@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  wlid_access-token: MyText
+  wlid_authentication_token: MyText
+  wlid_expire: 2013-04-10 02:57:50
+  spartan_token: MyText
+
+two:
+  wlid_access-token: MyText
+  wlid_authentication_token: MyText
+  wlid_expire: 2013-04-10 02:57:50
+  spartan_token: MyText

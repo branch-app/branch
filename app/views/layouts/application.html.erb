@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= yield(:title) %>
+  <%= stylesheet_link_tag    'application', :media => 'all' %>
+  <%= stylesheet_link_tag    'bootstrap.min', :media => 'all' %>
+  <%= stylesheet_link_tag    'bootstrap-responsive.min', :media => 'all' %>
+  <%= stylesheet_link_tag    'jbclock', :media => 'all' %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <%= javascript_include_tag 'bootstrap.min' %>
+  <%= javascript_include_tag 'bootswatch' %>
+  <%= javascript_include_tag 'jbclock' %>
+
+	<%= yield(:head_style) %>
+  <style type="text/css">
+	  footer {
+		  margin-left: 60px;
+	  }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar navbar navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <div class="container-fluid">
+	      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="brand" href="/">Halo 4 Stats<sup>{placeholder}</sup></a>
+	      <div class="nav-collapse collapse">
+	        <p class="navbar-text pull-right">
+	          Powered by <a href="http://www.AuntieDot.net" target="_blank">Auntie Dot</a>
+	        </p>
+	        <ul class="nav">
+	          <li class="<%= yield(:active_home) %>"><a href="/">Home</a></li>
+	          <li class="<%= yield(:active_home) %> dropdown">
+	            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
+	            <ul class="dropdown-menu" id="swatch-menu">
+	              <li><a href="/halo4/challenges">Challenges</a></li>
+	              <li><a href="/halo4/playlists">Playlists</a></li>
+	              <li class="divider"></li>
+	            </ul>
+	          </li>
+	          <li class="<%= yield(:active_home) %>"><a href="/blog">Blog</a></li>
+	          <li class="<%= yield(:active_home) %>"><a href="/">About</a></li>
+	        </ul>
+	        <div class="navbar-search pull-right">
+	          <input id="search-navbar" type="text" class="search-query span2" placeholder="Gamertag Search" style="border-radius: 20px;">
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<%= yield %>
+
+	<hr>
+
+	<footer>
+	  <p>343 stats, bunge styl</p>
+	</footer>
+</body>
+
+<script>
+	$('#search-navbar').keyup(function(e){
+		if(e.keyCode == 13)
+		{
+			$(this).trigger("enterKey");
+		}
+	});
+	$('#search-navbar').bind("enterKey",function(e){
+		search()
+	});
+	function search()
+	{
+		var gamertag = $('#search-navbar').val();
+		window.location.href = "/search/" + gamertag + "/";
+	}
+</script>
+
+</html>

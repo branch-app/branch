@@ -1,0 +1,221 @@
+<div class="container" style="margin-top: 100px;">
+  <% if flash[:notice] && (flash[:type] == 'success' || flash[:type] == 'error' || flash[:type] == 'warning') %>
+    <div class="alert alert-<%= flash[:type] %>">
+      <strong>
+        <% if flash[:type] == 'success' %>
+          Success!
+        <% else if flash[:type] == 'success' %>
+            Warning? :(
+          <% end %>
+          Error :/
+        <% end %>
+      </strong><br>
+      <% flash[:notice].split('-').each do |message| %>
+        <%= message %><br>
+      <% end %>
+    </div>
+  <% end %>
+
+  <span style="font-size: 45px;">Halo 4 - Challenges<% if @is_gamertag_related %> - <%= params[:gamertag] %> <% end %></span>
+  <div class="hero-unit" style="margin-top: -15px;">
+    <% @challenge_categories.each do |category| %>
+      <% challenges = @friendly_challenge_data[category['Id']] %>
+		  <h1><%= category['Name'] %>:</h1>
+      <div class="challenge-category-container">
+	      <% index = 0 %>
+	      <% challenges.each do |challenge| %>
+	        <% index += 1
+	           challenge_id = rand(1000)
+	        %>
+          <div class="row challenge-container">
+
+				    <div class="span3 preview-icon" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(category['ImageUrl']['BaseUrl'],
+				                                                                                category['ImageUrl']['AssetUrl'], 'large') %>')"></div>
+	          <div class="span7 challenge-meta">
+	            <script>
+		            $(document).ready(function(){
+			            JBCountDown({
+				            secondsColor : "#ffdc50",
+				            minutesColor : "#9cdb7d",
+				            hoursColor   : "#378cff",
+				            daysColor    : "#ff6565",
+
+				            startDate   : "<%= challenge['BeginDate'].to_time.to_i %>",
+				            endDate     : "<%= challenge['EndDate'].to_time.to_i %>",
+				            now         : "<%= Time.now.to_time.to_i %>",
+				            seconds     : "<%= Time.now.sec %>"
+			            }, <%= challenge_id %>);
+		            });
+
+	            </script>
+
+		        	<h3><%= challenge['Name'] %></h3>
+		          <h5><%= challenge['Description'] %></h5>
+		          <div>
+		            <div class="clock">
+		              <!-- Days -->
+		              <div id="clock_days_<%= challenge_id %>" class="clock_days">
+		                <div class="bgLayer">
+		                  <div class="topLayer"></div>
+		                  <canvas id="canvas_days_<%= challenge_id %>" width="120" height="120">
+		                  </canvas>
+		                  <div class="text">
+		                    <p class="val">0</p>
+		                    <p class="type_days">Days</p>
+		                  </div>
+		                </div>
+		              </div>
+		              <!-- Days -->
+		              <!-- Hours -->
+		              <div id="clock_hours_<%= challenge_id %>" class="clock_hours">
+		                <div class="bgLayer">
+		                  <div class="topLayer"></div>
+		                  <canvas id="canvas_hours_<%= challenge_id %>" width="120" height="120">
+		                  </canvas>
+		                  <div class="text">
+		                    <p class="val">0</p>
+		                    <p class="type_hours">Hours</p>
+		                  </div>
+		                </div>
+		              </div>
+		              <!-- Hours -->
+		              <!-- Minutes -->
+		              <div id="clock_minutes_<%= challenge_id %>" class="clock_minutes">
+		                <div class="bgLayer">
+		                  <div class="topLayer"></div>
+		                  <canvas id="canvas_minutes_<%= challenge_id %>" width="120" height="120">
+		                  </canvas>
+		                  <div class="text">
+		                    <p class="val">0</p>
+		                    <p class="type_minutes">Minutes</p>
+		                  </div>
+		                </div>
+		              </div>
+		              <!-- Minutes -->
+		              <!-- Seconds -->
+		              <div id="clock_seconds_<%=challenge_id  %>" class="clock_seconds">
+		                <div class="bgLayer">
+		                  <div class="topLayer"></div>
+		                  <canvas id="canvas_seconds_<%= challenge_id %>" width="120" height="120">
+		                  </canvas>
+		                  <div class="text">
+		                    <p class="val">0</p>
+		                    <p class="type_seconds">Seconds</p>
+		                  </div>
+		                </div>
+		              </div>
+		              <!-- Seconds -->
+		            </div>
+
+		          </div>
+
+	            <div class="challenge-xp">
+	              <%= challenge['XpReward'] %>xp
+	            </div>
+
+		          <hr>
+	          </div>
+
+	          <div class="cleaner"></div>
+          </div>
+
+	        <!-- <li><a href="/halo4/challenges"><%= challenge['Name'] %> - <%= challenge['XpReward'] %>xp</a></li> -->
+	      <% end %>
+      </div>
+      <% if index == 0 %>
+      <div class="challenge-category-container">
+        <div class="row challenge-container">
+
+          <div class="span3 preview-icon" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(category['ImageUrl']['BaseUrl'],
+			                                                                                category['ImageUrl']['AssetUrl'], 'large') %>')"></div>
+          <div class="span7 challenge-meta">
+            <script>
+              $(document).ready(function(){
+	              JBCountDown({
+		              secondsColor : "#ffdc50",
+		              minutesColor : "#9cdb7d",
+		              hoursColor   : "#378cff",
+		              daysColor    : "#ff6565",
+
+		              startDate   : "<%= Time.now.to_time.to_i %>",
+		              endDate     : "<%= Time.now.to_time.to_i %>",
+		              now         : "<%= Time.now.to_time.to_i %>",
+		              seconds     : "<%= Time.now.sec %>"
+	              }, 'none');
+              });
+
+            </script>
+
+            <h3>None</h3>
+            <h5>This category has no challenges :(</h5>
+            <div>
+              <div class="clock">
+                <!-- Days -->
+                <div id="clock_days_none" class="clock_days">
+                  <div class="bgLayer">
+                    <div class="topLayer"></div>
+                    <canvas id="canvas_days_none" width="120" height="120">
+                    </canvas>
+                    <div class="text">
+                      <p class="val">0</p>
+                      <p class="type_days">Days</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Days -->
+                <!-- Hours -->
+                <div id="clock_hours_none" class="clock_hours">
+                  <div class="bgLayer">
+                    <div class="topLayer"></div>
+                    <canvas id="canvas_hours_none" width="120" height="120">
+                    </canvas>
+                    <div class="text">
+                      <p class="val">0</p>
+                      <p class="type_hours">Hours</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Hours -->
+                <!-- Minutes -->
+                <div id="clock_minutes_none" class="clock_minutes">
+                  <div class="bgLayer">
+                    <div class="topLayer"></div>
+                    <canvas id="canvas_minutes_none" width="120" height="120">
+                    </canvas>
+                    <div class="text">
+                      <p class="val">0</p>
+                      <p class="type_minutes">Minutes</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Minutes -->
+                <!-- Seconds -->
+                <div id="clock_seconds_none" class="clock_seconds">
+                  <div class="bgLayer">
+                    <div class="topLayer"></div>
+                    <canvas id="canvas_seconds_none" width="120" height="120">
+                    </canvas>
+                    <div class="text">
+                      <p class="val">0</p>
+                      <p class="type_seconds">Seconds</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Seconds -->
+              </div>
+
+            </div>
+            <div class="challenge-xp">
+              0xp
+            </div>
+          </div>
+
+          <div class="cleaner"></div>
+        </div>
+
+        <!-- <li><a href="/halo4/challenges">none - 0xp</a></li> -->
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

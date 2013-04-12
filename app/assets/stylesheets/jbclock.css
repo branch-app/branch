@@ -1,0 +1,117 @@
+.clock {
+    width:845px;
+    margin:0 auto;
+    margin-top:50px;
+    height: 70px;
+}
+
+.clock_days {
+    float:left;
+    margin-right:15px;
+}
+.clock_hours {
+    float:left;
+    margin-right:15px;
+}
+.clock_minutes {
+    float:left;
+    margin-right:15px;
+}
+.clock_seconds {
+    float:left;
+}
+
+.bgLayer {
+    /* background: url(../images/countdown_timer/bg.png) no-repeat; */
+    position:relative; 
+}
+
+.topLayer { 
+    position:absolute;
+    /*background-image:url(../images/countdown_timer/top.png); */
+    width:120px;
+    height:120px;
+    /*background-repeat:no-repeat;*/
+}
+
+.text { position:absolute; top:45px; left:30px; width:30px;  height:30px;}
+
+.val {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:18px;
+    font-weight:bold;
+    color:#FFF;
+    text-align:center;
+    line-height:10px;
+    margin-top: -10px;
+    width:35px;
+}
+
+.type_days {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    color:#ff6565;
+    width:35px;
+    text-align:center;
+    font-size:9px;
+    line-height:10px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.type_hours {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    color:#378cff;
+    width:35px;
+    text-align:center;
+    font-size:9px;
+    line-height:10px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.type_minutes {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    color:#9cdb7d;
+    width:35px;
+    text-align:center;
+    font-size:9px;
+    line-height:10px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.type_seconds {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    color:#ffdc50;
+    width:20px;
+    text-align:center;
+    font-size:9px;
+    line-height:10px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.divider {
+	width:960px;
+	height:71px;
+	/*background-image:url(../images/countdown_timer/diviers.png);*/
+	float:left;
+	margin-top:50px;
+}
+
+.divider p {
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#b6b6b6;
+	line-height:70px;
+	text-align:center;
+}
+
+.divider a {
+	color:#39F;
+	text-decoration:none;
+}
+
+.divider a:hover {
+	color:#FFF;
+}

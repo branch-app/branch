@@ -1,0 +1,2 @@
+module Halo4ServiceRecordHelper
+end
