@@ -39,7 +39,7 @@
     <file path="/20130411184221_remove_extra_challenge_data.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365705842315" ignored="false" />
     <file path="/global_challenges.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365718407464" ignored="false" />
     <file path="/20130412003918_remove_irrelevant_playlist_data.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365727285818" ignored="false" />
-    <file path="/playlists.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365798234290" ignored="false" />
+    <file path="/playlists.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365803361249" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +92,17 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="playlists.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/playlists.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="239" column="46" selection-start="9527" selection-end="9527" vertical-scroll-proportion="0.8948598">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -119,9 +129,9 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/controllers/x343_api_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/halo4/playlists.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/jbclock.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
+        <option value="$PROJECT_DIR$/app/views/halo4/playlists.html.erb" />
       </list>
     </option>
   </component>
@@ -203,6 +213,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="halo4_stat_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="halo4_stat_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="halo4_stat_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -687,7 +729,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/playlists.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="0" selection-start="4657" selection-end="5197" vertical-scroll-proportion="0.6098131">
+        <state line="239" column="46" selection-start="9527" selection-end="9527" vertical-scroll-proportion="0.8948598">
           <folding />
         </state>
       </provider>
