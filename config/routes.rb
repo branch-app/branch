@@ -13,6 +13,8 @@ Halo4StatViewer::Application.routes.draw do
 	# match '/halo4/challenges/:gamertag/' => 'halo4#challenges' # cut
 	match '/halo4/playlists/' => 'halo4#playlists'
 	match '/halo4/servicerecord/:gamertag/' => 'halo4#service_record'
+	match '/halo4/servicerecord/:gamertag/match-history/' => 'halo4#match_history'
+	match '/halo4/servicerecord/:gamertag/match/:matchid' => 'halo4#view_match'
 
   resources :application
 

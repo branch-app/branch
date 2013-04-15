@@ -2,6 +2,176 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+/* Service Record
+--------------------------------- */
+
+.campaign-completion {
+  text-align: center;
+  margin-top: 8px;
+}
+.csr-completion {
+  text-align: center;
+}
+.completion-title {
+  font-size: 12px;
+}
+
+.gamertag-bar {
+  font-size: 20px;
+}
+.service-tag-bar {
+  font-size: 15px;
+}
+
+.gamertag-flairs {
+  float: left;
+}
+.gamertag-quick-meta {
+  font-size: 20px;
+  font-weight: 300;
+  float: right;
+}
+
+.gamertag-ranking {
+  margin-top: 15px;
+}
+
+.gamertag-progress-info-left {
+  float: left;
+}
+.gamertag-progress-info-right {
+  float: right;
+}
+
+
+.overview_style {
+  padding: 5px;
+  margin-top: 1px;
+  font-size: 12px;
+}
+  .overview_style > .title {
+    color: white;
+    float: left;
+  }
+  .overview_style > .body {
+    color: #c1c1c1;
+    float: right;
+  }
+
+.overview_colour_0 {
+  background-color: #1c2024;
+}
+.overview_colour_1 {
+  background-color: #24262b;
+}
+
+.recent-match-entry {
+  width: 25px;
+  float: left;
+  margin-left: 1px;
+}
+  .recent-match-dnf {
+    margin-top: 100px;
+    height: 40px;
+
+    background: rgba(57, 70, 69, 0.48);
+  }
+  .recent-match-los {
+    margin-top: 60px;
+    height: 40px;
+
+    background-color: #c00;
+  }
+  .recent-match-win {
+    height: 100px;
+
+    background-color: #016076;
+  }
+.recent-match-popbox {
+  display: none;
+  position: absolute;
+  z-index: 99999;
+  width: 250px;
+  background-color: #131517;
+  color: #000000;
+  border: 1px solid #4D4F53;
+  margin: 0px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+  box-shadow: 0px 0px 5px 0px rgba(164, 164, 164, 1);
+}
+  .recent-match-popbox > .header {
+    background-color: #333;
+    color: #ffffff;
+    font-size: 14px;
+    display: block;
+    height: 25px;
+    width: 100%;
+    padding-top: 4px;
+    padding-left: 4px;
+  }
+  .recent-match-popbox > .map-preview {
+    display: block;
+    height: 100px;
+    width: 100%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 250px 153 px ;
+  }
+    .recent-match-popbox > .map-preview > .cover {
+      background: -moz-linear-gradient(left,  rgba(0,0,0,0.84) 0%, rgba(0,0,0,0) 51%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.84)), color-stop(51%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left,  rgba(0,0,0,0.84) 0%,rgba(0,0,0,0) 51%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left,  rgba(0,0,0,0.84) 0%,rgba(0,0,0,0) 51%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(left,  rgba(0,0,0,0.84) 0%,rgba(0,0,0,0) 51%,rgba(0,0,0,0) 100%); /* IE10+ */
+      background: linear-gradient(to right,  rgba(0,0,0,0.84) 0%,rgba(0,0,0,0) 51%,rgba(0,0,0,0) 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+
+      height: 100px;
+    }
+
+.recent-match-popbox > .seperator {
+  border: 1px solid #333;
+  margin: 15px 20px;
+}
+
+  .recent-match-popbox > .quick-stats {
+    height: 60px;
+    margin: 0 10px 0 10px;
+  }
+    .recent-match-popbox > .quick-stats > h2 {
+      font-size: 16px;
+      font-weight: 300;
+      color:  white;
+
+      margin: 0;
+    }
+    .recent-match-popbox > .quick-stats > .basic {
+      padding-top: -30px;
+      color:  white;
+    }
+
+  .recent-match-popbox > .matchmaking-info {
+    margin: 0 10px 0 10px;
+    color: white;
+    font-size: 13px;
+  }
+
+  .recent-match-popbox .entry > .title {
+    float: left;
+  }
+  .recent-match-popbox .entry > .body {
+    float: right;
+  }
+
+  .recent-match-popbox > .personal-info {
+    margin: 0 10px 10px 10px;
+    color: white;
+    font-size: 13px;
+  }
+
+
 /* Challenges
 --------------------------------- */
 .challenge-container {
@@ -36,7 +206,7 @@
       font-size: 80px;
     }
 
-/* Playlists
+/* H4Playlists
 --------------------------------- */
 .playlist-container {
   margin-top: 20px;

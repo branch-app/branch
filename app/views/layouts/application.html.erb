@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= yield(:title) %>
+  <title><%= yield(:title) %></title>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
   <%= stylesheet_link_tag    'application', :media => 'all' %>
   <%= stylesheet_link_tag    'bootstrap.min', :media => 'all' %>
-  <%= stylesheet_link_tag    'bootstrap-responsive.min', :media => 'all' %>
+  <%= stylesheet_link_tag    'morris', :media => 'all' %>
+  <!--<%= stylesheet_link_tag    'bootstrap-responsive.min', :media => 'all' %>-->
   <%= stylesheet_link_tag    'jbclock', :media => 'all' %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'bootswatch' %>
   <%= javascript_include_tag 'jbclock' %>
+  <%= javascript_include_tag 'moris' %>
+
+	<!-- javascript donut chart -->
 
 	<%= yield(:head_style) %>
   <style type="text/css">
+	  body {
+	  }
+
 	  footer {
 		  margin-left: 60px;
 	  }
@@ -39,7 +50,7 @@
 	        </p>
 	        <ul class="nav">
 	          <li class="<%= yield(:active_home) %>"><a href="/">Home</a></li>
-	          <li class="<%= yield(:active_home) %> dropdown">
+	          <li class="<%= yield(:active_halo4) %> dropdown">
 	            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
 	            <ul class="dropdown-menu" id="swatch-menu">
 	              <li><a href="/halo4/challenges">Challenges</a></li>
@@ -47,11 +58,11 @@
 	              <li class="divider"></li>
 	            </ul>
 	          </li>
-	          <li class="<%= yield(:active_home) %>"><a href="/blog">Blog</a></li>
-	          <li class="<%= yield(:active_home) %>"><a href="/">About</a></li>
+	          <li class="<%= yield(:active_blog) %>"><a href="/blog">Blog</a></li>
+	          <li class="<%= yield(:active_about) %>"><a href="/">About</a></li>
 	        </ul>
 	        <div class="navbar-search pull-right">
-	          <input id="search-navbar" type="text" class="search-query span2" placeholder="Gamertag Search" style="border-radius: 20px;">
+	          <input id="search-navbar" value="<%= yield(:search_query) %>" type="text" class="search-query span2" placeholder="Gamertag Search" style="border-radius: 20px;">
 	        </div>
 	      </div>
 	    </div>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PlayerChallengesTest < ActiveSupport::TestCase
+class H4PlayerRecentMatchesTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

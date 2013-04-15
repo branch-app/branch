@@ -23,10 +23,10 @@ class X343ApiController < ApplicationController
 		settings = response['Settings']
 
 		# save to database
-		ServicesList.delete_all()
+		H4ServicesList.delete_all()
 
 		services_list.each do |services_list_item|
-			new_item = ServicesList.new
+			new_item = H4ServicesList.new
 			new_item.name = services_list_item[0]
 			new_item.url = services_list_item[1]
 			new_item.list_type = 'service_list'
@@ -34,7 +34,7 @@ class X343ApiController < ApplicationController
 		end
 
 		settings.each do |services_list_item|
-			new_item = ServicesList.new
+			new_item = H4ServicesList.new
 			new_item.name = services_list_item[0]
 			new_item.url = services_list_item[1]
 			new_item.list_type = 'settings'
@@ -49,8 +49,8 @@ class X343ApiController < ApplicationController
 		response = unauthorized_request(URI.parse(url), 'GET', nil)
 
 		# save to database
-		GameMetaData.delete_all()
-		meta_data = GameMetaData.new
+		H4GameMetadata.delete_all()
+		meta_data = H4GameMetadata.new
 		meta_data.data = response.body
 		meta_data.save
 
@@ -62,8 +62,8 @@ class X343ApiController < ApplicationController
 		url = full_url_with_defaults(url, nil)
 		response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-		Playlists.delete_all
-		playlist_model = Playlists.new
+		H4Playlists.delete_all
+		playlist_model = H4Playlists.new
 		playlist_model.data = response.body
 		playlist_model.save
 	end
@@ -79,15 +79,15 @@ class X343ApiController < ApplicationController
 			raise
 		end
 
-		GlobalChallenges.delete_all
-		new_challenge = GlobalChallenges.new
+		H4GlobalChallenges.delete_all
+		new_challenge = H4GlobalChallenges.new
 		new_challenge.data = response.body
 		new_challenge.save
 	end
 
 	def self.GetMetaData
 		# load from sql
-		cached_meta = GameMetaData.first
+		cached_meta = H4GameMetadata.first
 
 		if cached_meta != nil && cached_meta.data != nil
 			json = JSON.parse(cached_meta.data)
@@ -95,7 +95,7 @@ class X343ApiController < ApplicationController
 		else
 			UpdateMetaData()
 
-			cached_meta = GameMetaData.first
+			cached_meta = H4GameMetadata.first
 
 			if cached_meta != nil && cached_meta.data != nil
 				json = JSON.parse(cached_meta.data)
@@ -105,13 +105,110 @@ class X343ApiController < ApplicationController
 	end
 
 	def self.GetServiceRecord(gamertag)
-		url = url_from_name('GetServiceRecord', 'service_list')
-		url = full_url_with_defaults(url, { :gamertag => gamertag })
-		response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+		gamertag_name = gamertag.to_s.downcase
+		cached_sr = H4PlayerServicerecords.find_by_gamertag(gamertag_name)
 
-		data = JSON.parse(response.body)
+		if cached_sr != nil && cached_sr.data != nil && cached_sr.updated_at + (60 * 8) < Time.now
+			json = JSON.parse(cached_sr.data)
+			return json
+		else
+			url = url_from_name('GetServiceRecord', 'service_list')
+			url = full_url_with_defaults(url, { :gamertag => gamertag })
+			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-		data
+			data = JSON.parse(response.body)
+
+			# check shit worked
+			if data['StatusCode'] != 1
+				return { :status_code => data['StatusCode'], :continue => 'no' }
+			else
+				old_cached = H4PlayerServicerecords.find_all_by_gamertag(gamertag_name)
+				if old_cached != nil
+					H4PlayerServicerecords.delete(old_cached)
+				end
+
+				cached_sr = H4PlayerServicerecords.new
+				cached_sr.gamertag = gamertag_name
+				cached_sr.data = response.body
+				cached_sr.save
+
+				data
+			end
+		end
+	end
+
+	def self.GetPlayerCommendations(gamertag)
+		gamertag_name = gamertag.to_s.downcase
+		cached_com = H4PlayerCommendations.find_by_gamertag(gamertag_name)
+
+		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) < Time.now
+			json = JSON.parse(cached_com.data)
+			return json
+		else
+			url = url_from_name('GetCommendations', 'service_list')
+			url = full_url_with_defaults(url, { :gamertag => gamertag })
+			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+
+			data = JSON.parse(response.body)
+
+			# check shit worked
+			if data['StatusCode'] != 1
+				return { :status_code => data['StatusCode'], :continue => 'no' }
+			else
+				old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
+				if old_cached != nil
+					H4PlayerCommendations.delete(old_cached)
+				end
+
+				cached_com = H4PlayerCommendations.new
+				cached_com.gamertag = gamertag_name
+				cached_com.data = response.body
+				cached_com.save
+
+				data
+			end
+		end
+	end
+
+	def self.GetPlayerMatches(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
+		gamertag_name = gamertag.to_s.downcase
+		cached_com = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_name, start_index, count, mode_id, chapter_id)
+
+		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) < Time.now
+			json = JSON.parse(cached_com.data)
+			return json
+		else
+			url = url_from_name('GetGameHistory', 'service_list')
+			url += '?gamemodeid={gamemodeid}&count={count}&startat={startat}'
+			if chapter_id != -1
+				url += '&chapterid={chapterid}'
+			end
+			url = full_url_with_defaults(url, { :gamertag => gamertag, :count => count.to_s, :startat => start_index.to_s, :gamemodeid => mode_id.to_s, :chapterid => chapter_id.to_s })
+
+			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			data = JSON.parse(response.body)
+
+			# check shit worked
+			if data['StatusCode'] != 1
+				return { :status_code => data['StatusCode'], :continue => 'no' }
+			else
+				old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count(gamertag_name, start_index, count)
+				if old_cached != nil
+					H4PlayerRecentMatches.delete(old_cached)
+				end
+
+				cached_com = H4PlayerRecentMatches.new
+				cached_com.gamertag = gamertag_name
+				cached_com.data = response.body
+				cached_com.start_index = start_index
+				cached_com.count = count
+				cached_com.mode_id = mode_id
+				cached_com.chapter_id = chapter_id
+				cached_com.save
+
+				data
+			end
+		end
 	end
 
 	def self.GetPlayerModel(gamertag, size)
@@ -123,7 +220,7 @@ class X343ApiController < ApplicationController
 
 	def self.GetPlayerChallenges(gamertag)
 
-		cached_result = PlayerChallenges.find_by_gamertag(gamertag)
+		cached_result = H4PlayerChallenges.find_by_gamertag(gamertag)
 
 		if cached_result != nil && cached_result.data != nil && cached_result.updated_at + 8*60 > Time.now
 			# return cached data
@@ -148,13 +245,14 @@ class X343ApiController < ApplicationController
 			if cached_result != nil
 				cached_result.data = response.body
 			else
-				cached_result = PlayerChallenges.next
+				cached_result = H4PlayerChallenges.next
 				cached_result.data = response.body
 			end
 
 			data
 		end
 	end
+
 
 	### <summary>
 	### helpers
@@ -172,16 +270,18 @@ class X343ApiController < ApplicationController
 	end
 
 	def self.get_metadata
-		JSON.parse(GameMetaData.first.data)
+		JSON.parse(H4GameMetadata.first.data)
 	end
 
 	def self.asset_url_generator_basic(base_url, asset_url, size)
-		true_base = ServicesList.find_by_name_and_list_type(base_url, 'settings')
+		true_base = H4ServicesList.find_by_name_and_list_type(base_url, 'settings')
 
 		real_url = "#{true_base.url}#{asset_url.gsub('{size}', size)}"
 
 		real_url
 	end
+
+
 	### <summary>
 	### callz
 	### </summary>
@@ -211,7 +311,7 @@ class X343ApiController < ApplicationController
 	end
 
 	def self.authorized_request(uri, request_type, auth_type, optional_headers)
-		auth = AuthenticationVault.first
+		auth = H4ApiAuthenticationVault.first
 
 		request = nil
 		if request_type == 'GET'
@@ -252,17 +352,23 @@ class X343ApiController < ApplicationController
 			end
 		end
 
+		url = url.gsub(' ', '%20')
+
 		url
 	end
 
 	def self.url_from_name(name, type)
-		entry = ServicesList.find_by_name_and_list_type(name, type)
+		entry = H4ServicesList.find_by_name_and_list_type(name, type)
 
 		if entry == nil
 			raise
 		end
 
 		entry.url
+	end
+
+	def self.error_message_from_status_code(status_code)
+		status_code
 	end
 end
 

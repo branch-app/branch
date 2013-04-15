@@ -1,0 +1,278 @@
+<% title " - #{@service_record['Gamertag']}'s Service Record" %>
+<% active_halo4 'active' %>
+<% search_query @service_record['Gamertag'] %>
+
+<div class="container" style="margin-top: 80px; min-width: 1300px; max-width: 1300px;">
+
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <!-- recently finished -->
+          <li class="nav-header">Service Record</li>
+          <li class="active"><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/">Overview</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match-history/">Game History</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/commendations/">Commendations</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/specializations/">Specializations</a></li>
+
+          <li class="nav-header">Career Stats</li>
+
+          <li class="nav-header">File Share</li>
+        </ul>
+      </div>
+    </div>
+    <div class="well span9" style="padding: 20px 0 0 0;">
+      <% h4_rank_data = Halo4Controller.GetSimpleRankData(@service_record, 'medium') %>
+	  	<div class="row-fluid visible-desktop visible-tablet">
+			  <div class="span8" style="margin: 10px 0 0 20px">
+				  <div class="gamertag-flairs">
+				    <img style="margin-top: -8px;" src="<%= X343ApiController.asset_url_generator_basic(@service_record['RankImageUrl']['BaseUrl'], @service_record['RankImageUrl']['AssetUrl'], 'medium') %>" />
+				    <a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/">
+				    <span class="gamertag-bar">
+					    <%= @service_record['Gamertag'] %>
+					  </span>
+				    </a>
+					  -
+				    <span class="service-tag-bar">
+				      <%= @service_record['ServiceTag'] %>
+				    </span>
+				  </div>
+
+				  <div class="gamertag-quick-meta">
+				    <%= h4_rank_data[:specialization_block]['Name'] %>
+				  </div>
+				  <div class="cleaner"></div>
+				  <br>
+			    <div class="gamertag-ranking">
+				    <div class="gamertag-progress-info-left">
+					  	0
+				    </div>
+			      <div class="gamertag-progress-info-right">
+				    	<%= number_with_delimiter(h4_rank_data[:update_upper_xp], :delimiter => ',') %>
+			      </div>
+				    <div class="cleaner"></div>
+			      <div class="progress progress-striped active">
+			        <div class="bar" style="text-align: right; padding-right: 5px; width: <%= h4_rank_data[:update_percentage] %>%;">
+			          <%= number_with_delimiter(h4_rank_data[:update_current_xp], :delimiter => ',') %>
+			        </div>
+				    </div>
+			    </div>
+			  </div>
+			  <div class="span3">
+				  <div class="span4 campaign-completion">
+					  <img src="<%= Halo4Controller.CampaignProgressFromId(@service_record['GameModes'][0]['SinglePlayerDASO'].to_i, @service_record['GameModes'][0]['SinglePlayerDifficulty'].to_i, 'medium') %>" /><br>
+					  <span class="completion-title">Single Player</span>
+				  </div>
+			    <div class="span4 campaign-completion">
+			      <img src="<%= Halo4Controller.CampaignProgressFromId(@service_record['GameModes'][0]['CoopDASO'].to_i, @service_record['GameModes'][0]['CoopDifficulty'].to_i, 'medium') %>" /><br>
+			      <span class="completion-title">Co-op</span>
+			    </div>
+			    <div class="span4 csr-completion">
+			      <img src="https://assets.halowaypoint.com/games/h4/csr/v1/small/<%= Halo4Controller.GetHighestSkillRank(@service_record['SkillRanks'])  %>.png" /><br>
+			      <span class="completion-title">Highest CSR</span>
+			    </div>
+			  </div>
+	  	</div>
+	  </div>
+	  <div class="well span9">
+	    <h3>Overview:</h3>
+		  <div class="row-fluid">
+
+			  <div class="span4" style="background-repeat: no-repeat; background-position: 110px 20px; background-image: url('<%= X343ApiController.asset_url_generator_basic(@service_record['EmblemImageUrl']['BaseUrl'], @service_record['EmblemImageUrl']['AssetUrl'], '100') %>')">
+				  <img src="<%= X343ApiController.GetPlayerModel(params[:gamertag], 'medium') %>" />
+			  </div>
+		    <div class="span8">
+			    <div class="row-fluid">
+			      <div class="span6">
+			        <%
+			           overview_data = {
+					           :last_played => { :title => 'Last Played', :body => DateTime.strptime(@service_record['LastPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') },
+					           :loaduout_completion => { :title => 'Loadout Purchase Completion', :body => @service_record['TotalLoadoutItemsPurchased'].to_s + '%' },
+					           :challenge_completion => { :title => 'Challenges Completed', :body => @service_record['TotalChallengesCompleted'] },
+					           :spartan_points => { :title => 'Spartan Points', :body => number_with_delimiter(@service_record['SpartanPoints'], :delimiter => ',') },
+					           :total_kills => { :title => 'War Games Kills', :body => "#{number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], :delimiter => ',')} (#{@service_record['GameModes'][2]['KDRatio']})" },
+					           :total_medals => { :title => 'War Games Medals', :body => "#{number_with_delimiter(@service_record['GameModes'][2]['TotalMedals'], :delimiter => ',')}" },
+					           :covenant_killed => { :title => 'Covenant/Promethean Kills', :body => "#{number_with_delimiter(@service_record['GameModes'][0]['TotalKills'] + @service_record['GameModes'][1]['TotalKills'], :delimiter => ',')}" },
+					           :games_started => { :title => 'Games Started', :body => "#{number_with_delimiter(@service_record['TotalGamesStarted'], :delimiter => ',')}" },
+					           :player_since => { :title => 'Player Since', :body => DateTime.strptime(@service_record['FirstPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') }
+			           }
+
+			           type_index = 0
+			           overview_data.each do |overview|
+			             if type_index == 0
+			               type_index += 1
+			             else
+			               type_index = 0
+			             end
+			        %>
+			          <div class="overview_style overview_colour_<%= type_index %>">
+			            <div class="title">
+			              <%= overview[1][:title] %>
+			            </div>
+			            <div class="body">
+			              <%= overview[1][:body] %>
+			            </div>
+
+			            <div class="cleaner"></div>
+			          </div>
+			        <% end %>
+			      </div>
+			      <div class="span6">
+			        <div id="game-stat-chart" style="margin: 0 auto; height: 275px; width: 275px;"></div>
+			      </div>
+			    </div>
+			    <div class="row-fluid" style="display: none; margin-top: 10px;">
+				    <span class="span9" style="border: 1px solid #333; border-left: 3px solid #333;">
+					  	1
+				    </span>
+			    </div>
+			  </div>
+		  </div>
+    </div>
+	  <div class="well span9" style="margin: 0 0 0 332px;">
+		  <h3>Matchmaking History:</h3>
+		  <div class="row-fluid">
+				<% @recent_matches.each do |match| %>
+		      <div id="pop-<%= match['Id'] %>" class="recent-match-popbox">
+			      <div class="header">
+			          <% if !match['Completed'] %>
+			            DNF :(
+			          <% elsif match['Result'] != 0 %>
+			            Victory!
+			          <% else %>
+			            Defeat
+			          <% end %>
+			      </div>
+
+			      <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'],
+			                                                                                    'medium') %>')">
+				      <div class="cover">
+					      <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'],
+					                                                                'medium') %>" />
+				      </div>
+			      </div>
+
+			      <div class="quick-stats">
+				      <h2><%= match['FeaturedStatName'] %>: <%= number_with_delimiter(match['FeaturedStatValue'], :delimiter => ',') %></h2>
+				      <span class="basic">on <%= match['MapVariantName'] %> at <%= DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %></span>
+			      </div>
+
+			      <div class="seperator"></div>
+
+			      <div class="matchmaking-info">
+				    	<div class="entry">
+						    <div class="title">Playlist:</div>
+					      <div class="body"><%= match['PlayListName'] %></div>
+
+						    <div class="cleaner"></div>
+				    	</div>
+			        <div class="entry">
+			          <div class="title">Gametype:</div>
+			          <div class="body"><%= match['VariantName'] %></div>
+
+			          <div class="cleaner"></div>
+			        </div>
+			      </div>
+
+		        <div class="seperator"></div>
+
+			      <div class="personal-info">
+			        <div class="entry">
+			          <div class="title">Personal Score:</div>
+			          <div class="body"><%= match['PersonalScore'] %></div>
+
+			          <div class="cleaner"></div>
+			        </div>
+			        <div class="entry">
+			          <div class="title">Medals:</div>
+			          <div class="body"><%= match['TotalMedals'] %></div>
+
+			          <div class="cleaner"></div>
+			        </div>
+
+			        <div class="entry">
+			          <div class="title">Standing:</div>
+			          <div class="body"><%= match['Standing'] %></div>
+
+			          <div class="cleaner"></div>
+			        </div>
+			      </div>
+		      </div>
+
+				  <a class="recent-match-linker" id="<%= match['Id'] %>" href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match/<%= match['Id'] %>" data-popbox="pop-<%= match['Id'] %>">
+					  <div class="recent-match-entry <%= Halo4Controller.RecentGameStyleFromResult(match) %>">
+
+					  </div>
+				  </a>
+				<% end %>
+		  </div>
+	  </div>
+  </div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		new Morris.Donut({
+			element: 'game-stat-chart',
+			data: [
+				<% @service_record['GameModes'].each do |game_mode| %>
+				{ label: '<%= game_mode['Name'] %>', value: <%= game_mode['TotalGamesStarted'] %> },
+				<% end %>
+			],
+			colors: [ '#55712a', '#6f2a29', '#016076', '#382c55' ],
+			formatter: function (y) { return y + " games" }
+		});
+	});
+
+	function clicked() { alert('clicked'); }
+	function hovered() { alert('hovar'); }
+</script>
+<script>
+	$(function() {
+		var moveLeft = 0;
+		var moveDown = 0;
+		$('.recent-match-linker').hover(function(e) {
+
+			var target = '#' + ($(this).attr('data-popbox'));
+
+			$(target).show();
+			moveLeft = $(this).outerWidth();
+			moveDown = ($(target).outerHeight() / 2);
+		}, function() {
+			var target = '#' + ($(this).attr('data-popbox'));
+			$(target).hide();
+		});
+
+		$('.recent-match-linker').mousemove(function(e) {
+			var target = '#' + ($(this).attr('data-popbox'));
+
+			leftD = e.pageX + parseInt(moveLeft);
+			maxRight = leftD + $(target).outerWidth();
+			windowLeft = $(window).width() - 40;
+			windowRight = 0;
+			maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);
+
+			if(maxRight > windowLeft && maxLeft > windowRight)
+			{
+				leftD = maxLeft;
+			}
+
+			topD = e.pageY - parseInt(moveDown);
+			maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);
+			windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));
+			maxTop = topD;
+			windowTop = parseInt($(document).scrollTop());
+			if(maxTop < windowTop){
+				topD = (windowTop + 20);
+			}
+			else {
+				topD -= 190;
+			}
+
+			leftD += 5;
+
+			$(target).css('top', topD).css('left', leftD);
+		});
+
+	});
+</script>

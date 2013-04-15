@@ -2,16 +2,26 @@
   <dictionary name="Alex Reed">
     <words>
       <w>bootswatch</w>
+      <w>campaignprogress</w>
+      <w>chapterid</w>
       <w>derp</w>
       <w>dropdown</w>
       <w>fullbody</w>
+      <w>gamecount</w>
+      <w>gamemode</w>
+      <w>gamemodeid</w>
+      <w>halowaypoint</w>
       <w>herp</w>
       <w>jbclock</w>
       <w>khtml</w>
+      <w>loadout</w>
       <w>mapmeta</w>
       <w>mozilla</w>
       <w>navbar</w>
       <w>playlists</w>
+      <w>popbox</w>
+      <w>startat</w>
+      <w>tabbable</w>
       <w>viewport</w>
       <w>waypoint</w>
       <w>wlid</w>

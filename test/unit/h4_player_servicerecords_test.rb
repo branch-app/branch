@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GameMetaDataTest < ActiveSupport::TestCase
+class H4PlayerServicerecordsTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

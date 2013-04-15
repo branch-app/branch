@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PlaylistsTest < ActiveSupport::TestCase
+class H4PlayerCommendationsTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
