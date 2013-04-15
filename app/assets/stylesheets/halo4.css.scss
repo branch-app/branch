@@ -172,6 +172,122 @@
   }
 
 
+/* View Match
+--------------------------------- */
+.cover {
+  height:  300px;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  margin: 0 0 30px 0;
+}
+  .cover > .mask {
+    background: -moz-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+    background: linear-gradient(45deg, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    height: 300px;
+  }
+    .cover > .mask > .game-victor-player-model {
+      background-repeat: no-repeat;
+      background-position: 40px 10px;
+
+      height: 300px;
+    }
+      .cover > .mask > .game-victor-player-model > .game-summary-title {
+        color: white;
+        margin: auto 0;
+        padding-top: 20px;
+        text-align: center;
+      }
+        .cover > .mask > .game-victor-player-model > .game-summary-title > .title {
+           font-size: 30px;
+         }
+        .cover > .mask > .game-victor-player-model > .game-summary-title > .body {
+        font-size: 14px;
+        padding-top: 5px;
+        color: #cecece;
+      }
+      .cover > .mask > .game-victor-player-model > .game-summary-gametype {
+      margin: 0 auto;
+      width: 120px;
+      height: 120px;
+    }
+      .cover > .mask > .game-victor-player-model > .game-summary-seperator {
+        background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(107,107,107,0.65) 50%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(50%,rgba(107,107,107,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(107,107,107,0.65) 50%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(107,107,107,0.65) 50%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(107,107,107,0.65) 50%,rgba(0,0,0,0) 100%); /* IE10+ */
+        background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(107,107,107,0.65) 50%,rgba(0,0,0,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+
+        margin: 10px;
+
+        height: 2px;
+      }
+      .cover > .mask > .game-victor-player-model > .game-summary-victor {
+        margin: auto 0;
+        text-align: center;
+        color: white;
+      }
+      .cover > .mask > .game-victor-player-model > .game-summary-victor-team {
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 16px;
+        line-height: 5em;
+        color: white;
+      }
+        .cover > .mask > .game-victor-player-model > .game-summary-victor-team > .team {
+          height: 75px;
+          width: 50px;
+          float: left;
+          margin: 0 5px 0 5px;
+
+          text-align: center;
+        }
+
+  .team-player-flair {
+    float: left;
+
+    height: 55px;
+    width: 55px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 48px;
+  }
+  .team-player-name {
+    float: left;
+
+    margin: 5px 0 0 10px;
+  }
+  .team-player-csr {
+    float: right;
+
+    height: 50px;
+    width: 40px;
+
+    margin: 0 10px 0 0;
+
+    background-size: 40px 50px;
+  }
+  .team-player-rank {
+    width: 100px;
+    height: 40px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
 /* Challenges
 --------------------------------- */
 .challenge-container {

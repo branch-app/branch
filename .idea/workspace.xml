@@ -11,19 +11,19 @@
     <file path="/application_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365728614720" ignored="false" />
     <file path="/application.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365955406328" ignored="false" />
     <file path="/index.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811091124" ignored="false" />
-    <file path="/Dummy.txt" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365990772726" ignored="false" />
+    <file path="/Dummy.txt" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366025450375" ignored="false" />
     <file path="/20130410015750_create_authentication_vaults.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365559118261" ignored="false" />
     <file path="/background_autnehtication_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365561290584" ignored="false" />
     <file path="/background_auth_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365726427973" ignored="false" />
     <file path="/authentication_vault.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365601230025" ignored="false" />
-    <file path="/x343_api_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365990790622" ignored="false" />
+    <file path="/x343_api_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366034972038" ignored="false" />
     <file path="/20130410144922_change_type_to_list_type.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365605390480" ignored="false" />
     <file path="/services_list.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365605411391" ignored="false" />
     <file path="/20130410150629_change_meta_data_storage_type.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365606443151" ignored="false" />
     <file path="/schema.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365606503010" ignored="false" />
     <file path="/20130410151459_add_to_global_challenges.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365607095511" ignored="false" />
     <file path="/a.dummy" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365608295016" ignored="false" />
-    <file path="/temp.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365958622737" ignored="false" />
+    <file path="/temp.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366035166998" ignored="false" />
     <file path="/update_caches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365611841628" ignored="false" />
     <file path="/update_caches_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365726250889" ignored="false" />
     <file path="/playlists.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365727441485" ignored="false" />
@@ -31,9 +31,9 @@
     <file path="/search_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365640952473" ignored="false" />
     <file path="/search.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365641003168" ignored="false" />
     <file path="/halo4_service_record_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365642063174" ignored="false" />
-    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365990053269" ignored="false" />
+    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366036067431" ignored="false" />
     <file path="/challenges.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811012457" ignored="false" />
-    <file path="/halo4.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365983815206" ignored="false" />
+    <file path="/halo4.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366039649169" ignored="false" />
     <file path="/jbclock.css" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365792096208" ignored="false" />
     <file path="/jbclock.js" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365730505592" ignored="false" />
     <file path="/20130411184221_remove_extra_challenge_data.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365705842315" ignored="false" />
@@ -64,10 +64,11 @@
     <file path="/20130414164614_h4_4.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365957984067" ignored="false" />
     <file path="/20130414210549_create_h4_player_recent_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365973582431" ignored="false" />
     <file path="/20130414211529_stuff.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365974387611" ignored="false" />
-    <file path="/h4_player_recent_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365974695799" ignored="false" />
-    <file path="/view_match.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365988237635" ignored="false" />
+    <file path="/h4_player_recent_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366035008187" ignored="false" />
+    <file path="/view_match.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366039955215" ignored="false" />
     <file path="/match_history.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365992363953" ignored="false" />
     <file path="/20130415012856_update_match_details.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365989372868" ignored="false" />
+    <file path="/20130415113100_create_h4_player_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366025503758" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,11 +99,24 @@
             <file leaf-file-name="halo4.css.scss" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="168" column="23" selection-start="3845" selection-end="3845" vertical-scroll-proportion="0.7729516">
+                  <state line="284" column="14" selection-start="7931" selection-end="7931" vertical-scroll-proportion="0.4373149">
                     <folding>
                       <element signature="e#3244#3294#0" expanded="false" />
                       <element signature="e#3340#3433#0" expanded="false" />
                       <element signature="e#3483#3537#0" expanded="false" />
+                      <element signature="e#3955#4120#0" expanded="false" />
+                      <element signature="e#4138#4987#0" expanded="false" />
+                      <element signature="e#5035#5138#0" expanded="false" />
+                      <element signature="e#5210#5320#0" expanded="false" />
+                      <element signature="e#5403#5443#0" expanded="false" />
+                      <element signature="e#5525#5609#0" expanded="false" />
+                      <element signature="e#5684#5754#0" expanded="false" />
+                      <element signature="e#5830#6858#0" expanded="false" />
+                      <element signature="e#6931#7014#0" expanded="false" />
+                      <element signature="e#7092#7255#0" expanded="false" />
+                      <element signature="e#7343#7486#0" expanded="false" />
+                      <element signature="e#7509#7669#0" expanded="false" />
+                      <element signature="e#7759#7876#0" expanded="false" />
                     </folding>
                   </state>
                 </provider>
@@ -125,10 +139,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="x343_api_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="x343_api_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="174" column="0" selection-start="4692" selection-end="4692" vertical-scroll-proportion="0.33333334">
+            <state line="174" column="39" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#408#1109#0" expanded="false" />
                 <element signature="e#1112#1482#0" expanded="false" />
@@ -137,6 +151,8 @@
                 <element signature="e#2214#2581#0" expanded="false" />
                 <element signature="e#2584#3566#0" expanded="false" />
                 <element signature="e#3569#4562#0" expanded="false" />
+                <element signature="e#7208#7511#0" expanded="false" />
+                <element signature="e#7514#8364#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -145,8 +161,51 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="79" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0">
+            <state line="16" column="54" selection-start="574" selection-end="581" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_match.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="198" column="148" selection-start="10873" selection-end="10873" vertical-scroll-proportion="0.41621622">
+              <folding>
+                <element signature="tag#div#0;tag#div#0;tag#div#0" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="tag#div#0;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#6;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="tag#ul#0;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="tag#td#0;tag#tr#0;tag#tbody#0;tag#table#0;tag#div#0;tag#div#0;tag#div#0;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,17 +213,8 @@
       <file leaf-file-name="match_history.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="116" selection-start="5158" selection-end="5158" vertical-scroll-proportion="-31.296297">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="tag#div#0;tag#div#0;tag#div#1;tag#div#0;tag#div#0" expanded="false" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="tag#div#1;tag#div#0;tag#div#1;tag#div#0;tag#div#0" expanded="false" />
-                <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
-              </folding>
+            <state line="89" column="77" selection-start="4429" selection-end="4483" vertical-scroll-proportion="-9.555555">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -172,19 +222,16 @@
       <file leaf-file-name="halo4_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="44" selection-start="1286" selection-end="1286" vertical-scroll-proportion="0.0">
+            <state line="24" column="19" selection-start="948" selection-end="963" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#48#670#0" expanded="false" />
-                <element signature="e#2248#3601#0" expanded="false" />
-                <element signature="e#4258#5068#0" expanded="false" />
-                <element signature="e#4438#4485#0" expanded="false" />
-                <element signature="e#4488#4535#0" expanded="false" />
-                <element signature="e#4538#4588#0" expanded="false" />
-                <element signature="e#4660#4707#0" expanded="false" />
-                <element signature="e#4710#4757#0" expanded="false" />
-                <element signature="e#4760#4810#0" expanded="false" />
-                <element signature="e#5071#5375#0" expanded="false" />
-                <element signature="e#5378#7321#0" expanded="false" />
+                <element signature="e#1189#2132#0" expanded="false" />
+                <element signature="e#2135#2761#0" expanded="false" />
+                <element signature="e#2764#4117#0" expanded="false" />
+                <element signature="e#4120#4759#0" expanded="false" />
+                <element signature="e#4774#5584#0" expanded="false" />
+                <element signature="e#5587#5891#0" expanded="false" />
+                <element signature="e#5894#7837#0" expanded="false" />
+                <element signature="e#7840#8040#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -193,7 +240,7 @@
       <file leaf-file-name="service_record.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="156" column="159" selection-start="8089" selection-end="8177" vertical-scroll-proportion="-23.333334">
+            <state line="156" column="159" selection-start="8089" selection-end="8177" vertical-scroll-proportion="-7.3333335">
               <folding />
             </state>
           </provider>
@@ -213,22 +260,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20130414164547_h4_3.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130414164614_h4_4.rb" />
         <option value="$PROJECT_DIR$/app/controllers/background_auth_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/db/migrate/20130414210549_create_h4_player_recent_matches.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130414211529_stuff.rb" />
-        <option value="$PROJECT_DIR$/app/models/h4_player_recent_matches.rb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130415012856_update_match_details.rb" />
-        <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
         <option value="$PROJECT_DIR$/app/views/halo4/service_record.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20130415113100_create_h4_player_matches.rb" />
+        <option value="$PROJECT_DIR$/app/models/h4_player_recent_matches.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/match_history.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/x343_api_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
       </list>
     </option>
   </component>
@@ -881,8 +928,8 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14621131" sideWeight="0.675705" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.324295" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14621131" sideWeight="0.67353576" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275488" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -950,7 +997,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="146" />
+      <option name="time" value="155" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -972,31 +1019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="55" selection-start="1211" selection-end="1232" vertical-scroll-proportion="0.4848485">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/h4_player_recent_matches.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="46" selection-start="109" selection-end="109" vertical-scroll-proportion="0.060606062">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="23" selection-start="3845" selection-end="3845" vertical-scroll-proportion="0.7729516">
-          <folding>
-            <element signature="e#3244#3294#0" expanded="false" />
-            <element signature="e#3340#3433#0" expanded="false" />
-            <element signature="e#3483#3537#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,65 +1047,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="121" selection-start="891" selection-end="891" vertical-scroll-proportion="0.45487365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="79" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0">
+        <state line="25" column="64" selection-start="1213" selection-end="1233" vertical-scroll-proportion="0.4848485">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="159" selection-start="8089" selection-end="8177" vertical-scroll-proportion="-23.333334">
+        <state line="156" column="159" selection-start="8089" selection-end="8177" vertical-scroll-proportion="-7.3333335">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/h4_player_recent_matches.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="44" selection-start="1286" selection-end="1286" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#48#670#0" expanded="false" />
-            <element signature="e#2248#3601#0" expanded="false" />
-            <element signature="e#4258#5068#0" expanded="false" />
-            <element signature="e#4438#4485#0" expanded="false" />
-            <element signature="e#4488#4535#0" expanded="false" />
-            <element signature="e#4538#4588#0" expanded="false" />
-            <element signature="e#4660#4707#0" expanded="false" />
-            <element signature="e#4710#4757#0" expanded="false" />
-            <element signature="e#4760#4810#0" expanded="false" />
-            <element signature="e#5071#5375#0" expanded="false" />
-            <element signature="e#5378#7321#0" expanded="false" />
-          </folding>
+        <state line="1" column="79" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0302521">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.erb">
+    <entry file="file://A:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/activerecord-3.2.13/lib/active_record/dynamic_matchers.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="116" selection-start="5158" selection-end="5158" vertical-scroll-proportion="-31.296297">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="tag#div#0;tag#div#0;tag#div#1;tag#div#0;tag#div#0" expanded="false" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="tag#div#1;tag#div#0;tag#div#1;tag#div#0;tag#div#0" expanded="false" />
-            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#0;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
-          </folding>
+        <state line="23" column="8" selection-start="1029" selection-end="1029" vertical-scroll-proportion="-0.1210084">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="0" selection-start="4692" selection-end="4692" vertical-scroll-proportion="0.33333334">
+        <state line="174" column="39" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#408#1109#0" expanded="false" />
             <element signature="e#1112#1482#0" expanded="false" />
@@ -1092,6 +1086,103 @@
             <element signature="e#2214#2581#0" expanded="false" />
             <element signature="e#2584#3566#0" expanded="false" />
             <element signature="e#3569#4562#0" expanded="false" />
+            <element signature="e#7208#7511#0" expanded="false" />
+            <element signature="e#7514#8364#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="77" selection-start="4429" selection-end="4483" vertical-scroll-proportion="-9.555555">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="54" selection-start="574" selection-end="581" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="19" selection-start="948" selection-end="963" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1189#2132#0" expanded="false" />
+            <element signature="e#2135#2761#0" expanded="false" />
+            <element signature="e#2764#4117#0" expanded="false" />
+            <element signature="e#4120#4759#0" expanded="false" />
+            <element signature="e#4774#5584#0" expanded="false" />
+            <element signature="e#5587#5891#0" expanded="false" />
+            <element signature="e#5894#7837#0" expanded="false" />
+            <element signature="e#7840#8040#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="284" column="14" selection-start="7931" selection-end="7931" vertical-scroll-proportion="0.4373149">
+          <folding>
+            <element signature="e#3244#3294#0" expanded="false" />
+            <element signature="e#3340#3433#0" expanded="false" />
+            <element signature="e#3483#3537#0" expanded="false" />
+            <element signature="e#3955#4120#0" expanded="false" />
+            <element signature="e#4138#4987#0" expanded="false" />
+            <element signature="e#5035#5138#0" expanded="false" />
+            <element signature="e#5210#5320#0" expanded="false" />
+            <element signature="e#5403#5443#0" expanded="false" />
+            <element signature="e#5525#5609#0" expanded="false" />
+            <element signature="e#5684#5754#0" expanded="false" />
+            <element signature="e#5830#6858#0" expanded="false" />
+            <element signature="e#6931#7014#0" expanded="false" />
+            <element signature="e#7092#7255#0" expanded="false" />
+            <element signature="e#7343#7486#0" expanded="false" />
+            <element signature="e#7509#7669#0" expanded="false" />
+            <element signature="e#7759#7876#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="148" selection-start="10873" selection-end="10873" vertical-scroll-proportion="0.41621622">
+          <folding>
+            <element signature="tag#div#0;tag#div#0;tag#div#0" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="tag#div#0;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#6;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="tag#ul#0;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="tag#td#0;tag#tr#0;tag#tbody#0;tag#table#0;tag#div#0;tag#div#0;tag#div#0;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

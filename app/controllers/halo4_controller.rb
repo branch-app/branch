@@ -2,16 +2,31 @@ class Halo4Controller < ApplicationController
 
 	def view_match
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		@match = X343ApiController.GetMatchDetails(params[:gamertag], params[:matchid])
 		if @service_record['continue'] == 'no'
 			# error, handle it
 			SetupErrorNotification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
 			redirect_to_url :application
 			return
 		end
+		if @match['continue'] == 'no'
+			# error, handle it
+			SetupErrorNotification('error', "The match `#{params[:matchid]}` does not exist, or HaloWaypoint is down.")
+			redirect_to_url :application
+			return
+		end
 
-		@recent_matches = X343ApiController.GetPlayerMatches(params[:gamertag], 0, 20)['Games']
-		@commendations = X343ApiController.GetPlayerCommendations(params[:gamertag])['Commendations']
-		@commendations = @commendations.sort { |a, b| [a['LevelId'], a['Ticks']] <=> [b['LevelId'], b['Ticks']] }.reverse
+		@metadata = X343ApiController.GetMetaData()
+		@game_variant_metadata = @metadata['GameBaseVariantsMetadata']['GameBaseVariants']
+
+		@match = @match['Game']
+		@is_ffa = @match['Teams'].count == 0
+		@top_player = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse[0]
+		@sorted_players = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse
+
+		# duration
+		parts = @match['Duration'].split(':')
+		@duration = Time.new(1994, 8, 18, parts[0].to_i, parts[1].to_i, parts[2].to_i, '+00:00')
 	end
 
 	def match_history
@@ -29,7 +44,7 @@ class Halo4Controller < ApplicationController
 			@selected_gamemode = params[:game_mode].to_i
 		end
 		if params[:page].to_i != nil && params[:page].to_i > 0
-			@start_index = params[:page].to_i * 30
+			@start_index = params[:page].to_i * 25
 		end
 
 		@metadata = X343ApiController.GetMetaData()
@@ -229,5 +244,15 @@ class Halo4Controller < ApplicationController
 		else
 			return 'recent-match-win'
 		end
+	end
+
+	def self.GetVariantDataFromMeta(meta, variant_id)
+		meta.each do |variant|
+			if variant['Id'] == variant_id
+				return variant
+			end
+		end
+
+		return nil
 	end
 end

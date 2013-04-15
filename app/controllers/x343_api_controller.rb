@@ -211,6 +211,40 @@ class X343ApiController < ApplicationController
 		end
 	end
 
+	def self.GetMatchDetails(gamertag, match_id)
+		gamertag_name = gamertag.to_s.downcase
+		cached_match = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
+
+		if cached_match != nil && cached_match.data != nil && cached_match.updated_at + (60 * 8) < Time.now
+			json = JSON.parse(cached_match.data)
+			return json
+		else
+			url = url_from_name('GetGameDetails', 'service_list')
+			url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
+			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+
+			data = JSON.parse(response.body)
+
+			# check shit worked
+			if data['StatusCode'] != 1
+				return { :status_code => data['StatusCode'], :continue => 'no' }
+			else
+				old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
+				if old_cached != nil
+					H4PlayerMatch.delete(old_cached)
+				end
+
+				cached_match = H4PlayerMatch.new
+				cached_match.gamertag = gamertag_name
+				cached_match.data = response.body
+				cached_match.game_id = match_id
+				cached_match.save
+
+				data
+			end
+		end
+	end
+
 	def self.GetPlayerModel(gamertag, size)
 		url = url_from_name('GetSpartanImage', 'service_list') # https://spartans.svc.halowaypoint.com/players/{gamertag}/{game}/spartans/{pose}?target={size}
 		url = full_url_with_defaults(url, { :gamertag => gamertag, :pose => 'fullbody', :size => size })

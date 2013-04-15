@@ -74,9 +74,170 @@
 		  </div>
 		</div>
 		<div class="well span9">
-		  <h3>View Game:</h3>
+		  <h3><%= @match['GameVariantName'] %> on <%= @match['MapVariantName'] %></h3>
 		  <div class="row-fluid">
+		    <div class="cover" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large') %>')">
+			  	<div class="mask">
+					  <div class="game-victor-player-model" style="background-image: url('<%= X343ApiController.GetPlayerModel(@top_player['Gamertag'], 'medium') %>')">
+				      <% if @is_ffa %>
+					      <div class="game-summary-title">
+						      <span class="title"><%= @match['GameBaseVariantName'] %></span>
+							    <br>
+						      <span class="body"><%= DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %> | <%= @duration.min %> Minutes and <%= @duration.sec %> seconds</span>
+					      </div>
+				        <% variant_data = Halo4Controller.GetVariantDataFromMeta(@game_variant_metadata, @match['GameBaseVariantId']) %>
+						    <div class="game-summary-gametype" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(variant_data['ImageUrl']['BaseUrl'], variant_data['ImageUrl']['AssetUrl'], 'large') %>')"></div>
+					      <div class="game-summary-title">
+					        <span class="body" style="font-size: 16px;">on <%= @match['MapVariantName'] %></span>
+					      </div>
 
+							  <div class="game-summary-seperator"></div>
+
+					      <div class="game-summary-victor">
+					        <span><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>"><%= @service_record['Gamertag'] %></a> led the game with a personal score of <%= @top_player['PersonalScore'] %>,<br> and k/d spread of <%= (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) %>  </span>
+					      </div>
+					    <% else %>
+					      <div class="game-summary-title">
+					        <span class="title"><%= @match['GameBaseVariantName'] %></span>
+					        <br>
+					        <span class="body"><%= DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %> | <%= @duration.min %> Minutes and <%= @duration.sec %> seconds</span>
+					      </div>
+					      <% variant_data = Halo4Controller.GetVariantDataFromMeta(@game_variant_metadata, @match['GameBaseVariantId']) %>
+					      <div class="game-summary-gametype" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(variant_data['ImageUrl']['BaseUrl'], variant_data['ImageUrl']['AssetUrl'], 'large') %>')"></div>
+					      <div class="game-summary-title">
+					        <span class="body" style="font-size: 16px;">on <%= @match['MapVariantName'] %></span>
+					      </div>
+							  <%
+							     teams_in_order = @match['Teams'].sort_by { |team| team['Standing'] }
+
+								   # score percentage height stuff
+								   modifier = teams_in_order[0]['Score'] / 75
+							  %>
+					      <div class="game-summary-victor-team" style="width: <%= teams_in_order.count * 60 %>px;">
+						      <% teams_in_order.each do |team|%>
+						        <div class="team" style="height: <%= (team['Score']) / modifier %>px; margin-top: <%= 75 - (team['Score'] / modifier)  %>px; background-color: <%= team['PrimaryRGB'] %>">
+							      	<div style="height: 75px; margin-top: -<%= 75 - (team['Score'] / modifier)  %>px;">
+								        <%= team['Score'] %>
+								      </div>
+						        </div>
+								  <% end %>
+
+						      <div class="cleaner"></div>
+					      </div>
+					    <% end %>
+					  </div>
+				  </div>
+		    </div>
+			  <div class="game-stats">
+			    <ul class="nav nav-tabs">
+			      <li class="active"><a href="#A" data-toggle="tab">Results</a></li>
+			      <li><a href="#B" data-toggle="tab">Carnage</a></li>
+			      <li><a href="#C" data-toggle="tab">Medals</a></li>
+			      <li><a href="#D" data-toggle="tab">Unknown</a></li>
+			      <li><a href="#E" data-toggle="tab">Unknown</a></li>
+			    </ul>
+			    <div class="tabbable">
+			      <div class="tab-content">
+			        <div class="tab-pane active" id="A">
+				        <% if @is_ffa %>
+
+					      <% else %>
+				          <% teams_in_order.each do |team| %>
+			            <table class="team-table table table-bordered table-striped table-hover">
+			              <thead>
+			                <tr>
+				                <td style="width: 400px;"><%= team['Name'] %></td>
+			                  <td style="width: 80px;">Score</td>
+			                  <td style="width: 80px;">Assists</td>
+			                  <td style="width: 80px;">Spread</td>
+			                  <td style="width: 80px;">Penalties</td>
+			                  <td style="width: 100px;">Rank</td>
+			                </tr>
+			              </thead>
+				            <tbody>
+				            <% @sorted_players.each do |player|
+				               if player['TeamId'] != team['Id']
+												 next
+					             end
+
+				               if player['IsGuest'] %>
+				                <tr style="<% if player['Gamertag'] == @service_record['Gamertag'] %> border-top: 2px solid white; border-bottom: 2px solid white; <% end %>">
+				                  <td style="padding: 0;">
+				                    <div class="team-player-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url('https://emblems.svc.halowaypoint.com/h4/emblems/steel_brick_recruit-on-silver_plus?size=48');">
+
+
+				                    </div>
+				                    <div class="team-player-name">
+				                      <span class="gamer-tag"><%= player['Gamertag'] %></span><br>
+				                      <span class="service-tag">0000</span>
+				                    </div>
+
+				                    <div class="team-player-csr" style="background-image: url('https://assets.halowaypoint.com/games/h4/csr/v1/small/0.png');">
+
+				                    </div>
+
+				                    <div class="cleaner"></div>
+				                  </td>
+				                  <td><%= player['PersonalScore'] %></td>
+				                  <td><%= player['Assists'] %></td>
+				                  <td><%= (player['Kills'].to_f / player['Deaths'].to_f).to_f.round(2) %></td>
+				                  <td><%= (player['Betrayals'] + player['Suicides']) %></td>
+				                  <td>
+				                    <div class="team-player-rank" style="background-image: url('https://assets.halowaypoint.com/games/h4/ranks/v1/medium/sr-001.png')"></div>
+				                  </td>
+				                </tr>
+					             <% else %>
+				                <tr style="<% if player['Gamertag'] == @service_record['Gamertag'] %> border-top: 2px solid white; border-bottom: 2px solid white; <% end %>">
+				                  <td style="padding: 0;">
+			                      <div class="team-player-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url('<%= X343ApiController.asset_url_generator_basic(
+									            player['EmblemImageUrl']['BaseUrl'],
+									            player['EmblemImageUrl']['AssetUrl'],
+									            '48') %>');">
+
+				                    </div>
+					                  <div class="team-player-name">
+					                    <a href="/halo4/servicerecord/<%= player['Gamertag'] %>/"><span class="gamer-tag"><%= player['Gamertag'] %></span></a><br>
+						                  <span class="service-tag"><%= player['Servicetag'] %></span>
+					                  </div>
+
+					                  <div class="team-player-csr" style="background-image: url('https://assets.halowaypoint.com/games/h4/csr/v1/small/<%= player['SkillRank']['GameSkillRank'] %>.png');">
+
+					                  </div>
+
+				                    <div class="cleaner"></div>
+				                  </td>
+					                <td><%= player['PersonalScore'] %></td>
+				                  <td><%= player['Assists'] %></td>
+				                  <td><%= (player['Kills'].to_f / player['Deaths'].to_f).to_f.round(2) %></td>
+				                  <td><%= (player['Betrayals'] + player['Suicides']) %></td>
+				                  <td>
+					                  <div class="team-player-rank" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(player['RankUrl']['BaseUrl'], player['RankUrl']['AssetUrl'], 'medium') %>')">
+
+					                  </div>
+				                  </td>
+				                </tr>
+					             <% end %>
+					          <% end %>
+				            </tbody>
+			            </table>
+					        <% end %>
+					      <% end %>
+			        </div>
+			        <div class="tab-pane" id="B">
+			          <p>Howdy, I'm in Section B.</p>
+			        </div>
+			        <div class="tab-pane" id="C">
+			          <p>What up girl, this is Section C.</p>
+			        </div>
+			        <div class="tab-pane" id="D">
+			          <p>What up girl, this is Section C.</p>
+			        </div>
+			        <div class="tab-pane" id="E">
+			          <p>What up girl, this is Section C.</p>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
 		  </div>
 		</div>
 	</div>

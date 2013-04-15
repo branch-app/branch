@@ -10,6 +10,7 @@
       <w>gamecount</w>
       <w>gamemode</w>
       <w>gamemodeid</w>
+      <w>gametype</w>
       <w>halowaypoint</w>
       <w>herp</w>
       <w>jbclock</w>
@@ -20,6 +21,7 @@
       <w>navbar</w>
       <w>playlists</w>
       <w>popbox</w>
+      <w>servicetag</w>
       <w>startat</w>
       <w>tabbable</w>
       <w>viewport</w>

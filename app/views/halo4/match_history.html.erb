@@ -106,7 +106,7 @@
 										start = 0
 								  end
 
-                  mode_recent_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], start, 25, 4)['Games']
+                  mode_recent_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], start, 25, mode['Id'])['Games']
 
 						      if mode_recent_matches.count == 0
 									%>
