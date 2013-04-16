@@ -1,6 +1,5 @@
 class UpdateCachesController < ApplicationController
 	def devcacheupdate
-
 		# authorize
 		BackgroundAuthController.UpdateAuthentication
 

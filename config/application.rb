@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Halo4StatViewer
+module BranchApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -58,5 +58,17 @@ module Halo4StatViewer
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+		# Execute some sexy startup code
+		config.after_initialize do
+			# authorize
+			BackgroundAuthController.UpdateAuthentication
+
+			# call
+			X343ApiController.UpdateServicesList
+			X343ApiController.UpdateMetaData
+			X343ApiController.UpdateChallenges
+			X343ApiController.UpdatePlaylists
+		end
   end
 end

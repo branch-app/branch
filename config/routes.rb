@@ -1,4 +1,4 @@
-Halo4StatViewer::Application.routes.draw do
+BranchApp::Application.routes.draw do
 
 	root :to => 'application#index'
 

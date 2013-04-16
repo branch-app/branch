@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Halo4StatViewer::Application.load_tasks
+BranchApp::Application.load_tasks
