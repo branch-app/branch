@@ -1,11 +1,14 @@
 class Halo4Controller < ApplicationController
+	require 'digest/md5'
+	require 'active_support/core_ext/integer/inflections'
+
 
 	def view_match
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		@match = X343ApiController.GetMatchDetails(params[:gamertag], params[:matchid])
 		if @service_record['continue'] == 'no'
 			# error, handle it
-			SetupErrorNotification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			SetupErrorNotification('error', X343ApiController.error_message_from_status_code(@service_record['StatusCode'], params[:gamertag]))
 			redirect_to_url :application
 			return
 		end

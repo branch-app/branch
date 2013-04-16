@@ -1,6 +1,9 @@
 class X343ApiController < ApplicationController
 	cattr_accessor :game_meta_data
 
+	# Status Codes
+	## 1001 - Server Down
+
 	# requires
 	require 'net/https'
 	require 'open-uri'
@@ -17,28 +20,31 @@ class X343ApiController < ApplicationController
 
 	def self.UpdateServicesList
 		response = unauthorized_request(SERVICES_LIST_URI, 'GET', nil)
-		response = JSON.parse(response.body)
 
-		services_list = response['ServiceList']
-		settings = response['Settings']
+		if response.code == '200'
+			response = JSON.parse(response.body)
 
-		# save to database
-		H4ServicesList.delete_all()
+			services_list = response['ServiceList']
+			settings = response['Settings']
 
-		services_list.each do |services_list_item|
-			new_item = H4ServicesList.new
-			new_item.name = services_list_item[0]
-			new_item.url = services_list_item[1]
-			new_item.list_type = 'service_list'
-			new_item.save
-		end
+			# save to database
+			H4ServicesList.delete_all()
 
-		settings.each do |services_list_item|
-			new_item = H4ServicesList.new
-			new_item.name = services_list_item[0]
-			new_item.url = services_list_item[1]
-			new_item.list_type = 'settings'
-			new_item.save
+			services_list.each do |services_list_item|
+				new_item = H4ServicesList.new
+				new_item.name = services_list_item[0]
+				new_item.url = services_list_item[1]
+				new_item.list_type = 'service_list'
+				new_item.save
+			end
+
+			settings.each do |services_list_item|
+				new_item = H4ServicesList.new
+				new_item.name = services_list_item[0]
+				new_item.url = services_list_item[1]
+				new_item.list_type = 'settings'
+				new_item.save
+			end
 		end
 
 	end
@@ -48,13 +54,15 @@ class X343ApiController < ApplicationController
 		url = full_url_with_defaults(url, nil)
 		response = unauthorized_request(URI.parse(url), 'GET', nil)
 
-		# save to database
-		H4GameMetadata.delete_all()
-		meta_data = H4GameMetadata.new
-		meta_data.data = response.body
-		meta_data.save
+		if response.code == '200'
+			# save to database
+			H4GameMetadata.delete_all()
+			meta_data = H4GameMetadata.new
+			meta_data.data = response.body
+			meta_data.save
 
-		$game_meta_data = JSON.parse(response.body)
+			$game_meta_data = JSON.parse(response.body)
+		end
 	end
 
 	def self.UpdatePlaylists
@@ -62,10 +70,12 @@ class X343ApiController < ApplicationController
 		url = full_url_with_defaults(url, nil)
 		response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-		H4Playlists.delete_all
-		playlist_model = H4Playlists.new
-		playlist_model.data = response.body
-		playlist_model.save
+		if response.code == '200'
+			H4Playlists.delete_all
+			playlist_model = H4Playlists.new
+			playlist_model.data = response.body
+			playlist_model.save
+		end
 	end
 
 	def self.UpdateChallenges
@@ -73,16 +83,18 @@ class X343ApiController < ApplicationController
 		url = full_url_with_defaults(url, nil)
 		response = unauthorized_request(URI.parse(url), 'GET', nil)
 
-		json = JSON.parse(response.body)
+		if response.code == '200'
+			json = JSON.parse(response.body)
 
-		if json['StatusCode'] != 1
-			raise
+			if json['StatusCode'] != 1
+				raise
+			end
+
+			H4GlobalChallenges.delete_all
+			new_challenge = H4GlobalChallenges.new
+			new_challenge.data = response.body
+			new_challenge.save
 		end
-
-		H4GlobalChallenges.delete_all
-		new_challenge = H4GlobalChallenges.new
-		new_challenge.data = response.body
-		new_challenge.save
 	end
 
 	def self.GetMetaData
@@ -108,7 +120,7 @@ class X343ApiController < ApplicationController
 		gamertag_name = gamertag.to_s.downcase
 		cached_sr = H4PlayerServicerecords.find_by_gamertag(gamertag_name)
 
-		if cached_sr != nil && cached_sr.data != nil && cached_sr.updated_at + (60 * 8) < Time.now
+		if cached_sr != nil && cached_sr.data != nil && cached_sr.updated_at + (60 * 8) > Time.now
 			json = JSON.parse(cached_sr.data)
 			return json
 		else
@@ -116,23 +128,34 @@ class X343ApiController < ApplicationController
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
 			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-			data = JSON.parse(response.body)
+			i = response.code
 
-			# check shit worked
-			if data['StatusCode'] != 1
-				return { :status_code => data['StatusCode'], :continue => 'no' }
-			else
-				old_cached = H4PlayerServicerecords.find_all_by_gamertag(gamertag_name)
-				if old_cached != nil
-					H4PlayerServicerecords.delete(old_cached)
+			if response.code == '200'
+				data = JSON.parse(response.body)
+
+				# check shit worked
+				if data['StatusCode'] != 1
+					return { :status_code => data['StatusCode'], :continue => 'no' }
+				else
+					old_cached = H4PlayerServicerecords.find_all_by_gamertag(gamertag_name)
+					if old_cached != nil
+						H4PlayerServicerecords.delete(old_cached)
+					end
+
+					cached_sr = H4PlayerServicerecords.new
+					cached_sr.gamertag = gamertag_name
+					cached_sr.data = response.body
+					cached_sr.save
+
+					data
 				end
-
-				cached_sr = H4PlayerServicerecords.new
-				cached_sr.gamertag = gamertag_name
-				cached_sr.data = response.body
-				cached_sr.save
-
-				data
+			else
+				# try returning cache
+				if cached_sr != nil
+					return JSON.parse(cached_sr.data)
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
 			end
 		end
 	end
@@ -149,33 +172,42 @@ class X343ApiController < ApplicationController
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
 			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-			data = JSON.parse(response.body)
+			if response.code == '200'
+				data = JSON.parse(response.body)
 
-			# check shit worked
-			if data['StatusCode'] != 1
-				return { :status_code => data['StatusCode'], :continue => 'no' }
-			else
-				old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
-				if old_cached != nil
-					H4PlayerCommendations.delete(old_cached)
+				# check shit worked
+				if data['StatusCode'] != 1
+					return { :status_code => data['StatusCode'], :continue => 'no' }
+				else
+					old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
+					if old_cached != nil
+						H4PlayerCommendations.delete(old_cached)
+					end
+
+					cached_com = H4PlayerCommendations.new
+					cached_com.gamertag = gamertag_name
+					cached_com.data = response.body
+					cached_com.save
+
+					data
 				end
-
-				cached_com = H4PlayerCommendations.new
-				cached_com.gamertag = gamertag_name
-				cached_com.data = response.body
-				cached_com.save
-
-				data
+			else
+				# try returning cache
+				if cached_com != nil
+					return JSON.parse(cached_com.data)
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
 			end
 		end
 	end
 
 	def self.GetPlayerMatches(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
 		gamertag_name = gamertag.to_s.downcase
-		cached_com = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_name, start_index, count, mode_id, chapter_id)
+		cached_match = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_name, start_index, count, mode_id, chapter_id)
 
-		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) < Time.now
-			json = JSON.parse(cached_com.data)
+		if cached_match != nil && cached_match.data != nil && cached_match.updated_at + (60 * 8) < Time.now
+			json = JSON.parse(cached_match.data)
 			return json
 		else
 			url = url_from_name('GetGameHistory', 'service_list')
@@ -186,27 +218,37 @@ class X343ApiController < ApplicationController
 			url = full_url_with_defaults(url, { :gamertag => gamertag, :count => count.to_s, :startat => start_index.to_s, :gamemodeid => mode_id.to_s, :chapterid => chapter_id.to_s })
 
 			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
-			data = JSON.parse(response.body)
 
-			# check shit worked
-			if data['StatusCode'] != 1
-				return { :status_code => data['StatusCode'], :continue => 'no' }
-			else
-				old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count(gamertag_name, start_index, count)
-				if old_cached != nil
-					H4PlayerRecentMatches.delete(old_cached)
+			if response.code == '200'
+				data = JSON.parse(response.body)
+
+				# check shit worked
+				if data['StatusCode'] != 1
+					return { :status_code => data['StatusCode'], :continue => 'no' }
+				else
+					old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count(gamertag_name, start_index, count)
+					if old_cached != nil
+						H4PlayerRecentMatches.delete(old_cached)
+					end
+
+					cached_match = H4PlayerRecentMatches.new
+					cached_match.gamertag = gamertag_name
+					cached_match.data = response.body
+					cached_match.start_index = start_index
+					cached_match.count = count
+					cached_match.mode_id = mode_id
+					cached_match.chapter_id = chapter_id
+					cached_match.save
+
+					data
 				end
-
-				cached_com = H4PlayerRecentMatches.new
-				cached_com.gamertag = gamertag_name
-				cached_com.data = response.body
-				cached_com.start_index = start_index
-				cached_com.count = count
-				cached_com.mode_id = mode_id
-				cached_com.chapter_id = chapter_id
-				cached_com.save
-
-				data
+			else
+				# try returning cache
+				if cached_match != nil
+					return JSON.parse(cached_match.data)
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
 			end
 		end
 	end
@@ -223,24 +265,33 @@ class X343ApiController < ApplicationController
 			url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
 			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-			data = JSON.parse(response.body)
+			if response.code == '200'
+				data = JSON.parse(response.body)
 
-			# check shit worked
-			if data['StatusCode'] != 1
-				return { :status_code => data['StatusCode'], :continue => 'no' }
-			else
-				old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
-				if old_cached != nil
-					H4PlayerMatch.delete(old_cached)
+				# check shit worked
+				if data['StatusCode'] != 1
+					return { :status_code => data['StatusCode'], :continue => 'no' }
+				else
+					old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
+					if old_cached != nil
+						H4PlayerMatch.delete(old_cached)
+					end
+
+					cached_match = H4PlayerMatch.new
+					cached_match.gamertag = gamertag_name
+					cached_match.data = response.body
+					cached_match.game_id = match_id
+					cached_match.save
+
+					data
 				end
-
-				cached_match = H4PlayerMatch.new
-				cached_match.gamertag = gamertag_name
-				cached_match.data = response.body
-				cached_match.game_id = match_id
-				cached_match.save
-
-				data
+			else
+				# try returning cache
+				if cached_match != nil
+					return JSON.parse(cached_match.data)
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
 			end
 		end
 	end
@@ -266,24 +317,33 @@ class X343ApiController < ApplicationController
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
 			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
 
-			data = JSON.parse(response.body)
+			if response.code == '200'
+				data = JSON.parse(response.body)
 
-			# check gamertag exists
-			if data['StatusCode'] != 1
-				'player_not_found'
-			elsif data['StatusCode'] != 0
-		 	  raise
-			end
+				# check gamertag exists
+				if data['StatusCode'] != 1
+					'player_not_found'
+				elsif data['StatusCode'] != 0
+			    raise
+				end
 
-			# cache
-			if cached_result != nil
-				cached_result.data = response.body
+				# cache
+				if cached_result != nil
+					cached_result.data = response.body
+				else
+					cached_result = H4PlayerChallenges.next
+					cached_result.data = response.body
+				end
+
+				data
 			else
-				cached_result = H4PlayerChallenges.next
-				cached_result.data = response.body
+				# try returning cache
+				if cached_result != nil
+					return JSON.parse(cached_result.data)
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
 			end
-
-			data
 		end
 	end
 
@@ -401,8 +461,15 @@ class X343ApiController < ApplicationController
 		entry.url
 	end
 
-	def self.error_message_from_status_code(status_code)
-		status_code
+	def self.error_message_from_status_code(status_code, param1 = '')
+		case status_code
+			when 1001
+				return 'The Halo Waypoint API is down, we can only load cached data. Sorry about that.'
+			when 4
+				return "The specified gamertag `#{param1}` has no Halo 4 game history."
+			else
+				return 'Unknown Status Code'
+		end
 	end
 end
 

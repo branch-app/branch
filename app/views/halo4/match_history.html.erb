@@ -89,15 +89,15 @@
 	              <!-- load matches, :) -->
                 <table class="table table-bordered table-striped table-hover">
                   <thead>
-	                  <tr>
-	                    <td>Game Title</td>
-	                    <td>Place/Difficulty</td>
-	                    <td>Date</td>
-	                    <td>Personal Score</td>
-	                    <td>Standing</td>
-	                    <td>Map</td>
-	                    <td>Playlist</td>
-	                  </tr>
+                  <tr>
+                    <td>Game Title</td>
+                    <td>Place/Difficulty</td>
+                    <td>Date</td>
+                    <td>Personal Score</td>
+                    <td>Standing</td>
+                    <td>Map</td>
+                    <td>Playlist</td>
+                  </tr>
                   </thead>
                   <tbody>
                   <%
@@ -106,7 +106,7 @@
 										start = 0
 								  end
 
-                  mode_recent_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], start, 25, mode['Id'])['Games']
+                  mode_recent_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], start, 36, mode['Id'])['Games']
 
 						      if mode_recent_matches.count == 0
 									%>
@@ -127,7 +127,7 @@
 
 	                index = 1
                   mode_recent_matches.each do |match|
-                    if index == 24
+                    if index == 35
 											break
 	                  end
                   %>
@@ -144,11 +144,12 @@
                      end %>
                   </tbody>
                 </table>
-
                 <ul class="pager">
-                  <li class="previous <% if start == 0 %> disabled <% end %>"><a href="#">← Older</a></li>
-                  <li class="next <% if mode_recent_matches.count == 36 %> disabled <% end %>"><a href="#todo">Newer →</a></li>
+                  <li class="previous <% if start == 0 %> disabled <% end %>"><a href="#">? Older</a></li>
+                  <li class="next <% if mode_recent_matches.count == 36 %> disabled <% end %>"><a href="#todo">Newer ?</a></li>
                 </ul>
+
+
               </div>
             <% end %>
           </div>

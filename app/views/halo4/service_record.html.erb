@@ -144,11 +144,15 @@
 			          <% end %>
 			      </div>
 
+			      <% if match['MapImageUrl'] != nil %>
 			      <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'],
 			                                                                                    'medium') %>')">
+				    <% end %>
 				      <div class="cover">
+				        <% if match['BaseVariantImageUrl'] != nil %>
 					      <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'],
 					                                                                'medium') %>" />
+				        <% end %>
 				      </div>
 			      </div>
 
