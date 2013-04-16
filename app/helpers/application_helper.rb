@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def title(page_title)
-		content_for :title, 'Halo 4 Stats' + page_title.to_s
+		content_for :title, 'Branch' + page_title.to_s
 	end
 
 	def head_style(header_style)

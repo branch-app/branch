@@ -35,8 +35,10 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: Halo4StatViewer_production
+  database: branch_prod
   pool: 5
-  username: root
-  password:
+  username: branch_admin
+  password: 6BvX8bsD2YM8ZVM
   host: 127.0.0.1
+
+  #CREATE USER 'branch_admin'@'localhost' IDENTIFIED BY '6BvX8bsD2YM8ZVM';
