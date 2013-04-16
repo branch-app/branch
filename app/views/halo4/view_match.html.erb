@@ -399,7 +399,7 @@
 
 		              </div>
 		              <div class="team-player-name">
-		                <a class="show-player-carnage" onclick="show_carnage_for_player('player_medals_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
+		                <a class="show-player-carnage" onclick="show_carnage_for_player('player_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                  <% end %>"><%= player['Gamertag'] %></span></a><br>
 		                <span class="service-tag">0000</span>
 		              </div>
@@ -459,7 +459,7 @@
 
 		              </div>
 		              <div class="team-player-name">
-		                <a class="show-player-carnage" onclick="show_carnage_for_player('player_medals_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
+		                <a class="show-player-carnage" onclick="show_carnage_for_player('player_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                  <% end %>"><%= player['Gamertag'] %></span></a><br>
 		                <span class="service-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                  <% end %>"><%= player['Servicetag'] %></span>
@@ -511,7 +511,7 @@
 
 		                </div>
 		                <div class="team-player-name">
-		                  <a class="show-player-carnage" onclick="show_carnage_for_player('player_medals_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
+		                  <a class="show-player-carnage" onclick="show_carnage_for_player('player_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                    <% end %>"><%= player['Gamertag'] %></span></a><br>
 		                  <span class="service-tag">0000</span>
 		                </div>
@@ -567,7 +567,7 @@
 
 		                </div>
 		                <div class="team-player-name">
-		                  <a class="show-player-carnage" onclick="show_carnage_for_player('player_medals_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
+		                  <a class="show-player-carnage" onclick="show_carnage_for_player('player_<%= Digest::MD5.hexdigest(player['Gamertag']) %>');"><span class="gamer-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                    <% end %>"><%= player['Gamertag'] %></span></a><br>
 		                  <span class="service-tag" style="<% if player['Gamertag'] == @service_record['Gamertag'] %> font-weight: 600;
 		                    <% end %>"><%= player['Servicetag'] %></span>
