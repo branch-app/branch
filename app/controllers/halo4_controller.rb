@@ -249,6 +249,26 @@ class Halo4Controller < ApplicationController
 		end
 	end
 
+	def self.GetMedalDataFromId(medal_id, medal_meta)
+		medal_meta.each do |medal|
+			if medal['Id'] == medal_id
+				return medal
+			end
+		end
+
+		return nil
+	end
+
+	def self.GetMedalTeirFromId(tier_id, tier_meta)
+		tier_meta.each do |tier|
+			if tier['Id'] == tier_id
+				return tier
+			end
+		end
+
+		return nil
+	end
+
 	def self.GetVariantDataFromMeta(meta, variant_id)
 		meta.each do |variant|
 			if variant['Id'] == variant_id
