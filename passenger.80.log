@@ -1,0 +1,4 @@
+2013/04/17 02:27:36 [error] 2253#0: *4 "/home/deploy/public/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: _, request: "HEAD / HTTP/1.1", host: "0.0.0.0"
+2013/04/17 02:27:36 [error] 2253#0: *5 "/home/deploy/public/index.html" is not found (2: No such file or directory), client: 86.166.113.75, server: _, request: "GET / HTTP/1.1", host: "branchapp.co"
+2013/04/17 02:27:36 [error] 2253#0: *5 open() "/home/deploy/public/favicon.ico" failed (2: No such file or directory), client: 86.166.113.75, server: _, request: "GET /favicon.ico HTTP/1.1", host: "branchapp.co"
+2013/04/17 02:28:43 [error] 2333#0: *4 open() "/home/deploy/public/favicon.ico" failed (2: No such file or directory), client: 86.166.113.75, server: _, request: "GET /favicon.ico HTTP/1.1", host: "branchapp.co"
