@@ -4,20 +4,24 @@
   <title><%= yield(:title) %></title>
 
 
+
+  <!-- CDN -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.2.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.2.min.js"></script>
 
   <%= stylesheet_link_tag    'application', :media => 'all' %>
   <%= stylesheet_link_tag    'bootstrap.min', :media => 'all' %>
   <%= stylesheet_link_tag    'morris', :media => 'all' %>
   <!--<%= stylesheet_link_tag    'bootstrap-responsive.min', :media => 'all' %>-->
   <%= stylesheet_link_tag    'jbclock', :media => 'all' %>
+  <%= stylesheet_link_tag    'jquery.jqplot.min', :media => 'all' %>
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'bootswatch' %>
   <%= javascript_include_tag 'jbclock' %>
-  <%= javascript_include_tag 'moris' %>
-
-	<!-- javascript donut chart -->
+  <%= javascript_include_tag 'jquery.jqplot.min' %>
+  <%= javascript_include_tag 'Chart.min' %>
 
 	<%= yield(:head_style) %>
   <style type="text/css">
@@ -93,6 +97,11 @@
 		var gamertag = $('#search-navbar').val();
 		window.location.href = "/search/" + gamertag + "/";
 	}
+</script>
+<script type="text/javascript">
+	$(function () {
+		$("[rel='tooltip']").tooltip();
+	});
 </script>
 <script type="text/javascript">
 	var GoSquared = {};
