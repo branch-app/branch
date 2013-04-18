@@ -7,10 +7,9 @@
 
   <!-- CDN -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.2.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="http://cdn.oesmith.co.uk/morris-0.4.2.min.js"></script>
 
+	<!-- local -->
   <%= stylesheet_link_tag    'application', :media => 'all' %>
   <%= stylesheet_link_tag    'bootstrap.min', :media => 'all' %>
   <%= stylesheet_link_tag    'morris', :media => 'all' %>
@@ -21,7 +20,7 @@
   <%= javascript_include_tag 'bootswatch' %>
   <%= javascript_include_tag 'jbclock' %>
   <%= javascript_include_tag 'jquery.jqplot.min' %>
-  <%= javascript_include_tag 'Chart.min' %>
+  <%= javascript_include_tag 'morris' %>
 
 	<%= yield(:head_style) %>
   <style type="text/css">

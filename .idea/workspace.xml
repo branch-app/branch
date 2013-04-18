@@ -9,7 +9,7 @@
     <file path="/task_scheduler.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365723160174" ignored="false" />
     <file path="/routes.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365988289404" ignored="false" />
     <file path="/application_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365728614720" ignored="false" />
-    <file path="/application.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366256865276" ignored="false" />
+    <file path="/application.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366312372424" ignored="false" />
     <file path="/index.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811091124" ignored="false" />
     <file path="/Dummy.txt" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366025450375" ignored="false" />
     <file path="/20130410015750_create_authentication_vaults.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365559118261" ignored="false" />
@@ -139,12 +139,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service_record.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="x343_api_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="259" column="54" selection-start="7290" selection-end="7290" vertical-scroll-proportion="0.20089285">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="service_record.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="56" selection-start="7797" selection-end="7797" vertical-scroll-proportion="0.16216215">
+            <state line="151" column="27" selection-start="8308" selection-end="8308" vertical-scroll-proportion="-9.333333">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="16" selection-start="275" selection-end="275" vertical-scroll-proportion="-7.3333335">
+              <folding>
+                <element signature="tag#script#2;tag#html#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -164,7 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
         <option value="$PROJECT_DIR$/app/controllers/update_caches_controller.rb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
@@ -174,12 +193,13 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/Chart.min.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/service_record.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/x343_api_controller.rb" />
       </list>
     </option>
   </component>
@@ -244,7 +264,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -308,14 +327,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="halo4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -330,9 +341,14 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="RailsProjectView" />
     </panes>
   </component>
@@ -361,8 +377,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="A:\Skydrive\Development\Ruby\Branch\app\assets\javascripts" />
       <recent name="A:\Skydrive\Development\Ruby\Branch\app\assets\stylesheets" />
+      <recent name="A:\Skydrive\Development\Ruby\Branch\app\assets\javascripts" />
       <recent name="A:\Skydrive\Development\Ruby\Branch\app\controllers" />
       <recent name="A:\Skydrive\Development\Ruby\halo4_stat_viewer\app\assets\stylesheets" />
       <recent name="A:\Skydrive\Development\Ruby\halo4_stat_viewer\app\assets\javascripts" />
@@ -605,11 +621,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Rake.db:migrate" />
-      <item index="1" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="2" class="java.lang.String" itemvalue="Rake.spec" />
-      <item index="3" class="java.lang.String" itemvalue="Rails.Production: Halo4StatViewer" />
-      <item index="4" class="java.lang.String" itemvalue="Rails.Development: Halo4StatViewer" />
+      <item index="0" class="java.lang.String" itemvalue="Rake.test" />
+      <item index="1" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="2" class="java.lang.String" itemvalue="Rails.Production: Halo4StatViewer" />
+      <item index="3" class="java.lang.String" itemvalue="Rails.Development: Halo4StatViewer" />
+      <item index="4" class="java.lang.String" itemvalue="Rake.db:migrate" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -670,10 +686,11 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67353576" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15368196" sideWeight="0.67353576" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15368196" sideWeight="0.6713666" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.67353576" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275488" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -682,7 +699,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -752,11 +768,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config.ru">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="12" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="39" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0" />
@@ -803,20 +814,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="9" selection-start="3432" selection-end="3432" vertical-scroll-proportion="-21.333334" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="53" selection-start="8010" selection-end="8010" vertical-scroll-proportion="0.7838785" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="146" column="53" selection-start="8010" selection-end="8010" vertical-scroll-proportion="0.7838785">
+          <folding>
+            <element signature="e#415#478#0" expanded="true" />
+            <element signature="e#1311#1339#0" expanded="true" />
+            <element signature="e#1511#1540#0" expanded="true" />
+            <element signature="e#1595#1620#0" expanded="true" />
+            <element signature="e#2703#2798#0" expanded="true" />
+            <element signature="e#4086#4247#0" expanded="true" />
+            <element signature="e#4316#4423#0" expanded="true" />
+            <element signature="e#4985#5152#0" expanded="true" />
+            <element signature="e#5234#5258#0" expanded="true" />
+            <element signature="e#6308#6475#0" expanded="true" />
+            <element signature="e#6557#6581#0" expanded="true" />
+            <element signature="e#6974#7024#0" expanded="true" />
+            <element signature="e#7106#7257#0" expanded="true" />
+            <element signature="e#7280#7357#0" expanded="true" />
+            <element signature="e#8566#8618#0" expanded="true" />
+            <element signature="e#8668#8720#0" expanded="true" />
+            <element signature="e#8770#8822#0" expanded="true" />
+            <element signature="e#8849#8899#0" expanded="true" />
+            <element signature="e#14106#14126#0" expanded="true" />
+            <element signature="e#14155#14176#0" expanded="true" />
+            <element signature="e#14204#14224#0" expanded="true" />
+            <element signature="e#14250#14270#0" expanded="true" />
+            <element signature="e#14298#14318#0" expanded="true" />
+            <element signature="e#14345#14365#0" expanded="true" />
+            <element signature="e#14395#14416#0" expanded="true" />
+            <element signature="e#15616#15635#0" expanded="true" />
+            <element signature="e#15729#15997#0" expanded="true" />
+            <element signature="e#16071#16222#0" expanded="true" />
+            <element signature="e#16828#16942#0" expanded="true" />
+            <element signature="e#17047#17161#0" expanded="true" />
+            <element signature="e#17331#17424#0" expanded="true" />
+            <element signature="e#17502#17637#0" expanded="true" />
+            <element signature="e#18092#18192#0" expanded="true" />
+            <element signature="e#18271#18425#0" expanded="true" />
+            <element signature="e#18729#18750#0" expanded="true" />
+            <element signature="e#18792#18812#0" expanded="true" />
+            <element signature="e#18840#18860#0" expanded="true" />
+            <element signature="e#18890#18910#0" expanded="true" />
+            <element signature="e#18939#18959#0" expanded="true" />
+            <element signature="e#18991#19012#0" expanded="true" />
+            <element signature="e#20286#20305#0" expanded="true" />
+            <element signature="e#20403#20689#0" expanded="true" />
+            <element signature="e#20767#20936#0" expanded="true" />
+            <element signature="e#21558#21674#0" expanded="true" />
+            <element signature="e#21783#21899#0" expanded="true" />
+            <element signature="e#22077#22170#0" expanded="true" />
+            <element signature="e#22252#22387#0" expanded="true" />
+            <element signature="e#22862#22962#0" expanded="true" />
+            <element signature="e#23045#23199#0" expanded="true" />
+            <element signature="e#23635#23665#0" expanded="true" />
+            <element signature="e#26010#26040#0" expanded="true" />
+            <element signature="e#27322#27476#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -843,10 +897,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="56" selection-start="7797" selection-end="7797" vertical-scroll-proportion="0.16216215">
+        <state line="151" column="27" selection-start="8308" selection-end="8308" vertical-scroll-proportion="-9.333333">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="16" selection-start="275" selection-end="275" vertical-scroll-proportion="-7.3333335">
+          <folding>
+            <element signature="tag#script#2;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="259" column="54" selection-start="7290" selection-end="7290" vertical-scroll-proportion="0.20089285">
+          <folding />
         </state>
       </provider>
     </entry>

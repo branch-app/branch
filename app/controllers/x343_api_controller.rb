@@ -257,7 +257,7 @@ class X343ApiController < ApplicationController
 		gamertag_name = gamertag.to_s.downcase
 		cached_match = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
 
-		if cached_match != nil && cached_match.data != nil && cached_match.updated_at + (60 * 8) < Time.now
+		if cached_match != nil && cached_match.data != nil
 			json = JSON.parse(cached_match.data)
 			return json
 		else
