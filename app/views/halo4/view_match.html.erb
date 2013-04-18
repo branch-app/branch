@@ -143,8 +143,7 @@
     <li class="active"><a class="switch-content-tab" href="#A" data-toggle="tab">Results</a></li>
     <li><a class="switch-content-tab" href="#B" data-toggle="tab">Carnage</a></li>
     <li><a class="switch-content-tab" href="#C" data-toggle="tab">Medals</a></li>
-    <li><a class="switch-content-tab" href="#D" data-toggle="tab">Unknown</a></li>
-    <li><a class="switch-content-tab" href="#E" data-toggle="tab">Unknown</a></li>
+    <!--<li><a class="switch-content-tab" href="#D" data-toggle="tab">Player Summary</a></li>-->
   </ul>
   <script>
 	  $(document).ready(function() {
@@ -593,39 +592,11 @@
               </tr>
               </tbody>
             </table>
-
-            <% player['MedalStats'].each do |medal| %>
-              <div id="pop-medal-<%= Digest::MD5.hexdigest(player['Gamertag']) %>-<%= medal['Id'] %>" class="medal-stat-popbox">
-                <div class="header">
-                  <%= medal['Name'] %>
-                </div>
-
-
-                <div class="weapon-info">
-                  <div class="entry">
-                    <%= Halo4Controller.GetMedalDataFromId(medal['Id'], @metadata['MedalsMetadata']['Medals'])['Description'] %>
-                  </div>
-                </div>
-
-                <div class="seperate"></div>
-
-                <div class="personal-info">
-                  <div class="entry">
-                    <div class="title">Tier:</div>
-                    <div class="body"><%= Halo4Controller.GetMedalTeirFromId(Halo4Controller.GetMedalDataFromId(medal['Id'], @metadata['MedalsMetadata']['Medals'])['TierId'], @metadata['MedalsMetadata']['MedalTiers'])['Name'] %></div>
-                    <div class="cleaner"></div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
           </div>
         <% end %>
       </div>
       <div class="tab-pane" id="D">
-        <p>Woah cowboy, this is Section D.</p>
-      </div>
-      <div class="tab-pane" id="E">
-        <p>Dope nigga, smoke nigga, fuck swag nigga. This is Section E.</p>
+        <p>Personal</p>
       </div>
     </div>
   </div>
@@ -695,10 +666,26 @@
 			  show_medals_for_player(player_id);
 			  return false;
 		  }
-		  var i = 0;
+		  else if (tab_id == 'Player Summary') {
+			  show_personal_for_player(player_id);
+			  return false;
+		  }
+
 		  return true;
 	  });
   </script>
+	<script>
+		function show_personal_for_player(player_id)
+		{
+			// hide old shit
+			$('.personal_stats').each(function (i, element) {
+				$(element).css('display', 'none');
+			});
+
+			// show new shit
+			$('#player_personal_' + player_id).css('display', 'inline');
+		}
+	</script>
   <script>
 	  function show_carnage_for_player(player_id) {
 		  // hide old shit
@@ -720,102 +707,6 @@
 		  // show new shit
 		  $('#player_medals_' + player_id).css('display', 'inline');
 	  }
-  </script>
-  <script>
-	  $(function () {
-		  var moveLeft = 0;
-		  var moveDown = 0;
-		  $('.medal-stat-popbox-linker').hover(function (e) {
-
-			  var target = '#' + ($(this).attr('data-popbox'));
-
-			  $(target).show();
-			  moveLeft = $(this).outerWidth();
-			  moveDown = ($(target).outerHeight() / 2);
-		  }, function () {
-			  var target = '#' + ($(this).attr('data-popbox'));
-			  $(target).hide();
-		  });
-
-		  $('.medal-stat-popbox-linker').mousemove(function (e) {
-			  var target = '#' + ($(this).attr('data-popbox'));
-
-			  leftD = e.pageX + parseInt(moveLeft);
-			  maxRight = leftD + $(target).outerWidth();
-			  windowLeft = $(window).width() - 40;
-			  windowRight = 0;
-			  maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);
-
-			  if (maxRight > windowLeft && maxLeft > windowRight) {
-				  leftD = maxLeft;
-			  }
-
-			  topD = e.pageY - parseInt(moveDown);
-			  maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);
-			  windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));
-			  maxTop = topD;
-			  windowTop = parseInt($(document).scrollTop());
-			  if (maxTop < windowTop) {
-				  topD = (windowTop + 20);
-			  }
-			  else {
-				  topD -= 70;
-			  }
-
-			  leftD += 10;
-
-			  $(target).css('top', topD).css('left', leftD);
-		  });
-
-	  });
-  </script>
-  <script>
-	  $(function () {
-		  var moveLeft = 0;
-		  var moveDown = 0;
-		  $('.damage-stat-popbox-linker').hover(function (e) {
-
-			  var target = '#' + ($(this).attr('data-popbox'));
-
-			  $(target).show();
-			  moveLeft = $(this).outerWidth();
-			  moveDown = ($(target).outerHeight() / 2);
-		  }, function () {
-			  var target = '#' + ($(this).attr('data-popbox'));
-			  $(target).hide();
-		  });
-
-		  $('.damage-stat-popbox-linker').mousemove(function (e) {
-			  var target = '#' + ($(this).attr('data-popbox'));
-
-			  leftD = e.pageX + parseInt(moveLeft);
-			  maxRight = leftD + $(target).outerWidth();
-			  windowLeft = $(window).width() - 40;
-			  windowRight = 0;
-			  maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);
-
-			  if (maxRight > windowLeft && maxLeft > windowRight) {
-				  leftD = maxLeft;
-			  }
-
-			  topD = e.pageY - parseInt(moveDown);
-			  maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);
-			  windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));
-			  maxTop = topD;
-			  windowTop = parseInt($(document).scrollTop());
-			  if (maxTop < windowTop) {
-				  topD = (windowTop + 20);
-			  }
-			  else {
-				  topD -= 160;
-			  }
-
-			  leftD -= 150;
-
-			  $(target).css('top', topD).css('left', leftD);
-		  });
-
-	  });
   </script>
 <% elsif @match['$type'] == 'Microsoft.Halo.Core.DataContracts.SpartanGameHistory, Microsoft.Halo.Core' %>
   spartan ops

@@ -65,6 +65,7 @@ class Halo4Controller < ApplicationController
 			return
 		end
 
+		@metadata = X343ApiController.GetMetaData()
 		@recent_matches = X343ApiController.GetPlayerMatches(params[:gamertag], 0, 20)['Games']
 		@commendations = X343ApiController.GetPlayerCommendations(params[:gamertag])['Commendations']
 		@commendations = @commendations.sort { |a, b| [a['LevelId'], a['Ticks']] <=> [b['LevelId'], b['Ticks']] }.reverse
@@ -240,6 +241,14 @@ class Halo4Controller < ApplicationController
 	end
 
 	def self.RecentGameStyleFromResult(entry)
+		if entry['ModeName'] == 'Spartan Ops' || entry['ModeName'] == 'Campaign'
+			unless entry['Completed']
+				return 'recent-match-dnf'
+			else
+				return 'recent-match-win'
+			end
+		end
+
 		if !entry['Completed']
 			return 'recent-match-dnf'
 		elsif entry['Result'] == 0
@@ -276,6 +285,23 @@ class Halo4Controller < ApplicationController
 			end
 		end
 
+		return nil
+	end
+
+	def self.GetSpartanOpsChapter(season_id, episode_id, chapter_id, meta)
+		meta['SpartanOpsMetadata']['Seasons'].each do |season|
+			if season['Id'] == season_id
+				season['Episodes'].each do |episode|
+					if episode['Id'] == episode_id
+						episode['Chapters'].each do |chapter|
+							if chapter['Id'] == chapter_id
+								return chapter
+							end
+						end
+					end
+				end
+			end
+		end
 		return nil
 	end
 end

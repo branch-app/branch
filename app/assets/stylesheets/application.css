@@ -30,6 +30,10 @@
 
     height: 2px;
 }
+.seperate {
+    border: 1px solid #333;
+    margin: 15px 20px;
+}
 
 a {
     color: #1570a6;

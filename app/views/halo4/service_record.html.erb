@@ -8,7 +8,7 @@
     <div class="span3">
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <!-- recently finished -->
+          <!-- offer id brute forcing queue -->
           <li class="nav-header">Service Record</li>
           <li class="active"><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/">Overview</a></li>
           <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match-history/">Game History</a></li>
@@ -16,8 +16,12 @@
           <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/specializations/">Specializations</a></li>
 
           <li class="nav-header">Career Stats</li>
-
-          <li class="nav-header">File Share</li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/summary/">Summary</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/by-playlist/">By Playlist</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/by-map/">By Map</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/medals/">Medals</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/weapons/">Weapons</a></li>
+          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/enemies/">Enemies</a></li>
         </ul>
       </div>
     </div>
@@ -130,78 +134,184 @@
 		  </div>
     </div>
 	  <div class="well span9" style="margin: 0 0 0 332px;">
-		  <h3>Matchmaking History:</h3>
+		  <h3>Match History:</h3>
 		  <div class="row-fluid">
+			  <div class="axis" style="float: left; padding-right: 30px; margin-right: 30px; border-right: 1px solid #333;">
+				  <div style="color: #016076;">Win</div>
+			    <div style="margin-top: 35px; color: #c00;">Loss</div>
+			    <div style="margin-top: 50px; color: rgba(57, 70, 69, 1);">Did Not Finish</div>
+			  </div>
 				<% @recent_matches.each do |match| %>
-		      <div id="pop-<%= match['Id'] %>" class="recent-match-popbox">
-			      <div class="header">
-			          <% if !match['Completed'] %>
-			            DNF :(
-			          <% elsif match['Result'] != 0 %>
-			            Victory!
-			          <% else %>
-			            Defeat
-			          <% end %>
-			      </div>
+				  <% if match['$type'] == 'Microsoft.Halo.Core.DataContracts.WarGameHistory, Microsoft.Halo.Core' || match['$type'] == 'Microsoft.Halo.Core.DataContracts.CustomGameHistory, Microsoft.Halo.Core' %>
+		        <div id="pop-<%= match['Id'] %>" class="recent-match-popbox">
+		          <div class="header">
+		            <% if !match['Completed'] %>
+		              DNF :(
+		            <% elsif match['Result'] != 0 %>
+		              Victory!
+		            <% else %>
+		              Defeat
+		            <% end %>
+		          </div>
 
-			      <% if match['MapImageUrl'] != nil %>
-			      <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'],
+		          <% if match['MapImageUrl'] != nil %>
+		            <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'],
 			                                                                                    'medium') %>')">
-				    <% end %>
-				      <div class="cover">
-				        <% if match['BaseVariantImageUrl'] != nil %>
-					      <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'],
-					                                                                'medium') %>" />
-				        <% end %>
-				      </div>
-			      </div>
+		          <% end %>
+		          <div class="cover">
+		            <% if match['BaseVariantImageUrl'] != nil %>
+		              <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'],
+		                                                                                                      'medium') %>" />
+		            <% end %>
+		          </div>
+		          </div>
 
-			      <div class="quick-stats">
-				      <h2><%= match['FeaturedStatName'] %>: <%= number_with_delimiter(match['FeaturedStatValue'], :delimiter => ',') %></h2>
-				      <span class="basic">on <%= match['MapVariantName'] %> at <%= DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %></span>
-			      </div>
+		          <div class="quick-stats">
+		            <h2><%= match['FeaturedStatName'] %>: <%= number_with_delimiter(match['FeaturedStatValue'], :delimiter => ',') %></h2>
+		            <span class="basic">on <%= match['MapVariantName'] %> at <%= DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %></span>
+		          </div>
 
-			      <div class="seperator"></div>
+		          <div class="seperate"></div>
 
-			      <div class="matchmaking-info">
-				    	<div class="entry">
-						    <div class="title">Playlist:</div>
-					      <div class="body"><%= match['PlayListName'] %></div>
+		          <div class="matchmaking-info">
+		            <div class="entry">
+		              <div class="title">Playlist:</div>
+		              <div class="body"><%= match['PlayListName'] %></div>
 
-						    <div class="cleaner"></div>
-				    	</div>
-			        <div class="entry">
-			          <div class="title">Gametype:</div>
-			          <div class="body"><%= match['VariantName'] %></div>
+		              <div class="cleaner"></div>
+		            </div>
+		            <div class="entry">
+		              <div class="title">Gametype:</div>
+		              <div class="body"><%= match['VariantName'] %></div>
 
-			          <div class="cleaner"></div>
-			        </div>
-			      </div>
+		              <div class="cleaner"></div>
+		            </div>
+		          </div>
 
-		        <div class="seperator"></div>
+		          <div class="seperate"></div>
 
-			      <div class="personal-info">
-			        <div class="entry">
-			          <div class="title">Personal Score:</div>
-			          <div class="body"><%= match['PersonalScore'] %></div>
+		          <div class="personal-info">
+		            <div class="entry">
+		              <div class="title">Personal Score:</div>
+		              <div class="body"><%= match['PersonalScore'] %></div>
 
-			          <div class="cleaner"></div>
-			        </div>
-			        <div class="entry">
-			          <div class="title">Medals:</div>
-			          <div class="body"><%= match['TotalMedals'] %></div>
+		              <div class="cleaner"></div>
+		            </div>
+		            <div class="entry">
+		              <div class="title">Medals:</div>
+		              <div class="body"><%= match['TotalMedals'] %></div>
 
-			          <div class="cleaner"></div>
-			        </div>
+		              <div class="cleaner"></div>
+		            </div>
 
-			        <div class="entry">
-			          <div class="title">Standing:</div>
-			          <div class="body"><%= match['Standing'] %></div>
+		            <div class="entry">
+		              <div class="title">Standing:</div>
+		              <div class="body"><%= match['Standing'] %></div>
 
-			          <div class="cleaner"></div>
-			        </div>
-			      </div>
-		      </div>
+		              <div class="cleaner"></div>
+		            </div>
+		          </div>
+		        </div>
+					<% elsif match['$type'] == 'Microsoft.Halo.Core.DataContracts.SpartanGameHistory, Microsoft.Halo.Core' %>
+					  <% chapter_info = Halo4Controller.GetSpartanOpsChapter(match['SeasonId'], match['EpisodeId'], match['ChapterId'], @metadata) %>
+		        <div id="pop-<%= match['Id'] %>" class="recent-match-popbox">
+		          <div class="header">
+		            <% unless match['Completed'] %>
+		              DNF :(
+		            <% else %>
+		              Victory!
+		            <% end %>
+		          </div>
+
+	            <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(chapter_info['ImageUrl']['BaseUrl'], chapter_info['ImageUrl']['AssetUrl'], 'medium') %>')">
+			          <div class="cover">
+			            <% if match['DifficultyImageUrl'] != nil %>
+			              <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['DifficultyImageUrl']['BaseUrl'], match['DifficultyImageUrl']['AssetUrl'], 'medium') %>" />
+			            <% end %>
+			          </div>
+		          </div>
+
+		          <div class="quick-stats" style="height: 80px;">
+			          <h2>Spartan Ops</h2>
+		            <span class="basic"><%= match['ChapterName'] %> on <%= match['EpisodeName'] %> <br> at <%= DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %></span>
+		          </div>
+
+		          <div class="seperate"></div>
+
+		          <div class="matchmaking-info">
+		            <div class="entry">
+		              <div class="title">Single Player:</div>
+		              <div class="body"><%= match['SinglePlayer'].to_s.titleize %></div>
+
+		              <div class="cleaner"></div>
+		            </div>
+		            <div class="entry">
+		              <div class="title">Season:</div>
+		              <div class="body">Put shit here nigga</div>
+
+		              <div class="cleaner"></div>
+		            </div>
+		          </div>
+
+		          <div class="seperate"></div>
+
+		          <div class="personal-info">
+		            <div class="entry">
+		              <div class="title">Personal Score:</div>
+		              <div class="body"><%= match['PersonalScore'] %></div>
+
+		              <div class="cleaner"></div>
+		            </div>
+		            <div class="entry">
+		              <div class="title">Medals:</div>
+		              <div class="body"><%= match['TotalMedals'] %></div>
+
+		              <div class="cleaner"></div>
+		            </div>
+		          </div>
+		        </div>
+					<% elsif match['$type'] == 'Microsoft.Halo.Core.DataContracts.CampaignGameHistory, Microsoft.Halo.Core' %>
+		        <div id="pop-<%= match['Id'] %>" class="recent-match-popbox">
+		          <div class="header">
+		            <% unless match['Completed'] %>
+		              DNF :(
+		            <% else %>
+		              Victory!
+		            <% end %>
+		          </div>
+
+		          <div class="map-preview" style="background-image: url('<%= X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'], 'medium') %>')">
+		            <div class="cover">
+		              <% if match['DifficultyImageUrl'] != nil %>
+		                <img style="margin: 20px 0 0 10px" src="<%= X343ApiController.asset_url_generator_basic(match['DifficultyImageUrl']['BaseUrl'], match['DifficultyImageUrl']['AssetUrl'], 'medium') %>" />
+		              <% end %>
+		            </div>
+		          </div>
+
+		          <div class="quick-stats" style="height: 80px;">
+		            <h2>Campaign</h2>
+		            <span class="basic"><%= match['MapName'] %> on <%= @metadata['DifficultiesMetadata']['Difficulties'][match['Difficulty'].to_i]['Name'] %> <br> at <%= DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y') %></span>
+		          </div>
+
+		          <div class="seperate"></div>
+
+		          <div class="matchmaking-info">
+		            <div class="entry">
+		              <div class="title">Single Player:</div>
+		              <div class="body"><%= match['SinglePlayer'].to_s.titleize %></div>
+
+		              <div class="cleaner"></div>
+		            </div>
+		            <div class="entry">
+		              <div class="title">Skulls:</div>
+		              <div class="body">No idea, do l8r</div>
+
+		              <div class="cleaner"></div>
+		            </div>
+			          <br>
+		          </div>
+		        </div>
+					<% end %>
 
 				  <a class="recent-match-linker" id="<%= match['Id'] %>" href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match/<%= match['Id'] %>" data-popbox="pop-<%= match['Id'] %>">
 					  <div class="recent-match-entry <%= Halo4Controller.RecentGameStyleFromResult(match) %>">

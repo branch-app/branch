@@ -31,7 +31,7 @@
     <file path="/search_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365640952473" ignored="false" />
     <file path="/search.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365641003168" ignored="false" />
     <file path="/halo4_service_record_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365642063174" ignored="false" />
-    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366115214423" ignored="false" />
+    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366307797308" ignored="false" />
     <file path="/challenges.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811012457" ignored="false" />
     <file path="/halo4.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366114720731" ignored="false" />
     <file path="/jbclock.css" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365792096208" ignored="false" />
@@ -43,7 +43,7 @@
     <file path="/20130412215204_create_halo4_service_tags.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365803529029" ignored="false" />
     <file path="/servicerecord.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365817659511" ignored="false" />
     <file path="/application_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366138770175" ignored="false" />
-    <file path="/service_record.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366066159034" ignored="false" />
+    <file path="/service_record.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366311540760" ignored="false" />
     <file path="/error_notification.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811679664" ignored="false" />
     <file path="/halo4_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365816213605" ignored="false" />
     <file path="/moris.js" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365956271959" ignored="false" />
@@ -65,7 +65,7 @@
     <file path="/20130414210549_create_h4_player_recent_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365973582431" ignored="false" />
     <file path="/20130414211529_stuff.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365974387611" ignored="false" />
     <file path="/h4_player_recent_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366035008187" ignored="false" />
-    <file path="/view_match.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366260041939" ignored="false" />
+    <file path="/view_match.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366291111958" ignored="false" />
     <file path="/match_history.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366070593955" ignored="false" />
     <file path="/20130415012856_update_match_details.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365989372868" ignored="false" />
     <file path="/20130415113100_create_h4_player_matches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366025503758" ignored="false" />
@@ -95,7 +95,7 @@
             <file leaf-file-name="application.css" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="17" column="1" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0">
+                  <state line="32" column="9" selection-start="1597" selection-end="1605" vertical-scroll-proportion="0.0">
                     <folding />
                   </state>
                 </provider>
@@ -104,7 +104,7 @@
             <file leaf-file-name="halo4.css.scss" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="387" column="16" selection-start="9821" selection-end="9835" vertical-scroll-proportion="0.14799589">
+                  <state line="88" column="29" selection-start="1382" selection-end="1388" vertical-scroll-proportion="0.018499486">
                     <folding />
                   </state>
                 </provider>
@@ -125,112 +125,27 @@
     </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Halo4StatViewer" />
+  </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="view_match.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="580" column="20" selection-start="27239" selection-end="27342" vertical-scroll-proportion="0.11682243">
-              <folding>
-                <element signature="e#415#478#0" expanded="true" />
-                <element signature="e#1311#1339#0" expanded="true" />
-                <element signature="e#1511#1540#0" expanded="true" />
-                <element signature="e#1595#1620#0" expanded="true" />
-                <element signature="e#2703#2798#0" expanded="true" />
-                <element signature="e#4086#4247#0" expanded="true" />
-                <element signature="e#4316#4423#0" expanded="true" />
-                <element signature="e#4436#7536#0" expanded="false" />
-                <element signature="e#4985#5152#0" expanded="true" />
-                <element signature="e#5234#5258#0" expanded="true" />
-                <element signature="e#6308#6475#0" expanded="true" />
-                <element signature="e#6557#6581#0" expanded="true" />
-                <element signature="e#6974#7024#0" expanded="true" />
-                <element signature="e#7106#7257#0" expanded="true" />
-                <element signature="e#7280#7357#0" expanded="true" />
-                <element signature="e#8635#8687#0" expanded="true" />
-                <element signature="e#8737#8789#0" expanded="true" />
-                <element signature="e#8839#8891#0" expanded="true" />
-                <element signature="e#8918#8968#0" expanded="true" />
-                <element signature="e#9391#9736#0" expanded="false" />
-                <element signature="e#14175#14195#0" expanded="true" />
-                <element signature="e#14224#14245#0" expanded="true" />
-                <element signature="e#14273#14293#0" expanded="true" />
-                <element signature="e#14319#14339#0" expanded="true" />
-                <element signature="e#14367#14387#0" expanded="true" />
-                <element signature="e#14414#14434#0" expanded="true" />
-                <element signature="e#14464#14485#0" expanded="true" />
-                <element signature="e#15685#15704#0" expanded="true" />
-                <element signature="e#15798#16066#0" expanded="true" />
-                <element signature="e#16140#16291#0" expanded="true" />
-                <element signature="e#16897#17011#0" expanded="true" />
-                <element signature="e#17116#17230#0" expanded="true" />
-                <element signature="e#17400#17493#0" expanded="true" />
-                <element signature="e#17571#17706#0" expanded="true" />
-                <element signature="e#18161#18261#0" expanded="true" />
-                <element signature="e#18340#18494#0" expanded="true" />
-                <element signature="e#18798#18819#0" expanded="true" />
-                <element signature="e#18861#18881#0" expanded="true" />
-                <element signature="e#18909#18929#0" expanded="true" />
-                <element signature="e#18959#18979#0" expanded="true" />
-                <element signature="e#19008#19028#0" expanded="true" />
-                <element signature="e#19060#19081#0" expanded="true" />
-                <element signature="e#20355#20374#0" expanded="true" />
-                <element signature="e#20472#20758#0" expanded="true" />
-                <element signature="e#20836#21005#0" expanded="true" />
-                <element signature="e#21627#21743#0" expanded="true" />
-                <element signature="e#21852#21968#0" expanded="true" />
-                <element signature="e#22146#22239#0" expanded="true" />
-                <element signature="e#22321#22456#0" expanded="true" />
-                <element signature="e#22931#23031#0" expanded="true" />
-                <element signature="e#23114#23268#0" expanded="true" />
-                <element signature="tag#div#1;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
-                <element signature="e#23704#23734#0" expanded="true" />
-                <element signature="e#23774#25908#0" expanded="false" />
-                <element signature="e#26079#26109#0" expanded="true" />
-                <element signature="e#27391#27545#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="halo4_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="102" selection-start="1081" selection-end="1134" vertical-scroll-proportion="0.0">
+            <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <file leaf-file-name="service_record.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="9" selection-start="3432" selection-end="3432" vertical-scroll-proportion="-21.333334">
+            <state line="142" column="56" selection-start="7797" selection-end="7797" vertical-scroll-proportion="0.16216215">
               <folding>
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jquery.jqplot.min.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="162648" selection-start="162643" selection-end="162643" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1366250283567" expanded="true" signature="14948:14966" placeholder="..." />
-                <marker date="1366250283567" expanded="true" signature="15162:15236" placeholder="..." />
-                <marker date="1366250283567" expanded="true" signature="74487:74505" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="21" selection-start="787" selection-end="787" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -249,10 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history.html.erb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
-        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
         <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
         <option value="$PROJECT_DIR$/app/controllers/update_caches_controller.rb" />
@@ -265,6 +176,10 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
+        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/halo4/service_record.html.erb" />
       </list>
     </option>
   </component>
@@ -398,28 +313,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="halo4" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -437,108 +330,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -548,14 +339,14 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="xeraxic-ubuntu" serverId="e170701d-2a9a-4917-b65e-0363f6598299">
     <servers>
@@ -814,11 +605,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="1" class="java.lang.String" itemvalue="Rake.spec" />
-      <item index="2" class="java.lang.String" itemvalue="Rails.Production: Halo4StatViewer" />
-      <item index="3" class="java.lang.String" itemvalue="Rails.Development: Halo4StatViewer" />
-      <item index="4" class="java.lang.String" itemvalue="Rake.db:migrate" />
+      <item index="0" class="java.lang.String" itemvalue="Rake.db:migrate" />
+      <item index="1" class="java.lang.String" itemvalue="Rake.test" />
+      <item index="2" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="3" class="java.lang.String" itemvalue="Rails.Production: Halo4StatViewer" />
+      <item index="4" class="java.lang.String" itemvalue="Rails.Development: Halo4StatViewer" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -879,11 +670,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67353576" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15368196" sideWeight="0.67353576" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.67353576" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275488" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -892,6 +682,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -924,7 +715,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
     <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
@@ -934,6 +725,10 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="LIMIT_HISTORY" value="true" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
@@ -947,20 +742,16 @@
     <option name="ACTIVE_VCS_NAME" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="212" />
+      <option name="time" value="214" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.ru">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="12" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0" />
@@ -968,16 +759,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="39" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="70" column="39" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/background_auth_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="88" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="22" column="88" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
@@ -1004,9 +791,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/Chart.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="157" selection-start="11858" selection-end="11862" vertical-scroll-proportion="0.48251748" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="162648" selection-start="162643" selection-end="162643" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="9" selection-start="3432" selection-end="3432" vertical-scroll-proportion="-21.333334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="53" selection-start="8010" selection-end="8010" vertical-scroll-proportion="0.7838785" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="1" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0">
+        <state line="32" column="9" selection-start="1597" selection-end="1605" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1020,105 +836,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="387" column="16" selection-start="9821" selection-end="9835" vertical-scroll-proportion="0.14799589">
+        <state line="88" column="29" selection-start="1382" selection-end="1388" vertical-scroll-proportion="0.018499486">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/Chart.min.js">
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="157" selection-start="11858" selection-end="11862" vertical-scroll-proportion="0.48251748">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="162648" selection-start="162643" selection-end="162643" vertical-scroll-proportion="0.0">
+        <state line="142" column="56" selection-start="7797" selection-end="7797" vertical-scroll-proportion="0.16216215">
           <folding>
-            <marker date="1366250283567" expanded="true" signature="14948:14966" placeholder="..." />
-            <marker date="1366250283567" expanded="true" signature="15162:15236" placeholder="..." />
-            <marker date="1366250283567" expanded="true" signature="74487:74505" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="102" selection-start="1081" selection-end="1134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="9" selection-start="3432" selection-end="3432" vertical-scroll-proportion="-21.333334">
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="580" column="20" selection-start="27239" selection-end="27342" vertical-scroll-proportion="0.11682243">
-          <folding>
-            <element signature="e#415#478#0" expanded="true" />
-            <element signature="e#1311#1339#0" expanded="true" />
-            <element signature="e#1511#1540#0" expanded="true" />
-            <element signature="e#1595#1620#0" expanded="true" />
-            <element signature="e#2703#2798#0" expanded="true" />
-            <element signature="e#4086#4247#0" expanded="true" />
-            <element signature="e#4316#4423#0" expanded="true" />
-            <element signature="e#4436#7536#0" expanded="false" />
-            <element signature="e#4985#5152#0" expanded="true" />
-            <element signature="e#5234#5258#0" expanded="true" />
-            <element signature="e#6308#6475#0" expanded="true" />
-            <element signature="e#6557#6581#0" expanded="true" />
-            <element signature="e#6974#7024#0" expanded="true" />
-            <element signature="e#7106#7257#0" expanded="true" />
-            <element signature="e#7280#7357#0" expanded="true" />
-            <element signature="e#8635#8687#0" expanded="true" />
-            <element signature="e#8737#8789#0" expanded="true" />
-            <element signature="e#8839#8891#0" expanded="true" />
-            <element signature="e#8918#8968#0" expanded="true" />
-            <element signature="e#9391#9736#0" expanded="false" />
-            <element signature="e#14175#14195#0" expanded="true" />
-            <element signature="e#14224#14245#0" expanded="true" />
-            <element signature="e#14273#14293#0" expanded="true" />
-            <element signature="e#14319#14339#0" expanded="true" />
-            <element signature="e#14367#14387#0" expanded="true" />
-            <element signature="e#14414#14434#0" expanded="true" />
-            <element signature="e#14464#14485#0" expanded="true" />
-            <element signature="e#15685#15704#0" expanded="true" />
-            <element signature="e#15798#16066#0" expanded="true" />
-            <element signature="e#16140#16291#0" expanded="true" />
-            <element signature="e#16897#17011#0" expanded="true" />
-            <element signature="e#17116#17230#0" expanded="true" />
-            <element signature="e#17400#17493#0" expanded="true" />
-            <element signature="e#17571#17706#0" expanded="true" />
-            <element signature="e#18161#18261#0" expanded="true" />
-            <element signature="e#18340#18494#0" expanded="true" />
-            <element signature="e#18798#18819#0" expanded="true" />
-            <element signature="e#18861#18881#0" expanded="true" />
-            <element signature="e#18909#18929#0" expanded="true" />
-            <element signature="e#18959#18979#0" expanded="true" />
-            <element signature="e#19008#19028#0" expanded="true" />
-            <element signature="e#19060#19081#0" expanded="true" />
-            <element signature="e#20355#20374#0" expanded="true" />
-            <element signature="e#20472#20758#0" expanded="true" />
-            <element signature="e#20836#21005#0" expanded="true" />
-            <element signature="e#21627#21743#0" expanded="true" />
-            <element signature="e#21852#21968#0" expanded="true" />
-            <element signature="e#22146#22239#0" expanded="true" />
-            <element signature="e#22321#22456#0" expanded="true" />
-            <element signature="e#22931#23031#0" expanded="true" />
-            <element signature="e#23114#23268#0" expanded="true" />
-            <element signature="tag#div#1;tag#div#0;tag#div#2;tag#div#1;tag#div#0;tag#div#2;tag#div#0;tag#div#0" expanded="false" />
-            <element signature="e#23704#23734#0" expanded="true" />
-            <element signature="e#23774#25908#0" expanded="false" />
-            <element signature="e#26079#26109#0" expanded="true" />
-            <element signature="e#27391#27545#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
