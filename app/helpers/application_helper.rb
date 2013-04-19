@@ -24,14 +24,12 @@ module ApplicationHelper
 		content_for :search_query, search_query.to_s
 	end
 
+	def h4_gamertag(h4_gamertag)
+		content_for :h4_gamertag, h4_gamertag.to_s
+	end
+
 	def self.SetupErrorNotification(type, message)
 		flash[:type] = type
 		flash[:notice] = message
-	end
-
-	class Numeric
-		def percent_of(n)
-			self.to_f / n.to_f * 100.0
-		end
 	end
 end

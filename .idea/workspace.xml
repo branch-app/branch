@@ -31,7 +31,7 @@
     <file path="/search_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365640952473" ignored="false" />
     <file path="/search.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365641003168" ignored="false" />
     <file path="/halo4_service_record_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365642063174" ignored="false" />
-    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366307797308" ignored="false" />
+    <file path="/halo4_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366328287731" ignored="false" />
     <file path="/challenges.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811012457" ignored="false" />
     <file path="/halo4.css.scss" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366114720731" ignored="false" />
     <file path="/jbclock.css" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365792096208" ignored="false" />
@@ -42,8 +42,8 @@
     <file path="/playlists.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811025373" ignored="false" />
     <file path="/20130412215204_create_halo4_service_tags.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365803529029" ignored="false" />
     <file path="/servicerecord.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365817659511" ignored="false" />
-    <file path="/application_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366138770175" ignored="false" />
-    <file path="/service_record.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366311540760" ignored="false" />
+    <file path="/application_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366336516615" ignored="false" />
+    <file path="/service_record.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366340003612" ignored="false" />
     <file path="/error_notification.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811679664" ignored="false" />
     <file path="/halo4_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365816213605" ignored="false" />
     <file path="/moris.js" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365956271959" ignored="false" />
@@ -74,6 +74,7 @@
     <file path="/view_campaign_match.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366066743059" ignored="false" />
     <file path="/application.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366154772019" ignored="false" />
     <file path="/production.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366167871758" ignored="false" />
+    <file path="/halo4_sidebar.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366339292870" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,19 +131,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="halo4_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+      <file leaf-file-name="_h4_sidebar.html.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/application/_h4_sidebar.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="x343_api_controller.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="54" selection-start="7290" selection-end="7290" vertical-scroll-proportion="0.20089285">
+            <state line="6" column="51" selection-start="334" selection-end="357" vertical-scroll-proportion="0.12428078">
               <folding />
             </state>
           </provider>
@@ -151,20 +143,84 @@
       <file leaf-file-name="service_record.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="27" selection-start="8308" selection-end="8308" vertical-scroll-proportion="-9.333333">
+            <state line="8" column="34" selection-start="260" selection-end="326" vertical-scroll-proportion="-5.3333335">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_match.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="32" selection-start="511" selection-end="580" vertical-scroll-proportion="-6.0">
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#415#478#0" expanded="true" />
+                <element signature="e#609#637#0" expanded="true" />
+                <element signature="e#812#841#0" expanded="true" />
+                <element signature="e#898#923#0" expanded="true" />
+                <element signature="e#2031#2126#0" expanded="true" />
+                <element signature="e#3439#3600#0" expanded="true" />
+                <element signature="e#3671#3778#0" expanded="true" />
+                <element signature="e#4349#4516#0" expanded="true" />
+                <element signature="e#4600#4624#0" expanded="true" />
+                <element signature="e#5689#5856#0" expanded="true" />
+                <element signature="e#5940#5964#0" expanded="true" />
+                <element signature="e#6367#6417#0" expanded="true" />
+                <element signature="e#6501#6652#0" expanded="true" />
+                <element signature="e#6676#6753#0" expanded="true" />
+                <element signature="e#7998#8050#0" expanded="true" />
+                <element signature="e#8101#8153#0" expanded="true" />
+                <element signature="e#8204#8256#0" expanded="true" />
+                <element signature="e#8284#8334#0" expanded="true" />
+                <element signature="e#13685#13705#0" expanded="true" />
+                <element signature="e#13735#13756#0" expanded="true" />
+                <element signature="e#13785#13805#0" expanded="true" />
+                <element signature="e#13832#13852#0" expanded="true" />
+                <element signature="e#13881#13901#0" expanded="true" />
+                <element signature="e#13929#13949#0" expanded="true" />
+                <element signature="e#13980#14001#0" expanded="true" />
+                <element signature="e#15232#15251#0" expanded="true" />
+                <element signature="e#15347#15618#0" expanded="true" />
+                <element signature="e#15694#15845#0" expanded="true" />
+                <element signature="e#16459#16574#0" expanded="true" />
+                <element signature="e#16681#16796#0" expanded="true" />
+                <element signature="e#16970#17063#0" expanded="true" />
+                <element signature="e#17143#17278#0" expanded="true" />
+                <element signature="e#17743#17843#0" expanded="true" />
+                <element signature="e#17924#18078#0" expanded="true" />
+                <element signature="e#18394#18415#0" expanded="true" />
+                <element signature="e#18458#18478#0" expanded="true" />
+                <element signature="e#18507#18527#0" expanded="true" />
+                <element signature="e#18558#18578#0" expanded="true" />
+                <element signature="e#18608#18628#0" expanded="true" />
+                <element signature="e#18661#18682#0" expanded="true" />
+                <element signature="e#19987#20006#0" expanded="true" />
+                <element signature="e#20106#20395#0" expanded="true" />
+                <element signature="e#20475#20644#0" expanded="true" />
+                <element signature="e#21274#21391#0" expanded="true" />
+                <element signature="e#21502#21619#0" expanded="true" />
+                <element signature="e#21801#21894#0" expanded="true" />
+                <element signature="e#21978#22113#0" expanded="true" />
+                <element signature="e#22598#22698#0" expanded="true" />
+                <element signature="e#22783#22937#0" expanded="true" />
+                <element signature="e#23388#23418#0" expanded="true" />
+                <element signature="e#25804#25834#0" expanded="true" />
+                <element signature="e#27146#27300#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <file leaf-file-name="match_history.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="16" selection-start="275" selection-end="275" vertical-scroll-proportion="-7.3333335">
+            <state line="7" column="29" selection-start="283" selection-end="283" vertical-scroll-proportion="-4.6666665">
               <folding>
-                <element signature="tag#script#2;tag#html#0" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,22 +240,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/update_caches_controller.rb" />
-        <option value="$PROJECT_DIR$/config/application.rb" />
-        <option value="$PROJECT_DIR$/config/environments/production.rb" />
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/jquery.jqplot.css" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/Chart.min.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js" />
-        <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/halo4/service_record.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/x343_api_controller.rb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/morris.js" />
+        <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
+        <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/halo4_sidebar.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/application/h4_sidebar.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/halo4/service_record.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/halo4/match_history.html.erb" />
       </list>
     </option>
   </component>
@@ -292,20 +348,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -327,6 +369,90 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="halo4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helpers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -343,6 +469,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -764,113 +930,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="214" />
+      <option name="time" value="217" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="39" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/background_auth_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="88" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="17" selection-start="948" selection-end="957" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="73" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="25" selection-start="500" selection-end="500" vertical-scroll-proportion="0.3939394" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="21" selection-start="787" selection-end="787" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/Chart.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="157" selection-start="11858" selection-end="11862" vertical-scroll-proportion="0.48251748" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/jquery.jqplot.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="162648" selection-start="162643" selection-end="162643" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="53" selection-start="8010" selection-end="8010" vertical-scroll-proportion="0.7838785">
-          <folding>
-            <element signature="e#415#478#0" expanded="true" />
-            <element signature="e#1311#1339#0" expanded="true" />
-            <element signature="e#1511#1540#0" expanded="true" />
-            <element signature="e#1595#1620#0" expanded="true" />
-            <element signature="e#2703#2798#0" expanded="true" />
-            <element signature="e#4086#4247#0" expanded="true" />
-            <element signature="e#4316#4423#0" expanded="true" />
-            <element signature="e#4985#5152#0" expanded="true" />
-            <element signature="e#5234#5258#0" expanded="true" />
-            <element signature="e#6308#6475#0" expanded="true" />
-            <element signature="e#6557#6581#0" expanded="true" />
-            <element signature="e#6974#7024#0" expanded="true" />
-            <element signature="e#7106#7257#0" expanded="true" />
-            <element signature="e#7280#7357#0" expanded="true" />
-            <element signature="e#8566#8618#0" expanded="true" />
-            <element signature="e#8668#8720#0" expanded="true" />
-            <element signature="e#8770#8822#0" expanded="true" />
-            <element signature="e#8849#8899#0" expanded="true" />
-            <element signature="e#14106#14126#0" expanded="true" />
-            <element signature="e#14155#14176#0" expanded="true" />
-            <element signature="e#14204#14224#0" expanded="true" />
-            <element signature="e#14250#14270#0" expanded="true" />
-            <element signature="e#14298#14318#0" expanded="true" />
-            <element signature="e#14345#14365#0" expanded="true" />
-            <element signature="e#14395#14416#0" expanded="true" />
-            <element signature="e#15616#15635#0" expanded="true" />
-            <element signature="e#15729#15997#0" expanded="true" />
-            <element signature="e#16071#16222#0" expanded="true" />
-            <element signature="e#16828#16942#0" expanded="true" />
-            <element signature="e#17047#17161#0" expanded="true" />
-            <element signature="e#17331#17424#0" expanded="true" />
-            <element signature="e#17502#17637#0" expanded="true" />
-            <element signature="e#18092#18192#0" expanded="true" />
-            <element signature="e#18271#18425#0" expanded="true" />
-            <element signature="e#18729#18750#0" expanded="true" />
-            <element signature="e#18792#18812#0" expanded="true" />
-            <element signature="e#18840#18860#0" expanded="true" />
-            <element signature="e#18890#18910#0" expanded="true" />
-            <element signature="e#18939#18959#0" expanded="true" />
-            <element signature="e#18991#19012#0" expanded="true" />
-            <element signature="e#20286#20305#0" expanded="true" />
-            <element signature="e#20403#20689#0" expanded="true" />
-            <element signature="e#20767#20936#0" expanded="true" />
-            <element signature="e#21558#21674#0" expanded="true" />
-            <element signature="e#21783#21899#0" expanded="true" />
-            <element signature="e#22077#22170#0" expanded="true" />
-            <element signature="e#22252#22387#0" expanded="true" />
-            <element signature="e#22862#22962#0" expanded="true" />
-            <element signature="e#23045#23199#0" expanded="true" />
-            <element signature="e#23635#23665#0" expanded="true" />
-            <element signature="e#26010#26040#0" expanded="true" />
-            <element signature="e#27322#27476#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,34 +962,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="27" selection-start="8308" selection-end="8308" vertical-scroll-proportion="-9.333333">
+        <state line="235" column="44" selection-start="8104" selection-end="8104" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/morris.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1860" column="14" selection-start="72563" selection-end="72563" vertical-scroll-proportion="-32.88">
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1366325218804" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1366325218804" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/application_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="17" selection-start="603" selection-end="614" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#78#1267#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="16" selection-start="275" selection-end="275" vertical-scroll-proportion="-7.3333335">
+        <state line="24" column="24" selection-start="907" selection-end="925" vertical-scroll-proportion="10.0">
           <folding>
             <element signature="tag#script#2;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="253" column="35" selection-start="8294" selection-end="8294" vertical-scroll-proportion="0.0">
+        <state line="259" column="54" selection-start="7290" selection-end="7290" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/playlists.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="54" selection-start="7290" selection-end="7290" vertical-scroll-proportion="0.20089285">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="32" selection-start="511" selection-end="580" vertical-scroll-proportion="-6.0">
+          <folding>
+            <element signature="e#415#478#0" expanded="true" />
+            <element signature="e#609#637#0" expanded="true" />
+            <element signature="e#812#841#0" expanded="true" />
+            <element signature="e#898#923#0" expanded="true" />
+            <element signature="e#2031#2126#0" expanded="true" />
+            <element signature="e#3439#3600#0" expanded="true" />
+            <element signature="e#3671#3778#0" expanded="true" />
+            <element signature="e#4349#4516#0" expanded="true" />
+            <element signature="e#4600#4624#0" expanded="true" />
+            <element signature="e#5689#5856#0" expanded="true" />
+            <element signature="e#5940#5964#0" expanded="true" />
+            <element signature="e#6367#6417#0" expanded="true" />
+            <element signature="e#6501#6652#0" expanded="true" />
+            <element signature="e#6676#6753#0" expanded="true" />
+            <element signature="e#7998#8050#0" expanded="true" />
+            <element signature="e#8101#8153#0" expanded="true" />
+            <element signature="e#8204#8256#0" expanded="true" />
+            <element signature="e#8284#8334#0" expanded="true" />
+            <element signature="e#13685#13705#0" expanded="true" />
+            <element signature="e#13735#13756#0" expanded="true" />
+            <element signature="e#13785#13805#0" expanded="true" />
+            <element signature="e#13832#13852#0" expanded="true" />
+            <element signature="e#13881#13901#0" expanded="true" />
+            <element signature="e#13929#13949#0" expanded="true" />
+            <element signature="e#13980#14001#0" expanded="true" />
+            <element signature="e#15232#15251#0" expanded="true" />
+            <element signature="e#15347#15618#0" expanded="true" />
+            <element signature="e#15694#15845#0" expanded="true" />
+            <element signature="e#16459#16574#0" expanded="true" />
+            <element signature="e#16681#16796#0" expanded="true" />
+            <element signature="e#16970#17063#0" expanded="true" />
+            <element signature="e#17143#17278#0" expanded="true" />
+            <element signature="e#17743#17843#0" expanded="true" />
+            <element signature="e#17924#18078#0" expanded="true" />
+            <element signature="e#18394#18415#0" expanded="true" />
+            <element signature="e#18458#18478#0" expanded="true" />
+            <element signature="e#18507#18527#0" expanded="true" />
+            <element signature="e#18558#18578#0" expanded="true" />
+            <element signature="e#18608#18628#0" expanded="true" />
+            <element signature="e#18661#18682#0" expanded="true" />
+            <element signature="e#19987#20006#0" expanded="true" />
+            <element signature="e#20106#20395#0" expanded="true" />
+            <element signature="e#20475#20644#0" expanded="true" />
+            <element signature="e#21274#21391#0" expanded="true" />
+            <element signature="e#21502#21619#0" expanded="true" />
+            <element signature="e#21801#21894#0" expanded="true" />
+            <element signature="e#21978#22113#0" expanded="true" />
+            <element signature="e#22598#22698#0" expanded="true" />
+            <element signature="e#22783#22937#0" expanded="true" />
+            <element signature="e#23388#23418#0" expanded="true" />
+            <element signature="e#25804#25834#0" expanded="true" />
+            <element signature="e#27146#27300#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="34" selection-start="260" selection-end="326" vertical-scroll-proportion="-5.3333335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="29" selection-start="283" selection-end="283" vertical-scroll-proportion="-4.6666665">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/application/_h4_sidebar.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="51" selection-start="334" selection-end="357" vertical-scroll-proportion="0.12428078">
           <folding />
         </state>
       </provider>

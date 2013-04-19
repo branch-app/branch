@@ -4,22 +4,10 @@
 
 <div class="container" style="margin-top: 80px; min-width: 1300px; max-width: 1300px;">
   <div class="row-fluid">
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          <!-- recently finished -->
-          <li class="nav-header">Service Record</li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/">Overview</a></li>
-          <li class="active"><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match-history/">Game History</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/commendations/">Commendations</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/specializations/">Specializations</a></li>
 
-          <li class="nav-header">Career Stats</li>
+    <%= h4_sidebar_game_history 'active' %>
+    <%= render 'h4_sidebar' %>
 
-          <li class="nav-header">File Share</li>
-        </ul>
-      </div>
-    </div>
     <div class="well span9" style="padding: 20px 0 0 0;">
       <% h4_rank_data = Halo4Controller.GetSimpleRankData(@service_record, 'medium') %>
       <div class="row-fluid visible-desktop visible-tablet">

@@ -1,0 +1,20 @@
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <!-- offer id brute forcing queue -->
+      <li class="nav-header">Service Record</li>
+      <li class="<%= yield(:h4_sidebar_overview) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/">Overview</a></li>
+      <li class="<%= yield(:h4_sidebar_game_history) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/match-history/">Game History</a></li>
+      <li class="<%= yield(:h4_sidebar_commendations) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/commendations/">Commendations</a></li>
+      <li class="<%= yield(:h4_sidebar_specializations) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/specializations/">Specializations</a></li>
+
+      <li class="nav-header">Career Stats</li>
+      <li class="<%= yield(:h4_sidebar_summary) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/summary/">Summary</a></li>
+      <li class="<%= yield(:h4_sidebar_by_playlist) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/by-playlist/">By Playlist</a></li>
+      <li class="<%= yield(:h4_sidebar_by_map) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/by-map/">By Map</a></li>
+      <li class="<%= yield(:h4_sidebar_medals) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/medals/">Medals</a></li>
+      <li class="<%= yield(:h4_sidebar_weapons) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/weapons/">Weapons</a></li>
+      <li class="<%= yield(:h4_sidebar_enemies) %>"><a href="/halo4/servicerecord/<%= yield(:h4_gamertag) %>/enemies/">Enemies</a></li>
+    </ul>
+  </div>
+</div>

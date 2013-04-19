@@ -202,10 +202,20 @@ class Halo4Controller < ApplicationController
 		h4_rank_data[:current_rank_start_xp] = service_record['RankStartXP']
 
 		# next rank data
-		h4_rank_data[:next_rank_name] = service_record['NextRankName']
-		h4_rank_data[:next_rank_id] = service_record['NextRankId']
-		h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['NextRankImageUrl']['BaseUrl'], service_record['NextRankImageUrl']['AssetUrl'], size)
-		h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
+		if service_record['NextRankId'] == 0
+			# max rank
+			h4_rank_data[:next_rank_name] = 'Mastery'
+			h4_rank_data[:next_rank_name_friendly] = 'Mastery (Max Rank)'
+			h4_rank_data[:next_rank_id] = service_record['RankId']
+			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
+			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
+		else
+			h4_rank_data[:next_rank_name] = service_record['NextRankName']
+			h4_rank_data[:next_rank_name_friendly] = "#{service_record['NextRankName']} (#{service_record['NextRankStartXP']})"
+			h4_rank_data[:next_rank_id] = service_record['NextRankId']
+			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['NextRankImageUrl']['BaseUrl'], service_record['NextRankImageUrl']['AssetUrl'], size)
+			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
+		end
 
 		# specialization stuff
 		h4_rank_data[:specialization_block] = nil
@@ -219,7 +229,7 @@ class Halo4Controller < ApplicationController
 		end
 
 		# percentage stuff
-		if service_record['RankStartXP'] == 0
+		if service_record['NextRankId'] == 0
 			h4_rank_data[:update_next_rank_name] = 'Max Rank'
 			h4_rank_data[:update_upper_xp] = ''
 			h4_rank_data[:update_current_xp] = service_record['XP']

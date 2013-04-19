@@ -5,26 +5,9 @@
 <div class="container" style="margin-top: 80px; min-width: 1300px; max-width: 1300px;">
 
   <div class="row-fluid">
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          <!-- offer id brute forcing queue -->
-          <li class="nav-header">Service Record</li>
-          <li class="active"><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/">Overview</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/match-history/">Game History</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/commendations/">Commendations</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/specializations/">Specializations</a></li>
+    <%= h4_sidebar_overview 'active' %>
+    <%= render 'h4_sidebar' %>
 
-          <li class="nav-header">Career Stats</li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/summary/">Summary</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/by-playlist/">By Playlist</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/by-map/">By Map</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/medals/">Medals</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/weapons/">Weapons</a></li>
-          <li><a href="/halo4/servicerecord/<%= @service_record['Gamertag'] %>/enemies/">Enemies</a></li>
-        </ul>
-      </div>
-    </div>
     <div class="well span9" style="padding: 20px 0 0 0;">
       <% h4_rank_data = Halo4Controller.GetSimpleRankData(@service_record, 'medium') %>
 	  	<div class="row-fluid visible-desktop visible-tablet">
@@ -326,20 +309,20 @@
 
 <script>
 	$(document).ready(function() {
-		new Morris.Donut({
+		var chart = new Morris.Donut({
 			element: 'game-stat-chart',
+			labelColor: '#ffffff',
 			data: [
+				<% index = 0 %>
 				<% @service_record['GameModes'].each do |game_mode| %>
-				{ label: '<%= game_mode['Name'] %>', value: <%= game_mode['TotalGamesStarted'] %> },
+				<% index += 1 %>
+				{ label: '<%= game_mode['Name'] %>', value: <%= game_mode['TotalGamesStarted'] %>, index: <%= index.to_i %> },
 				<% end %>
 			],
 			colors: [ '#55712a', '#6f2a29', '#016076', '#382c55' ],
 			formatter: function (y) { return y + " games" }
 		});
 	});
-
-	function clicked() { alert('clicked'); }
-	function hovered() { alert('hovar'); }
 </script>
 <script>
 	$(function() {
