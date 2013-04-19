@@ -24,9 +24,42 @@ module ApplicationHelper
 		content_for :search_query, search_query.to_s
 	end
 
+
+	# halo 4 sidebar
 	def h4_gamertag(h4_gamertag)
 		content_for :h4_gamertag, h4_gamertag.to_s
 	end
+	def h4_sidebar_overview(h4_sidebar_overview)
+		content_for :h4_sidebar_overview, h4_sidebar_overview.to_s
+	end
+	def h4_sidebar_game_history(h4_sidebar_game_history)
+		content_for :h4_sidebar_game_history, h4_sidebar_game_history.to_s
+	end
+	def h4_sidebar_commendations(h4_sidebar_commendations)
+		content_for :h4_sidebar_commendations, h4_sidebar_commendations.to_s
+	end
+	def h4_sidebar_specializations(h4_sidebar_specializations)
+		content_for :h4_sidebar_specializations, h4_sidebar_specializations.to_s
+	end
+	def h4_sidebar_summary(h4_sidebar_summary)
+		content_for :h4_sidebar_summary, h4_sidebar_summary.to_s
+	end
+	def h4_sidebar_by_playlist(h4_sidebar_by_playlist)
+		content_for :h4_sidebar_by_playlist, h4_sidebar_by_playlist.to_s
+	end
+	def h4_sidebar_by_map(h4_sidebar_by_map)
+		content_for :h4_sidebar_by_map, h4_sidebar_by_map.to_s
+	end
+	def h4_sidebar_medals(h4_sidebar_medals)
+		content_for :h4_sidebar_medals, h4_sidebar_medals.to_s
+	end
+	def h4_sidebar_weapons(h4_sidebar_weapons)
+		content_for :h4_sidebar_weapons, h4_sidebar_weapons.to_s
+	end
+	def h4_sidebar_enemies(h4_sidebar_enemies)
+		content_for :h4_sidebar_enemies, h4_sidebar_enemies.to_s
+	end
+
 
 	def self.SetupErrorNotification(type, message)
 		flash[:type] = type
