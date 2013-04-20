@@ -1,0 +1,73 @@
+- playlists = @friendly_playlist_data[mode['Id']]
+
+%h1
+  #{mode['Name']}
+
+.playlist-category-container
+  - index = 0
+  - playlists.each do |playlist|
+    - if !playlist['IsCurrent'] || playlist['PopulationCount'] == 0
+      - next
+    - index += 1
+    - playlist_id = rand(10000)
+    .row.playlist-container
+      .span3.preview-icon{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(playlist['ImageUrl']['BaseUrl'], playlist['ImageUrl']['AssetUrl'], 'large')}')" }
+
+      .span7.playlist-meta
+        %h3
+          #{playlist['Name']}
+
+        %h5
+          #{playlist['Description']}
+
+        .playlist-player-data
+          %span.entry
+            Max Local Players:
+            %strong
+              #{playlist['MaxLocalPlayers']}
+          %br/
+          %span.entry
+            Max Party Size:
+            %strong
+              #{playlist['MaxPartySize']}
+          %br/
+          %span.entry
+            Player Grouping:
+            %strong
+              - if playlist['IsFreeForAll']
+                Free For All
+              - else
+                Team
+          %br/
+
+        = render :partial => 'halo4/playlists/population/population_count', :locals => { :playlist_id => playlist_id, :playlist => playlist }
+
+      .cleaner
+
+      - if playlist['GameVariants'].any?
+        = render :partial => 'halo4/playlists/play_data/game_variants', :locals => { :playlist => playlist, :playlist_id => playlist_id }
+
+      .cleaner
+
+      - if playlist['MapVariants'].any?
+        = render :partial => 'halo4/playlists/play_data/map_variants', :locals => { :playlist => playlist, :playlist_id => playlist_id }
+
+    .cleaner
+
+
+
+
+- if index == 0
+  .playlist-category-container
+    .row.playlist-container
+      .span3.preview-icon-none{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(mode['ImageUrl']['BaseUrl'], mode['ImageUrl']['AssetUrl'], 'large')}')" }
+
+      .span7.playlist-meta
+        %h3
+          None
+        %h5
+          This category has no playlists :(
+
+        = render :partial => 'halo4/playlists/population/population_none'
+
+        .cleaner

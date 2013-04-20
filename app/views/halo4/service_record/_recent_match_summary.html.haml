@@ -1,0 +1,65 @@
+.well.span9{:style => "margin: 0 0 0 332px;"}
+  %h3 Match History:
+  .row-fluid
+    .axis{:style => "float: left; padding-right: 30px; margin-right: 30px; border-right: 1px solid #333;"}
+      %div{:style => "color: #016076;"} Win
+      %div{:style => "margin-top: 35px; color: #c00;"} Loss
+      %div{:style => "margin-top: 50px; color: rgba(57, 70, 69, 1);"} Did Not Finish
+    - @recent_matches.each do |match|
+      %a.recent-match-linker{"data-popbox" => "pop-#{match['Id']}", :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match/#{match['Id']}", :id => match['Id']}
+        %div{:class => "recent-match-entry #{recent_game_style_from_result(match)}"}
+          - if match['ModeId'] == 3 || match['ModeId'] == 6
+            = render :partial => 'halo4/service_record/recent_match/war_games', :locals => { :match => match, :service_record => @service_record }
+          - elsif match['ModeId'] == 5
+            = render :partial => 'halo4/service_record/recent_match/spartan_ops', :locals => { :match => match, :service_record => @service_record }
+          - elsif match['ModeId'] == 4
+            = render :partial => 'halo4/service_record/recent_match/campaign', :locals => { :match => match, :service_record => @service_record }
+
+:javascript
+  $(function() {
+  	var moveLeft = 0;
+  	var moveDown = 0;
+  	$('.recent-match-linker').hover(function(e) {
+
+  		var target = '#' + ($(this).attr('data-popbox'));
+
+  		$(target).show();
+  		moveLeft = $(this).outerWidth();
+  		moveDown = ($(target).outerHeight() / 2);
+  	}, function() {
+  		var target = '#' + ($(this).attr('data-popbox'));
+  		$(target).hide();
+  	});
+
+  	$('.recent-match-linker').mousemove(function(e) {
+  		var target = '#' + ($(this).attr('data-popbox'));
+
+  		leftD = e.pageX + parseInt(moveLeft);
+  		maxRight = leftD + $(target).outerWidth();
+  		windowLeft = $(window).width() - 40;
+  		windowRight = 0;
+  		maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);
+
+  		if(maxRight > windowLeft && maxLeft > windowRight)
+  		{
+  			leftD = maxLeft;
+  		}
+
+  		topD = e.pageY - parseInt(moveDown);
+  		maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);
+  		windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));
+  		maxTop = topD;
+  		windowTop = parseInt($(document).scrollTop());
+  		if(maxTop < windowTop){
+  			topD = (windowTop + 20);
+  		}
+  		else {
+  			topD -= 190;
+  		}
+
+  		leftD += 5;
+
+  		$(target).css('top', topD).css('left', leftD);
+  	});
+
+  });

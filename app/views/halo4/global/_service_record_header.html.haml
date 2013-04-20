@@ -1,0 +1,38 @@
+.well.span9{:style => "padding: 20px 0 0 0;"}
+  - h4_rank_data = get_simple_rank_data(@service_record, 'medium')
+  .row-fluid.visible-desktop.visible-tablet
+    .span8{:style => "margin: 10px 0 0 20px"}
+      .gamertag-flairs
+        %img{:src => X343ApiController.asset_url_generator_basic(@service_record['RankImageUrl']['BaseUrl'], @service_record['RankImageUrl']['AssetUrl'], 'medium'), :style => "margin-top: -8px;"}/
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"}
+          %span.gamertag-bar
+            = @service_record['Gamertag']
+        \-
+        %span.service-tag-bar
+          = @service_record['ServiceTag']
+      .gamertag-quick-meta
+        = h4_rank_data[:specialization_block]['Name']
+      .cleaner
+      %br/
+      .gamertag-ranking
+        .gamertag-progress-info-left
+          0
+        .gamertag-progress-info-right
+          = number_with_delimiter(h4_rank_data[:update_upper_xp], :delimiter => ',')
+        .cleaner
+        .progress.progress-striped.active
+          .bar{:style => "text-align: right; padding-right: 5px; width: #{h4_rank_data[:update_percentage]}%;"}
+            = number_with_delimiter(h4_rank_data[:update_current_xp], :delimiter => ',')
+    .span3
+      .span4.campaign-completion
+        %img{:src => campaign_progress_from_id(@service_record['GameModes'][0]['SinglePlayerDASO'].to_i, @service_record['GameModes'][0]['SinglePlayerDifficulty'].to_i, 'medium')}/
+        %br/
+        %span.completion-title Single Player
+      .span4.campaign-completion
+        %img{:src => campaign_progress_from_id(@service_record['GameModes'][0]['CoopDASO'].to_i, @service_record['GameModes'][0]['CoopDifficulty'].to_i, 'medium')}/
+        %br/
+        %span.completion-title Co-op
+      .span4.csr-completion
+        %img{:src => "https://assets.halowaypoint.com/games/h4/csr/v1/small/#{get_highest_skill_rank(@service_record['SkillRanks'])}.png"}/
+        %br/
+        %span.completion-title Highest CSR

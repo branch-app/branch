@@ -38,3 +38,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'rufus-scheduler'
+gem 'haml-rails'

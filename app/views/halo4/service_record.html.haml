@@ -1,0 +1,17 @@
+- title " - #{@service_record['Gamertag']}'s Service Record"
+- active_halo4 'active'
+- search_query @service_record['Gamertag']
+
+.container{:style => "margin-top: 80px; min-width: 1300px; max-width: 1300px;"}
+  .row-fluid
+
+    = h4_sidebar_overview 'active'
+    = render :partial => 'halo4/global/sidebar', :object => @service_record
+
+    = render :partial => 'application/notification_header'
+
+    = render :partial => 'halo4/global/service_record_header', :object => @service_record
+
+    = render :partial => 'halo4/service_record/overview', :object => @service_record
+
+    = render :partial => 'halo4/service_record/recent_match_summary', :object => @service_record

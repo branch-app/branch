@@ -1,0 +1,18 @@
+- active_halo4 'active'
+- search_query @service_record['Gamertag']
+.container{:style => "margin-top: 80px; min-width: 1300px; max-width: 1300px;"}
+  .row-fluid
+
+    = h4_sidebar_game_history 'active'
+    = render :partial => 'halo4/global/sidebar', :object => @service_record
+
+    = render :partial => 'application/notification_header'
+
+    = render :partial => 'halo4/global/service_record_header', :object => @service_record
+
+    - if @match['ModeId'] == 3 || @match['ModeId'] == 6
+      = render :partial => 'halo4/view_match/view_war_games', :locals => { :match => @match, :service_record => @service_record }
+    - elsif @match['ModeId'] == 5
+      %h1 todo, spartan ops
+    - elsif @match['ModeId'] == 4
+      %h1 todo, campaign

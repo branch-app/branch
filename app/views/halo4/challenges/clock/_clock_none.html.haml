@@ -1,0 +1,52 @@
+:javascript
+  $(document).ready(function(){
+    JBCountDown({
+      secondsColor : "#ffdc50",
+      minutesColor : "#9cdb7d",
+      hoursColor   : "#378cff",
+      daysColor    : "#ff6565",
+
+      startDate   : "#{Time.now.to_time.to_i}",
+      endDate     : "#{Time.now.to_time.to_i}",
+      now         : "#{Time.now.to_time.to_i}",
+      seconds     : "#{Time.now.sec} %>"
+    }, 'none');
+  });
+
+.clock
+  / Days
+  #clock_days_none.clock_days
+    .bgLayer
+      .topLayer
+      %canvas#canvas_days_none{:height => "120", :width => "120"}
+      .text
+        %p.val 0
+        %p.type_days Days
+  / Days
+  / Hours
+  #clock_hours_none.clock_hours
+    .bgLayer
+      .topLayer
+      %canvas#canvas_hours_none{:height => "120", :width => "120"}
+      .text
+        %p.val 0
+        %p.type_hours Hours
+  / Hours
+  / Minutes
+  #clock_minutes_none.clock_minutes
+    .bgLayer
+      .topLayer
+      %canvas#canvas_minutes_none{:height => "120", :width => "120"}
+      .text
+        %p.val 0
+        %p.type_minutes Minutes
+  / Minutes
+  / Seconds
+  #clock_seconds_none.clock_seconds
+    .bgLayer
+      .topLayer
+      %canvas#canvas_seconds_none{:height => "120", :width => "120"}
+      .text
+        %p.val 0
+        %p.type_seconds Seconds
+  / Seconds

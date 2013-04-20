@@ -1,0 +1,26 @@
+.span3
+  .well.sidebar-nav
+    %ul.nav.nav-list
+      / offer id brute forcing queue
+      %li.nav-header Service Record
+      %li{:class => yield(:h4_sidebar_overview)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"} Overview
+      %li{:class => yield(:h4_sidebar_game_history)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/"} Game History
+      %li{:class => yield(:h4_sidebar_commendations)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/commendations/"} Commendations
+      %li{:class => yield(:h4_sidebar_specializations)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/specializations/"} Specializations
+      %li.nav-header Career Stats
+      %li{:class => yield(:h4_sidebar_summary)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/summary/"} Summary
+      %li{:class => yield(:h4_sidebar_by_playlist)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-playlist/"} By Playlist
+      %li{:class => yield(:h4_sidebar_by_map)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-map/"} By Map
+      %li{:class => yield(:h4_sidebar_medals)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/medals/"} Medals
+      %li{:class => yield(:h4_sidebar_weapons)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/weapons/"} Weapons
+      %li{:class => yield(:h4_sidebar_enemies)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/enemies/"} Enemies

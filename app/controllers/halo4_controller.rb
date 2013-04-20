@@ -23,7 +23,7 @@ class Halo4Controller < ApplicationController
 		@game_variant_metadata = @metadata['GameBaseVariantsMetadata']['GameBaseVariants']
 
 		@match = @match['Game']
-		@is_ffa = @match['Teams'].count == 0
+		@is_ffa = (@match['Teams'] != nil && @match['Teams'].count == 0)
 		@top_player = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse[0]
 		@sorted_players = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse
 
@@ -139,135 +139,6 @@ class Halo4Controller < ApplicationController
 
 
 	# helpers
-	def self.CampaignProgressFromId(progress1, progress2, size)
-		use_progress_1 = true if progress1 > progress2
-
-		if progress1 == nil || progress2 == 0
-			progress1 = 'easy'
-		end
-		if progress1 == 1
-			progress1 = 'normal'
-		end
-		if progress1 == 2
-			progress1 = 'heroic'
-		end
-		if progress1 == 3
-			progress1 = 'legendary'
-		end
-
-		if progress2 == nil || progress2 == 0
-			progress2 = 'easy'
-		end
-		if progress2 == 1
-			progress2 = 'normal'
-		end
-		if progress2 == 2
-			progress2 = 'heroic'
-		end
-		if progress2 == 3
-			progress2 = 'legendary'
-		end
-
-
-		if use_progress_1
-			return X343ApiController.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress1}.png", size)
-		else
-			return X343ApiController.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress2}.png", size)
-		end
-	end
-
-	def self.GetHighestSkillRank(skill_ranks)
-		highest_skill = 0
-
-		skill_ranks.each do |rank|
-			if rank['CurrentSkillRank'] == nil
-				rank['CurrentSkillRank'] = 0
-			end
-
-			if rank['CurrentSkillRank'] > highest_skill
-				highest_skill = rank['CurrentSkillRank']
-			end
-		end
-
-		return highest_skill
-	end
-
-	def self.GetSimpleRankData(service_record, size)
-		h4_rank_data = { }
-
-		# current rank data
-		h4_rank_data[:current_rank_name] = service_record['RankName']
-		h4_rank_data[:current_rank_id] = service_record['RankId']
-		h4_rank_data[:current_rank_url] = X343ApiController.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
-		h4_rank_data[:current_rank_start_xp] = service_record['RankStartXP']
-
-		# next rank data
-		if service_record['NextRankId'] == 0
-			# max rank
-			h4_rank_data[:next_rank_name] = 'Mastery'
-			h4_rank_data[:next_rank_name_friendly] = 'Mastery (Max Rank)'
-			h4_rank_data[:next_rank_id] = service_record['RankId']
-			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
-			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
-		else
-			h4_rank_data[:next_rank_name] = service_record['NextRankName']
-			h4_rank_data[:next_rank_name_friendly] = "#{service_record['NextRankName']} (#{service_record['NextRankStartXP']})"
-			h4_rank_data[:next_rank_id] = service_record['NextRankId']
-			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['NextRankImageUrl']['BaseUrl'], service_record['NextRankImageUrl']['AssetUrl'], size)
-			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
-		end
-
-		# specialization stuff
-		h4_rank_data[:specialization_block] = nil
-		service_record['Specializations'].each do |specialization|
-			if specialization['IsCurrent']
-				h4_rank_data[:specialization_block] = specialization
-			end
-		end
-		if h4_rank_data[:specialization_block]['Completed']
-			h4_rank_data[:specialization_block]['Name'] == 'Mastery'
-		end
-
-		# percentage stuff
-		if service_record['NextRankId'] == 0
-			h4_rank_data[:update_next_rank_name] = 'Max Rank'
-			h4_rank_data[:update_upper_xp] = ''
-			h4_rank_data[:update_current_xp] = service_record['XP']
-			h4_rank_data[:update_percentage] = 100
-		else
-			h4_rank_data[:update_next_rank_name] = service_record['NextRankName']
-			h4_rank_data[:update_upper_xp] = service_record['NextRankStartXP'] - service_record['RankStartXP']
-			h4_rank_data[:update_current_xp] = service_record['XP'] - service_record['RankStartXP']
-
-			a = h4_rank_data[:update_current_xp].to_i
-			b = h4_rank_data[:update_upper_xp].to_i
-
-			perc = ((a.to_f / b.to_f) * 100)
-
-			h4_rank_data[:update_percentage] = perc
-		end
-
-		return h4_rank_data
-	end
-
-	def self.RecentGameStyleFromResult(entry)
-		if entry['ModeName'] == 'Spartan Ops' || entry['ModeName'] == 'Campaign'
-			unless entry['Completed']
-				return 'recent-match-dnf'
-			else
-				return 'recent-match-win'
-			end
-		end
-
-		if !entry['Completed']
-			return 'recent-match-dnf'
-		elsif entry['Result'] == 0
-			return 'recent-match-los'
-		else
-			return 'recent-match-win'
-		end
-	end
-
 	def self.GetMedalDataFromId(medal_id, medal_meta)
 		medal_meta.each do |medal|
 			if medal['Id'] == medal_id
@@ -295,23 +166,6 @@ class Halo4Controller < ApplicationController
 			end
 		end
 
-		return nil
-	end
-
-	def self.GetSpartanOpsChapter(season_id, episode_id, chapter_id, meta)
-		meta['SpartanOpsMetadata']['Seasons'].each do |season|
-			if season['Id'] == season_id
-				season['Episodes'].each do |episode|
-					if episode['Id'] == episode_id
-						episode['Chapters'].each do |chapter|
-							if chapter['Id'] == chapter_id
-								return chapter
-							end
-						end
-					end
-				end
-			end
-		end
 		return nil
 	end
 end

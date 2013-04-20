@@ -432,19 +432,20 @@
   height: 275px
 }
 
-  .challenge-container > .challenge-container {
+  .challenge-container {
     margin-top: 25px;
     margin-bottom: 25px;
   }
     .challenge-container > .preview-icon {
-      width: 125px;
-      height: 125px;
-      background-size: 125px 125px;
+        width: 128px;
+        height: 128px;
+        background-size: 128px 128px;
+        background-repeat: no-repeat;
+        background-position: center;
 
-      float: left;
-    }
+        float: left;
+      }
     .challenge-container > .challenge-meta {
-
       position: relative;
       float: left;
     }

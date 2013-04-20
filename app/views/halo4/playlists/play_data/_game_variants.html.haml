@@ -1,0 +1,28 @@
+:javascript
+  $(document).ready(function() {
+    $(".gamevariant_content_#{playlist_id}").hide();
+    //toggle the componenet with class msg_body
+    $(".gamevariant_heading_#{playlist_id}").click(function()
+    {
+      $(this).next(".gamevariant_content_#{playlist_id}").slideToggle(500);
+    });
+  });
+
+.playlist-gamevarients
+  %p{:class => "expander_heading gamevariant_heading_#{playlist_id}"} Game Variant Cycle:
+  %div{:class => "expander_content gamevariant_content_#{playlist_id}"}
+    %table.table.table-hover
+      %thead
+        %tr
+          %td Icon
+          %td Name
+          %td Description
+          %td Base Variant
+      %tbody
+        - playlist['GameVariants'].each do |variant|
+          %tr
+            %td
+              %img{:src => X343ApiController.asset_url_generator_basic(variant['GameBaseVariantImageUrl']['BaseUrl'], variant['GameBaseVariantImageUrl']['AssetUrl'], 'medium')}/
+            %td= variant['GameVariantName']
+            %td= variant['GameVariantDescription']
+            %td= variant['GameBaseVariantName']

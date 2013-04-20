@@ -1,0 +1,29 @@
+:javascript
+  $(document).ready(function() {
+    var cdays = $("#canvas_population_#{playlist_id}").get(0);
+    var ctx = cdays.getContext("2d");
+    ctx.clearRect(0, 0, cdays.width, cdays.height);
+    ctx.beginPath();
+    ctx.strokeStyle = '#ffdc50';
+
+    ctx.shadowBlur    = 10;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+
+    ctx.arc(94/2,94/2,85/2, deg(0), deg((360 / #{@total_population}) * (#{playlist['PopulationCount'].to_i} - #{@total_population})));
+    ctx.lineWidth = 17/2;
+    ctx.stroke();
+    $("#population_#{playlist_id} .text .val").text("#{playlist['PopulationCount'].to_i}");
+  })
+
+%div
+  .clock
+    / Population
+    .clock_days{:id => "population_#{playlist_id}"}
+      .bgLayer
+        .topLayer
+        %canvas{:height => "120", :id => "canvas_population_#{playlist_id}", :width => "120"}
+        .text
+          %p.val 0
+          %p.type_days Players
+    / Population

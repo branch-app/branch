@@ -1,0 +1,201 @@
+- title " - #{@match['GameVariantName']} on #{@match['MapVariantName']} as #{@service_record['Gamertag']}"
+
+.well.span9
+  %h3
+    = @match['GameVariantName']
+    on #{@match['MapVariantName']}
+
+  .row-fluid
+    .cover{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large')}')" }
+      .mask
+        .game-victor-player-model{ :style => "background-image: url('#{X343ApiController.GetPlayerModel(@top_player['Gamertag'], 'medium')}')" }
+          - if @is_ffa
+            = render :partial => 'halo4/view_match/cover/war_games_ffa'
+          - else
+            = render :partial => 'halo4/view_match/cover/war_games_team'
+
+    .game-stats
+      %ul.game-stat-tabs.nav.nav-tabs
+        %li.active
+          %a.switch-content-tab{:href => '#A', "data-toggle" => 'tab'}
+            Results
+        %li
+          %a.switch-content-tab{:href => '#B', "data-toggle" => 'tab'}
+            Carnage
+        %li
+          %a.switch-content-tab{:href => '#C', "data-toggle" => 'tab'}
+            Medals
+
+      .carnage-report-header-graph
+        %div{ :id => 'graph-carnage-header-kills', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
+        %div{ :id => 'graph-carnage-header-deaths', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
+        %div{ :id => 'graph-carnage-header-medals', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
+
+        %div{ :style => 'margin: 15px 0 25px 0; text-align: center;' }
+          Carnage Timeline:
+          %a.global-carnage-stats-over-time{ :id => 'global-kills-over-time', :href => '#global-kills-over-time' }
+            Kills
+          |
+          %a.global-carnage-stats-over-time{ :id => 'global-deaths-over-time', :href => '#global-deaths-over-time' }
+            Deaths
+          |
+          %a.global-carnage-stats-over-time{ :id => 'global-medals-over-time', :href => '#global-medals-over-time' }
+            Medals
+
+      .carnage-quick-view
+        - if @is_ffa
+          = render :partial => 'halo4/view_match/carnage_quick_view/carnage_war_games_quick_view_ffa', :object => @match
+        - else
+          = render :partial => 'halo4/view_match/carnage_quick_view/carnage_war_games_quick_view_team', :object => @match
+
+      .tabbable
+        .tab-content
+          .tab-pane.active{ :id => 'A' }
+            / yolo
+          .tab-pane{ :id => 'B' }
+            = render :partial => 'halo4/view_match/cargane_details/carnage_report', :object => @match
+          .tab-pane{ :id => 'C' }
+            = render :partial => 'halo4/view_match/cargane_details/medal_report', :object => @match
+
+:javascript
+
+  // Player Linker, yolo
+  $('.player-linker').click(function () {
+    var player_id = $(this).attr('playerid');
+    var tab_id = '';
+
+    $('.game-stat-tabs li.active').each(function (index) {
+      tab_id = $(this).find('a').text();
+    }
+                                       );
+
+    if (tab_id.indexOf("Carnage") >= 0) {
+      show_carnage_for_player(player_id);
+      return false;
+    }
+    else if (tab_id.indexOf("Medals") >= 0) {
+      show_medals_for_player(player_id);
+      return false;
+    }
+    else if (tab_id.indexOf("Player Summary") >= 0) {
+      show_personal_for_player(player_id);
+      return false;
+    }
+
+    return true;
+  });
+
+  // Drawing x-over-time graphs
+  Morris.Line({
+    element: 'graph-carnage-header-kills',
+    data: [
+      #{draw_war_games_carnage_graph('KillsOverTime')}
+    ],
+    xkey: 't',
+    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
+    labels: [ #{raw create_war_games_carnage_graph_labels} ],
+    hideHover: 'always',
+    #{create_war_games_carnage_graph_line_colours}
+  });
+  Morris.Line({
+    element: 'graph-carnage-header-deaths',
+    data: [
+      #{draw_war_games_carnage_graph('DeathsOverTime')}
+    ],
+    xkey: 't',
+    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
+    labels: [ #{raw create_war_games_carnage_graph_labels} ],
+    hideHover: 'always',
+    #{create_war_games_carnage_graph_line_colours}
+  });
+  Morris.Line({
+    element: 'graph-carnage-header-medals',
+    data: [
+      #{draw_war_games_carnage_graph('MedalsOverTime')}
+    ],
+    xkey: 't',
+    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
+    labels: [ #{raw create_war_games_carnage_graph_labels} ],
+    hideHover: 'always',
+    #{create_war_games_carnage_graph_line_colours}
+  });
+
+  $(document).ready(function () {
+    $('#graph-carnage-header-kills').css('display', 'block');
+    $('#graph-carnage-header-deaths').css('display', 'none');
+    $('#graph-carnage-header-medals').css('display', 'none');
+  });
+  function hide_graphs() {
+    $('#graph-carnage-header-kills').css('display', 'none');
+    $('#graph-carnage-header-deaths').css('display', 'none');
+    $('#graph-carnage-header-medals').css('display', 'none');
+  }
+  $('#global-kills-over-time').click(function () {
+    hide_graphs();
+    $('#graph-carnage-header-kills').css('display', 'block');
+    return false;
+  });
+  $('#global-deaths-over-time').click(function () {
+    hide_graphs();
+    $('#graph-carnage-header-deaths').css('display', 'block');
+    return false;
+  });
+  $('#global-medals-over-time').click(function () {
+    hide_graphs();
+    $('#graph-carnage-header-medals').css('display', 'block');
+    return false;
+  });
+
+
+  // Initial Page Load Graph Hiding, ye
+  $(document).ready(function() {
+    $('.carnage-report-header-graph').css('display', 'none');
+  });
+
+  // Hiding/Showing x-over-time graphs
+  $('.switch-content-tab').click(function() {
+    var destination = $(this).attr('href');
+
+    if (destination == "#A") {
+      // hide graphs
+      $('.carnage-report-header-graph').css('display', 'none');
+    }
+    else {
+      // Show dem graphs
+      $('.carnage-report-header-graph').css('display', 'inline');
+    }
+
+    return true;
+  });
+
+  function show_personal_for_player(player_id)
+  {
+    // hide old shit
+    $('.personal_stats').each(function (i, element) {
+      $(element).css('display', 'none');
+    }
+                             );
+
+    // show new shit
+    $('#player_personal_' + player_id).css('display', 'inline');
+  }
+  function show_carnage_for_player(player_id) {
+    // hide old shit
+    $('.carnage_damage_stats').each(function (i, element) {
+      $(element).css('display', 'none');
+    }
+                                   );
+
+    // show new shit
+    $('#player_' + player_id).css('display', 'inline');
+  }
+  function show_medals_for_player(player_id) {
+    // hide old shit
+    $('.medal_stats').each(function (i, element) {
+      $(element).css('display', 'none');
+    }
+                          );
+
+    // show new shit
+    $('#player_medals_' + player_id).css('display', 'inline');
+  }
