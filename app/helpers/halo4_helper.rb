@@ -70,8 +70,8 @@ module Halo4Helper
 				h4_rank_data[:specialization_block] = specialization
 			end
 		end
-		if h4_rank_data[:specialization_block]['Completed']
-			h4_rank_data[:specialization_block]['Name'] == 'Mastery'
+		if h4_rank_data[:specialization_block]['PercentComplete'] == 1.0
+			h4_rank_data[:specialization_block]['Name'] = 'Mastery'
 		end
 
 		# percentage stuff

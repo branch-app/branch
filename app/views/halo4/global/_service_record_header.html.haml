@@ -16,13 +16,17 @@
       %br/
       .gamertag-ranking
         .gamertag-progress-info-left
-          0
+          SR -
+          = h4_rank_data[:current_rank_name]
         .gamertag-progress-info-right
           = number_with_delimiter(h4_rank_data[:update_upper_xp], :delimiter => ',')
         .cleaner
         .progress.progress-striped.active
           .bar{:style => "text-align: right; padding-right: 5px; width: #{h4_rank_data[:update_percentage]}%;"}
-            = number_with_delimiter(h4_rank_data[:update_current_xp], :delimiter => ',')
+            - if @service_record['NextRankId'] == 0
+              Max Rank
+            - else
+              = number_with_delimiter(h4_rank_data[:update_current_xp], :delimiter => ',')
     .span3
       .span4.campaign-completion
         %img{:src => campaign_progress_from_id(@service_record['GameModes'][0]['SinglePlayerDASO'].to_i, @service_record['GameModes'][0]['SinglePlayerDifficulty'].to_i, 'medium')}/
