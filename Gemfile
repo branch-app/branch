@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem 'rufus-scheduler'
 gem 'haml-rails'
+gem 'httparty'

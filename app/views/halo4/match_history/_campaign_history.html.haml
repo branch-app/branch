@@ -1,0 +1,79 @@
+- relevant_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], @start_index, @recent_match_load_count, 4, -1)['Games']
+
+- if relevant_matches.any?
+  %table.team-table.table.table-bordered.table-striped.table-hover
+    %thead
+      %tr
+        %td
+          Mission
+        %td
+          Difficulty
+        %td
+          Type
+        %td
+          Date
+        %td
+          Duration
+
+    %tbody
+      - index = 0
+      - relevant_matches.each do |match|
+        - index += 1
+        - if index >= @recent_match_load_count - 1
+          - break
+        %tr
+          %td
+            %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match/#{match['Id']}" }
+              #{match['MapName']}
+          %td
+            #{difficulty_from_id(match['Difficulty'])['Name']}
+          %td
+            - if match['SinglePlayer']
+              Single Player
+            - else
+              Co-op
+          %td
+            #{DateTime.strptime(match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')}
+          %td
+            - parts = match['Duration'].split(':')
+            - duration = Time.new(1994, 8, 18, parts[0].to_i, parts[1].to_i, parts[2].to_i, '+00:00')
+            - if duration.hour > 0
+              - if duration.hour == 1
+                1 Hour,
+              - else
+                #{duration.hour} Hours,
+
+            - if duration.min > 0
+              - if duration.min == 1
+                1 Minute and
+              - else
+                #{duration.min} Minutes and
+
+            - if duration.sec > 0
+              - if duration.sec == 1
+                1 Second
+              - else
+                #{duration.sec} Seconds
+
+- else
+  %div{ :style => 'margin-left: 20px; margin-top: 20px; margin-bottom: 60px;' }
+    %h3
+      Woah Cowboy!
+    %h5
+      Seems you haven't been playing enough halo to have records going back this far. Get Playing!
+    %hr/
+
+%ul.pager
+  - if @selected_gamemode == 4 && @start_index > 0
+    %li.previous
+      %a{:href => match_history_pagnation_previous(4)} ← Older
+  - else
+    %li.previous.disabled
+      %a ← Older
+
+  - if relevant_matches.count == @recent_match_load_count
+    %li.next
+      %a{:href => match_history_pagnation_next(4)} Newer →
+  - else
+    %li.next.disabled
+      %a Newer →

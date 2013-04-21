@@ -2,7 +2,6 @@ class Halo4Controller < ApplicationController
 	require 'digest/md5'
 	require 'active_support/core_ext/integer/inflections'
 
-
 	def view_match
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		@match = X343ApiController.GetMatchDetails(params[:gamertag], params[:matchid])
@@ -41,13 +40,17 @@ class Halo4Controller < ApplicationController
 			return
 		end
 
+		@recent_match_load_count = 36
+
 		@start_index = 0
+		@start_page = 0
 		@selected_gamemode = 3
 		if params[:game_mode].to_i != nil && params[:game_mode].to_i > 2 && params[:game_mode].to_i < 7
 			@selected_gamemode = params[:game_mode].to_i
 		end
 		if params[:page].to_i != nil && params[:page].to_i > 0
-			@start_index = params[:page].to_i * 25
+			@start_index = params[:page].to_i * (@recent_match_load_count - 1)
+			@start_page = params[:page].to_i
 		end
 
 		@metadata = X343ApiController.GetMetaData()

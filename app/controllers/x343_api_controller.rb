@@ -5,23 +5,22 @@ class X343ApiController < ApplicationController
 	## 1001 - Server Down
 
 	# requires
-	require 'net/https'
-	require 'open-uri'
 	require 'uri'
 	require 'json'
 	require 'openssl'
+	require 'httparty'
 
 	# human stupidity
 	GAME = 'h4'
 	LANGUAGE = 'en-us'
-	SERVICES_LIST_URI = URI.parse('https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752')
+	SERVICES_LIST_URL = 'https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752'
 
 	# private variables
 
 	def self.UpdateServicesList
-		response = unauthorized_request(SERVICES_LIST_URI, 'GET', nil)
+		response = unauthorized_request(SERVICES_LIST_URL, 'GET', nil)
 
-		if response.code == '200'
+		if response.code == 200
 			response = JSON.parse(response.body)
 
 			services_list = response['ServiceList']
@@ -52,9 +51,9 @@ class X343ApiController < ApplicationController
 	def self.UpdateMetaData
 		url = url_from_name('GetGameMetadata', 'service_list')
 		url = full_url_with_defaults(url, nil)
-		response = unauthorized_request(URI.parse(url), 'GET', nil)
+		response = unauthorized_request(url, 'GET', nil)
 
-		if response.code == '200'
+		if response.code == 200
 			# save to database
 			H4GameMetadata.delete_all()
 			meta_data = H4GameMetadata.new
@@ -68,9 +67,9 @@ class X343ApiController < ApplicationController
 	def self.UpdatePlaylists
 		url = url_from_name('GetPlaylists', 'service_list')
 		url = full_url_with_defaults(url, nil)
-		response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+		response = authorized_request(url, 'GET', 'Spartan', nil)
 
-		if response.code == '200'
+		if response.code == 200
 			H4Playlists.delete_all
 			playlist_model = H4Playlists.new
 			playlist_model.data = response.body
@@ -81,9 +80,9 @@ class X343ApiController < ApplicationController
 	def self.UpdateChallenges
 		url = url_from_name('GetGlobalChallenges', 'service_list')
 		url = full_url_with_defaults(url, nil)
-		response = unauthorized_request(URI.parse(url), 'GET', nil)
+		response = unauthorized_request(url, 'GET', nil)
 
-		if response.code == '200'
+		if response.code == 200
 			json = JSON.parse(response.body)
 
 			if json['StatusCode'] != 1
@@ -126,11 +125,11 @@ class X343ApiController < ApplicationController
 		else
 			url = url_from_name('GetServiceRecord', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
-			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			response = authorized_request(url, 'GET', 'Spartan', nil)
 
 			i = response.code
 
-			if response.code == '200'
+			if response.code == 200
 				data = JSON.parse(response.body)
 
 				# check shit worked
@@ -170,9 +169,9 @@ class X343ApiController < ApplicationController
 		else
 			url = url_from_name('GetCommendations', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
-			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			response = authorized_request(url, 'GET', 'Spartan', nil)
 
-			if response.code == '200'
+			if response.code == 200
 				data = JSON.parse(response.body)
 
 				# check shit worked
@@ -217,9 +216,9 @@ class X343ApiController < ApplicationController
 			end
 			url = full_url_with_defaults(url, { :gamertag => gamertag, :count => count.to_s, :startat => start_index.to_s, :gamemodeid => mode_id.to_s, :chapterid => chapter_id.to_s })
 
-			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			response = authorized_request(url, 'GET', 'Spartan', nil)
 
-			if response.code == '200'
+			if response.code == 200
 				data = JSON.parse(response.body)
 
 				# check shit worked
@@ -263,9 +262,9 @@ class X343ApiController < ApplicationController
 		else
 			url = url_from_name('GetGameDetails', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
-			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			response = authorized_request(url, 'GET', 'Spartan', nil)
 
-			if response.code == '200'
+			if response.code == 200
 				data = JSON.parse(response.body)
 
 				# check shit worked
@@ -315,9 +314,9 @@ class X343ApiController < ApplicationController
 		else
 			url = url_from_name('GetPlayerChallenges', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
-			response = authorized_request(URI.parse(url), 'GET', 'Spartan', nil)
+			response = authorized_request(url, 'GET', 'Spartan', nil)
 
-			if response.code == '200'
+			if response.code == 200
 				data = JSON.parse(response.body)
 
 				# check gamertag exists
@@ -379,61 +378,48 @@ class X343ApiController < ApplicationController
 	### <summary>
 	### callz
 	### </summary>
-	def self.unauthorized_request(uri, request_type, optional_headers)
-		request = nil
+	def self.unauthorized_request(url, request_type, headers)
+
+		if headers == nil
+			headers = { }
+		end
+		headers['Accept'] = 'application/json'
+
+		response = nil
 		if request_type == 'GET'
-			request = Net::HTTP::Get.new(uri.path)
+			response = HTTParty.get(url, :headers => headers)
 		elsif request_type == 'POST'
-			request = Net::HTTP::Post.new(uri.path)
+			response = HTTParty.post(url, :headers => headers)
 		else
 			raise
 		end
-
-		request['Accept'] = 'application/json'
-		if optional_headers != nil
-			# set dem headerz
-			optional_headers.each do |header|
-				request[header[0]] = header[1]
-			end
-		end
-
-		response = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https', :verify_mode => OpenSSL::SSL::VERIFY_NONE) {|http|
-			http.request(request)
-		}
 
 		response
 	end
 
-	def self.authorized_request(uri, request_type, auth_type, optional_headers)
+	def self.authorized_request(url, request_type, auth_type, headers)
 		auth = H4ApiAuthenticationVault.first
 
-		request = nil
+		if headers == nil
+			headers = { }
+		end
+		if auth_type == 'Spartan'
+			headers['X-343-Authorization-Spartan'] = auth.spartan_token
+		elsif auth_type == 'WLID'
+			headers['X-343-Authorization-WLID'] = 'v1=' + auth.wlid_access_token
+		end
+		headers['Accept'] = 'application/json'
+
+		response = nil
 		if request_type == 'GET'
-			request = Net::HTTP::Get.new(uri.path)
+			response = HTTParty.get(url, :headers => headers)
 		elsif request_type == 'POST'
-			request = Net::HTTP::Post.new(uri.path)
+			response = HTTParty.post(url, :headers => headers)
 		else
 			raise
 		end
 
-		request['Accept'] = 'application/json'
-		if optional_headers != nil
-			# set dem headerz
-			optional_headers.each do |header|
-				request[header[0]] = header[1]
-			end
-		end
-		if auth_type == 'Spartan'
-			request['X-343-Authorization-Spartan'] = auth.spartan_token
-		elsif auth_type == 'WLID'
-			request['X-343-Authorization-WLID'] = 'v1=' + auth.wlid_access_token
-		end
-
-		response = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https', :verify_mode => OpenSSL::SSL::VERIFY_NONE) {|http|
-			http.request(request)
-		}
-
-		response
+		return response
 	end
 
 	def self.full_url_with_defaults(url, custom_defaults)

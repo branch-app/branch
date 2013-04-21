@@ -1,4 +1,6 @@
 module Halo4Helper
+	require 'active_support/core_ext/integer/inflections'
+
 	def draw_game_count_chart(service_record)
 		output = ''
 
@@ -131,6 +133,10 @@ module Halo4Helper
 		end
 	end
 
+	def difficulty_from_id(difficulty_id)
+		return @metadata['DifficultiesMetadata']['Difficulties'][difficulty_id]
+	end
+
 	def get_highest_skill_rank(skill_ranks)
 		highest_skill = 0
 
@@ -242,5 +248,29 @@ module Halo4Helper
 			output += "'#{team['PrimaryRGB']}', "
 		end
 		return output[0...-2] += ' ]'
+	end
+
+	def place_from_standing(standing)
+		if standing == -1
+			return 'DNF'
+		else
+			standing.ordinalize
+		end
+	end
+
+	def match_history_pagnation_next(mode_id)
+		if mode_id == @selected_gamemode
+			# yolo continue on like a nigga
+			return "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/#{mode_id}/#{@start_page + 1}/"
+		else
+			# woah, this one was unpopular, lets drop out of boarding school and do something with your life
+			return "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/#{mode_id}/2/"
+		end
+	end
+	def match_history_pagnation_previous(mode_id)
+		if mode_id == @selected_gamemode
+			# yolo continue on like a nigga
+			return "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/#{mode_id}/#{@start_page - 1}/"
+		end
 	end
 end
