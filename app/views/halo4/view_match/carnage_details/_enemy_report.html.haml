@@ -35,7 +35,7 @@
             %td
               #{enemy_stats['Deaths']}
             %td
-              #{calculate_spread(enemy_stats['Kills'], enemy_stats['Deaths'])}
+              #{ enemy_stats['Kills'] - enemy_stats['Deaths'] }
             %td
               #{enemy_stats['AverageKillDistance']}
             %td

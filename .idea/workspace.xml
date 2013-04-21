@@ -23,7 +23,7 @@
     <file path="/schema.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365606503010" ignored="false" />
     <file path="/20130410151459_add_to_global_challenges.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365607095511" ignored="false" />
     <file path="/a.dummy" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365608295016" ignored="false" />
-    <file path="/temp.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366509620649" ignored="false" />
+    <file path="/temp.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366561524675" ignored="false" />
     <file path="/update_caches.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365611841628" ignored="false" />
     <file path="/update_caches_controller.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366494873264" ignored="false" />
     <file path="/playlists.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365727441485" ignored="false" />
@@ -85,7 +85,7 @@
     <file path="/_view_war_games.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366554932722" ignored="false" />
     <file path="/_war_games_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366426265867" ignored="false" />
     <file path="/_war_games_team.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366427254243" ignored="false" />
-    <file path="/_carnage_war_games_quick_view_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366519538009" ignored="false" />
+    <file path="/_carnage_war_games_quick_view_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366561494601" ignored="false" />
     <file path="/_carnage_war_games_quick_view_team.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366469030795" ignored="false" />
     <file path="/_h4_sidebar.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366468518477" ignored="false" />
     <file path="/_carnage_report.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366470754590" ignored="false" />
@@ -106,10 +106,11 @@
     <file path="/_view_spartan_ops.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366556819151" ignored="false" />
     <file path="/_spartan_ops.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366555127203" ignored="false" />
     <file path="/_carnage_spartan_ops.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366555534470" ignored="false" />
-    <file path="/_enemy_report.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366556549832" ignored="false" />
+    <file path="/_enemy_report.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366561551802" ignored="false" />
     <file path="/_view_campaign.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366560671694" ignored="false" />
     <file path="/_campaign.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366560512822" ignored="false" />
     <file path="/_skulls_report.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366560913997" ignored="false" />
+    <file path="/_carnage_campaign_engine.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366561488477" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +129,75 @@
     <favorites_list name="Halo4StatViewer" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="_carnage_campaign_engine.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_campaign_engine.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="10" selection-start="2482" selection-end="2482" vertical-scroll-proportion="-9.814815">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_overview.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record/_overview.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="43" selection-start="469" selection-end="469" vertical-scroll-proportion="-5.3333335">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_carnage_war_games_quick_view_ffa.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_ffa.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="10" selection-start="2589" selection-end="2589" vertical-scroll-proportion="-16.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_carnage_war_games_quick_view_team.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="58" selection-start="2882" selection-end="2882" vertical-scroll-proportion="-12.666667">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="halo4_helper.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="6" selection-start="352" selection-end="352" vertical-scroll-proportion="0.15517241">
+              <folding>
+                <element signature="e#76#345#0" expanded="false" />
+                <element signature="e#1878#2017#0" expanded="false" />
+                <element signature="e#2020#4561#0" expanded="false" />
+                <element signature="e#4564#5372#0" expanded="false" />
+                <element signature="e#5494#5796#0" expanded="false" />
+                <element signature="e#5798#6051#0" expanded="false" />
+                <element signature="e#6054#6439#0" expanded="false" />
+                <element signature="e#6442#6850#0" expanded="false" />
+                <element signature="e#6852#7140#0" expanded="false" />
+                <element signature="e#7143#7303#0" expanded="false" />
+                <element signature="e#7476#8120#0" expanded="false" />
+                <element signature="e#8122#8496#0" expanded="false" />
+                <element signature="e#8498#8699#0" expanded="false" />
+                <element signature="e#8701#8966#0" expanded="false" />
+                <element signature="e#8969#9326#0" expanded="false" />
+                <element signature="e#9328#9547#0" expanded="false" />
+                <element signature="e#9549#9716#0" expanded="false" />
+                <element signature="e#9718#9825#0" expanded="false" />
+                <element signature="e#9828#9938#0" expanded="false" />
+                <element signature="e#9941#10371#0" expanded="false" />
+                <element signature="e#10373#10608#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -142,22 +211,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_spartan_ops_history.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/_view_war_games.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/cover/_spartan_ops.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_spartan_ops.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_enemy_report.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/_view_spartan_ops.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_campaign_engine.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/halo4.css.scss" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/cover/_campaign.html.haml" />
-        <option value="$PROJECT_DIR$/app/helpers/halo4_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_skulls_report.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match/_view_campaign.html.haml" />
+        <option value="$PROJECT_DIR$/app/helpers/halo4_helper.rb" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_enemy_report.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_ffa.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_campaign_engine.html.haml" />
       </list>
     </option>
   </component>
@@ -384,7 +453,63 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="carnage_quick_view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="halo4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view_match" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="carnage_details" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Halo4StatViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="halo4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service_record" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -780,16 +905,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67353576" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18996799" sideWeight="0.6800434" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31995663" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18996799" sideWeight="0.6713666" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31995663" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.67353576" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275488" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -866,36 +991,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="39" selection-start="5787" selection-end="5787" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_carnage_report.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="50" selection-start="0" selection-end="1915" vertical-scroll-proportion="0.29294756">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/_view_war_games.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="111" selection-start="2665" selection-end="6745" vertical-scroll-proportion="1.1806674">
-          <folding>
-            <element signature="tag#div#2" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="58" selection-start="921" selection-end="921" vertical-scroll-proportion="0.533101">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/cover/_spartan_ops.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="358" selection-end="358" vertical-scroll-proportion="0.4076655">
@@ -906,13 +1001,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/_view_spartan_ops.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.31070197">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_campaign_engine.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="9" selection-start="456" selection-end="456" vertical-scroll-proportion="0.09625668">
           <folding />
         </state>
       </provider>
@@ -952,43 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_enemy_report.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="28" selection-start="0" selection-end="1478" vertical-scroll-proportion="0.22994652">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="5" selection-start="7474" selection-end="7474" vertical-scroll-proportion="0.80532444">
-          <folding>
-            <element signature="e#76#345#0" expanded="false" />
-            <element signature="e#348#1875#0" expanded="false" />
-            <element signature="e#1878#2017#0" expanded="false" />
-            <element signature="e#2020#4561#0" expanded="false" />
-            <element signature="e#4564#5372#0" expanded="false" />
-            <element signature="e#5494#5796#0" expanded="false" />
-            <element signature="e#5798#6051#0" expanded="false" />
-            <element signature="e#6054#6439#0" expanded="false" />
-            <element signature="e#6442#6850#0" expanded="false" />
-            <element signature="e#6852#7140#0" expanded="false" />
-            <element signature="e#7143#7304#0" expanded="false" />
-            <element signature="e#7477#8121#0" expanded="false" />
-            <element signature="e#8123#8497#0" expanded="false" />
-            <element signature="e#8499#8700#0" expanded="false" />
-            <element signature="e#8702#8967#0" expanded="false" />
-            <element signature="e#8970#9327#0" expanded="false" />
-            <element signature="e#9329#9548#0" expanded="false" />
-            <element signature="e#9550#9717#0" expanded="false" />
-            <element signature="e#9719#9826#0" expanded="false" />
-            <element signature="e#9829#9939#0" expanded="false" />
-            <element signature="e#9942#10372#0" expanded="false" />
-            <element signature="e#10374#10609#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_skulls_report.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="19" selection-start="221" selection-end="221" vertical-scroll-proportion="0.15679443">
@@ -1000,6 +1051,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="145" column="7" selection-start="4817" selection-end="5083" vertical-scroll-proportion="0.031358887">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_carnage_report.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="70" selection-start="1864" selection-end="1915" vertical-scroll-proportion="-16.481482">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_details/_enemy_report.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="66" selection-start="1394" selection-end="1394" vertical-scroll-proportion="0.73960215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_ffa.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="10" selection-start="2589" selection-end="2589" vertical-scroll-proportion="-16.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="58" selection-start="2882" selection-end="2882" vertical-scroll-proportion="-12.666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_campaign_engine.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="10" selection-start="2482" selection-end="2482" vertical-scroll-proportion="-9.814815">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/service_record/_overview.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="43" selection-start="469" selection-end="469" vertical-scroll-proportion="-5.3333335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="6" selection-start="352" selection-end="352" vertical-scroll-proportion="0.15517241">
+          <folding>
+            <element signature="e#76#345#0" expanded="false" />
+            <element signature="e#1878#2017#0" expanded="false" />
+            <element signature="e#2020#4561#0" expanded="false" />
+            <element signature="e#4564#5372#0" expanded="false" />
+            <element signature="e#5494#5796#0" expanded="false" />
+            <element signature="e#5798#6051#0" expanded="false" />
+            <element signature="e#6054#6439#0" expanded="false" />
+            <element signature="e#6442#6850#0" expanded="false" />
+            <element signature="e#6852#7140#0" expanded="false" />
+            <element signature="e#7143#7303#0" expanded="false" />
+            <element signature="e#7476#8120#0" expanded="false" />
+            <element signature="e#8122#8496#0" expanded="false" />
+            <element signature="e#8498#8699#0" expanded="false" />
+            <element signature="e#8701#8966#0" expanded="false" />
+            <element signature="e#8969#9326#0" expanded="false" />
+            <element signature="e#9328#9547#0" expanded="false" />
+            <element signature="e#9549#9716#0" expanded="false" />
+            <element signature="e#9718#9825#0" expanded="false" />
+            <element signature="e#9828#9938#0" expanded="false" />
+            <element signature="e#9941#10371#0" expanded="false" />
+            <element signature="e#10373#10608#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

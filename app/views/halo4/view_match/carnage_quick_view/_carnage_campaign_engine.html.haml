@@ -8,7 +8,7 @@
       %td{ :style => 'width: 80px;'}
         Assists
       %td{ :style => 'width: 80px;'}
-        Spread
+        K/D Ratio
       %td{ :style => 'width: 80px;'}
         Penalties
       %td{ :style => 'width: 100px;'}
@@ -62,7 +62,7 @@
           #{player['Assists']}
 
         %td
-          #{(player['Kills'].to_f / player['Deaths'].to_f).to_f.round(2)}
+          #{calculate_ratio(player['Kills'], player['Deaths'])}
 
         %td
           #{(player['Betrayals'] + player['Suicides'])}

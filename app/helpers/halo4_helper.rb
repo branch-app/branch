@@ -206,7 +206,7 @@ module Halo4Helper
 		end
 	end
 
-	def calculate_spread(kills, deaths, round_to = 2)
+	def calculate_ratio(kills, deaths, round_to = 2)
 		if kills <= 0 || deaths <= 0
 			return 1
 		else
