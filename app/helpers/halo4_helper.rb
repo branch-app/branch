@@ -194,6 +194,35 @@ module Halo4Helper
 		end
 		return nil
 	end
+	def get_spartan_ops_data_from_chapter_id(chapter_id)
+		@metadata['SpartanOpsMetadata']['Seasons'].each do |season|
+			season['Episodes'].each do |episode|
+				episode['Chapters'].each do |chapter|
+					if chapter['Id'] == chapter_id
+						return chapter
+					end
+				end
+			end
+		end
+	end
+
+	def calculate_spread(kills, deaths, round_to = 2)
+		if kills <= 0 || deaths <= 0
+			return 1
+		else
+			(kills.to_f / deaths.to_f).to_f.round(round_to)
+		end
+	end
+
+	def skull_meta_from_id(skull_id)
+		@metadata['SkullsMetadata']['Skulls'].each do |skull|
+			if skull['Id'] == skull_id
+				return skull
+			end
+		end
+
+		return nil
+	end
 
 	def draw_war_games_carnage_graph(type)
 		output = ''
@@ -255,6 +284,39 @@ module Halo4Helper
 			output += "'#{team['PrimaryRGB']}', "
 		end
 		return output[0...-2] += ' ]'
+	end
+
+	def draw_spartan_ops_carnage_graph(type)
+		output = ''
+		@sorted_players.each do |player|
+			tick_count = 0
+			player[type].sort_by { |thingy| thingy['Time'] }.each do |thingy|
+				tick_count += thingy['Ticks']
+				output += "{ t: #{thingy['Time']}, player#{player['Gamertag'].gsub(/[^0-9A-Za-z]/, '')}: #{tick_count} }, "
+			end
+		end
+
+		return output
+	end
+	def create_spartan_ops_carnage_graph_ykeys
+		ykeys = ''
+		@sorted_players.each do |player|
+			ykeys += '\'player' + player['Gamertag'].gsub(/[^0-9A-Za-z]/, '') + '\', '
+		end
+		ykeys = ykeys[0...-2]
+
+		return ykeys
+	end
+	def create_spartan_ops_carnage_graph_labels
+		labels = ''
+		@sorted_players.each do |player|
+			labels += '\'' + player['Gamertag'] + '\', '
+		end
+		return labels
+	end
+	def create_spartan_ops_carnage_graph_line_colours
+		# hahaha, english spelling, fuck you.
+			return ''
 	end
 
 	def place_from_standing(standing)

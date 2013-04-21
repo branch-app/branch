@@ -1,18 +1,14 @@
-- title " - #{@match['GameVariantName']} on #{@match['MapVariantName']} as #{@service_record['Gamertag']}"
+- title " - #{@match['MapName']} as #{@service_record['Gamertag']}"
 
 .well.span9
   %h3
-    = @match['GameVariantName']
-    on #{@match['MapVariantName']}
+    Campaign Mission:
 
   .row-fluid
     .cover{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large')}')" }
       .mask
         .game-victor-player-model{ :style => "background-image: url('#{X343ApiController.GetPlayerModel(@top_player['Gamertag'], 'medium')}')" }
-          - if @is_ffa
-            = render :partial => 'halo4/view_match/cover/war_games_ffa'
-          - else
-            = render :partial => 'halo4/view_match/cover/war_games_team'
+          = render :partial => 'halo4/view_match/cover/campaign'
 
     .game-stats
       %ul.game-stat-tabs.nav.nav-tabs
@@ -24,12 +20,14 @@
             Carnage
         %li
           %a.switch-content-tab{:href => '#C', "data-toggle" => 'tab'}
-            Medals
+            Enemies
+        %li
+          %a.switch-content-tab{:href => '#D', "data-toggle" => 'tab'}
+            Skulls
 
       .carnage-report-header-graph
         %div{ :id => 'graph-carnage-header-kills', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
         %div{ :id => 'graph-carnage-header-deaths', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
-        %div{ :id => 'graph-carnage-header-medals', :style => 'margin: 0 auto; width: 900px; height: 350px;' }
 
         %div{ :style => 'margin: 15px 0 25px 0; text-align: center;' }
           Carnage Timeline:
@@ -38,15 +36,9 @@
           |
           %a.global-carnage-stats-over-time{ :id => 'global-deaths-over-time', :href => '#global-deaths-over-time' }
             Deaths
-          |
-          %a.global-carnage-stats-over-time{ :id => 'global-medals-over-time', :href => '#global-medals-over-time' }
-            Medals
 
       .carnage-quick-view
-        - if @is_ffa
-          = render :partial => 'halo4/view_match/carnage_quick_view/carnage_war_games_quick_view_ffa', :object => @match
-        - else
-          = render :partial => 'halo4/view_match/carnage_quick_view/carnage_war_games_quick_view_team', :object => @match
+        = render :partial => 'halo4/view_match/carnage_quick_view/carnage_campaign_engine', :object => @match
 
       .tabbable
         .tab-content
@@ -55,10 +47,13 @@
           .tab-pane{ :id => 'B' }
             = render :partial => 'halo4/view_match/carnage_details/carnage_report', :object => @match
           .tab-pane{ :id => 'C' }
-            = render :partial => 'halo4/view_match/carnage_details/medal_report', :object => @match
+            = render :partial => 'halo4/view_match/carnage_details/enemy_report', :object => @match
+          .tab-pane{ :id => 'D' }
+            = render :partial => 'halo4/view_match/carnage_details/skulls_report', :object => @match
+
+
 
 :javascript
-
   // Player Linker, yolo
   $('.player-linker').click(function () {
     var player_id = $(this).attr('playerid');
@@ -66,19 +61,18 @@
 
     $('.game-stat-tabs li.active').each(function (index) {
       tab_id = $(this).find('a').text();
-    }
-                                       );
+    });
 
     if (tab_id.indexOf("Carnage") >= 0) {
       show_carnage_for_player(player_id);
       return false;
     }
-    else if (tab_id.indexOf("Medals") >= 0) {
-      show_medals_for_player(player_id);
-      return false;
-    }
     else if (tab_id.indexOf("Player Summar") >= 0) {
       show_personal_for_player(player_id);
+      return false;
+    }
+    else if (tab_id.indexOf("Enemies") >= 0) {
+      show_enemys_for_player(player_id);
       return false;
     }
 
@@ -89,46 +83,33 @@
   Morris.Line({
     element: 'graph-carnage-header-kills',
     data: [
-      #{draw_war_games_carnage_graph('KillsOverTime')}
+      #{draw_spartan_ops_carnage_graph('KillsOverTime')}
     ],
     xkey: 't',
-    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
-    labels: [ #{raw create_war_games_carnage_graph_labels} ],
+    ykeys: [ #{raw create_spartan_ops_carnage_graph_ykeys} ],
+    labels: [ #{raw create_spartan_ops_carnage_graph_labels} ],
     hideHover: 'always',
-    #{create_war_games_carnage_graph_line_colours}
+    #{create_spartan_ops_carnage_graph_line_colours}
   });
   Morris.Line({
     element: 'graph-carnage-header-deaths',
     data: [
-      #{draw_war_games_carnage_graph('DeathsOverTime')}
+      #{draw_spartan_ops_carnage_graph('DeathsOverTime')}
     ],
     xkey: 't',
-    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
-    labels: [ #{raw create_war_games_carnage_graph_labels} ],
+    ykeys: [ #{raw create_spartan_ops_carnage_graph_ykeys} ],
+    labels: [ #{raw create_spartan_ops_carnage_graph_labels} ],
     hideHover: 'always',
-    #{create_war_games_carnage_graph_line_colours}
-  });
-  Morris.Line({
-    element: 'graph-carnage-header-medals',
-    data: [
-      #{draw_war_games_carnage_graph('MedalsOverTime')}
-    ],
-    xkey: 't',
-    ykeys: [ #{raw create_war_games_carnage_graph_ykeys} ],
-    labels: [ #{raw create_war_games_carnage_graph_labels} ],
-    hideHover: 'always',
-    #{create_war_games_carnage_graph_line_colours}
+    #{create_spartan_ops_carnage_graph_line_colours}
   });
 
   $(document).ready(function () {
     $('#graph-carnage-header-kills').css('display', 'block');
     $('#graph-carnage-header-deaths').css('display', 'none');
-    $('#graph-carnage-header-medals').css('display', 'none');
   });
   function hide_graphs() {
     $('#graph-carnage-header-kills').css('display', 'none');
     $('#graph-carnage-header-deaths').css('display', 'none');
-    $('#graph-carnage-header-medals').css('display', 'none');
   }
   $('#global-kills-over-time').click(function () {
     hide_graphs();
@@ -138,11 +119,6 @@
   $('#global-deaths-over-time').click(function () {
     hide_graphs();
     $('#graph-carnage-header-deaths').css('display', 'block');
-    return false;
-  });
-  $('#global-medals-over-time').click(function () {
-    hide_graphs();
-    $('#graph-carnage-header-medals').css('display', 'block');
     return false;
   });
 
@@ -173,8 +149,7 @@
     // hide old shit
     $('.personal_stats').each(function (i, element) {
       $(element).css('display', 'none');
-    }
-                             );
+    });
 
     // show new shit
     $('#player_personal_' + player_id).css('display', 'inline');
@@ -183,19 +158,17 @@
     // hide old shit
     $('.carnage_damage_stats').each(function (i, element) {
       $(element).css('display', 'none');
-    }
-                                   );
+    });
 
     // show new shit
     $('#player_' + player_id).css('display', 'inline');
   }
-  function show_medals_for_player(player_id) {
+  function show_enemys_for_player(player_id) {
     // hide old shit
-    $('.medal_stats').each(function (i, element) {
+    $('.enemy_stats').each(function (i, element) {
       $(element).css('display', 'none');
-    }
-                          );
+    });
 
     // show new shit
-    $('#player_medals_' + player_id).css('display', 'inline');
+    $('#player_enemies_' + player_id).css('display', 'inline');
   }

@@ -26,6 +26,12 @@ class Halo4Controller < ApplicationController
 		@top_player = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse[0]
 		@sorted_players = @match['Players'].sort_by { |player| player['PersonalScore'] }.reverse
 
+		if @top_player['PersonalScore'] == 0
+			# sort by killz
+			@sorted_players = @match['Players'].sort_by { |player| player['Kills'] }.reverse
+			@top_player = @sorted_players[0]
+		end
+
 		# duration
 		parts = @match['Duration'].split(':')
 		@duration = Time.new(1994, 8, 18, parts[0].to_i, parts[1].to_i, parts[2].to_i, '+00:00')

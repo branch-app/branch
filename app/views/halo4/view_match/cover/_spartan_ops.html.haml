@@ -1,0 +1,21 @@
+.game-summary-title
+  %span.title
+    Spartan Ops - #{chapter['Title']}
+  %br/
+  %span.body
+    #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.min} Minutes and #{@duration.sec} Seconds
+
+.game-summary-gametype
+
+.game-summary-title
+  %span.body{:style => 'font-size: 16px;'}
+    on
+    #{@match['MapName']}
+
+.game-summary-seperator
+
+.game-summary-victor
+  %span
+    %a{ :href => "/halo4/servicerecord/#{@top_player['Gamertag']}/" }
+      #{@top_player['Gamertag']}
+    led the game with a k/d ratio of #{ (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) }
