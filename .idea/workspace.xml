@@ -45,7 +45,7 @@
     <file path="/application_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366342599449" ignored="false" />
     <file path="/service_record.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366340003612" ignored="false" />
     <file path="/error_notification.html.erb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365811679664" ignored="false" />
-    <file path="/halo4_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366517268338" ignored="false" />
+    <file path="/halo4_helper.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366519497760" ignored="false" />
     <file path="/moris.js" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365956271959" ignored="false" />
     <file path="/20130414163250_h4_part1.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365957216160" ignored="false" />
     <file path="$PROJECT_DIR$/test/unit/h4_player_servicerecords_test.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365957249690" ignored="false" />
@@ -85,7 +85,7 @@
     <file path="/_view_war_games.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366476975643" ignored="false" />
     <file path="/_war_games_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366426265867" ignored="false" />
     <file path="/_war_games_team.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366427254243" ignored="false" />
-    <file path="/_carnage_war_games_quick_view_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366434641713" ignored="false" />
+    <file path="/_carnage_war_games_quick_view_ffa.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366519538009" ignored="false" />
     <file path="/_carnage_war_games_quick_view_team.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366469030795" ignored="false" />
     <file path="/_h4_sidebar.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366468518477" ignored="false" />
     <file path="/_carnage_report.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366470754590" ignored="false" />
@@ -141,10 +141,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="match_history.html.haml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.haml">
+      <file leaf-file-name="_campaign_history.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_campaign_history.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="59" selection-start="1466" selection-end="1466" vertical-scroll-proportion="1.2676057">
+            <state line="25" column="99" selection-start="691" selection-end="691" vertical-scroll-proportion="-15.703704">
               <folding />
             </state>
           </provider>
@@ -153,90 +153,26 @@
       <file leaf-file-name="_spartan_ops_history.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_spartan_ops_history.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="34" selection-start="1094" selection-end="1094" vertical-scroll-proportion="-9.333333">
+            <state line="29" column="99" selection-start="758" selection-end="758" vertical-scroll-proportion="-17.333334">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_war_games_ffa.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/cover/_war_games_ffa.html.haml">
+      <file leaf-file-name="_war_game_history.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="148" selection-start="183" selection-end="236" vertical-scroll-proportion="-3.3333333">
+            <state line="29" column="99" selection-start="751" selection-end="751" vertical-scroll-proportion="-15.333333">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="halo4_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
+      <file leaf-file-name="_war_games_customs_history.html.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="24" selection-start="5379" selection-end="5397" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#76#345#0" expanded="false" />
-                <element signature="e#348#1875#0" expanded="false" />
-                <element signature="e#1878#2017#0" expanded="false" />
-                <element signature="e#2020#4561#0" expanded="false" />
-                <element signature="e#4564#5372#0" expanded="false" />
-                <element signature="e#5494#5796#0" expanded="false" />
-                <element signature="e#5799#6184#0" expanded="false" />
-                <element signature="e#6187#6595#0" expanded="false" />
-                <element signature="e#6598#7242#0" expanded="false" />
-                <element signature="e#7244#7618#0" expanded="false" />
-                <element signature="e#7620#7821#0" expanded="false" />
-                <element signature="e#7823#8088#0" expanded="false" />
-                <element signature="e#8091#8201#0" expanded="false" />
-                <element signature="e#8204#8634#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="halo4_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="103" selection-start="1178" selection-end="1306" vertical-scroll-proportion="0.0">
+            <state line="29" column="99" selection-start="751" selection-end="751" vertical-scroll-proportion="0.2552817">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="x343_api_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="223" column="51" selection-start="6122" selection-end="6122" vertical-scroll-proportion="-7.92">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="59" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rails" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script/rails">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="14" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1366507368278" expanded="true" signature="54:140" placeholder="#..." />
-                <marker date="1366507368278" expanded="true" signature="157:242" placeholder="#..." />
-                <marker date="1366507368278" expanded="true" signature="507:764" placeholder="#..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -255,8 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/application/_notification_header.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/application/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/search/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/view_match.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/playlists.html.haml" />
@@ -265,12 +199,14 @@
         <option value="$PROJECT_DIR$/app/controllers/x343_api_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/match_history.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_ffa.html.haml" />
         <option value="$PROJECT_DIR$/app/helpers/halo4_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/match_history/_campaign_history.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/match_history/_spartan_ops_history.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/halo4/match_history.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml" />
       </list>
     </option>
   </component>
@@ -372,128 +308,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="halo4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="halo4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view_match" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="halo4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view_match" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cover" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Halo4StatViewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="halo4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="match_history" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -871,7 +685,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -879,7 +693,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67353576" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18836713" sideWeight="0.67353576" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18836713" sideWeight="0.67353576" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3264642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.67353576" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -957,43 +771,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="80" selection-start="108" selection-end="166" vertical-scroll-proportion="0.06486487">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/_view_war_games.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.58450705">
-          <folding>
-            <element signature="tag#div#2" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="58" selection-start="335" selection-end="335" vertical-scroll-proportion="0.2535211">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="14" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1366507368278" expanded="true" signature="54:140" placeholder="#..." />
-            <marker date="1366507368278" expanded="true" signature="157:242" placeholder="#..." />
-            <marker date="1366507368278" expanded="true" signature="507:764" placeholder="#..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/rails">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1005,63 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="59" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="223" column="51" selection-start="6122" selection-end="6122" vertical-scroll-proportion="-7.92">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="27" selection-start="0" selection-end="1779" vertical-scroll-proportion="0.31690142">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="30" selection-start="1448" selection-end="1448" vertical-scroll-proportion="1.6478873">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="24" selection-start="5379" selection-end="5397" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#76#345#0" expanded="false" />
-            <element signature="e#348#1875#0" expanded="false" />
-            <element signature="e#1878#2017#0" expanded="false" />
-            <element signature="e#2020#4561#0" expanded="false" />
-            <element signature="e#4564#5372#0" expanded="false" />
-            <element signature="e#5494#5796#0" expanded="false" />
-            <element signature="e#5799#6184#0" expanded="false" />
-            <element signature="e#6187#6595#0" expanded="false" />
-            <element signature="e#6598#7242#0" expanded="false" />
-            <element signature="e#7244#7618#0" expanded="false" />
-            <element signature="e#7620#7821#0" expanded="false" />
-            <element signature="e#7823#8088#0" expanded="false" />
-            <element signature="e#8091#8201#0" expanded="false" />
-            <element signature="e#8204#8634#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="103" selection-start="1178" selection-end="1306" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/cover/_war_games_ffa.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="148" selection-start="183" selection-end="236" vertical-scroll-proportion="-3.3333333">
@@ -1069,23 +792,107 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="24" selection-start="83" selection-end="83" vertical-scroll-proportion="-0.6666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/rails">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_team.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="110" selection-start="2515" selection-end="2515" vertical-scroll-proportion="-11.222222">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/view_match/carnage_quick_view/_carnage_war_games_quick_view_ffa.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="84" selection-start="2262" selection-end="2262" vertical-scroll-proportion="0.45405406">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/halo4_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="158" column="94" selection-start="6032" selection-end="6032" vertical-scroll-proportion="0.36302522">
+          <folding>
+            <element signature="e#76#345#0" expanded="false" />
+            <element signature="e#348#1875#0" expanded="false" />
+            <element signature="e#1878#2017#0" expanded="false" />
+            <element signature="e#2020#4561#0" expanded="false" />
+            <element signature="e#4564#5372#0" expanded="false" />
+            <element signature="e#5375#5491#0" expanded="false" />
+            <element signature="e#5494#5796#0" expanded="false" />
+            <element signature="e#7499#7873#0" expanded="false" />
+            <element signature="e#7875#8076#0" expanded="false" />
+            <element signature="e#8078#8343#0" expanded="false" />
+            <element signature="e#8346#8456#0" expanded="false" />
+            <element signature="e#8459#8889#0" expanded="false" />
+            <element signature="e#8891#9126#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/halo4_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="103" selection-start="1178" selection-end="1306" vertical-scroll-proportion="0.33277312">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/x343_api_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="223" column="51" selection-start="6122" selection-end="6122" vertical-scroll-proportion="0.7266055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="59" selection-start="339" selection-end="339" vertical-scroll-proportion="-0.0302521">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="14" selection-start="819" selection-end="819" vertical-scroll-proportion="0.8487395">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_campaign_history.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="53" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.5880282">
+        <state line="25" column="99" selection-start="691" selection-end="691" vertical-scroll-proportion="-15.703704">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_spartan_ops_history.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="34" selection-start="1094" selection-end="1094" vertical-scroll-proportion="-9.333333">
+        <state line="29" column="99" selection-start="758" selection-end="758" vertical-scroll-proportion="-17.333334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_game_history.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="59" selection-start="1466" selection-end="1466" vertical-scroll-proportion="1.2676057">
+        <state line="29" column="99" selection-start="751" selection-end="751" vertical-scroll-proportion="-15.333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/halo4/match_history/_war_games_customs_history.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="99" selection-start="751" selection-end="751" vertical-scroll-proportion="0.2552817">
           <folding />
         </state>
       </provider>

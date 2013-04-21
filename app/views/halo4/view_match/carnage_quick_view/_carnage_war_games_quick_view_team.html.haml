@@ -54,7 +54,7 @@
                   #{player['ServiceTag']}
 
             - unless player['IsGuest']
-              .team-player-csr{ :style => "background-image: url('https://assets.halowaypoint.com/games/h4/csr/v1/small/#{player['SkillRank']['GameSkillRank']}.png');"}
+              .team-player-csr{ :style => "background-image: url('#{csr_image_from_raw_csr(player['SkillRank'], 'small')}');"}
             - else
               .team-player-csr{ :style => "background-image: url('https://assets.halowaypoint.com/games/h4/csr/v1/small/0.png');"}
 

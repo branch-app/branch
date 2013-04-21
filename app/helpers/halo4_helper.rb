@@ -152,6 +152,13 @@ module Halo4Helper
 
 		return highest_skill
 	end
+	def csr_image_from_raw_csr(raw_csr, size)
+		if raw_csr == nil
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/0.png"
+		else
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/#{raw_csr['GameSkillRank']}.png"
+		end
+	end
 
 	def recent_game_style_from_result(entry)
 		if entry['ModeName'] == 'Spartan Ops' || entry['ModeName'] == 'Campaign'
