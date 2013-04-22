@@ -61,7 +61,7 @@ module ApplicationHelper
 	end
 
 
-	def self.SetupErrorNotification(type, message)
+	def setup_error_notification(type, message)
 		flash[:type] = type
 		flash[:notice] = message
 	end

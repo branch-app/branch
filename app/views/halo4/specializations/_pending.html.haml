@@ -1,0 +1,24 @@
+- pending_specializations = get_pending_specializations()
+
+- if pending_specializations.any?
+  - # yea nigga
+  %h3
+    Pending Specializations:
+
+  - pending_specializations.each do |specialization|
+    %div{ :style => "background-position: top right; background-repeat: no-repeat; background-image: url('#{X343ApiController.asset_url_generator_basic(specialization['ImageUrl']['BaseUrl'], specialization['ImageUrl']['AssetUrl'], 'medium')}')" }
+      %hr/
+      %h4
+        #{specialization['Name']}
+      %br/
+      %p
+        #{specialization['Description']}
+
+- else
+  - # nooooo
+  %h3
+    You don't have any more pending specializations...
+
+  %p
+    You must of enrolled in them all already
+  %hr/

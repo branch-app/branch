@@ -71,38 +71,39 @@
     %hr/
     %footer
       %p 343 stats, bunge styl
-  :javascript
-    $('#search-navbar').keyup(function(e){
-    	if(e.keyCode == 13)
-    	{
-    		$(this).trigger("enterKey");
-    	}
-    });
-    $('#search-navbar').bind("enterKey",function(e){
-    	search()
-    });
-    function search()
-    {
-    	var gamertag = $('#search-navbar').val();
-    	window.location.href = "/search/" + gamertag + "/";
-    }
 
-    $(function () {
-    	$("[rel='tooltip']").tooltip();
-    });
+:javascript
+  $('#search-navbar').keyup(function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
+  });
+  $('#search-navbar').bind("enterKey",function(e){
+      search()
+  });
+  function search()
+  {
+      var gamertag = $('#search-navbar').val();
+      window.location.href = "/search/" + gamertag + "/";
+  }
 
-    var GoSquared = {};
-    GoSquared.acct = "GSN-152925-H";
-    (function(w){
-    	function gs(){
-    		w._gstc_lt = +new Date;
-    		var d = document, g = d.createElement("script");
-    		g.type = "text/javascript";
-    		g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-    		var s = d.getElementsByTagName("script")[0];
-    		s.parentNode.insertBefore(g, s);
-    	}
-    	w.addEventListener ?
-    			w.addEventListener("load", gs, false) :
-    			w.attachEvent("onload", gs);
-    })(window);
+  $(function () {
+      $("[rel='tooltip']").tooltip();
+  });
+
+  var GoSquared = {};
+  GoSquared.acct = "GSN-152925-H";
+  (function(w){
+      function gs(){
+          w._gstc_lt = +new Date;
+          var d = document, g = d.createElement("script");
+          g.type = "text/javascript";
+          g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+          var s = d.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(g, s);
+      }
+      w.addEventListener ?
+              w.addEventListener("load", gs, false) :
+              w.attachEvent("onload", gs);
+  })(window);

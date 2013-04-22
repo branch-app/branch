@@ -35,9 +35,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: branch_prod
+  database: branchapp_prod
   pool: 5
-  username: branch_admin
+  username: branchapp_admin
   password: 6BvX8bsD2YM8ZVM
   host: 127.0.0.1
 

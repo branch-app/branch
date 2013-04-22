@@ -342,4 +342,45 @@ module Halo4Helper
 			return "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/#{mode_id}/#{@start_page - 1}/"
 		end
 	end
+
+	# specializations
+	def get_in_progress_specialization
+		@service_record['Specializations'].each do |specialization|
+			if specialization['IsCurrent']
+				if specialization['PercentComplete'] == 1.0
+					return nil
+				else
+					return specialization
+				end
+			end
+		end
+		return nil
+	end
+	def get_pending_specializations
+		pending_specializations = [ ]
+		@service_record['Specializations'].each do |specialization|
+			if !specialization['IsCurrent'] && !specialization['Completed']
+				pending_specializations << specialization
+			end
+		end
+		return pending_specializations
+	end
+	def get_completed_specializations
+		completed_specializations = [ ]
+		@service_record['Specializations'].each do |specialization|
+			if !specialization['IsCurrent'] && specialization['Completed']
+				completed_specializations << specialization
+			end
+		end
+		return completed_specializations
+	end
+
+	def specialization_data_from_id(specialization_id)
+		@metadata['SpecializationsMetadata']['Specializations'].each do |specialization|
+			if specialization['Id'] == specialization_id
+				return specialization
+			end
+		end
+		return nil
+	end
 end

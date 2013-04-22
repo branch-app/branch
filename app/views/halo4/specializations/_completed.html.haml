@@ -1,0 +1,24 @@
+- completed_specializations = get_completed_specializations()
+
+- if completed_specializations.any?
+  - # yea nigga
+  %h3
+    Pending Specializations:
+
+  - completed_specializations.each do |specialization|
+    %div{ :style => "background-position: top right; background-repeat: no-repeat; background-image: url('#{X343ApiController.asset_url_generator_basic(specialization['ImageUrl']['BaseUrl'], specialization['ImageUrl']['AssetUrl'], 'medium')}')" }
+      %hr/
+      %h4
+        #{specialization['Name']}
+      %br/
+      %p
+        #{specialization['Description']}
+
+- else
+  - # nooooo
+  %h3
+    You don't have any completed specializations...
+
+  %p
+    You gotta play some more halo man, alot more
+  %hr/

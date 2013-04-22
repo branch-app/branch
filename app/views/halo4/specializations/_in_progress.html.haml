@@ -1,0 +1,36 @@
+- in_progress = get_in_progress_specialization()
+
+- if in_progress == nil
+  - # no specializations are in progress
+  %h3
+    You currently don't have any specializations in progress
+
+  %p
+    You probally finished them all :o
+  %hr/
+
+- else
+  %div{ :style => "background-position: top right; background-repeat: no-repeat; background-image: url('#{X343ApiController.asset_url_generator_basic(in_progress['ImageUrl']['BaseUrl'], in_progress['ImageUrl']['AssetUrl'], 'large')}')" }
+    - # swag nigaa, we got dis
+    - specialization_data = specialization_data_from_id(in_progress['Id'])
+    %h3
+      Specialization In Progress:
+
+    %hr{ :style => 'margin-right: 150px;' }
+
+    %p{ :style => 'font-size: 20px;' }
+      %strong
+        #{specialization_data['Name']}
+    %p{ :style => 'font-size: 16px;' }
+      #{specialization_data['Description']}
+
+    %br/
+
+    %p
+      Level: #{in_progress['Level']}
+
+    .progress.progress-striped.active{ :style => 'margin: 0px;' }
+      .bar{:style => "text-align: right; padding-right: 5px; width: #{in_progress['PercentComplete'] * 100}%;"}
+        #{in_progress['PercentComplete'] * 100}% Complete
+
+

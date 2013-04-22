@@ -1,4 +1,5 @@
 class Halo4Controller < ApplicationController
+	include ApplicationHelper
 	require 'digest/md5'
 	require 'active_support/core_ext/integer/inflections'
 
@@ -7,14 +8,14 @@ class Halo4Controller < ApplicationController
 		@match = X343ApiController.GetMatchDetails(params[:gamertag], params[:matchid])
 		if @service_record['continue'] == 'no'
 			# error, handle it
-			SetupErrorNotification('error', X343ApiController.error_message_from_status_code(@service_record['StatusCode'], params[:gamertag]))
+			setup_error_notification('error', X343ApiController.error_message_from_status_code(@service_record['StatusCode'], params[:gamertag]))
 			redirect_to_url :application
 			return
 		end
 		if @match['continue'] == 'no'
 			# error, handle it
-			SetupErrorNotification('error', "The match `#{params[:matchid]}` does not exist, or HaloWaypoint is down.")
-			redirect_to_url :application
+			setup_error_notification('error', "The match `#{params[:matchid]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
 			return
 		end
 
@@ -36,13 +37,12 @@ class Halo4Controller < ApplicationController
 		parts = @match['Duration'].split(':')
 		@duration = Time.new(1994, 8, 18, parts[0].to_i, parts[1].to_i, parts[2].to_i, '+00:00')
 	end
-
 	def match_history
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record['continue'] == 'no'
 			# error, handle it
-			SetupErrorNotification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
-			redirect_to_url :application
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
 			return
 		end
 
@@ -65,12 +65,24 @@ class Halo4Controller < ApplicationController
 		@game_modes = @metadata['GameModesMetadata']['GameModes']
 	end
 
+	def specializations
+		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		if @service_record[:continue] == "no"
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+
+		@metadata = X343ApiController.GetMetaData()
+	end
+
 	def service_record
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record['continue'] == 'no'
 			# error, handle it
-			SetupErrorNotification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
-			redirect_to_url :application
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
 			return
 		end
 
@@ -145,6 +157,9 @@ class Halo4Controller < ApplicationController
 			@friendly_playlist_data[mode['Id']] = relevant_playlists
 		end
 	end
+
+
+
 
 
 	# helpers

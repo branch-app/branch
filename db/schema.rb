@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415113100) do
+ActiveRecord::Schema.define(:version => 20130421171843) do
 
   create_table "h4_api_authentication_vaults", :force => true do |t|
     t.text     "wlid_access_token"
