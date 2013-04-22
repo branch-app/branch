@@ -16,8 +16,8 @@
     </data-source>
     <data-source source="LOCAL" name="Rails Halo4StatViewer: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="75906a63-b1f7-4143-a8c9-26496fbed510">
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/branch_prod</jdbc-url>
-      <user-name>branch_admin</user-name>
+      <jdbc-url>jdbc:mysql://127.0.0.1/branchapp_prod</jdbc-url>
+      <user-name>branchapp_admin</user-name>
       <user-password>df9cdfe8dfdcdff2df92dfc8dfd9dfeedf98dff3dfe7df92dff0dffcdfe7</user-password>
       <libraries>
         <library>
