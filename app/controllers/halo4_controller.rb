@@ -77,6 +77,20 @@ class Halo4Controller < ApplicationController
 		@metadata = X343ApiController.GetMetaData()
 	end
 
+	def commendations
+		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		if @service_record[:continue] == "no"
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+
+		@commendations = X343ApiController.GetPlayerCommendations(params[:gamertag])['Commendations'].sort_by { |commendation| commendation['NextLevel']['ProgressToNextLevel'] }.reverse
+		@metadata = X343ApiController.GetMetaData()
+		@commendation_categories = @metadata['CommendationsMetadata']['CommendationCategories']
+	end
+
 	def service_record
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record['continue'] == 'no'
@@ -88,8 +102,6 @@ class Halo4Controller < ApplicationController
 
 		@metadata = X343ApiController.GetMetaData()
 		@recent_matches = X343ApiController.GetPlayerMatches(params[:gamertag], 0, 20)['Games']
-		@commendations = X343ApiController.GetPlayerCommendations(params[:gamertag])['Commendations']
-		@commendations = @commendations.sort { |a, b| [a['LevelId'], a['Ticks']] <=> [b['LevelId'], b['Ticks']] }.reverse
 	end
 
 	def challenges

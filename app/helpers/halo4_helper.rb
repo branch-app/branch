@@ -374,7 +374,6 @@ module Halo4Helper
 		end
 		return completed_specializations
 	end
-
 	def specialization_data_from_id(specialization_id)
 		@metadata['SpecializationsMetadata']['Specializations'].each do |specialization|
 			if specialization['Id'] == specialization_id
@@ -382,5 +381,41 @@ module Halo4Helper
 			end
 		end
 		return nil
+	end
+
+	def plural_commendation_category_name_to_single(name)
+		case name
+			when 'Weapons'
+				return 'Weapon'
+			when 'Enemies'
+				return 'Enemy'
+			when 'Vehicles'
+				return 'Vehicle'
+			when 'Player'
+				return 'Player'
+			when 'Game Types'
+				return 'Game Type'
+			else
+				return ''
+		end
+	end
+	def commendations_by_category(category_id)
+		commendations = [ ]
+		@commendations.each do |commendation|
+			if commendation['CategoryId'].to_i == category_id.to_i
+				commendations << commendation
+			end
+		end
+		return commendations
+	end
+	def commendation_max_level(commendation_id)
+		current_search_commendation_level = -69
+		commendation_final = nil
+		@metadata['CommendationsMetadata']['CommendationLevels'].each do |commendation|
+			if commendation['CommendationId'] == commendation_id && current_search_commendation_level < commendation['Level']
+				commendation_final = commendation
+			end
+		end
+		return commendation_final
 	end
 end

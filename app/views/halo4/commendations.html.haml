@@ -1,0 +1,28 @@
+- title " - #{@service_record['Gamertag']}'s Specializations"
+- active_halo4 'active'
+- search_query @service_record['Gamertag']
+
+.container{:style => "margin-top: 80px; min-width: 1300px; max-width: 1300px;"}
+  .row-fluid
+
+    = h4_sidebar_commendations 'active'
+    = render :partial => 'halo4/global/sidebar', :object => @service_record
+
+    = render :partial => 'application/notification_header'
+
+    = render :partial => 'halo4/global/service_record_header', :object => @service_record
+
+    .span9
+      - @commendation_categories.each do |category|
+        - commendations = commendations_by_category(category['Id'])
+        - if category['Name'] == '--'
+          - next
+        .well
+          %h3
+            #{@service_record['Gamertag']}'s #{plural_commendation_category_name_to_single(category['Name'])} Commendations:
+
+          .commendations-stuff{  }
+            - commendations.each do |commendation|
+              = render :partial => 'halo4/commendations/commendation', :locals => { :category => category, :commendation => commendation }
+
+          .cleaner

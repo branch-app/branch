@@ -1506,19 +1506,6 @@
     </table>
     <procedure name="test_multi_sets" schema="" catalog="test" type="0"/>
   </data-source>
-  <data-source source="LOCAL" name="Rails Halo4StatViewer: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="9ffe5368-d1f9-462b-900e-9ff5f187ca02">
-    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-    <jdbc-url>jdbc:mysql://127.0.0.1/Halo4StatViewer_production</jdbc-url>
-    <user-name>root</user-name>
-    <libraries>
-      <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
-      </library>
-      <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
-      </library>
-    </libraries>
-  </data-source>
   <data-source source="LOCAL" name="Rails Halo4StatViewer: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="392a757d-906a-4107-a116-ac4528786699">
     <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
     <jdbc-url>jdbc:mysql://127.0.0.1/Halo4StatViewer_test</jdbc-url>

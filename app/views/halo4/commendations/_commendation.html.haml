@@ -1,0 +1,29 @@
+.commendation-entry{ :style => 'float: left; width: 410px; height: 150px; margin: 10px 10px;' }
+  %h4
+    - if commendation['LevelName'] == nil
+      #{commendation['Name']} - Starter
+    - else
+      #{commendation['LevelName']}
+
+  .commendation-rank-position{ :style => 'float: right; margin-top: -35px; font-size: 60px; opacity: 0.1; font-weight: 400;' }
+    #{commendation['LevelId']} / #{commendation_max_level(commendation['Id'])['Level'] + 1}
+  .cleaner
+
+  %p{ :style => 'height: 35px;' }
+    #{commendation['Description']}
+
+  %br/
+
+  .commendation-rank-up-ticks{ :style => '' }
+    .lower-bound{ :style => 'float: left;' }
+      #{commendation['LevelStartTicks']}
+    .upper-bound{ :style => 'float: right;' }
+      #{commendation['NextLevel']['NextLevelStartTicks']}
+    .cleaner
+
+  .progress.progress-striped.active{ :style => 'margin: 0px;' }
+    .bar{:style => "text-align: right; padding-right: 5px; width: #{(commendation['NextLevel']['ProgressToNextLevel'] * 100).round(2)}%;"}
+      - if commendation['NextLevel']['NextLevelName'] == nil
+        100% Complete
+      - else
+        #{(commendation['NextLevel']['ProgressToNextLevel'] * 100).round(2)}% Complete (#{commendation['NextLevel']['NextLevelName']})
