@@ -13,20 +13,6 @@
       </library>
     </libraries>
   </data-source>
-  <data-source source="LOCAL" name="Rails Halo4StatViewer: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="75906a63-b1f7-4143-a8c9-26496fbed510">
-    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-    <jdbc-url>jdbc:mysql://127.0.0.1/branch_prod</jdbc-url>
-    <user-name>branch_admin</user-name>
-    <user-password>df9cdfe8dfdcdff2df92dfc8dfd9dfeedf98dff3dfe7df92dff0dffcdfe7</user-password>
-    <libraries>
-      <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
-      </library>
-      <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
-      </library>
-    </libraries>
-  </data-source>
   <data-source source="LOCAL" name="Rails Halo4StatViewer: development" product="MySQL" version="5.5.27" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="2c4a20c3-ff7a-4f38-9157-7c69a220ce02">
     <extra-name-characters>#@</extra-name-characters>
     <identifier-quote-string>`</identifier-quote-string>

@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2354732060">
+  <component name="DataSourceManagerImpl" format="xml" hash="712318818">
     <data-source source="LOCAL" name="Rails Halo4StatViewer: test" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="b3060503-3847-4d3f-af7c-23e6e695f53f">
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1/Halo4StatViewer_test</jdbc-url>
       <user-name>root</user-name>
-      <libraries>
-        <library>
-          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
-        </library>
-        <library>
-          <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.18-bin.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Rails Halo4StatViewer: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="75906a63-b1f7-4143-a8c9-26496fbed510">
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/branchapp_prod</jdbc-url>
-      <user-name>branchapp_admin</user-name>
-      <user-password>df9cdfe8dfdcdff2df92dfc8dfd9dfeedf98dff3dfe7df92dff0dffcdfe7</user-password>
       <libraries>
         <library>
           <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>

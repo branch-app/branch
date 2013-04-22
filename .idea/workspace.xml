@@ -4,7 +4,7 @@
     <list default="true" id="e76342ce-cf34-484b-8e3e-7acb82ee0b78" name="Default" comment="" />
     <ignored path="Halo4StatViewer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/database.yml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366588373831" ignored="false" />
+    <file path="/database.yml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366611264231" ignored="false" />
     <file path="/Gemfile" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366392417591" ignored="false" />
     <file path="/task_scheduler.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1365723160174" ignored="false" />
     <file path="/routes.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366514486359" ignored="false" />
@@ -146,10 +146,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="45" selection-start="187" selection-end="187" vertical-scroll-proportion="0.14668219">
+            <state line="7" column="45" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="database.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/database.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="71" selection-start="443" selection-end="443" vertical-scroll-proportion="0.35040745">
               <folding />
             </state>
           </provider>
@@ -232,13 +241,13 @@
         <option value="$PROJECT_DIR$/db/schema.rb" />
         <option value="$PROJECT_DIR$/app/controllers/halo4_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-        <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/app/views/halo4/specializations/_in_progress.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/specializations.html.haml" />
         <option value="$PROJECT_DIR$/app/helpers/halo4_helper.rb" />
         <option value="$PROJECT_DIR$/app/views/halo4/specializations/_pending.html.haml" />
         <option value="$PROJECT_DIR$/app/views/halo4/specializations/_completed.html.haml" />
         <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/config/database.yml" />
       </list>
     </option>
   </component>
@@ -893,11 +902,6 @@
         <state line="75" column="2" selection-start="3143" selection-end="3143" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="36" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/global/_service_record_header.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="94" selection-start="1029" selection-end="1226" vertical-scroll-proportion="0.3418124" />
@@ -974,7 +978,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="45" selection-start="187" selection-end="187" vertical-scroll-proportion="0.14668219">
+        <state line="7" column="45" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="71" selection-start="443" selection-end="443" vertical-scroll-proportion="0.35040745">
           <folding />
         </state>
       </provider>
