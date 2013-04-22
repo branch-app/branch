@@ -116,7 +116,7 @@
     <file path="$PROJECT_DIR$/test/unit/h4_player_specializations_test.rb" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366564958701" ignored="false" />
     <file path="/specializations.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366602694002" ignored="false" />
     <file path="/_in_progress.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366593006528" ignored="false" />
-    <file path="/_completed.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366604293243" ignored="false" />
+    <file path="/_completed.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366607517907" ignored="false" />
     <file path="/_pending.html.haml" changelist="e76342ce-cf34-484b-8e3e-7acb82ee0b78" time="1366604989097" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +140,7 @@
       <file leaf-file-name="_completed.html.haml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/halo4/specializations/_completed.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="29" selection-start="180" selection-end="180" vertical-scroll-proportion="0.27391306">
+            <state line="0" column="26" selection-start="12" selection-end="26" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -1148,7 +1148,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/halo4/specializations/_completed.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="29" selection-start="180" selection-end="180" vertical-scroll-proportion="0.27391306">
+        <state line="0" column="26" selection-start="12" selection-end="26" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
