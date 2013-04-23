@@ -3,6 +3,10 @@ module ApplicationHelper
 		content_for :title, 'Branch' + page_title.to_s
 	end
 
+	def container_type(container_type)
+		content_for :container_type, container_type.to_s
+	end
+
 	def head_style(header_style)
 		content_for :head_style, header_style.to_s
 	end

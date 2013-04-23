@@ -1,5 +1,6 @@
 class Halo4Controller < ApplicationController
 	include ApplicationHelper
+	include Halo4Helper
 	require 'digest/md5'
 	require 'active_support/core_ext/integer/inflections'
 
@@ -75,6 +76,25 @@ class Halo4Controller < ApplicationController
 		end
 
 		@metadata = X343ApiController.GetMetaData()
+	end
+	def unique_playlist_csr
+		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		if @service_record[:continue] == "no"
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+
+		@metadata = X343ApiController.GetMetaData()
+		@playlist_data = playlist_data_from_id(params[:playlist_id])
+
+		if @playlist_data == nil
+			# error, handle it
+			setup_error_notification('error', "The specified playlist `#{params[:playlist_id]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
 	end
 
 	def specializations

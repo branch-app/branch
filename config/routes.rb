@@ -19,6 +19,7 @@ BranchApp::Application.routes.draw do
 	match '/halo4/servicerecord/:gamertag/match-history/:game_mode/:page/' => 'halo4#match_history'
 	match '/halo4/servicerecord/:gamertag/match/:matchid/' => 'halo4#view_match'
 	match '/halo4/servicerecord/:gamertag/competitive-skill-rank/' => 'halo4#competitive_skill_rank'
+	match '/halo4/servicerecord/:gamertag/competitive-skill-rank/:playlist_id/' => 'halo4#unique_playlist_csr'
 	match '/halo4/servicerecord/:gamertag/commendations/' => 'halo4#commendations'
 	match '/halo4/servicerecord/:gamertag/specializations/' => 'halo4#specializations'
 

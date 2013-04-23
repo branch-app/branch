@@ -4,12 +4,12 @@ module Halo4Helper
 	# playlist
 	def playlist_data_from_id(playlist_id)
 		@metadata['PlaylistsMetadata']['Playlists'].each do |playlist|
-			if playlist['Id'] == playlist_id
+			if playlist['Id'] == playlist_id.to_i
 				return playlist
 			end
 		end
 
-		return nil
+		return
 	end
 
 	def draw_game_count_chart(service_record)
@@ -493,5 +493,14 @@ module Halo4Helper
 		else
 			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/#{raw_csr}.png"
 		end
+	end
+	def skill_rank_from_playlist_id(playlist_id)
+		@service_record['SkillRanks'].each do |skill_rank|
+			if skill_rank['PlaylistId'] == playlist_id.to_i
+				return skill_rank
+			end
+		end
+
+		return nil
 	end
 end
