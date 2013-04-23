@@ -65,6 +65,18 @@ class Halo4Controller < ApplicationController
 		@game_modes = @metadata['GameModesMetadata']['GameModes']
 	end
 
+	def competitive_skill_rank
+		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		if @service_record[:continue] == "no"
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+
+		@metadata = X343ApiController.GetMetaData()
+	end
+
 	def specializations
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record[:continue] == "no"

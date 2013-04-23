@@ -1,0 +1,36 @@
+- title " - #{@service_record['Gamertag']}'s Competitive Skill Ranks"
+- active_halo4 'active'
+- search_query @service_record['Gamertag']
+
+
+.row-fluid
+
+  = h4_sidebar_csr 'active'
+  = render :partial => 'halo4/global/sidebar', :object => @service_record
+
+  = render :partial => 'application/notification_header'
+
+  = render :partial => 'halo4/global/service_record_header', :object => @service_record
+
+  .span9
+    .row-fluid
+      .span6.well{ :style => 'padding: 0;' }
+        = render :partial => 'halo4/competitive_skill_rank/overview', :locals => { :type => 'team', :type_friendly => 'Team', :size => '400' }
+      .span6.well{ :style => 'padding: 0;' }
+        = render :partial => 'halo4/competitive_skill_rank/overview', :locals => { :type => 'individual', :type_friendly => 'Individual', :size => '400' }
+
+    .well
+      %h3#tabs
+        Detailed CSR
+        %sub (kinda)
+      %ul.nav.nav-tabs
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#A"} Team Based
+        %li
+          %a{"data-toggle" => "tab", :href => "#B"} Individual Based
+      .tabbable
+        .tab-content
+          #A.tab-pane.active
+            = render :partial => 'halo4/competitive_skill_rank/detailed_csr', :locals => { :type => 'team', :type_friendly => 'Team' }
+          #B.tab-pane
+            = render :partial => 'halo4/competitive_skill_rank/detailed_csr', :locals => { :type => 'individual', :type_friendly => 'Individual' }

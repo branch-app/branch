@@ -1,14 +1,13 @@
 - title ' - Halo 4 Playlists'
 - active_halo4 'active'
 
-.container{:style => 'margin-top: 80px; min-width: 1300px; max-width: 1300px;'}
-  .row-fluid
-    %span{ :style => 'font-size: 45px' }
-      Halo 4 - Playlists
+.row-fluid
+  %span{ :style => 'font-size: 45px' }
+    Halo 4 - Playlists
 
-    .hero-unit{ :style => 'margin-top: -15px;' }
-      - @game_modes.each do |mode|
-        = render :partial => 'halo4/playlists/game_mode', :locals => { :mode => mode }
+  .hero-unit{ :style => 'margin-top: -15px;' }
+    - @game_modes.each do |mode|
+      = render :partial => 'halo4/playlists/game_mode', :locals => { :mode => mode }
 
 
 

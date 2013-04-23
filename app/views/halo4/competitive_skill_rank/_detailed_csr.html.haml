@@ -1,0 +1,27 @@
+%table.team-table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %td{ :style => 'width: 160px;' }
+        Playlist Image
+      %td{ :style => 'width: 120px;' }
+        Playlist
+      %td
+        Description
+      %td{ :style => 'width: 80px;' }
+        CSR
+
+  %tbody
+    - skill_ranks = csr_data_from_type(type)
+    - skill_ranks.each do |skill_rank|
+      - playlist_data = playlist_data_from_id(skill_rank['PlaylistId'])
+      %tr
+        %td
+          %img{ :src => X343ApiController.asset_url_generator_basic(playlist_data['ImageUrl']['BaseUrl'], playlist_data['ImageUrl']['AssetUrl'], 'small') }
+        %td
+          #{playlist_data['Name']}
+        %td
+          #{playlist_data['Description']}
+        %td
+          %img{ :src => csr_image_from_current_csr(skill_rank['CurrentSkillRank'], 'medium') }
+
+

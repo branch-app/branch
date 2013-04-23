@@ -2,39 +2,38 @@
 - active_halo4 'active'
 - search_query @service_record['Gamertag']
 
-.container{:style => "margin-top: 80px; min-width: 1300px; max-width: 1300px;"}
-  .row-fluid
+.row-fluid
 
-    = h4_sidebar_game_history 'active'
-    = render :partial => 'halo4/global/sidebar', :object => @service_record
+  = h4_sidebar_game_history 'active'
+  = render :partial => 'halo4/global/sidebar', :object => @service_record
 
-    = render :partial => 'application/notification_header'
+  = render :partial => 'application/notification_header'
 
-    = render :partial => 'halo4/global/service_record_header', :object => @service_record
+  = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-    .well.span9
-      %h3
-        #{@service_record['Gamertag']}'s Match History:
+  .well.span9
+    %h3
+      #{@service_record['Gamertag']}'s Match History:
 
-      %ul.nav.nav-tabs
-        %li#tab-3
-          %a{"data-toggle" => "tab", :href => "#T-3"} War Games
-        %li#tab-4
-          %a{"data-toggle" => "tab", :href => "#T-4"} Spartan Ops
-        %li#tab-5
-          %a{"data-toggle" => "tab", :href => "#T-5"} Campaign
-        %li#tab-6
-          %a{"data-toggle" => "tab", :href => "#T-6"} War Games - Customs
-      .tabbable
-        .tab-content
-          #T-3.tab-pane
-            = render :partial => 'halo4/match_history/war_game_history'
-          #T-4.tab-pane
-            = render :partial => 'halo4/match_history/spartan_ops_history'
-          #T-5.tab-pane
-            = render :partial => 'halo4/match_history/campaign_history'
-          #T-6.tab-pane
-            = render :partial => 'halo4/match_history/war_games_customs_history'
+    %ul.nav.nav-tabs
+      %li#tab-3
+        %a{"data-toggle" => "tab", :href => "#T-3"} War Games
+      %li#tab-4
+        %a{"data-toggle" => "tab", :href => "#T-4"} Spartan Ops
+      %li#tab-5
+        %a{"data-toggle" => "tab", :href => "#T-5"} Campaign
+      %li#tab-6
+        %a{"data-toggle" => "tab", :href => "#T-6"} War Games - Customs
+    .tabbable
+      .tab-content
+        #T-3.tab-pane
+          = render :partial => 'halo4/match_history/war_game_history'
+        #T-4.tab-pane
+          = render :partial => 'halo4/match_history/spartan_ops_history'
+        #T-5.tab-pane
+          = render :partial => 'halo4/match_history/campaign_history'
+        #T-6.tab-pane
+          = render :partial => 'halo4/match_history/war_games_customs_history'
 
 :javascript
   $(document).ready(function() {

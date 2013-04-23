@@ -1,11 +1,11 @@
-.commendation-entry{ :style => 'float: left; width: 410px; height: 150px; margin: 10px 10px;' }
+.commendation-entry{ :style => 'float: left; width: 45%; height: 150px; margin: 25px 10px;' }
   %h4
     - if commendation['LevelName'] == nil
       #{commendation['Name']} - Starter
     - else
       #{commendation['LevelName']}
 
-  .commendation-rank-position{ :style => 'float: right; margin-top: -35px; font-size: 60px; opacity: 0.1; font-weight: 400;' }
+  .commendation-rank-position{ :style => 'float: right; margin-top: -25px; font-size: 50px; opacity: 0.1; font-weight: 400;' }
     #{commendation['LevelId']} / #{commendation_max_level(commendation['Id'])['Level'] + 1}
   .cleaner
 

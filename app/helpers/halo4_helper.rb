@@ -1,6 +1,17 @@
 module Halo4Helper
 	require 'active_support/core_ext/integer/inflections'
 
+	# playlist
+	def playlist_data_from_id(playlist_id)
+		@metadata['PlaylistsMetadata']['Playlists'].each do |playlist|
+			if playlist['Id'] == playlist_id
+				return playlist
+			end
+		end
+
+		return nil
+	end
+
 	def draw_game_count_chart(service_record)
 		output = ''
 
@@ -135,29 +146,6 @@ module Halo4Helper
 
 	def difficulty_from_id(difficulty_id)
 		return @metadata['DifficultiesMetadata']['Difficulties'][difficulty_id]
-	end
-
-	def get_highest_skill_rank(skill_ranks)
-		highest_skill = 0
-
-		skill_ranks.each do |rank|
-			if rank['CurrentSkillRank'] == nil
-				rank['CurrentSkillRank'] = 0
-			end
-
-			if rank['CurrentSkillRank'] > highest_skill
-				highest_skill = rank['CurrentSkillRank']
-			end
-		end
-
-		return highest_skill
-	end
-	def csr_image_from_raw_csr(raw_csr, size)
-		if raw_csr == nil
-			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/0.png"
-		else
-			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/#{raw_csr['GameSkillRank']}.png"
-		end
 	end
 
 	def recent_game_style_from_result(entry)
@@ -383,6 +371,7 @@ module Halo4Helper
 		return nil
 	end
 
+	# commendations
 	def plural_commendation_category_name_to_single(name)
 		case name
 			when 'Weapons'
@@ -417,5 +406,92 @@ module Halo4Helper
 			end
 		end
 		return commendation_final
+	end
+
+	# competitive skill rank
+	def csr_graph_labels(type)
+		playlist_ids = [ ]
+		if type == 'team'
+			playlist_ids = [129,122,105,102,123,121,117]
+		else
+			playlist_ids = [100,101,128,116,126,104,113,103,115]
+		end
+		output = ''
+
+		@service_record['SkillRanks'].each do |skill_ranks|
+			if playlist_ids.include? skill_ranks['PlaylistId']
+				output += "'#{skill_ranks['PlaylistName']}', "
+			end
+		end
+
+		return output[0...-2]
+	end
+	def csr_graph_datapoints(type)
+		playlist_ids = [ ]
+		if type == 'team'
+			playlist_ids = [129,122,105,102,123,121,117]
+		else
+			playlist_ids = [100,101,128,116,126,104,113,103,115]
+		end
+		output = ''
+		@service_record['SkillRanks'].each do |skill_ranks|
+			tmp_output = ''
+			if skill_ranks['CurrentSkillRank'] == nil
+				tmp_output += '0, '
+			else
+				tmp_output += skill_ranks['CurrentSkillRank'].to_s + ', '
+			end
+
+			if playlist_ids.include? skill_ranks['PlaylistId']
+				output += tmp_output
+			end
+		end
+		return output[0...-2]
+	end
+	def csr_data_from_type(type)
+		playlist_ids = [ ]
+		if type == 'team'
+			playlist_ids = [129,122,105,102,123,121,117]
+		else
+			playlist_ids = [100,101,128,116,126,104,113,103,115]
+		end
+		skill_ranks = [ ]
+
+		@service_record['SkillRanks'].each do |skill_rank|
+			if playlist_ids.include? skill_rank['PlaylistId']
+				skill_ranks << skill_rank
+			end
+		end
+
+		return skill_ranks
+	end
+	def get_highest_skill_rank(skill_ranks)
+		highest_skill = 0
+
+		skill_ranks.each do |rank|
+			if rank['CurrentSkillRank'] == nil
+				rank['CurrentSkillRank'] = 0
+			end
+
+			if rank['CurrentSkillRank'] > highest_skill
+				highest_skill = rank['CurrentSkillRank']
+			end
+		end
+
+		return highest_skill
+	end
+	def csr_image_from_raw_csr(raw_csr, size)
+		if raw_csr == nil
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/0.png"
+		else
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/#{raw_csr['GameSkillRank']}.png"
+		end
+	end
+	def csr_image_from_current_csr(raw_csr, size)
+		if raw_csr == nil
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/0.png"
+		else
+			return "https://assets.halowaypoint.com/games/h4/csr/v1/#{size}/#{raw_csr}.png"
+		end
 	end
 end

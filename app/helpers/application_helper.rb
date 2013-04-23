@@ -35,6 +35,9 @@ module ApplicationHelper
 	def h4_sidebar_game_history(h4_sidebar_game_history)
 		content_for :h4_sidebar_game_history, h4_sidebar_game_history.to_s
 	end
+	def h4_sidebar_csr(h4_sidebar_csr)
+		content_for :h4_sidebar_csr, h4_sidebar_csr.to_s
+	end
 	def h4_sidebar_commendations(h4_sidebar_commendations)
 		content_for :h4_sidebar_commendations, h4_sidebar_commendations.to_s
 	end

@@ -2,21 +2,21 @@
 - active_halo4 'active'
 - search_query @service_record['Gamertag']
 
-.container{:style => "margin-top: 80px; min-width: 1300px; max-width: 1300px;"}
-  .row-fluid
+.row-fluid
 
-    = h4_sidebar_specializations 'active'
-    = render :partial => 'halo4/global/sidebar', :object => @service_record
+  = h4_sidebar_specializations 'active'
+  = render :partial => 'halo4/global/sidebar', :object => @service_record
 
-    = render :partial => 'application/notification_header'
+  = render :partial => 'application/notification_header'
 
-    = render :partial => 'halo4/global/service_record_header', :object => @service_record
+  = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-    .span9.well
+  .span9
+    .well
       = render :partial => 'halo4/specializations/in_progress'
 
-    .row.span9.offset3
-      .span6.well{ :style => 'margin-left: -28px;' }
+    .row-fluid
+      .span6.well
         = render :partial => 'halo4/specializations/pending'
       .span6.well
         = render :partial => 'halo4/specializations/completed'

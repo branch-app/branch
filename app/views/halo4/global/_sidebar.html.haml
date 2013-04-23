@@ -7,6 +7,8 @@
         %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"} Overview
       %li{:class => yield(:h4_sidebar_game_history)}
         %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/"} Game History
+      %li{:class => yield(:h4_sidebar_csr)}
+        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/competitive-skill-rank/"} Competitive Skill Rank
       %li{:class => yield(:h4_sidebar_commendations)}
         %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/commendations/"} Commendations
       %li{:class => yield(:h4_sidebar_specializations)}
