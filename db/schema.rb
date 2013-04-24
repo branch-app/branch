@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421171843) do
+ActiveRecord::Schema.define(:version => 20130423133133) do
 
   create_table "h4_api_authentication_vaults", :force => true do |t|
     t.text     "wlid_access_token"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(:version => 20130421171843) do
     t.string   "game_id"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "h4_player_mode_details", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "campaign_data",    :limit => 2147483647
+    t.text     "spartan_ops_data", :limit => 2147483647
+    t.text     "war_games_data",   :limit => 2147483647
+    t.text     "custom_data",      :limit => 2147483647
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "h4_player_recent_matches", :force => true do |t|

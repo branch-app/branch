@@ -1,11 +1,7 @@
 BranchApp::Application.routes.draw do
 
 	root :to => 'application#index'
-
-	# dev shiz
-	if Rails.env.development?
-		get '/devcacheupdate' => 'update_caches#devcacheupdate'
-	end
+	match '/about/' => 'application#about'
 
 	# search
 	match '/search/:gamertag/' => 'search#index'
@@ -22,9 +18,15 @@ BranchApp::Application.routes.draw do
 	match '/halo4/servicerecord/:gamertag/competitive-skill-rank/:playlist_id/' => 'halo4#unique_playlist_csr'
 	match '/halo4/servicerecord/:gamertag/commendations/' => 'halo4#commendations'
 	match '/halo4/servicerecord/:gamertag/specializations/' => 'halo4#specializations'
+	match '/halo4/servicerecord/:gamertag/summary/' => 'halo4#summary'
 
 	# halo4 cut
 	## match '/halo4/challenges/:gamertag/' => 'halo4#challenges'
+
+	# dev shiz
+	if Rails.env.development?
+		get '/devcacheupdate' => 'update_caches#devcacheupdate'
+	end
 
   resources :application
 

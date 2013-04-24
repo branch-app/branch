@@ -1,0 +1,7 @@
+.row-fluid
+  .span4
+    = render :partial => 'halo4/career_stats_summary/overview', :locals => { :mode_data => mode_data }
+    = render :partial => 'halo4/career_stats_summary/overview_basic_stats', :locals => { :mode_data => mode_data }
+  .span6
+    = render :partial => 'halo4/career_stats_summary/top_medals', :locals => { :mode_data => mode_data }
+    = render :partial => 'halo4/career_stats_summary/top_weapons', :locals => { :mode_data => mode_data }

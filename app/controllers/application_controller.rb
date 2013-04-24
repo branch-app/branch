@@ -40,4 +40,8 @@ class ApplicationController < ActionController::Base
 			@friendly_playlist_data[mode['Id']] = relevant_playlists
 		end
 	end
+
+	def about
+
+	end
 end

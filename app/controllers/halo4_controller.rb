@@ -97,6 +97,30 @@ class Halo4Controller < ApplicationController
 		end
 	end
 
+	def summary
+		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
+		if @service_record['continue'] == 'no'
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+		@metadata = X343ApiController.GetMetaData()
+
+		mode_data = X343ApiController.GetDetailedModeDetails(params[:gamertag])
+		if mode_data['continue'] == 'no'
+			# error, handle it
+			setup_error_notification('error', "The gamertag `#{params[:gamertag]}` does not exist, or HaloWaypoint is down.")
+			redirect_to '/'
+			return
+		end
+
+		@campaign_data = JSON.parse(mode_data.campaign_data)
+		@spartan_ops_data = JSON.parse(mode_data.spartan_ops_data)
+		@war_games_data = JSON.parse(mode_data.war_games_data)
+		@custom_data = JSON.parse(mode_data.custom_data)
+	end
+
 	def specializations
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record[:continue] == "no"

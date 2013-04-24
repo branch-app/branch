@@ -159,11 +159,75 @@ class X343ApiController < ApplicationController
 		end
 	end
 
+	def self.GetDetailedModeDetails(gamertag)
+		gamertag_name = gamertag.to_s.downcase
+		cached_com = H4PlayerModeDetails.find_by_gamertag(gamertag_name)
+
+		if cached_com != nil
+			cached_campaign = cached_com.campaign_data
+			cached_spartan_ops = cached_com.spartan_ops_data
+			cached_war_games = cached_com.war_games_data
+			cached_custom = cached_com.custom_data
+		end
+
+		if cached_com != nil && cached_com.updated_at + ((60 * 60) * 24) > Time.now # We'll do this every day, come on, this is a big one, like 1mb
+			cached_com
+		else
+			new_campaign = GetDetailedModeData(gamertag, 'GetCampaignDetails', cached_campaign)
+			new_spartan_ops = GetDetailedModeData(gamertag, 'GetSpartanOpsDetails', cached_spartan_ops)
+			new_war_games = GetDetailedModeData(gamertag, 'GetWarGameDetails', cached_war_games)
+			new_custom = GetDetailedModeData(gamertag, 'GetCustomGameDetails', cached_custom)
+
+			# check fo nullz
+			result = true
+			if new_campaign == nil || new_spartan_ops == nil || new_war_games == nil || new_custom == nil
+				result = false
+			end
+
+			# save to db
+			H4PlayerModeDetails.find_by_gamertag(gamertag_name).delete
+			mode_details = H4PlayerModeDetails.new
+			mode_details.gamertag = gamertag
+			mode_details.custom_data = new_custom
+			mode_details.campaign_data = new_campaign
+			mode_details.spartan_ops_data = new_spartan_ops
+			mode_details.war_games_data = new_war_games
+			mode_details.save
+
+			if result
+				return H4PlayerModeDetails.find_by_gamertag(gamertag_name)
+			else
+				# try returning cache
+				if cached_com != nil
+					return cached_com
+				else
+					return { :status_code => 1001, :continue => 'no' }
+				end
+			end
+		end
+	end
+	def self.GetDetailedModeData(gamertag, service, cache)
+		url = url_from_name(service, 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag })
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+
+		if response.code == 200
+			data = JSON.parse(response.body)
+
+			# check shit worked
+			if data['StatusCode'] != 1
+				return cache
+			else
+				return response.body
+			end
+		end
+	end
+
 	def self.GetPlayerCommendations(gamertag)
 		gamertag_name = gamertag.to_s.downcase
 		cached_com = H4PlayerCommendations.find_by_gamertag(gamertag_name)
 
-		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) < Time.now
+		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) > Time.now
 			json = JSON.parse(cached_com.data)
 			return json
 		else
@@ -205,7 +269,7 @@ class X343ApiController < ApplicationController
 		gamertag_name = gamertag.to_s.downcase
 		cached_match = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_name, start_index, count, mode_id, chapter_id)
 
-		if cached_match != nil && cached_match.data != nil && cached_match.updated_at + (60 * 8) < Time.now
+		if cached_match != nil && cached_match.data != nil && cached_match.updated_at + (60 * 8) > Time.now
 			json = JSON.parse(cached_match.data)
 			return json
 		else
@@ -225,7 +289,7 @@ class X343ApiController < ApplicationController
 				if data['StatusCode'] != 1
 					return { :status_code => data['StatusCode'], :continue => 'no' }
 				else
-					old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count(gamertag_name, start_index, count)
+					old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_name, start_index, count, mode_id, chapter_id)
 					if old_cached != nil
 						H4PlayerRecentMatches.delete(old_cached)
 					end
@@ -306,7 +370,7 @@ class X343ApiController < ApplicationController
 
 		cached_result = H4PlayerChallenges.find_by_gamertag(gamertag)
 
-		if cached_result != nil && cached_result.data != nil && cached_result.updated_at + 8*60 > Time.now
+		if cached_result != nil && cached_result.data != nil && cached_result.updated_at + (8 * 60) > Time.now
 			# return cached data
 			json = JSON.parse(cached_result.data)
 
