@@ -68,6 +68,12 @@ module ApplicationHelper
 	end
 
 
+	# leaf
+	def gamertag_to_safe_leaf(gamertag)
+		return gamertag.downcase.tr(" ", "_").strip
+	end
+
+	# errorz
 	def setup_error_notification(type, message)
 		flash[:type] = type
 		flash[:notice] = message

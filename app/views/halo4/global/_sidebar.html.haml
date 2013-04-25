@@ -29,10 +29,10 @@
 
       %li.nav-header Leaf Integration
       %li
-        %a{ :href => "http://leafapp.co/gt/#{@service_record['Gamertag']}", :target => '_blank' } View Profile on Leaf
+        %a{ :href => "http://leafapp.co/gt/#{gamertag_to_safe_leaf(@service_record['Gamertag'])}", :target => '_blank' } View Profile on Leaf
       %li
-        %a{ :href => "http://leafapp.co/compare/#{@service_record['Gamertag']}/", :target => '_blank' } Compare Profile on Leaf
+        %a{ :href => "http://leafapp.co/compare/#{gamertag_to_safe_leaf(@service_record['Gamertag'])}/", :target => '_blank' } Compare Profile on Leaf
       %li
-        %a{ :href => "http://leafapp.co/star/#{@service_record['Gamertag']}", :target => '_blank' } Star Profile on Leaf
+        %a{ :href => "http://leafapp.co/star/#{gamertag_to_safe_leaf(@service_record['Gamertag'])}", :target => '_blank' } Star Profile on Leaf
       %li
-        %a{ :href => "http://leafapp.co/guilty_spark/flag/#{@service_record['Gamertag']}", :target => '_blank' } Flag as Cheater/Booster on Leaf
+        %a{ :href => "http://leafapp.co/guilty_spark/flag/#{gamertag_to_safe_leaf(@service_record['Gamertag'])}", :target => '_blank' } Flag as Cheater/Booster on Leaf
