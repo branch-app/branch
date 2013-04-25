@@ -3,26 +3,36 @@
     %ul.nav.nav-list
       / offer id brute forcing queue
       %li.nav-header Service Record
-      %li{:class => yield(:h4_sidebar_overview)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"} Overview
-      %li{:class => yield(:h4_sidebar_game_history)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/"} Game History
-      %li{:class => yield(:h4_sidebar_csr)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/competitive-skill-rank/"} Competitive Skill Rank
-      %li{:class => yield(:h4_sidebar_commendations)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/commendations/"} Commendations
-      %li{:class => yield(:h4_sidebar_specializations)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/specializations/"} Specializations
-      %li.nav-header Career Stats
-      %li{:class => yield(:h4_sidebar_summary)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/summary/"} Summary
-      %li{:class => yield(:h4_sidebar_by_playlist)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-playlist/"} By Playlist
-      %li{:class => yield(:h4_sidebar_by_map)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-map/"} By Map
-      %li{:class => yield(:h4_sidebar_medals)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/medals/"} Medals
-      %li{:class => yield(:h4_sidebar_weapons)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/weapons/"} Weapons
-      %li{:class => yield(:h4_sidebar_enemies)}
-        %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/enemies/"} Enemies
+      %li{ :class => yield(:h4_sidebar_overview) }
+        %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/" } Overview
+      %li{ :class => yield(:h4_sidebar_game_history) }
+        %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/match-history/" } Game History
+      %li{ :class => yield(:h4_sidebar_csr) }
+        %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/competitive-skill-rank/" } Competitive Skill Rank
+      %li{ :class => yield(:h4_sidebar_commendations) }
+        %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/commendations/" } Commendations
+      %li{ :class => yield(:h4_sidebar_specializations) }
+        %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/specializations/" } Specializations
+      -#%li.nav-header Career Stats
+      -#%li{:class => yield(:h4_sidebar_summary)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/summary/"} Summary
+      -#%li{:class => yield(:h4_sidebar_by_playlist)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-playlist/"} By Playlist
+      -#%li{:class => yield(:h4_sidebar_by_map)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/by-map/"} By Map
+      -#%li{:class => yield(:h4_sidebar_medals)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/medals/"} Medals
+      -#%li{:class => yield(:h4_sidebar_weapons)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/weapons/"} Weapons
+      -#%li{:class => yield(:h4_sidebar_enemies)}
+      -#  %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/enemies/"} Enemies
+
+      %li.nav-header Leaf Integration
+      %li
+        %a{ :href => "http://leafapp.co/gt/#{@service_record['Gamertag']}", :target => '_blank' } View Profile on Leaf
+      %li
+        %a{ :href => "http://leafapp.co/compare/#{@service_record['Gamertag']}/", :target => '_blank' } Compare Profile on Leaf
+      %li
+        %a{ :href => "http://leafapp.co/star/#{@service_record['Gamertag']}", :target => '_blank' } Star Profile on Leaf
+      %li
+        %a{ :href => "http://leafapp.co/guilty_spark/flag/#{@service_record['Gamertag']}", :target => '_blank' } Flag as Cheater/Booster on Leaf
