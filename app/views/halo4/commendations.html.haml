@@ -11,7 +11,7 @@
 
   = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-  .span9
+  .span8
     - @commendation_categories.each do |category|
       - commendations = commendations_by_category(category['Id'])
       - if category['Name'] == '--'
