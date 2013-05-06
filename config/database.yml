@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: Halo4StatViewer_development
+  database: branchapp_development
   pool: 5
   username: root
   password:
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: Halo4StatViewer_test
+  database: branchapp_test
   pool: 5
   username: root
   password:
@@ -35,10 +35,7 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: d738daednfluqv
-  username: qmpjzsnlysjuvv
-  password: 2sVzTHewM5IPNobo4jm09ZvPW1
-  host: ec2-54-225-105-169.compute-1.amazonaws.com
-  port: 5432
-
-  #CREATE USER 'branch_admin'@'localhost' IDENTIFIED BY '6BvX8bsD2YM8ZVM';
+  database: branchapp_production
+  username: root
+  password: 
+  host: 127.0.0.1 # TODO: deploy and sheet
