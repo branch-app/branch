@@ -32,10 +32,10 @@ test:
   host: 127.0.0.1
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: branchapp_production
-  username: root
-  password: 
-  host: 127.0.0.1 # TODO: deploy and sheet
+  adapter: pg
+  encoding: utf8
+  database: d8upsvecud8ha5
+  username: zfysktkcojzhdq
+  password: KHqEatFDqmQ5-BoqWenxU3pCIz
+  host: ec2-23-23-214-251.compute-1.amazonaws.com
+  port: 5432
