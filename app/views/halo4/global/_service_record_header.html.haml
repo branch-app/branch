@@ -1,7 +1,7 @@
 .well.span8{:style => "padding: 20px 0 0 0;"}
   - h4_rank_data = get_simple_rank_data(@service_record, 'medium')
   .row-fluid.visible-desktop.visible-tablet
-    .span8{:style => "margin: 10px 0 0 20px"}
+    .span7{:style => "margin: 10px 0 0 20px"}
       .gamertag-flairs
         %img{:src => X343ApiController.asset_url_generator_basic(@service_record['RankImageUrl']['BaseUrl'], @service_record['RankImageUrl']['AssetUrl'], 'medium'), :style => "margin-top: -8px;"}/
         %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"}
@@ -27,7 +27,7 @@
               Max Rank
             - else
               = number_with_delimiter(h4_rank_data[:update_current_xp], :delimiter => ',')
-    .span3
+    .span4
       .span4.campaign-completion
         %img{:src => campaign_progress_from_id(@service_record['GameModes'][0]['SinglePlayerDASO'].to_i, @service_record['GameModes'][0]['SinglePlayerDifficulty'].to_i, 'medium')}/
         %br/
