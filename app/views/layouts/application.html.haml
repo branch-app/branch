@@ -73,12 +73,12 @@
             .navbar-search.pull-right
               %input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
 
-    = if yield(:container_type) == 'fluid'
+    - if yield(:container_type) == 'fluid'
       .container-fluid{ :style => "margin: 0 10%; margin-top: 80px;" }
-        = yield
+      = yield
     - else
       .container-fluid{ :style => "margin: 0 15%; margin-top: 80px; min-width: 1100px;" }
-        = yield
+      = yield
 
     %hr/
     %footer
