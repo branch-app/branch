@@ -1,7 +1,14 @@
 BranchApp::Application.routes.draw do
 
 	root :to => 'application#index'
+
+  # about
 	match '/about/' => 'application#about'
+
+  # users
+  get '/login' => 'sessions#new'
+  get '/logout' => 'sessions#destroy'
+  get '/register' => 'users#new'
 
 	# search
 	match '/search/:gamertag/' => 'search#index'
