@@ -11,91 +11,103 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130523054457) do
 
-	create_table "h4_api_authentication_vaults", :force => true do |t|
-		t.text     "wlid_access_token"
-		t.text     "wlid_authentication_token"
-		t.datetime "wlid_expire"
-		t.text     "spartan_token"
-		t.datetime "created_at",                :null => false
-		t.datetime "updated_at",                :null => false
-	end
+  create_table "blog_posts", :force => true do |t|
+    t.string   "title"
+    t.string   "title_safe"
+    t.integer  "author_id"
+    t.text     "body"
+    t.string   "summary"
+    t.boolean  "is_published"
+    t.string   "tags"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
-	create_table "h4_game_metadata", :force => true do |t|
-		t.text     "data",       :limit => 2147483647
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-	end
+  create_table "h4_api_authentication_vaults", :force => true do |t|
+    t.text     "wlid_access_token"
+    t.text     "wlid_authentication_token"
+    t.datetime "wlid_expire"
+    t.text     "spartan_token"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
-	create_table "h4_global_challenges", :force => true do |t|
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-		t.text     "data",       :limit => 2147483647
-	end
+  create_table "h4_game_metadata", :force => true do |t|
+    t.text     "data",       :limit => 2147483647
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
-	create_table "h4_player_challenges", :force => true do |t|
-		t.text     "data",       :limit => 2147483647
-		t.string   "gamertag"
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-	end
+  create_table "h4_global_challenges", :force => true do |t|
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "data",       :limit => 2147483647
+  end
 
-	create_table "h4_player_commendations", :force => true do |t|
-		t.string   "gamertag"
-		t.text     "data",       :limit => 2147483647
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-	end
+  create_table "h4_player_challenges", :force => true do |t|
+    t.text     "data",       :limit => 2147483647
+    t.string   "gamertag"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
-	create_table "h4_player_matches", :force => true do |t|
-		t.string   "gamertag"
-		t.text     "data",       :limit => 2147483647
-		t.string   "game_id"
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-	end
+  create_table "h4_player_commendations", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "data",       :limit => 2147483647
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
-	create_table "h4_player_mode_details", :force => true do |t|
-		t.string   "gamertag"
-		t.text     "campaign_data",    :limit => 2147483647
-		t.text     "spartan_ops_data", :limit => 2147483647
-		t.text     "war_games_data",   :limit => 2147483647
-		t.text     "custom_data",      :limit => 2147483647
-		t.datetime "created_at",                             :null => false
-		t.datetime "updated_at",                             :null => false
-	end
+  create_table "h4_player_matches", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "data",       :limit => 2147483647
+    t.string   "game_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
-	create_table "h4_player_recent_matches", :force => true do |t|
-		t.string   "gamertag"
-		t.text     "data",        :limit => 2147483647
-		t.datetime "created_at",                        :null => false
-		t.datetime "updated_at",                        :null => false
-		t.integer  "start_index"
-		t.integer  "count"
-		t.integer  "mode_id"
-		t.integer  "chapter_id"
-	end
+  create_table "h4_player_mode_details", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "campaign_data",    :limit => 2147483647
+    t.text     "spartan_ops_data", :limit => 2147483647
+    t.text     "war_games_data",   :limit => 2147483647
+    t.text     "custom_data",      :limit => 2147483647
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
 
-	create_table "h4_player_servicerecords", :force => true do |t|
-		t.string   "gamertag"
-		t.text     "data",       :limit => 2147483647
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-	end
+  create_table "h4_player_recent_matches", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "data",        :limit => 2147483647
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "start_index"
+    t.integer  "count"
+    t.integer  "mode_id"
+    t.integer  "chapter_id"
+  end
 
-	create_table "h4_playlists", :force => true do |t|
-		t.datetime "created_at",                       :null => false
-		t.datetime "updated_at",                       :null => false
-		t.text     "data",       :limit => 2147483647
-	end
+  create_table "h4_player_servicerecords", :force => true do |t|
+    t.string   "gamertag"
+    t.text     "data",       :limit => 2147483647
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
-	create_table "h4_services_lists", :force => true do |t|
-		t.string   "list_type"
-		t.string   "name"
-		t.text     "url"
-		t.datetime "created_at", :null => false
-		t.datetime "updated_at", :null => false
-	end
+  create_table "h4_playlists", :force => true do |t|
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "data",       :limit => 2147483647
+  end
+
+  create_table "h4_services_lists", :force => true do |t|
+    t.string   "list_type"
+    t.string   "name"
+    t.text     "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
