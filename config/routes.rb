@@ -15,7 +15,7 @@ BranchApp::Application.routes.draw do
 
   # blog
   match '/blog/' => 'blog#index'
-  match '/blog/:year/:month/:day/:title' => 'blog#view'
+  match '/blog/:year/:month/:day/:title_safe' => 'blog#view'
 
 	# halo4
 	match '/halo4/challenges/' => 'halo4#challenges'

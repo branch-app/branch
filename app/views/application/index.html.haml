@@ -3,75 +3,70 @@
 - container_type 'fluid'
 
 .row-fluid
-  .span3
-    .well.sidebar-nav
-      %ul.nav.nav-list
-        / recently finished
-        - @challenge_categories.each do |category|
-          - challenges = @friendly_challenge_data[category['Id']]
-          %li.nav-header
-            = category['Name']
-            Challenges;
-          - index = 0
-          - challenges.each do |challenge|
-            - index += 1
-            %li
-              %a{:href => "/halo4/challenges"}
-                = challenge['Name']
-                \- #{challenge['XpReward']}xp
-          - if index == 0
-            %li
-              %a{:href => "/halo4/challenges"} None
-    .well.sidebar-nav
-      %span
-        Current Population:
-        %strong= number_with_delimiter(@total_population, :delimiter => ',')
-      %ul.nav.nav-list{:style => "margin-top: 10px"}
-        / recently finished
-        - @game_modes.each do |mode|
-          - playlists = @friendly_playlist_data[mode['Id']]
-          %li.nav-header
-            = mode['Name']
-            Playlists;
-          - index = 0
-          - playlists.each do |playlist|
-            - index += 1
-            - if !playlist['IsCurrent'] || playlist['PopulationCount'] == 0
-              - next
-            %li
-              %a{:href => "/halo4/playlists"}
-                = playlist['Name']
-                \: #{number_with_delimiter(playlist['PopulationCount'], :delimiter => ',')} players
-          - if index == 0
-            %li
-              %a{:href => "/halo4/playlists"} None
+	.span3
+		.well.sidebar-nav
+			%ul.nav.nav-list
+				/ recently finished
+				- @challenge_categories.each do |category|
+					- challenges = @friendly_challenge_data[category['Id']]
+					%li.nav-header
+						= category['Name']
+						Challenges;
+					- index = 0
+					- challenges.each do |challenge|
+						- index += 1
+						%li
+							%a{:href => "/halo4/challenges"}
+								= challenge['Name']
+								\- #{challenge['XpReward']}xp
+					- if index == 0
+						%li
+							%a{:href => "/halo4/challenges"} None
+		.well.sidebar-nav
+			%span
+				Current Population:
+				%strong= number_with_delimiter(@total_population, :delimiter => ',')
+			%ul.nav.nav-list{:style => "margin-top: 10px"}
+				/ recently finished
+				- @game_modes.each do |mode|
+					- playlists = @friendly_playlist_data[mode['Id']]
+					%li.nav-header
+						= mode['Name']
+						Playlists;
+					- index = 0
+					- playlists.each do |playlist|
+						- index += 1
+						- if !playlist['IsCurrent'] || playlist['PopulationCount'] == 0
+							- next
+						%li
+							%a{:href => "/halo4/playlists"}
+								= playlist['Name']
+								\: #{number_with_delimiter(playlist['PopulationCount'], :delimiter => ',')} players
+					- if index == 0
+						%li
+							%a{:href => "/halo4/playlists"} None
 
-  = render :partial => 'application/notification_header'
+	= render :partial => 'application/notification_header'
 
-  .span9
-    .hero-unit
-      %h1 sup
-      %p dem stats
-    .row-fluid
-      .span4
-        %h3 Development Blog:
-      / /span
-    .row-fluid
-      .span4
-        %h2 Heading
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a.btn{:href => "#"} View details »
-      / /span
-      .span4
-        %h2 Heading
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a.btn{:href => "#"} View details »
-      / /span
-      .span4
-        %h2 Heading
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a.btn{:href => "#"} View details »
-      / /span
+	.span9
+		.hero-unit
+			%h1 sup
+			%p dem stats
+		.row-fluid
+			.span4
+				%h3 Development Blog:
+			/ /span
+		.row-fluid
+		- blogs = BlogPost.all
+		- i = 0
+		- blogs.each do |blog|
+			- break if i > 3
+			- i += 1
+			.span4
+				%h2
+					= blog.title
+				%p
+					= blog.summary
+				%p
+					- created_at = blog.created_at
+					%a.btn{:href => "/blog/#{created_at.year}/#{created_at.month}/#{created_at.day}/#{blog.title_safe}"} View details »

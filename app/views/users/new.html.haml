@@ -1,0 +1,20 @@
+- title ' - Register an account on Branch'
+- #active_halo4 'active'
+
+.row-fluid
+	.well.offset3.span6{ style: 'padding: 30px;' }
+		%span{ :style => 'font-size: 45px;' }
+			Register
+
+		%hr/
+		= form_for :user_create do |f|
+			%fieldset{ style: 'margin-top: 20px;' }
+				.control-group{ id: 'email-field' }
+					%label.control-label{ for: 'inputIcon' }
+						Email Address:
+					.controls
+						.input-prepend
+							%span.add-on
+								%i.icon-envelope
+							%input{ name: 'email', class: 'email-input', id: 'inputIcon', type: 'text', placeholder: 'alex@outlook.com' }
+						%span.help-inline{ style: 'margin-bottom: 8px' }

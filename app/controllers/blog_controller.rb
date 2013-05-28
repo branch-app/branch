@@ -7,5 +7,11 @@ class BlogController < ApplicationController
 	end
 
 	def view 
+		title_safe = params[:title_safe]
+		year = params[:year]
+		month = params[:month]
+		day = params[:day]
+
+		@blog_entry = BlogPost.find_by_title_safe title_safe
 	end
 end

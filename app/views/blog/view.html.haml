@@ -1,0 +1,15 @@
+- title " - #{@blog_entry.title}"
+- #active_halo4 'active'
+
+.row-fluid
+	.well.offset3.span6{ style: 'padding: 30px;' }
+		%h1
+			#{@blog_entry.title}
+		%h6
+			Posted at #{@blog_entry.updated_at}, by Xerax
+		%hr/
+
+		%p
+			#{@blog_entry.body}
+
+		/ Social Sharing Stuff
