@@ -17,8 +17,12 @@
 
 .game-summary-victor
   %span
-    %a{ :href => "/halo4/servicerecord/#{@top_player['Gamertag']}/" }
-      #{@top_player['Gamertag']}
+    - if @top_player['IsGuest']
+      %strong
+        #{@top_player['Gamertag']}
+    - else
+      %a{ :href => "/halo4/servicerecord/#{@top_player['Gamertag']}/" }
+        #{@top_player['Gamertag']}
     led the game with a personal score of #{@top_player['PersonalScore']},
     %br/
     and a k/d ratio of #{ (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) }

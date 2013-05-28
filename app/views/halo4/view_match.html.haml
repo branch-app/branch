@@ -10,9 +10,12 @@
 
   = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-  - if @match['ModeId'] == 3 || @match['ModeId'] == 6 # war gmaes and customs
-    = render :partial => 'halo4/view_match/view_war_games', :locals => { :match => @match, :service_record => @service_record }
-  - elsif @match['ModeId'] == 5 # spartan ops
-    = render :partial => 'halo4/view_match/view_spartan_ops', :locals => { :match => @match, :service_record => @service_record }
-  - elsif @match['ModeId'] == 4 # campaign
-    = render :partial => 'halo4/view_match/view_campaign', :locals => { :match => @match, :service_record => @service_record }
+  .span8
+    - if @match['ModeId'] == 3 || @match['ModeId'] == 6 # war gmaes and customs
+      = render :partial => 'halo4/view_match/view_war_games', :locals => { :match => @match, :service_record => @service_record }
+    - elsif @match['ModeId'] == 5 # spartan ops
+      = render :partial => 'halo4/view_match/view_spartan_ops', :locals => { :match => @match, :service_record => @service_record }
+    - elsif @match['ModeId'] == 4 # campaign
+      = render :partial => 'halo4/view_match/view_campaign', :locals => { :match => @match, :service_record => @service_record }
+      
+    = render :partial => 'halo4/global/social_sharing'

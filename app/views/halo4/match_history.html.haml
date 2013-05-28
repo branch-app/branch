@@ -11,29 +11,31 @@
 
   = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-  .well.span8
-    %h3
-      #{@service_record['Gamertag']}'s Match History:
+  .span8
+    .well
+      %h3
+        #{@service_record['Gamertag']}'s Match History:
 
-    %ul.nav.nav-tabs
-      %li#tab-3
-        %a{"data-toggle" => "tab", :href => "#T-3"} War Games
-      %li#tab-4
-        %a{"data-toggle" => "tab", :href => "#T-4"} Spartan Ops
-      %li#tab-5
-        %a{"data-toggle" => "tab", :href => "#T-5"} Campaign
-      %li#tab-6
-        %a{"data-toggle" => "tab", :href => "#T-6"} War Games - Customs
-    .tabbable
-      .tab-content
-        #T-3.tab-pane
-          = render :partial => 'halo4/match_history/war_game_history'
-        #T-4.tab-pane
-          = render :partial => 'halo4/match_history/spartan_ops_history'
-        #T-5.tab-pane
-          = render :partial => 'halo4/match_history/campaign_history'
-        #T-6.tab-pane
-          = render :partial => 'halo4/match_history/war_games_customs_history'
+      %ul.nav.nav-tabs
+        %li#tab-3
+          %a{"data-toggle" => "tab", :href => "#T-3"} War Games
+        %li#tab-4
+          %a{"data-toggle" => "tab", :href => "#T-4"} Spartan Ops
+        %li#tab-5
+          %a{"data-toggle" => "tab", :href => "#T-5"} Campaign
+        %li#tab-6
+          %a{"data-toggle" => "tab", :href => "#T-6"} War Games - Customs
+      .tabbable
+        .tab-content
+          #T-3.tab-pane
+            = render :partial => 'halo4/match_history/war_game_history'
+          #T-4.tab-pane
+            = render :partial => 'halo4/match_history/spartan_ops_history'
+          #T-5.tab-pane
+            = render :partial => 'halo4/match_history/campaign_history'
+          #T-6.tab-pane
+            = render :partial => 'halo4/match_history/war_games_customs_history'
+    = render :partial => 'halo4/global/social_sharing'
 
 :javascript
   $(document).ready(function() {

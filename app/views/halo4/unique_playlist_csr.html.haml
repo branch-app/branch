@@ -12,40 +12,43 @@
 
   = render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-  .span8.well
-    %h3
-      #{@playlist_data['Name']} Competitive Skill Ranking
+  .span8
+    .well
+      %h3
+        #{@playlist_data['Name']} Competitive Skill Ranking
 
-    %hr/
+      %hr/
 
-    .row{ :style => 'margin: 0;' }
-      .span6
-        %img{ :src => X343ApiController.asset_url_generator_basic(@playlist_data['ImageUrl']['BaseUrl'], @playlist_data['ImageUrl']['AssetUrl'], 'large') }
+      .row{ :style => 'margin: 0;' }
+        .span6
+          %img{ :src => X343ApiController.asset_url_generator_basic(@playlist_data['ImageUrl']['BaseUrl'], @playlist_data['ImageUrl']['AssetUrl'], 'large') }
 
-      .span6
-        %p
-          #{@playlist_data['Description']}
+        .span6
+          %p
+            #{@playlist_data['Description']}
 
-        %br/
+          %br/
 
-        %p{ :style => 'font-size: 20px;' }
-          Max Party Size:
-          %strong
-            #{@playlist_data['MaxPartySize']}
+          %p{ :style => 'font-size: 20px;' }
+            Max Party Size:
+            %strong
+              #{@playlist_data['MaxPartySize']}
 
-        %p{ :style => 'font-size: 20px;' }
-          Max Local Players:
-          %strong
-            #{@playlist_data['MaxLocalPlayers']}
+          %p{ :style => 'font-size: 20px;' }
+            Max Local Players:
+            %strong
+              #{@playlist_data['MaxLocalPlayers']}
 
-        %p{ :style => 'font-size: 20px;' }
-          Player Grouping:
-          %strong
-            - if @playlist_data['IsFreeForAll']
-              Free For All
-            - else
-              Team
+          %p{ :style => 'font-size: 20px;' }
+            Player Grouping:
+            %strong
+              - if @playlist_data['IsFreeForAll']
+                Free For All
+              - else
+                Team
 
-        %div{ :style => 'float: right; opacity: 0.6; margin-top: -60px;' }
-          %img{ :src => csr_image_from_current_csr(skill_rank['CurrentSkillRank'], 'large') }
+          %div{ :style => 'float: right; opacity: 0.6; margin-top: -60px;' }
+            %img{ :src => csr_image_from_current_csr(skill_rank['CurrentSkillRank'], 'large') }
+            
+    = render :partial => 'halo4/global/social_sharing'
 
