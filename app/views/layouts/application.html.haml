@@ -1,121 +1,128 @@
 !!!
 %html
-  %head
-    %title= yield(:title)
-    / CDN
-    %script{:src => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'}
-    %script{:src => '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js'}
+	%head
+		%title= yield(:title)
+		/ CDN
+		%script{:src => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'}
+		%script{:src => '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js'}
 
-    / local
-    = stylesheet_link_tag    'application', :media => 'all'
-    = stylesheet_link_tag    'bootstrap.min', :media => 'all'
-    = stylesheet_link_tag    'morris', :media => 'all'
-    / stylesheet_link_tag    'bootstrap-responsive.min', :media =&gt; 'all'
-    = stylesheet_link_tag    'jbclock', :media => 'all'
-    = stylesheet_link_tag    'jquery.jqplot.min', :media => 'all'
-    = javascript_include_tag 'bootstrap.min'
-    = javascript_include_tag 'bootswatch'
-    = javascript_include_tag 'jbclock'
-    = javascript_include_tag 'jquery.jqplot.min'
-    = javascript_include_tag 'morris'
-    = javascript_include_tag 'Chart.min'
+		/ local
+		= stylesheet_link_tag    'application', :media => 'all'
+		= stylesheet_link_tag    'bootstrap.min', :media => 'all'
+		= stylesheet_link_tag    'morris', :media => 'all'
+		/ stylesheet_link_tag    'bootstrap-responsive.min', :media =&gt; 'all'
+		= stylesheet_link_tag    'jbclock', :media => 'all'
+		= stylesheet_link_tag    'jquery.jqplot.min', :media => 'all'
+		= javascript_include_tag 'bootstrap.min'
+		= javascript_include_tag 'bootswatch'
+		= javascript_include_tag 'jbclock'
+		= javascript_include_tag 'jquery.jqplot.min'
+		= javascript_include_tag 'morris'
+		= javascript_include_tag 'Chart.min'
 
-    = yield(:head_style)
-    :css
-      body {
-      }
+		= yield(:head_style)
+		:css
+			body {
+			}
 
-      footer {
-        margin-left: 60px;
-      }
+			footer {
+				margin-left: 60px;
+			}
 
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+		%meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
 
-    %meta{:content => "", :name => "description"}/
-    %meta{:content => "", :name => "author"}/
-    = csrf_meta_tags
-  %body
-    .navbar.navbar.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
-          %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => "/"}
-            Branch
-            %sup {alpha}
-          .nav-collapse.collapse
-            %p.navbar-text.pull-right
-              Powered by
-              %a{:href => "http://www.AuntieDot.net", :target => "_blank"} Auntie Dot
-            %ul.nav
-              %li{:class => yield(:active_home)}
-                %a{:href => "/"} Home
-              %li{:class => "#{yield(:active_halo4)} dropdown"}
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  Halo 4
-                  %b.caret
-                %ul#swatch-menu.dropdown-menu
-                  %li
-                    %a{:href => "/halo4/challenges"} Challenges
-                  %li
-                    %a{:href => "/halo4/playlists"} Playlists
-                  %li.divider
-                  %li
-                    %a{:href => "http://leafapp.co/leaderboards"} Top Ten Leaderboards
-                  %li
-                    %a{:href => "http://leafapp.co/csr_leaderboards"} CSR Leaderboards
-              %li{:class => yield(:active_blog)}
-                %a{:href => "/blog/"} Blog
-              %li{:class => yield(:active_about)}
-                %a{:href => "/about/"} About
-            .navbar-search.pull-right
-              %input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
+		- if content_for? :twitter_meta
+			%meta{:content => "summary", :name => "twitter:card"}
+			%meta{:content => "@alexerax", :name => "twitter:site"}
+			%meta{:content => "@alexerax", :name => "twitter:creator"}
+			%meta{:content => "http://branchapp.co", :name => "twitter:domain"}
+			= yield(:twitter_meta)
 
-    - if yield(:container_type) == 'fluid'
-      .container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
-        = yield
-    - else
-      .container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
-        = yield
+		%meta{:content => "", :name => "description"}/
+		%meta{:content => "", :name => "author"}/
+		= csrf_meta_tags
+	%body
+		.navbar.navbar.navbar-fixed-top
+			.navbar-inner
+				.container-fluid
+					%button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+						%span.icon-bar
+						%span.icon-bar
+						%span.icon-bar
+					%a.brand{:href => "/"}
+						Branch
+						%sup {alpha}
+					.nav-collapse.collapse
+						%p.navbar-text.pull-right
+							Powered by
+							%a{:href => "http://www.AuntieDot.net", :target => "_blank"} Auntie Dot
+						%ul.nav
+							%li{:class => yield(:active_home)}
+								%a{:href => "/"} Home
+							%li{:class => "#{yield(:active_halo4)} dropdown"}
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+									Halo 4
+									%b.caret
+								%ul#swatch-menu.dropdown-menu
+									%li
+										%a{:href => "/halo4/challenges"} Challenges
+									%li
+										%a{:href => "/halo4/playlists"} Playlists
+									%li.divider
+									%li
+										%a{:href => "http://leafapp.co/leaderboards"} Top Ten Leaderboards
+									%li
+										%a{:href => "http://leafapp.co/csr_leaderboards"} CSR Leaderboards
+							%li{:class => yield(:active_blog)}
+								%a{:href => "/blog/"} Blog
+							%li{:class => yield(:active_about)}
+								%a{:href => "/about/"} About
+						.navbar-search.pull-right
+							%input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
 
-    %hr/
-    %footer
-      %p 343 stats, bunge styl
+		- if yield(:container_type) == 'fluid'
+			.container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
+				= yield
+		- else
+			.container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
+				= yield
+
+		%hr/
+		%footer
+			%p 343 stats, bunge styl
 
 :javascript
-  $('#search-navbar').keyup(function(e){
-      if(e.keyCode == 13)
-      {
-          $(this).trigger("enterKey");
-      }
-  });
-  $('#search-navbar').bind("enterKey",function(e){
-      search()
-  });
-  function search()
-  {
-      var gamertag = $('#search-navbar').val();
-      window.location.href = "/search/" + gamertag + "/";
-  }
+	$('#search-navbar').keyup(function(e){
+			if(e.keyCode == 13)
+			{
+					$(this).trigger("enterKey");
+			}
+	});
+	$('#search-navbar').bind("enterKey",function(e){
+			search()
+	});
+	function search()
+	{
+			var gamertag = $('#search-navbar').val();
+			window.location.href = "/search/" + gamertag + "/";
+	}
 
-  $(function () {
-      $("[rel='tooltip']").tooltip();
-  });
+	$(function () {
+			$("[rel='tooltip']").tooltip();
+	});
 
-  var GoSquared = {};
-  GoSquared.acct = "GSN-152925-H";
-  (function(w){
-      function gs(){
-          w._gstc_lt = +new Date;
-          var d = document, g = d.createElement("script");
-          g.type = "text/javascript";
-          g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-          var s = d.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(g, s);
-      }
-      w.addEventListener ?
-              w.addEventListener("load", gs, false) :
-              w.attachEvent("onload", gs);
-  })(window);
+	var GoSquared = {};
+	GoSquared.acct = "GSN-152925-H";
+	(function(w){
+			function gs(){
+					w._gstc_lt = +new Date;
+					var d = document, g = d.createElement("script");
+					g.type = "text/javascript";
+					g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+					var s = d.getElementsByTagName("script")[0];
+					s.parentNode.insertBefore(g, s);
+			}
+			w.addEventListener ?
+							w.addEventListener("load", gs, false) :
+							w.attachEvent("onload", gs);
+	})(window);
