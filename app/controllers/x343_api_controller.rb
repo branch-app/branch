@@ -28,12 +28,16 @@ class X343ApiController < ApplicationController
 			# save to database
 			H4ServicesList.delete_all()
 
+			$services_list = { service_list: { }, settings: { } }
+
 			services_list.each do |services_list_item|
 				new_item = H4ServicesList.new
 				new_item.name = services_list_item[0]
 				new_item.url = services_list_item[1]
 				new_item.list_type = 'service_list'
 				new_item.save
+
+				$services_list[:service_list][services_list_item[0]] = services_list_item[1] 
 			end
 
 			settings.each do |services_list_item|
@@ -42,6 +46,8 @@ class X343ApiController < ApplicationController
 				new_item.url = services_list_item[1]
 				new_item.list_type = 'settings'
 				new_item.save
+
+				$services_list[:settings][services_list_item[0]] = services_list_item[1] 
 			end
 		end
 	end
@@ -430,9 +436,9 @@ class X343ApiController < ApplicationController
 	end
 
 	def self.asset_url_generator_basic(base_url, asset_url, size)
-		true_base = H4ServicesList.find_by_name_and_list_type(base_url, 'settings')
+		true_base = $services_list[:settings][base_url]
 
-		real_url = "#{true_base.url}#{asset_url.gsub('{size}', size)}"
+		real_url = "#{true_base}#{asset_url.gsub('{size}', size)}"
 
 		real_url
 	end
@@ -508,13 +514,13 @@ class X343ApiController < ApplicationController
 	end
 
 	def self.url_from_name(name, type)
-		entry = H4ServicesList.find_by_name_and_list_type(name, type)
+		entry = $services_list[type.to_sym][name]
 
 		if entry == nil
 			raise
 		end
 
-		entry.url
+		entry
 	end
 
 	def self.error_message_from_status_code(status_code, param1 = '')
