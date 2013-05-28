@@ -317,7 +317,7 @@ class X343ApiController < ApplicationController
 
 	def self.GetMatchDetails(gamertag, match_id)
 		gamertag_name = gamertag.to_s.downcase
-		cached_match = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
+		cached_match = H4PlayerMatch.find_by_game_id(match_id)
 
 		if cached_match != nil && cached_match.data != nil
 			json = JSON.parse(cached_match.data)
