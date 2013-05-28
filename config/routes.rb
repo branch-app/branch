@@ -2,20 +2,20 @@ BranchApp::Application.routes.draw do
 
 	root :to => 'application#index'
 
-  # about
+	# about
 	match '/about/' => 'application#about'
 
-  # users
-  get '/login' => 'sessions#new'
-  get '/logout' => 'sessions#destroy'
-  get '/register' => 'users#new'
+	# users
+	get '/login' => 'sessions#new'
+	get '/logout' => 'sessions#destroy'
+	get '/register' => 'users#new'
 
 	# search
 	match '/search/:gamertag/' => 'search#index'
 
-  # blog
-  match '/blog/' => 'blog#index'
-  match '/blog/:year/:month/:day/:title_safe' => 'blog#view'
+	# blog
+	match '/blog/' => 'blog#index'
+	match '/blog/:year/:month/:day/:title_safe' => 'blog#view'
 
 	# halo4
 	match '/halo4/challenges/' => 'halo4#challenges'
@@ -37,5 +37,5 @@ BranchApp::Application.routes.draw do
 	# dev shiz
 	get '/devcacheupdate' => 'update_caches#devcacheupdate' if Rails.env.development?
 
-  resources :application
+	resources :application
 end
