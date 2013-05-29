@@ -32,10 +32,11 @@
 		%meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
 
 		- if content_for? :twitter_meta
+			/ twitter card integration
 			%meta{:content => "summary", :name => "twitter:card"}
 			%meta{:content => "@alexerax", :name => "twitter:site"}
 			%meta{:content => "@alexerax", :name => "twitter:creator"}
-			%meta{:content => "http://branchapp.co", :name => "twitter:domain"}
+			%meta{:content => "http://branchapp.co/", :name => "twitter:domain"}
 			= yield(:twitter_meta)
 
 		%meta{:content => "", :name => "description"}/

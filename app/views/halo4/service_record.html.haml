@@ -1,6 +1,10 @@
 - title " - #{@service_record['Gamertag']}'s Service Record"
 - active_halo4 'active'
 - search_query @service_record['Gamertag']
+- content_for :twitter_meta do
+	%meta{:content => "Branch - #{@service_record['Gamertag']}'s Service Record", :name => "twitter:title"}
+	%meta{:content => "Halo 4 Service Record for #{@service_record['Gamertag']}. ", :name => "twitter:description"}
+	%meta{:content => X343ApiController.GetPlayerModel(params[:gamertag], 'medium'), :name => "twitter:image:src"}
 
 .row-fluid
 

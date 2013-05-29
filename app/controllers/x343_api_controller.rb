@@ -364,9 +364,9 @@ class X343ApiController < ApplicationController
 		end
 	end
 
-	def self.GetPlayerModel(gamertag, size)
+	def self.GetPlayerModel(gamertag, size, pose = 'fullbody')
 		url = url_from_name('GetSpartanImage', 'service_list') # https://spartans.svc.halowaypoint.com/players/{gamertag}/{game}/spartans/{pose}?target={size}
-		url = full_url_with_defaults(url, { :gamertag => gamertag, :pose => 'fullbody', :size => size })
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
 
 		url
 	end

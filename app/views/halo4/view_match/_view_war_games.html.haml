@@ -1,4 +1,8 @@
 - title " - #{@match['GameVariantName']} on #{@match['MapVariantName']} as #{@service_record['Gamertag']}"
+- content_for :twitter_meta do
+	%meta{:content => "Branch - #{@match['GameVariantName']} on #{@match['MapVariantName']}", :name => "twitter:title"}
+	%meta{:content => "Halo 4 War Games Match, #{@match['GameVariantName']} on #{@match['MapVariantName']}, at #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} lasting #{@duration.min} Minutes and #{@duration.sec} Seconds. Top player was #{@top_player['Gamertag']}, who led the game with a K/D Ratio of #{ (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) }", :name => "twitter:description"}
+	%meta{:content => X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large'), :name => "twitter:image:src"}
 
 .well
 	%h3
