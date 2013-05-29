@@ -414,7 +414,7 @@ module Halo4Helper
 		if type == 'team'
 			playlist_ids = [129,122,105,102,123,121,117]
 		else
-			playlist_ids = [100,101,128,116,126,104,113,103,115]
+			playlist_ids = [100,101,128,116,126,104,113,103,115,131]
 		end
 		output = ''
 
@@ -431,7 +431,7 @@ module Halo4Helper
 		if type == 'team'
 			playlist_ids = [129,122,105,102,123,121,117]
 		else
-			playlist_ids = [100,101,128,116,126,104,113,103,115]
+			playlist_ids = [100,101,128,116,126,104,113,103,115,131]
 		end
 		output = ''
 		@service_record['SkillRanks'].each do |skill_ranks|
@@ -453,7 +453,7 @@ module Halo4Helper
 		if type == 'team'
 			playlist_ids = [129,122,105,102,123,121,117]
 		else
-			playlist_ids = [100,101,128,116,126,104,113,103,115]
+			playlist_ids = [100,101,128,116,126,104,113,103,115,131]
 		end
 		skill_ranks = [ ]
 
