@@ -39,6 +39,11 @@
 			%meta{:content => "http://branchapp.co/", :name => "twitter:domain"}
 			= yield(:twitter_meta)
 
+		- if content_for? :facebook_meta
+			/ facebook open graph integration
+			%meta{:content => "Branch - Halo 4 Stats", :property => "og:site_name"}/
+			= yield(:facebook_meta)
+
 		%meta{:content => "", :name => "description"}/
 		%meta{:content => "", :name => "author"}/
 		= csrf_meta_tags
