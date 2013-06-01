@@ -32,9 +32,6 @@ class BlogController < ApplicationController
 				storage += 1
 			end
 		end
-
-
-		#render json: { entries: blog_entries, count: blog_entry_count }
 	end
 
 	def view 
