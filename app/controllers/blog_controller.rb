@@ -4,7 +4,7 @@ class BlogController < ApplicationController
 		@page = params[:page].to_i
 		@page = 1 if @page == 0 || @page < 0
 
-		@blog_entries = BlogPost.where("id >= #{@count_modifier * (@page - 1)}").order('id ASC').limit(@count_modifier)
+		@blog_entries = BlogPost.where("id >= #{@count_modifier * (@page - 1)} AND is_published = 1").order('id ASC').limit(@count_modifier)
 		@blog_entry_count = BlogPost.count
 
 		# pagination calculation
@@ -41,5 +41,12 @@ class BlogController < ApplicationController
 		day = params[:day]
 
 		@blog_entry = BlogPost.find_by_title_safe title_safe
+
+		if @blog_entry == nil || !@blog_entry.is_published
+			# throw 404
+			raise ActionController::RoutingError.new('Not Found')
+		end
+
+		@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 	end
 end

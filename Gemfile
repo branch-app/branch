@@ -20,6 +20,7 @@ end
 gem 'jquery-rails'
 
 # Damn sexy plugins
+gem 'redcarpet'
 gem 'rufus-scheduler'
 gem 'haml-rails'
 gem 'httparty'

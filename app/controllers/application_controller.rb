@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
 	def index
-
 		# Challanges
 		@challenge_metadata = X343ApiController.GetMetaData()['ChallengesMetadata']
 		@challenge_categories = @challenge_metadata['ChallengeCategories']
@@ -39,6 +38,9 @@ class ApplicationController < ActionController::Base
 			end
 			@friendly_playlist_data[mode['Id']] = relevant_playlists
 		end
+
+		# Blogs
+		@blog_posts = BlogPost.where('is_published=1').order('id ASC')
 	end
 
 	def about

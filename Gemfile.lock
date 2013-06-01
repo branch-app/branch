@@ -40,7 +40,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    haml (4.0.2)
+    haml (4.0.3)
       tilt
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
@@ -53,7 +53,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.2.1)
+    jquery-rails (3.0.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.0)
@@ -61,7 +61,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
-    multi_json (1.7.3)
+    multi_json (1.7.4)
     multi_xml (0.5.3)
     mysql2 (0.3.11)
     pbkdf2 (0.1.0)
@@ -91,6 +91,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.3.0)
     rufus-scheduler (2.0.19)
       tzinfo (>= 0.3.23)
     sass (3.2.9)
@@ -109,7 +110,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (2.1.0)
+    uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
 
@@ -124,6 +125,7 @@ DEPENDENCIES
   mysql2
   pbkdf2
   rails (= 3.2.13)
+  redcarpet
   rufus-scheduler
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
