@@ -34,7 +34,7 @@
     /*background-repeat:no-repeat;*/
 }
 
-.text { position:absolute; top:45px; left:25px; width:30px;  height:30px;}
+.text { position:absolute; top:45px; left:30px; width:35px;  height:30px; text-align: center;}
 
 .val {
     font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
