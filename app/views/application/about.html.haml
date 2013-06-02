@@ -3,74 +3,90 @@
 - container_type 'fluid'
 
 .container
-  .row-fluid
-    = render :partial => 'application/notification_header'
+	.row-fluid
+		= render :partial => 'application/notification_header'
 
-    .span7
-      %h2
-        History
-      .well.well-large
-        %h4
-          Complete and in-depth Halo 4 Stats. Made, maintained and powered by the community!
+		.span7
+			%h2
+				History
+			.well.well-large
+				%h4
+					Complete and in-depth Halo 4 Stats. Made, maintained and powered by the community!
 
-        %br/
+				%br/
 
-        %h3
-          FAQ:
-        %br/
-        %p
-          %strong
-            Why should I come here?
-          %br/
-          It's about 2mb less clutter than HaloWaypoint, and we provide as much juicy data. Just in a more.. Familiar and Friendly format.
+				%h3
+					FAQ:
+				%br/
+				%p
+					%strong
+						Why should I come here?
+					%br/
+					It's about 2mb less clutter than HaloWaypoint, and we provide as much juicy data. Just in a more.. Familiar and Friendly format.
 
-        %p
-          %strong
-            How often can I update my stats?
-          %br/
-          It depends on the stats. Service Records, Commendations, Game Histories, and Specilizations update every 8 minutes. A Matchs History never update, as they will never change.
+				%p
+					%strong
+						How often can I update my stats?
+					%br/
+					It depends on the stats. Service Records, Commendations, Game Histories, and Specilizations update every 8 minutes. A Matchs History never update, as they will never change.
+
+				%p
+					%strong
+						Dude, I have like a really cool idea.
+					%br/
+					Post a Bug Report
+					%a{href: 'https://github.com/Xerax/Branch/issues/new?labels=feature%20addition'}
+						here
+					, and i'll see what can be done.
+
+				%p
+					%strong
+						Can I have Sauce?
+					%br/
+					%a{href: 'https://github.com/Xerax/Branch'}
+						Github
 
 
 
-    .span5
-      %h2
-        Me
-      .well
-        .pagination-centered
-          %img.img-polaroid{src: 'https://en.gravatar.com/avatar/400f92af64c19671fd2f19cfc0e048a5?s=200&r=pg'}
-          %br/
-          %br/
-          %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/alexerax"} 
-            Follow @alexerax
-          :javascript
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+		.span5
+			%h2
+				Me
+			.well
+				.pagination-centered
+					%img.img-polaroid{src: 'https://en.gravatar.com/avatar/400f92af64c19671fd2f19cfc0e048a5?s=200&r=pg'}
+					%br/
+					%br/
+					%a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/alexerax"} 
+						Follow @alexerax
+					:javascript
+						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
-      %h4
-        Sources
-      .well
-        %a{href: 'http://twitter.github.io/bootstrap/'}
-          Bootstrap
-        #{"-> Base template system"}
-        %br/
-        %a{href: 'http://bootswatch.com/cyborg/'}
-          Cyborg
-        #{"-> Snazzy looking Bootstrap theme"}
-        %br/
-        %a{href: 'http://jquery.com/'}
-          jQuery
-        #{"-> All the beautiful JS"}
-        %br/
-        %a{href: 'http://www.oesmith.co.uk/morris.js/'}
-          morris.js
-        #{"-> Sexy looking Javascript charts"}
-        %br/
-        %a{href: 'http://rubyonrails.org/'}
-          RubyOnRails
-        #{"-> A pretty good web programming language"}
-        %br/
+			%h4
+				Sources
+			.well
+				%a{href: 'http://twitter.github.io/bootstrap/'}
+					Bootstrap
+				#{"-> Base template system"}
+				%br/
+				%a{href: 'http://bootswatch.com/cyborg/'}
+					Cyborg
+				#{"-> Snazzy looking Bootstrap theme"}
+				%br/
+				%a{href: 'http://jquery.com/'}
+					jQuery
+				#{"-> All the beautiful JS"}
+				%br/
+				%a{href: 'http://www.oesmith.co.uk/morris.js/'}
+					morris.js
+				#{"-> Sexy looking Javascript charts"}
+				%br/
+				%a{href: 'http://rubyonrails.org/'}
+					RubyOnRails
+				#{"-> A pretty good web programming language"}
+				%br/
 
-      %h4
-        The Tree
-      .well
-        Branched Hard
-        
+			%h4
+				The Tree
+			.well
+				Branched Hard
+				
