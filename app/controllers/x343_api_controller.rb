@@ -142,12 +142,13 @@ class X343ApiController < ApplicationController
 				else
 					old_cached = H4PlayerServicerecords.find_all_by_gamertag(gamertag_name)
 					if old_cached != nil
-						old_cached = H4PlayerServicerecords.new
+						H4PlayerServicerecords.delete(old_cached)
 					end
 
-					old_cached.gamertag = gamertag_name
-					old_cached.data = response.body
-					old_cached.save
+					cached_sr = H4PlayerServicerecords.new
+					cached_sr.gamertag = gamertag_name
+					cached_sr.data = response.body
+					cached_sr.save
 
 					data
 				end
