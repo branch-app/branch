@@ -4,25 +4,39 @@
 
 .row-fluid
 
-  = h4_sidebar_commendations 'active'
-  = render :partial => 'halo4/global/sidebar', :object => @service_record
+	= h4_sidebar_commendations 'active'
+	= render :partial => 'halo4/global/sidebar', :object => @service_record
 
-  = render :partial => 'application/notification_header'
+	= render :partial => 'application/notification_header'
 
-  = render :partial => 'halo4/global/service_record_header', :object => @service_record
+	= render :partial => 'halo4/global/service_record_header', :object => @service_record
 
-  .span8
-    - @commendation_categories.each do |category|
-      - commendations = commendations_by_category(category['Id'])
-      - if category['Name'] == '--'
-        - next
-      .well{ :style => 'padding: 10px 0 0 10px;' }
-        %h3
-          #{@service_record['Gamertag']}'s #{plural_commendation_category_name_to_single(category['Name'])} Commendations:
+	.span8.well
+		%ul.nav.nav-tabs
+			- first = true
+			- @commendation_categories.each do |category|
+				- next if category['Name'] == '--'
+				%li{class: "#{'active' if first}"}
+					%a{'data-toggle' => 'tab', href: "#cat-#{category['Id']}"}
+						= category['Name']
 
-        .commendations-stuff{  }
-          - commendations.each do |commendation|
-            = render :partial => 'halo4/commendations/commendation', :locals => { :category => category, :commendation => commendation }
+				- first = false
 
-        .cleaner
-    = render :partial => 'halo4/global/social_sharing'
+		.tabbable
+			.tab-content
+				- first = true
+				- @commendation_categories.each do |category|
+					- next if category['Name'] == '--'
+					- commendations = commendations_by_category(category['Id'])
+					.tab-pane{class: "#{'active' if first}", id: "cat-#{category['Id']}"}
+						%h3
+							#{@service_record['Gamertag']}'s #{plural_commendation_category_name_to_single(category['Name'])} Commendations:
+
+						.commendations-stuff
+							- commendations.each do |commendation|
+								= render :partial => 'halo4/commendations/commendation', :locals => { :category => category, :commendation => commendation }
+
+						.cleaner
+
+					- first = false
+		= render :partial => 'halo4/global/social_sharing'
