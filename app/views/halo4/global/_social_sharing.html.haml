@@ -8,7 +8,8 @@
 	%br/
 	%a.twitter-share-button{"data-hashtags" => "branchapp", :href => "https://twitter.com/share"} 
 		Share
-	
+	%br/
+
 	:javascript
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
@@ -26,3 +27,5 @@
 			po.src = 'https://apis.google.com/js/plusone.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 		})();
+
+	%script{type: 'text/javascript', src: 'http://www.reddit.com/static/button/button1.js'}/
