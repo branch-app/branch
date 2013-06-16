@@ -153,6 +153,7 @@ class X343ApiController < ApplicationController
 		end
 	end
 
+	# TODO: Detailed shit
 	def self.GetDetailedModeDetails(gamertag)
 		gamertag_name = gamertag.to_s.downcase
 		cached_com = H4PlayerModeDetails.find_by_gamertag(gamertag_name)
@@ -200,7 +201,6 @@ class X343ApiController < ApplicationController
 			end
 		end
 	end
-
 	def self.GetDetailedModeData(gamertag, service, cache)
 		url = url_from_name(service, 'service_list')
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
