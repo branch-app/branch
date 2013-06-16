@@ -126,42 +126,38 @@ class X343ApiController < ApplicationController
 	def self.GetServiceRecord(gamertag)
 		gamertag_name = gamertag.to_s.downcase
 		cached_sr = H4PlayerServicerecords.find_by_gamertag(gamertag_name)
+		cached_data = S3Storage.pull(GAME_LONG, 'service_record', gamertag_name)
 
-		if cached_sr != nil && cached_sr.data != nil && cached_sr.updated_at + (60 * 8) > Time.now
-			json = JSON.parse(cached_sr.data)
-			return json
+		if cached_sr != nil && cached_data != nil && cached_sr.updated_at + (60 * 8) > Time.now
+			JSON.parse cached_data
 		else
 			url = url_from_name('GetServiceRecord', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
 			response = authorized_request(url, 'GET', 'Spartan', nil)
 
-			i = response.code
-
 			if response != nil && response.code == 200
-				data = JSON.parse(response.body)
+				data = JSON.parse response.body
 
 				# check shit worked
 				if data['StatusCode'] != 1
-					return { :status_code => data['StatusCode'], :continue => 'no' }
+					{ :status_code => data['StatusCode'], :continue => 'no' }
 				else
-					old_cached = H4PlayerServicerecords.find_all_by_gamertag(gamertag_name)
-					if old_cached != nil
-						H4PlayerServicerecords.delete(old_cached)
-					end
+					old_cached = H4PlayerServicerecords.find_all_by_gamertag gamertag_name
+					H4PlayerServicerecords.delete(old_cached) if old_cached != nil
 
 					cached_sr = H4PlayerServicerecords.new
 					cached_sr.gamertag = gamertag_name
-					cached_sr.data = response.body
 					cached_sr.save
 
+					S3Storage.push(GAME_LONG, 'service_record', gamertag_name, response.body)
 					data
 				end
 			else
 				# try returning cache
-				if cached_sr != nil
-					return JSON.parse(cached_sr.data)
+				if cached_sr != nil && cached_data != nil
+					JSON.parse cached_data
 				else
-					return { :status_code => 1001, :continue => 'no' }
+					{ :status_code => 1001, :continue => 'no' }
 				end
 			end
 		end
