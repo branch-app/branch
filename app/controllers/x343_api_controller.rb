@@ -221,40 +221,38 @@ class X343ApiController < ApplicationController
 	def self.GetPlayerCommendations(gamertag)
 		gamertag_name = gamertag.to_s.downcase
 		cached_com = H4PlayerCommendations.find_by_gamertag(gamertag_name)
+		cached_data = S3Storage.pull(GAME_LONG, 'player_commendation', gamertag_name)
 
-		if cached_com != nil && cached_com.data != nil && cached_com.updated_at + (60 * 8) > Time.now
-			json = JSON.parse(cached_com.data)
-			return json
+		if cached_com != nil && cached_data != nil && cached_com.updated_at + (60 * 8) > Time.now
+			JSON.parse cached_data
 		else
 			url = url_from_name('GetCommendations', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag })
 			response = authorized_request(url, 'GET', 'Spartan', nil)
 
 			if response != nil && response.code == 200
-				data = JSON.parse(response.body)
+				data = JSON.parse response.body
 
 				# check shit worked
 				if data['StatusCode'] != 1
-					return { :status_code => data['StatusCode'], :continue => 'no' }
+					{ :status_code => data['StatusCode'], :continue => 'no' }
 				else
 					old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
-					if old_cached != nil
-						H4PlayerCommendations.delete(old_cached)
-					end
+					H4PlayerCommendations.delete(old_cached) if old_cached != nil
 
 					cached_com = H4PlayerCommendations.new
 					cached_com.gamertag = gamertag_name
-					cached_com.data = response.body
 					cached_com.save
 
+					S3Storage.push(GAME_LONG, 'player_commendation', gamertag_name, response.body)
 					data
 				end
 			else
 				# try returning cache
-				if cached_com != nil
-					return JSON.parse(cached_com.data)
+				if cached_data != nil
+					JSON.parse cached_data
 				else
-					return { :status_code => 1001, :continue => 'no' }
+					{ :status_code => 1001, :continue => 'no' }
 				end
 			end
 		end
