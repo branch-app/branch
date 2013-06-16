@@ -1,4 +1,7 @@
+require 'aws-sdk'
+
 class X343ApiController < ApplicationController
+	include S3Storage
 	cattr_accessor :game_meta_data
 
 	# Status Codes
@@ -12,6 +15,7 @@ class X343ApiController < ApplicationController
 
 	# human stupidity
 	GAME = 'h4'
+	GAME_LONG = 'halo4'
 	LANGUAGE = 'en-us'
 	SERVICES_LIST_URL = 'https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752'
 
