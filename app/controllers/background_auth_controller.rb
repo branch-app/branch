@@ -8,7 +8,7 @@ class BackgroundAuthController < ApplicationController
 			loop = true
 
 			while loop
-				url = URI.parse('http://h4tokengen.xeraxic.com/api/authentication/NoHackingItsBad')
+				url = URI.parse('http://h4tokengen.xeraxic.com/api/authentication/' + ENV['PARAM1'])
 				req = Net::HTTP::Get.new(url.path)
 				res = Net::HTTP.start(url.host, url.port) {|http|
 					http.request(req)
