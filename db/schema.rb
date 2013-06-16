@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525023741) do
+ActiveRecord::Schema.define(:version => 20130616202519) do
 
   create_table "blog_posts", :force => true do |t|
     t.string   "title"
@@ -34,12 +34,6 @@ ActiveRecord::Schema.define(:version => 20130525023741) do
     t.datetime "updated_at",                :null => false
   end
 
-  create_table "h4_game_metadata", :force => true do |t|
-    t.text     "data",       :limit => 2147483647
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-  end
-
   create_table "h4_global_challenges", :force => true do |t|
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
@@ -55,17 +49,15 @@ ActiveRecord::Schema.define(:version => 20130525023741) do
 
   create_table "h4_player_commendations", :force => true do |t|
     t.string   "gamertag"
-    t.text     "data",       :limit => 2147483647
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "h4_player_matches", :force => true do |t|
     t.string   "gamertag"
-    t.text     "data",       :limit => 2147483647
     t.string   "game_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "h4_player_mode_details", :force => true do |t|
@@ -80,9 +72,8 @@ ActiveRecord::Schema.define(:version => 20130525023741) do
 
   create_table "h4_player_recent_matches", :force => true do |t|
     t.string   "gamertag"
-    t.text     "data",        :limit => 2147483647
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "start_index"
     t.integer  "count"
     t.integer  "mode_id"
@@ -91,9 +82,8 @@ ActiveRecord::Schema.define(:version => 20130525023741) do
 
   create_table "h4_player_servicerecords", :force => true do |t|
     t.string   "gamertag"
-    t.text     "data",       :limit => 2147483647
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "h4_playlists", :force => true do |t|
