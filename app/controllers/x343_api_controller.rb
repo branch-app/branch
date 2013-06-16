@@ -62,13 +62,11 @@ class X343ApiController < ApplicationController
 		response = unauthorized_request(url, 'GET', nil)
 
 		if response != nil && response.code == 200
-			# save to database
-			H4GameMetadata.delete_all()
-			meta_data = H4GameMetadata.new
-			meta_data.data = response.body
-			meta_data.save
+			# save to s3
+			S3Storage.push(GAME_LONG, 'other', 'metadata', response.body)
 
-			$game_meta_data = JSON.parse(response.body)
+			$game_meta_data = JSON.parse response.body
+			$game_meta_data
 		end
 	end
 
@@ -106,20 +104,12 @@ class X343ApiController < ApplicationController
 
 	def self.GetMetaData
 		# load from sql
-		cached_meta = H4GameMetadata.first
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'metadata')
 
-		if cached_meta != nil && cached_meta.data != nil
-			json = JSON.parse(cached_meta.data)
-			return json
+		if cached_data != nil
+			JSON.parse cached_data
 		else
-			UpdateMetaData()
-
-			cached_meta = H4GameMetadata.first
-
-			if cached_meta != nil && cached_meta.data != nil
-				json = JSON.parse(cached_meta.data)
-				json
-			end
+			UpdateMetaData
 		end
 	end
 
