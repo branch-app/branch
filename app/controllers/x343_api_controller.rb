@@ -320,41 +320,39 @@ class X343ApiController < ApplicationController
 	def self.GetMatchDetails(gamertag, match_id)
 		gamertag_name = gamertag.to_s.downcase
 		cached_match = H4PlayerMatch.find_by_game_id(match_id)
+		cached_data = S3Storage.pull(GAME_LONG, 'player_match', gamertag_name + '.' + match_id)
 
-		if cached_match != nil && cached_match.data != nil
-			json = JSON.parse(cached_match.data)
-			return json
+		if cached_match != nil && cached_data != nil
+			JSON.parse cached_data
 		else
 			url = url_from_name('GetGameDetails', 'service_list')
 			url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
 			response = authorized_request(url, 'GET', 'Spartan', nil)
 
 			if response != nil && response.code == 200
-				data = JSON.parse(response.body)
+				data = JSON.parse response.body
 
 				# check shit worked
 				if data['StatusCode'] != 1
-					return { :status_code => data['StatusCode'], :continue => 'no' }
+					{ :status_code => data['StatusCode'], :continue => 'no' }
 				else
 					old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_name, match_id)
-					if old_cached != nil
-						H4PlayerMatch.delete(old_cached)
-					end
+					H4PlayerMatch.delete(old_cached) if old_cached != nil
 
 					cached_match = H4PlayerMatch.new
 					cached_match.gamertag = gamertag_name
-					cached_match.data = response.body
 					cached_match.game_id = match_id
 					cached_match.save
 
+					S3Storage.push(GAME_LONG, 'player_match', gamertag_name + '.' + match_id, response.body)
 					data
 				end
 			else
 				# try returning cache
 				if cached_match != nil
-					return JSON.parse(cached_match.data)
+					JSON.parse cached_data
 				else
-					return { :status_code => 1001, :continue => 'no' }
+					{ :status_code => 1001, :continue => 'no' }
 				end
 			end
 		end
