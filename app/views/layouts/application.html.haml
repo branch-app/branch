@@ -84,7 +84,8 @@
 							%li{:class => yield(:active_about)}
 								%a{:href => "/about/"} About
 						.navbar-search.pull-right
-							%input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
+							%form{ action: '/search/' }
+								%input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", name: 'q', :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
 
 		- if yield(:container_type) == 'fluid'
 			.container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
@@ -98,20 +99,6 @@
 			%p 343 stats, bunge styl
 
 :javascript
-	$('#search-navbar').keyup(function(e){
-			if(e.keyCode == 13)
-			{
-					$(this).trigger("enterKey");
-			}
-	});
-	$('#search-navbar').bind("enterKey",function(e){
-			search()
-	});
-	function search()
-	{
-			var gamertag = $('#search-navbar').val();
-			window.location.href = "/search/" + gamertag + "/";
-	}
 	$(function () {
 			$("[rel='tooltip']").tooltip();
 	});

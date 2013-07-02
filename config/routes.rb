@@ -11,7 +11,7 @@ BranchApp::Application.routes.draw do
 	get '/register' => 'users#new'
 
 	# search
-	match '/search/:gamertag/' => 'search#index'
+	get '/search/' => 'search#index'
 
 	# blog
 	match '/blog/' => 'blog#index'
