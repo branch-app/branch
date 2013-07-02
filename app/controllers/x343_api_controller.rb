@@ -243,7 +243,7 @@ class X343ApiController < ApplicationController
 	def self.GetMatchDetails(gamertag, match_id)
 		gamertag_name = gamertag.to_s.downcase
 		cached_match = H4PlayerMatch.find_by_game_id(match_id)
-		cached_data = S3Storage.pull(GAME_LONG, 'player_match', gamertag_name + '.' + match_id)
+		cached_data = S3Storage.pull(GAME_LONG, 'player_match', match_id)
 
 		if cached_match != nil && cached_data != nil
 			JSON.parse cached_data
@@ -267,7 +267,7 @@ class X343ApiController < ApplicationController
 					cached_match.game_id = match_id
 					cached_match.save
 
-					S3Storage.push(GAME_LONG, 'player_match', gamertag_name + '.' + match_id, response.body)
+					S3Storage.push(GAME_LONG, 'player_match', match_id, response.body)
 					data
 				end
 			else
