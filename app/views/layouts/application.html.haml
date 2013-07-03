@@ -8,11 +8,7 @@
 
 		/ local
 		= stylesheet_link_tag    'application', :media => 'all'
-		= stylesheet_link_tag    'bootstrap.min', :media => 'all'
-		= stylesheet_link_tag    'morris', :media => 'all'
-		/ stylesheet_link_tag    'bootstrap-responsive.min', :media =&gt; 'all'
-		= stylesheet_link_tag    'jbclock', :media => 'all'
-		= stylesheet_link_tag    'jquery.jqplot.min', :media => 'all'
+		/ = stylesheet_link_tag    'bootstrap-responsive.min', :media =&gt; 'all'
 		= javascript_include_tag 'bootstrap.min'
 		= javascript_include_tag 'bootswatch'
 		= javascript_include_tag 'jbclock'
@@ -23,6 +19,37 @@
 		= yield(:head_style)
 		:css
 			body {
+				padding-top: 85px;
+			}
+			@media (max-width: 808px) {
+				body {
+					padding-top: 120px;
+				} 
+			}
+			@media (max-width: 502px) {
+				body {
+					padding-top: 180px;
+				} 
+			}
+			@media (max-width: 362px) {
+				body {
+					padding-top: 220px;
+				} 
+			}
+			@media (max-width: 346px) {
+				body {
+					padding-top: 280px;
+				} 
+			}
+			@media (max-width: 233px) {
+				body {
+					padding-top: 300px;
+				} 
+			}
+			@media (max-width: 220px) {
+				body {
+					padding-top: 350px;
+				} 
 			}
 
 			footer {
@@ -88,10 +115,10 @@
 								%input#search-navbar.search-query.span2{:placeholder => "Gamertag Search", name: 'q', :style => "border-radius: 20px;", :type => "text", :value => yield(:search_query)}/
 
 		- if yield(:container_type) == 'fluid'
-			.container-fluid{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
+			.container-fluid{ :style => "max-width: 1600px; min-width: 1200px;" }
 				= yield
 		- else
-			.container{ :style => "margin-top: 80px; max-width: 1600px; min-width: 1200px;" }
+			.container{ :style => "max-width: 1600px; min-width: 1200px;" }
 				= yield
 
 		%hr/
