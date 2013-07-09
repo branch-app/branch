@@ -19,37 +19,36 @@ module I343ApiH4
 		init
 		
 		response = unauthorized_request(SERVICES_LIST_URL, 'GET', nil)
+		return unless validate_response(response)
 
-		if validate_response(response)
-			response = JSON.parse(response.body)
+		response = JSON.parse(response.body)
 
-			services_list = response['ServiceList']
-			settings = response['Settings']
+		services_list = response['ServiceList']
+		settings = response['Settings']
 
-			# save to database
-			H4ServicesList.delete_all()
+		# save to database
+		H4ServicesList.delete_all()
 
-			$services_list = { service_list: { }, settings: { } }
+		$services_list = { service_list: { }, settings: { } }
 
-			services_list.each do |services_list_item|
-				new_item = H4ServicesList.new
-				new_item.name = services_list_item[0]
-				new_item.url = services_list_item[1]
-				new_item.list_type = 'service_list'
-				new_item.save
+		services_list.each do |services_list_item|
+			new_item = H4ServicesList.new
+			new_item.name = services_list_item[0]
+			new_item.url = services_list_item[1]
+			new_item.list_type = 'service_list'
+			new_item.save
 
-				$services_list[:service_list][services_list_item[0]] = services_list_item[1] 
-			end
+			$services_list[:service_list][services_list_item[0]] = services_list_item[1] 
+		end
 
-			settings.each do |services_list_item|
-				new_item = H4ServicesList.new
-				new_item.name = services_list_item[0]
-				new_item.url = services_list_item[1]
-				new_item.list_type = 'settings'
-				new_item.save
+		settings.each do |services_list_item|
+			new_item = H4ServicesList.new
+			new_item.name = services_list_item[0]
+			new_item.url = services_list_item[1]
+			new_item.list_type = 'settings'
+			new_item.save
 
-				$services_list[:settings][services_list_item[0]] = services_list_item[1] 
-			end
+			$services_list[:settings][services_list_item[0]] = services_list_item[1] 
 		end
 	end
 
@@ -58,15 +57,15 @@ module I343ApiH4
 		
 		url = url_from_name('GetGameMetadata', 'service_list')
 		url = full_url_with_defaults(url, nil)
+
 		response = unauthorized_request(url, 'GET', nil)
+		return unless validate_response(response)
 
-		if validate_response(response)
-			# save to s3
-			S3Storage.push(GAME_LONG, 'other', 'metadata', response.body)
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'metadata', response.body)
 
-			$game_meta_data = JSON.parse response.body
-			$game_meta_data
-		end
+		$game_meta_data = JSON.parse response.body
+		$game_meta_data
 	end
 
 	def self.update_playlist_data
@@ -74,14 +73,14 @@ module I343ApiH4
 
 		url = url_from_name('GetPlaylists', 'service_list')
 		url = full_url_with_defaults(url, nil)
+
 		response = authorized_request(url, 'GET', 'Spartan', nil)
+		return unless validate_response(response)
 
-		if validate_response(response)
-			# save to s3
-			S3Storage.push(GAME_LONG, 'other', 'playlist_data', response.body)
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'playlist_data', response.body)
 
-			JSON.parse response.body
-		end
+		JSON.parse response.body
 	end
 
 	def self.update_challenge_data
@@ -89,14 +88,14 @@ module I343ApiH4
 
 		url = url_from_name('GetGlobalChallenges', 'service_list')
 		url = full_url_with_defaults(url, nil)
+
 		response = unauthorized_request(url, 'GET', nil)
+		return unless validate_response(response)
 
-		if validate_response(response)
-			# save to s3
-			S3Storage.push(GAME_LONG, 'other', 'challenge_data', response.body)
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'challenge_data', response.body)
 
-			JSON.parse response.body
-		end
+		JSON.parse response.body
 	end
 
 
