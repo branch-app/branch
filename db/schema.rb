@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616202519) do
+ActiveRecord::Schema.define(:version => 20130709200114) do
 
   create_table "blog_posts", :force => true do |t|
     t.string   "title"
@@ -32,12 +32,6 @@ ActiveRecord::Schema.define(:version => 20130616202519) do
     t.text     "spartan_token"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-  end
-
-  create_table "h4_global_challenges", :force => true do |t|
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.text     "data",       :limit => 2147483647
   end
 
   create_table "h4_player_challenges", :force => true do |t|
@@ -84,12 +78,6 @@ ActiveRecord::Schema.define(:version => 20130616202519) do
     t.string   "gamertag"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "h4_playlists", :force => true do |t|
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.text     "data",       :limit => 2147483647
   end
 
   create_table "h4_services_lists", :force => true do |t|
