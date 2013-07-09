@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 		@challenge_periods = @challenge_metadata['ChallengePeriods']
 
 		@friendly_challenge_data = { }
-		challenges = JSON.parse(H4GlobalChallenges.first.data)['Challenges']
+		challenges = X343ApiController.GetChallengeData()['Challenges']
 		@challenge_categories.each do |category|
 			relevant_challenges = [ ]
 			challenges.each do |challenge|
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 		@total_population = 0
 
 		@friendly_playlist_data = { }
-		playlists = JSON.parse(H4Playlists.first.data)['Playlists']
+		playlists = X343ApiController.GetPlaylistData()['Playlists']
 		@game_modes.each do |mode|
 			relevant_playlists = [ ]
 			playlists.each do |playlist|

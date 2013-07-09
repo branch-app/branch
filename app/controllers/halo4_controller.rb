@@ -65,7 +65,6 @@ class Halo4Controller < ApplicationController
 		@commendations = @commendations.sort { |a, b| [a['LevelId'], a['Ticks']] <=> [b['LevelId'], b['Ticks']] }.reverse
 		@game_modes = @metadata['GameModesMetadata']['GameModes']
 	end
-
 	def competitive_skill_rank
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record[:continue] == "no"
@@ -96,7 +95,6 @@ class Halo4Controller < ApplicationController
 			return
 		end
 	end
-
 	def summary
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record['continue'] == 'no'
@@ -120,7 +118,6 @@ class Halo4Controller < ApplicationController
 		@war_games_data = JSON.parse(mode_data.war_games_data)
 		@custom_data = JSON.parse(mode_data.custom_data)
 	end
-
 	def specializations
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record[:continue] == "no"
@@ -132,7 +129,6 @@ class Halo4Controller < ApplicationController
 
 		@metadata = X343ApiController.GetMetaData()
 	end
-
 	def commendations
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record[:continue] == "no"
@@ -146,7 +142,6 @@ class Halo4Controller < ApplicationController
 		@metadata = X343ApiController.GetMetaData()
 		@commendation_categories = @metadata['CommendationsMetadata']['CommendationCategories']
 	end
-
 	def service_record
 		@service_record = X343ApiController.GetServiceRecord(params[:gamertag])
 		if @service_record['continue'] == 'no'
@@ -167,32 +162,8 @@ class Halo4Controller < ApplicationController
 		@challenge_categories = @challenge_metadata['ChallengeCategories']
 		@challenge_periods = @challenge_metadata['ChallengePeriods']
 
-		if params[:gamertag] != nil
-			# gamurtag
-			@friendly_challenge_data = { }
-			challenges = X343ApiController.GetPlayerChallenges(params[:gamertag])
-
-			if challenges != 'player_not_found'
-				flash[:notice] = "Specified Player `#{params[:gamertag]}` could not be found."
-				flash[:type] = 'error'
-			else
-				challenges = challenges['Challenges']
-				@challenge_categories.each do |category|
-					relevant_challenges = [ ]
-					challenges.each do |challenge|
-						if challenge['CategoryId'] == category['Id']
-							relevant_challenges << challenge
-						end
-					end
-					@friendly_challenge_data[category['Id']] = relevant_challenges
-					@is_gamertag_related = true
-					return
-				end
-			end
-		end
-
 		@friendly_challenge_data = { }
-		challenges = JSON.parse(H4GlobalChallenges.first.data)['Challenges']
+		challenges = X343ApiController.GetChallengeData()['Challenges']
 		@challenge_categories.each do |category|
 
 			relevant_challenges = [ ]
@@ -204,7 +175,6 @@ class Halo4Controller < ApplicationController
 			@friendly_challenge_data[category['Id']] = relevant_challenges
 		end
 	end
-
 	def playlists
 		@game_mode_metadata = X343ApiController.GetMetaData()['GameModesMetadata']
 		@game_modes = @game_mode_metadata['GameModes']
@@ -212,7 +182,7 @@ class Halo4Controller < ApplicationController
 		@total_population = 0
 
 		@friendly_playlist_data = { }
-		playlists = JSON.parse(H4Playlists.first.data)['Playlists']
+		playlists = X343ApiController.GetPlaylistData()['Playlists']
 		@game_modes.each do |mode|
 			relevant_playlists = [ ]
 			playlists.each do |playlist|

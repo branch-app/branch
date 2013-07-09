@@ -67,8 +67,8 @@ module BranchApp
 			# call
 			X343ApiController.UpdateServicesList
 			X343ApiController.UpdateMetaData
-			X343ApiController.UpdateChallenges
-			X343ApiController.UpdatePlaylists
+			X343ApiController.UpdateChallengeData
+			X343ApiController.UpdatePlaylistData
 		end
 	end
 end

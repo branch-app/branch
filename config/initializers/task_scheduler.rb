@@ -32,11 +32,11 @@ scheduler = Rufus::Scheduler.start_new
 
 	# re-cache playlists and population
 	scheduler.every '1h' do
-		X343ApiController.UpdatePlaylists
+		X343ApiController.UpdatePlaylistData
 	end
 
 
 	# re-cache the challenges
 	scheduler.cron '5 10 * * 1-7' do
-		X343ApiController.UpdateChallenges
+		X343ApiController.UpdateChallengeData
 	end

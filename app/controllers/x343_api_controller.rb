@@ -70,46 +70,59 @@ class X343ApiController < ApplicationController
 		end
 	end
 
-	def self.UpdatePlaylists
+	def self.UpdatePlaylistData
 		url = url_from_name('GetPlaylists', 'service_list')
 		url = full_url_with_defaults(url, nil)
 		response = authorized_request(url, 'GET', 'Spartan', nil)
 
 		if response != nil && response.code == 200
-			H4Playlists.delete_all
-			playlist_model = H4Playlists.new
-			playlist_model.data = response.body
-			playlist_model.save
+			# save to s3
+			S3Storage.push(GAME_LONG, 'other', 'playlist_data', response.body)
+
+			JSON.parse response.body
 		end
 	end
 
-	def self.UpdateChallenges
+	def self.UpdateChallengeData
 		url = url_from_name('GetGlobalChallenges', 'service_list')
 		url = full_url_with_defaults(url, nil)
 		response = unauthorized_request(url, 'GET', nil)
 
 		if response != nil && response.code == 200
-			json = JSON.parse(response.body)
+			# save to s3
+			S3Storage.push(GAME_LONG, 'other', 'challenge_data', response.body)
 
-			if json['StatusCode'] != 1
-				raise
-			end
-
-			H4GlobalChallenges.delete_all
-			new_challenge = H4GlobalChallenges.new
-			new_challenge.data = response.body
-			new_challenge.save
+			JSON.parse response.body
 		end
 	end
 
 	def self.GetMetaData
-		# load from sql
 		cached_data = S3Storage.pull(GAME_LONG, 'other', 'metadata')
 
 		if cached_data != nil
 			JSON.parse cached_data
 		else
 			UpdateMetaData
+		end
+	end
+
+	def self.GetPlaylistData
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'playlist_data')
+
+		if cached_data != nil
+			JSON.parse cached_data
+		else
+			UpdatePlaylistData
+		end
+	end
+
+	def self.GetChallengeData
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'challenge_data')
+
+		if cached_data != nil
+			JSON.parse cached_data
+		else
+			UpdateChallengeData
 		end
 	end
 
