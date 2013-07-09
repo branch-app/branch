@@ -1,4 +1,5 @@
 scheduler = Rufus::Scheduler.start_new
+	include I343Auth
 
 =begin
 	scheduler.in '20m' do
@@ -21,7 +22,7 @@ scheduler = Rufus::Scheduler.start_new
 
 	# re-authenticate windows live and spartan tokens
 	scheduler.every '55m' do
-		BackgroundAuthController.UpdateAuthentication
+		I343Auth.update_authentication
 	end
 
 	# re-cache services list (I don't think they change this much, so lets do it once a week. We can always manually re-cache it from the acp later)

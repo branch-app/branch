@@ -1,7 +1,9 @@
 class UpdateCachesController < ApplicationController
+	include I343Auth
+
 	def devcacheupdate
 		# authorize
-		BackgroundAuthController.UpdateAuthentication
+		I343Auth.update_authentication
 
 		# call
 		X343ApiController.UpdateServicesList
