@@ -162,6 +162,38 @@ module I343ApiH4
 		end
 	end
 
+	def self.get_player_commendations(gamertag)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_commendation', gamertag_safe, H4PlayerCommendations.find_by_gamertag(gamertag_safe), (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetCommendations', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
+			H4PlayerCommendations.delete(old_cached) if old_cached != nil
+
+			cached_com = H4PlayerCommendations.new
+			cached_com.gamertag = gamertag_name
+			cached_com.save
+
+			S3Storage.push(GAME_LONG, 'player_commendation', gamertag_name, response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
 	def self.get_player_model(gamertag, size, pose = 'fullbody')
 		init
 
