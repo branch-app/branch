@@ -179,14 +179,14 @@ module I343ApiH4
 
 			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
 
-			old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_name)
+			old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_safe)
 			H4PlayerCommendations.delete(old_cached) if old_cached != nil
 
 			cached_com = H4PlayerCommendations.new
-			cached_com.gamertag = gamertag_name
+			cached_com.gamertag = gamertag_safe
 			cached_com.save
 
-			S3Storage.push(GAME_LONG, 'player_commendation', gamertag_name, response.body)
+			S3Storage.push(GAME_LONG, 'player_commendation', gamertag_safe, response.body)
 			data
 		else
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
