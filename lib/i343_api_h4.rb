@@ -206,8 +206,8 @@ module I343ApiH4
 		init
 
 		gamertag_safe = gamertag.to_s.downcase
-		cache_response = rename_this_later('player_match_history',
-			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}",
+		cache_response = rename_this_later('player_match_history', 
+			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", 
 			H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id),
 			60 * 8)
 
