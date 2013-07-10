@@ -213,12 +213,6 @@ module I343ApiH4
 		end
 	end
 
-	def self.get_metadata
-		init
-		
-		JSON.parse(H4GameMetadata.first.data)
-	end
-
 	def self.asset_url_generator_basic(base_url, asset_url, size)
 		init
 		
