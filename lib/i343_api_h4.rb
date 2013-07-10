@@ -136,7 +136,7 @@ module I343ApiH4
 		gamertag_safe = gamertag.to_s.downcase
 		cache_response = rename_this_later('service_record', gamertag_safe, H4PlayerServicerecords.find_by_gamertag(gamertag_safe), (60 * 8))
 
-		return cache_response[:data] unless cache_response[:is_valid] == true
+		return cache_response[:data] unless cache_response[:is_valid] == false
 
 		url = url_from_name('GetServiceRecord', 'service_list')
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
