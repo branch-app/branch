@@ -79,7 +79,6 @@ module I343ApiH4
 
 		# save to s3
 		S3Storage.push(GAME_LONG, 'other', 'playlist_data', response.body)
-
 		JSON.parse response.body
 	end
 
@@ -94,7 +93,6 @@ module I343ApiH4
 
 		# save to s3
 		S3Storage.push(GAME_LONG, 'other', 'challenge_data', response.body)
-
 		JSON.parse response.body
 	end
 
