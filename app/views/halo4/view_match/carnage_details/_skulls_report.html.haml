@@ -20,7 +20,7 @@
           %tr
             - skull_data = skull_meta_from_id(skull_id)
             %td
-              %img{ :src => X343ApiController.asset_url_generator_basic(skull_data['ImageUrl']['BaseUrl'], skull_data['ImageUrl']['AssetUrl'], 'medium') }
+              %img{ :src => I343ApiH4.asset_url_generator_basic(skull_data['ImageUrl']['BaseUrl'], skull_data['ImageUrl']['AssetUrl'], 'medium') }
             %td
               #{skull_data['Name']}
             %td

@@ -6,7 +6,7 @@
     Completed Specializations:
 
   - completed_specializations.each do |specialization|
-    %div{ :style => "background-position: top right; background-repeat: no-repeat; background-image: url('#{X343ApiController.asset_url_generator_basic(specialization['ImageUrl']['BaseUrl'], specialization['ImageUrl']['AssetUrl'], 'medium')}')" }
+    %div{ :style => "background-position: top right; background-repeat: no-repeat; background-image: url('#{I343ApiH4.asset_url_generator_basic(specialization['ImageUrl']['BaseUrl'], specialization['ImageUrl']['AssetUrl'], 'medium')}')" }
       %hr/
       %h4
         #{specialization['Name']}

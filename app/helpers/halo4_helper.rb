@@ -55,7 +55,7 @@ module Halo4Helper
 		# current rank data
 		h4_rank_data[:current_rank_name] = service_record['RankName']
 		h4_rank_data[:current_rank_id] = service_record['RankId']
-		h4_rank_data[:current_rank_url] = X343ApiController.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
+		h4_rank_data[:current_rank_url] = I343ApiH4.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
 		h4_rank_data[:current_rank_start_xp] = service_record['RankStartXP']
 
 		# next rank data
@@ -64,13 +64,13 @@ module Halo4Helper
 			h4_rank_data[:next_rank_name] = 'Mastery'
 			h4_rank_data[:next_rank_name_friendly] = 'Mastery (Max Rank)'
 			h4_rank_data[:next_rank_id] = service_record['RankId']
-			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
+			h4_rank_data[:next_rank_url] = I343ApiH4.asset_url_generator_basic(service_record['RankImageUrl']['BaseUrl'], service_record['RankImageUrl']['AssetUrl'], size)
 			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
 		else
 			h4_rank_data[:next_rank_name] = service_record['NextRankName']
 			h4_rank_data[:next_rank_name_friendly] = "#{service_record['NextRankName']} (#{service_record['NextRankStartXP']})"
 			h4_rank_data[:next_rank_id] = service_record['NextRankId']
-			h4_rank_data[:next_rank_url] = X343ApiController.asset_url_generator_basic(service_record['NextRankImageUrl']['BaseUrl'], service_record['NextRankImageUrl']['AssetUrl'], size)
+			h4_rank_data[:next_rank_url] = I343ApiH4.asset_url_generator_basic(service_record['NextRankImageUrl']['BaseUrl'], service_record['NextRankImageUrl']['AssetUrl'], size)
 			h4_rank_data[:next_rank_start_xp] = service_record['NextRankStartXP']
 		end
 
@@ -138,9 +138,9 @@ module Halo4Helper
 
 
 		if use_progress_1
-			return X343ApiController.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress1}.png", size)
+			return I343ApiH4.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress1}.png", size)
 		else
-			return X343ApiController.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress2}.png", size)
+			return I343ApiH4.asset_url_generator_basic('H4DifficultyAssets', "{size}/#{progress2}.png", size)
 		end
 	end
 

@@ -22,7 +22,7 @@
         - playlist['GameVariants'].each do |variant|
           %tr
             %td
-              %img{:src => X343ApiController.asset_url_generator_basic(variant['GameBaseVariantImageUrl']['BaseUrl'], variant['GameBaseVariantImageUrl']['AssetUrl'], 'medium')}/
+              %img{:src => I343ApiH4.asset_url_generator_basic(variant['GameBaseVariantImageUrl']['BaseUrl'], variant['GameBaseVariantImageUrl']['AssetUrl'], 'medium')}/
             %td= variant['GameVariantName']
             %td= variant['GameVariantDescription']
             %td= variant['GameBaseVariantName']

@@ -3,7 +3,7 @@
   .row-fluid.visible-desktop.visible-tablet
     .span7{:style => "margin: 10px 0 0 20px"}
       .gamertag-flairs
-        %img{:src => X343ApiController.asset_url_generator_basic(@service_record['RankImageUrl']['BaseUrl'], @service_record['RankImageUrl']['AssetUrl'], 'medium'), :style => "margin-top: -8px;"}/
+        %img{:src => I343ApiH4.asset_url_generator_basic(@service_record['RankImageUrl']['BaseUrl'], @service_record['RankImageUrl']['AssetUrl'], 'medium'), :style => "margin-top: -8px;"}/
         %a{:href => "/halo4/servicerecord/#{@service_record['Gamertag']}/"}
           %span.gamertag-bar
             = @service_record['Gamertag']

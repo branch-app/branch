@@ -6,7 +6,7 @@
     #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.min} Minutes and #{@duration.sec} Seconds
 
 - difficulty_data = difficulty_from_id(@match['Difficulty'])
-.game-summary-gametype{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(difficulty_data['ImageUrl']['BaseUrl'], difficulty_data['ImageUrl']['AssetUrl'], 'large')}')" }
+.game-summary-gametype{ :style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(difficulty_data['ImageUrl']['BaseUrl'], difficulty_data['ImageUrl']['AssetUrl'], 'large')}')" }
 
 .game-summary-title
   %span.body{:style => 'font-size: 16px;'}

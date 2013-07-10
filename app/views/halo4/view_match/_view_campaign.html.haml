@@ -3,12 +3,12 @@
 - content_for :twitter_meta do
 	%meta{:content => "Branch - #{@match['MapName']} on #{difficulty_data['Name']}", :name => "twitter:title"}
 	%meta{:content => "Halo 4 Campaign Match, #{@match['MapName']} on #{difficulty_data['Name']}, at #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} lasting #{@duration.min} Minutes and #{@duration.sec} Seconds. Top player was #{@top_player['Gamertag']}, who led the game with a K/D Ratio of #{ (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) }", :name => "twitter:description"}
-	%meta{:content => X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large'), :name => "twitter:image:src"}
+	%meta{:content => I343ApiH4.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large'), :name => "twitter:image:src"}
 
 - content_for :facebook_meta do
 	%meta{:content => "Branch - #{@match['MapName']} on #{difficulty_data['Name']}", :property => "og:title"}/
 	%meta{:content => "Halo 4 Campaign Match, #{@match['MapName']} on #{difficulty_data['Name']}, at #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} lasting #{@duration.min} Minutes and #{@duration.sec} Seconds. Top player was #{@top_player['Gamertag']}, who led the game with a K/D Ratio of #{ (@top_player['Kills'].to_f / @top_player['Deaths'].to_f).to_f.round(2) }", :property => 'og:description'}/
-	%meta{:content => X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large'), :property => "og:image"}/
+	%meta{:content => I343ApiH4.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large'), :property => "og:image"}/
 			
 
 .well
@@ -16,9 +16,9 @@
 		Campaign Mission:
 
 	.row-fluid
-		.cover{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large')}')" }
+		.cover{ :style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(@match['MapImageUrl']['BaseUrl'], @match['MapImageUrl']['AssetUrl'], 'large')}')" }
 			.mask
-				.game-victor-player-model{ :style => "background-image: url('#{X343ApiController.GetPlayerModel(@top_player['Gamertag'], 'medium')}')" }
+				.game-victor-player-model{ :style => "background-image: url('#{I343ApiH4.get_player_model(@top_player['Gamertag'], 'medium')}')" }
 					= render :partial => 'halo4/view_match/cover/campaign'
 
 		.game-stats

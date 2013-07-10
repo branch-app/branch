@@ -1,4 +1,4 @@
-- relevant_matches = X343ApiController.GetPlayerMatches(@service_record['Gamertag'], @start_index, @recent_match_load_count, 3, -1)['Games']
+- relevant_matches = I343ApiH4.get_player_matches(@service_record['Gamertag'], @start_index, @recent_match_load_count, 3, -1)['Games']
 
 - if relevant_matches.any?
   %table.team-table.table.table-bordered.table-striped.table-hover

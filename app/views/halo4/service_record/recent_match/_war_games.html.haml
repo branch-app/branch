@@ -6,10 +6,10 @@
       Victory!
     - else
       Defeat
-  .map-preview{:style => "background-image: url('#{X343ApiController.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'], 'medium')}')"}
+  .map-preview{:style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(match['MapImageUrl']['BaseUrl'], match['MapImageUrl']['AssetUrl'], 'medium')}')"}
     .cover
       - if match['DifficultyImageUrl'] != nil
-        %img{:src => X343ApiController.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'], 'medium'), :style => "margin: 20px 0 0 10px"}/
+        %img{:src => I343ApiH4.asset_url_generator_basic(match['BaseVariantImageUrl']['BaseUrl'], match['BaseVariantImageUrl']['AssetUrl'], 'medium'), :style => "margin: 20px 0 0 10px"}/
   .quick-stats
     %h2
       = match['FeaturedStatName']

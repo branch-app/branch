@@ -19,9 +19,9 @@
           %td Description
       %tbody
         - playlist['MapVariants'].each do |variant|
-          - map_meta = X343ApiController.mapmeta_from_id(variant['MapId'], @map_meta)
+          - map_meta = I343ApiH4.mapmeta_from_id(variant['MapId'], @map_meta)
           %tr
             %td
-              %img{:src => X343ApiController.asset_url_generator_basic(map_meta['ImageUrl']['BaseUrl'], map_meta['ImageUrl']['AssetUrl'], 'small')}/
+              %img{:src => I343ApiH4.asset_url_generator_basic(map_meta['ImageUrl']['BaseUrl'], map_meta['ImageUrl']['AssetUrl'], 'small')}/
             %td= variant['MapVariantName']
             %td= map_meta['Description']

@@ -29,7 +29,7 @@
         - enemy_stats_sorted.each do |enemy_stats|
           %tr
             %td
-              %img{ :src => X343ApiController.asset_url_generator_basic(enemy_stats['ImageUrl']['BaseUrl'], enemy_stats['ImageUrl']['AssetUrl'], 'medium'), 'data-toggle' => 'tooltop', 'data-html' => 'true', :title => "<strong>#{enemy_stats['Name']}</strong>" , :rel => 'tooltip', 'data-placement' => 'right' }
+              %img{ :src => I343ApiH4.asset_url_generator_basic(enemy_stats['ImageUrl']['BaseUrl'], enemy_stats['ImageUrl']['AssetUrl'], 'medium'), 'data-toggle' => 'tooltop', 'data-html' => 'true', :title => "<strong>#{enemy_stats['Name']}</strong>" , :rel => 'tooltip', 'data-placement' => 'right' }
             %td
               #{enemy_stats['Kills']}
             %td

@@ -8,7 +8,7 @@
     - index += 1
     - challenge_id = rand(10000)
     .row.challenge-container
-      .span3.preview-icon{:style => "background-image: url('#{X343ApiController.asset_url_generator_basic(category['ImageUrl']['BaseUrl'], category['ImageUrl']['AssetUrl'], 'large')}')"}
+      .span3.preview-icon{:style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(category['ImageUrl']['BaseUrl'], category['ImageUrl']['AssetUrl'], 'large')}')"}
 
       .span7.challenge-meta
         %h3
@@ -27,7 +27,7 @@
 - if index == 0
   .challenge-category-container
     .row.challenge-container
-      .span3.preview-icon{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(category['ImageUrl']['BaseUrl'], category['ImageUrl']['AssetUrl'], 'large')}')" }
+      .span3.preview-icon{ :style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(category['ImageUrl']['BaseUrl'], category['ImageUrl']['AssetUrl'], 'large')}')" }
 
       .span7.challenge-meta
         %h3

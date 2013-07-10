@@ -19,7 +19,7 @@
       %tr
         %td
           - unless player['IsGuest']
-            .team-player-flair{ :style => "background-color: #262626; background-image: url('#{X343ApiController.asset_url_generator_basic(player['EmblemImageUrl']['BaseUrl'], player['EmblemImageUrl']['AssetUrl'], '48')}');"}
+            .team-player-flair{ :style => "background-color: #262626; background-image: url('#{I343ApiH4.asset_url_generator_basic(player['EmblemImageUrl']['BaseUrl'], player['EmblemImageUrl']['AssetUrl'], '48')}');"}
           - else
             .team-player-flair{ :style => "background-color: #262626; background-image: url('https://emblems.svc.halowaypoint.com/h4/emblems/steel_brick_recruit-on-silver_plus?size=48');"}
 
@@ -69,6 +69,6 @@
 
         %td
           - unless player['IsGuest']
-            .team-player-rank{ :style => "background-image: url('#{X343ApiController.asset_url_generator_basic(player['RankUrl']['BaseUrl'], player['RankUrl']['AssetUrl'], 'medium')}')"}
+            .team-player-rank{ :style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(player['RankUrl']['BaseUrl'], player['RankUrl']['AssetUrl'], 'medium')}')"}
           - else
             .team-player-rank{ :style => "background-image: url('https://assets.halowaypoint.com/games/h4/ranks/v1/medium/sr-001.png')"}

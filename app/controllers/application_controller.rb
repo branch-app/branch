@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
 
 	def index
 		# Challanges
-		@challenge_metadata = X343ApiController.GetMetaData()['ChallengesMetadata']
+		@challenge_metadata = I343ApiH4.get_meta_data()['ChallengesMetadata']
 		@challenge_categories = @challenge_metadata['ChallengeCategories']
 		@challenge_periods = @challenge_metadata['ChallengePeriods']
 
 		@friendly_challenge_data = { }
-		challenges = X343ApiController.GetChallengeData()['Challenges']
+		challenges = I343ApiH4.get_challenge_data()['Challenges']
 		@challenge_categories.each do |category|
 			relevant_challenges = [ ]
 			challenges.each do |challenge|
@@ -22,12 +22,12 @@ class ApplicationController < ActionController::Base
 
 
 		# H4Playlists
-		@game_mode_metadata = X343ApiController.GetMetaData()['GameModesMetadata']
+		@game_mode_metadata = I343ApiH4.get_meta_data()['GameModesMetadata']
 		@game_modes = @game_mode_metadata['GameModes']
 		@total_population = 0
 
 		@friendly_playlist_data = { }
-		playlists = X343ApiController.GetPlaylistData()['Playlists']
+		playlists = I343ApiH4.get_playlist_data()['Playlists']
 		@game_modes.each do |mode|
 			relevant_playlists = [ ]
 			playlists.each do |playlist|

@@ -29,7 +29,7 @@
         - damage_stats_sorted.each do |damage_stats|
           %tr
             %td
-              %img{ :src => X343ApiController.asset_url_generator_basic(damage_stats['ImageUrl']['BaseUrl'], damage_stats['ImageUrl']['AssetUrl'], 'medium'), 'data-toggle' => 'tooltop', 'data-html' => 'true', :title => "<strong>#{damage_stats['Name']}</strong><br /><br/>#{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Description']}<br /><br/>Power: #{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Power']}<br />Range: #{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Range']} <br />Faction:  #{@metadata['FactionsMetadata']['Factions'][@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['FactionId']]['Name']}" , :rel => 'tooltip', 'data-placement' => 'right' }
+              %img{ :src => I343ApiH4.asset_url_generator_basic(damage_stats['ImageUrl']['BaseUrl'], damage_stats['ImageUrl']['AssetUrl'], 'medium'), 'data-toggle' => 'tooltop', 'data-html' => 'true', :title => "<strong>#{damage_stats['Name']}</strong><br /><br/>#{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Description']}<br /><br/>Power: #{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Power']}<br />Range: #{@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['Range']} <br />Faction:  #{@metadata['FactionsMetadata']['Factions'][@metadata['DamageMetadata']['DamageTypes'][damage_stats['Id'].to_i]['FactionId']]['Name']}" , :rel => 'tooltip', 'data-placement' => 'right' }
             %td
               #{damage_stats['Kills']}
             %td

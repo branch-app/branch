@@ -16,7 +16,7 @@
       - playlist_data = playlist_data_from_id(skill_rank['PlaylistId'])
       %tr
         %td
-          %img{ :src => X343ApiController.asset_url_generator_basic(playlist_data['ImageUrl']['BaseUrl'], playlist_data['ImageUrl']['AssetUrl'], 'small') }
+          %img{ :src => I343ApiH4.asset_url_generator_basic(playlist_data['ImageUrl']['BaseUrl'], playlist_data['ImageUrl']['AssetUrl'], 'small') }
         %td
           %a{ :href => "/halo4/servicerecord/#{@service_record['Gamertag']}/competitive-skill-rank/#{playlist_data['Id']}/" }
             #{playlist_data['Name']}
