@@ -130,7 +130,7 @@ module I343ApiH4
 
 
 	# Module Api Get Calls (Player Data)
-	def self.get_service_record(gamertag)
+	def self.get_player_service_record(gamertag)
 		init
 
 		gamertag_safe = gamertag.to_s.downcase
