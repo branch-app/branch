@@ -162,6 +162,12 @@ module I343ApiH4
 		end
 	end
 
+	def self.get_player_model(gamertag, size, pos = 'fullbody')
+		# https://spartans.svc.halowaypoint.com/players/{gamertag}/{game}/spartans/{pose}?target={size}
+		url = url_from_name('GetSpartanImage', 'service_list')
+		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
+	end
+
 
 	# Module Api Helpers
 	def self.mapmeta_from_id(id, meta)
