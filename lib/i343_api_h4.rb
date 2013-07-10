@@ -131,6 +131,8 @@ module I343ApiH4
 
 	# Module Api Get Calls (Player Data)
 	def self.get_service_record(gamertag)
+		init
+
 		gamertag_safe = gamertag.to_s.downcase
 		cache_response = rename_this_later('service_record', gamertag_safe, H4PlayerServicerecords.find_by_gamertag(gamertag_safe), (60 * 8))
 
