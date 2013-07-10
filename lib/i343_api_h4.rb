@@ -231,6 +231,7 @@ module I343ApiH4
 
 		output = { is_valid: false, data: nil }
 		output[:is_valid] = (cached_model != nil && cached_data != nil && cached_model.updated_at + cache_time > Time.now)
+		output[:data] = JSON.parse(cached_data) unless cached_data == nil
 
 		output
 	end
