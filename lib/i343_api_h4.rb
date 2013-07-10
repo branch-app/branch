@@ -62,7 +62,7 @@ module I343ApiH4
 		return unless validate_response(response)
 
 		# save to s3
-		S3Storage.push(GAME_LONG, 'other', 'metadata', response.body)
+		S3Storage.push(GAME_LONG, 'other', 'meta_data', response.body)
 
 		$game_meta_data = JSON.parse response.body
 		$game_meta_data
@@ -101,12 +101,12 @@ module I343ApiH4
 
 	# Module Api Get Calls
 	def self.get_meta_data
-		cached_data = S3Storage.pull(GAME_LONG, 'other', 'metadata')
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'meta_data')
 
 		unless cached_data == nil
 			JSON.parse cached_data
 		else
-			update_metadata
+			update_meta_data
 		end
 	end
 
