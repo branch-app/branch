@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+	protect_from_forgery
+	include I343ApiH4
 
 	def index
 		# Challanges
