@@ -207,7 +207,7 @@ module I343ApiH4
 	def self.mapmeta_from_id(id, meta)
 		init
 		
-		meta = GetMetaData()['MapsMetadata']['Maps'] if meta == nil
+		meta = get_meta_data()['MapsMetadata']['Maps'] if meta == nil
 		meta.each do |map|
 			return map if map['Id'] == id
 		end
