@@ -99,7 +99,7 @@ module I343ApiH4
 	end
 
 
-	# Module Api Get Calls
+	# Module Api Get Calls (Other Data)
 	def self.get_meta_data
 		cached_data = S3Storage.pull(GAME_LONG, 'other', 'meta_data')
 
@@ -129,6 +129,9 @@ module I343ApiH4
 			update_challenge_data
 		end
 	end
+
+
+	# Module Api Get Calls (Player Data)
 	# Module Api Helpers
 	def self.mapmeta_from_id(id, meta)
 		init
