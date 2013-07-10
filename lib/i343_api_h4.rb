@@ -202,6 +202,47 @@ module I343ApiH4
 		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
 	end
 
+	def self.get_player_matches(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_match_history',
+			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}",
+			H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id),
+			60 * 8)
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetGameHistory', 'service_list')
+		url += '?gamemodeid={gamemodeid}&count={count}&startat={startat}'
+		url += '&chapterid={chapterid}' if chapter_id != -1
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :count => count.to_s, :startat => start_index.to_s, :gamemodeid => mode_id.to_s, :chapterid => chapter_id.to_s })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id)
+			H4PlayerRecentMatches.delete(old_cached) if old_cached != nil
+
+			cached_match = H4PlayerRecentMatches.new
+			cached_match.gamertag = gamertag_safe
+			cached_match.start_index = start_index
+			cached_match.count = count
+			cached_match.mode_id = mode_id
+			cached_match.chapter_id = chapter_id
+			cached_match.save
+
+			S3Storage.push(GAME_LONG, 'player_match_history', "#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
 	def self.get_match_details(gamertag, match_id)
 		init
 
