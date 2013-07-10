@@ -110,6 +110,15 @@ module I343ApiH4
 		end
 	end
 
+	def self.get_playlist_data
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'playlist_data')
+
+		unless cached_data == nil
+			JSON.parse cached_data
+		else
+			update_playlist_data
+		end
+	end
 
 	# Module Api Helpers
 	def self.mapmeta_from_id(id, meta)
