@@ -227,11 +227,10 @@ module I343ApiH4
 
 	def self.rename_this_later(s3_bucket_path, s3_file_name, model_data, cache_time)
 		cached_data = S3Storage.pull(GAME_LONG, s3_bucket_path, s3_file_name)
-		cachned_model = model_data
+		cached_model = model_data
 
 		output = { is_valid: false, data: nil }
-		output[:is_valid] = (cachned_model != nil && cached_data != nil && cachned_model.updated_at + cache_time > Time.now)
-		output[:data] = cached_data
+		output[:is_valid] = (cached_model != nil && cached_data != nil && cached_model.updated_at + cache_time > Time.now)
 
 		output
 	end
