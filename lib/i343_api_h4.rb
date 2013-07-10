@@ -202,6 +202,39 @@ module I343ApiH4
 		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
 	end
 
+	def self.get_match_details(gamertag, match_id)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_match', match_id, H4PlayerMatch.find_by_game_id(match_id), (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetGameDetails', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_safe, match_id)
+			H4PlayerMatch.delete(old_cached) if old_cached != nil
+
+			cached_match = H4PlayerMatch.new
+			cached_match.gamertag = gamertag_safe
+			cached_match.game_id = match_id
+			cached_match.save
+
+			S3Storage.push(GAME_LONG, 'player_match', match_id, response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
 
 	# Module Api Helpers
 	def self.mapmeta_from_id(id, meta)
