@@ -132,6 +132,37 @@ module I343ApiH4
 
 
 	# Module Api Get Calls (Player Data)
+	def self.get_service_record(gamertag)
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('service_record', gamertag_safe, H4PlayerServicerecords.find_by_gamertag(gamertag_safe), (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == true
+
+		url = url_from_name('GetServiceRecord', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerServicerecords.find_all_by_gamertag gamertag_safe
+			H4PlayerServicerecords.delete(old_cached) if old_cached != nil
+
+			cached_sr = H4PlayerServicerecords.new
+			cached_sr.gamertag = gamertag_safe
+			cached_sr.save
+
+			S3Storage.push(GAME_LONG, 'service_record', gamertag_safe, response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
+
 	# Module Api Helpers
 	def self.mapmeta_from_id(id, meta)
 		init
