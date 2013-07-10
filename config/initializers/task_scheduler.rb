@@ -1,5 +1,6 @@
 scheduler = Rufus::Scheduler.start_new
 	include I343Auth
+	include I343ApiH4
 
 =begin
 	scheduler.in '20m' do
@@ -27,16 +28,20 @@ scheduler = Rufus::Scheduler.start_new
 
 	# re-cache services list (I don't think they change this much, so lets do it once a week. We can always manually re-cache it from the acp later)
 	scheduler.every '1w' do
-		X343ApiController.UpdateServicesList
+		I343ApiH4.update_services_list
 	end
 
 	# re-cache playlists and population
 	scheduler.every '1h' do
-		X343ApiController.UpdatePlaylistData
+		I343ApiH4.update_playlist_data
 	end
 
+	# re-cache metadata
+	scheduler.every '1d' do
+		I343ApiH4.update_meta_data
+	end	
 
 	# re-cache the challenges
 	scheduler.cron '5 10 * * 1-7' do
-		X343ApiController.UpdateChallengeData
+		I343ApiH4.update_challenge_data
 	end

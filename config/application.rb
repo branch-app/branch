@@ -65,10 +65,10 @@ module BranchApp
 			I343Auth.send :update_authentication
 
 			# call
-			X343ApiController.UpdateServicesList
-			X343ApiController.UpdateMetaData
-			X343ApiController.UpdateChallengeData
-			X343ApiController.UpdatePlaylistData
+			I343ApiH4.send :update_services_list
+			I343ApiH4.send :update_meta_data
+			I343ApiH4.send :update_challenge_data
+			I343ApiH4.send :update_playlist_data
 		end
 	end
 end
