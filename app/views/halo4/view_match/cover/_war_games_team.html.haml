@@ -3,7 +3,7 @@
     #{@match['GameBaseVariantName']}
   %br/
   %span.body
-    #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.min} Minutes and #{@duration.sec} Seconds
+    #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.hour} Hours, #{@duration.min} Minutes, and #{@duration.sec} Seconds
 
 - variant_data = Halo4Controller.GetVariantDataFromMeta(@game_variant_metadata, @match['GameBaseVariantId'])
 .game-summary-gametype{ :style => "background-image: url('#{I343ApiH4.asset_url_generator_basic(variant_data['ImageUrl']['BaseUrl'], variant_data['ImageUrl']['AssetUrl'], 'large')}')" }

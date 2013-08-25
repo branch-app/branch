@@ -3,7 +3,7 @@
     Spartan Ops - #{chapter['Title']}
   %br/
   %span.body
-    #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.min} Minutes and #{@duration.sec} Seconds
+    #{DateTime.strptime(@match['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ').strftime('%d.%m.%Y')} | #{@duration.hour} Hours, #{@duration.min} Minutes, and #{@duration.sec} Seconds
 
 .game-summary-gametype
 
