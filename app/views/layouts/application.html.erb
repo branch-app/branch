@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Social Media Button Scripts -->
-		<div id="fb-root"></div>
-		<script>
-			(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
-				fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk')
-			);
-		</script>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
 		<title>
 			Branch <%= (" - " + yield(:title)) if content_for :title %>
 		</title>
@@ -48,28 +34,42 @@
 						<li class="<%= 'active' if content_for? :home %>">
 							<%= link_to 'Home', root_url %>
 						</li>
-						<li class="dropdown">
-							<%= link_to(raw('Halo 4 <b class="caret"></b>'), root_url, { class: 'dropdown-toggle', 'data-toggle' => 'dropdown' }) %>
+						<li class="dropdown <%= 'active' if content_for? :halo4 %>">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">Action</a>
+									<%= link_to 'Halo 4', :halo4_home %>
+								</li>
+
+								<li class="divider"></li>
+								<li class="dropdown-header">Waypoint</li>
+								<li>
+									<%= link_to 'Playlists', '#' %>
 								</li>
 								<li>
-									<a href="#">Another action</a>
+									<%= link_to 'Challenges', '#' %>
 								</li>
-								<li><a href="#">Something else here</a></li>
+
 								<li class="divider"></li>
-								<li class="dropdown-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
+								<li class="dropdown-header">Leaf</li>
+								<li>
+									<a href="http://leafapp.co/h4/leaderboards">Leaderboards</a>
+								</li>
 							</ul>
 						</li>
 					</ul>
-					<form class="navbar-form navbar-right">
-						<div class="form-group">
-							<input type="text" placeholder="Search Gamertag" class="form-control">
-						</div>
-					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<form class="navbar-form">
+								<div class="form-group">
+									<input type="text" placeholder="Search Gamertag" class="form-control">
+								</div>
+							</form>
+						</li>
+						<li>
+							<a href="#">Sign In</a>
+						</li>
+					</ul>
 				</nav>
 			</div>
 		</header>
@@ -103,6 +103,20 @@
 				</div>
 			</footer>
 		<% end %>
+
+				<!-- Social Media Button Scripts -->
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+				fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk')
+			);
+		</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 		<!-- Scripts -->
 		<%= yield(:scripts) if content_for? :scripts %>
