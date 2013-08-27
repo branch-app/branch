@@ -1,0 +1,133 @@
+<% content_for :home, true %>
+<% content_for :title, 'Welcome' %>	
+<% content_for :has_footer, true %>
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Welcome to Branch</h1>
+		<p>Detailed Halo Stats. Designed and Built with the community in mind.</p>
+
+		<ul class="project-stats" style="display: none;">
+			<li>
+				Last Commit: <a id="last-commit" target="_blank" href=""></a>
+			</li>
+
+			<li>
+				By: <a id="last-commiter" target="_blank" href=""></a>
+			</li>
+		</ul>
+
+		<!-- Social Networks are such a fad -->
+		<ul class="social-media-shit">
+			<li>
+				<!-- NeckbeardHub -->
+				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=watch" 
+					allowtransparency="true" 
+					frameborder="0" 
+					scrolling="0" 
+					width="50" 
+					height="20"></iframe>
+			</li>
+
+			<li>
+				<!-- NeckbeardHub 2 -->
+				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=fork" 
+					allowtransparency="true" 
+					frameborder="0" 
+					scrolling="0" 
+					width="55" 
+					height="20"></iframe>
+			</li>
+
+			<li>
+				<!-- Fuckbook -->
+				<div class="fb-like" 
+					data-href="http://developers.facebook.com/docs/reference/plugins/like" 
+					data-width="100" 
+					data-layout="button_count" 
+					data-show-faces="true" 
+					data-send="false"></div>
+			</li>
+
+			<li>
+				<!-- Twitter -->
+				<a href="https://twitter.com/share" 
+					class="twitter-share-button" 
+					data-via="alexerax" 
+					data-hashtags="branchapp" 
+					data-dnt="true">Tweet</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="container marketing">
+	<div class="row central">
+		<div class="col-md-4">
+			<%= image_tag 'placeholder-140x140.png', { class: 'img-circle', style: 'width: 140px; height: 140px;' } %>
+			<h2>Simple</h2>
+			<p>
+				Branch is designed from top to bottom to show your stats in a clean, and simple mannor. And it is entirely responsive to work on every device you own.
+			</p>
+		</div>
+
+		<div class="col-md-4">
+			<%= image_tag 'placeholder-140x140.png', { class: 'img-circle', style: 'width: 140px; height: 140px;' } %>
+			<h2>Fast</h2>
+			<p>
+				Branch is built without fancy background videos, 'edgy' animated buttons, and 2.2mb of clutter. So you can spend less time waiting, and more time viewing.
+			</p>
+		</div>
+
+		<div class="col-md-4">
+			<%= image_tag 'placeholder-140x140.png', { class: 'img-circle', style: 'width: 140px; height: 140px;' } %>
+			<h2>Social</h2>
+			<p>
+				What fun is getting a K/D of 6.9, or camping in lighting flag to get 1,000's of kills if you can't even brag about it on your favourite social network?
+			</p>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2>In Depth Stats, <span class="text-muted">at a glance.</span></h2>
+			<p class="lead">
+				Have an entire game, service record, game history or even commendation progress splayed out on a simple and easy to use page.
+			</p>
+		</div>
+		<div class="col-md-5">
+			<%= image_tag 'placeholder-500x500.png', { class: 'featurette-image img-responsive', style: 'width: 500px; height: 500px;' } %>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row featurette">
+		<div class="col-md-5">
+			<%= image_tag 'placeholder-500x500.png', { class: 'featurette-image img-responsive', style: 'width: 500px; height: 500px;' } %>
+		</div>
+		<div class="col-md-7">
+			<h2>Regular Updates, <span class="text-muted">like, seriously.</span></h2>
+			<p class="lead">
+				Updates, fixes and tweaks<sup>(twerks)</sup> are pretty regular, and if you have an idea, i'd love to <a target="_blank" href="#">hear</a> from you.
+			</p>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2>Open Source, <span class="text-muted">just for the neckbeards.</span></h2>
+			<p class="lead">
+				I use Git.. You use Git.. Even your grandmother uses Git.. So lets do some <a target="_blank" href="#">Git</a> together! pls? ;_;
+			</p>
+		</div>
+		<div class="col-md-5">
+			<%= image_tag 'placeholder-500x500.png', { class: 'featurette-image img-responsive', style: 'width: 500px; height: 500px;' } %>
+		</div>
+	</div>
+
+</div>

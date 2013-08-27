@@ -1,0 +1,74 @@
+.welcome-header {
+	padding-bottom: 0;
+}
+
+.project-stats {
+	margin: 0;
+	padding: 0;
+	margin-top: -10px;
+	margin-bottom: 0;
+	list-style-type: none;
+}
+	.project-stats li {
+		display: inline;
+		margin-left: 10px;
+
+		font-size: 12px;
+	}
+	.project-stats li:first-child {
+		display: inline;
+		margin-left: 0px;
+	}
+		.project-stats li a {
+
+		}
+
+.social-media-shit {
+	margin: 0;
+	padding: 0;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	list-style-type: none;
+}
+	.social-media-shit li {
+		display: inline;
+		margin-left: 20px;
+	}
+	.social-media-shit li:first-child {
+		display: inline;
+		margin-left: 0px;
+	}
+
+
+.marketing {
+	margin-top: 100px;
+}
+	.marketing > .central {
+		text-align: center;
+	}
+	.marketing > hr {
+		margin: 80px 0;
+	}
+
+.featurette h2 {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+@media (min-width: 768px) {
+
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .featurette h2 {
+    font-size: 50px;
+  }
+
+}
+@media (min-width: 992px) {
+  .featurette h2 {
+    margin-top: 120px;
+  }
+}

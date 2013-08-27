@@ -1,10 +1,8 @@
-# MySQL.  Versions 4.1 and 5.0 are recommended.
-
 development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: branchapp_development
+  database: branch_development
   pool: 5
   username: root
   password:
@@ -15,7 +13,7 @@ local_stage:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: branchapp_development
+  database: branch_development
   pool: 5
   username: root
   password:
@@ -26,7 +24,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: branchapp_test
+  database: branch_test
   pool: 5
   username: root
   password:

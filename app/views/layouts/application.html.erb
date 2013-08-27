@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Social Media Button Scripts -->
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+				fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk')
+			);
+		</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+		<title>
+			Branch <%= (" - " + yield(:title)) if content_for :title %>
+		</title>
+
+		<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+		<%= stylesheet_link_tag    "branch-theme", :media => "all" %>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+
+		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+		<%= javascript_include_tag "jquery-1.10.2.min" %>
+		<%= javascript_include_tag "bootstrap" %>
+		<%= javascript_include_tag "application" %>
+
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<a class="sr-only" href="#content">Skip navigation</a>
+		<header class="navbar navbar-inverse navbar-fixed-top bs-branch-nav" role="banner">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<%= link_to raw('Branch <sup>{εpsilon}</sup>'), root_url, { class: 'navbar-brand' } %>
+				</div>
+				<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+					<ul class="nav navbar-nav">
+						<li class="<%= 'active' if content_for? :home %>">
+							<%= link_to 'Home', root_url %>
+						</li>
+						<li class="dropdown">
+							<%= link_to(raw('Halo 4 <b class="caret"></b>'), root_url, { class: 'dropdown-toggle', 'data-toggle' => 'dropdown' }) %>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">Action</a>
+								</li>
+								<li>
+									<a href="#">Another action</a>
+								</li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<div class="form-group">
+							<input type="text" placeholder="Search Gamertag" class="form-control">
+						</div>
+					</form>
+				</nav>
+			</div>
+		</header>
+
+		<%= yield %>
+
+		<% if content_for? :has_footer %>
+			<footer class="bs-footer" role="contentinfo">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10">
+							<p>Designed and developed by <a href="http://twitter.com/alexerax" target="_blank">@alexerax</a>.</p>
+							<p>Code licensed under the <a href="http://www.dbad-license.org/" target="_blank">Don't Be A Dick</a> Public License.</p>
+							<ul class="footer-links">
+								<li><a href="http://xboxchaos.com/">Xbox Chaos</a></li>
+								<li class="muted">·</li>
+								<li><a href="http://halo.reddit.com/">Halo Reddit</a></li>
+								<li class="muted">·</li>
+								<li><a href="http://halowaypoint.com">Halo Waypoint</a></li>
+								<li class="muted">·</li>
+								<li><a href="/blog/">Blog</a></li>
+							</ul>
+						</div>
+
+						<div class="col-md-2 right hidden-xs hidden-sm">
+							<%= image_tag("uk-map.png", { width: '60', height: '77' }) %>
+							<br>
+							<span class="made-in">Made in the UK</span>
+						</div>
+					</div>
+				</div>
+			</footer>
+		<% end %>
+
+		<!-- Scripts -->
+		<%= yield(:scripts) if content_for? :scripts %>
+	</body>
+</html>
