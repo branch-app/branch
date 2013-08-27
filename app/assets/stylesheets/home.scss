@@ -1,6 +1,15 @@
 body.home {
 	.welcome-header {
 		padding-bottom: 0;
+		text-align: center;
+	}
+
+	@media screen and (min-width: 992px) {
+		.bs-header h1,
+		.bs-header p {
+			margin-right: 0px;
+			text-align: center;
+		}
 	}
 
 	.project-stats {
