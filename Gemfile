@@ -18,6 +18,7 @@ end
 
 # Front End
 gem 'jquery-rails'
+gem 'sass'
 
 # Other
 gem 'redcarpet'
