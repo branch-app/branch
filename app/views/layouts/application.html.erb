@@ -16,7 +16,7 @@
 
 		<%= csrf_meta_tags %>
 	</head>
-	<body>
+	<body class="<%= yield(:template) if content_for? :template %>">
 		<a class="sr-only" href="#content">Skip navigation</a>
 		<header class="navbar navbar-inverse navbar-fixed-top bs-branch-nav" role="banner">
 			<div class="container">
