@@ -57,6 +57,12 @@
 								</li>
 							</ul>
 						</li>
+						<li class="<%= 'active' if content_for? :blog %>">
+							<%= link_to 'Blog', '#' %>
+						</li>
+						<li class="<%= 'active' if content_for? :about %>">
+							<%= link_to 'About', '#' %>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
@@ -84,17 +90,19 @@
 							<p>Designed and developed by <a href="http://twitter.com/alexerax" target="_blank">@alexerax</a>.</p>
 							<p>Code licensed under the <a href="http://www.dbad-license.org/" target="_blank">Don't Be A Dick</a> Public License.</p>
 							<ul class="footer-links">
-								<li><a href="http://xboxchaos.com/">Xbox Chaos</a></li>
+								<li><a href="http://xboxchaos.com/" target="_blank">Xbox Chaos</a></li>
 								<li class="muted">·</li>
-								<li><a href="http://halo.reddit.com/">Halo Reddit</a></li>
+								<li><a href="http://halo.reddit.com/" target="_blank">Halo Reddit</a></li>
 								<li class="muted">·</li>
-								<li><a href="http://halowaypoint.com">Halo Waypoint</a></li>
+								<li><a href="http://halowaypoint.com" target="_blank">Halo Waypoint</a></li>
 								<li class="muted">·</li>
-								<li><a href="/blog/">Blog</a></li>
+								<li><a href="/blog/" target="_blank">Blog</a></li>
+								<li class="muted">·</li>
+								<li><a href="https://github.com/Xerax/Branch" target="_blank">Github</a></li>
 							</ul>
 						</div>
 
-						<div class="col-md-2 right hidden-xs hidden-sm">
+						<div class="col-md-2 hidden-xs hidden-sm">
 							<%= image_tag("uk-map.png", { width: '60', height: '77' }) %>
 							<br>
 							<span class="made-in">Made in the UK</span>
