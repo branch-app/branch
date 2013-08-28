@@ -1,0 +1,132 @@
+<% content_for :title, 'Search' %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'search' %>
+
+<div class="container">
+	<div class="search-result-block">
+		<div class="page-header row">
+			<div class="col-md-11">
+				<h1 id="less">Branch Accounts</h1>
+			</div>
+			<div class="col-md-1 focus-col">
+				<button class="btn btn-default toggle" type="button">Focus On &raquo;</button>
+			</div>
+		</div>
+
+			<% 
+				users = [
+					{ 
+						username: 'Xerax', 
+						name: 'Alex Reed' 
+					},
+					{ 
+						username: 'iBotPeaches', 
+						name: 'Connor' 
+					},
+					{ 
+						username: 'Swainooooo', 
+						name: 'Adam Swaine' 
+					},
+					{ 
+						username: 'Doofette', 
+						name: 'Evelyn Watts' 
+					},
+					{ 
+						username: 'Minor K1ng', 
+						name: 'Ryan Licchelli' 
+					},
+					{ 
+						username: 'xyoatcakes', 
+						name: 'William Sawtell' 
+					},
+					{ 
+						username: '_jmie', 
+						name: 'Jamie EcElwain' 
+					}
+				]
+
+				index = 0
+				users.each do |user|
+					if index == 0
+						%> <div class="row"> <%
+					end
+					%>
+						<div class="col-md-4 entry">
+							<a href="#">
+								<div class="text-container">
+									<h2><%= user[:username] %></h2>
+									<h3><%= user[:name] %></h3>
+								</div>
+							</a>
+						</div>
+					<%
+					index += 1
+					if index == 3
+						index = 0
+						%> </div> <%
+					end
+				end
+			%>
+		</div>
+
+		<div class="search-result-block">
+			<div class="page-header row">
+				<div class="col-md-11">
+					<h1 id="less">Halo 4 Gamertags</h1>
+				</div>
+				<div class="col-md-1 focus-col">
+					<button class="btn btn-default toggle" type="button">Focus On &raquo;</button>
+				</div>
+			</div>
+
+			<% 
+				gamertags = [
+					{ 
+						gamertag: 'Doofette', 
+						service_tag: 'DOOF' 
+					},
+					{ 
+						gamertag: 'Swainooooo', 
+						service_tag: 'SWAN' 
+					},
+					{ 
+						gamertag: 'xyoatcakes', 
+						service_tag: 'DOPE' 
+					},
+					{ 
+						gamertag: 'Minor K1ng', 
+						service_tag: 'SWAG' 
+					},
+					{ 
+						gamertag: 'iBotPeaches v5', 
+						service_tag: 'LEAF' 
+					}
+				]
+
+				index = 0
+				gamertags.each do |gamertag|
+					if index == 0
+						%> <div class="row"> <%
+					end
+					%>
+						<div class="col-md-4 entry">
+							<a href="#">
+								<div class="spartan-image" style="background-image: url(https://spartans.svc.halowaypoint.com/players/<%= CGI.escape gamertag[:gamertag] %>/h4/spartans/fullbody?target=large)"></div>
+								<div class="mask"></div>
+								<div class="text-container">
+									<h2><%= gamertag[:gamertag] %></h2>
+									<h3><%= gamertag[:service_tag] %></h3>
+								</div>
+							</a>
+						</div>
+					<%
+					index += 1
+					if index == 3
+						index = 0
+						%> </div> <%
+					end
+				end
+			%>
+		</div>
+	</div>
+</div>
