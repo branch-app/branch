@@ -80,6 +80,17 @@
 			</div>
 		</header>
 
+		<div class="container">
+			<% [:info, :success, :danger].each do |level| %>
+				<% unless flash[level].blank? %>
+					<div class="alert alert-<%= level %>">
+						<span><%= flash[level] %> </span>
+						<a class="close" href="#">×</a>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+
 		<%= yield %>
 
 		<% if content_for? :has_footer %>
