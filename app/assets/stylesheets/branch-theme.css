@@ -1083,3 +1083,9 @@ h1[id] {
   margin-top: 15px;
   margin-bottom: 5px;
 }
+
+/* Progress Bars */
+.progress-bar > .progress-bar-indicator {
+  font-weight: 500;
+  font-size: 12px;
+}
