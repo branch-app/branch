@@ -2,6 +2,11 @@
 <% content_for :title, 'Halo 4 - iBotPeaches v5' %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'overview' %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
 <% content_for :template, 'halo4 halo4_service_record' %>
 
 <%= render partial: 'halo4/partials/header' %>
@@ -19,10 +24,40 @@
 				</div>
 			</div>
 
-			<div class="bs-branch-section">
+			<div class="bs-branch-section game-history">
 				<div class="page-header">
 					<h1>Game History</h1>
 				</div>
+
+				<div class="row">
+					<% 12.times do |i| %>
+						<% ran = rand(0..2) %>
+						<%
+							modifier = 'dnf' if ran == 0
+							modifier = 'win' if ran == 1
+							modifier = 'los' if ran == 2
+
+							friendly = 'DNF' if ran == 0
+							friendly = 'Win' if ran == 1
+							friendly = 'Loss' if ran == 2
+						%>
+						<div id="history-entry-<%= i.to_s %>" class="col-md-12 game-history-entry">
+							<a href="#">
+								<div class="game-history-container" style="background-image: url(https://assets.halowaypoint.com/games/h4/maps/v1/large/ragnarok.png)">
+									<div class="mask <%= modifier %>"></div>
+									<div class="gametype-icon" style="background-image: url(http://localhost:9999/ctf.png)"></div>
+									<div class="inner">
+										<span class="gametype">Big Team Infinity Slayer</span>
+										<span class="selector">on</span>
+										<span class="map-name">Valhalla</span>
+
+										<div class="map"><%= friendly %></div>
+									</div>
+								</div>
+							</a>
+						</div>
+					<% end %>
+				</ul>
 			</div>
 		</div>
 	</div>
