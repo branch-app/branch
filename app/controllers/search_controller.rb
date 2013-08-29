@@ -5,7 +5,7 @@ class SearchController < ApplicationController
 		@query = params['q']
 
 		# check search query
-		if @query.strip == nil || @query.strip == ''
+		if @query == nil || @query.strip == ''
 			flash[:danger] = "Empty Search Query"
 			redirect_to root_url
 			return
