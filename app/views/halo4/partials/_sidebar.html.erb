@@ -1,0 +1,41 @@
+<div class="bs-sidebar affix-top">
+	<ul class="nav bs-sidenav">
+		<li class="active">
+			<%= link_to 'Branch', halo4_servicerecord_path(@gamertag) %>
+			<ul class="nav">
+				<li class="<%= 'active' if content_for(:halo4_active) == 'overview' %>">
+					<%= link_to 'Overview', halo4_servicerecord_path(@gamertag) %>
+				</li>
+				<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
+					<%= link_to 'Game History', '#' %>
+				</li>
+				<li class="<%= 'active' if content_for(:halo4_active) == 'csr' %>">
+					<%= link_to 'Competitive Skill Rank', '#' %>
+				</li>
+				<li class="<%= 'active' if content_for(:halo4_active) == 'commendations' %>">
+					<%= link_to 'Commendations', '#' %>
+				</li>
+				<li class="<%= 'active' if content_for(:halo4_active) == 'specializations' %>">
+					<%= link_to 'Specializations', '#' %>
+				</li>
+			</ul>
+		</li>
+		<li class="active">
+			<%= link_to 'Leaf Integration', '#' %>
+			<ul class="nav">
+				<li>
+					<a href="">View</a>
+				</li>
+				<li>
+					<a href="">Compare</a>
+				</li>
+				<li>
+					<a href="">Star</a>
+				</li>
+				<li>
+					<a href="">Flag as Cheater/Booster</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
