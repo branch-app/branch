@@ -44,7 +44,7 @@ body {
 
 /* Outline button for use within the branch */
 .btn-outline {
-  color: #563d7c;
+  color: #3d3d7c;
   background-color: #fff;
   border-color: #e5e5e5;
 }
@@ -52,8 +52,8 @@ body {
 .btn-outline:focus,
 .btn-outline:active {
   color: #fff;
-  background-color: #563d7c;
-  border-color: #563d7c;
+  background-color: #3d3d7c;
+  border-color: #3d3d7c;
 }
 
 /* Inverted outline button (white on dark) */
@@ -65,7 +65,7 @@ body {
 .btn-outline-inverse:hover,
 .btn-outline-inverse:focus,
 .btn-outline-inverse:active {
-  color: #563d7c;
+  color: #3d3d7c;
   text-shadow: none;
   background-color: #fff;
   border-color: #fff;
@@ -80,12 +80,12 @@ body {
 
 .bs-branch-nav {
   text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  background-color: #563d7c;
-  border-color: #463265;
+  background-color: #3d3d7c;
+  border-color: #323465;
   box-shadow: 0 1px 0 rgba(255,255,255,.1);
 }
 .bs-branch-nav .navbar-collapse {
-  border-color: #463265;
+  border-color: #323465;
 }
 .bs-branch-nav .navbar-brand {
   color: #fff;
@@ -99,14 +99,14 @@ body {
 .bs-branch-nav .navbar-nav > .active > a,
 .bs-branch-nav .navbar-nav > .active > a:hover {
   color: #fff;
-  background-color: #463265;
+  background-color: #323465;
 }
 .bs-branch-nav .navbar-toggle {
-  border-color: #563d7c;
+  border-color: #3d3d7c;
 }
 .bs-branch-nav .navbar-toggle:hover {
-  background-color: #463265;
-  border-color: #463265;
+  background-color: #323465;
+  border-color: #323465;
 }
 
 
@@ -199,7 +199,7 @@ body {
 .bs-branch-home,
 .bs-header {
   color: #cdbfe3;
-  background-color: #563d7c;
+  background-color: #3d3d7c;
   background-image: url('/assets/forerunner.png');
   background-size: 120px 120px;
 }
@@ -328,7 +328,7 @@ body {
   font-size: 13px !important;
   line-height: 16px !important;
   text-align: left;
-  background: #463265 !important;
+  background: #323465 !important;
   border: 0 !important;
   box-shadow: inset 0 3px 5px rgba(0,0,0,.075);
 }
@@ -437,9 +437,9 @@ body {
 .bs-sidebar .nav > .active:hover > a,
 .bs-sidebar .nav > .active:focus > a {
   font-weight: bold;
-  color: #563d7c;
+  color: #3d3d7c;
   background-color: transparent;
-  border-right: 1px solid #563d7c;
+  border-right: 1px solid #3d3d7c;
 }
 
 /* Nav: second level (shown on .active) */
