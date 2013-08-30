@@ -5,14 +5,12 @@
 			Branch <%= (" - " + yield(:title)) if content_for :title %> BY GABE_K
 		</title>
 
+		<!-- Stock third Party -->
 		<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+
+		<!-- App Style Sheets -->
 		<%= stylesheet_link_tag    "branch-theme", :media => "all" %>
 		<%= stylesheet_link_tag    "application", :media => "all" %>
-
-		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-		<%= javascript_include_tag "jquery-1.10.2.min" %>
-		<%= javascript_include_tag "bootstrap" %>
-		<%= javascript_include_tag "application" %>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
@@ -125,7 +123,13 @@
 			</footer>
 		<% end %>
 
-				<!-- Social Media Button Scripts -->
+		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+		<%= javascript_include_tag "jquery-1.10.2.min" %>
+		<%= javascript_include_tag "bootstrap" %>
+		<%= javascript_include_tag "Chart" %>
+		<%= javascript_include_tag "application" %>
+
+		<!-- Social Media Button Scripts -->
 		<div id="fb-root"></div>
 		<script>
 			(function(d, s, id) {
