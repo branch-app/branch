@@ -4,7 +4,29 @@
 <% content_for :halo4_active, 'overview' %>
 <% content_for :scripts do %>
 <script>
+	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+	var chart = new Chart(ctx).Doughnut([ 
+			{
+				value: 55,
+				color: '#F7464A'
+			},
+			{
+				value: 15,
+				color: '#E2EAE9'
+			},
+			{
+				value: 23,
+				color: '#D4CCC5'
+			},
+			{
+				value: 7,
+				color: '#949FB1'
+			},
+		], 
+		{ 
 
+		}
+	);
 </script>
 <% end %>
 <% content_for :template, 'halo4 halo4_service_record' %>
@@ -21,6 +43,52 @@
 			<div class="bs-branch-section">
 				<div class="page-header">
 					<h1>Overview</h1>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<canvas id="game-history-split-chart" width="400" height="400"></canvas>
+					</div>
+					<div class="col-md-5">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<span class="badge">25.08.2013</span>
+								Last Played
+							</li>
+							<li class="list-group-item">
+								<span class="badge">47%</span>
+								Loadout Purchase Completion
+							</li>
+							<li class="list-group-item">
+								<span class="badge">225</span>
+								Challenges Completed
+							</li>
+							<li class="list-group-item">
+								<span class="badge">52 ;)</span>
+								Spartan Points
+							</li>
+							<li class="list-group-item">
+								<span class="badge">32,470 (1.64 k/d)</span>
+								War Games Kills
+							</li>
+							<li class="list-group-item">
+								<span class="badge">75,043</span>
+								War Games Medals
+							</li>
+							<li class="list-group-item">
+								<span class="badge">3,604</span>
+								Covenant/Promethean Kills
+							</li>
+							<li class="list-group-item">
+								<span class="badge">2,094</span>
+								Games Started
+							</li>
+							<li class="list-group-item">
+								<span class="badge">08.11.2012</span>
+								Player Since
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
