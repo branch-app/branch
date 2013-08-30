@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
+# Frameworks
 gem 'rails', '3.2.13'
+gem 'thin'
 
 # Database
 gem 'mysql2'
