@@ -1,8 +1,8 @@
 body.halo4_service_record {
 	.game-history {
-		.row > .col-md-12 {
-			margin: 20px 5px;
-			padding: 0;
+		.row > .game-history-entry {
+			margin: 20px 0;
+			padding: 0 10px;
 			height: 220px;
 			overflow: hidden;
 
@@ -88,7 +88,7 @@ body.halo4_service_record {
 					> .inner {
 						position: absolute;
 						top: 10px;
-						left: 10px;
+						left: 20px;
 						height: 100%;
 						width: 100%;
 						overflow: hidden;
@@ -106,19 +106,33 @@ body.halo4_service_record {
 							font-weight: 500;
 						}
 
-						.map {
+						.stats {
+							position: absolute;
+							bottom: -5px;
+							left: 0;
+
+							> .type {
+								font-size: 20px;
+							}
+							> .stat {
+								font-size: 80px;
+								opacity: 0.6;
+							}
+						}
+
+						.windicator {
 							position: absolute;
 							bottom: -30px;
 							right: 0;
 
-							opacity: 0.2;	
-
-							font-size: 100px;
+							opacity: 0.2;
+							font-size: 40px;
 							font-weight: 900;
 							text-transform: uppercase;
 
 							@media (max-width: 767px) {
 								opacity: 0.3;	
+								right: 25px;
 								bottom: -10px;
 								font-size: 60px;
 							}

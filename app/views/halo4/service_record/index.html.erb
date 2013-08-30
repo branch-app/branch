@@ -41,17 +41,24 @@
 							friendly = 'Win' if ran == 1
 							friendly = 'Loss' if ran == 2
 						%>
-						<div id="history-entry-<%= i.to_s %>" class="col-md-12 game-history-entry">
+
+						<div id="history-entry-<%= i.to_s %>" class="col-lg-6 col-sm-12 game-history-entry">
 							<a href="#">
 								<div class="game-history-container" style="background-image: url(https://assets.halowaypoint.com/games/h4/maps/v1/large/ragnarok.png)">
 									<div class="mask <%= modifier %>"></div>
 									<div class="gametype-icon" style="background-image: url(http://localhost:9999/ctf.png)"></div>
 									<div class="inner">
 										<span class="gametype">Big Team Infinity Slayer</span>
+										<br class="visible-lg visible-xs" />
 										<span class="selector">on</span>
 										<span class="map-name">Valhalla</span>
 
-										<div class="map"><%= friendly %></div>
+										<div class="stats">
+											<span class="type">Survival Time:</span>
+											<span class="stat"><%= rand(12..24) %></span>
+										</div>
+
+										<div class="windicator"><%= friendly %></div>
 									</div>
 								</div>
 							</a>
