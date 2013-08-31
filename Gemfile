@@ -5,7 +5,7 @@ gem 'rails', '3.2.13'
 gem 'thin'
 
 # Database
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 
 # Security
 gem 'pbkdf2'

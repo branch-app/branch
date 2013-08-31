@@ -40,6 +40,7 @@ GEM
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.0)
     haml (4.0.3)
       tilt
@@ -64,7 +65,8 @@ GEM
     mime-types (1.24)
     multi_json (1.7.9)
     multi_xml (0.5.5)
-    mysql2 (0.3.13)
+    mysql2 (0.3.11)
+    mysql2 (0.3.11-x86-mingw32)
     pbkdf2 (0.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -121,13 +123,14 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml-rails
   httparty
   jquery-rails
-  mysql2
+  mysql2 (= 0.3.11)
   pbkdf2
   rails (= 3.2.13)
   redcarpet
