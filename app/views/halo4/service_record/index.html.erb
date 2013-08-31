@@ -16,7 +16,7 @@
 			},
 			{
 				value: 23,
-				color: '#D4CCC5'
+				color: '#3d3d7c'
 			},
 			{
 				value: 7,
@@ -40,15 +40,43 @@
 		</div>
 
 		<div class="col-md-9">
-			<div class="bs-branch-section">
+			<div class="bs-branch-section overview">
 				<div class="page-header">
 					<h1>Overview</h1>
 				</div>
 
 				<div class="row">
-					<div class="col-md-5">
-						<canvas id="game-history-split-chart" width="400" height="400"></canvas>
+					<div class="col-md-6 game-history-split">
+						<div class="wrapper">
+							<div class="area">
+								<canvas id="game-history-split-chart" width="300" height="300"></canvas>
+							</div>
+							<div class="area-legend">
+								<ul>
+									<li>
+										<div class="identifier war-games"></div>
+										War Games
+									</li>
+									<li>
+										<div class="identifier campaign"></div>
+										Campaign
+									</li>
+								</ul>
+								<br />
+								<ul>
+									<li>
+										<div class="identifier customs"></div>
+										Custom Games
+									</li>
+									<li>
+										<div class="identifier spartan-ops"></div>
+										Spartan Ops
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
+					<div class="col-md-1"></div>
 					<div class="col-md-5">
 						<ul class="list-group">
 							<li class="list-group-item">
