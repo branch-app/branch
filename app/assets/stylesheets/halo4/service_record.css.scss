@@ -6,6 +6,11 @@ body.halo4_service_record {
 				margin: 0 auto;
 				width: 500px;
 
+				// responsive state 2
+				@media (min-width: 992px) and (max-width: 1199px) {
+					margin-left: -15%;
+				}
+
 				> .area {
 					margin: 0 auto;
 					width: 300px; 
