@@ -14,7 +14,8 @@ $(document).ready(function() {
 		$('.project-stats > li > #last-commiter').text(commit.committer.login);
 
 		setTimeout(function() {
-			$('.project-stats').fadeIn(600)
+			$('.project-stats').fadeIn(600);
+			$('.bs-sidebar').attr('data-offset-top', '251');
 		}, 1000);
 	});
 });
