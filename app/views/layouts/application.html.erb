@@ -73,9 +73,25 @@
 								</div>
 							</form>
 						</li>
-						<li>
-							<a href="#">Sign In</a>
+						<% if true %>
+						<li class="dropdown <%= 'active' if content_for? :user %>">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Xerax <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to 'View Profile', user_view_path('xerax') %>
+								</li>
+
+								<li class="divider"></li>
+								<li>
+									<%= link_to 'Sign Out', '#' %>
+								</li>
+							</ul>
 						</li>
+						<% else %>
+						<li>
+							<%= link_to 'Sign In', :user_signin %>
+						</li>
+						<% end %>
 					</ul>
 				</nav>
 			</div>
