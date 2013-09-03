@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
-	$.getJSON('https://api.github.com/repos/xerax/branch/commits', function(data) {
+	$.getJSON('https://api.github.com/repos/thetree/branch/commits', function(data) {
 		var commit = data[0];
 
 		// Link to last commit
