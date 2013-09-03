@@ -82,4 +82,50 @@ body.home {
 			margin-top: 120px;
 		}
 	}
+
+	.game-feed {
+
+		> .page-header > h1 {
+			font-size: 20px;
+		}
+
+		> ul {
+			margin: 0;
+			padding: 0;
+
+			list-style-type: none;
+
+			> li {
+				padding: 20px;
+				border-bottom: 1px solid #f1f1f1;
+
+				> .glyphicon {
+					margin-bottom: -20px;
+				}
+
+				> .info {
+					margin-left: 40px;
+					margin-top: -19px;
+
+					font-size: 13px;
+
+					> .time-info {
+						color: #bbb;
+						font-size: 12px;
+					}
+
+					> img {
+						opacity: 0.7;
+						border: 1px solid #eee;
+						padding: 2px;
+						margin-top: 8px;
+					}
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+	}
 }
