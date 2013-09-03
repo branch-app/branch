@@ -116,15 +116,15 @@
 						<div class="col-md-2 hidden-xs hidden-sm">
 							<%= image_tag("uk-map.png", { width: '60', height: '77' }) %>
 							<br>
-							<span class="made-in">Made in the UK</span>
+							<!-- <span class="made-in">Made in the UK</span> -->
 						</div>
 					</div>
 				</div>
 			</footer>
 		<% end %>
 
-		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-		<%= javascript_include_tag "jquery-1.10.2.min" %>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.map"></script>
 		<%= javascript_include_tag "bootstrap" %>
 		<%= javascript_include_tag "Chart" %>
 		<%= javascript_include_tag "application" %>
