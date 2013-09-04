@@ -15,7 +15,6 @@ $(document).ready(function() {
 
 		setTimeout(function() {
 			$('.project-stats').fadeIn(600);
-			$('.row > .col-md-3 > .bs-sidebar').attr('data-offset-top', '10');
 		}, 1000);
 	});
 });
