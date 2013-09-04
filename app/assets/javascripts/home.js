@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var commit = data[0];
 
 		// Link to last commit
-		$('.project-stats > li > #last-commit').attr('href', "https://github.com/Xerax/Branch/commit/" + commit.sha);
+		$('.project-stats > li > #last-commit').attr('href', "https://github.com/Xerax/thetree/commit/" + commit.sha);
 		$('.project-stats > li > #last-commit').text(commit.sha.substring(0,7));
 
 		// Link to last commiter
@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 		setTimeout(function() {
 			$('.project-stats').fadeIn(600);
-			$('.bs-sidebar').attr('data-offset-top', '251');
+			$('.row > .col-md-3 > .bs-sidebar').attr('data-offset-top', '10');
 		}, 1000);
 	});
 });
