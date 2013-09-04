@@ -8,6 +8,22 @@
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
 					<%= link_to 'Game History', '#' %>
+					<% if content_for(:halo4_active) == 'game_history' %>
+						<ul class="nav">
+							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'matchmaking' %>">
+								<%= link_to 'Matchmaking', halo4_gamehistory_path( sub_view: 'matchmaking', page: 0 ) %>
+							</li>
+							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'custom_games' %>">
+								<%= link_to 'Custom Games', halo4_gamehistory_path( sub_view: 'custom-games', page: 0 ) %>
+							</li>
+							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'spartan_ops' %>">
+								<%= link_to 'Spartan Ops', halo4_gamehistory_path( sub_view: 'spartan-ops', page: 0 ) %>
+							</li>
+							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'campaign' %>">
+								<%= link_to 'Campaign', halo4_gamehistory_path( sub_view: 'campaign', page: 0 ) %>
+							</li>
+						</ul>
+					<% end %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'csr' %>">
 					<%= link_to 'Competitive Skill Rank', '#' %>

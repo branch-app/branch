@@ -15,7 +15,11 @@ BranchApp::Application.routes.draw do
   # Halo 4
   get '/halo4/' => 'halo4/home#index', as: :halo4_home
   get '/halo4/servicerecord/:gamertag/' => 'halo4/service_record#index', as: :halo4_servicerecord
-  get '/halo4/servicerecord/:gamertag/match-history' => 'halo4/game_history#index', as: :halo4_gamehistory
-  get '/halo4/servicerecord/:gamertag/match' => 'halo4/game_history#view', as: :halo4_viewgame
+
+  get '/halo4/servicerecord/:gamertag/match-history' => 'halo4/game_history#index'
+  get '/halo4/servicerecord/:gamertag/game-history(/:sub_view/:page)' => 'halo4/game_history#index', as: :halo4_gamehistory
+
+  get '/halo4/servicerecord/:gamertag/match' => 'halo4/game_history#view'
+  get '/halo4/servicerecord/:gamertag/game' => 'halo4/game_history#view', as: :halo4_viewgame
 
 end

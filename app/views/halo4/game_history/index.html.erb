@@ -1,0 +1,51 @@
+<% content_for :halo4, true %>
+<% content_for :title, 'Halo 4 - iBotPeaches v5\'s Game History' %>	
+<% content_for :has_footer, true %>
+<% content_for :halo4_active, 'game_history' %>
+<% content_for :halo4_game_history_active, @css_class %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_game_history' %>
+
+<%= render partial: 'halo4/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'halo4/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section overview">
+				<div class="page-header">
+					<h1><%= @friendly_name %> History</h1>
+				</div>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Game</th>
+							<th>Standing</th>
+							<th>Date</th>
+							<th>Map</th>
+							<th>Playlist</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>Big Team Slayer</td>
+							<td>1st</td>
+							<td>2/12/2013</td>
+							<td>Haven</td>
+							<td>Big Team Slayer</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
