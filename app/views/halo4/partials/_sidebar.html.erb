@@ -41,16 +41,16 @@
 			<%= link_to 'Leaf', '#' %>
 			<ul class="nav">
 				<li>
-					<a href="">Overview</a>
+					<%= link_to 'Overview', "http://leafapp.co/gt/#{@gamertag}" %>
 				</li>
 				<li>
-					<a href="">Compare</a>
+					<%= link_to 'Compare', "http://leafapp.co/compare/#{@gamertag}" %>
 				</li>
 				<li>
-					<a href="">Star</a>
+					<%= link_to 'Star', "http://leafapp.co/star/#{@gamertag}" %>
 				</li>
 				<li>
-					<a href="">Flag as Cheater/Booster</a>
+					<%= link_to 'Flag as Cheater/Booster', "http://leafapp.co/guilty_spark/flag/#{@gamertag}" %>
 				</li>
 			</ul>
 		</li>
