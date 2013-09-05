@@ -6,6 +6,7 @@ class Halo4::GameHistoryController < Halo4::HomeController
 
 		redirect_to(halo4_gamehistory_path( sub_view: @sub_view || 'matchmaking', page: @page || 0 )) if !page_was_valid || !sub_view_was_valid
 
+		@is_last_page = true
 		@friendly_name = sub_view_to_friendly(@sub_view)
 		@css_class = sub_view_to_css_class(@sub_view)
 	end
