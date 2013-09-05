@@ -7,7 +7,8 @@
 					<%= link_to 'Overview', halo4_servicerecord_path(@gamertag) %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
-					<%= link_to 'Game History', '#' %>
+					<%= link_to 'Game History', halo4_gamehistory_path %>
+
 					<% if content_for(:halo4_active) == 'game_history' %>
 						<ul class="nav">
 							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'matchmaking' %>">
