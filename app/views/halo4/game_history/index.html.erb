@@ -45,6 +45,15 @@
 						</tr>
 					</tbody>
 				</table>
+
+				<ul class="pager">
+					<li class="previous <%= 'disabled' if @page == 0 %> ">
+						<%= link_to '← Older', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'older') ) %>
+					</li>
+					<li class="next <%= 'disabled' if @is_last_page %>">
+						<%= link_to 'Newer →', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'newer') ) %>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
