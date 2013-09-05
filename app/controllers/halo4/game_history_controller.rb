@@ -12,7 +12,8 @@ class Halo4::GameHistoryController < Halo4::HomeController
 	end
 
 	def view
-		
+		@css_class = 'matchmaking'
+		@duration = Time.new(1994, 8, 18, 2, 45, 56, '+00:00')
 	end
 
 	private
