@@ -25,5 +25,4 @@ gem 'sass'
 # Other
 gem 'redcarpet'
 gem 'rufus-scheduler'
-gem 'haml-rails'
 gem 'httparty'
