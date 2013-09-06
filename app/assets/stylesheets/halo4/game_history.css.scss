@@ -1,6 +1,5 @@
 .halo4_game_history {
 
-
 	.game-details {
 
 		// le cover stuff
@@ -23,12 +22,6 @@
 				> .inner {
 					padding: 10px;
 					color: #c5c5c5;
-
-					> .victor-player-model {
-						background-repeat: no-repeat;
-						background-position: 30px 120px;
-						height: 100%;
-					}
 
 					> .title {
 						text-align: center;
@@ -62,7 +55,21 @@
 					}
 				}
 			}
+
+			> .victor-player-model {
+				background-repeat: no-repeat;
+				background-position: 30px 20px;
+
+				height: 348px;
+				width: 100%;
+				position: absolute;
+				top: 138px;
+				left: 0;
+
+				@media (min-width: 768px) and (max-width: 992px) {
+					height: 342px;
+				}
+			}
 		}
 	}
-
 }
