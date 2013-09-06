@@ -21,19 +21,35 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section game-details">
 				<div class="page-header">
-					<h1>Big Team Slayer on Valhalla</h1>
+					<h1>Capture the Flag on Valhalla</h1>
 				</div>
 
 				<div class="cover" style="background-image: url(https://assets.halowaypoint.com/games/h4/maps/v1/large/ragnarok.png)">
-					<div class="mask"></div>
-					<div class="inner">
-						<div class="victor-player-model hidden-xs" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Swainooooo/h4/spartans/fullbody?target=medium)"></div>
+					<div class="mask">
+						<div class="inner">
+							<!-- <div class="victor-player-model hidden-xs" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Swainooooo/h4/spartans/fullbody?target=medium)"></div> -->
 
-						<div class="title">
-							<h2>Griffball</h2>
-							<p>
-								11/07/2013 | <%= duration_to_friendly(@duration) %>
-							</p>
+							<div class="title">
+								<h2>Capture the Flag</h2>
+								<p>
+									11/07/2013 | <%= duration_to_friendly(@duration) %>
+								</p>
+							</div>
+
+							<div class="game-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/game-base-variants/v1/large/ctf.png)"></div>
+
+							<div class="map">
+								on
+								<br />
+								<span class="focus">Valhalla</span>
+							</div>
+
+							<div class="seperator"></div>
+
+							<div class="victor">
+								<%= link_to 'Gerrit', '#' %>
+								led the game with a personal score of 8, and a K/D of 1.67
+							</div>
 						</div>
 					</div>
 				</div>

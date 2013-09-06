@@ -5,9 +5,10 @@
 
 		// le cover stuff
 		> .cover {
-			height: 300px;
+			min-height: 320px;
 			width: 100%;
 			background-size: cover;
+			background-repeat: no-repeat;
 
 			> .mask {
 				background: -moz-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
@@ -18,18 +19,47 @@
 				background: linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
 				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
 				height: 100%;
-			}
-			> .inner {
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
 
-				> .victor-player-model {
-					background-repeat: no-repeat;
-					background-position: 30px 120px;
-					height: 100%;
+				> .inner {
+					padding: 10px;
+					color: #c5c5c5;
+
+					> .victor-player-model {
+						background-repeat: no-repeat;
+						background-position: 30px 120px;
+						height: 100%;
+					}
+
+					> .title {
+						text-align: center;
+
+						> h2 {
+							color: white;
+						}
+					}
+
+					> .game-icon {
+						width: 128px;
+						height: 128px;
+						margin: 0 auto;
+
+						background-repeat: no-repeat;
+					}
+
+					> .map {
+						font-size: 16px;
+						text-align: center;
+
+						> span.focus {
+							color: white;
+						}
+					}
+
+					> .victor {
+						max-width: 248px;
+						margin: 0 auto;
+						text-align: center;
+					}
 				}
 			}
 		}
