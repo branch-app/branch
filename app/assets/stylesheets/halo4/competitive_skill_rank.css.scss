@@ -1,3 +1,34 @@
 body.halo4_csr {
 
+	.chart {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.csr > .row > div > table > tbody > tr > td > .csr-table-icon {
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 100px;
+		height: 100px;
+	}
+
+	.outer-container {
+		display: table;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
+	.inner-container {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.canvas-container {
+		position: relative;
+		max-width: 1024px;
+		min-width: 350px;
+		margin: 0 auto;
+	}
 }
