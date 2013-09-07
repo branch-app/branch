@@ -1,0 +1,57 @@
+<% content_for :halo4, true %>
+<% content_for :title, "Halo 4 - iBotPeaches v5's CSR - Rumble Pit" %>	
+<% content_for :has_footer, true %>
+<% content_for :halo4_active, 'csr' %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_csr' %>
+
+<%= render partial: 'halo4/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'halo4/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section csr-details">
+				<div class="page-header">
+					<h1>iBotPeaches v5's Rumble Pit CSR</h1>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 playlist-image" style="background-image: url(https://assets.halowaypoint.com/games/h4/playlists/v1/large/big-team-battle.png)">
+
+					</div>
+					<div class="col-md-6 playlist-data" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)">
+
+						<hr class="visible-xs visible-sm" />
+
+						<span class="description">Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.</span>
+
+						<div class="meta">
+							<span class="party-size">
+								Max Party Size:
+								<strong>8</strong>
+							</span>
+							<br />
+							<span class="local-party-size">
+								Max Local Party Size:
+								<strong>4</strong>
+							</span>
+							<br />
+							<span class="player-grouping">
+								Player Grouping:
+								<strong>Free For All</strong>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
