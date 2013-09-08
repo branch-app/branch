@@ -15,6 +15,7 @@ group :production do
 	gem 'figaro'
 	gem 'unicorn'
 	gem 'therubyracer'
+	gem 'execjs'
 end
 
 group :development, :test do 
