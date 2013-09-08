@@ -10,7 +10,7 @@ module I343Auth
 		loop = true
 		while loop
 			unless Rails.env.local_stage?
-				url = 'http://h4tokengen.xeraxic.com/api/authentication/' + ENV['PARAM1'].to_s
+				url = 'http://h4tokengen.xeraxic.com/api/authentication/LetsAllPlayNice'
 				response = HTTParty.get(url)
 
 				if response != nil || response.code == 200
