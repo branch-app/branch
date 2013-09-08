@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'unicorn'
 gem 'thin'
+gem 'figaro'
 
 # Database
 gem 'mysql2'
