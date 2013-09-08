@@ -10,7 +10,7 @@ module I343Auth
 		loop = true
 		while loop
 			unless Rails.env.local_stage?
-				url = 'http://h4tokengen.xeraxic.com/api/authentication/LetsAllPlayNice'
+				url = 'http://h4tokengen.xeraxic.com/api/authentication/' + ENV['SEC_TOKEN'].to_s
 				response = HTTParty.get(url)
 
 				if response != nil || response.code == 200
@@ -23,7 +23,7 @@ module I343Auth
 					# get dem codes to tha db
 					H4ApiAuthenticationVault.delete_all
 					auth_vault = H4ApiAuthenticationVault.new
-					auth_vault.spartan_token = node[:test] #tokens['X343Tokens']['SpartanToken']
+					auth_vault.spartan_token = tokens['X343Tokens']['SpartanToken']
 					auth_vault.wlid_access_token = tokens['WLIDTokens']['AccessToken']
 					auth_vault.wlid_authentication_token = tokens['WLIDTokens']['AuthenticationToken']
 					auth_vault.wlid_expire = tokens['WLIDTokens']['Expires']
