@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'unicorn'
-gem 'thin'
-gem 'figaro'
 
 # Database
 gem 'mysql2'
@@ -13,6 +10,16 @@ gem 'pbkdf2'
 
 # AWS
 gem 'aws-sdk'
+
+group :production do
+	gem 'figaro'
+	gem 'unicorn'
+	gem 'therubyracer'
+end
+
+group :development, :test do 
+	gem 'thin'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
