@@ -40,7 +40,6 @@ GEM
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.0)
     hike (1.2.3)
     httparty (0.11.0)
