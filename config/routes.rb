@@ -27,4 +27,6 @@ BranchApp::Application.routes.draw do
   get '/halo4/servicerecord/:gamertag/competitive-skill-rank/:id' => 'halo4/competitive_skill_rank#details'
   get '/halo4/servicerecord/:gamertag/csr/:id' => 'halo4/competitive_skill_rank#details', as: :halo4_csr_details
 
+  get '/halo4/servicerecord/:gamertag/specializations' => 'halo4/specialization#index', as: :halo4_specialization
+
 end

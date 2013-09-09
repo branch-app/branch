@@ -1,0 +1,105 @@
+<% content_for :halo4, true %>
+<% content_for :title, "Halo 4 - iBotPeaches v5's Specializations" %>	
+<% content_for :has_footer, true %>
+<% content_for :halo4_active, 'specialization' %>
+<% content_for :scripts do %>
+<script>
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_specialization' %>
+
+<%= render partial: 'halo4/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'halo4/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section specialization">
+				<div class="row">
+					<div class="col-md-12 active-specialization">
+						<h2>
+							Active Specialization;
+						</h2>
+						<hr />
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-3 specialization-icon visible-md visible-lg" style="background-image: url(https://assets.halowaypoint.com/games/h4/specializations/v1/large/stalker.png);"></div>
+							<div class="col-md-8">
+								<span class="title">
+									Stalker
+								</span>
+								<br />
+								<span class="description">
+									Spartan optimization for target shadowing missions which require tactical invisibility despite operating at an extremely close range to the target itself.
+								</span>
+								<div class="level-progression">
+									<span class="level">
+										Current Level:
+										<strong>
+											9
+										</strong>
+									</span>
+									<div class="progress progress-striped active">
+										<div class="progress-bar"  role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100" style="width: 69%">
+											<span class="sr-only">69% Complete</span>
+											<span class="progress-bar-indicator">69% Complete</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row other-shit">
+					<div class="col-md-12">
+						<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+							<li class="active"><a href="#pending" data-toggle="tab">Pending Specializations</a></li>
+							<li><a href="#completed" data-toggle="tab">Completed Specializations</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="col-md-12 tab-pane fade active in" id="pending">
+								<% 6.times do |i| %>
+									<div class="row">
+										<div class="col-md-1"></div>
+										<div class="col-md-3 specialization-icon visible-md visible-lg" style="background-image: url(https://assets.halowaypoint.com/games/h4/specializations/v1/large/stalker.png);"></div>
+										<div class="col-md-8">
+											<span class="title">
+												Stalker
+											</span>
+											<br />
+											<span class="description">
+												Spartan optimization for target shadowing missions which require tactical invisibility despite operating at an extremely close range to the target itself.
+											</span>
+										</div>
+									</div>
+									<hr class="" />
+								<% end %>
+							</div>
+							<div class="col-md-12 tab-pane fade" id="completed">
+								<% 6.times do |i| %>
+									<div class="row">
+										<div class="col-md-1"></div>
+										<div class="col-md-3 specialization-icon visible-md visible-lg" style="background-image: url(https://assets.halowaypoint.com/games/h4/specializations/v1/large/stalker.png);"></div>
+										<div class="col-md-8">
+											<span class="title">
+												Stalker
+											</span>
+											<br />
+											<span class="description">
+												Spartan optimization for target shadowing missions which require tactical invisibility despite operating at an extremely close range to the target itself.
+											</span>
+										</div>
+									</div>
+									<hr class="" />
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
