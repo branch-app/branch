@@ -1,3 +1,30 @@
 body.halo4_commendations {
-	
+	.commendations {
+		.entry {
+			margin-bottom: 35px;
+			> .title {
+				font-size: 16px;
+				> .numerical {
+					font-size: 30px;
+					font-weight: 500;
+				}
+			}
+			> .description {
+				font-size: 14px;
+			}
+
+			> .progression {
+				margin-top: 20px;
+				> .points {
+					display: inline;
+					> .lower {
+						float: left;
+					}
+					> .upper {
+						float: right;
+					}
+				}
+			}
+		}
+	}
 }
