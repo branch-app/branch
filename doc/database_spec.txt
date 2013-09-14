@@ -82,3 +82,10 @@ sessions
 	expired				||		boolean
 	owner_ip			||		string
 	expires_at			||		datetime
+
+favourites
+	id 					||		integer
+	game 				||		string
+	type				||		string
+	data				||		string
+	user_id				||		integer
