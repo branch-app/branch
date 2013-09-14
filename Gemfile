@@ -22,7 +22,7 @@ group :development, :test do
 end
 
 # Fuck linux man, jesus
-platforms :ruby do
+group :production do
   gem 'unicorn'
 end
 
