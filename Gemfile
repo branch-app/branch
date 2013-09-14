@@ -21,9 +21,8 @@ group :development, :test do
 	gem 'thin'
 end
 
-# Fuck linux man, jesus
 group :production do
-  gem 'unicorn'
+	gem 'unicorn'
 end
 
 # Front End
