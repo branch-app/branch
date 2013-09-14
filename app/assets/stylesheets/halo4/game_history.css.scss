@@ -71,5 +71,45 @@ body.halo4_game_history {
 				}
 			}
 		}
+
+		.details {
+			.team-table {
+				> thead > tr {
+					color: white;
+				}
+
+				> tbody {
+					> tr {
+						.end-dnf {
+
+						}
+						> td {
+							.player-emblem {
+								width: 60px;
+								height: 60px;
+								background-position: center;
+								background-repeat: no-repeat;
+
+								margin: 2px;
+
+								float: left;
+							}
+							.player-gamertag {
+								margin: 10px 0 0 5px;
+								float: left;
+							}
+							.player-csr {
+								height: 60px;
+								width: 40px;
+								background-size: contain;
+								background-position: 0% 100%;
+								background-repeat: no-repeat;
+								float: right;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

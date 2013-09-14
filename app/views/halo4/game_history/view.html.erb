@@ -58,8 +58,139 @@
 					<div class="victor-player-model hidden-xs" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Swainooooo/h4/spartans/fullbody?target=medium)"></div>
 				</div>
 
-				<div class="">
+				<hr style="margin: 30px 0 30px 0;" />
 
+				<div class="details hidden-xs">
+					<div class="graphs" style="display: none;">
+						TODO
+					</div>
+					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+						<li class="active">
+							<a href="#overview" data-toggle="tab">Overview</a>
+						</li>
+						<li>
+							<a href="#carnage" data-toggle="tab">Carnage</a>
+						</li>
+						<li>
+							<a href="#medals" data-toggle="tab">Medals</a>
+						</li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade active in" id="overview">
+						</div>
+						<div class="tab-pane fade active in" id="carnage">
+						</div>
+						<div class="tab-pane fade active in" id="medals">
+						</div>
+					</div>
+
+					<table class="table red-team team-table" style="border-left: 4px solid #D96551;">
+						<thead style="background-color: #D96551;">
+							<tr>
+								<th>
+									Red Team
+								</th>
+								<th>
+									Score
+								</th>
+								<th>
+									Kills
+								</th>
+								<th>
+									Deaths
+								</th>
+								<th>
+									K/D Ratio
+								</th>
+								<th>
+									Assists
+								</th>
+								<th>
+									Penalties
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<% 5.times do |i| %>
+								<% dnf = 'end-dnf' if rand(0..4) == 1 %>
+								<tr>
+									<td class="<%= dnf %>">
+										<div class="player-emblem" style="background-color: #D96551; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
+										<div class="player-gamertag">
+											<%= link_to 'Xerax', halo4_servicerecord_path(gamertag: 'xerax') %>
+											<br />
+											<strong>DOPE</strong>
+										</div>
+										<div class="player-csr" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/small/50.png);"></div>
+										<div class="clearfix"></div>
+									</td>
+									<td>420</td>
+									<td>15</td>
+									<td>7</td>
+									<td>1.55</td>
+									<td>6</td>
+									<td>1</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+
+					<table class="table blue-team team-table" style="border-left: 4px solid #6384B0;">
+						<thead style="background-color: #6384B0;">
+							<tr>
+								<th>
+									Blue Team
+								</th>
+								<th>
+									Score
+								</th>
+								<th>
+									Kills
+								</th>
+								<th>
+									Deaths
+								</th>
+								<th>
+									K/D Ratio
+								</th>
+								<th>
+									Assists
+								</th>
+								<th>
+									Penalties
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<% 5.times do |i| %>
+								<% dnf = 'end-dnf' if rand(0..4) == 1 %>
+								<tr>
+									<td class="<%= dnf %>">
+										<div class="player-emblem" style="background-color: #6384B0; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
+										<div class="player-gamertag">
+											<%= link_to 'Xerax', halo4_servicerecord_path(gamertag: 'xerax') %>
+											<br />
+											<strong>DOPE</strong>
+										</div>
+										<div class="player-csr" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/small/50.png);"></div>
+										<div class="clearfix"></div>
+									</td>
+									<td>420</td>
+									<td>15</td>
+									<td>7</td>
+									<td>1.55</td>
+									<td>6</td>
+									<td>1</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+
+				</div>
+				<div class="details visible-xs">
+					hi mobile guys
 				</div>
 			</div>
 		</div>
