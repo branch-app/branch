@@ -97,25 +97,16 @@
 			</div>
 		</header>
 
-		<div class="container">
-			<% [:info, :success, :danger].each do |level| %>
-				<% unless flash[level].blank? %>
-					<div class="alert alert-<%= level %>">
-						<span><%= flash[level] %> </span>
-						<a class="close" href="#">×</a>
-					</div>
-				<% end %>
-			<% end %>
-		</div>
-
-		<%= yield %>
+		<article>
+			<%= yield %>
+		</article>
 
 		<% if content_for? :has_footer %>
 			<footer class="bs-footer" role="contentinfo">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-10">
-							<p>Designed and developed by <a href="http://twitter.com/alexerax" target="_blank">@alexerax</a>.</p>
+							<p>Designed and Developed by <a href="http://twitter.com/alexerax" target="_blank">@alexerax</a>.</p>
 							<p>Code licensed under the <a href="http://www.dbad-license.org/" target="_blank">Don't Be A Dick</a> Public License.</p>
 							<ul class="footer-links">
 								<li><a href="http://xboxchaos.com/" target="_blank">Xbox Chaos</a></li>
@@ -133,34 +124,36 @@
 						<div class="col-md-2 hidden-xs hidden-sm">
 							<%= image_tag("uk-map.png", { width: '60', height: '77' }) %>
 							<br>
-							<!-- <span class="made-in">Made in the UK</span> -->
+							<!-- <span class="made-in">Made in the UK</span> - fuck this line -->
 						</div>
 					</div>
 				</div>
 			</footer>
 		<% end %>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.map"></script>
-		<%= javascript_include_tag "bootstrap" %>
-		<%= javascript_include_tag "Chart" %>
-		<%= javascript_include_tag "application" %>
+		<div class="scripts">
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.map"></script>
+			<%= javascript_include_tag "bootstrap" %>
+			<%= javascript_include_tag "Chart" %>
+			<%= javascript_include_tag "application" %>
 
-		<!-- Social Media Button Scripts -->
-		<div id="fb-root"></div>
-		<script>
-			(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
-				fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk')
-			);
-		</script>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<!-- Social Media Button Scripts -->
+			<div id="fb-root"></div>
+			<script>
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk')
+				);
+			</script>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-		<!-- Scripts -->
-		<%= yield(:scripts) if content_for? :scripts %>
+			<!-- Scripts -->
+			<%= yield(:scripts) if content_for? :scripts %>
+		</div>
 	</body>
 </html>
