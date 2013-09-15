@@ -80,8 +80,8 @@ body.halo4_game_history {
 
 				> tbody {
 					> tr {
-						.end-dnf {
-
+						&.end-dnf {
+							background-color: #eee;
 						}
 						> td {
 							.player-emblem {
