@@ -5,7 +5,17 @@
 <% content_for :halo4_game_history_active, @css_class %>
 <% content_for :scripts do %>
 <script>
+// Current Tab Sutff
+var currentViewTab = 0;
+$('#tab-overview').click(function(e) { currentViewTab = 0; });
+$('#tab-carnage').click(function(e) { currentViewTab = 1; });
+$('#tab-medals').click(function(e) { currentViewTab = 2; });
 
+
+$('.player-linker').click(function(e) {
+	if (currentViewTab != 0)
+		e.preventDefault();
+});
 </script>
 <% end %>
 <% content_for :template, 'halo4 halo4_game_history' %>
@@ -66,23 +76,15 @@
 					</div>
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 						<li class="active">
-							<a href="#overview" data-toggle="tab">Overview</a>
+							<a id="tab-overview" href="#overview" data-toggle="tab">Overview</a>
 						</li>
 						<li>
-							<a href="#carnage" data-toggle="tab">Carnage</a>
+							<a id="tab-carnage" href="#carnage" data-toggle="tab">Carnage</a>
 						</li>
 						<li>
-							<a href="#medals" data-toggle="tab">Medals</a>
+							<a id="tab-medals" href="#medals" data-toggle="tab">Medals</a>
 						</li>
 					</ul>
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="overview">
-						</div>
-						<div class="tab-pane fade active in" id="carnage">
-						</div>
-						<div class="tab-pane fade active in" id="medals">
-						</div>
-					</div>
 
 					<table class="table red-team team-table" style="border-left: 4px solid #D96551;">
 						<thead style="background-color: #D96551;">
@@ -188,7 +190,20 @@
 						</tbody>
 					</table>
 
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade active in" id="overview">
+						</div>
+						<div class="tab-pane fade in" id="carnage">
+							<span class="click-helper">* Click a players name to get their carnage report.</span>
+							<hr />
+						</div>
+						<div class="tab-pane fade in" id="medals">
+							<span class="click-helper">* Click a players name to get their medal report.</span>
+							<hr />
+						</div>
+					</div>
 				</div>
+
 				<div class="details visible-xs">
 					hi mobile guys
 				</div>
