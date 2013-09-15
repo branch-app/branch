@@ -109,6 +109,13 @@ body.halo4_game_history {
 						}
 					}
 				}
+
+				.tab-pane {
+					> .click-helper {
+						color: #aaa;
+						font-size: 15px;
+					}
+				}
 			}
 		}
 	}
