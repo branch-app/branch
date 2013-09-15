@@ -58,7 +58,6 @@ users
 	username			||		string
 	name				|| 		string
 	email				||		string
-	dob					||		datetime
 	password			||		string
 	gamertag_id			||		integer
 	role_id				||		integer
