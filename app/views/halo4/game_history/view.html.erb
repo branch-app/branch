@@ -37,6 +37,17 @@ $('.player-linker').click(function(e) {
 		$('#carnage > table > tbody').html(output);
 
 	} else if (currentViewTab == 2) { // Medals
+		data = jQuery.parseJSON($(this).attr('data-attr'));
+		$('#medals > .owner').text(data.owner.gamertag + "'s Medals");
+
+		var output = '';
+		var header = '';
+		for(var i = 0; i < data.medals.length; i++) {
+			header += '<td>' + data.medals[i].tier + '</td>';
+			output += '';
+		}
+		$('#medals > table > thead > tr').html(header);
+		$('#medals > table > tbody').html(output);
 	}
 });
 </script>
