@@ -3,6 +3,10 @@ body.user_register {
 	.register-header {
 		height: 350px;
 
+		@media (max-width: 768px) {
+			height: 180px;
+		}
+
 		> .container > .holy-shit-people {
 
 			position: absolute;
@@ -43,6 +47,35 @@ body.user_register {
 					transform: scaleX(-1);
 					filter: FlipH;
 					-ms-filter: "FlipH";
+				}
+			}
+		}
+	}
+
+	.details {
+		.validation-errors {
+			> ul {
+				padding-left: 20px;
+				margin: 20px auto auto auto;
+				list-style-type: circle;
+
+				> li {
+
+				}
+			}
+		}
+
+		.input-section {
+			margin: 40px auto;
+
+			.col-md-6 {
+				> .title {
+					font-size: 16px;
+					font-weight: 600;
+				}
+
+				> .input-group {
+					margin-top: 10px;
 				}
 			}
 		}
