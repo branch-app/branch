@@ -69,6 +69,29 @@ $(document).ready(function() {
 			$('.username-section > div > .input-group').removeClass('has-error');
 		}
 	});
+
+	// Email Validation
+	$('.email-section > div > .input-group > input').on('input', function() {
+		var data = $('.email-section > div > .input-group > input').val();
+		var invalid = false;
+		var reason = '';
+
+		if (data != '') {
+			// check regex
+			invalid = !(data.match(/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/));
+			reason = "The Specified Email Address is not a valid Email Address.";
+		}
+		
+		if (invalid) {
+			$('.email-section > div > .bs-callout').css('display', 'block');
+			$('.email-section > div > .bs-callout > .reason').text(reason);
+			$('.email-section > div > .input-group').addClass('has-error');
+		} else {
+			$('.email-section > div > .bs-callout').css('display', 'none');
+			$('.email-section > div > .bs-callout > .reason').text('');
+			$('.email-section > div > .input-group').removeClass('has-error');
+		}
+	});
 });
 
 </script>
@@ -126,6 +149,21 @@ $(document).ready(function() {
 
 						<div class="bs-callout bs-callout-danger" style="display: none;">
 							<h4>Invalid Username</h4>
+							<p class="reason"></p>
+						</div>
+					</div>
+				</section>
+
+				<section class="input-section email-section row">
+					<div class="col-md-6">
+						<span class="title">Email Address</span>
+						<div class="input-group">
+							<span class="input-group-addon">@</span>
+							<input type="text" class="form-control" placeholder="Email Address">
+						</div>
+
+						<div class="bs-callout bs-callout-danger" style="display: none;">
+							<h4>Invalid Email Address</h4>
 							<p class="reason"></p>
 						</div>
 					</div>
