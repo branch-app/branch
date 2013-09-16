@@ -92,6 +92,53 @@ $(document).ready(function() {
 			$('.email-section > div > .input-group').removeClass('has-error');
 		}
 	});
+
+	// Password Validation
+	function validatePasswordStuff() {
+		var data = $('.password-section > div > .input-group > input').val();
+		var dataConf = $('.password-conf-section > div > .input-group > input').val();
+		var invalid = false;
+		var reason = '';
+
+		if (data != '') {
+			var complexity = 0;
+
+			if (data.match(/[0-9]+/))
+				complexity++;
+			if (data.match(/[a-z]+/))
+				complexity++;
+			if (data.match(/[A-Z]+/))
+				complexity++;
+			if (data.match(/[^a-zA-Z0-9]+/))
+				complexity++;
+
+			if (complexity <= 2) {
+				invalid = true;
+				reason = "Your password is not complex enough. It must contain atleast 2 of the following: numbers, lower case letters, upper case letters or special characters.";
+			}
+
+			if (invalid) {
+				$('.password-conf-section > div > .bs-callout').css('display', 'block');
+				$('.password-conf-section > div > .bs-callout > .reason').text(reason);
+				$('.password-section > div > .input-group').addClass('has-error');
+			} else {
+				$('.password-section > div > .input-group').removeClass('has-error');
+				if (data != dataConf) {
+					reason = 'Your Password and Password Confirmation do not match.';
+
+					$('.password-conf-section > div > .bs-callout').css('display', 'block');
+					$('.password-conf-section > div > .bs-callout > .reason').text(reason);
+					$('.password-conf-section > div > .input-group').addClass('has-error');
+				} else {
+					$('.password-conf-section > div > .bs-callout').css('display', 'none');
+					$('.password-conf-section > div > .bs-callout > .reason').text('');
+					$('.password-conf-section > div > .input-group').removeClass('has-error');
+				}
+			}
+		}
+	}
+	$('.password-section > div > .input-group > input').on('input', validatePasswordStuff);
+	$('.password-conf-section > div > .input-group > input').on('input', validatePasswordStuff);
 });
 
 </script>
@@ -164,6 +211,33 @@ $(document).ready(function() {
 
 						<div class="bs-callout bs-callout-danger" style="display: none;">
 							<h4>Invalid Email Address</h4>
+							<p class="reason"></p>
+						</div>
+					</div>
+				</section>
+
+				<hr />
+
+				<section class="input-section password-section row">
+					<div class="col-md-6">
+						<span class="title">Password</span>
+						<div class="input-group">
+							<span class="input-group-addon">*</span>
+							<input type="password" class="form-control" placeholder="Password">
+						</div>
+					</div>
+				</section>
+
+				<section class="input-section password-conf-section row">
+					<div class="col-md-6">
+						<span class="title">Password Confirmation</span>
+						<div class="input-group">
+							<span class="input-group-addon">*</span>
+							<input type="password" class="form-control" placeholder="Password Confirmation">
+						</div>
+
+						<div class="bs-callout bs-callout-danger" style="display: none;">
+							<h4>Invalid Password</h4>
 							<p class="reason"></p>
 						</div>
 					</div>
