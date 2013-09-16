@@ -121,6 +121,7 @@ $(document).ready(function() {
 				$('.password-conf-section > div > .bs-callout').css('display', 'block');
 				$('.password-conf-section > div > .bs-callout > .reason').text(reason);
 				$('.password-section > div > .input-group').addClass('has-error');
+				$('.password-conf-section > div > .input-group').removeClass('has-error');
 			} else {
 				$('.password-section > div > .input-group').removeClass('has-error');
 				if (data != dataConf) {
