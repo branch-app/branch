@@ -3,6 +3,74 @@
 <% content_for :has_footer, true %>
 <% content_for :scripts do %>
 <script>
+
+$(document).ready(function() {
+
+	// Username Fullname
+	$('.full-name-section > div > .input-group > input').on('input', function() {
+		var data = $('.full-name-section > div > .input-group > input').val();
+		var invalid = false;
+		var reason = '';
+
+		if (data != '') {
+			// check it doesn't start with space
+			if (data.indexOf('  ') != -1) {
+				reason = "Names can not have more than 1 space in a row in them.";
+				invalid = true;
+			} else if (data.replace(/^\s+|\s+$/g,'') != data) {
+				reason = "Names can not start or end with a space.";
+				invalid = true;
+			} else {
+				// check regex
+				invalid = !(data.match(/[a-zA-Z\-]/));
+				reason = "Names can only contain letters, spaces and hyphens.";
+			}
+		}
+		
+		if (invalid) {
+			$('.full-name-section > div > .bs-callout').css('display', 'block');
+			$('.full-name-section > div > .bs-callout > .reason').text(reason);
+			$('.full-name-section > div > .input-group').addClass('has-error');
+		} else {
+			$('.full-name-section > div > .bs-callout').css('display', 'none');
+			$('.full-name-section > div > .bs-callout > .reason').text('');
+			$('.full-name-section > div > .input-group').removeClass('has-error');
+		}
+	});
+
+	// Username Validation
+	$('.username-section > div > .input-group > input').on('input', function() {
+		var data = $('.username-section > div > .input-group > input').val();
+		var invalid = false;
+		var reason = '';
+
+		if (data != '') {
+			// check it doesn't start with space
+			if (data.indexOf('  ') != -1) {
+				reason = "Username's can not have more than 1 space in a row in them.";
+				invalid = true;
+			} else if (data.replace(/^\s+|\s+$/g,'') != data) {
+				reason = "Username's can not start or end with a space.";
+				invalid = true;
+			} else {
+				// check regex
+				invalid = !(data.match(/[a-zA-Z0-9\_\.]/));
+				reason = "Username's can only contain letters, numbers, underscores and stops.";
+			}
+		}
+		
+		if (invalid) {
+			$('.username-section > div > .bs-callout').css('display', 'block');
+			$('.username-section > div > .bs-callout > .reason').text(reason);
+			$('.username-section > div > .input-group').addClass('has-error');
+		} else {
+			$('.username-section > div > .bs-callout').css('display', 'none');
+			$('.username-section > div > .bs-callout > .reason').text('');
+			$('.username-section > div > .input-group').removeClass('has-error');
+		}
+	});
+});
+
 </script>
 <% end %>
 <% content_for :template, 'user user_register' %>
@@ -16,6 +84,53 @@
 			<div class="player a" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Swainooooo/h4/spartans/fullbody?target=large)"></div>
 			<div class="player b" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Doofette/h4/spartans/fullbody?target=large)"></div>
 			<div class="player c" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Pr0gram/h4/spartans/fullbody?target=large)"></div>
+		</div>
+	</div>
+</div>
+
+<div class="container bitch-needs-a-break">
+	<div class="row">
+		<div class="col-md-12 panel panel-default">
+			<div class="panel-body details">
+				<section class="bs-callout bs-callout-danger validation-errors">
+					<h4>Validation Error</h4>
+					<ul>
+						<li>Full Name's can't be 1 character long. idiot</li>
+						<li>Username has already been taken</li>
+						<li>You must have an email address</li>
+					</ul>
+				</section>
+
+				<section class="input-section full-name-section row">
+					<div class="col-md-6">
+						<span class="title">Full Name</span>
+						<div class="input-group">
+							<span class="input-group-addon">@</span>
+							<input type="text" class="form-control" placeholder="Full Name">
+						</div>
+
+						<div class="bs-callout bs-callout-danger" style="display: none;">
+							<h4>Invalid Name</h4>
+							<p class="reason"></p>
+						</div>
+					</div>
+				</section>
+
+				<section class="input-section username-section row">
+					<div class="col-md-6">
+						<span class="title">Username</span>
+						<div class="input-group">
+							<span class="input-group-addon">@</span>
+							<input type="text" class="form-control" placeholder="Username">
+						</div>
+
+						<div class="bs-callout bs-callout-danger" style="display: none;">
+							<h4>Invalid Username</h4>
+							<p class="reason"></p>
+						</div>
+					</div>
+				</section>
+			</div>
 		</div>
 	</div>
 </div>
