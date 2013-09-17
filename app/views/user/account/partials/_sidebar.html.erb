@@ -4,7 +4,7 @@
 			<%= link_to 'Xerax', '#' %>
 			<ul class="nav">
 				<li class="<%= 'active' if content_for(:account_active) == 'overview' %>">
-					<%= link_to 'Overview', '#' %>
+					<%= link_to 'Overview', user_view_path(username: @username) %>
 				</li>
 				<li class="<%= 'active' if content_for(:account_active) == 'friends' %>">
 					<%= link_to 'Friends', '#' %>
