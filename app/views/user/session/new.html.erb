@@ -8,13 +8,52 @@
 <% end %>
 <% content_for :template, 'user session_signin' %>
 
-<%= render partial: 'user/partials/header', locals: { title: 'Sign into Branch', description: '' } %>
+<%= render partial: 'user/partials/header', locals: { title: 'Sign into Branch', description: 'Signing into Branch gives you customized experience, with just what you want to see.' } %>
 
 <div class="container bitch-needs-a-break">
 	<div class="row">
 		<div class="col-md-12 panel panel-default">
 			<div class="panel-body details">
-				swag
+				<section class="bs-callout bs-callout-danger validation-errors">
+					<h4>Sign In Error</h4>
+					<p>
+						Invalid Username or Password.
+					</p>
+				</section>
+
+				<section class="input-section identifier-section row">
+					<div class="col-md-6">
+						<span class="title">Username or Email Address</span>
+						<div class="input-group">
+							<span class="input-group-addon">@</span>
+							<input type="text" class="form-control" placeholder="Username or Email Address">
+						</div>
+					</div>
+				</section>
+
+				<section class="input-section password-section row">
+					<div class="col-md-6">
+						<span class="title">Password</span>
+						<div class="input-group">
+							<span class="input-group-addon">*</span>
+							<input type="password" class="form-control" placeholder="Password">
+						</div>
+					</div>
+				</section>
+
+				<hr />
+
+				<section class="input-section submit row">
+					<ul>
+						<li>
+							<input type="submit" class="btn btn-primary btn-large" value="Sign In" />
+						</li>
+						<li>or</li>
+						<li>
+							<%= link_to 'Register', user_register_path, class: 'btn btn-info btn-large' %>
+						</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 	</div>
