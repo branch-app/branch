@@ -61,23 +61,8 @@ body.user {
 			}
 		}
 	}
-}
-
-body.user_register {
 
 	.details {
-		.validation-errors {
-			> ul {
-				padding-left: 20px;
-				margin: 20px auto auto auto;
-				list-style-type: circle;
-
-				> li {
-
-				}
-			}
-		}
-
 		.input-section {
 			margin: 40px auto;
 
@@ -91,9 +76,27 @@ body.user_register {
 					margin-top: 10px;
 				}
 			}
+		}
+	}
+}
 
-			&.submit {
-				margin-left: 20px;
+body.user_register {
+	.details {
+		.validation-errors {
+			> ul {
+				padding-left: 20px;
+				margin: 20px auto auto auto;
+				list-style-type: circle;
+
+				> li {
+
+				}
+			}
+
+			.input-section {
+				&.submit {
+					margin-left: 20px;
+				}
 			}
 		}
 	}

@@ -1,5 +1,22 @@
 body.session {
-	body.session_signin {
 
+}
+
+body.session_signin {
+	.details {
+		> .submit {
+			margin: 10px !important;
+			> ul {
+				margin: 0;
+				padding: 0;
+				display: inline;
+				list-style-type: none;
+
+				> li {
+					display: inline;
+					margin: auto 5px;
+				}
+			}
+		}
 	}
 }
