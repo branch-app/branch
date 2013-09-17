@@ -1,2 +1,21 @@
-<h1>User::Session#new</h1>
-<p>Find me in app/views/user/session/new.html.erb</p>
+<% content_for :user, true %>
+<% content_for :title, 'Sign In' %>	
+<% content_for :has_footer, true %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'user session_signin' %>
+
+<%= render partial: 'user/partials/header', locals: { title: 'Sign into Branch', description: '' } %>
+
+<div class="container bitch-needs-a-break">
+	<div class="row">
+		<div class="col-md-12 panel panel-default">
+			<div class="panel-body details">
+				swag
+			</div>
+		</div>
+	</div>
+</div>
