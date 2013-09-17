@@ -1,0 +1,61 @@
+body.account {
+	.account-header {
+		height: 350px;
+
+		@media (max-width: 768px) {
+			height: 240px;
+		}
+
+		> .container  {
+
+			> h1 {
+				margin-top: 0px;
+
+				@media (max-width: 768px) {
+					margin-top: auto;
+				}
+			}
+			> ul {
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+				font-size: 15px;
+
+				> li {
+					margin-right: 5px;
+					display: inline;
+				}
+			}
+			> .actions {
+				margin-top: 20px;
+			}
+
+			> .h4-player-posed {
+
+				position: absolute;
+				top: -40px;
+				right: 0;
+				width: 460px;
+				height: 360px;
+
+				> .player {
+					background-repeat: no-repeat;
+					position: absolute;
+					background-size: cover;
+
+					-moz-transform: scaleX(-1);
+					-o-transform: scaleX(-1);
+					-webkit-transform: scaleX(-1);
+					transform: scaleX(-1);
+					filter: FlipH;
+					-ms-filter: "FlipH";
+
+					top: 33px;
+					right: 91px;
+					height: 327px;
+					width: 264px;
+				}
+			}
+		}
+	}
+}

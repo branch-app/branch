@@ -7,7 +7,7 @@
 					<%= link_to 'Overview', user_view_path(username: @username) %>
 				</li>
 				<li class="<%= 'active' if content_for(:account_active) == 'friends' %>">
-					<%= link_to 'Friends', '#' %>
+					<%= link_to 'Friends', user_friends_path(username: @username) %>
 				</li>
 				<li class="<%= 'active' if content_for(:account_active) == 'favourites' %>">
 					<%= link_to 'Favourites', '#' %>
