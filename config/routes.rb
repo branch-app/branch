@@ -10,10 +10,12 @@ BranchApp::Application.routes.draw do
   root :to => 'home#index'
   get '/welcome' => 'home#welcome', as: :home_welcome
 
-  # Account
+  # User
   get '/user/signin' => 'user/session#new', as: :user_signin
   get '/user/register' => 'user/user#new', as: :user_register
-  get '/user/:username' => 'user/user#index', as: :user_view
+
+  # Account
+  get '/user/:username' => 'user/account/home#index', as: :user_view
 
   # Search
   get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
