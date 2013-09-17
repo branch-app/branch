@@ -13,7 +13,7 @@ BranchApp::Application.routes.draw do
   # Account
   get '/user/signin' => 'user/session#new', as: :user_signin
   get '/user/register' => 'user/user#new', as: :user_register
-  get '/user/:username' => 'user/home#index', as: :user_view
+  get '/user/:username' => 'user/user#index', as: :user_view
 
   # Search
   get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
