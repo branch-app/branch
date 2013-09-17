@@ -17,6 +17,7 @@ BranchApp::Application.routes.draw do
   # Account
   get '/user/:username' => 'user/account/home#index', as: :user_view
   get '/user/:username/friends' => 'user/account/friends#index', as: :user_friends
+  get '/user/:username/favourites' => 'user/account/favourites#index', as: :user_favourites
 
   # Search
   get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
