@@ -39,6 +39,19 @@ body {
 	opacity: 0.6;
 }
 
+/* UL Helpers */
+ul.no-style {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	&.inline {
+		> li {
+			display: inline;
+		}
+	}
+}
+
 footer > .container > .row > .col-md-2 > .made-in {
 	font-size: 12px;
 	color: #aaa;
