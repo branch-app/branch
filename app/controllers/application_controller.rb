@@ -1,11 +1,8 @@
 class ApplicationController < ActionController::Base
+	helper_method :current_user
 	protect_from_forgery
 
-	def index
-	end
-
-	# Internal Functions
-
+	# -- Internal Functions
 	def sub_view_to_friendly(sub_view)
 		return sub_view.gsub('-', ' ').titlecase
 	end
@@ -31,6 +28,16 @@ class ApplicationController < ActionController::Base
 			return param, true
 		else
 			return 0, false
+		end
+	end
+
+	# -- Helpers
+	def current_user
+		begin
+			@current_user ||= User.find(session[:user_id]) if session[:user_id]
+		rescue
+			reset_session
+			@current_user = nil
 		end
 	end
 

@@ -5,7 +5,6 @@
 <script>
 
 $(document).ready(function() {
-
 	// Full Name Fullname
 	$('.full-name-section > div > .input-group > input').on('input', function() {
 		var data = $('.full-name-section > div > .input-group > input').val();
@@ -148,97 +147,139 @@ $(document).ready(function() {
 
 <%= render partial: 'user/partials/header', locals: { title: 'Join Branch', description: 'And get access to shit I have yet to think of.' } %>
 
-<div class="container bitch-needs-a-break">
-	<div class="row">
-		<div class="col-md-12 panel panel-default">
-			<div class="panel-body details">
-				<section class="bs-callout bs-callout-danger validation-errors">
-					<h4>Validation Error</h4>
-					<ul>
-						<li>Full Name's can't be 1 character long. idiot</li>
-						<li>Username has already been taken</li>
-						<li>You must have an email address</li>
-					</ul>
-				</section>
+<%= form_for @user, url: :user_create, method: :post do |f| %>
+	<div class="container bitch-needs-a-break">
+		<div class="row">
+			<div class="col-md-12 panel panel-default">
+				<div class="panel-body details">
+					<% if @user.errors.any? %>
+						<section class="bs-callout bs-callout-danger validation-errors">
+							<h4>Validation Error</h4>
+							<ul>
+								<% for message in @user.errors.full_messages %>
+									<li><%= message %></li>
+								<% end %>
+							</ul>
+						</section>
+					<% end %>
 
-				<section class="input-section full-name-section row">
-					<div class="col-md-6">
-						<span class="title">Full Name</span>
-						<div class="input-group">
-							<span class="input-group-addon">@</span>
-							<input type="text" class="form-control" placeholder="Full Name">
+					<section class="input-section full-name-section row">
+						<div class="col-md-6">
+							<span class="title">Full Name</span>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<%= f.text_field :name, placeholder: 'Full Name', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :name) %>">
+								<h4>Invalid Name</h4>
+								<p class="reason">
+									<% for message in @user.errors[:name] %>
+										Full Name <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
 						</div>
+					</section>
 
-						<div class="bs-callout bs-callout-danger" style="display: none;">
-							<h4>Invalid Name</h4>
-							<p class="reason"></p>
+					<section class="input-section username-section row">
+						<div class="col-md-6">
+							<span class="title">Username</span>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<%= f.text_field :username, placeholder: 'Username', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :username) %>">
+								<h4>Invalid Username</h4>
+								<p class="reason">
+									<% for message in @user.errors[:username] %>
+										Username <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
 						</div>
-					</div>
-				</section>
+					</section>
 
-				<section class="input-section username-section row">
-					<div class="col-md-6">
-						<span class="title">Username</span>
-						<div class="input-group">
-							<span class="input-group-addon">@</span>
-							<input type="text" class="form-control" placeholder="Username">
+					<section class="input-section gamertag-section row">
+						<div class="col-md-6">
+							<span class="title">Gamertag</span>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<%= f.text_field :gamertag, placeholder: 'Gamertag', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :gamertag) %>">
+								<h4>Invalid Gamertag</h4>
+								<p class="reason">
+									<% for message in @user.errors[:gamertag] %>
+										Username <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
 						</div>
+					</section>
 
-						<div class="bs-callout bs-callout-danger" style="display: none;">
-							<h4>Invalid Username</h4>
-							<p class="reason"></p>
+					<section class="input-section email-section row">
+						<div class="col-md-6">
+							<span class="title">Email Address</span>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<%= f.text_field :email, placeholder: 'Username', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :email) %>">
+								<h4>Invalid Email Address</h4>
+								<p class="reason">
+									<% for message in @user.errors[:email] %>
+										Email Address <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
 						</div>
-					</div>
-				</section>
+					</section>
 
-				<section class="input-section email-section row">
-					<div class="col-md-6">
-						<span class="title">Email Address</span>
-						<div class="input-group">
-							<span class="input-group-addon">@</span>
-							<input type="text" class="form-control" placeholder="Email Address">
+					<hr />
+
+					<section class="input-section password-section row">
+						<div class="col-md-6">
+							<span class="title">Password</span>
+							<div class="input-group">
+								<span class="input-group-addon">*</span>
+								<%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+							</div>
 						</div>
+					</section>
 
-						<div class="bs-callout bs-callout-danger" style="display: none;">
-							<h4>Invalid Email Address</h4>
-							<p class="reason"></p>
+					<section class="input-section password-conf-section row">
+						<div class="col-md-6">
+							<span class="title">Password Confirmation</span>
+							<div class="input-group">
+								<span class="input-group-addon">*</span>
+								<%= f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="display: none;">
+								<h4>Invalid Password</h4>
+								<p class="reason">
+									<% for message in @user.errors[:password] %>
+										Password <%= message %> <br />
+									<% end %>
+									<% for message in @user.errors[:password_confirmation] %>
+										Password Confirmation <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
 						</div>
-					</div>
-				</section>
+					</section>
 
-				<hr />
+					<hr />
 
-				<section class="input-section password-section row">
-					<div class="col-md-6">
-						<span class="title">Password</span>
-						<div class="input-group">
-							<span class="input-group-addon">*</span>
-							<input type="password" class="form-control" placeholder="Password">
-						</div>
-					</div>
-				</section>
-
-				<section class="input-section password-conf-section row">
-					<div class="col-md-6">
-						<span class="title">Password Confirmation</span>
-						<div class="input-group">
-							<span class="input-group-addon">*</span>
-							<input type="password" class="form-control" placeholder="Password Confirmation">
-						</div>
-
-						<div class="bs-callout bs-callout-danger" style="display: none;">
-							<h4>Invalid Password</h4>
-							<p class="reason"></p>
-						</div>
-					</div>
-				</section>
-
-				<hr />
-
-				<section class="input-section submit row">
-					<input type="submit" class="btn btn-primary btn-large" value="Sign Up" />
-				</section>
+					<section class="input-section submit row">
+						<input type="submit" class="btn btn-primary btn-large" value="Sign Up" />
+					</section>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<% end %>

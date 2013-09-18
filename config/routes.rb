@@ -7,6 +7,7 @@ BranchApp::Application.routes.draw do
   # User
   get '/user/signin' => 'user/session#new', as: :user_signin
   get '/user/register' => 'user/user#new', as: :user_register
+  post '/user/register' => 'user/user#create', as: :user_create
 
   # Account
   get '/user/:username' => 'user/account/home#index', as: :user_view
