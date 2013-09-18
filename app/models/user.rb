@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	validates_uniqueness_of :email, :username
 
 	validate :validate_password_confirmation
+	validate :map_gamertag, if: ->(a) { a.gamertag.present? }
 	validate :password_is_complex, if: ->(a) { a.password.present? }
 
 	validates_format_of :email, with: /\A[\w\d\-.+]+@[\w\d\-.+]+\.[a-z]{2,25}\Z/i
