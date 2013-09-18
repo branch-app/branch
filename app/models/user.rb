@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 	attr_accessible :email, :gamertag_id, :gamertag, :name, :password, :password_confirmation, :role_id, :username
 	attr_accessor :password_confirmation, :gamertag
 
+	has_many :session
+
 	validates_presence_of :email, :gamertag, :name, :password
 	validates_presence_of :password_confirmation, on: :create
 

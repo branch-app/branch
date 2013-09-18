@@ -18,7 +18,13 @@ class User::SessionController < User::HomeController
 		stuff = params[:login]
 		user = User.authenticate(stuff[:identifier], stuff[:password])
 		if user != nil
-			session[:user_id] = user.id
+			expire = 2.weeks.from_now
+			expire = 69.years.from_now if stuff[:rememberme]
+
+			user_session = Session.new(expired: false, expires_at: expire, owner_ip: '', location: '', user_agent: '', user_id: user.id)
+			user_session.save!
+
+			session[:session_id] = user_session.identifier
 			redirect_to(root_path)
 		else
 			@error = 'Incorrect Password or Username/Email Address'
@@ -28,7 +34,7 @@ class User::SessionController < User::HomeController
 	end
 
 	def destroy
-		session[:user_id] = nil
+		session[:identifier] = nil
 		reset_session
 
 		redirect_to(root_path)

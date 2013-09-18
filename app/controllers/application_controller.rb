@@ -34,7 +34,9 @@ class ApplicationController < ActionController::Base
 	# -- Helpers
 	def current_user
 		begin
-			@current_user ||= User.find(session[:user_id]) if session[:user_id]
+			user_session = Session.find_by_identifier(session[:session_id]) if session[:session_id]
+			raise if user_session == nil || user_session.expired || user_session.expires_at < DateTime.now
+			@current_user = User.find_by_id(user_session.user_id)
 		rescue
 			reset_session
 			@current_user = nil

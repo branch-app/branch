@@ -4,6 +4,16 @@ body.session {
 
 body.session_signin {
 	.details {
+		> .remember-me-section {
+			margin-top: -20px !important;
+
+			> div > .input-group > .checkbox-pair {
+				font-size: 14px;
+				font-weight: 600;
+				margin-left: 10px;
+			}
+		}
+
 		> .submit {
 			margin: 10px !important;
 			> ul {
