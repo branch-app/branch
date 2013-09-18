@@ -1,11 +1,5 @@
 BranchApp::Application.routes.draw do
-
-  get "session/new"
-
-  get "session/create"
-
-  get "session/destroy"
-
+  
   # Core
   root :to => 'home#index'
   get '/welcome' => 'home#welcome', as: :home_welcome
