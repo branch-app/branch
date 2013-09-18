@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
 
 	validates_uniqueness_of :email, :username
 
-	validate :validate_password_confirmation
-	validate :map_gamertag, if: ->(a) { a.gamertag.present? }
+	validate :validate_password_confirmation, on: :create
+	validate :map_gamertag
 	validate :password_is_complex, if: ->(a) { a.password.present? }
 
 	validates_format_of :email, with: /\A[\w\d\-.+]+@[\w\d\-.+]+\.[a-z]{2,25}\Z/i
@@ -20,32 +20,52 @@ class User < ActiveRecord::Base
 	validates_format_of :name, with: /\A[A-Za-z\- ]+\z/
 	validates_format_of :gamertag, with: /\A[a-z]([a-z0-9]{0,15} ?)*\Z/i
 
-	def map_gamertag
-		g_tag = Gamertag.find_by_gamertag(gamertag)
-		if (g_tag == nil)
-			g_tag = Gamertag.new(gamertag: gamertag)
-			g_tag.save
-		end
-		gamertag_id = g_tag.id
+	before_create :hash_password
+
+	def self.authenticate(identifier, password)
+		user = find_by_username(identifier)
+		user = find_by_emil(identifier) if user == nil
+
+		return user if user == nil
+		return user if Hashing.validate(password, user.password)
 	end
 
-	def validate_password_confirmation
-		if password != password_confirmation
-			errors.add(:password, 'is not the same as your Confirmation Password')
+	private
+		def map_gamertag
+			g_tag = Gamertag.find_by_gamertag(gamertag)
+			if (g_tag == nil)
+				g_tag = Gamertag.new(gamertag: gamertag)
+				if g_tag.save
+					self.gamertag_id = g_tag.id
+				else
+					errors.add(:gamertag, 'seems to be Invalid')
+				end
+			else
+				self.gamertag_id = g_tag.id
+			end
 		end
-	end
 
-	def password_is_complex
-		c = 0
-
-		# we will increment unless no match
-		c += 1 unless nil === (password =~ /\d+/)
-		c += 1 unless nil === (password =~ /[a-z]+/)
-		c += 1 unless nil === (password =~ /[A-Z]+/)
-		c += 1 unless nil === (password =~ /[^a-zA-Z\d]+/)
-
-		if c < 2
-			errors.add(:password, 'not complex enough - try adding numbers or special characters')
+		def validate_password_confirmation
+			if password != password_confirmation
+				errors.add(:password, 'is not the same as your Confirmation Password')
+			end
 		end
-	end
+
+		def hash_password
+			self.password = Hashing.create(self.password)
+		end
+
+		def password_is_complex
+			c = 0
+
+			# we will increment unless no match
+			c += 1 unless nil === (password =~ /\d+/)
+			c += 1 unless nil === (password =~ /[a-z]+/)
+			c += 1 unless nil === (password =~ /[A-Z]+/)
+			c += 1 unless nil === (password =~ /[^a-zA-Z\d]+/)
+
+			if c < 2
+				errors.add(:password, 'not complex enough - try adding numbers or special characters')
+			end
+		end
 end
