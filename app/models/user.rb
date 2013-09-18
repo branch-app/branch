@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
 		gamertag_id = g_tag.id
 	end
 
+	def validate_password_confirmation
+		if password != password_confirmation
+			errors.add(:password, 'is not the same as your Confirmation Password')
+		end
+	end
+
 	def password_is_complex
 		c = 0
 
