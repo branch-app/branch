@@ -16,6 +16,11 @@ BranchApp::Application.routes.draw do
   get '/user/:username/friends' => 'user/account/friends#index', as: :user_friends
   get '/user/:username/favourites' => 'user/account/favourites#index', as: :user_favourites
 
+  # Account Settings
+  get '/user/settings' => 'user/settings/profile#index'
+  get '/user/settings/profile' => 'user/settings/profile#index', as: :settings_profile
+  post '/user/settings/profile' => 'user/settings/profile#create', as: :settings_profile_update
+
   # Search
   get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
 
