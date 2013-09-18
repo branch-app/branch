@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
 	def self.authenticate(identifier, password)
 		user = find_by_username(identifier)
-		user = find_by_emil(identifier) if user == nil
+		user = find_by_email(identifier) if user == nil
 
 		return user if user == nil
 		return user if Hashing.validate(password, user.password)
