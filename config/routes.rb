@@ -1,5 +1,5 @@
 BranchApp::Application.routes.draw do
-  
+
   # Core
   root :to => 'home#index'
   get '/welcome' => 'home#welcome', as: :home_welcome
@@ -8,6 +8,7 @@ BranchApp::Application.routes.draw do
   get '/user/signin' => 'user/session#new', as: :user_signin
   get '/user/register' => 'user/user#new', as: :user_register
   post '/user/register' => 'user/user#create', as: :user_create
+  get '/user/signout' => 'user/session#destroy', as: :user_signout
 
   # Account
   get '/user/:username' => 'user/account/home#index', as: :user_view
