@@ -1,0 +1,15 @@
+<div class="bs-sidebar" data-spy="affix" data-offset-top="350">
+	<ul class="nav bs-sidenav">
+		<li class="active">
+			<%= link_to 'Settings', '#' %>
+			<ul class="nav">
+				<li class="<%= 'active' if content_for(:setting_active) == 'profile' %>">
+					<%= link_to 'Profile', settings_profile_path %>
+				</li>
+				<li class="<%= 'active' if content_for(:setting_active) == 'session' %>">
+					<%= link_to 'Sessions', settings_session_path %>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
