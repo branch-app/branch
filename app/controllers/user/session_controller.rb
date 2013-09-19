@@ -21,7 +21,7 @@ class User::SessionController < User::HomeController
 			expire = 2.weeks.from_now
 			expire = 69.years.from_now if stuff[:rememberme]
 
-			user_session = Session.new(expired: false, expires_at: expire, owner_ip: '', location: '', user_agent: '', user_id: user.id)
+			user_session = Session.new(expired: false, expires_at: expire, owner_ip: request.remote_ip, location: '', user_agent: request.env['HTTP_USER_AGENT'], user_id: user.id)
 			user_session.save!
 
 			session[:session_id] = user_session.identifier
@@ -34,6 +34,12 @@ class User::SessionController < User::HomeController
 	end
 
 	def destroy
+		user_session = Session.find_by_identifier(session[:identifier])
+		if user_session != nil
+			user_session.expired = true
+			user_session.save
+		end
+
 		session[:identifier] = nil
 		reset_session
 
