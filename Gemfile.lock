@@ -40,7 +40,13 @@ GEM
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
+    geokit (1.6.6)
+      multi_json (>= 1.3.2)
     hike (1.2.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -118,6 +124,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    user-agent (1.0.0)
 
 PLATFORMS
   ruby
@@ -125,6 +132,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  figaro
+  geokit
   httparty
   jquery-rails
   mysql2 (= 0.3.11)
@@ -137,3 +146,4 @@ DEPENDENCIES
   thin
   uglifier (>= 1.0.3)
   unicorn
+  user-agent
