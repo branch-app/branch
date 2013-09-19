@@ -20,6 +20,8 @@ BranchApp::Application.routes.draw do
   get '/user/settings' => 'user/settings/profile#index'
   get '/user/settings/profile' => 'user/settings/profile#index', as: :settings_profile
   post '/user/settings/profile' => 'user/settings/profile#create', as: :settings_profile_update
+  get '/settings/sessions' => 'user/settings/session#index', as: :settings_session
+  delete '/settings/sessions' => 'user/settings/session#destroy', as: :settings_session_destroy
 
   # Search
   get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
