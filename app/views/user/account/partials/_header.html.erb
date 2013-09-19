@@ -8,9 +8,11 @@
 			<li><span class="label label-info">Halo Reach</span></li>
 			<li><span class="label label-info">Halo 3</span></li>
 		</ul>
-		<div class="actions">
-			<a class="btn btn-outline-inverse btn-lg">Edit Profile</a>
-		</div>
+		<% if !content_for?(:setting_active) %>
+			<div class="actions">
+				<a class="btn btn-outline-inverse btn-lg">Edit Profile</a>
+			</div>
+		<% end %>
 
 		<div class="h4-player-posed hidden-xs">
 			<div class="player" style="background-image: url(https://spartans.svc.halowaypoint.com/players/iBotPeaches%20v5/h4/spartans/posed?target=large)"></div>
