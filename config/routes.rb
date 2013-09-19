@@ -17,9 +17,9 @@ BranchApp::Application.routes.draw do
   get '/user/:username/favourites' => 'user/account/favourites#index', as: :user_favourites
 
   # Account Settings
-  get '/user/settings' => 'user/settings/profile#index'
-  get '/user/settings/profile' => 'user/settings/profile#index', as: :settings_profile
-  post '/user/settings/profile' => 'user/settings/profile#create', as: :settings_profile_update
+  get '/settings' => 'user/settings/profile#index'
+  get '/settings/profile' => 'user/settings/profile#index', as: :settings_profile
+  post '/settings/profile' => 'user/settings/profile#update', as: :settings_profile_update
   get '/settings/sessions' => 'user/settings/session#index', as: :settings_session
   delete '/settings/sessions' => 'user/settings/session#destroy', as: :settings_session_destroy
 
