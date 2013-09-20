@@ -18,7 +18,6 @@ class Session < ActiveRecord::Base
 			self.version = agent.version
 		end
 		def refine_ip_location
-			self.owner_ip = '64.233.160.23' if owner_ip == '127.0.0.1'
 			geocode = Geokit::Geocoders::MultiGeocoder.geocode(owner_ip)
 			puts geocode.to_hash
 			return if geocode == nil && geocode.Success
