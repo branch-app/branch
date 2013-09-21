@@ -16,3 +16,4 @@
 .elasticbeanstalk/
 /.sass-cache
 config/application.yml
+application.yml
