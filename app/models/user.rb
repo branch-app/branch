@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	attr_accessor :password_confirmation, :gamertag
 
 	has_many :sessions
+	belongs_to :role
 	
 	validates_presence_of :email, :gamertag, :name, :password
 	validates_presence_of :password_confirmation, on: :create
