@@ -19,6 +19,9 @@ BranchApp::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  # Amazon SES Emailing
+  config.action_mailer.delivery_method = :ses
+  
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
