@@ -9,9 +9,6 @@ gem 'mysql2', '0.3.11'
 # Security
 gem 'pbkdf2'
 
-# Amazon
-gem "aws-ses", "~> 0.5.0", :require => 'aws/ses'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
