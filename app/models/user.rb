@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 	private
 		def map_gamertag
 			g_tag = Gamertag.find_by_gamertag(gamertag)
-			if (g_tag == nil)
+			if g_tag == nil
 				g_tag = Gamertag.new(gamertag: gamertag)
 				if g_tag.save
 					self.gamertag_id = g_tag.id
