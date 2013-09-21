@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918075152) do
+ActiveRecord::Schema.define(:version => 20130921221010) do
 
   create_table "gamertags", :force => true do |t|
     t.string   "gamertag"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 20130918075152) do
     t.datetime "expires_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_verifications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "identifier"
+    t.boolean  "has_verified"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|
