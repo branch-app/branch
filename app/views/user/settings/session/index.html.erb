@@ -9,10 +9,15 @@ $(document).ready(function() {
 	google.maps.visualRefresh = true;
 
 	<% @sessions.each do |session| %>
-		<% 
-			stuff = session.gps_loc.split(',')
-			lat = stuff[0]
-			lng = stuff[1]
+		<%
+			lat = 0
+			lng = 0
+
+			if session.gps_loc != ','
+				stuff = session.gps_loc.split(',')
+				lat = stuff[0]
+				lng = stuff[1]
+			end
 		%>
 		var sessionPosition = new google.maps.LatLng(<%= lat %>, <%= lng %>);
 		var mapOptions = {
@@ -51,7 +56,11 @@ $(document).ready(function() {
 							<div class="map" id="map-<%= user_session.id %>"></div>
 							<div class="mask">
 								<div class="inner-content">
-									<h2><%= user_session.location %></h2>
+									<% if user_session.location == '' %>
+										<h2>Unknown Location</h2>
+									<% else %>
+										<h2><%= user_session.location %></h2>
+									<% end %>
 									<span class="ip"><%= user_session.owner_ip %></span>
 									<hr />
 									<span class="browser">Browser: <strong><%= user_session.browser %></strong></span> <br />
