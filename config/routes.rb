@@ -13,9 +13,9 @@ BranchApp::Application.routes.draw do
   get '/user/verify/:verification_id' => 'user/user#verify', as: :user_verify
 
   # Account
-  get '/user/:username' => 'user/account/home#index', as: :user_view
-  get '/user/:username/friends' => 'user/account/friends#index', as: :user_friends
-  get '/user/:username/favourites' => 'user/account/favourites#index', as: :user_favourites
+  get '/user/:username' => 'user/account/home#index', as: :user_view, constraints: UserConstraint
+  get '/user/:username/friends' => 'user/account/friends#index', as: :user_friends, constraints: UserConstraint
+  get '/user/:username/favourites' => 'user/account/favourites#index', as: :user_favourites, constraints: UserConstraint
 
   # Account Settings
   get '/settings' => 'user/settings/profile#index'
