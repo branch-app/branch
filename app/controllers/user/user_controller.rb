@@ -5,10 +5,6 @@ class User::UserController < User::HomeController
 		redirect_to(root_path) if current_user
 	end
 
-	def index
-		
-	end
-
 	def new
 		@user = User.new
 	end
