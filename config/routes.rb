@@ -10,6 +10,7 @@ BranchApp::Application.routes.draw do
   get '/user/register' => 'user/user#new', as: :user_register
   post '/user/register' => 'user/user#create', as: :user_create
   get '/user/signout' => 'user/session#destroy', as: :user_signout
+  get '/user/verify/:verification_id' => 'user/user#verify', as: :user_verify
 
   # Account
   get '/user/:username' => 'user/account/home#index', as: :user_view

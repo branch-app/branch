@@ -1,5 +1,5 @@
 class User::UserController < User::HomeController
-	before_filter :validate_user_unauthed, only: [ :new, :create ]
+	before_filter :validate_user_unauthed, only: [ :new, :create, :verify ]
 
 	def validate_user_unauthed
 		redirect_to(root_path) if current_user
@@ -22,6 +22,17 @@ class User::UserController < User::HomeController
 			redirect_to(root_path)
 		else
 			render 'user/user/new'
+		end
+	end
+
+	def verify
+		verification_id = params[:verification_id]
+		verification = UserVerification.verify(verification_id)
+
+		if verification === true
+			flash[:success] = 'You have successfully verified your account. Thanks!'
+			redirect_to(root_path)
+			return
 		end
 	end
 end

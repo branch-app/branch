@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	attr_accessor :password_confirmation, :gamertag
 
 	has_many :sessions
+	has_many :user_verification
 	belongs_to :role
 	
 	validates_presence_of :email, :gamertag, :name, :password
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
 	validates_format_of :gamertag, with: /\A[a-z]([a-z0-9]{0,15} ?)*\Z/i
 
 	before_create :hash_password
+	after_create :set_to_validating
 
 	def self.authenticate(identifier, password)
 		user = find_by_username(identifier)
@@ -46,6 +48,17 @@ class User < ActiveRecord::Base
 			else
 				self.gamertag_id = g_tag.id
 			end
+		end
+
+		def set_to_validating
+			self.role_id = Role.find_by_identifier(1).id
+			self.save!
+
+			# send validation email
+			verification = UserVerification.new(has_verified: false, user_id: self.id)
+			verification.save!
+
+			UserMailer.validation_email(self, verification).deliver
 		end
 
 		def validate_password_confirmation
