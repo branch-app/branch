@@ -1,5 +1,4 @@
 module Halo4::GameHistoryHelper
-
 	def update_pagination(current_page, direction)
 		if direction == 'older'
 			return current_page if current_page == 0
@@ -32,5 +31,4 @@ module Halo4::GameHistoryHelper
 
 		return str
 	end
-
 end
