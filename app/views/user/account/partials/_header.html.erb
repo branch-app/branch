@@ -4,7 +4,9 @@
 			<h1><%= current_user.username %></h1>
 			<p>Member Since <%= "#{current_user.created_at.day}/#{current_user.created_at.month}/#{current_user.created_at.year}" %></p>
 			<ul>
-				<li><span class="label label-success">Developer</span></li>
+				<% if current_user.role.identifier != 2 %>
+					<li><span class="label" style="background-color: #<%= current_user.role.colour %>;"><%= current_user.role.name %></span></li>
+				<% end %>
 				<li><span class="label label-info">Halo 4</span></li>
 				<li><span class="label label-info">Halo Reach</span></li>
 				<li><span class="label label-info">Halo 3</span></li>
@@ -13,7 +15,9 @@
 			<h1><%= @account.username %></h1>
 			<p>Member Since <%= "#{@account.created_at.day}/#{@account.created_at.month}/#{@account.created_at.year}" %></p>
 			<ul>
-				<li><span class="label label-success">Developer</span></li>
+				<% if @account.role.identifier != 2 %>
+					<li><span class="label" style="background-color: #<%= @account.role.colour %>;"><%= @account.role.name %></span></li>
+				<% end %>
 				<li><span class="label label-info">Halo 4</span></li>
 				<li><span class="label label-info">Halo Reach</span></li>
 				<li><span class="label label-info">Halo 3</span></li>
