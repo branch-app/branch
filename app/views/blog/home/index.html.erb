@@ -1,0 +1,55 @@
+<% content_for :home, true %>
+<% content_for :title, 'Blog' %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'home' %>
+<% content_for :scripts do %>
+<script>
+</script>
+<% end %>
+
+<div class="bs-header" id="content">
+	<div class="container">
+		<h1>Blog</h1>
+		<p>sysops, stats, new features. shit like that.</p>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="bs-branch-section blog">
+				<div class="page-header">
+					<h1>Blog</h1>
+				</div>
+
+
+
+				<ul class="pager">
+					<li class="previous <%= 'disabled' if !@has_less %>">
+						<%= link_to(raw('&larr; Older'), blog_home_path(page: @previous_page)) %>
+					</li>
+					<li class="next <%= 'disabled' if !@has_more %>">
+						<%= link_to(raw('Newer &rarr;'), blog_home_path(page: @next_page)) %>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="bs-sidebar" data-spy="affix" data-offset-top="254">
+				<ul class="nav bs-sidenav">
+					<li class="active">
+						<a href="#">Blog</a>
+						<ul class="nav">
+							<% BlogCategory.all.each do |blog_category| %>
+								<li>
+									<%= link_to blog_category.name, '#' %>
+								</li>
+							<% end %>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

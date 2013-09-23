@@ -24,6 +24,9 @@ BranchApp::Application.routes.draw do
 	get '/settings/sessions' => 'user/settings/session#index', as: :settings_session
 	delete '/settings/sessions' => 'user/settings/session#destroy', as: :settings_session_destroy
 
+	# Blog
+	get '/blog(/:page(/:focus))' => 'blog/home#index', as: :blog_home
+
 	# Search
 	get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
 
