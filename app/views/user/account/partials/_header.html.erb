@@ -1,16 +1,27 @@
 <div class="bs-header account-header" id="content">
 	<div class="container">
-		<h1><%= @account.username %></h1>
-		<p>Member Since 18/08/1994</p>
-		<ul>
-			<li><span class="label label-success">Developer</span></li>
-			<li><span class="label label-info">Halo 4</span></li>
-			<li><span class="label label-info">Halo Reach</span></li>
-			<li><span class="label label-info">Halo 3</span></li>
-		</ul>
+		<% if content_for?(:setting_active) %>
+			<h1><%= current_user.username %></h1>
+			<p>Member Since <%= "#{current_user.created_at.day}/#{current_user.created_at.month}/#{current_user.created_at.year}" %></p>
+			<ul>
+				<li><span class="label label-success">Developer</span></li>
+				<li><span class="label label-info">Halo 4</span></li>
+				<li><span class="label label-info">Halo Reach</span></li>
+				<li><span class="label label-info">Halo 3</span></li>
+			</ul>
+		<% else %>
+			<h1><%= @account.username %></h1>
+			<p>Member Since <%= "#{@account.created_at.day}/#{@account.created_at.month}/#{@account.created_at.year}" %></p>
+			<ul>
+				<li><span class="label label-success">Developer</span></li>
+				<li><span class="label label-info">Halo 4</span></li>
+				<li><span class="label label-info">Halo Reach</span></li>
+				<li><span class="label label-info">Halo 3</span></li>
+			</ul>
+		<% end %>
 		<% if !content_for?(:setting_active) %>
 			<div class="actions">
-				<a class="btn btn-outline-inverse btn-lg">Edit Profile</a>
+				<%= link_to 'Edit Profile', settings_profile_path, class: 'btn btn-outline-inverse btn-lg' %>
 			</div>
 		<% end %>
 
