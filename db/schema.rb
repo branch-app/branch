@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921221010) do
+ActiveRecord::Schema.define(:version => 20130923050144) do
+
+  create_table "blog_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "slug"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "blog_posts", :force => true do |t|
+    t.string   "name"
+    t.string   "short_body"
+    t.string   "full_body"
+    t.integer  "user_id"
+    t.boolean  "is_published"
+    t.integer  "blog_category_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "gamertags", :force => true do |t|
     t.string   "gamertag"
