@@ -2,6 +2,7 @@
 <% content_for :title, 'Blog' %>	
 <% content_for :has_footer, true %>
 <% content_for :template, 'blog blog_home' %>
+<% content_for :data_affix_height, '201' %>
 <% content_for :scripts do %>
 <script>
 </script>
@@ -32,13 +33,13 @@
 							<div class="details">
 								<ul>
 									<li>
-										Author: <strong><%= link_to(blog_post.user.username, user_view_path(blog_post.user.username)) %></strong>
+										Posted By: <strong><%= link_to(blog_post.user.username, user_view_path(blog_post.user.username)) %></strong>
 									</li>
 									<li>
 										Posted At: <strong><%= blog_post.created_at.strftime('%B %-d, %Y') %></strong>
 									</li>
 									<li>
-										Category: <strong><%= link_to(blog_post.blog_category.name, '#') %></strong>
+										Posted In: <strong><%= link_to(blog_post.blog_category.name, blog_home_path(page: 1, focus: blog_post.blog_category.slug)) %></strong>
 									</li>
 								</ul>
 							</div>

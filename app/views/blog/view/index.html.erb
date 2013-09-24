@@ -2,15 +2,30 @@
 <% content_for :title, 'Blog' %>	
 <% content_for :has_footer, true %>
 <% content_for :template, 'blog blog_view' %>
+<% content_for :data_affix_height, '251' %>
 <% content_for :scripts do %>
 <script>
 </script>
 <% end %>
 
-<div class="bs-header" id="content">
+<div class="bs-header blog-header" id="content">
 	<div class="container">
 		<h1><%= @blog_post.name %></h1>
 		<p><%= @blog_post.short_body %></p>
+
+		<div class="details">
+			<ul>
+				<li>
+					Posted By: <strong><%= link_to(@blog_post.user.username, user_view_path(@blog_post.user.username)) %></strong>
+				</li>
+				<li>
+					Posted At: <strong><%= @blog_post.created_at.strftime('%B %-d, %Y') %></strong>
+				</li>
+				<li>
+					Posted In: <strong><strong><%= link_to(@blog_post.blog_category.name, blog_home_path(page: 1, focus: @blog_post.blog_category.slug)) %></strong>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 
