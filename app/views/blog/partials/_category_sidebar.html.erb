@@ -1,0 +1,14 @@
+<div class="bs-sidebar" data-spy="affix" data-offset-top="201">
+	<ul class="nav bs-sidenav">
+		<li class="active">
+			<a href="#">Blog</a>
+			<ul class="nav">
+				<% BlogCategory.all.each do |blog_category| %>
+					<li>
+						<%= link_to blog_category.name, blog_home_path(page: 1, focus: blog_category.slug) %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+	</ul>
+</div>

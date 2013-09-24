@@ -58,21 +58,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<div class="bs-sidebar" data-spy="affix" data-offset-top="254">
-				<ul class="nav bs-sidenav">
-					<li class="active">
-						<a href="#">Blog</a>
-						<ul class="nav">
-							<% BlogCategory.all.each do |blog_category| %>
-								<li>
-									<%= link_to blog_category.name, '#' %>
-								</li>
-							<% end %>
-						</ul>
-					</li>
-				</ul>
-			</div>
+		<div class="col-md-3" data-spy="affix" data-offset-top="201">
+			<%= render partial: 'blog/partials/category_sidebar' %>
 		</div>
 	</div>
 </div>
