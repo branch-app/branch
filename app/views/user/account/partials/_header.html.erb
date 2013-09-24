@@ -30,7 +30,11 @@
 		<% end %>
 
 		<div class="h4-player-posed hidden-xs">
-			<div class="player" style="background-image: url(https://spartans.svc.halowaypoint.com/players/iBotPeaches%20v5/h4/spartans/posed?target=large)"></div>
+			<% if content_for?(:setting_active) %>
+				<div class="player" style="background-image: url(https://spartans.svc.halowaypoint.com/players/<%= gamertag_to_html(current_user.gamertag.gamertag) %>/h4/spartans/posed?target=large)"></div>
+			<% else %>
+				<div class="player" style="background-image: url(https://spartans.svc.halowaypoint.com/players/<%= gamertag_to_html(@account.gamertag.gamertag) %>/h4/spartans/posed?target=large)"></div>
+			<% end %>
 		</div>
 	</div>
 </div>
