@@ -26,6 +26,7 @@ BranchApp::Application.routes.draw do
 
 	# Blog
 	get '/blog(/:page(/:focus))' => 'blog/home#index', as: :blog_home
+	get '/blog/:year/:month/:day/:slug' => 'blog/view#index', as: :blog_view
 
 	# Search
 	get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }

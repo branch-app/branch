@@ -1,0 +1,28 @@
+<% content_for :blog, true %>
+<% content_for :title, 'Blog' %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'blog blog_view' %>
+<% content_for :scripts do %>
+<script>
+</script>
+<% end %>
+
+<div class="bs-header" id="content">
+	<div class="container">
+		
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="bs-branch-section blog-post">
+				
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<%= render partial: 'blog/partials/category_sidebar' %>
+		</div>
+	</div>
+</div>
