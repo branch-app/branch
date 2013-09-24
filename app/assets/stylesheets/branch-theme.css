@@ -1084,6 +1084,17 @@ h1[id] {
 }
 
 /* Progress Bars */
+.progress {
+  border: 1px solid #428bca;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.0);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.0);
+  background-color: rgba(0,0,0,0);
+  border-radius: 0px;
+}
+.progress > .progress-bar {
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0);
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0);
+}
 .progress-bar > .progress-bar-indicator {
   font-weight: 500;
   font-size: 12px;
