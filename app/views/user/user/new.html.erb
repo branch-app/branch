@@ -206,13 +206,13 @@ $(document).ready(function() {
 							<span class="title">Gamertag</span>
 							<div class="input-group">
 								<span class="input-group-addon">@</span>
-								<%= f.text_field :gamertag, placeholder: 'Gamertag', class: 'form-control' %>
+								<%= f.text_field :gamertag_friendly, placeholder: 'Gamertag', class: 'form-control' %>
 							</div>
 
-							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :gamertag) %>">
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :gamertag_friendly) %>">
 								<h4>Invalid Gamertag</h4>
 								<p class="reason">
-									<% for message in @user.errors[:gamertag] %>
+									<% for message in @user.errors[:gamertag_friendly] %>
 										Username <%= message %> <br />
 									<% end %>
 								</p>

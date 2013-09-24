@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-	attr_accessible :email, :gamertag_id, :gamertag, :name, :password, :password_confirmation, :role_id, :username
-	attr_accessor :password_confirmation, :gamertag
+	attr_accessible :email, :gamertag_id, :gamertag_friendly, :name, :password, :password_confirmation, :role_id, :username
+	attr_accessor :password_confirmation, :gamertag_friendly
 
-	has_many :sessions
+	has_many :session
 	has_many :user_verification
 	belongs_to :role
+	belongs_to :gamertag
 	
 	validates_presence_of :email, :gamertag, :name, :password
 	validates_presence_of :password_confirmation, on: :create
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
 	validates_format_of :email, with: /\A[\w\d\-.+]+@[\w\d\-.+]+\.[a-z]{2,25}\Z/i
 	validates_format_of :username, with: /\A\w+\Z/
 	validates_format_of :name, with: /\A[A-Za-z\- ]+\z/
-	validates_format_of :gamertag, with: /\A[a-z]([a-z0-9]{0,15} ?)*\Z/i
+	validates_format_of :gamertag_friendly, with: /\A[a-z]([a-z0-9]{0,15} ?)*\Z/i
 
 	before_create :hash_password
 	after_create :set_to_validating
@@ -37,9 +38,9 @@ class User < ActiveRecord::Base
 
 	private
 		def map_gamertag
-			g_tag = Gamertag.find_by_gamertag(gamertag)
+			g_tag = Gamertag.find_by_gamertag(gamertag_friendly)
 			if g_tag == nil
-				g_tag = Gamertag.new(gamertag: gamertag)
+				g_tag = Gamertag.new(gamertag: gamertag_friendly)
 				if g_tag.save
 					self.gamertag_id = g_tag.id
 				else
