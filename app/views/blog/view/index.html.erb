@@ -2,7 +2,7 @@
 <% content_for :title, 'Blog' %>	
 <% content_for :has_footer, true %>
 <% content_for :template, 'blog blog_view' %>
-<% content_for :data_affix_height, '251' %>
+<% content_for :data_affix_height, '211' %>
 <% content_for :scripts do %>
 <script>
 </script>
@@ -14,17 +14,9 @@
 		<p><%= @blog_post.short_body %></p>
 
 		<div class="details">
-			<ul>
-				<li>
-					Posted By: <strong><%= link_to(@blog_post.user.username, user_view_path(@blog_post.user.username)) %></strong>
-				</li>
-				<li>
-					Posted At: <strong><%= @blog_post.created_at.strftime('%B %-d, %Y') %></strong>
-				</li>
-				<li>
-					Posted In: <strong><strong><%= link_to(@blog_post.blog_category.name, blog_home_path(page: 1, focus: @blog_post.blog_category.slug)) %></strong>
-				</li>
-			</ul>
+			Posted By <strong><%= link_to(@blog_post.user.username, user_view_path(@blog_post.user.username)) %></strong>, 
+			at <strong><%= @blog_post.created_at.strftime('%B %-d, %Y') %></strong>, 
+			in <strong><%= link_to(@blog_post.blog_category.name, blog_home_path(page: 1, focus: @blog_post.blog_category.slug)) %></strong>
 		</div>
 	</div>
 </div>
