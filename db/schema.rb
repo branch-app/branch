@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20130923164304) do
   create_table "blog_posts", :force => true do |t|
     t.string   "name"
     t.string   "short_body"
-    t.string   "full_body"
+    t.text     "full_body"
     t.integer  "user_id"
     t.boolean  "is_published"
     t.integer  "blog_category_id"
