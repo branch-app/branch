@@ -10,7 +10,6 @@ class User::SessionController < User::HomeController
 		redirect_to(root_path) if current_user
 	end
 
-
 	def new
 	end
 
@@ -25,6 +24,7 @@ class User::SessionController < User::HomeController
 			user_session.save!
 
 			session[:identifier] = user_session.identifier
+			sleep(3) # no idea, but this needs it >_>
 			redirect_to(root_path)
 		else
 			@error = 'Incorrect Password or Username/Email Address'
