@@ -1,5 +1,5 @@
 <% content_for :home, true %>
-<% content_for :title, 'Welcome, Xerax' %>	
+<% content_for :title, "Welcome, #{current_user.username}" %>	
 <% content_for :has_footer, true %>
 <% content_for :template, 'home' %>
 <% content_for :scripts do %>
@@ -34,7 +34,7 @@
 			<div class="bs-sidebar" data-spy="affix" data-offset-top="254">
 				<ul class="nav bs-sidenav">
 					<li class="active">
-						<a href="#">Xerax</a>
+						<a href="#"><%= current_user.username %></a>
 						<ul class="nav">
 							<li class="active">
 								<a href="#">Game Feed</a>
