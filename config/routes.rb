@@ -5,7 +5,7 @@ BranchApp::Application.routes.draw do
 	get '/welcome' => 'home#welcome', as: :home_welcome
 
 	# Admin
-	get '/guilty_spark/' => 'admin/home#index', as: :admin_home
+	get '/domain/' => 'admin/home#index', as: :admin_home
 
 	# User
 	get '/user/signin' => 'user/session#new', as: :user_signin
