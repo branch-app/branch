@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Branch Domain <%= (" - " + yield(:title)) if content_for :title %>
+		</title>
+
+		<!-- Stock third Party -->
+		<%= stylesheet_link_tag    "bootstrap", :media => "all" %>
+
+		<!-- App Style Sheets -->
+		<%= stylesheet_link_tag    "branch-theme", :media => "all" %>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+
+		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		
+		<%= csrf_meta_tags %>
+	</head>
+	<body class="<%= yield(:template) if content_for? :template %>">
+		<a class="sr-only" href="#content">Skip navigation</a>
+		<header class="navbar navbar-inverse navbar-fixed-top bs-branch-nav" role="banner">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<%= link_to raw('Branch <sup>{domain}</sup>'), root_url, { class: 'navbar-brand' } %>
+				</div>
+				<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+					<ul class="nav navbar-nav">
+						<li class="<%= 'active' if content_for? :home %>">
+							<%= link_to 'Home', root_url %>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<% if current_user %>
+						<li class="dropdown <%= 'active' if content_for? :user %>">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.username %> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to('View Profile', user_view_path(current_user.username)) %>
+								</li>
+
+								<% if current_user.role.identifier == 3 %>
+									<li class="dividier"></li>
+									<div class="dropdown-header">WOAH</div>
+									<li>
+										<%= link_to('Admin Portal', admin_home_path) %>
+									</li>
+								<% end %>
+
+								<li class="divider"></li>
+								<li class="dropdown-header">SETTINGS</li>
+								<li>
+									<%= link_to('Edit Profile', settings_profile_path) %>
+								</li>
+								<li>
+									<%= link_to('Edit Sessions', settings_session_path) %>
+								</li>
+
+								<li class="divider"></li>
+								<li>
+									<%= link_to('Sign Out', user_signout_path) %>
+								</li>
+							</ul>
+						</li>
+						<% end %>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<%= yield %>
+		</main>
+
+		<% if content_for? :has_footer %>
+			<footer class="bs-footer" role="contentinfo">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10">
+							<p>Super Secret.</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		<% end %>
+
+		<div class="scripts">
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.map"></script>
+			<%= javascript_include_tag "bootstrap" %>
+			<%= javascript_include_tag "Chart" %>
+			<%= javascript_include_tag "application" %>
+
+			<!-- Scripts -->
+			<%= yield(:scripts) if content_for? :scripts %>
+		</div>
+	</body>
+</html>
