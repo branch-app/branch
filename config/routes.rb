@@ -4,6 +4,9 @@ BranchApp::Application.routes.draw do
 	root :to => 'home#index'
 	get '/welcome' => 'home#welcome', as: :home_welcome
 
+	# Admin
+	get '/guilty_spark/' => 'admin/home#index', as: :admin_home
+
 	# User
 	get '/user/signin' => 'user/session#new', as: :user_signin
 	post '/user/signin' => 'user/session#create', as: :session_create

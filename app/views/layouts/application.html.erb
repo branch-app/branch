@@ -81,6 +81,14 @@
 									<%= link_to('View Profile', user_view_path(current_user.username)) %>
 								</li>
 
+								<% if current_user.role.identifier == 3 %>
+									<li class="dividier"></li>
+									<div class="dropdown-header">WOAH</div>
+									<li>
+										<%= link_to('Admin Portal', admin_home_path) %>
+									</li>
+								<% end %>
+
 								<li class="divider"></li>
 								<li class="dropdown-header">SETTINGS</li>
 								<li>
