@@ -2,8 +2,8 @@
 	<div class="container">
 		<%
 			storage = nil
-			storage = @account if content_for?(:setting_active)
-			storage = current_user if !content_for?(:setting_active)
+			storage = current_user if content_for?(:setting_active)
+			storage = @account if !content_for?(:setting_active)
 		%>
 		<h1><%= storage.username %></h1>
 		<p>Member Since <%= "#{storage.created_at.day}/#{storage.created_at.month}/#{storage.created_at.year}" %></p>
