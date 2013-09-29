@@ -31,4 +31,20 @@ class User::UserController < User::HomeController
 			return
 		end
 	end
+
+	def resend_verification
+		if !current_user
+			redirect_to(user_signin_path) 
+			return
+		end
+		if current_user.role_id != Role.find_by_identifier(1).id
+			flash[:failure] = "You can't resend a verification email to an verified account"
+			redirect_to(root_path)
+			return
+		end
+
+		current_user.set_to_validating()
+		flash[:failure] = "Verification email resent"
+		redirect_to(user_view_path(id: current_user.username))
+	end
 end

@@ -14,6 +14,7 @@ BranchApp::Application.routes.draw do
 	post '/user/register' => 'user/user#create', as: :user_create
 	get '/user/signout' => 'user/session#destroy', as: :user_signout
 	get '/user/verify/:verification_id' => 'user/user#verify', as: :user_verify
+	get '/user/resend_verification' => 'user/user#resend_verification', as: :user_resend_verification
 
 	# Account
 	match '/user/:id/' => 'user/account/home#index', via: [ :get ], as: :user_view, constraints: UserConstraint
