@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	belongs_to :role
 	belongs_to :gamertag
 	
-	validates_presence_of :email, :gamertag, :name, :password
+	validates_presence_of :email, :gamertag_friendly, :name, :password
 	validates_presence_of :password_confirmation, on: :create
 
 	validates_length_of :password, if: ->(a) { a.password.present? }, minimum: 7
