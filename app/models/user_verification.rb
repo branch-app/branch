@@ -20,8 +20,8 @@ class UserVerification < ActiveRecord::Base
 		verification.save!
 
 		# Set user as normal, not validating
-		verification.user.role_id = Role.find_by_identifier(2).id
-		verification.user.save()
+		user = verification.user
+		user.update_attribute(:role_id, Role.find_by_identifier(2).id)
 
 		return true
 	end
