@@ -36,6 +36,16 @@ class User < ActiveRecord::Base
 		return user if Hashing.validate(password, user.password)
 	end
 
+	def set_to_validating
+		update_attribute(:role_id, Role.find_by_identifier(1).id)
+
+		# send validation email
+		verification = UserVerification.new(has_verified: false, user_id: self.id)
+		verification.save!
+
+		UserMailer.validation_email(self, verification).deliver
+	end
+
 	private
 		def map_gamertag
 			g_tag = Gamertag.find_by_gamertag(gamertag_friendly)
@@ -49,17 +59,6 @@ class User < ActiveRecord::Base
 			else
 				self.gamertag_id = g_tag.id
 			end
-		end
-
-		def set_to_validating
-			self.role_id = Role.find_by_identifier(1).id
-			self.save!
-
-			# send validation email
-			verification = UserVerification.new(has_verified: false, user_id: self.id)
-			verification.save!
-
-			UserMailer.validation_email(self, verification).deliver
 		end
 
 		def validate_password_confirmation
