@@ -14,8 +14,8 @@ class User::UserController < User::HomeController
 		if @user.save
 			user_session = Session.new(expired: false, expires_at: 2.weeks.from_now, owner_ip: request.remote_ip, location: '', user_agent: request.env['HTTP_USER_AGENT'], user_id: @user.id)
 			user_session.save!
-			session[:session_id] = user_session.identifier
 			redirect_to(root_path)
+			session[:identifier] = user_session.identifier
 		else
 			render 'user/user/new'
 		end
