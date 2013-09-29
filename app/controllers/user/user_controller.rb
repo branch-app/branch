@@ -1,5 +1,5 @@
 class User::UserController < User::HomeController
-	before_filter :validate_user_unauthed, only: [ :new, :create, :verify ]
+	before_filter :validate_user_unauthed, only: [ :new, :create ]
 
 	def validate_user_unauthed
 		redirect_to(root_path) if current_user
