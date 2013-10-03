@@ -213,6 +213,28 @@
 			$('#medals > .row > .col-md-12 > .tab-content').html(outputContent);
 		}
 	});
+
+	$('.player-details-expander').click(function(e) {
+		e.preventDefault();
+
+		var identifier = $(this).attr('data-ref');
+		var expander = $('#' + identifier + ' > div > .expander-indicator > .player-details-expander');
+		var detailsView = $('#' + identifier + ' > .player-data');
+
+		if (detailsView.hasClass('collapsed')) {
+			detailsView.removeClass('collapsed');
+			detailsView.addClass('expanded');
+			detailsView.show(400, function() { });
+			expander.removeClass('glyphicon-chevron-down');
+			expander.addClass('glyphicon-chevron-up');
+		} else {
+			detailsView.removeClass('expanded');
+			detailsView.addClass('collapsed');
+			detailsView.hide(400, function() { });
+			expander.removeClass('glyphicon-chevron-up');
+			expander.addClass('glyphicon-chevron-down');
+		}
+	});
 </script>
 <% end %>
 <% content_for :template, 'halo4 halo4_game_history' %>
@@ -267,6 +289,109 @@
 
 				<hr style="margin: 30px 0 30px 0;" />
 
+				<div class="details">
+					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+						<li class="active">
+							<a id="tab-overview" href="#overview" data-toggle="tab">Overview</a>
+						</li>
+						<li>
+							<a id="tab-carnage" href="#graph" data-toggle="tab">Graphs?</a>
+						</li>
+					</ul>
+
+					<div id="player-listing" class="tab-content">
+						<div class="tab-pane fade active in" id="overview">
+							<%
+								team_data = [
+									{
+										name: 'Red Team',
+										colour: '#D96551'
+									},
+									{
+										name: 'Blue Team',
+										colour: '#6384B0'
+									}
+								]
+							%>
+							<% team_data.each do |team| %>
+								<div class="team red-team col-md-12" style="border-color: <%= team[:colour] %>;">
+									<div class="col-md-12 header">
+										<div class="row">
+											<div class="col-md-5 team-indicator"><%= team[:name] %></div>
+											<div class="col-md-1 score-indicator hidden-xs hidden-sm">Score</div>
+											<div class="col-md-1 kills-indicator hidden-xs hidden-sm">Kills</div>
+											<div class="col-md-1 deaths-indicator hidden-xs hidden-sm">Deaths</div>
+											<div class="col-md-2 kd-indicator hidden-xs hidden-sm">K/D Ratio</div>
+											<div class="col-md-1 assists-indicator hidden-xs hidden-sm">Assists</div>
+											<div class="col-md-1 csr-indicator hidden-xs hidden-sm">CSR</div>
+										</div>
+									</div>
+									<div class="team-players">
+										<% 5.times do |i| %>
+											<% identifier = rand(100000..999999) %>
+											<div class="col-md-12" id="<%= identifier %>">
+												<div class="desktop-view hidden-xs hidden-sm row">
+													<div class="col-md-1 expander-indicator">
+														<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>
+													</div>
+													<div class="col-md-1 visual-flair" style="background-color: <%= team[:colour] %>; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
+													<div class="col-md-3 alphabetical-flair">
+														<%= link_to('Xerax', halo4_servicerecord_path(gamertag: 'xerax')) %>
+														<br />
+														<strong>DOPE</strong>
+													</div>
+													<div class="col-md-1 score-indicator">420</div>
+													<div class="col-md-1 kills-indicator">15</div>
+													<div class="col-md-1 deaths-indicator">7</div>
+													<div class="col-md-2 kd-indicator">1.55</div>
+													<div class="col-md-1 assists-indicator">6</div>
+													<div class="col-md-1 csr-indicator" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/small/50.png);"></div>
+												</div>
+												<div class="mobile-view visible-xs visible-sm row">
+													<div class="expander-indicator">
+														<div class="player-details-expander" data-ref="<%= identifier %>">
+															<div class="player-indicator">
+																Xerax
+																<br />
+																<strong>DOPE</strong>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="player-data collapsed" style="display: none;">
+													<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+														<li class="active">
+															<a id="tab-summary" href="#summary" data-toggle="tab">Summary</a>
+														</li>
+														<li>
+															<a id="tab-weapons" href="#weapons" data-toggle="tab">Weapons</a>
+														</li>
+														<li>
+															<a id="tab-medals" href="#medals" data-toggle="tab">Medals</a>
+														</li>
+													</ul>
+
+													<div id="player-listing" class="tab-content">
+														<div class="tab-pane fade active in" id="summary">
+														</div>
+														<div class="tab-pane fade in" id="weapons">
+														</div>
+														<div class="tab-pane fade in" id="medals">
+														</div>
+													</div>
+												</div>
+											</div>
+											<hr />
+										<% end %>
+									</div>
+								</div>
+							<% end %>
+						</div>
+						<div class="tab-pane fade in" id="graph">
+						</div>
+					</div>
+				</div>
+
 				<div class="details hidden-xs">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 						<li class="active">
@@ -279,120 +404,6 @@
 							<a id="tab-medals" href="#medals" data-toggle="tab">Medals</a>
 						</li>
 					</ul>
-
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="overview"></div>
-						<div class="tab-pane fade in" id="carnage">
-							<div id="graph-carnage"></div>
-						</div>
-						<div class="tab-pane fade in" id="medals">
-							<div id="graph-medals"></div>
-						</div>
-					</div>
-
-					<table class="table red-team team-table" style="border-left: 4px solid #D96551;">
-						<thead style="background-color: #D96551;">
-							<tr>
-								<th>
-									Red Team
-								</th>
-								<th>
-									Score
-								</th>
-								<th>
-									Kills
-								</th>
-								<th>
-									Deaths
-								</th>
-								<th>
-									K/D Ratio
-								</th>
-								<th>
-									Assists
-								</th>
-								<th>
-									Penalties
-								</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<% 5.times do |i| %>
-								<% dnf = 'end-dnf' if rand(0..4) == 1 %>
-								<tr class="<%= dnf %>">
-									<td>
-										<div class="player-emblem" style="background-color: #D96551; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
-										<div class="player-gamertag">
-											<%= link_to 'Xerax', halo4_servicerecord_path(gamertag: 'xerax'), class: 'player-linker', 'data-attr' => '{"owner":{"gamertag":"Xerax"},"carnage":[{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/battle-rifle.png","name":"Battle Rifle","description":"DESIGNATION: BR85 Heavy-Barrel Service Rifle. The BR85HB Service Rifle is a gas-operated, magazine-fed, semi-automatic rifle optimized for three-round burst firing, and proven to be an extraordinarily versatile weapon at a wide variety of ranges in the hands of a capable marksman.","stats":{"power":5,"range":7,"faction":"UNSC"}},"stats":{"kills":7,"headshots":6,"deaths":0,"penalties":0,"spread":7}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/melee.png","name":"Melee","description":"DESIGNATION: BR85 Heavy-Barrel Service Rifle. The BR85HB Service Rifle is a gas-operated, magazine-fed, semi-automatic rifle optimized for three-round burst firing, and proven to be an extraordinarily versatile weapon at a wide variety of ranges in the hands of a capable marksman.","stats":{"power":0,"range":0,"faction":"None"}},"stats":{"kills":2,"headshots":0,"deaths":0,"penalties":0,"spread":2}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/magnum.png","name":"Magnum","description":"DESIGNATION: M6H Personal Defense Weapon System . The M6H Magnum is a semi-automatic, recoil-operated, magazine-fed handgun and the standard personal sidearm of all branches of the UNSC post-2555. This weapon is surprisingly effective at reasonably long distances, proving its universal value in the field.","stats":{"power":5,"range":6,"faction":"UNSC"}},"stats":{"kills":1,"headshots":1,"deaths":0,"penalties":0,"spread":1}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/covenant-carbine.png","name":"Carbine","description":"Some shit about a carbine","stats":{"power":5,"range":7,"faction":"Covenant"}},"stats":{"kills":0,"headshots":0,"deaths":3,"penalties":0,"spread":-3}}],"medals":[{"tier":"Kill","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Bonus / Style","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Assist / Support","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Mode Specific","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]}]}' %>
-											<br />
-											<strong>DOPE</strong>
-										</div>
-										<div class="player-csr" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/small/50.png);"></div>
-										<div class="clearfix"></div>
-									</td>
-									<td>420</td>
-									<td>15</td>
-									<td>7</td>
-									<td>1.55</td>
-									<td>6</td>
-									<td>1</td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
-
-					<table class="table blue-team team-table" style="border-left: 4px solid #6384B0;">
-						<thead style="background-color: #6384B0;">
-							<tr>
-								<th>
-									Blue Team
-								</th>
-								<th>
-									Score
-								</th>
-								<th>
-									Kills
-								</th>
-								<th>
-									Deaths
-								</th>
-								<th>
-									K/D Ratio
-								</th>
-								<th>
-									Assists
-								</th>
-								<th>
-									Penalties
-								</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<% 5.times do |i| %>
-								<% dnf = 'end-dnf' if rand(0..4) == 1 %>
-								<tr class="<%= dnf %>">
-									<td>
-										<div class="player-emblem" style="background-color: #6384B0; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
-										<div class="player-gamertag">
-											<%= link_to 'Xerax', halo4_servicerecord_path(gamertag: 'xerax'), class: 'player-linker', 'data-attr' => '{"owner":{"gamertag":"Xerax"},"carnage":[{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/battle-rifle.png","name":"Battle Rifle","description":"DESIGNATION: BR85 Heavy-Barrel Service Rifle. The BR85HB Service Rifle is a gas-operated, magazine-fed, semi-automatic rifle optimized for three-round burst firing, and proven to be an extraordinarily versatile weapon at a wide variety of ranges in the hands of a capable marksman.","stats":{"power":5,"range":7,"faction":"UNSC"}},"stats":{"kills":7,"headshots":6,"deaths":0,"penalties":0,"spread":7}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/melee.png","name":"Melee","description":"DESIGNATION: BR85 Heavy-Barrel Service Rifle. The BR85HB Service Rifle is a gas-operated, magazine-fed, semi-automatic rifle optimized for three-round burst firing, and proven to be an extraordinarily versatile weapon at a wide variety of ranges in the hands of a capable marksman.","stats":{"power":0,"range":0,"faction":"None"}},"stats":{"kills":2,"headshots":0,"deaths":0,"penalties":0,"spread":2}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/magnum.png","name":"Magnum","description":"DESIGNATION: M6H Personal Defense Weapon System . The M6H Magnum is a semi-automatic, recoil-operated, magazine-fed handgun and the standard personal sidearm of all branches of the UNSC post-2555. This weapon is surprisingly effective at reasonably long distances, proving its universal value in the field.","stats":{"power":5,"range":6,"faction":"UNSC"}},"stats":{"kills":1,"headshots":1,"deaths":0,"penalties":0,"spread":1}},{"weapon":{"image":"https://assets.halowaypoint.com/games/h4/damage-types/v1/large/covenant-carbine.png","name":"Carbine","description":"Some shit about a carbine","stats":{"power":5,"range":7,"faction":"Covenant"}},"stats":{"kills":0,"headshots":0,"deaths":3,"penalties":0,"spread":-3}}],"medals":[{"tier":"Kill","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Bonus / Style","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Assist / Support","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]},{"tier":"Mode Specific","medals":[{"medal":{"name":"Headshot","desc":"Headshot Kill","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-headshot.png"},"count":69},{"medal":{"name":"Melee Kill","desc":"Hit and Kill an opponent with a melee.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-beat-down.png"},"count":5},{"medal":{"name":"Kill","desc":"Generic Kill.","image":"https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png"},"count":2}]}]}' %>
-											<br />
-											<strong>DOPE</strong>
-										</div>
-										<div class="player-csr" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/small/50.png);"></div>
-										<div class="clearfix"></div>
-									</td>
-									<td>420</td>
-									<td>15</td>
-									<td>7</td>
-									<td>1.55</td>
-									<td>6</td>
-									<td>1</td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
 
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="overview">
@@ -453,10 +464,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="details visible-xs">
-					hi mobile guys
 				</div>
 			</div>
 		</div>

@@ -73,6 +73,81 @@ body.halo4_game_history {
 		}
 
 		.details {
+			> #player-listing {
+				margin-bottom: 40px;
+				> div > .team {
+					border-left: 4px solid;
+					border-top: 35px solid;
+
+					margin-bottom: 30px;
+
+					padding: 15px 0 0 10px;
+
+					> .header {
+						margin-left: -13px;
+						margin-top: -43px;
+						color: white;
+						font-weight: 600;
+					}
+
+					> .team-players {
+						margin-top: 16px;
+
+						> div {
+							> .desktop-view {
+								> .expander-indicator {
+									margin: 15px 0 0 -5px;
+
+									@media (min-width: 992px) and (max-width: 1199px) {
+										margin: 15px 0 0 6px;
+										padding: 0 5px 0 0;
+									}
+
+								}
+
+								> .visual-flair {
+									width: 60px;
+									height: 60px;
+									background-position: center;
+									background-repeat: no-repeat;
+								}
+
+								> .alphabetical-flair {
+									margin-top: 10px;
+								}
+
+								> .csr-indicator {
+									background-position: center;
+									background-repeat: no-repeat;
+									height: 60px;
+									background-size: contain;
+								}
+							}
+
+							> .mobile-view {
+								margin: -8px 0 0 -25px;
+
+								> .expander-indicator {
+									.player-details-expander {
+										> .player-indicator {
+											padding: 20px 0 0 20px;
+										}
+									}
+								}
+							}
+
+							> .player-data {
+								margin: 20px auto;
+							}
+						}
+
+						> hr {
+							margin: 5px 0;
+						}
+					}
+				}
+			}
+
 			.team-table {
 				> thead > tr {
 					color: white;
