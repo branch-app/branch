@@ -120,6 +120,45 @@ body.halo4_game_history {
 			}
 		}
 
+		#overview {
+			margin-top: 40px;
+
+			.graph-container {
+				width: 700px;
+				margin: 20px auto;
+				margin-bottom: 40px;
+
+				> .name {
+					text-align: center;
+					color: #555;
+					width: 700px;
+					font-size: 20px;
+					font-weight: 100;
+				}
+
+				.morris-hover, .morris-default-style {
+
+					border-radius: 0px;
+					background-color: rgba(255, 255, 255, 0.4);
+					border: 2px solid rgba(230, 230, 230, 0.6);
+
+					> .graph-hover-legend {
+						margin: 5px 10px;
+
+						> .time {
+							font-weight: 600;
+							font-size: 14px;
+						}
+
+						> .key {
+							font-weight: 600;
+							font-size: 14px;
+						}
+					}
+				}
+			}
+		}
+
 		#medals {
 			.medal-entry {
 				margin: 20px auto;
