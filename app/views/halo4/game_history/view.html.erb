@@ -377,6 +377,195 @@
 														<div class="tab-pane fade" id="<%= identifier %>-weapons">
 														</div>
 														<div class="medals tab-pane fade" id="<%= identifier %>-medals">
+															<% medal_graph_identifier = 'player-medals-' + rand(1000..9999).to_s %>
+															<div class="graph-container hidden-xs">
+																<div id="<%= medal_graph_identifier %>" style="height: 250px; width: 700px;"></div>
+															</div>
+
+															<h2>Top Medals</h2>
+															<hr />
+															<div class="row" id="top-medals">
+																<div class="col-md-1 col-md-offset-3">
+																	<div class="medal" style="background-image: url('https://assets.halowaypoint.com/games/h4/medals/v1/large/bonus-first-strike.png')">
+																	</div>
+																	<%= rand(2..12) %>
+																</div>
+																<div class="col-md-1">
+																	<div class="medal" style="background-image: url('https://assets.halowaypoint.com/games/h4/medals/v1/large/bonus-first-strike.png')">
+																	</div>
+																	<%= rand(2..12) %>
+																</div>
+																<div class="col-md-1">
+																	<div class="medal" style="background-image: url('https://assets.halowaypoint.com/games/h4/medals/v1/large/bonus-first-strike.png')">
+																	</div>
+																	<%= rand(2..12) %>
+																</div>
+																<div class="col-md-1">
+																	<div class="medal" style="background-image: url('https://assets.halowaypoint.com/games/h4/medals/v1/large/bonus-first-strike.png')">
+																	</div>
+																	<%= rand(2..12) %>
+																</div>
+															</div>
+
+
+															<h2>All Medals</h2>
+															<hr />
+															<ul class="nav nav-tabs">
+																<li class="active">
+																	<%= link_to('Kill', "#medal-tier-kill-#{identifier}", 'data-toggle' => 'tab') %>
+																</li>
+																<li>
+																	<%= link_to('Bonus / Style', "#medal-tier-style-#{identifier}", 'data-toggle' => 'tab') %>
+																</li>
+																<li>
+																	<%= link_to('Assist/Support', "#medal-tier-support-#{identifier}", 'data-toggle' => 'tab') %>
+																</li>
+																<li>
+																	<%= link_to('Spree', "#medal-tier-spree-#{identifier}", 'data-toggle' => 'tab') %>
+																</li>
+																<li>
+																	<%= link_to('Mode Specific', "#medal-tier-specific-#{identifier}", 'data-toggle' => 'tab') %>
+																</li>
+															</ul>
+
+															<div id='player-medals' class="tab-content">
+																<div class="tab-pane fade active in" id="medal-tier-kill-<%= identifier %>">
+																	<% 3.times do |i| %>
+																		<div class="col-md-12 medal-entry row">
+																			<div class="medal" style="background-image: url(https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png)"></div>
+																			<div class="description">
+																				<span class="name">Kill</span>
+																				<br />
+																				Generic Kill.
+																			</div>
+																			<div class="count">
+																				<span class="integer"><%= rand(0..15) %></span>
+																				<br />
+																				<span class="in-dick-ator">earned</span> 
+																			</div>
+																		</div>
+																		<hr />
+																	<% end %>
+																</div>
+																<div class="tab-pane fade" id="medal-tier-style-<%= identifier %>">
+																	<% 3.times do |i| %>
+																		<div class="col-md-12 medal-entry row">
+																			<div class="medal" style="background-image: url(https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png)"></div>
+																			<div class="description">
+																				<span class="name">Kill</span>
+																				<br />
+																				Generic Kill.
+																			</div>
+																			<div class="count">
+																				<span class="integer"><%= rand(0..15) %></span>
+																				<br />
+																				<span class="in-dick-ator">earned</span> 
+																			</div>
+																		</div>
+																		<hr />
+																	<% end %>
+																</div>
+																<div class="tab-pane fade" id="medal-tier-support-<%= identifier %>">
+																	<% 3.times do |i| %>
+																		<div class="col-md-12 medal-entry row">
+																			<div class="medal" style="background-image: url(https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png)"></div>
+																			<div class="description">
+																				<span class="name">Kill</span>
+																				<br />
+																				Generic Kill.
+																			</div>
+																			<div class="count">
+																				<span class="integer"><%= rand(0..15) %></span>
+																				<br />
+																				<span class="in-dick-ator">earned</span> 
+																			</div>
+																		</div>
+																		<hr />
+																	<% end %>
+																</div>
+																<div class="tab-pane fade" id="medal-tier-spree-<%= identifier %>">
+																	<% 3.times do |i| %>
+																		<div class="col-md-12 medal-entry row">
+																			<div class="medal" style="background-image: url(https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png)"></div>
+																			<div class="description">
+																				<span class="name">Kill</span>
+																				<br />
+																				Generic Kill.
+																			</div>
+																			<div class="count">
+																				<span class="integer"><%= rand(0..15) %></span>
+																				<br />
+																				<span class="in-dick-ator">earned</span> 
+																			</div>
+																		</div>
+																		<hr />
+																	<% end %>
+																</div>
+																<div class="tab-pane fade" id="medal-tier-specific-<%= identifier %>">
+																	<% 3.times do |i| %>
+																		<div class="col-md-12 medal-entry row">
+																			<div class="medal" style="background-image: url(https://assets.halowaypoint.com/games/h4/medals/v1/large/kill-kill.png)"></div>
+																			<div class="description">
+																				<span class="name">Kill</span>
+																				<br />
+																				Generic Kill.
+																			</div>
+																			<div class="count">
+																				<span class="integer"><%= rand(0..15) %></span>
+																				<br />
+																				<span class="in-dick-ator">earned</span> 
+																			</div>
+																		</div>
+																		<hr />
+																	<% end %>
+																</div>
+															</div>
+
+															<% content_for :scripts do %>
+																<script>
+																	<%
+																		medals = [ ]
+																		team_a = 0
+																		25.times do |i|
+																			tmp = rand(0..2)
+																			if tmp == 1
+																				tmp == rand(0..3)
+																				if tmp == 0
+																					team_a += 1
+																				elsif tmp == 1
+																					team_a += 2
+																				end
+																			end
+
+																			medals << team_a
+																		end
+																	%>
+																	Morris.Area({
+																		element: '<%= medal_graph_identifier %>',
+																		data: [
+																			<% 
+																			index = 0
+																			medals.each do |medals_entry|
+																			%>
+																				<%= raw("{ y: '#{ index }', a: #{ medals_entry } },") %>
+																			<% 
+																				index += 1
+																			end
+																			%>
+																		],
+																		lineColors: [ '<%= team[:colour] %>' ],
+																		xkey: 'y',
+																		xLabels: 'decade',
+																		ykeys: [ 'a' ],
+																		labels: [ 'Xerax' ],
+																		behaveLikeLine: true,
+																		hideHover: true,
+																		hoverCallback: function (index, options, content) {
+																			return generateGraphHoverView(index, options, content, 'Medals');
+																		}
+																	});
+																</script>
+															<% end %>
 														</div>
 													</div>
 												</div>

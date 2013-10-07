@@ -146,6 +146,73 @@ body.halo4_game_history {
 							margin: 5px 0;
 						}
 					}
+
+
+					.player-stats {
+						> .medals {
+							> #top-medals {
+								> div {
+									min-width: 100px;
+									min-height: 100px;
+									padding: 10px;
+
+									text-align: center;
+									font-size: 25px;
+									font-weight: 100;
+
+									> .medal {
+										height: 100px;
+
+										background-repeat: no-repeat;
+										background-size: 80px 80px;
+									}
+								}
+							}	
+
+							> #player-medals {
+								margin-bottom: 60px;
+
+								.medal-entry {
+									margin: 20px auto;
+									> .medal {
+										float: left;
+										background-repeat: no-repeat;
+										height: 100px;
+										width: 80px;
+										background-size: 80px 80px;
+										background-position: center center;
+									}
+									> .medal-small {
+
+									}
+									> .description {
+										float: left;
+										margin-left: 30px;
+										width: 250px;
+
+										> .name {
+											font-size: 16px;
+											font-weight: 600;
+										}
+									}
+									> .count {
+										float: right;
+										min-width: 100px;
+										text-align: center;
+										> .integer {
+											font-size: 50px;
+											font-weight: 100;
+										}
+										> .in-dick-ator {
+											font-size: 12px;
+											font-weight: 600;
+											text-transform: uppercase;
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 
