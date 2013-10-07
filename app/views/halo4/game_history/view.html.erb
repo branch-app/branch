@@ -169,48 +169,6 @@
 			}
 			$('#carnage > table > tbody').html(output);
 
-		} else if (currentViewTab == 2) { // Medals
-			data = jQuery.parseJSON($(this).attr('data-attr'));
-			$('#medals > .owner').text(data.owner.gamertag + "'s Medals");
-
-			var outputHeader = '';
-			var outputContent = '';
-			for(var i = 0; i < data.medals.length; i++) {
-				var activeText = '';
-				var tierName = data.medals[i].tier;
-				var tierNameSafe = '0x' + (Math.floor(Math.random() * 10000) + 1).toString(16);
-				if (i == 0) activeText = 'active';
-
-				outputHeader += '\
-				<li class="' + activeText + '"> \
-					<a href="#' + tierNameSafe + '" data-toggle="tab">' + tierName + '</a> \
-				</li>';
-
-				outputContent += '<div class="tab-pane fade in ' + activeText + '" id="' + tierNameSafe + '">';
-
-				for(var j = 0; j < data.medals[i].medals.length; j++) {
-					var medalData = data.medals[i].medals[j];
-					outputContent += ' \
-					<div class="col-md-12 medal-entry row"> \
-						<div class="medal" style="background-image: url(' + medalData.medal.image + ')"></div> \
-						<div class="description"> \
-							<span class="name">' + medalData.medal.name + '</span> \
-							<br /> \
-							' + medalData.medal.desc + ' \
-						</div> \
-						<div class="count"> \
-							<span class="integer">' + medalData.count + '</span> \
-							<br /> \
-							<span class="in-dick-ator">earned</span> \
-						</div> \
-					</div> \
-					<hr />';
-				}
-
-				outputContent += '</div>';
-			}
-			$('#medals > .row > .col-md-12 > .nav').html(outputHeader);
-			$('#medals > .row > .col-md-12 > .tab-content').html(outputContent);
 		}
 	});
 
