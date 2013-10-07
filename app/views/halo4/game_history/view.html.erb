@@ -176,19 +176,30 @@
 		e.preventDefault();
 
 		var identifier = $(this).attr('data-ref');
+		var entry = $('#' + identifier);
 		var expander = $('#' + identifier + ' > div > .expander-indicator > .player-details-expander');
 		var detailsView = $('#' + identifier + ' > .player-data');
 
 		if (detailsView.hasClass('collapsed')) {
 			detailsView.removeClass('collapsed');
 			detailsView.addClass('expanded');
+
+			entry.removeClass('collapsed');
+			entry.addClass('expanded');
+
 			detailsView.show(400, function() { });
+
 			expander.removeClass('glyphicon-chevron-down');
 			expander.addClass('glyphicon-chevron-up');
 		} else {
 			detailsView.removeClass('expanded');
 			detailsView.addClass('collapsed');
+			
+			entry.removeClass('expanded');
+			entry.addClass('collapsed');
+
 			detailsView.hide(400, function() { });
+			
 			expander.removeClass('glyphicon-chevron-up');
 			expander.addClass('glyphicon-chevron-down');
 		}
@@ -287,7 +298,7 @@
 									<div class="team-players">
 										<% 5.times do |i| %>
 											<% identifier = rand(100000..999999) %>
-											<div class="col-md-12" id="<%= identifier %>">
+											<div class="col-md-12" id="<%= identifier %>" style="border-color: <%= team[:colour] %>;">
 												<div class="desktop-view hidden-xs hidden-sm row">
 													<div class="col-md-1 expander-indicator">
 														<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>

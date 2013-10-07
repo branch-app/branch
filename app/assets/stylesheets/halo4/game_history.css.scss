@@ -95,6 +95,13 @@ body.halo4_game_history {
 						margin-top: 16px;
 
 						> div {
+							border-bottom: 0px;
+							margin-left: -10px;
+
+							&.expanded {
+								border-bottom: 4px solid;
+							}
+
 							> .desktop-view {
 								> .expander-indicator {
 									margin: 15px 0 0 -5px;
