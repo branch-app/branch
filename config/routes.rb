@@ -35,6 +35,10 @@ BranchApp::Application.routes.draw do
 	# About
 	get '/about' => 'about/home#index', as: :about_home
 
+	# Legal
+	get '/legal/privacy' => 'legal/privacy#index', as: :legal_privacy
+	get '/legal/terms' => 'legal/terms#index', as: :legal_terms
+
 	# Search
 	get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
 
