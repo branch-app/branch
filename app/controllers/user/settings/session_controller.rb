@@ -1,6 +1,6 @@
 class User::Settings::SessionController < User::Settings::HomeController
 	def index
-		@sessions = Session.where('expired = FALSE AND user_id = ? AND expires_at > CURRENT_DATE', current_user.id)
+		@sessions = Session.where('expired = FALSE AND user_id = ? AND expires_at > CURRENT_DATE', current_user.id).order('created_at DESC')
 	end
 
 	def destroy
