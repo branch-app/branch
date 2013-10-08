@@ -62,6 +62,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.24)
+    modern-user-agent (1.2.0)
     multi_json (1.7.9)
     multi_xml (0.5.5)
     mysql2 (0.3.11)
@@ -124,7 +125,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    user-agent (1.0.0)
 
 PLATFORMS
   ruby
@@ -136,6 +136,7 @@ DEPENDENCIES
   geokit (= 1.6.5)
   httparty
   jquery-rails
+  modern-user-agent
   mysql2 (= 0.3.11)
   pbkdf2
   rails (= 3.2.13)
@@ -146,4 +147,3 @@ DEPENDENCIES
   thin
   uglifier (>= 1.0.3)
   unicorn
-  user-agent
