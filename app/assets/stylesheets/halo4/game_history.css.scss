@@ -156,6 +156,19 @@ body.halo4_game_history {
 
 
 					.player-stats {
+						> .summary {
+							> div {
+								> .player-model {
+									height: 630px;
+									background-repeat: no-repeat;
+									background-position: 0 -40px;
+
+									@media (min-width: 992px) and (max-width: 1199px) {
+										background-position: -20px -40px;
+									}
+								}
+							}
+						}
 						> .medals {
 							> #top-medals {
 								> div {

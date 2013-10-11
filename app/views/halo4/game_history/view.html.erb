@@ -341,7 +341,74 @@
 													</ul>
 
 													<div class="player-stats tab-content">
-														<div class="tab-pane fade active in" id="<%= identifier %>-summary">
+														<div class="tab-pane fade active in summary" id="<%= identifier %>-summary">
+															<div class="row">
+																<div class="col-md-5 hidden-sm player-model" style="background-image: url(https://spartans.svc.halowaypoint.com/players/PhoenixBanTrain/h4/spartans/fullbody?target=large)"></div>
+																<div class="col-md-7">
+																	<h2>
+																		Score
+																	</h2>
+																	<ul class="list-group">
+																		<li class="list-group-item">
+																			<span class="badge">
+																				<%= link_to('Doofette', halo4_servicerecord_path(gamertag: 'Doofette')) %>
+																				(12)
+																			</span>
+																			Most Killed
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">
+																				<%= link_to('Swainooooo', halo4_servicerecord_path(gamertag: 'Swainooooo')) %>
+																				(4)
+																			</span>
+																			Most Killed By
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">35.19 Meters</span>
+																			Average Kill Distance
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">50.01 Meters</span>
+																			Average Death Distance
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">21</span>
+																			Kills <!-- Featured Stat Name -->
+																		</li>
+																	</ul>
+
+																	<h2>
+																		Medals
+																	</h2>
+																	<ul class="list-group">
+																		<li class="list-group-item">
+																			<span class="badge">52</span>
+																			Medals Earned
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">21</span>
+																			Kill Medals Earned
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">11</span>
+																			Bonus Medals Earned
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">11</span>
+																			Assist Medals Earned
+																		</li>
+																		<li class="list-group-item">
+																			<span class="badge">9</span>
+																			Spree Medals Earned
+																		</li>
+																		<!-- <li class="list-group-item">
+																			<span class="badge">0</span>
+																			Mode Medals Earned
+																		</li> Hide this is 0 -->
+
+																	</ul>
+																</div>
+															</div>
 														</div>
 														<div class="tab-pane fade" id="<%= identifier %>-weapons">
 														</div>
