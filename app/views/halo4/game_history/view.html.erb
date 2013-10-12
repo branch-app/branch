@@ -424,6 +424,102 @@
 															</div>
 														</div>
 														<div class="tab-pane fade" id="<%= identifier %>-weapons">
+															<% weapon_graph_identifier = 'player-weapons-' + rand(1000..9999).to_s %>
+															<div class="graph-container hidden-xs">
+																<div id="<%= weapon_graph_identifier %>" style="height: 250px; width: 700px;"></div>
+															</div>
+
+															<h2>All Medals</h2>
+															<hr />
+															<table class="table weapons">
+																<thead>
+																	<tr>
+																		<th>Weapon</th>
+																		<th>Kills</th>
+																		<th>Headshots</th>
+																		<th>Deaths</th>
+																		<th>Penalties</th>
+																		<th>Spread</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<% 5.times do |i| %>
+																		<tr>
+																			<td>
+																				<img data-toggle="tooltip" title="first tooltip" src="https://assets.halowaypoint.com/games/h4/damage-types/v1/medium/gravity-hammer.png" />
+																			</td>
+																			<td><%= rand(1..30) %></td>
+																			<td><%= rand(0..4) %></td>
+																			<td><%= rand(0..15) %></td>
+																			<td><%= rand(0..2) %></td>
+																			<td><%= rand(0..30) %></td>
+																		</tr>
+																	<% end %>
+																</tbody>
+															</table>
+
+															<% content_for :scripts do %>
+																<script>
+																	<%
+																		carnage = [ ]
+																		kills = 0
+																		deaths = 0
+																		25.times do |i|
+																			tmp = rand(0..2)
+																			if tmp == 1
+																				tmp == rand(0..3)
+																				if tmp == 0
+																					kills += 1
+																				elsif tmp == 1
+																					kills += 2
+																				end
+																			end
+
+																			tmp = rand(0..2)
+																			if tmp == 1
+																				tmp == rand(0..3)
+																				if tmp == 0
+																					deaths += 1
+																				elsif tmp == 1
+																					deaths += 2
+																				end
+																			end
+
+																			carnage << { kills: kills, deaths: deaths }
+																		end
+																	%>
+																	Morris.Area({
+																		element: '<%= weapon_graph_identifier %>',
+																		data: [
+																			<% 
+																			index = 0
+																			carnage.each do |carnage_entry|
+																			%>
+																				<%= raw("{ y: '#{ index }', a: #{ carnage_entry[:kills] }, b: #{ carnage_entry[:deaths] } },") %>
+																			<% 
+																				index += 1
+																			end
+																			%>
+																		],
+																		lineColors: [
+																			'#51D951',
+																			'#D96551'
+																		],
+																		xkey: 'y',
+																		xLabels: 'decade',
+																		ykeys: ['a', 'b'],
+																		labels: ['Kills', 'Deaths'],
+																		behaveLikeLine: true,
+																		hideHover: true,
+																		hoverCallback: function (index, options, content) {
+																			return generateGraphHoverView(index, options, content, 'Kills');
+																		}
+																	});
+																</script>
+															<% end %>
+
+															Graph of Kills/Deaths
+															Table of weapons used
 														</div>
 														<div class="tab-pane fade medals" id="<%= identifier %>-medals">
 															<% medal_graph_identifier = 'player-medals-' + rand(1000..9999).to_s %>
