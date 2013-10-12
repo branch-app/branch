@@ -3,6 +3,10 @@ module ApplicationHelper
 		return CGI.escape(gamertag)
 	end
 
+	def gamertag_to_leaf_html(gamertag)
+		return gamertag.gsub(' ', '_')
+	end
+
 	def generate_facebook_share_url()
 		return "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url())}"
 	end

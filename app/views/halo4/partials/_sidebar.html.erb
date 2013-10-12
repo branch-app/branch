@@ -1,76 +1,76 @@
 <div class="bs-sidebar" data-spy="affix" data-offset-top="302">
 	<ul class="nav bs-sidenav">
 		<li class="active">
-			<%= link_to raw('<span class="glyphicon glyphicon-tree-deciduous"></span> Branch'), halo4_servicerecord_path(@gamertag) %>
+			<%= link_to(raw('<span class="glyphicon glyphicon-tree-deciduous"></span> Branch'), halo4_servicerecord_path(@gamertag)) %>
 			<ul class="nav">
 				<li class="<%= 'active' if content_for(:halo4_active) == 'overview' %>">
-					<%= link_to 'Overview', halo4_servicerecord_path(@gamertag) %>
+					<%= link_to('Overview', halo4_servicerecord_path(@gamertag)) %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
-					<%= link_to 'Game History', halo4_gamehistory_path %>
+					<%= link_to('Game History', halo4_gamehistory_path) %>
 
 					<% if content_for(:halo4_active) == 'game_history' %>
 						<ul class="nav">
 							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'matchmaking' %>">
-								<%= link_to 'Matchmaking', halo4_gamehistory_path( sub_view: 'matchmaking', page: 0 ) %>
+								<%= link_to('Matchmaking', halo4_gamehistory_path( sub_view: 'matchmaking', page: 0 )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'custom_games' %>">
-								<%= link_to 'Custom Games', halo4_gamehistory_path( sub_view: 'custom-games', page: 0 ) %>
+								<%= link_to('Custom Games', halo4_gamehistory_path( sub_view: 'custom-games', page: 0 )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'spartan_ops' %>">
-								<%= link_to 'Spartan Ops', halo4_gamehistory_path( sub_view: 'spartan-ops', page: 0 ) %>
+								<%= link_to('Spartan Ops', halo4_gamehistory_path( sub_view: 'spartan-ops', page: 0 )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'campaign' %>">
-								<%= link_to 'Campaign', halo4_gamehistory_path( sub_view: 'campaign', page: 0 ) %>
+								<%= link_to('Campaign', halo4_gamehistory_path( sub_view: 'campaign', page: 0 )) %>
 							</li>
 						</ul>
 					<% end %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'csr' %>">
-					<%= link_to 'Competitive Skill Rank', halo4_csr_path %>
+					<%= link_to('Competitive Skill Rank', halo4_csr_path) %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'commendations' %>">
-					<%= link_to 'Commendations', halo4_commendations_path %>
+					<%= link_to('Commendations', halo4_commendations_path) %>
 
 					<% if content_for(:halo4_active) == 'commendations' %>
 						<ul class="nav">
 							<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'weapon' %>">
-								<%= link_to 'Weapons', halo4_commendations_path( sub_view: 'weapon' ) %>
+								<%= link_to('Weapons', halo4_commendations_path( sub_view: 'weapon' )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'enemy' %>">
-								<%= link_to 'Enemies', halo4_commendations_path( sub_view: 'enemy' ) %>
+								<%= link_to('Enemies', halo4_commendations_path( sub_view: 'enemy' )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'vehicle' %>">
-								<%= link_to 'Vehicles', halo4_commendations_path( sub_view: 'vehicle' ) %>
+								<%= link_to('Vehicles', halo4_commendations_path( sub_view: 'vehicle' )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'player' %>">
-								<%= link_to 'Player', halo4_commendations_path( sub_view: 'player' ) %>
+								<%= link_to('Player', halo4_commendations_path( sub_view: 'player' )) %>
 							</li>
 							<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'game_type' %>">
-								<%= link_to 'Game Types', halo4_commendations_path( sub_view: 'game-type' ) %>
+								<%= link_to('Game Types', halo4_commendations_path( sub_view: 'game-type' )) %>
 							</li>
 						</ul>
 					<% end %>
 				</li>
 				<li class="<%= 'active' if content_for(:halo4_active) == 'specialization' %>">
-					<%= link_to 'Specializations', halo4_specialization_path %>
+					<%= link_to('Specializations', halo4_specialization_path) %>
 				</li>
 			</ul>
 		</li>
 		<li class="active">
-			<%= link_to raw('<span class="glyphicon glyphicon-leaf"></span> Leaf'), '#' %>
+			<%= link_to(raw('<span class="glyphicon glyphicon-leaf"></span> Leaf'), '#') %>
 			<ul class="nav">
 				<li>
-					<%= link_to 'Overview', "http://leafapp.co/gt/#{@gamertag}" %>
+					<%= link_to('Overview', "http://leafapp.co/h4/record/#{gamertag_to_leaf_html(@gamertag)}") %>
 				</li>
 				<li>
-					<%= link_to 'Compare', "http://leafapp.co/compare/#{@gamertag}" %>
+					<%= link_to('Compare', "http://leafapp.co/h4/compare/#{gamertag_to_leaf_html(@gamertag)}") %>
 				</li>
 				<li>
-					<%= link_to 'Star', "http://leafapp.co/star/#{@gamertag}" %>
+					<%= link_to('Star', "http://leafapp.co/h4/star/#{gamertag_to_leaf_html(@gamertag)}") %>
 				</li>
 				<li>
-					<%= link_to 'Flag as Cheater/Booster', "http://leafapp.co/guilty_spark/flag/#{@gamertag}" %>
+					<%= link_to('Flag as Cheater/Booster', "http://leafapp.co/h4/flag/#{gamertag_to_leaf_html(@gamertag)}") %>
 				</li>
 			</ul>
 		</li>
