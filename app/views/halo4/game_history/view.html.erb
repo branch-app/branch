@@ -150,7 +150,7 @@
 
 		var identifier = $(this).attr('data-ref');
 		var entry = $('#' + identifier);
-		var expander = $('#' + identifier + ' > div > .expander-indicator > .player-details-expander');
+		var expander = $('#' + identifier + ' > div > .expander-indicator > div > .player-details-expander');
 		var detailsView = $('#' + identifier + ' > .player-data');
 
 		if (detailsView.hasClass('collapsed')) {
@@ -274,7 +274,9 @@
 											<div class="col-md-12" id="<%= identifier %>" style="border-color: <%= team[:colour] %>;">
 												<div class="desktop-view hidden-xs hidden-sm row">
 													<div class="col-md-1 expander-indicator">
-														<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>
+														<div class="expander-positioner">
+															<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>
+														</div>
 													</div>
 													<div class="col-md-1 visual-flair" style="background-color: <%= team[:colour] %>; background-image: url(https://emblems.svc.halowaypoint.com/h4/emblems/brick_cyan_stuck-on-steel_circle?size=48);"></div>
 													<div class="col-md-3 alphabetical-flair">

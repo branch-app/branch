@@ -108,11 +108,12 @@ body.halo4_game_history {
 
 							> .desktop-view {
 								> .expander-indicator {
-									margin: 15px 0 0 -5px;
-
-									@media (min-width: 992px) and (max-width: 1199px) {
-										margin: 15px 0 0 6px;
-										padding: 0 5px 0 0;
+									> .expander-positioner {
+										margin: 15px 0 0 -1px;
+										@media (min-width: 992px) and (max-width: 1199px) {
+											margin: 15px 0 0 -7px;
+											padding: 0 5px 0 0;
+										}
 									}
 
 								}
