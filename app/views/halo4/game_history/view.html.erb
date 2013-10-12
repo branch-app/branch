@@ -145,33 +145,6 @@
 		}
 	});
 
-	$('.player-linker').click(function(e) {
-		if (currentViewTab != 0) // Default
-			e.preventDefault();
-
-		if (currentViewTab == 1) { // Carnage
-			data = jQuery.parseJSON($(this).attr('data-attr'));
-			$('#carnage > .owner').text(data.owner.gamertag + "'s Carnage");
-
-			var output = '';
-			for(var i = 0; i < data.carnage.length; i++) {
-				output += '\
-				<tr>\
-					<td> \
-						<img src="' + data.carnage[i].weapon.image + '" /> \
-					</td> \
-					<td>' + data.carnage[i].stats.kills + '</td> \
-					<td>' + data.carnage[i].stats.headshots + '</td> \
-					<td>' + data.carnage[i].stats.deaths + '</td> \
-					<td>' + data.carnage[i].stats.penalties + '</td> \
-					<td>' + data.carnage[i].stats.spread + '</td> \
-				</tr>';
-			}
-			$('#carnage > table > tbody').html(output);
-
-		}
-	});
-
 	$('.player-details-expander').click(function(e) {
 		e.preventDefault();
 
