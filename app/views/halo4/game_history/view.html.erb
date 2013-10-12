@@ -227,6 +227,20 @@
 				</div>
 				<div class="social-shit">
 					<ul>
+						<li>
+							<a href="<%= generate_twitter_share_url('Capture The Flag on Valhalla') %>" target="_blank" class="btn btn-default" style="color: #4099FF;">
+								<span class="glyphicon glyphicon-retweet" style="padding-right: 8px;"></span>
+								Tweet
+							</a>
+						</li>
+
+						<li>
+							<a href="<%= generate_facebook_share_url() %>" target="_blank" class="btn btn-default" style="color: #3B5998;">
+								<span class="glyphicon glyphicon-thumbs-up" style="padding-right: 8px;"></span>
+								Like
+							</a>
+						</li>
+
 						<% if current_user %>
 							<li>
 								<%= link_to raw('<span class="glyphicon glyphicon-star" style="padding-right: 8px;"></span>Favourite'), '#', { class: 'btn btn-default' } %>
