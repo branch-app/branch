@@ -8,13 +8,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 <script>
-	// Current Tab Sutff
-	var currentViewTab = 0;
-	$('#tab-overview').click(function(e) { currentViewTab = 0; });
-	$('#tab-carnage').click(function(e) { currentViewTab = 1; });
-	$('#tab-medals').click(function(e) { currentViewTab = 2; });
-
-
 	function generateGraphHoverView(index, options, content, unit) {
 		var row = options.data[index];
 		var ykeys = options.ykeys;
@@ -31,119 +24,6 @@
 		output += '</div></div>'
 		return output;
 	}
-
-	// Draw Graphs
-	<%
-		carnage = [ ]
-		team_a = 0
-		team_b = 0
-		25.times do |i|
-			tmp = rand(0..2)
-			if tmp == 1
-				tmp == rand(0..3)
-				if tmp == 0
-					team_a += 1
-				elsif tmp == 1
-					team_a += 2
-				end
-			end
-
-			tmp = rand(0..2)
-			if tmp == 1
-				tmp == rand(0..3)
-				if tmp == 0
-					team_b += 1
-				elsif tmp == 1
-					team_b += 2
-				end
-			end
-
-			carnage << { team_a: team_a, team_b: team_b }
-		end
-	%>
-	Morris.Area({
-		element: 'graph-carnage',
-		data: [
-			<% 
-			index = 0
-			carnage.each do |carnage_entry|
-			%>
-				<%= raw("{ y: '#{ index }', a: #{ carnage_entry[:team_a] }, b: #{ carnage_entry[:team_b] } },") %>
-			<% 
-				index += 1
-			end
-			%>
-		],
-		lineColors: [
-			'#D96551',
-			'#6384B0',
-		],
-		xkey: 'y',
-		xLabels: 'decade',
-		ykeys: ['a', 'b'],
-		labels: ['Red Team', 'Blue Team'],
-		behaveLikeLine: true,
-		hideHover: true,
-		hoverCallback: function (index, options, content) {
-			return generateGraphHoverView(index, options, content, 'Kills');
-		}
-	});
-	<%
-		medals = [ ]
-		team_a = 0
-		team_b = 0
-		25.times do |i|
-			tmp = rand(0..2)
-			if tmp == 1
-				tmp == rand(0..3)
-				if tmp == 0
-					team_a += 1
-				elsif tmp == 1
-					team_a += 2
-				end
-			end
-
-			tmp = rand(0..2)
-			if tmp == 1
-				tmp == rand(0..3)
-				if tmp == 0
-					team_b += 1
-				elsif tmp == 1
-					team_b += 2
-				end
-			end
-
-			medals << { team_a: team_a, team_b: team_b }
-		end
-	%>
-	Morris.Area({
-		element: 'graph-medals',
-		data: [
-			<% 
-			index = 0
-			medals.each do |medals_entry|
-			%>
-				<%= raw("{ y: '#{ index }', a: #{ medals_entry[:team_a] }, b: #{ medals_entry[:team_b] } },") %>
-			<% 
-				index += 1
-			end
-			%>
-		],
-		lineColors: [
-			'#D96551',
-			'#6384B0',
-		],
-		xkey: 'y',
-		xLabels: 'decade',
-		ykeys: ['a', 'b'],
-		labels: ['Red Team', 'Blue Team'],
-
-		behaveLikeLine: true,
-		hideHover: true,
-		hoverCallback: function (index, options, content) {
-			return generateGraphHoverView(index, options, content, 'Medals');
-		}
-	});
 
 	$('.player-details-expander').click(function(e) {
 		e.preventDefault();
@@ -252,16 +132,9 @@
 				<hr style="margin: 10px 0 30px 0;" />
 
 				<div class="details">
-					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active">
-							<a id="tab-overview" href="#overview" data-toggle="tab">Overview</a>
-						</li>
-						<li>
-							<a id="tab-carnage" href="#graph" data-toggle="tab">Graphs?</a>
-						</li>
-					</ul>
-
-					<div id="player-listing" class="tab-content">
+					<h2>Players</h2>
+					<hr />
+					<div id="player-listing">
 						<div class="tab-pane fade active in" id="overview">
 							<%
 								team_data = [
@@ -734,75 +607,145 @@
 				</div>
 
 				<div class="details hidden-xs">
-					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-						<li class="active">
-							<a id="tab-overview" href="#overview" data-toggle="tab">Overview</a>
-						</li>
-						<li>
-							<a id="tab-carnage" href="#carnage" data-toggle="tab">Carnage</a>
-						</li>
-						<li>
-							<a id="tab-medals" href="#medals" data-toggle="tab">Medals</a>
-						</li>
-					</ul>
-
-					<div id="myTabContent" class="tab-content">
-						<div class="tab-pane fade active in" id="overview">
-							<h2>Timelines</h2>
-							<hr />
-							<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-								<li class="active">
-									<a id="tab-overview" href="#graph-kill" data-toggle="tab">Kills</a>
-								</li>
-								<li>
-									<a id="tab-carnage" href="#graph-medal" data-toggle="tab">Medals</a>
-								</li>
-							</ul>
-							<div id="graph-tab-content" class="tab-content">
-								<div class="tab-pane fade active in" id="graph-kill">
-									<div class="graph-container">
-										<div id="graph-carnage" style="height: 250px; width: 700px;"></div>
-									</div>
-								</div>
-								<div class="tab-pane fade in" id="graph-medal">
-									<div class="graph-container">
-										<div id="graph-medals" style="height: 250px; width: 700px;"></div>
-									</div>
+					<div class="tab-pane fade active in" id="overview">
+						<h2>Timelines</h2>
+						<hr />
+						<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+							<li class="active">
+								<a id="tab-overview" href="#graph-kill" data-toggle="tab">Kills</a>
+							</li>
+							<li>
+								<a id="tab-carnage" href="#graph-medal" data-toggle="tab">Medals</a>
+							</li>
+						</ul>
+						<div id="graph-tab-content" class="tab-content">
+							<div class="tab-pane fade active in" id="graph-kill">
+								<div class="graph-container">
+									<div id="graph-carnage" style="height: 250px; width: 700px;"></div>
 								</div>
 							</div>
-						</div>
-						<div class="tab-pane fade in" id="carnage">
-							<span class="click-helper">* Click a players name to get their carnage report.</span>
-							<hr />
-
-							<h2 class="owner"></h2>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Weapon</th>
-										<th>Kills</th>
-										<th>Headshots</th>
-										<th>Deaths</th>
-										<th>Penalties</th>
-										<th>Spread</th>
-									</tr>
-								</thead>
-								<tbody>
-									
-								</tbody>
-							</table>
-						</div>
-						<div class="tab-pane fade in" id="medals">
-							<span class="click-helper">* Click a players name to get their medal report.</span>
-							<hr />
-
-							<h2 class="owner"></h2>
-							<div class="row">
-								<div class="col-md-12">
-									<ul class="nav nav-tabs" style="margin-bottom: 15px;"></ul>
-									<div class="tab-content"></div>
+							<div class="tab-pane fade in" id="graph-medal">
+								<div class="graph-container">
+									<div id="graph-medals" style="height: 250px; width: 700px;"></div>
 								</div>
 							</div>
+
+							<% content_for :scripts do %>
+								<script>
+									// Draw Graphs
+									<%
+										carnage = [ ]
+										team_a = 0
+										team_b = 0
+										25.times do |i|
+											tmp = rand(0..2)
+											if tmp == 1
+												tmp == rand(0..3)
+												if tmp == 0
+													team_a += 1
+												elsif tmp == 1
+													team_a += 2
+												end
+											end
+
+											tmp = rand(0..2)
+											if tmp == 1
+												tmp == rand(0..3)
+												if tmp == 0
+													team_b += 1
+												elsif tmp == 1
+													team_b += 2
+												end
+											end
+
+											carnage << { team_a: team_a, team_b: team_b }
+										end
+									%>
+									Morris.Area({
+										element: 'graph-carnage',
+										data: [
+											<% 
+											index = 0
+											carnage.each do |carnage_entry|
+											%>
+												<%= raw("{ y: '#{ index }', a: #{ carnage_entry[:team_a] }, b: #{ carnage_entry[:team_b] } },") %>
+											<% 
+												index += 1
+											end
+											%>
+										],
+										lineColors: [
+											'#D96551',
+											'#6384B0',
+										],
+										xkey: 'y',
+										xLabels: 'decade',
+										ykeys: ['a', 'b'],
+										labels: ['Red Team', 'Blue Team'],
+										behaveLikeLine: true,
+										hideHover: true,
+										hoverCallback: function (index, options, content) {
+											return generateGraphHoverView(index, options, content, 'Kills');
+										}
+									});
+									<%
+										medals = [ ]
+										team_a = 0
+										team_b = 0
+										25.times do |i|
+											tmp = rand(0..2)
+											if tmp == 1
+												tmp == rand(0..3)
+												if tmp == 0
+													team_a += 1
+												elsif tmp == 1
+													team_a += 2
+												end
+											end
+
+											tmp = rand(0..2)
+											if tmp == 1
+												tmp == rand(0..3)
+												if tmp == 0
+													team_b += 1
+												elsif tmp == 1
+													team_b += 2
+												end
+											end
+
+											medals << { team_a: team_a, team_b: team_b }
+										end
+									%>
+									Morris.Area({
+										element: 'graph-medals',
+										data: [
+											<% 
+											index = 0
+											medals.each do |medals_entry|
+											%>
+												<%= raw("{ y: '#{ index }', a: #{ medals_entry[:team_a] }, b: #{ medals_entry[:team_b] } },") %>
+											<% 
+												index += 1
+											end
+											%>
+										],
+										lineColors: [
+											'#D96551',
+											'#6384B0',
+										],
+										xkey: 'y',
+										xLabels: 'decade',
+										ykeys: ['a', 'b'],
+										labels: ['Red Team', 'Blue Team'],
+
+										behaveLikeLine: true,
+										hideHover: true,
+										hoverCallback: function (index, options, content) {
+											return generateGraphHoverView(index, options, content, 'Medals');
+										}
+									});
+								</script>
+							<% end %>
 						</div>
 					</div>
 				</div>
