@@ -89,6 +89,10 @@ body.halo4_game_history {
 						margin-top: -43px;
 						color: white;
 						font-weight: 600;
+
+						> .row > .check-dat-paddin {
+							padding-left: 0px;
+						}
 					}
 
 					> .team-players {
