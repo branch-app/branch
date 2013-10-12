@@ -72,6 +72,19 @@ body.halo4_game_history {
 			}
 		}
 
+		> .social-shit {
+			margin: 10px 0;
+
+			> ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+
+				> li {
+				}
+			}
+		}
+
 		.details {
 			> #player-listing {
 				margin-bottom: 40px;

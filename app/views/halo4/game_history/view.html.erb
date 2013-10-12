@@ -192,11 +192,8 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section game-details">
 				<div class="page-header row">
-					<div class="col-md-10">
+					<div class="col-md-12">
 						<h1>Capture the Flag on Valhalla</h1>
-					</div>
-					<div class="col-md-2 focus-col">
-						<%= link_to raw('<span class="glyphicon glyphicon-star" style="padding-right: 8px;"></span>Favourite'), '#', { class: 'btn btn-default' } %>
 					</div>
 				</div>
 
@@ -228,8 +225,17 @@
 					</div>
 					<div class="victor-player-model hidden-xs" style="background-image: url(https://spartans.svc.halowaypoint.com/players/Swainooooo/h4/spartans/fullbody?target=medium)"></div>
 				</div>
+				<div class="social-shit">
+					<ul>
+						<% if current_user %>
+							<li>
+								<%= link_to raw('<span class="glyphicon glyphicon-star" style="padding-right: 8px;"></span>Favourite'), '#', { class: 'btn btn-default' } %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
 
-				<hr style="margin: 30px 0 30px 0;" />
+				<hr style="margin: 10px 0 30px 0;" />
 
 				<div class="details">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
