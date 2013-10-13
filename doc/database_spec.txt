@@ -1,9 +1,9 @@
 /* System */
-x_gamertags
+gamertags
 	id					||		integer
 	gamertag			|| 		string
 
-x_gamertag_replacements
+gamertag_replacements
 	id 					||		integer
 	target_gamertag		||		string
 	replacement_gamertag||		string
