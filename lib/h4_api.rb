@@ -193,13 +193,16 @@ module H4Api
 		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
 	end
 
-	def self.get_player_matches(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
+	def self.get_player_game_history(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
 		init
 
 		gamertag_safe = gamertag.to_s.downcase
+		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Game History :: ' + gamertag + ' ::') if (h4_sr == nil)
+
 		cache_response = rename_this_later('player_match_history', 
 			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", 
-			H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id),
+			H4GameHistory.find_by_h4_service_record_id_and_start_index_and_count_and_mode_id_and_chapter_id(h4_sr.id, start_index, count, mode_id, chapter_id),
 			60 * 8)
 
 		return cache_response[:data] unless cache_response[:is_valid] == false
@@ -215,11 +218,11 @@ module H4Api
 
 			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
 
-			old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id)
-			H4PlayerRecentMatches.delete(old_cached) if old_cached != nil
+			old_cached = H4GameHistory.find_by_h4_service_record_id_and_start_index_and_count_and_mode_id_and_chapter_id(h4_sr.id, start_index, count, mode_id, chapter_id)
+			H4GameHistory.delete(old_cached) if old_cached != nil
 
-			cached_match = H4PlayerRecentMatches.new
-			cached_match.gamertag = gamertag_safe
+			cached_match = H4GameHistory.new
+			cached_match.h4_service_record_id = h4_sr.id
 			cached_match.start_index = start_index
 			cached_match.count = count
 			cached_match.mode_id = mode_id
@@ -227,7 +230,9 @@ module H4Api
 			cached_match.save
 
 			S3Storage.push(GAME_LONG, 'player_match_history', "#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", response.body)
-			data
+			
+			puts data
+			return data
 		else
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
 			{ :status_code => 1001, :continue => 'no' }
