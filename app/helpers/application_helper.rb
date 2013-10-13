@@ -22,4 +22,13 @@ module ApplicationHelper
 
 		return url
 	end
+
+	def gamertag_validation(gamertag)
+		replacement = GamertagReplacement.find_by_target(gamertag)
+		if replacement == nil
+			return gamertag
+		else
+			return replacement.replacement
+		end
+	end
 end
