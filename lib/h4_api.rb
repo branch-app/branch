@@ -367,7 +367,6 @@ module H4Api
 	end
 
 	def self.url_from_name(name, type)
-		puts $services_list
 		entry = $services_list[type.to_sym][name]
 		raise if entry == nil
 		entry
