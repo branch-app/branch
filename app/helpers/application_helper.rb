@@ -31,4 +31,8 @@ module ApplicationHelper
 			return replacement.replacement
 		end
 	end
+
+	def parse_datetime(date_string, in_format, out_format)
+		return DateTime.strptime(date_string, in_format).strftime(out_format)
+	end
 end
