@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'sass'
 
 # AWS
+gem 'nokogiri'
 gem 'aws-sdk'
 
 # Other
