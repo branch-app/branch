@@ -82,39 +82,49 @@
 					<div class="col-md-5">
 						<ul class="list-group">
 							<li class="list-group-item">
-								<span class="badge">25.08.2013</span>
+								<span class="badge"><%= parse_datetime(@service_record['LastPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ', '%d.%m.%Y') %></span>
 								Last Played
 							</li>
 							<li class="list-group-item">
-								<span class="badge">47%</span>
+								<span class="badge"><%= @service_record['TotalLoadoutItemsPurchased'].to_s %>%</span>
 								Loadout Purchase Completion
 							</li>
 							<li class="list-group-item">
-								<span class="badge">225</span>
+								<span class="badge"><%= @service_record['TotalChallengesCompleted'] %></span>
 								Challenges Completed
 							</li>
 							<li class="list-group-item">
-								<span class="badge">52 ;)</span>
+								<%
+									spartan_points = @service_record['SpartanPoints']
+									if (spartan_points == 52)
+										spartan_points = spartan_points.to_s + ' ;)'
+									end
+								%>
+								<span class="badge"><%= spartan_points %></span>
 								Spartan Points
 							</li>
 							<li class="list-group-item">
-								<span class="badge">32,470 (1.64 k/d)</span>
+								<% 
+									kills = @service_record['GameModes'][2]['TotalKills']
+									kd_ratio = @service_record['GameModes'][2]['KDRatio']
+								%>
+								<span class="badge"><%= number_with_delimiter(kills, delimiter: ',') %> (<%= kd_ratio %> K/D)</span>
 								War Games Kills
 							</li>
 							<li class="list-group-item">
-								<span class="badge">75,043</span>
+								<span class="badge"><%= number_with_delimiter(@service_record['GameModes'][2]['TotalMedals'], delimiter: ',') %></span>
 								War Games Medals
 							</li>
 							<li class="list-group-item">
-								<span class="badge">3,604</span>
+								<span class="badge"><%= number_with_delimiter(@service_record['GameModes'][0]['TotalKills'], delimiter: ',') %></span>
 								Covenant/Promethean Kills
 							</li>
 							<li class="list-group-item">
-								<span class="badge">2,094</span>
+								<span class="badge"><%= number_with_delimiter(@service_record['TotalGamesStarted'], delimiter: ',') %></span>
 								Games Started
 							</li>
 							<li class="list-group-item">
-								<span class="badge">08.11.2012</span>
+								<span class="badge"><%= parse_datetime(@service_record['FirstPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ', '%d.%m.%Y') %></span>
 								Player Since
 							</li>
 						</ul>
