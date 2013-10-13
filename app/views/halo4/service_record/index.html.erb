@@ -138,35 +138,40 @@
 				</div>
 
 				<div class="row">
-					<% 12.times do |i| %>
-						<% ran = rand(0..2) %>
+					<% @game_history['Games'].each do |game_history| %>
 						<%
-							modifier = 'dnf' if ran == 0
-							modifier = 'win' if ran == 1
-							modifier = 'los' if ran == 2
-
-							friendly = 'DNF' if ran == 0
-							friendly = 'Win' if ran == 1
-							friendly = 'Loss' if ran == 2
+							id = game_history['Id']
+							result = ''
+							friendly_result = ''
+							if (!game_history['Completed'])
+								result = 'dnf'
+								friendly_result = 'DNF'
+							elsif (game_history['Result'] == 2)
+								result = 'win'
+								friendly_result = 'Win'
+							elsif (game_history['Result'] == 0)
+								result = 'los'
+								friendly_result = 'Loss'
+							end
 						%>
 
-						<div id="history-entry-<%= i.to_s %>" class="col-lg-6 col-sm-12 game-history-entry">
-							<a href="#">
-								<div class="game-history-container" style="background-image: url(https://assets.halowaypoint.com/games/h4/maps/v1/large/ragnarok.png)">
-									<div class="mask <%= modifier %>"></div>
-									<div class="gametype-icon" style="background-image: url(http://localhost:9999/ctf.png)"></div>
+						<div id="history-entry-<%= id %>" class="col-lg-6 col-sm-12 game-history-entry">
+							<a href="<%= halo4_viewgame_path(gamertag: @gamertag, game_id: id) %>">
+								<div class="game-history-container" style="background-image: url(<%= get_raw_asset_url(game_history['MapImageUrl'], 'large') %>)">
+									<div class="mask <%= result %>"></div>
+									<div class="gametype-icon" style="background-image: url(<%= get_raw_asset_url(game_history['BaseVariantImageUrl'], 'large') %>)"></div>
 									<div class="inner">
-										<span class="gametype">Big Team Infinity Slayer</span>
+										<span class="gametype"><%= game_history['VariantName'] %></span>
 										<br class="visible-lg visible-xs" />
 										<span class="selector">on</span>
-										<span class="map-name">Valhalla</span>
+										<span class="map-name"><%= game_history['MapVariantName'] %></span>
 
 										<div class="stats">
-											<span class="type">Survival Time:</span>
-											<span class="stat"><%= rand(12..24) %></span>
+											<span class="type"><%= game_history['FeaturedStatName'] %></span>
+											<span class="stat"><%= game_history['FeaturedStatValue'] %></span>
 										</div>
 
-										<div class="windicator hidden-xs"><%= friendly %></div>
+										<div class="windicator hidden-xs"><%= friendly_result %></div>
 									</div>
 								</div>
 							</a>
