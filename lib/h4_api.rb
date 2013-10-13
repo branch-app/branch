@@ -1,0 +1,395 @@
+require 'uri'
+require 'json'
+require 'openssl'
+require 'httparty'
+require 'aws-sdk'
+
+module H4Api
+	include S3Storage
+
+	# woah, consts
+	GAME = 'h4'
+	GAME_LONG = 'halo4'
+	LANGUAGE = 'en-us'
+	SERVICES_LIST_URL = 'https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752'
+
+
+	# Module Api Update Calls
+	def self.update_services_list(do_init = true)
+		init if do_init
+
+		response = unauthorized_request(SERVICES_LIST_URL, 'GET', nil)
+		return unless validate_response(response)
+
+		response = JSON.parse(response.body)
+
+		services_list = response['ServiceList']
+		settings = response['Settings']
+
+		# save to database
+		$services_list = { service_list: { }, settings: { } }
+
+		services_list.each do |services_list_item|
+			$services_list[:service_list][services_list_item[0]] = services_list_item[1] 
+		end
+
+		settings.each do |services_list_item|
+			$services_list[:settings][services_list_item[0]] = services_list_item[1] 
+		end
+	end
+
+	def self.update_meta_data(do_init = true)
+		init if do_init
+		
+		url = url_from_name('GetGameMetadata', 'service_list')
+		url = full_url_with_defaults(url, nil)
+
+		response = unauthorized_request(url, 'GET', nil)
+		return unless validate_response(response)
+
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'meta_data', response.body)
+
+		$game_meta_data = JSON.parse response.body
+		$game_meta_data
+	end
+
+	def self.update_playlist_data
+		init
+
+		url = url_from_name('GetPlaylists', 'service_list')
+		url = full_url_with_defaults(url, nil)
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		return unless validate_response(response)
+
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'playlist_data', response.body)
+		JSON.parse response.body
+	end
+
+	def self.update_challenge_data
+		init
+
+		url = url_from_name('GetGlobalChallenges', 'service_list')
+		url = full_url_with_defaults(url, nil)
+
+		response = unauthorized_request(url, 'GET', nil)
+		return unless validate_response(response)
+
+		# save to s3
+		S3Storage.push(GAME_LONG, 'other', 'challenge_data', response.body)
+		JSON.parse response.body
+	end
+
+
+	# Module Api Get Calls (Other Data)
+	def self.get_meta_data
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'meta_data')
+
+		unless cached_data == nil
+			JSON.parse cached_data
+		else
+			update_meta_data
+		end
+	end
+
+	def self.get_playlist_data
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'playlist_data')
+
+		unless cached_data == nil
+			JSON.parse cached_data
+		else
+			update_playlist_data
+		end
+	end
+
+	def self.get_challenge_data
+		cached_data = S3Storage.pull(GAME_LONG, 'other', 'challenge_data')
+
+		unless cached_data == nil
+			JSON.parse cached_data
+		else
+			update_challenge_data
+		end
+	end
+
+
+	# Module Api Get Calls (Player Data)
+	def self.get_player_service_record(gamertag)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
+		cache_response = rename_this_later('service_record', gamertag_safe, h4_sr, (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetServiceRecord', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			if data['StatusCode'] != 1
+				h4_sr.delete if h4_sr
+				return { :status_code => data['StatusCode'], :continue => 'no' } 
+			end
+			if h4_sr
+				h4_sr.save
+			else
+				gt = Gamertag.new(gamertag: gamertag_safe)
+				h4_sr = H4ServiceRecord.new(gamertag_id: gt.id)
+			end
+			S3Storage.push(GAME_LONG, 'service_record', gamertag_safe, response.body)
+			data
+		else
+			# remove h4 servive record
+			h4_sr.delete if h4_sr
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+		end
+	end
+
+	def self.get_player_commendations(gamertag)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_commendation', gamertag_safe, H4PlayerCommendations.find_by_gamertag(gamertag_safe), (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetCommendations', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_safe)
+			H4PlayerCommendations.delete(old_cached) if old_cached != nil
+
+			cached_com = H4PlayerCommendations.new
+			cached_com.gamertag = gamertag_safe
+			cached_com.save
+
+			S3Storage.push(GAME_LONG, 'player_commendation', gamertag_safe, response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
+	def self.get_player_model(gamertag, size, pose = 'fullbody')
+		init
+
+		# https://spartans.svc.halowaypoint.com/players/{gamertag}/{game}/spartans/{pose}?target={size}
+		url = url_from_name('GetSpartanImage', 'service_list')
+		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
+	end
+
+	def self.get_player_matches(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_match_history', 
+			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", 
+			H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id),
+			60 * 8)
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetGameHistory', 'service_list')
+		url += '?gamemodeid={gamemodeid}&count={count}&startat={startat}'
+		url += '&chapterid={chapterid}' if chapter_id != -1
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :count => count.to_s, :startat => start_index.to_s, :gamemodeid => mode_id.to_s, :chapterid => chapter_id.to_s })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerRecentMatches.find_by_gamertag_and_start_index_and_count_and_mode_id_and_chapter_id(gamertag_safe, start_index, count, mode_id, chapter_id)
+			H4PlayerRecentMatches.delete(old_cached) if old_cached != nil
+
+			cached_match = H4PlayerRecentMatches.new
+			cached_match.gamertag = gamertag_safe
+			cached_match.start_index = start_index
+			cached_match.count = count
+			cached_match.mode_id = mode_id
+			cached_match.chapter_id = chapter_id
+			cached_match.save
+
+			S3Storage.push(GAME_LONG, 'player_match_history', "#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
+	def self.get_match_details(gamertag, match_id)
+		init
+
+		gamertag_safe = gamertag.to_s.downcase
+		cache_response = rename_this_later('player_match', match_id, H4PlayerMatch.find_by_game_id(match_id), (60 * 8))
+
+		return cache_response[:data] unless cache_response[:is_valid] == false
+
+		url = url_from_name('GetGameDetails', 'service_list')
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
+
+		response = authorized_request(url, 'GET', 'Spartan', nil)
+		if validate_response(response)
+			data = JSON.parse response.body
+
+			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+
+			old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_safe, match_id)
+			H4PlayerMatch.delete(old_cached) if old_cached != nil
+
+			cached_match = H4PlayerMatch.new
+			cached_match.gamertag = gamertag_safe
+			cached_match.game_id = match_id
+			cached_match.save
+
+			S3Storage.push(GAME_LONG, 'player_match', match_id, response.body)
+			data
+		else
+			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+			{ :status_code => 1001, :continue => 'no' }
+		end
+	end
+
+
+	# Module Api Helpers
+	def self.mapmeta_from_id(id, meta)
+		init
+		
+		meta = get_meta_data()['MapsMetadata']['Maps'] if meta == nil
+		meta.each do |map|
+			return map if map['Id'] == id
+		end
+	end
+
+	def self.asset_url_generator_basic(base_url, asset_url, size)
+		init
+		
+		"#{$services_list[:settings][base_url]}#{asset_url.gsub('{size}', size)}"
+	end
+
+	def self.rename_this_later(s3_bucket_path, s3_file_name, model_data, cache_time)
+		cached_data = S3Storage.pull(GAME_LONG, s3_bucket_path, s3_file_name)
+		cached_model = model_data
+
+		output = { is_valid: false, data: nil }
+		output[:is_valid] = (cached_model != nil && cached_data != nil && cached_model.updated_at + cache_time > Time.now)
+		output[:data] = JSON.parse(cached_data) unless cached_data == nil
+
+		output
+	end
+
+
+	# Module Helpers
+	def self.validate_response(response)
+		init
+		
+		false if response == nil || response.code != 200
+		true
+	end
+
+
+	# Used for URL Modification and Server Calls
+	def self.unauthorized_request(url, request_type, headers)
+		init
+		nil if Rails.env.local_stage?
+
+		if headers == nil
+			headers = { }
+		end
+		headers['Accept'] = 'application/json'
+
+		response = nil
+		if request_type == 'GET'
+			response = HTTParty.get(url, :headers => headers)
+		elsif request_type == 'POST'
+			response = HTTParty.post(url, :headers => headers)
+		else
+			raise
+		end
+
+		response
+	end
+
+	def self.authorized_request(url, request_type, auth_type, headers)
+		init
+		nil if Rails.env.local_stage?
+
+		auth = H4Auth.first
+
+		if headers == nil
+			headers = { }
+		end
+		if auth_type == 'Spartan'
+			headers['X-343-Authorization-Spartan'] = auth.spartan_token
+		end
+		headers['Accept'] = 'application/json'
+
+		response = nil
+		if request_type == 'GET'
+			response = HTTParty.get(url, :headers => headers)
+		elsif request_type == 'POST'
+			response = HTTParty.post(url, :headers => headers)
+		else
+			raise
+		end
+
+		response
+	end
+
+	def self.full_url_with_defaults(url, custom_defaults)
+		url = url.gsub('{language}', LANGUAGE)
+		url = url.gsub('{game}', GAME)
+
+		if custom_defaults != nil
+			custom_defaults.each do |default|
+				url = url.gsub("{#{default[0]}}", default[1])
+			end
+		end
+
+		url.gsub(' ', '%20')
+	end
+
+	def self.url_from_name(name, type)
+		puts $services_list
+		entry = $services_list[type.to_sym][name]
+		raise if entry == nil
+		entry
+	end
+
+	def self.error_message_from_status_code(status_code, param1 = '')
+		case status_code
+			when 1001
+				return 'The Halo Waypoint API is down, we can only load cached data. Sorry about that.'
+			when 4
+				return "The specified gamertag `#{param1}` has no Halo 4 game history."
+			else
+				return 'Unknown Status Code'
+		end
+	end
+
+
+	# Module Initalization
+	@is_initalized = false
+	def self.init
+		return if @is_initalized
+		@is_initalized = true
+
+		update_services_list(false)
+		update_meta_data(false)
+	end
+end
