@@ -392,5 +392,7 @@ module H4Api
 
 		update_services_list(false)
 		update_meta_data(false)
+
+		return
 	end
 end
