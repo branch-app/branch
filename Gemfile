@@ -29,6 +29,9 @@ end
 gem 'jquery-rails'
 gem 'sass'
 
+# AWS
+gem 'aws-sdk'
+
 # Other
 gem 'redcarpet'
 gem 'rufus-scheduler'
