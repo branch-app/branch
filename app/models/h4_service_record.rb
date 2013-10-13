@@ -8,10 +8,10 @@ class H4ServiceRecord < ActiveRecord::Base
 		gt = Gamertag.find_by_gamertag(gamertag)
 		if gt == nil
 			gt = Gamertag.new(gamertag: gamertag)
-			gt.save
+			gt.save()
 		end
 
-		h4_sr = new(gamertag_id: gt.id)
+		h4_sr = H4ServiceRecord.new(gamertag_id: gt.id)
 		h4_sr.save
 	end
 
