@@ -7,25 +7,26 @@
 	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
 	var chart = new Chart(ctx).Doughnut([ 
 			{
-				value: 55,
+				value: <%= @service_record['GameModes'][0]['TotalGamesStarted'] %>,
 				color: '#F7464A'
 			},
 			{
-				value: 15,
-				color: '#E2EAE9'
+				value: <%= @service_record['GameModes'][2]['TotalGamesStarted'] %>,
 				color: '#5880A0'
 			},
 			{
-				value: 23,
+				value: <%= @service_record['GameModes'][3]['TotalGamesStarted'] %>,
 				color: '#3d3d7c'
 			},
 			{
-				value: 7,
+				value: <%= @service_record['GameModes'][1]['TotalGamesStarted'] %>,
 				color: '#949FB1'
 			},
 		], 
 		{ 
-
+			animationStages : 500,
+			animateScale : false,
+			animateRotate : false
 		}
 	);
 </script>
