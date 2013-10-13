@@ -123,7 +123,7 @@ module H4Api
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
 		cache_response = rename_this_later('service_record', gamertag_safe, h4_sr, (60 * 8))
 
-		return cache_response[:data] if (!cache_response[:is_valid])
+		return cache_response[:data] if (cache_response[:is_valid])
 
 		url = url_from_name('GetServiceRecord', 'service_list')
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
@@ -136,7 +136,8 @@ module H4Api
 				h4_sr.delete() if (h4_sr)
 				return { "StatusCode" => data['StatusCode'], continue: false } 
 			end
-			if (h4_sr)
+
+			if (h4_sr != nil)
 				h4_sr.save()
 			else
 				H4ServiceRecord.insert_new_gamertag(gamertag.to_s)
