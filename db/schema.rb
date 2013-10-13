@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(:version => 20130923164304) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "h4_service_records", :force => true do |t|
+    t.integer  "gamertag_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "description"
