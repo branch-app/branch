@@ -129,12 +129,12 @@ module H4Api
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
 
 		response = authorized_request(url, 'GET', 'Spartan', nil)
-		if validate_response(response)
+		if (validate_response(response))
 			data = JSON.parse response.body
 
 			if data['StatusCode'] != 1
 				h4_sr.delete if h4_sr
-				return { :status_code => data['StatusCode'], :continue => 'no' } 
+				return { "StatusCode" => data['StatusCode'], continue: false } 
 			end
 			if h4_sr
 				h4_sr.save
