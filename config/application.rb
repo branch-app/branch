@@ -61,11 +61,11 @@ module BranchApp
 
     # Setup
     config.after_initialize do
-            # authorize
-            I343Auth.send :update_authentication
+        # authorize
+        I343Auth.send :update_authentication
 
-            # call
-            H4Api.send :init
-        end
+        # call
+        H4Api.send :init
+    end
   end
 end
