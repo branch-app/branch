@@ -123,29 +123,30 @@ module H4Api
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
 		cache_response = rename_this_later('service_record', gamertag_safe, h4_sr, (60 * 8))
 
-		return cache_response[:data] unless cache_response[:is_valid] == false
+		return cache_response[:data] if (!cache_response[:is_valid])
 
 		url = url_from_name('GetServiceRecord', 'service_list')
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
 
 		response = authorized_request(url, 'GET', 'Spartan', nil)
 		if (validate_response(response))
-			data = JSON.parse response.body
+			data = JSON.parse(response.body)
 
-			if data['StatusCode'] != 1
-				h4_sr.delete if h4_sr
+			if (data['StatusCode'] != 1)
+				h4_sr.delete() if (h4_sr)
 				return { "StatusCode" => data['StatusCode'], continue: false } 
 			end
-			if h4_sr
-				h4_sr.save
+			if (h4_sr)
+				h4_sr.save()
 			else
-				gt = Gamertag.new(gamertag: gamertag_safe)
-				h4_sr = H4ServiceRecord.new(gamertag_id: gt.id)
+				H4ServiceRecord.insert_new_gamertag(gamertag.to_s)
 			end
+
 			S3Storage.push(GAME_LONG, 'service_record', gamertag_safe, response.body)
-			data
+
+			return data
 		else
-			# remove h4 servive record
+			# remove h4 servive record (don't remove gamertag, just incase errors and shit happen)
 			h4_sr.delete if h4_sr
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
 		end
