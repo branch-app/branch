@@ -3,6 +3,7 @@ class H4ServiceRecord < ActiveRecord::Base
 
 	belongs_to :gamertag
 	has_many :h4_game_history
+	has_many :h4_player_commendation
 
 	def self.insert_new_gamertag(gamertag)
 		gt = Gamertag.find_by_gamertag(gamertag)
