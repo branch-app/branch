@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131013212316) do
+ActiveRecord::Schema.define(:version => 20131014203242) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(:version => 20131013212316) do
     t.integer  "h4_service_record_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+  end
+
+  create_table "h4_playlist_orientations", :force => true do |t|
+    t.integer  "playlist_id"
+    t.boolean  "is_team"
+    t.boolean  "is_individual"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "h4_service_records", :force => true do |t|
