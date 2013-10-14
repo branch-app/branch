@@ -157,8 +157,10 @@ module H4Api
 		init
 
 		gamertag_safe = gamertag.to_s.downcase
-		cache_response = rename_this_later('player_commendation', gamertag_safe, H4PlayerCommendations.find_by_gamertag(gamertag_safe), (60 * 8))
+		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Commendations :: ' + gamertag + ' ::') if (h4_sr == nil)
 
+		cache_response = rename_this_later('player_commendation', gamertag_safe, H4PlayerCommendation.find_by_h4_service_record_id(h4_sr.id), (60 * 8))
 		return cache_response[:data] unless cache_response[:is_valid] == false
 
 		url = url_from_name('GetCommendations', 'service_list')
@@ -170,15 +172,15 @@ module H4Api
 
 			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
 
-			old_cached = H4PlayerCommendations.find_all_by_gamertag(gamertag_safe)
-			H4PlayerCommendations.delete(old_cached) if old_cached != nil
+			old_cached = H4PlayerCommendation.find_all_by_h4_service_record_id(h4_sr.id)
+			H4PlayerCommendation.delete(old_cached) if old_cached != nil
 
-			cached_com = H4PlayerCommendations.new
-			cached_com.gamertag = gamertag_safe
-			cached_com.save
+			cached_com = H4PlayerCommendation.new
+			cached_com.h4_service_record_id = h4_sr.id
+			cached_com.save()
 
 			S3Storage.push(GAME_LONG, 'player_commendation', gamertag_safe, response.body)
-			data
+			return data
 		else
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
 			{ :status_code => 1001, :continue => 'no' }
