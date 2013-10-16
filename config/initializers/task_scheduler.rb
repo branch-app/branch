@@ -1,4 +1,4 @@
-scheduler = Rufus::Scheduler.start_new
+scheduler = Rufus::Scheduler.new
 	include I343Auth
 	include H4Api
 
