@@ -58,6 +58,69 @@
 							</span>
 						</div>
 					</div>
+
+					<div class="col-md-12 hidden-xs">
+						<hr />
+					</div>
+					<div class="col-md-12 hidden-xs playlist-advanced-data">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a href="#gvar" data-toggle="tab">Game Variants</a>
+							</li>
+							<li>
+								<a href="#mvar" data-toggle="tab">Map Variants</a>
+							</li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="gvar">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>*</th>
+											<th>Game Variant Name</th>
+											<th>Game Variant Description</th>
+											<th>Variant Based off of</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @playlist['RelatedGameVariants'].each do |game_variant| %>
+											<tr class="entry">
+												<td>
+													<div class="icon-frame" style="background-image: url(<%= get_raw_asset_url(game_variant['GameBaseVariantImageUrl'], 'medium') %>);"></div>
+												</td>
+												<td><%= game_variant['Name'] %></td>
+												<td><%= game_variant['Description'] %></td>
+												<td><%= game_variant['GameBaseVariantName'] %></td>
+											</tr>
+										<% end %>
+									</tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade in" id="mvar">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>*</th>
+											<th>Game Variant Name</th>
+											<th>Game Variant Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @playlist['RelatedMapVariants'].each do |map_variant| %>
+											<% map = get_map_from_base_id(map_variant['BaseMapId']) %>
+											<tr class="entry">
+												<td>
+													<div class="preview-frame" style="background-image: url(<%= get_raw_asset_url(map['ImageUrl'], 'medium') %>);"></div>
+												</td>
+												<td><%= map['Name'] %></td>
+												<td><%= map['Description'] %></td>
+											</tr>
+										<% end %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
