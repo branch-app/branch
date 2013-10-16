@@ -1,5 +1,5 @@
 <% content_for :halo4, true %>
-<% content_for :title, "Halo 4 - iBotPeaches v5's CSR - Rumble Pit" %>	
+<% content_for :title, "Halo 4 - #{@service_record['Gamertag']}'s CSR - #{@current_skill_rank['PlaylistName']}" %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'csr' %>
 <% content_for :scripts do %>
@@ -20,33 +20,41 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section csr-details">
 				<div class="page-header">
-					<h1>iBotPeaches v5's Rumble Pit CSR</h1>
+					<h1><%= @service_record['Gamertag'] %>'s <%= @current_skill_rank['PlaylistName'] %> CSR</h1>
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 playlist-image" style="background-image: url(https://assets.halowaypoint.com/games/h4/playlists/v1/large/big-team-battle.png)">
-
+					<div class="col-md-12 playlist-image" style="background-image: url(<%= get_raw_asset_url(@current_skill_rank['PlaylistImageUrl'], 'large') %>)">
+						<div class="csr" style="background-image: url(<%= get_csr_level_url(@current_skill_rank['CurrentSkillRank'], 'medium') %>)"></div>
 					</div>
-					<div class="col-md-6 playlist-data" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)">
 
-						<hr class="visible-xs visible-sm" />
+					<div class="col-md-12">
+						<hr />
+					</div>
 
-						<span class="description">Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.</span>
+					<div class="col-md-12 playlist-data">
+						<span class="description"><%= @current_skill_rank['PlaylistDescription'] %></span>
 
 						<div class="meta">
 							<span class="party-size">
 								Max Party Size:
-								<strong>8</strong>
+								<strong><%= @playlist['MaxPartySize'] %></strong>
 							</span>
 							<br />
 							<span class="local-party-size">
 								Max Local Party Size:
-								<strong>4</strong>
+								<strong><%= @playlist['MaxLocalPlayers'] %></strong>
 							</span>
 							<br />
 							<span class="player-grouping">
 								Player Grouping:
-								<strong>Free For All</strong>
+								<strong>
+									<% if (@playlist['IsFreeForAll']) %>
+										<%= "Free for All" %>
+									<% else %>
+										<%= "Team vs Team" %>
+									<% end %>
+								</strong>
 							</span>
 						</div>
 					</div>

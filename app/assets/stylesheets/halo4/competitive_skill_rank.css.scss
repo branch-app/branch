@@ -35,9 +35,22 @@ body.halo4_csr {
 
 	.csr-details {
 		> .row {
+			text-align: center;
+
 			> .playlist-image {
 				background-size: cover;
 				height: 260px;
+
+				> .csr {
+					position: absolute;
+					bottom: 10px;
+					left: 10px;
+
+					width: 78px;
+					height: 99px;
+					background-repeat: no-repeat;
+
+				}
 			}
 
 			> .playlist-data {
@@ -46,21 +59,13 @@ body.halo4_csr {
 				min-height: 260px;
 
 				> .description {
-					font-size: 14px;
+					font-size: 17px;
 				}
 
 				> .meta {
 					margin-top: 25px;
 
-					> .party-size {
-						font-size: 18px;
-					}
-					> .local-party-size {
-						font-size: 18px;
-					}
-					> .player-grouping {
-						font-size: 18px;
-					}
+					font-size: 15px;
 				}
 			}
 		}

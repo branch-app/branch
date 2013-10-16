@@ -1,71 +1,9 @@
 <% content_for :halo4, true %>
-<% content_for :title, "Halo 4 - iBotPeaches v5's CSR" %>	
+<% content_for :title, "Halo 4 - #{@service_record['Gamertag']}'s CSR" %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'csr' %>
 <% content_for :scripts do %>
 <script>
-	var team_data = {
-		labels : [
-			"Dominion",
-			"<%= link_to 'Capture the Flag', '#' %>",
-			"Griffball",
-			"Team Doubles",
-			"Team Throwdown"
-		],
-		datasets : [
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : [
-					18,
-					22,
-					3,
-					14,
-					18
-				]
-			}
-		]
-	}
-
-	var indv_data = {
-		labels : [
-			"Infinity Slayer",
-			"Big Team Infinity Slayer",
-			"Flood",
-			"Team Snipers",
-			"SWAT",
-			"Multi-Team",
-			"Team Action Sack",
-			"Rumble Pit"
-		],
-		datasets : [
-			{
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,1)",
-				pointColor : "rgba(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				data : [
-					43,
-					45,
-					12,
-					25,
-					33,
-					47,
-					22,
-					49
-				]
-			}
-		]
-	}
-
-
-	var chr_team = document.getElementById("chart-team-csr").getContext("2d");
-	new Chart(chr_team).Radar(team_data);
-
-	var char_indv = document.getElementById("chart-indv-csr").getContext("2d");
-	new Chart(char_indv).Radar(indv_data);
 </script>
 <% end %>
 <% content_for :template, 'halo4 halo4_csr' %>
@@ -81,7 +19,7 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section csr">
 				<div class="page-header">
-					<h1>iBotPeaches v5's CSR</h1>
+					<h1><%= @service_record['Gamertag'] %>'s CSR</h1>
 				</div>
 
 				<div class="row">
@@ -114,76 +52,23 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/ctf.png" />
-											</td>
-											<td>
-												<%= link_to 'Capture the Flag', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Capture and return the enemy’s Flag while protecting your own. 5 vs. 5.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/ctf.png" />
-											</td>
-											<td>
-												<%= link_to 'Capture the Flag', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Capture and return the enemy’s Flag while protecting your own. 5 vs. 5.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/ctf.png" />
-											</td>
-											<td>
-												<%= link_to 'Capture the Flag', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Capture and return the enemy’s Flag while protecting your own. 5 vs. 5.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/ctf.png" />
-											</td>
-											<td>
-												<%= link_to 'Capture the Flag', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Capture and return the enemy’s Flag while protecting your own. 5 vs. 5.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/ctf.png" />
-											</td>
-											<td>
-												<%= link_to 'Capture the Flag', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Capture and return the enemy’s Flag while protecting your own. 5 vs. 5.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
+										<% @team_playlists.each do |playlist| %>
+											<% playlist_slug = playlist['PlaylistName'].to_slug() %>
+											<tr>
+												<td>
+													<img src="<%= get_raw_asset_url(playlist['PlaylistImageUrl'], 'small') %>" />
+												</td>
+												<td>
+													<%= link_to(playlist['PlaylistName'], halo4_csr_details_path(gamertag: @service_record['Gamertag'], id: playlist['PlaylistId'], slug: playlist_slug)) %>
+												</td>
+												<td>
+													<%= playlist['PlaylistDescription'] %>
+												</td>
+												<td>
+													<div class="csr-table-icon" style="background-image: url(<%= get_csr_level_url(playlist['CurrentSkillRank']) %>)"></div>
+												</td>
+											</tr>
+										<% end %>
 									</tbody>
 								</table>
 							</div>
@@ -206,91 +91,28 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/rumblepit-597a7a44-1c64-4996-91e1-27cd7281eeb4.png" />
-											</td>
-											<td>
-												<%= link_to 'Rumble Pit', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/rumblepit-597a7a44-1c64-4996-91e1-27cd7281eeb4.png" />
-											</td>
-											<td>
-												<%= link_to 'Rumble Pit', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/rumblepit-597a7a44-1c64-4996-91e1-27cd7281eeb4.png" />
-											</td>
-											<td>
-												<%= link_to 'Rumble Pit', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<img src="https://assets.halowaypoint.com/games/h4/playlists/v1/small/rumblepit-597a7a44-1c64-4996-91e1-27cd7281eeb4.png" />
-											</td>
-											<td>
-												<%= link_to 'Rumble Pit', halo4_csr_details_path(gamertag: @gamertag, id: '10') %>
-											</td>
-											<td>
-												Kill enemy Spartans in a selection of Infinity and Pro Rumble variants. 8 player FFA.
-											</td>
-											<td>
-												<div class="csr-table-icon" style="background-image: url(https://assets.halowaypoint.com/games/h4/csr/v1/medium/50.png)"></div>
-											</td>
-										</tr>
+										<% @individual_playlists.each do |playlist| %>
+											<% playlist_slug = playlist['PlaylistName'].to_slug() %>
+											<tr>
+												<td>
+													<img src="<%= get_raw_asset_url(playlist['PlaylistImageUrl'], 'small') %>" />
+												</td>
+												<td>
+													<%= link_to(playlist['PlaylistName'], halo4_csr_details_path(gamertag: @service_record['Gamertag'], id: playlist['PlaylistId'], slug: playlist_slug)) %>
+												</td>
+												<td>
+													<%= playlist['PlaylistDescription'] %>
+												</td>
+												<td>
+													<div class="csr-table-icon" style="background-image: url(<%= get_csr_level_url(playlist['CurrentSkillRank']) %>)"></div>
+												</td>
+											</tr>
+										<% end %>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-
-					<!-- <div class="col-md-6">
-						<h1>Team CSR</h1>
-
-						<div class="outer-container">
-							<div class="inner-container">
-								<div class="canvas-container">
-									<canvas class="chart" id="chart-team-csr" width="350" height="350"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<h1>Individual CSR</h1>
-
-						<div class="outer-container">
-							<div class="inner-container">
-								<div class="canvas-container">
-									<canvas class="chart" id="chart-indv-csr" width="350" height="350"></canvas>
-								</div>
-							</div>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
