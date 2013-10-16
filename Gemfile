@@ -9,6 +9,9 @@ gem 'mysql2', '0.3.11'
 # Security
 gem 'pbkdf2'
 
+# Misc
+gem 'nokogiri'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,7 +33,6 @@ gem 'jquery-rails'
 gem 'sass'
 
 # AWS
-gem 'nokogiri'
 gem 'aws-sdk'
 
 # Other
