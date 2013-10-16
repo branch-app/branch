@@ -7,7 +7,7 @@ module Halo4::HomeHelper
 		return 0
 	end
 
-	#-- Misc --#
+	#-- Asset Urls --#
 	def get_player_model_url(gamertag, size, pose = 'fullbody')
 		return H4Api.get_player_model(gamertag, size, pose)
 	end
@@ -18,5 +18,16 @@ module Halo4::HomeHelper
 
 	def get_csr_level_url(csr, size = 'medium', version = 'v1')
 		return "https://assets.halowaypoint.com/games/h4/csr/#{version}/#{size}/#{csr}.png"
+	end
+
+	#-- Get Shit From an Id --#
+	def get_map_from_base_id(base_id)
+		@metadata['MapsMetadata']['Maps'].each do |map|
+			if (map['Id'] == base_id.to_i)
+				return map
+			end
+		end
+
+		return nil
 	end
 end
