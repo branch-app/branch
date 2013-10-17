@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014203242) do
+ActiveRecord::Schema.define(:version => 20131017161831) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20131014203242) do
     t.integer  "count"
     t.integer  "mode_id"
     t.integer  "chapter_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "h4_games", :force => true do |t|
+    t.integer  "h4_service_record_id"
+    t.string   "game_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
