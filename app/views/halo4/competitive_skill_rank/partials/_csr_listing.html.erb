@@ -23,7 +23,7 @@
 					<img src="<%= get_raw_asset_url(playlist['PlaylistImageUrl'], 'small') %>" />
 				</td>
 				<td>
-					<%= link_to(playlist['PlaylistName'], halo4_csr_details_path(gamertag: @service_record['Gamertag'], id: playlist['PlaylistId'], slug: playlist_slug)) %>
+					<%= link_to(playlist['PlaylistName'], halo4_csr_details_path(gamertag: gamertag_validation(@service_record['Gamertag']), id: playlist['PlaylistId'], slug: playlist_slug)) %>
 				</td>
 				<td>
 					<%= playlist['PlaylistDescription'] %>

@@ -1,5 +1,5 @@
 <% content_for :halo4, true %>
-<% content_for :title, "Halo 4 - #{@service_record['Gamertag']}'s CSR" %>	
+<% content_for :title, "Halo 4 - #{gamertag_validation(@service_record['Gamertag'])}'s CSR" %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'csr' %>
 <% content_for :scripts do %>
@@ -19,7 +19,7 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section csr">
 				<div class="page-header">
-					<h1><%= @service_record['Gamertag'] %>'s CSR</h1>
+					<h1><%= gamertag_validation(@service_record['Gamertag']) %>'s CSR</h1>
 				</div>
 
 				<div class="row">

@@ -61,16 +61,16 @@
 			<%= link_to(raw('<span class="glyphicon glyphicon-leaf"></span> Leaf'), '#') %>
 			<ul class="nav">
 				<li>
-					<%= link_to('Overview', "http://leafapp.co/h4/record/#{gamertag_to_leaf_html(@gamertag)}") %>
+					<%= link_to('Overview', "http://leafapp.co/h4/record/#{gamertag_to_leaf_html(gamertag_validation(@gamertag))}") %>
 				</li>
 				<li>
-					<%= link_to('Compare', "http://leafapp.co/h4/compare/#{gamertag_to_leaf_html(@gamertag)}") %>
+					<%= link_to('Compare', "http://leafapp.co/h4/compare/#{gamertag_to_leaf_html(gamertag_validation(@gamertag))}") %>
 				</li>
 				<li>
-					<%= link_to('Star', "http://leafapp.co/h4/star/#{gamertag_to_leaf_html(@gamertag)}") %>
+					<%= link_to('Star', "http://leafapp.co/h4/star/#{gamertag_to_leaf_html(gamertag_validation(@gamertag))}") %>
 				</li>
 				<li>
-					<%= link_to('Flag as Cheater/Booster', "http://leafapp.co/h4/flag/#{gamertag_to_leaf_html(@gamertag)}") %>
+					<%= link_to('Flag as Cheater/Booster', "http://leafapp.co/h4/flag/#{gamertag_to_leaf_html(gamertag_validation(@gamertag))}") %>
 				</li>
 			</ul>
 		</li>

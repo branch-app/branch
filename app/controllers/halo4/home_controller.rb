@@ -5,6 +5,11 @@ class Halo4::HomeController < ApplicationController
 	def get_gamertag
 		@gamertag = params[:gamertag]
 
+		new_gamertag = GamertagReplacement.find_by_replacement(@gamertag)
+		if (new_gamertag != nil)
+			@gamertag = new_gamertag.target
+		end
+
 		# pull stats
 		@service_record = H4Api.get_player_service_record(@gamertag)
 		@metadata = H4Api.get_meta_data()

@@ -1,5 +1,5 @@
 <% content_for :halo4, true %>
-<% content_for :title, "Halo 4 - #{@service_record['Gamertag']}'s #{@friendly_name} Commendations" %>	
+<% content_for :title, "Halo 4 - #{gamertag_validation(@service_record['Gamertag'])}'s #{@friendly_name} Commendations" %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'commendations' %>
 <% content_for :halo4_commendations_active, @css_class %>

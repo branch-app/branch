@@ -1,5 +1,5 @@
 <% content_for :halo4, true %>
-<% content_for :title, 'Halo 4 - ' + @service_record['Gamertag'] %>	
+<% content_for :title, "Halo 4 - #{gamertag_validation(@service_record['Gamertag'])}" %>	
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'overview' %>
 <% content_for :scripts do %>
@@ -156,7 +156,7 @@
 						%>
 
 						<div id="history-entry-<%= id %>" class="col-lg-6 col-sm-12 game-history-entry">
-							<a href="<%= halo4_viewgame_path(gamertag: @gamertag, game_id: id) %>">
+							<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(@gamertag), game_id: id) %>">
 								<div class="game-history-container" style="background-image: url(<%= get_raw_asset_url(game_history['MapImageUrl'], 'large') %>)">
 									<div class="mask <%= result %>"></div>
 									<div class="gametype-icon" style="background-image: url(<%= get_raw_asset_url(game_history['BaseVariantImageUrl'], 'large') %>)"></div>
