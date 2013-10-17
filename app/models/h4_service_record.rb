@@ -2,6 +2,7 @@ class H4ServiceRecord < ActiveRecord::Base
 	attr_accessible :gamertag_id
 
 	belongs_to :gamertag
+	has_many :h4_game
 	has_many :h4_game_history
 	has_many :h4_player_commendation
 
