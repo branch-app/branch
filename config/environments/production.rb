@@ -13,6 +13,8 @@ BranchApp::Application.configure do
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
+  config.assets.enabled = true
+  config.assets.paths << "#{Rails.root}/app/assets/fonts" 
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
