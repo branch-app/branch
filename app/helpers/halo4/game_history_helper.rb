@@ -1,4 +1,6 @@
 module Halo4::GameHistoryHelper
+
+	#-- Pagination Stuff --#
 	def update_pagination(current_page, direction)
 		if (direction == 'older')
 			return current_page if (current_page == 0)
@@ -8,6 +10,31 @@ module Halo4::GameHistoryHelper
 		end
 	end
 
+
+	#-- Game Meta Stuff --#
+	def get_victory_type(game)
+		result = ''
+		friendly_result = ''
+		if (!game['Completed'])
+			result = 'dnf'
+			friendly_result = 'DNF'
+		elsif (game['Result'] == 2)
+			result = 'win'
+			friendly_result = 'Won'
+		elsif (game['Result'] == 0)
+			result = 'los'
+			friendly_result = 'Lost'
+		end
+
+		return { result: result, friendly_result: friendly_result }
+	end
+
+	def get_full_difficulty(difficulty_id)
+		return @metadata['DifficultiesMetadata']['Difficulties'][difficulty_id]
+	end
+
+
+	#-- DateTime Stuff --#
 	def duration_to_friendly(duration)
 		str = ''
 		
