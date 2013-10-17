@@ -27,23 +27,23 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<%= render partial: "halo4/game_history/partials/header/#{@sub_view}" %>
+							<%= render partial: "halo4/game_history/partials/history/header/#{@sub_view}" %>
 						</tr>
 					</thead>
 
 					<tbody>
 						<% @game_history['Games'].each do |game| %>
-							<%= render partial: "halo4/game_history/partials/row/#{@sub_view}", locals: { game: game } %>
+							<%= render partial: "halo4/game_history/partials/history/row/#{@sub_view}", locals: { game: game } %>
 						<% end %>
 					</tbody>
 				</table>
 
 				<ul class="pager">
 					<li class="previous <%= 'disabled' if @page == 0 %> ">
-						<%= link_to '← Older', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'older') ) %>
+						<%= link_to('← Older', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'older'))) %>
 					</li>
 					<li class="next <%= 'disabled' if @is_last_page %>">
-						<%= link_to 'Newer →', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'newer') ) %>
+						<%= link_to('Newer →', halo4_gamehistory_path( sub_view: @sub_view, page: update_pagination(@page, 'newer'))) %>
 					</li>
 				</ul>
 			</div>
