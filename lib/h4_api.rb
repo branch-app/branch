@@ -241,32 +241,35 @@ module H4Api
 		end
 	end
 
-	def self.get_match_details(gamertag, match_id)
+	def self.get_player_game(gamertag, game_id)
 		init
 
-		gamertag_safe = gamertag.to_s.downcase
-		cache_response = rename_this_later('player_match', match_id, H4PlayerMatch.find_by_game_id(match_id), (60 * 8))
+		gamertag_safe = gamertag.to_s().downcase()
+		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Game :: ' + gamertag + ' ::') if (h4_sr == nil)
 
-		return cache_response[:data] unless cache_response[:is_valid] == false
+		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), (60 * 8))
+
+		return cache_response[:data] if (cache_response[:is_valid] != false)
 
 		url = url_from_name('GetGameDetails', 'service_list')
-		url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => match_id })
+		url = full_url_with_defaults(url, { :gamertag => gamertag, :gameid => game_id })
 
 		response = authorized_request(url, 'GET', 'Spartan', nil)
-		if validate_response(response)
-			data = JSON.parse response.body
+		if (validate_response(response))
+			data = JSON.parse(response.body)
 
-			return { :status_code => data['StatusCode'], :continue => 'no' } if data['StatusCode'] != 1
+			return { :status_code => data['StatusCode'], :continue => 'no' } if (data['StatusCode'] != 1)
 
-			old_cached = H4PlayerMatch.find_by_gamertag_and_game_id(gamertag_safe, match_id)
-			H4PlayerMatch.delete(old_cached) if old_cached != nil
+			old_cached = H4Game.find_by_h4_service_record_id_and_game_id(h4_sr.id, game_id)
+			H4Game.delete(old_cached) if old_cached != nil
 
-			cached_match = H4PlayerMatch.new
-			cached_match.gamertag = gamertag_safe
-			cached_match.game_id = match_id
+			cached_match = H4Game.new
+			cached_match.h4_service_record_id = h4_sr.id
+			cached_match.game_id = game_id
 			cached_match.save
 
-			S3Storage.push(GAME_LONG, 'player_match', match_id, response.body)
+			S3Storage.push(GAME_LONG, 'player_match', game_id, response.body)
 			data
 		else
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
