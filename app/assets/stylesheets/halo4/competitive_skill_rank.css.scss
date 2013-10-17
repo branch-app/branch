@@ -85,13 +85,19 @@ body.halo4_csr {
 
 				#mvar {
 					.entry {
-						> td > .preview-frame {
-							width: 180px;
-							height: 130px;
-							background-color: #3d3d7c;
-							background-position: center;
-							background-size: cover;
-							background-repeat: no-repeat;
+						> td {
+							> .preview-frame {
+								width: 180px;
+								height: 130px;
+								background-color: #3d3d7c;
+								background-position: center;
+								background-size: cover;
+								background-repeat: no-repeat;
+							}
+
+							> .name {
+								width: 130px;
+							}
 						}
 					}
 				}

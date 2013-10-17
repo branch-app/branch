@@ -2,15 +2,18 @@ class Halo4::CompetitiveSkillRankController < Halo4::HomeController
 	def index
 		@team_playlists = [ ]
 		@individual_playlists = [ ]
+		@unknown_playlists = [ ]
 
 		playlist_orientations = H4PlaylistOrientation.all
 		@service_record['SkillRanks'].each do |skill_rank|
-			playlist_is_team = check_playlist_orientation_is_team(skill_rank, playlist_orientations)
+			playlist_orientation = H4PlaylistOrientation.find_by_playlist_id(skill_rank['PlaylistId'])
 			skill_rank['CurrentSkillRank'] = 0 if skill_rank['CurrentSkillRank'] == nil
 
-			if (playlist_is_team)
+			if (playlist_orientation == nil)
+				@unknown_playlists << skill_rank
+			elsif (playlist_orientation.is_team)
 				@team_playlists << skill_rank
-			elsif (!playlist_is_team)
+			elsif (playlist_orientation.is_individual)
 				@individual_playlists << skill_rank
 			end
 		end
@@ -42,15 +45,4 @@ class Halo4::CompetitiveSkillRankController < Halo4::HomeController
 			return
 		end
 	end
-
-	private
-		def check_playlist_orientation_is_team(playlist, orientations)
-			orientations.each do |orientation|
-				if (orientation.playlist_id == playlist['PlaylistId'])
-					return orientation.is_team
-				end
-			end
-
-			return nil
-		end
 end
