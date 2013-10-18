@@ -21,7 +21,7 @@
 			<div class="victor">
 				<% if (@game['Teams'].length > 0) %>
 					<%
-						modifier = (@teams_in_order[@teams_in_order.length - 1]['Score'].to_f() / 75).to_f()
+						modifier = (@teams_in_order.reverse[@teams_in_order.length - 1]['Score'].to_f() / 75).to_f()
 						if (modifier == 0)
 							modifier = 1
 						end
