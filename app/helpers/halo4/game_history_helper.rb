@@ -29,6 +29,19 @@ module Halo4::GameHistoryHelper
 		return { result: result, friendly_result: friendly_result }
 	end
 
+	def get_page_title(game)
+		case(game['ModeId'])
+			when 3
+			when 6
+				return "#{game['GameVariantName']} on #{game['MapVariantName']}"
+			when 4
+			when 5
+				return "#{game['MapName']} on #{get_full_difficulty(game['Difficulty'])['Name']}"
+			else
+				return "oops"
+		end
+	end
+
 	def get_full_difficulty(difficulty_id)
 		return @metadata['DifficultiesMetadata']['Difficulties'][difficulty_id]
 	end
