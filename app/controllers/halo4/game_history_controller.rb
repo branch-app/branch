@@ -25,8 +25,24 @@ class Halo4::GameHistoryController < Halo4::HomeController
 	end
 
 	def view
+		@game = H4Api.get_player_game(@service_record['Gamertag'], params[:game_id].to_s)['Game']
+
 		@css_class = 'matchmaking'
-		@duration = Time.new(1994, 8, 18, 2, 45, 56, '+00:00')
+		@partial_type = 'matchmaking'
+		case @game['ModeId']
+			when 3
+				@css_class = 'matchmaking'
+				@partial_type = 'matchmaking'
+			when 4
+				@css_class = 'campaign'
+				@partial_type = 'campaign'
+			when 5
+				@css_class = 'spartan-ops'
+				@partial_type = 'spartan-ops'
+			when 6
+				@css_class = 'custom-games'
+				@partial_type = 'matchmaking'
+		end
 	end
 	
 	private

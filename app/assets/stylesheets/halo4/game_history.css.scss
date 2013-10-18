@@ -4,7 +4,7 @@ body.halo4_game_history {
 
 		// le cover stuff
 		> .cover {
-			min-height: 320px;
+			height: 374px;
 			width: 100%;
 			background-size: cover;
 			background-repeat: no-repeat;
@@ -49,9 +49,43 @@ body.halo4_game_history {
 					}
 
 					> .victor {
-						max-width: 248px;
 						margin: 0 auto;
 						text-align: center;
+
+						> .team-score-bollards {
+							margin: 0 auto;
+							margin-bottom: -10px;
+							color: white;
+
+							> .score-bollard {
+								float: left;
+								height: 75px;
+								width: 50px;
+								margin: 0 5px;
+
+								> .height-mask {
+									width: 100%;
+								}
+								> .score {
+									position: absolute;
+									width: 50px;
+									text-align: center;
+									margin-top: -45px;
+								}
+							}
+
+							> .team-score-bollard {
+								float: left;
+
+								height: 75px;
+								width: 50px;
+								margin: 0 5px;
+
+								> div {
+									line-height: 5em;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -60,14 +94,15 @@ body.halo4_game_history {
 				background-repeat: no-repeat;
 				background-position: 30px 20px;
 
-				height: 348px;
-				width: 100%;
+				height: 350px;
+				width: 255px;
 				position: absolute;
-				top: 138px;
+				top: 163px;
 				left: 0;
 
 				@media (min-width: 768px) and (max-width: 992px) {
-					height: 342px;
+					top: 120px;
+					height: 353px;
 				}
 			}
 		}

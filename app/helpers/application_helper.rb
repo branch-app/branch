@@ -32,7 +32,16 @@ module ApplicationHelper
 		end
 	end
 
-	def parse_datetime(date_string, in_format, out_format)
+	def parse_datetime(date_string, in_format = '%Y-%m-%dT%H:%M:%SZ', out_format = '%d/%m/%Y')
 		return DateTime.strptime(date_string, in_format).strftime(out_format)
+	end
+
+	#-- Maths Helpers --#
+	def calculate_kd(kills, deaths, round_to = 2)
+		if (kills <= 0 || deaths <= 0)
+            return 0.0
+        else
+            return (kills.to_f() / deaths.to_f()).to_f().round(round_to)
+        end
 	end
 end

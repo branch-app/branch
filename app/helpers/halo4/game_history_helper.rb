@@ -37,6 +37,8 @@ module Halo4::GameHistoryHelper
 	#-- DateTime Stuff --#
 	def duration_to_friendly(duration)
 		str = ''
+
+		duration = Time.parse(duration)
 		
 		# Hours
 		unless (duration.hour == 0)

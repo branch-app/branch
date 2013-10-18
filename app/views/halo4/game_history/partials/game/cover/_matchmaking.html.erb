@@ -1,0 +1,58 @@
+<%
+	@top_player = @game['Players'].sort_by { |p| -p['Standing'] }[0]
+%>
+
+<div class="cover" style="background-image: url(<%= get_raw_asset_url(@game['MapImageUrl']) %>)">
+	<div class="mask">
+		<div class="inner">
+			<div class="title">
+				<h2><%= @game['GameVariantName'] %></h2>
+				<p>
+					<%= parse_datetime(@game['EndDateUtc']) %> | <%= duration_to_friendly(@game['Duration']) %>
+				</p>
+			</div>
+
+			<div class="game-icon" style="background-image: url(<%= get_raw_asset_url(get_gametype_from_base_id(@game['GameBaseVariantId'])['ImageUrl'], 'large') %>)"></div>
+
+			<div class="map">
+				on
+				<br />
+				<span class="focus"><%= @game['MapVariantName'] %> <%= "(#{@game['MapName']})" if (@game['MapVariantName'] != @game['MapName'])%></span>
+			</div>
+
+			<div class="seperator"></div>
+
+			<div class="victor">
+				<% if (@game['Teams'] != nil) %>
+					<%
+						teams_in_order = @game['Teams'].sort_by { |t| t['Standing'] }
+						modifier = (teams_in_order[0]['Score'].to_f() / 75).to_f()
+						if (modifier == 0)
+							modifier = 1
+						end
+						width = (50 + (5 * 2)) * teams_in_order.length
+					%>
+					<div class="team-score-bollards" style="width: <%= width %>px;">
+						<% teams_in_order.each do |team| %>
+							<div class="score-bollard">
+								<div class="height-mask" style="height: <%= team['Score'] / modifier %>px; margin-top: <%= 75 - (team['Score'] / modifier) %>px; background-color: <%= team['PrimaryRGB'] %>;"></div>
+								<div class="score">
+									<%= team['Score'] %>
+								</div>
+							</div>
+						<% end %>
+						<div class="clearfix"></div>
+					</div>
+				<% else %>
+					<% if (@top_player['IsGuest']) %>
+						<strong><%= gamertag_validation(@top_player['Gamertag']) %></strong>
+					<% else %>
+						<%= link_to(gamertag_validation(@top_player['Gamertag']), halo4_servicerecord_path(gamertag: gamertag_validation(@top_player['Gamertag']))) %>
+					<% end %>
+					led the game with a personal score of <%= @top_player['PersonalScore'] %>, and a K/D of <%= calculate_kd(@top_player['Kills'], @top_player['Deaths']) %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="victor-player-model hidden-xs" style="background-image: url(<%= get_player_model_url(@top_player['Gamertag'], 'medium') %>)"></div>
+</div>

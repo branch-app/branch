@@ -8,7 +8,7 @@ module Halo4::HomeHelper
 	end
 
 	#-- Asset Urls --#
-	def get_player_model_url(gamertag, size, pose = 'fullbody')
+	def get_player_model_url(gamertag, size = 'large', pose = 'fullbody')
 		return H4Api.get_player_model(gamertag, size, pose)
 	end
 
@@ -25,6 +25,16 @@ module Halo4::HomeHelper
 		@metadata['MapsMetadata']['Maps'].each do |map|
 			if (map['Id'] == base_id.to_i)
 				return map
+			end
+		end
+
+		return nil
+	end
+
+	def get_gametype_from_base_id(base_id)
+		@metadata['GameBaseVariantsMetadata']['GameBaseVariants'].each do |game_variant|
+			if (game_variant['Id'] == base_id)
+				return game_variant
 			end
 		end
 
