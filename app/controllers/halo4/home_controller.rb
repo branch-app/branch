@@ -1,4 +1,5 @@
 class Halo4::HomeController < ApplicationController
+	include Halo4::HomeHelper
 	before_filter :get_gamertag
 
 	@gamertag = nil

@@ -46,4 +46,18 @@ module Halo4::HomeHelper
 
 		return nil
 	end
+
+	def get_spops_chapter_from_chapter_id(chapter_id)
+		@metadata['SpartanOpsMetadata']['Seasons'].each do |season|
+			season['Episodes'].each do |episode|
+				episode['Chapters'].each do |chapter|
+					if chapter['Id'] == chapter_id
+						return chapter
+					end
+				end
+			end
+		end
+
+		return nil
+	end
 end

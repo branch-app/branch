@@ -1,8 +1,4 @@
-<%
-	@top_player = @game['Players'].sort_by { |p| -p['Standing'] }[0]
-%>
-
-<div class="cover" style="background-image: url(<%= get_raw_asset_url(@game['MapImageUrl']) %>)">
+<div class="cover" style="background-image: url(<%= get_raw_asset_url(@game['MapImageUrl'], 'large') %>)">
 	<div class="mask">
 		<div class="inner">
 			<div class="title">
@@ -25,15 +21,14 @@
 			<div class="victor">
 				<% if (@game['Teams'].length > 0) %>
 					<%
-						teams_in_order = @game['Teams'].sort_by { |t| -t['Standing'] }
-						modifier = (teams_in_order[0]['Score'].to_f() / 75).to_f()
+						modifier = (@teams_in_order[@teams_in_order.length - 1]['Score'].to_f() / 75).to_f()
 						if (modifier == 0)
 							modifier = 1
 						end
-						width = (50 + (5 * 2)) * teams_in_order.length
+						width = (50 + (5 * 2)) * @teams_in_order.length
 					%>
 					<div class="team-score-bollards" style="width: <%= width %>px;">
-						<% teams_in_order.each do |team| %>
+						<% @teams_in_order.each do |team| %>
 							<div class="score-bollard">
 								<div class="height-mask" style="height: <%= team['Score'] / modifier %>px; margin-top: <%= 75 - (team['Score'] / modifier) %>px; background-color: <%= team['PrimaryRGB'] %>;"></div>
 								<div class="score">

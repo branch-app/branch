@@ -1,4 +1,5 @@
 class Halo4::GameHistoryController < Halo4::HomeController
+	include Halo4::GameHistoryHelper
 
 	def index
 		@sub_view, sub_view_was_valid = validate_param(params[:sub_view], [ 'matchmaking', 'custom-games', 'spartan-ops', 'campaign' ], 'matchmaking')
@@ -25,7 +26,13 @@ class Halo4::GameHistoryController < Halo4::HomeController
 	end
 
 	def view
-		@game = H4Api.get_player_game(@service_record['Gamertag'], params[:game_id].to_s)['Game']
+		begin
+			@game = H4Api.get_player_game(@service_record['Gamertag'], params[:game_id].to_s)['Game']
+		rescue
+			flash['failure'] = 'There was an error retreiving stats for this game.. The data was probally purged by 343. Sorry about that.'
+			redirect_to(halo4_servicerecord_path(gamertag: @gamertag))
+			return
+		end
 
 		@css_class = 'matchmaking'
 		@partial_type = 'matchmaking'
@@ -43,6 +50,12 @@ class Halo4::GameHistoryController < Halo4::HomeController
 				@css_class = 'custom-games'
 				@partial_type = 'matchmaking'
 		end
+
+
+		@top_player = @game['Players'].sort_by { |p| -p['Standing'] }[0]
+		@teams_in_order = @game['Teams'].sort_by { |t| -t['Standing'] } if (@game['ModeId'] == 3 || @game['ModeId'] == 6)
+		@difficulty = get_full_difficulty(@game['Difficulty']) if (@game['ModeId'] == 4 || @game['ModeId'] == 5)
+		@chapter = get_spops_chapter_from_chapter_id(@game['ChapterId']) if (@game['ModeId'] == 5)
 	end
 	
 	private
