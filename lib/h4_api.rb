@@ -195,6 +195,12 @@ module H4Api
 		full_url_with_defaults(url, { :gamertag => gamertag, :pose => pose, :size => size })
 	end
 
+	def self.get_supersecret_player_model(player_model_url)
+		init
+
+		return Base64.encode64(HTTParty.get(player_model_url).response.body).gsub("\n", '')
+	end
+
 	def self.get_player_game_history(gamertag, start_index, count, mode_id = 3, chapter_id = -1)
 		init
 

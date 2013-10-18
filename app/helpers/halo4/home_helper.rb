@@ -9,7 +9,13 @@ module Halo4::HomeHelper
 
 	#-- Asset Urls --#
 	def get_player_model_url(gamertag, size = 'large', pose = 'fullbody')
-		return H4Api.get_player_model(gamertag, size, pose)
+		player_model_url = H4Api.get_player_model(gamertag, size, pose)
+
+		if (GamertagReplacement.find_by_target(gamertag) != nil)
+			return "data:image/png;base64,#{H4Api.get_supersecret_player_model(player_model_url)}"
+		else
+			return player_model_url
+		end
 	end
 
 	def get_raw_asset_url(raw_asset_object, size = 'medium')
