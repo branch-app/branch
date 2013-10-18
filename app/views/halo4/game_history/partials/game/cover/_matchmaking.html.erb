@@ -23,7 +23,7 @@
 			<div class="seperator"></div>
 
 			<div class="victor">
-				<% if (@game['Teams'] != nil) %>
+				<% if (@game['Teams'].length > 0) %>
 					<%
 						teams_in_order = @game['Teams'].sort_by { |t| t['Standing'] }
 						modifier = (teams_in_order[0]['Score'].to_f() / 75).to_f()
