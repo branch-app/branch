@@ -1,0 +1,162 @@
+<div class="team red-team col-md-12" style="border-color: <%= team['PrimaryRGB'] %>;">
+	<div class="col-md-12 header">
+		<div class="row">
+			<div class="col-md-5 team-indicator"><%= team['Name'] %></div>
+			<div class="col-md-1 score-indicator check-dat-paddin hidden-xs hidden-sm">Score</div>
+			<div class="col-md-1 kills-indicator check-dat-paddin hidden-xs hidden-sm">Kills</div>
+			<div class="col-md-1 deaths-indicator check-dat-paddin hidden-xs hidden-sm">Deaths</div>
+			<div class="col-md-2 kd-indicator check-dat-paddin hidden-xs hidden-sm">K/D Ratio</div>
+			<div class="col-md-1 assists-indicator check-dat-paddin hidden-xs hidden-sm">Assists</div>
+			<div class="col-md-1 csr-indicator check-dat-paddin hidden-xs hidden-sm">CSR</div>
+		</div>
+	</div>
+	<div class="team-players">
+		<% players.each do |player| %>
+			<% identifier = Digest::SHA1.hexdigest(player['Gamertag'])[0..8] %>
+			<div class="col-md-12" id="<%= identifier %>" style="border-color: <%= team['PrimaryRGB'] %>;">
+				<div class="desktop-view hidden-xs hidden-sm row">
+					<div class="col-md-1 expander-indicator">
+						<div class="expander-positioner">
+							<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>
+						</div>
+					</div>
+					<% if (player['IsGuest']) %>
+						<div class="col-md-1 visual-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url();"></div>
+					<% else %>
+						<div class="col-md-1 visual-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url(<%= get_raw_asset_url(player['EmblemImageUrl'], 48) %>);"></div>
+					<% end %>
+					<div class="col-md-3 alphabetical-flair">
+						<% if (player['IsGuest']) %>
+							<%= player['Gamertag'] %>
+						<% else %>
+							<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag: link_to(gamertag_validation(player['Gamertag'])))) %>
+						<% end %>
+						<br />
+						<strong><%= player['ServiceTag'] %></strong>
+					</div>
+					<div class="col-md-1 score-indicator check-dat-paddin"><%= player['PersonalScore'] %></div>
+					<div class="col-md-1 kills-indicator check-dat-paddin"><%= player['Kills'] %></div>
+					<div class="col-md-1 deaths-indicator check-dat-paddin"><%= player['Deaths'] %></div>
+					<div class="col-md-2 kd-indicator check-dat-paddin"><%= calculate_kd(player['Kills'], player['Deaths']) %></div>
+					<div class="col-md-1 assists-indicator check-dat-paddin"><%= player['Assists'] %></div>
+					<% if (player['IsGuest'] || player['SkillRank'] == nil ) %>
+						<div class="col-md-1 csr-indicator check-dat-paddin" style="background-image: url(<%= get_csr_level_url(0) %>);"></div>
+					<% else %>
+						<div class="col-md-1 csr-indicator check-dat-paddin" style="background-image: url(<%= get_csr_level_url(player['SkillRank']['CurrentSkillRank']) %>);"></div>
+					<% end %>
+				</div>
+				<div class="mobile-view visible-xs visible-sm row">
+					<div class="expander-indicator">
+						<div class="player-details-expander" data-ref="<%= identifier %>">
+							<div class="player-indicator">
+								<%= gamertag_validation(player['Gamertag']) %>
+								<br />
+								<strong><%= player['ServiceTag'] %></strong>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="player-data collapsed" style="display: none;">
+					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+						<li class="active">
+							<a id="tab-summary" href="#<%= identifier %>-summary" data-toggle="tab">Summary</a>
+						</li>
+						<li>
+							<a id="tab-weapons" href="#<%= identifier %>-weapons" data-toggle="tab">Weapons</a>
+						</li>
+						<li>
+							<a id="tab-medals" href="#<%= identifier %>-medals" data-toggle="tab">Medals</a>
+						</li>
+					</ul>
+
+					<div class="player-stats tab-content">
+						<div class="tab-pane fade active in summary" id="<%= identifier %>-summary">
+							<div class="row">
+								<div class="col-md-5 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(gamertag_validation(remove_halo_guest_indentifier(player['Gamertag']))) %>)"></div>
+								<div class="col-md-7">
+									<h2>
+										Score
+									</h2>
+									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge">
+												<%= link_to('Doofette', halo4_servicerecord_path(gamertag: 'Doofette')) %>
+												(12)
+											</span>
+											Most Killed
+										</li>
+										<li class="list-group-item">
+											<span class="badge">
+												<%= link_to('Swainooooo', halo4_servicerecord_path(gamertag: 'Swainooooo')) %>
+												(4)
+											</span>
+											Most Killed By
+										</li>
+										<li class="list-group-item">
+											<span class="badge">35.19 Meters</span>
+											Average Kill Distance
+										</li>
+										<li class="list-group-item">
+											<span class="badge">50.01 Meters</span>
+											Average Death Distance
+										</li>
+										<li class="list-group-item">
+											<span class="badge">21</span>
+											Kills Featured Stat Name
+										</li>
+									</ul>
+
+									<h2>
+										Medals
+									</h2>
+									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge">52</span>
+											Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge">21</span>
+											Kill Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge">11</span>
+											Bonus Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge">11</span>
+											Assist Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge">9</span>
+											Spree Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge">0</span>
+											Mode Medals Earned
+										</li> Hide this is 0
+									</ul>
+
+									<h2>
+										Player
+									</h2>
+									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge">14</span>
+											CSR
+										</li>
+										<li class="list-group-item">
+											<span class="badge">SR 140</span>
+											Rank
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr />
+		<% end %>
+	</div>
+</div>
