@@ -74,40 +74,44 @@
 							</form>
 						</li>
 						<% if current_user %>
-						<li class="dropdown <%= 'active' if content_for? :user %>">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.username %> <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li>
-									<%= link_to('View Profile', user_view_path(current_user.username)) %>
-								</li>
-
-								<% if current_user.role.identifier == 3 %>
-									<li class="divider"></li>
-									<div class="dropdown-header">DOMAIN</div>
+							<li class="dropdown <%= 'active' if content_for? :user %>">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.username %> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
 									<li>
-										<%= link_to('Admin Portal', admin_home_path) %>
+										<%= link_to('View Profile', user_view_path(current_user.username)) %>
 									</li>
-								<% end %>
 
-								<li class="divider"></li>
-								<li class="dropdown-header">SETTINGS</li>
-								<li>
-									<%= link_to('Edit Profile', settings_profile_path) %>
-								</li>
-								<li>
-									<%= link_to('Edit Sessions', settings_session_path) %>
-								</li>
+									<% if current_user.role.identifier == 3 %>
+										<li class="divider"></li>
+										<div class="dropdown-header">DOMAIN</div>
+										<li>
+											<%= link_to('Admin Portal', admin_home_path) %>
+										</li>
+									<% end %>
 
-								<li class="divider"></li>
-								<li>
-									<%= link_to('Sign Out', user_signout_path) %>
-								</li>
-							</ul>
-						</li>
+									<li class="divider"></li>
+									<li class="dropdown-header">SETTINGS</li>
+									<li>
+										<%= link_to('Edit Profile', settings_profile_path) %>
+									</li>
+									<li>
+										<%= link_to('Edit Sessions', settings_session_path) %>
+									</li>
+
+									<li class="divider"></li>
+									<li>
+										<%= link_to('Sign Out', user_signout_path + create_return_url()) %>
+									</li>
+								</ul>
+							</li>
 						<% else %>
-						<li class="<%= 'active' if content_for? :user %>">
-							<%= link_to 'Sign In', :user_signin %>
-						</li>
+							<li class="<%= 'active' if (content_for?(:user)) %>">
+								<% if (content_for?(:home)) %>
+									<%= link_to('Sign In', user_signin_path()) %>
+								<% else %>
+									<%= link_to('Sign In', user_signin_path() + create_return_url()) %>
+								<% end %>
+							</li>
 						<% end %>
 					</ul>
 				</nav>

@@ -11,6 +11,7 @@
 <%= render partial: 'user/partials/header', locals: { title: 'Sign into Branch', description: 'Signing into Branch gives you customized experience, with just what you want to see.' } %>
 
 <%= form_for :login, url: :session_create, method: :post do |f| %>
+	<%= hidden_field(:login, :return_url, value: @return_url) %>
 	<div class="container bitch-needs-a-break">
 		<div class="row">
 			<div class="col-md-12 panel panel-default">

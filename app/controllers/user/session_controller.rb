@@ -11,6 +11,7 @@ class User::SessionController < User::HomeController
 	end
 
 	def new
+		@return_url = params[:return_url]
 	end
 
 	def create
@@ -24,7 +25,9 @@ class User::SessionController < User::HomeController
 			user_session.save!
 
 			session[:identifier] = user_session.identifier
-			redirect_to(root_path())
+			
+			return if (redirect_to_return_url(stuff[:return_url]))
+			redirect_to(user_view_path(user.username))
 		else
 			@error = 'Incorrect Password or Username/Email Address'
 			@identifier = stuff[:identifier]
@@ -42,6 +45,7 @@ class User::SessionController < User::HomeController
 		session[:identifier] = nil
 		reset_session()
 
+		return if (redirect_to_return_url(params[:return_url]))
 		redirect_to(root_path())
 	end
 end

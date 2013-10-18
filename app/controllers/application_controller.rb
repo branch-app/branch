@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+	include ApplicationHelper
 	helper_method :current_user
+	helper_method :redirect_to_return_url
 	protect_from_forgery
 
 	# -- Internal Functions
@@ -43,4 +45,19 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def redirect_to_return_url(return_url)
+		if (return_url)
+			begin
+				uri = URI.parse(return_url)
+				if (uri.host == 'localhost' || uri.host == 'branchapp')
+					redirect_to(return_url)
+					return true
+				end
+			rescue
+				return false
+			end
+		end
+
+		return false
+	end
 end

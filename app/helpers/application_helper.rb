@@ -1,4 +1,5 @@
 module ApplicationHelper
+	#-- Html Helpers --#
 	def gamertag_to_html(gamertag)
 		return CGI.escape(gamertag)
 	end
@@ -7,6 +8,7 @@ module ApplicationHelper
 		return gamertag.gsub(' ', '_')
 	end
 
+	#-- Social Shit --#
 	def generate_facebook_share_url()
 		return "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url())}"
 	end
@@ -23,6 +25,7 @@ module ApplicationHelper
 		return url
 	end
 
+	#-- Branch Helpers --#
 	def gamertag_validation(gamertag)
 		replacement = GamertagReplacement.find_by_target(gamertag)
 		if replacement == nil
@@ -32,6 +35,11 @@ module ApplicationHelper
 		end
 	end
 
+	def create_return_url()
+		return "?return_url=#{CGI.escape(request.url)}"
+	end
+
+	#-- Date Helpers --#
 	def parse_datetime(date_string, in_format = '%Y-%m-%dT%H:%M:%SZ', out_format = '%d/%m/%Y')
 		return DateTime.strptime(date_string, in_format).strftime(out_format)
 	end
