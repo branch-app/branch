@@ -11,17 +11,19 @@
 			<% if storage.role.identifier != 2 %>
 				<li><span class="label" style="background-color: #<%= storage.role.colour %>;"><%= storage.role.name %></span></li>
 			<% end %>
-			<li><span class="label label-info">Halo 4</span></li>
-			<li><span class="label label-info">Halo Reach</span></li>
-			<li><span class="label label-info">Halo 3</span></li>
+			<% if (storage.gamertag != nil) %>
+				<% if (storage.gamertag.h4_service_record != nil) %>
+					<li><span class="label label-info">Halo 4</span></li>
+				<% end %>
+			<% end %>
 		</ul>
 		
 		<div class="actions">
-		<% if !content_for?(:setting_active) && current_user == storage %>
-			<%= link_to('Edit Profile', settings_profile_path, class: 'btn btn-outline-inverse btn-lg') %>
+		<% if (!content_for?(:setting_active) && current_user() == storage) %>
+			<%= link_to('Edit Profile', settings_profile_path(), class: 'btn btn-outline-inverse btn-lg') %>
 			
 			<% if current_user.role_id == Role.find_by_identifier(1).id %>
-				<%= link_to('Resend Verification', user_resend_verification_path, class: 'btn btn-outline-inverse btn-lg') %>
+				<%= link_to('Resend Verification', user_resend_verification_path(), class: 'btn btn-outline-inverse btn-lg') %>
 			<% end %>
 		<% end %>
 		</div>
