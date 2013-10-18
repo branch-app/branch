@@ -8,20 +8,22 @@ module S3Storage
 		bucket = @s3.buckets[bucket_name]
 		@s3.buckets.create(bucket_name) unless bucket.exists?
 		object = bucket.objects[name]
-		object.write data
+		return object.write(data)
 	end
 
-	def self.pull(game, type, name)
+	def self.pull(game, type, name, return_raw = false)
 		init
 
 		begin
 			bucket_name = "branchapp_storage/#{game}/#{type}"
 			bucket = @s3.buckets[bucket_name]
-			@s3.buckets.create(bucket_name) unless bucket.exists?
+			@s3.buckets.create(bucket_name) unless (bucket.exists?)
 			object = bucket.objects[name]
-			data = object.read
-
-			data
+			if (return_raw)
+				return object
+			else
+				return object.read()
+			end
 		rescue
 			nil
 		end
@@ -32,10 +34,10 @@ module S3Storage
 		return if @is_initalized
 
 		AWS.config(
-			:access_key_id => ENV['S3_ACCESS_KEY_ID'],
-			:secret_access_key => ENV['S3_SECRET_KEY']
+			access_key_id: ENV['S3_ACCESS_KEY_ID'],
+			secret_access_key: ENV['S3_SECRET_KEY']
 		)
-		@s3 = AWS::S3.new
+		@s3 = AWS::S3.new()
 
 		@is_initalized = true
 	end
