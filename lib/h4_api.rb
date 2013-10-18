@@ -305,6 +305,16 @@ module H4Api
 		output
 	end
 
+	def self.also_rename_this_later(s3_bucket_path, s3_file_name, cache_time)
+		cached_object = S3Storage.pull(GAME_LONG, s3_bucket_path, s3_file_name, true)
+		cached_data = cached_object.read()
+
+		output = { is_valid: false, data: nil }
+		output[:is_valid] = (cached_object != nil && cached_object.last_modified + cache_time > Time.now)
+		output[:data] = JSON.parse(cached_data) unless cached_data == nil
+
+		return output
+	end
 
 	# Module Helpers
 	def self.validate_response(response)
