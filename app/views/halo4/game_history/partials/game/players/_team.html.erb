@@ -82,6 +82,7 @@
 										</h2>
 										<h3 class="player-servicetag"><%= player['Servicetag'] %></h3>
 									<% end %>
+									<hr />
 
 									<h2>
 										Score
@@ -126,6 +127,7 @@
 											<%= player['FeaturedStatName'] %>
 										</li>
 									</ul>
+									<hr />
 
 									<h2>
 										Medals
@@ -156,6 +158,7 @@
 											Mode Medals Earned
 										</li>
 									</ul>
+									<hr />
 
 									<h2>
 										Player
@@ -418,11 +421,11 @@
 															end
 															%>
 													],
-													lineColors: [ '<%= team[:colour] %>' ],
+													lineColors: [ '<%= team['PrimaryRGB'] %>' ],
 													xkey: 'y',
 													xLabels: 'decade',
 													ykeys: [ 'a' ],
-													labels: [ 'Xerax' ],
+													labels: [ '<%= player['Gamertag'] %>' ],
 													behaveLikeLine: true,
 													hideHover: true,
 													hoverCallback: function (index, options, content) {
