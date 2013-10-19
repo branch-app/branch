@@ -228,6 +228,10 @@ body.halo4_game_history {
 									}
 								}
 							}
+
+							.player-servicetag {
+								margin-top: -10px;
+							}
 						}
 						> .weapons {
 							> .weapons > tbody > tr > .weapon {
@@ -236,11 +240,14 @@ body.halo4_game_history {
 						}
 						> .medals {
 							> #top-medals {
+								margin: 0 auto;
+
 								> div {
-									min-width: 100px;
-									max-width: 100px;
+									width: 100px;
 									min-height: 100px;
 									padding: 10px;
+									margin: auto 10px;
+									float: left;
 
 									text-align: center;
 									font-size: 25px;
@@ -265,44 +272,47 @@ body.halo4_game_history {
 								}
 							}	
 
-							> #player-medals {
-								margin-bottom: 60px;
+							> #all-medals {
+								margin-left: 10px;
 
-								.medal-entry {
-									margin: 20px auto;
-									> .medal {
-										float: left;
-										background-repeat: no-repeat;
-										height: 100px;
-										width: 80px;
-										background-size: 80px 80px;
-										background-position: center center;
-									}
-									> .medal-small {
-
-									}
-									> .description {
-										float: left;
-										margin-left: 30px;
-										width: 250px;
-
-										> .name {
-											font-size: 16px;
-											font-weight: 600;
+								> #player-medals {
+									margin-bottom: 60px;
+									.medal-entry {
+										margin: 20px auto;
+										> .medal {
+											float: left;
+											background-repeat: no-repeat;
+											height: 100px;
+											width: 80px;
+											background-size: 80px 80px;
+											background-position: center center;
 										}
-									}
-									> .count {
-										float: right;
-										min-width: 100px;
-										text-align: center;
-										> .integer {
-											font-size: 50px;
-											font-weight: 100;
+										> .medal-small {
+
 										}
-										> .in-dick-ator {
-											font-size: 12px;
-											font-weight: 600;
-											text-transform: uppercase;
+										> .description {
+											float: left;
+											margin-left: 30px;
+											width: 250px;
+
+											> .name {
+												font-size: 16px;
+												font-weight: 600;
+											}
+										}
+										> .count {
+											float: right;
+											min-width: 100px;
+											text-align: center;
+											> .integer {
+												font-size: 50px;
+												font-weight: 100;
+											}
+											> .in-dick-ator {
+												font-size: 12px;
+												font-weight: 600;
+												text-transform: uppercase;
+											}
 										}
 									}
 								}

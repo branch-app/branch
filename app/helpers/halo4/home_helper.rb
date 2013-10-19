@@ -47,11 +47,31 @@ module Halo4::HomeHelper
 		return nil
 	end
 
-	def get_spops_chapter_from_chapter_id(chapter_id)
+	def get_medal_from_base_id(base_id)
+		@metadata['MedalsMetadata']['Medals'].each do |medal|
+			if (medal['Id'] == base_id)
+				return medal
+			end
+		end
+
+		return nil
+	end
+
+	def get_medal_class_from_base_id(base_id)
+		@metadata['MedalsMetadata']['MedalClasses'].each do |medal_class|
+			if (medal_class['Id'] == base_id)
+				return medal_class
+			end
+		end
+
+		return nil
+	end
+
+	def get_spops_chapter_from_base_id(base_id)
 		@metadata['SpartanOpsMetadata']['Seasons'].each do |season|
 			season['Episodes'].each do |episode|
 				episode['Chapters'].each do |chapter|
-					if chapter['Id'] == chapter_id
+					if chapter['Id'] == base_id
 						return chapter
 					end
 				end

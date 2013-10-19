@@ -52,4 +52,8 @@ module ApplicationHelper
             return (kills.to_f() / deaths.to_f()).to_f().round(round_to)
         end
 	end
+
+	def calculate_spread(kills, deaths)
+		return (kills - deaths)
+	end
 end
