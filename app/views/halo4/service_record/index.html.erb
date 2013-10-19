@@ -54,25 +54,28 @@
 								<canvas id="game-history-split-chart" width="300" height="300"></canvas>
 							</div>
 							<div class="area-legend">
+								<%
+									total_games = @service_record['GameModes'][0]['TotalGamesStarted'] + @service_record['GameModes'][1]['TotalGamesStarted'] + @service_record['GameModes'][2]['TotalGamesStarted'] + @service_record['GameModes'][3]['TotalGamesStarted']
+								%>
 								<ul>
 									<li>
 										<div class="identifier war-games"></div>
-										War Games
+										War Games - <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][2]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
 									</li>
 									<li>
 										<div class="identifier campaign"></div>
-										Campaign
+										Campaign - <%= number_with_delimiter(@service_record['GameModes'][0]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][0]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
 									</li>
 								</ul>
 								<br />
 								<ul>
 									<li>
 										<div class="identifier customs"></div>
-										Custom Games
+										Custom Games - <%= number_with_delimiter(@service_record['GameModes'][3]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][3]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
 									</li>
 									<li>
 										<div class="identifier spartan-ops"></div>
-										Spartan Ops
+										Spartan Ops - <%= number_with_delimiter(@service_record['GameModes'][1]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][1]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
 									</li>
 								</ul>
 							</div>
