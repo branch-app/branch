@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
 
 	has_many :session
 	has_many :user_verification
+	has_many :following_follows, class_name: :Follow, foreign_key: :follower_id
+	has_many :followers_follows, class_name: :Follow, foreign_key: :following_id
+	has_many :following, class_name: :User, through: :following_follows
+	has_many :followers, class_name: :User, through: :followers_follows
 	belongs_to :role
 	belongs_to :gamertag
 	
@@ -34,6 +38,10 @@ class User < ActiveRecord::Base
 
 		return user if user == nil
 		return user if Hashing.validate(password, user.password)
+	end
+
+	def following?(user)
+		return following.include?(user)
 	end
 
 	def set_to_validating

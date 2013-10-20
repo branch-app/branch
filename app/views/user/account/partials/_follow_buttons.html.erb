@@ -1,0 +1,55 @@
+<!-- 
+Guide;
+	css_class :: The css classes to apply to the buttons, defaults to 'btn btn-primary btn-lg'
+	followee_user :: The user that is going to be followed
+	follower_user :: The user that is going to follow the followee
+-->
+<%
+	css_class = 'btn btn-primary btn-lg'if (css_class == nil)
+	unique_id = 'follow-ajax-' + Digest::SHA1.hexdigest(rand(100000..999999).to_s)[0..8]
+%>
+
+<% if (follower_user.following?(followee_user)) %>
+	<%= form_for(:follow, url: user_follow_path(), remote: true, method: :delete, html: { id: unique_id }) do |f| %>
+		<%= f.hidden_field(:user_in_question, value: followee_user.id) %>
+		<button class="<%= css_class %>">
+			<span class="glyphicon glyphicon-minus-sign"></span> Following
+		</button>
+	<% end %>
+<% else %>
+	<%= form_for(:follow, url: user_follow_path(), remote: true, method: :post, html: { id: unique_id }) do |f| %>
+		<%= f.hidden_field(:user_in_question, value: followee_user.id) %>
+		<button class="<%= css_class %>">
+			<span class="glyphicon glyphicon-plus-sign"></span> Follow
+		</button>
+	<% end %>
+<% end %>
+
+<% content_for :scripts do %>
+	<script>
+		$(document).ready(function() {
+			return $("#<%= unique_id %>").on("ajax:success", function(e, data, status, xhr) {
+				var jsonData = $.parseJSON(xhr.responseText);
+
+				if (jsonData.success) {
+					if (jsonData.state != null) {
+						if (jsonData.state == "follow") {
+							$("#<%= unique_id %>").attr('method', 'post');
+							$("#<%= unique_id %> > button").html('<span class="glyphicon glyphicon-plus-sign"></span> Follow');
+						} else if (jsonData.state == "following") {
+							$("#<%= unique_id %>").attr('method', 'delete');
+							$("#<%= unique_id %> > button").html('<span class="glyphicon glyphicon-minus-sign"></span> Following');
+						}
+					}
+				} else {
+					$("#<%= unique_id %> > button").popover({ 
+						title: 'Oh Noes!',
+						content: jsonData.error.desc
+					});
+				}
+			}).bind("ajax:error", function(e, xhr, status, error) {
+				console.log('fuck, that failed');
+			});
+		});
+	</script>
+<% end %>
