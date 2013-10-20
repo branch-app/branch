@@ -9,4 +9,6 @@
 
 <%= render partial: 'user/partials/header', locals: { title: 'Account Verification', description: 'Oops... Seems some weird shit happened, and that verification token has expired. Sorry about that.' } %>
 
-
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>

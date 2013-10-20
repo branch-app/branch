@@ -22,7 +22,12 @@
 	</div>
 </div>
 
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>
+
 <div class="container marketing">
+
 	<div class="row central">
 		<div class="col-md-4">
 			<%= image_tag 'placeholder-140x140.png', { class: 'img-circle', style: 'width: 140px; height: 140px;' } %>

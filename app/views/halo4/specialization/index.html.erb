@@ -34,6 +34,7 @@
 
 		<div class="col-md-9">
 			<div class="bs-branch-section specialization">
+				<%= render partial: 'partials/flash', locals: { flash: flash } %>
 				<% if (active_specialization != nil) %>
 					<div class="row">
 						<div class="col-md-12 active-specialization">
