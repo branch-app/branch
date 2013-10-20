@@ -16,9 +16,11 @@ BranchApp::Application.routes.draw do
 	get '/user/verify/:verification_id' => 'user/user#verify', as: :user_verify
 	get '/user/resend_verification' => 'user/user#resend_verification', as: :user_resend_verification
 	match '/user/follow' => 'user/user#follow', as: :user_follow, via: [ :post, :delete ]
+
 	# Account
 	match '/user/:id/' => 'user/account/home#index', via: [ :get ], as: :user_view, constraints: UserConstraint
-	get '/user/:id/friends' => 'user/account/friends#index', as: :user_friends, constraints: UserConstraint
+	get '/user/:id/following' => 'user/account/following#index', as: :user_following, constraints: UserConstraint
+	get '/user/:id/followers' => 'user/account/followers#index', as: :user_followers, constraints: UserConstraint
 	get '/user/:id/favourites' => 'user/account/favourites#index', as: :user_favourites, constraints: UserConstraint
 
 	# Account Settings

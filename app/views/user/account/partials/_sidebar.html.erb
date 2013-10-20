@@ -1,16 +1,19 @@
 <div class="bs-sidebar" data-spy="affix" data-offset-top="350">
 	<ul class="nav bs-sidenav">
 		<li class="active">
-			<%= link_to 'Xerax', '#' %>
+			<%= link_to(@account.username, '#') %>
 			<ul class="nav">
-				<li class="<%= 'active' if content_for(:account_active) == 'overview' %>">
-					<%= link_to 'Overview', user_view_path(username: @username) %>
+				<li class="<%= 'active' if (content_for(:account_active) == 'overview') %>">
+					<%= link_to('Overview', user_view_path(username: @username)) %>
 				</li>
-				<li class="<%= 'active' if content_for(:account_active) == 'friends' %>">
-					<%= link_to 'Friends', user_friends_path(username: @username) %>
+				<li class="<%= 'active' if (content_for(:account_active) == 'following') %>">
+					<%= link_to('Following', user_following_path(username: @username)) %>
 				</li>
-				<li class="<%= 'active' if content_for(:account_active) == 'favourites' %>">
-					<%= link_to 'Favourites', '#' %>
+				<li class="<%= 'active' if (content_for(:account_active) == 'followers') %>">
+					<%= link_to('Followers', user_followers_path(username: @username)) %>
+				</li>
+				<li class="<%= 'active' if (content_for(:account_active) == 'favourites') %>">
+					<%= link_to('Favourites', '#') %>
 				</li>
 			</ul>
 		</li>

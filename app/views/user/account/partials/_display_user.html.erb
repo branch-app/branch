@@ -1,0 +1,34 @@
+<!--
+Guide;
+	follow :: The user to display stuff about
+-->
+
+<%
+
+player_model_url = nil
+player_model_type = nil
+
+if (follow.gamertag != nil)
+	if (follow.gamertag.h4_service_record != nil)
+		player_model_type = 'h4'
+		player_model_url = get_player_model_url(gamertag_to_html(follow.gamertag.gamertag), 'medium', 'posed')
+	end
+end
+%>
+
+<div class="row follow-entry <%= player_model_type if (player_model_type != nil) %>" style="<%= "background-image: url(#{player_model_url});" %>">
+	<div class="col-md-10">
+		<h2>
+			<%= link_to(follow.username, user_view_path(follow.username)) %>
+		</h2>
+		<h3><%= follow.name %></h3>
+		<%= render partial: 'user/account/partials/badges', locals: { storage: follow } %>
+		<div class="visible-xs visible-sm follow-button" style="margin-top: 20px;">
+			<%= render partial: 'user/account/partials/follow_buttons', locals: { followee_user: follow, follower_user: current_user(), css_class: 'btn btn-primary btn-large' } %>
+		</div>
+	</div>
+	<div class="col-md-2 hidden-xs hidden-sm follow-button">
+		<%= render partial: 'user/account/partials/follow_buttons', locals: { followee_user: follow, follower_user: current_user(), css_class: 'btn btn-primary btn-large' } %>
+	</div>
+</div>
+<hr />

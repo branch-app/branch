@@ -1,0 +1,20 @@
+body.account_follow {
+	.follow {
+		> .follow-entry {
+			height: 190px;
+
+			&.h4 {
+				background-position: 85% -20%;
+				background-repeat: no-repeat;
+			}
+
+			> div > .follow-button {
+
+			}
+
+			> .follow-button {
+				margin-top: 40px;
+			}
+		}
+	}
+}

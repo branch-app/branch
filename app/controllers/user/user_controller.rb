@@ -56,7 +56,7 @@ class User::UserController < User::HomeController
 	def follow
 		user_a = User.find_by_id(params[:follow][:user_in_question].to_i)
 		user_b = current_user
-
+		
 		if (user_a == nil || user_b == nil)
 			render json: { state: nil, success: false, error: { name: 'invalid_user_shit', desc: "Somewhere along the way a user id broke (not good...). Check you're logged in, and that the user you're following actually exists..." } }
 			return
