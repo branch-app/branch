@@ -39,6 +39,16 @@ module ApplicationHelper
 		return "?return_url=#{CGI.escape(request.url)}"
 	end
 
+	def flash_class(level)
+		case level
+			when :success then "success"
+			when :failure then "danger"
+			when :warning then "warning"
+			when :info then "info"
+		end
+	end
+
+
 	#-- Date Helpers --#
 	def parse_datetime(date_string, in_format = '%Y-%m-%dT%H:%M:%SZ', out_format = '%d/%m/%Y')
 		return DateTime.strptime(date_string, in_format).strftime(out_format)

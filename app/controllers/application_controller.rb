@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 	include ApplicationHelper
 	helper_method :current_user
+	helper_method :set_flash_message
 	helper_method :redirect_to_return_url
 	protect_from_forgery
 
@@ -43,6 +44,10 @@ class ApplicationController < ActionController::Base
 			reset_session
 			@current_user = nil
 		end
+	end
+
+	def set_flash_message(type, title, desc)
+		flash[type.to_sym] = { title: title, desc: desc }
 	end
 
 	def redirect_to_return_url(return_url)
