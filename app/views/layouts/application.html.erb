@@ -67,9 +67,13 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<form class="navbar-form">
+							<% if (content_for?(:search_overide)) %>
+								<form class="navbar-form" method="GET" action="<%= yield(:search_overide) %>">
+							<% else %>
+								<form class="navbar-form" method="GET" action="/search/all/">
+							<% end %>
 								<div class="form-group">
-									<input type="text" placeholder="Search Gamertag" class="form-control">
+									<input type="text" name="q" placeholder="Search Gamertag" class="form-control" value="<%= session[:search_query] if (session[:search_query] != nil) %>">
 								</div>
 							</form>
 						</li>

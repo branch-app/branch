@@ -42,7 +42,9 @@ BranchApp::Application.routes.draw do
 	get '/legal/terms' => 'legal/terms#index', as: :legal_terms
 
 	# Search
-	get '/search/:focus/' => 'search#search', as: :search_query, defaults: { focus: 'all' }
+	get '/search/all/' => 'search/home#index', as: :search_query
+	get '/search/branch/:page/' => 'search/focus#branch', as: :search_branch_query
+	get '/search/halo4/:page/' => 'search/focus#halo4', as: :search_halo4_query
 
 	# Halo 4
 	get '/halo4/' => 'halo4/home#index', as: :halo4_home

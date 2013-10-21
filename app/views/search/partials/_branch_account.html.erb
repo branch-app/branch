@@ -1,0 +1,26 @@
+<!--
+Guide;
+	branch_account :: The account that we doin it with
+-->
+
+<div class="col-md-4 entry">
+	<a class="nope" href="<%= user_view_path(branch_account.username) %>">
+		<% if (branch_account.gamertag != nil) %>
+			<% if (branch_account.gamertag.h4_service_record != nil) %>
+				<div class="spartan-image" style="background-image: url(<%= get_player_model_url(gamertag_validation(branch_account.gamertag.gamertag), 'large', 'posed') %>)"></div>
+			<% end %>
+		<% end %>
+		<div class="mask"></div>
+		<div class="text-container">
+			<h2><%= branch_account.username %></h2>
+			<div class="info">
+				<strong>Gamertag:</strong><br />
+				<%= link_to(gamertag_validation(branch_account.gamertag.gamertag), halo4_servicerecord_path(gamertag_validation(branch_account.gamertag.gamertag))) %><br />
+				<br />
+				<strong>Member Since:</strong><br />
+				<%= "#{branch_account.created_at.day}/#{branch_account.created_at.month}/#{branch_account.created_at.year}" %><br />
+				<%= render partial: 'user/account/partials/badges', locals: { storage: branch_account } %>
+			</div>
+		</div>
+	</a>
+</div>

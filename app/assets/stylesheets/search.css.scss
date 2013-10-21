@@ -12,7 +12,7 @@ body.search {
 				height: 220px;
 				margin-bottom: 50px;
 
-				a {
+				a.nope {
 					color: inherit;
 					text-decoration: none;
 
@@ -53,17 +53,10 @@ body.search {
 
 					height: 100%;
 					width: 100%;
-				}
 
-				ul {
-					position: absolute;
-					bottom: 0px;
-					right: 40px;
+					> .info {
 
-					opacity: 0.1;
-					font-size: 50px;
-
-					list-style-type: none;
+					}
 				}
 			}
 		}

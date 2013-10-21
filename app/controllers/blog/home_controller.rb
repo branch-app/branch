@@ -1,5 +1,4 @@
 class Blog::HomeController < ApplicationController
-
 	PER_PAGE = 3
 
 	def index

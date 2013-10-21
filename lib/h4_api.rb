@@ -129,7 +129,9 @@ module H4Api
 		url = full_url_with_defaults(url, { :gamertag => gamertag })
 
 		response = authorized_request(url, 'GET', 'Spartan', nil)
-		if (validate_response(response))
+		begin
+			raise() if (!validate_response(response))
+
 			data = JSON.parse(response.body)
 
 			if (data['StatusCode'] != 1)
@@ -146,10 +148,10 @@ module H4Api
 			S3Storage.push(GAME_LONG, 'service_record', gamertag_safe, response.body)
 
 			return data
-		else
-			# remove h4 servive record (don't remove gamertag, just incase errors and shit happen)
-			h4_sr.delete if h4_sr
-			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
+		rescue
+			h4_sr.delete if (h4_sr)
+			return JSON.parse cache_response[:data] if (cache_response[:data] != nil)
+			return nil
 		end
 	end
 
