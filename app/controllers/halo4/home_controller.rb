@@ -16,7 +16,7 @@ class Halo4::HomeController < ApplicationController
 		@metadata = H4Api.get_meta_data()
 
 		if (@service_record == nil || @service_record[:continue] == false || @service_record["StatusCode"] != 1)
-			flash[:failure] = "We couldn't load stats for the gamertag #{@gamertag}, sorry :("
+			set_flash_message('failure', 'Oops...', "We couldn't load stats for the gamertag #{@gamertag}, sorry :(")
 			redirect_to(root_url())
 			return
 		end

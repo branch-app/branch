@@ -29,7 +29,7 @@ class Halo4::GameHistoryController < Halo4::HomeController
 		begin
 			@game = H4Api.get_player_game(@service_record['Gamertag'], params[:game_id].to_s)['Game']
 		rescue
-			flash['failure'] = 'There was an error retreiving stats for this game.. The data was probally purged by 343. Sorry about that.'
+			set_flash_message('failure', 'Oops..', "There was an error retreiving stats for this game.. The data was probally purged by 343. Sorry about that.")
 			redirect_to(halo4_servicerecord_path(gamertag: @gamertag))
 			return
 		end

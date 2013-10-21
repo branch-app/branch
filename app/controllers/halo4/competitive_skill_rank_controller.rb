@@ -40,8 +40,8 @@ class Halo4::CompetitiveSkillRankController < Halo4::HomeController
 		end
 
 		if (@current_skill_rank == nil)
-			flash[:failure] = 'Unable to find this playlist, it could of been deleted by 343, or the URL has become corrupt.'
-			redirect_to(halo4_csr_path(gamertag: @service_record['Gamertag']))
+			set_flash_message('failure', 'Oops..', "Unable to find this playlist, it was probally deleted by 343, or the URL has become corrupt.")
+			redirect_to(halo4_csr_path(@service_record['Gamertag']))
 			return
 		end
 	end

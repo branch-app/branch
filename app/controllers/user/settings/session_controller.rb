@@ -8,13 +8,13 @@ class User::Settings::SessionController < User::Settings::HomeController
 		user_session = Session.find_by_id(session_id)
 
 		if (user_session == nil)
-			flash[:info] = 'Unable to murder a non-existant session'
+			set_flash_message('info', 'Hey, Btw', "You can't murder a session that doesn't exist...")
 			render('user/settings/session')
 			return
 		end
 
 		if (user_session.user_id != current_user.id)
-			flash[:danger] = "Don't even try to murder someone else's session, you fucking wanker"
+			set_flash_message('failure', 'What the fuck...', "Don't even try to murder someone else's session...")
 			render('user/settings/session')
 			return
 		end

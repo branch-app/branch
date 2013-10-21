@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
 	helper_method :current_user
 	helper_method :set_flash_message
 	helper_method :redirect_to_return_url
+	before_filter :set_flash
 	protect_from_forgery
+
+	def set_flash()
+		if (params[:force_flash].to_i == 1)
+			set_flash_message('success', 'Woo!', 'This is a success message!')
+			set_flash_message('failure', 'Fuck...', 'Something bad happened, and im here to tell you that.')
+			set_flash_message('warning', 'ehh..', 'Something bad might happen, so heads up.')
+			set_flash_message('info', 'hey m8!', "Did you know this is a information message? I know right, it's pretty cool")
+		end
+	end
 
 	# -- Internal Functions
 	def sub_view_to_friendly(sub_view)
