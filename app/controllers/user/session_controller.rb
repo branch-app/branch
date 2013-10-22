@@ -27,7 +27,7 @@ class User::SessionController < User::HomeController
 			session[:identifier] = user_session.identifier
 			
 			return if (redirect_to_return_url(stuff[:return_url]))
-			redirect_to(user_view_path(user.username))
+			redirect_to(root_path())
 		else
 			@error = 'Incorrect Password or Username/Email Address'
 			@identifier = stuff[:identifier]
