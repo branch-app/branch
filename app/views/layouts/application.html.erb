@@ -93,6 +93,16 @@
 										</li>
 									<% end %>
 
+									<% if (current_user().gamertag != nil) %>
+										<li class="divider"></li>
+										<div class="dropdown-header">GAMES</div>
+										<% if (current_user().get_h4_service_record()) %>
+											<li>
+												<%= link_to('Halo 4 Service Record', halo4_servicerecord_path(gamertag_validation(current_user().gamertag().gamertag))) %>
+											</li>
+										<% end %>
+									<% end %>
+
 									<li class="divider"></li>
 									<li class="dropdown-header">SETTINGS</li>
 									<li>

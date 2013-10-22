@@ -7,9 +7,7 @@ Guide;
 	<% if storage.role.identifier != 2 %>
 		<li><span class="label" style="background-color: #<%= storage.role.colour %>;"><%= storage.role.name %></span></li>
 	<% end %>
-	<% if (storage.gamertag != nil) %>
-		<% if (storage.gamertag.h4_service_record != nil) %>
-			<li><span class="label label-info">Halo 4</span></li>
-		<% end %>
+	<% if (get_h4_service_record != nil) %>
+		<li><span class="label label-info">Halo 4</span></li>
 	<% end %>
 </ul>
