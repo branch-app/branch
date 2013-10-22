@@ -32,12 +32,10 @@ class User < ActiveRecord::Base
 	before_create :hash_password
 	after_create :set_to_validating
 
-	def self.authenticate(identifier, password)
-		user = find_by_username(identifier)
-		user = find_by_email(identifier) if user == nil
-
-		return user if user == nil
-		return user if Hashing.validate(password, user.password)
+	#-- Inner Functions --#
+	def get_h4_service_record()
+		return gamertag if (gamertag == nil)
+		return gamertag.h4_service_record()
 	end
 
 	def following?(user)
@@ -52,6 +50,15 @@ class User < ActiveRecord::Base
 		verification.save!
 
 		UserMailer.validation_email(self, verification).deliver
+	end
+
+	#-- Outer Functionns --#
+	def self.authenticate(identifier, password)
+		user = find_by_username(identifier)
+		user = find_by_email(identifier) if user == nil
+
+		return user if user == nil
+		return user if Hashing.validate(password, user.password)
 	end
 
 	private
