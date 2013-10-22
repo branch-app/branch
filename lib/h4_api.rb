@@ -208,7 +208,7 @@ module H4Api
 
 		gamertag_safe = gamertag.to_s.downcase
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
-		throw(':: Unknown Halo 4 Service Record :: Getting Player Game History :: ' + gamertag + ' ::') if (h4_sr == nil)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Game History :: ' + (gamertag || "Gamertag is Null, weird") + ' ::') if (h4_sr == nil)
 
 		cache_response = rename_this_later('player_match_history', 
 			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", 
