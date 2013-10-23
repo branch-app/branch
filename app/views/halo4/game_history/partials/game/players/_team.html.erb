@@ -72,13 +72,13 @@
 					<div class="player-stats tab-content">
 						<div class="tab-pane fade in active summary" id="<%= identifier %>-summary">
 							<div class="row">
-								<div class="col-md-5 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(gamertag_validation(remove_halo_guest_indentifier(player['Gamertag']))) %>)"></div>
+								<div class="col-md-5 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
 								<div class="col-md-7">
 									<% if (player['IsGuest']) %>
 										<h2><%= player['Gamertag'] %></h2>
 									<% else %>
 										<h2>
-											<%= link_to(player['Gamertag'], halo4_servicerecord_path(player['Gamertag'])) %>
+											<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag_validation(player['Gamertag']))) %>
 										</h2>
 										<h3 class="player-servicetag"><%= player['Servicetag'] %></h3>
 									<% end %>
