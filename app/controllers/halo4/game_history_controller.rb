@@ -55,7 +55,7 @@ class Halo4::GameHistoryController < Halo4::HomeController
 		@top_player = @game['Players'].sort_by { |p| p['Standing'] }[0]
 		@teams_in_order = @game['Teams'].sort_by { |t| t['Standing'] } if (@game['ModeId'] == 3 || @game['ModeId'] == 6)
 		@difficulty = get_full_difficulty(@game['Difficulty']) if (@game['ModeId'] == 4 || @game['ModeId'] == 5)
-		@chapter = get_spops_chapter_from_chapter_id(@game['ChapterId']) if (@game['ModeId'] == 5)
+		@chapter = get_spops_chapter_from_base_id(@game['ChapterId']) if (@game['ModeId'] == 5)
 	end
 	
 	private
