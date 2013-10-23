@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
 	has_many :session
 	has_many :user_verification
+	has_many :favourite
 	has_many :following_follows, class_name: :Follow, foreign_key: :follower_id
 	has_many :followers_follows, class_name: :Follow, foreign_key: :following_id
 	has_many :following, class_name: :User, through: :following_follows
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
 	validates_length_of :name, in: 3..30
 
 	validates_uniqueness_of :email, :username
+	validates_uniqueness_of :email, :email
 
 	validate :validate_password_confirmation, on: :create
 	validate :map_gamertag
