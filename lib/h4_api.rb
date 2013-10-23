@@ -285,7 +285,7 @@ module H4Api
 		end
 	end
 
-	def self.get_player_game(gamertag, game_id)
+	def self.get_player_game(game_id)
 		init
 
 		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), 117.years.to_i)
