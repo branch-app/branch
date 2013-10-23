@@ -256,7 +256,7 @@ module H4Api
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
 		throw(':: Unknown Halo 4 Service Record :: Getting Player Game :: ' + gamertag + ' ::') if (h4_sr == nil)
 
-		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), (60 * 8))
+		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), 117.years.to_i)
 
 		return cache_response[:data] if (cache_response[:is_valid] != false)
 
