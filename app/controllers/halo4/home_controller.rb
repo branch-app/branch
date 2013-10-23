@@ -90,7 +90,7 @@ class Halo4::HomeController < ApplicationController
 					return
 				end
 
-				favourite = H4Favourite.new(game_variant_name: game_variant_name, game_id: game.game_id, favourite_id: favourite_parent.id, game_variant_id: game_variant_id, game_variant_name: game_variant_name, map_id: map_id, map_variant_name: map_variant_name, mvp_gamertag: mvp_gamertag, mvp_kd: mvp_kd, mvp_kills: mvp_kills)
+				favourite = H4Favourite.new(mode_id: game_data['ModeId'].to_i, game_variant_name: game_variant_name, game_id: game.game_id, favourite_id: favourite_parent.id, game_variant_id: game_variant_id, game_variant_name: game_variant_name, map_id: map_id, map_variant_name: map_variant_name, mvp_gamertag: mvp_gamertag, mvp_kd: mvp_kd, mvp_kills: mvp_kills)
 				if (!favourite.save())
 					render json: { state: 'favourite', success: false, error: { name: 'error_saving_model', desc: "Parent model didn't save, fuck." } }
 					return
