@@ -214,7 +214,7 @@
 										<% player['DamageTypeStats'].sort_by{ |d| -calculate_spread(d['Kills'], d['Deaths'] + d['Suicides']) }.each do |damage_type| %>
 											<tr>
 												<td>
-														<img data-toggle="tooltip" title="<%= damage_type['Name'] %>" src="<%= get_raw_asset_url(damage_type['ImageUrl']) %>" />
+													<img data-toggle="tooltip" title="<%= damage_type['Name'] %>" src="<%= get_raw_asset_url(damage_type['ImageUrl']) %>" />
 												</td>
 												<td><%= damage_type['Kills'] %></td>
 												<td><%= damage_type['Headshots'] %></td>
@@ -324,7 +324,7 @@
 								<div class="row" id="top-medals" style="width: <%= top_medals.length * (100 + 20 + 20) %>px;">
 									<% top_medals.each do |medal| %>
 										<div class="entry">
-											<div class="medal" data-toggle="tooltip" title="<%= medal['MedalStats']['Name'] %>" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>"></div>
+											<div class="medal" data-toggle="tooltip" title="<%= medal['MedalStats']['Name'] %>" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
 											<div class="count">
 												<%= medal['MedalStats']['TotalMedals'] %>
 											</div>
@@ -366,7 +366,7 @@
 												<div class="tab-pane fade in <%= 'active' if (first_entry) %>" id="medal-tier-<%= medal_data['MedalClass']['Name'].to_slug() %>-<%= identifier %>">
 													<% medal_data['Medals'].each do |medal| %>
 														<div class="col-md-12 medal-entry row">
-															<div class="medal" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>"></div>
+															<div class="medal" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
 															<div class="description">
 																	<span class="name"><%= medal['RawMedal']['Name'] %></span>
 																	<br />
