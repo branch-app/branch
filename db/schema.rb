@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019164144) do
+ActiveRecord::Schema.define(:version => 20131023043650) do
 
   create_table "blog_categories", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,12 @@ ActiveRecord::Schema.define(:version => 20131019164144) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "slug"
+  end
+
+  create_table "favourites", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "follows", :force => true do |t|
@@ -58,6 +64,20 @@ ActiveRecord::Schema.define(:version => 20131019164144) do
     t.datetime "expires_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "h4_favourites", :force => true do |t|
+    t.integer  "favourite_id"
+    t.string   "game_id"
+    t.string   "map_variant_name"
+    t.string   "game_variant_name"
+    t.integer  "game_variant_id"
+    t.integer  "map_id"
+    t.string   "mvp_gamertag"
+    t.integer  "mvp_kills"
+    t.decimal  "mvp_kd",            :precision => 10, :scale => 2
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
   end
 
   create_table "h4_game_histories", :force => true do |t|

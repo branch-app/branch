@@ -98,9 +98,70 @@
 							</a>
 						</li>
 
-						<% if current_user %>
+						<% if (current_user()) %>
 							<li>
-								<%= link_to raw('<span class="glyphicon glyphicon-star" style="padding-right: 8px;"></span>Favourite'), '#', { class: 'btn btn-default' } %>
+								<%
+									unique_id = 'favourite-ajax-' + Digest::SHA1.hexdigest(rand(100000..999999).to_s)[0..8]
+									has_favourited = false
+									h4_favourite = H4Favourite.find_by_game_id(@raw_game['Id'])
+									if (h4_favourite != nil && h4_favourite.favourite != nil && h4_favourite.favourite.user_id == current_user().id)
+										has_favourited = true
+									end
+								%>
+
+								<% if (has_favourited) %>
+									<%= form_for(:favourite, url: user_halo4_favourite_path(), remote: true, method: :delete, html: { id: unique_id, style: 'display: inline;' }) do |f| %>
+										<%= f.hidden_field(:game_id, value: @game['Id']) %>
+										<button class="btn btn-default" data-loading-text="Un-Favoriting...">
+											<span class="glyphicon glyphicon-star-empty"></span> Un-Favourite
+										</button>
+									<% end %>
+								<% else %>
+									<%= form_for(:favourite, url: user_halo4_favourite_path(), remote: true, method: :post, html: { id: unique_id, style: 'display: inline;' }) do |f| %>
+										<%= f.hidden_field(:game_id, value: @game['Id']) %>
+										<button class="btn btn-default" data-loading-text="Favoriting...">
+											<span class="glyphicon glyphicon-star"></span> Favourite
+										</button>
+									<% end %>
+								<% end %>
+
+								<% content_for :scripts do %>
+									<script>
+										$(document).ready(function() {
+											return $("#<%= unique_id %>").on("ajax:before", function () {
+												$("#<%= unique_id %> > button").button('loading');
+											})
+											.on("ajax:success", function(e, data, status, xhr) {
+												var jsonData = $.parseJSON(xhr.responseText);
+												console.log(xhr.responseText);
+												if (jsonData.success) {
+													if (jsonData.state != null) {
+														if (jsonData.state == "favourite") {
+															$("#<%= unique_id %>").attr('method', 'post');
+															$("#<%= unique_id %> > button").button('reset');
+															$("#<%= unique_id %> > button").attr('data-loading-text', 'Favoriting...');
+															$("#<%= unique_id %> > button").html('<span class="glyphicon glyphicon-star"></span> Favourite');
+														} else if (jsonData.state == "unfavourite") {
+															$("#<%= unique_id %>").attr('method', 'delete');
+															$("#<%= unique_id %> > button").button('reset');
+															$("#<%= unique_id %> > button").attr('data-loading-text', 'Un-Favoriting...');
+															$("#<%= unique_id %> > button").html('<span class="glyphicon glyphicon-star-empty"></span> Un-Favourite');
+														} else {
+															$("#<%= unique_id %> > button").button('reset');
+														}
+													}
+												} else {
+													$("#<%= unique_id %> > button").button('reset');
+												}
+												$("#<%= unique_id %> > button").blur();
+											}).bind("ajax:error", function(e, xhr, status, error) {
+												console.log(xhr.responseText);
+												$("#<%= unique_id %> > button").blur();
+												$("#<%= unique_id %> > button").button('reset');
+											});
+										});
+									</script>
+								<% end %>
 							</li>
 						<% end %>
 					</ul>
