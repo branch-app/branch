@@ -103,7 +103,7 @@
 								<%
 									unique_id = 'favourite-ajax-' + Digest::SHA1.hexdigest(rand(100000..999999).to_s)[0..8]
 									has_favourited = false
-									h4_favourite = H4Favourite.find_by_game_id(@raw_game['Id'])
+									h4_favourite = H4Favourite.find_by_game_id(@game['Id'])
 									if (h4_favourite != nil && h4_favourite.favourite != nil && h4_favourite.favourite.user_id == current_user().id)
 										has_favourited = true
 									end
