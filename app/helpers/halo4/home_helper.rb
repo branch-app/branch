@@ -37,6 +37,10 @@ module Halo4::HomeHelper
 		return nil
 	end
 
+	def get_difficulty_from_base_id(base_id)
+		return @metadata['DifficultiesMetadata']['Difficulties'][base_id]
+	end
+
 	def get_gametype_from_base_id(base_id)
 		@metadata['GameBaseVariantsMetadata']['GameBaseVariants'].each do |game_variant|
 			if (game_variant['Id'] == base_id)
