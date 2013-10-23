@@ -160,7 +160,7 @@ module H4Api
 
 		gamertag_safe = gamertag.to_s.downcase
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
-		throw(':: Unknown Halo 4 Service Record :: Getting Player Commendations :: ' + gamertag + ' ::') if (h4_sr == nil)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Commendations :: ' + (gamertag.to_s || "Gamertag is Null, weird") + ' ::') if (h4_sr == nil)
 
 		cache_response = rename_this_later('player_commendation', gamertag_safe, H4PlayerCommendation.find_by_h4_service_record_id(h4_sr.id), (60 * 8))
 		return cache_response[:data] unless cache_response[:is_valid] == false
@@ -208,7 +208,7 @@ module H4Api
 
 		gamertag_safe = gamertag.to_s.downcase
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
-		throw(':: Unknown Halo 4 Service Record :: Getting Player Game History :: ' + (gamertag || "Gamertag is Null, weird") + ' ::') if (h4_sr == nil)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Game History :: ' + (gamertag.to_s || "Gamertag is Null, weird") + ' ::') if (h4_sr == nil)
 
 		cache_response = rename_this_later('player_match_history', 
 			"#{gamertag_safe}.#{start_index}.#{count}.#{mode_id}.#{chapter_id}", 
@@ -254,7 +254,7 @@ module H4Api
 
 		gamertag_safe = gamertag.to_s().downcase()
 		h4_sr = H4ServiceRecord.find_by_gamertag(gamertag_safe)
-		throw(':: Unknown Halo 4 Service Record :: Getting Player Game :: ' + gamertag + ' ::') if (h4_sr == nil)
+		throw(':: Unknown Halo 4 Service Record :: Getting Player Game :: ' + (gamertag.to_s || "Gamertag is Null, weird") + ' ::') if (h4_sr == nil)
 
 		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), 117.years.to_i)
 
@@ -278,22 +278,11 @@ module H4Api
 			cached_match.save
 
 			S3Storage.push(GAME_LONG, 'player_match', game_id, response.body)
+			
 			data
 		else
 			return JSON.parse cache_response[:data] unless cache_response[:data] == nil
 			{ :status_code => 1001, :continue => 'no' }
-		end
-	end
-
-	def self.get_player_game(game_id)
-		init
-
-		cache_response = rename_this_later('player_match', game_id, H4Game.find_by_game_id(game_id), 117.years.to_i)
-
-		if (cache_response[:is_valid] != false)
-			return cache_response[:data]
-		else
-			return nil
 		end
 	end
 
