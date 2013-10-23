@@ -4,8 +4,10 @@ class Halo4::HomeController < ApplicationController
 
 	@gamertag = nil
 	def get_gamertag
+		@metadata = H4Api.get_meta_data()
+		
 		# hacky fix to get controller name/action, huehuehue
-		if (!(controller_name() == 'home' && action_name() == 'index'))
+		if (!(controller_name() == 'home' && (action_name() == 'index' || action_name() == 'favourite')))
 			@gamertag = params[:gamertag]
 
 			new_gamertag = GamertagReplacement.find_by_replacement(@gamertag)
@@ -15,7 +17,6 @@ class Halo4::HomeController < ApplicationController
 
 			# pull stats
 			@service_record = H4Api.get_player_service_record(@gamertag)
-			@metadata = H4Api.get_meta_data()
 
 			if (@service_record == nil || @service_record[:continue] == false || @service_record["StatusCode"] != 1)
 				set_flash_message('failure', 'Oops...', "We couldn't load stats for the gamertag #{@gamertag}, sorry :(")
