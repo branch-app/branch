@@ -15,7 +15,7 @@ Guide;
 %>
 
 <div class="halo4-favourite">
-	<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(h4_favourite.mvp_gamertag), game_id: 'h4_favourite.game_id') %>">
+	<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(h4_favourite.mvp_gamertag), game_id: h4_favourite.game_id) %>">
 		<div class="col-md-12 map-preview" style="background-image: url(<%= map_url %>)">
 			<div class="mask"></div>
 			<div class="content">
