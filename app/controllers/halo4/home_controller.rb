@@ -63,6 +63,7 @@ class Halo4::HomeController < ApplicationController
 				game_variant_id = 0
 				game_variant_name = ""
 				map_id = game_data['MapId']
+				chapter_id = -1
 				map_variant_name = ""
 				mvp_gamertag = top_player['Gamertag']
 				mvp_kd = calculate_kd(top_player['Kills'], top_player['Deaths'])
@@ -84,13 +85,17 @@ class Halo4::HomeController < ApplicationController
 					map_variant_name = game_data['MapName']
 				end
 
+				if (game_data['ModeId'] == 5)
+					chapter_id = game_data['ChapterId']
+				end
+
 				favourite_parent = Favourite.new(user_id: current_user().id)
 				if (!favourite_parent.save())
 					render json: { state: 'favourite', success: false, error: { name: 'error_saving_model', desc: "Parent model didn't save, fuck." } }
 					return
 				end
 
-				favourite = H4Favourite.new(mode_id: game_data['ModeId'].to_i, game_variant_name: game_variant_name, game_id: game.game_id, favourite_id: favourite_parent.id, game_variant_id: game_variant_id, game_variant_name: game_variant_name, map_id: map_id, map_variant_name: map_variant_name, mvp_gamertag: mvp_gamertag, mvp_kd: mvp_kd, mvp_kills: mvp_kills)
+				favourite = H4Favourite.new(chapter_id: chapter_id, mode_id: game_data['ModeId'].to_i, game_variant_name: game_variant_name, game_id: game.game_id, favourite_id: favourite_parent.id, game_variant_id: game_variant_id, game_variant_name: game_variant_name, map_id: map_id, map_variant_name: map_variant_name, mvp_gamertag: mvp_gamertag, mvp_kd: mvp_kd, mvp_kills: mvp_kills)
 				if (!favourite.save())
 					render json: { state: 'favourite', success: false, error: { name: 'error_saving_model', desc: "Parent model didn't save, fuck." } }
 					return
