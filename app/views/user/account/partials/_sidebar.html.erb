@@ -13,7 +13,7 @@
 					<%= link_to('Followers', user_followers_path(username: @username)) %>
 				</li>
 				<li class="<%= 'active' if (content_for(:account_active) == 'favourites') %>">
-					<%= link_to('Favourites', '#') %>
+					<%= link_to('Favourites', user_favourites_path(username: @username, page: 1)) %>
 				</li>
 			</ul>
 		</li>
