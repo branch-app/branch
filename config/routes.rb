@@ -1,8 +1,9 @@
 BranchApp::Application.routes.draw do
 
 	# Core
-	root :to => 'home#index'
-	get '/welcome' => 'home#welcome', as: :home_welcome
+	root :to => 'home#welcome'
+	get '/' => 'home#welcome', as: :home_welcome
+	get '/dashboard/' => 'home#index', as: :home_dashboard
 
 	# Admin
 	get '/domain/' => 'admin/home#index', as: :admin_home
