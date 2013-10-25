@@ -72,8 +72,8 @@
 					<div class="player-stats tab-content">
 						<div class="tab-pane fade in active summary" id="<%= identifier %>-summary">
 							<div class="row">
-								<div class="col-md-5 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
-								<div class="col-md-7">
+								<div class="col-md-6 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
+								<div class="col-md-6">
 									<% if (player['IsGuest']) %>
 										<h2><%= player['Gamertag'] %></h2>
 									<% else %>
@@ -88,6 +88,45 @@
 										Score
 									</h2>
 									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge"><%= player['PersonalScore'] %></span>
+											Personal Score
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Kills'] %></span>
+											Kills
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Deaths'] %></span>
+											Deaths
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= calculate_kd(player['Kills'], player['Deaths']) %></span>
+											K/D Ratio
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Assists'] %></span>
+											Assists
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalMedals'] %></span>
+											Medals
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Betrayals'] + player['Suicides'] %></span>
+											Penalities (Betrayals, Suicides, etc)
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['FeaturedStatValue'] %></span>
+											<%= player['FeaturedStatName'] %>
+										</li>
+									</ul>
+									<hr />
+
+									<h2>
+										Meta
+									</h2>
+									<ul class="list-group">
 										<% if (player['KilledMostGamertag'] != nil) %>
 											<li class="list-group-item">
 												<span class="badge">
@@ -98,6 +137,11 @@
 													<% end %>
 													(<%= player['KilledMostCount'] %>)
 												</span>
+												Most Killed
+											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
 												Most Killed
 											</li>
 										<% end %>
@@ -113,6 +157,11 @@
 												</span>
 												Most Killed By
 											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
+												Most Killed By
+											</li>
 										<% end %>
 										<li class="list-group-item">
 											<span class="badge"><%= player['AverageKillDistance'] %> Meters</span>
@@ -122,21 +171,15 @@
 											<span class="badge"><%= player['AverageDeathDistance'] %> Meters</span>
 											Average Death Distance
 										</li>
-										<li class="list-group-item">
-											<span class="badge"><%= player['FeaturedStatValue'] %></span>
-											<%= player['FeaturedStatName'] %>
-										</li>
 									</ul>
 									<hr />
+								</div>
 
+								<div class="col-md-6">
 									<h2>
 										Medals
 									</h2>
 									<ul class="list-group">
-										<li class="list-group-item">
-											<span class="badge"><%= player['TotalMedals'] %></span>
-											Medals Earned
-										</li>
 										<li class="list-group-item">
 											<span class="badge"><%= player['TotalKillMedals'] %></span>
 											Kill Medals Earned
@@ -158,8 +201,8 @@
 											Mode Medals Earned
 										</li>
 									</ul>
-									<hr />
-
+								</div>
+								<div class="col-md-6">
 									<h2>
 										Player
 									</h2>
@@ -186,6 +229,30 @@
 												Rank
 											</li>
 										<% end %>
+										<li class="list-group-item">
+											<span class="badge">
+												<% if (player['IsCompleted']) %>
+													Finished the Fight
+												<% else %>
+													Did Not Finish
+												<% end %>
+											</span>
+											Completion Style
+										</li>
+										<li class="list-group-item">
+											<span class="badge">
+												<% if (player['JoinedInProgress']) %>
+													Joined In Progress
+												<% else %>
+													Played From the Start
+												<% end %>
+											</span>
+											Deployment Style
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Standing'] %></span>
+											Standing
+										</li>
 									</ul>
 								</div>
 							</div>

@@ -219,12 +219,12 @@ body.halo4_game_history {
 						> .summary {
 							> div {
 								> .player-model {
-									height: 630px;
+									height: 660px;
 									background-repeat: no-repeat;
-									background-position: 0 -40px;
+									background-position: 50px 20px;
 
 									@media (min-width: 992px) and (max-width: 1199px) {
-										background-position: -20px -40px;
+										background-position: 5px 20px;
 									}
 								}
 							}
