@@ -54,6 +54,33 @@ module ApplicationHelper
 		return DateTime.strptime(date_string, in_format).strftime(out_format)
 	end
 
+	def duration_to_seconds(duration_str)
+		duration = Time.strptime(duration_str, "%H:%M:%S")
+
+		return duration.seconds_since_midnight.to_i
+	end
+
+	#-- Graph Helpers --#
+	def generate_graph_from_single(dataset, duration)
+		output = ""
+		running_total = 0
+		duration_sec = duration_to_seconds(duration)
+		duration_sec.times do |i|
+			if (i == 0 || (i + 1) == duration_sec)
+				output += "{ x: '#{i}', a: '#{ running_total }' },"
+			end
+
+			dataset.each do |medal_entry|
+				if (medal_entry['Time'] == i)
+					running_total += medal_entry['Ticks']
+					output += "{ x: '#{i}', y: '#{ running_total }' },"
+				end
+			end
+		end
+
+		output = output[0..-1]
+	end
+
 	#-- Maths Helpers --#
 	def calculate_kd(kills, deaths, round_to = 2)
 		if (kills <= 0 || deaths <= 0)
