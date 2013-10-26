@@ -9,9 +9,6 @@ gem 'mysql2', '0.3.11'
 # Security
 gem 'pbkdf2'
 
-# Misc
-gem 'nokogiri'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,9 +27,6 @@ end
 # Front End
 gem 'sass'
 
-# AWS
-gem 'aws-sdk'
-
 # Other
 gem 'redcarpet'
 gem 'rufus-scheduler'
@@ -40,3 +34,7 @@ gem 'httparty', '0.11.0' # new version does weird shit with https
 gem 'modern-user-agent'
 gem 'geokit', '1.6.5'
 gem 'figaro'
+gem 'nokogiri'
+
+# AWS
+gem 'aws-sdk'
