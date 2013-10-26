@@ -260,8 +260,9 @@
 						<div class="tab-pane fade in weapons" id="<%= identifier %>-weapons">
 							<% weapon_graph_identifier = 'player-weapons-' + identifier.to_s %>
 							<div class="graph-container hidden-xs">
-									<div id="<%= weapon_graph_identifier %>" style="height: 250px; width: 700px;">
-									</div>
+								<!-- Graphs Will Return! -->
+								<div id="<%= weapon_graph_identifier %>" style="height: 250px; width: 700px; display: none;">
+								</div>
 							</div>
 
 							<h2>All Weapons</h2>
@@ -360,7 +361,8 @@
 						<div class="tab-pane fade in medals" id="<%= identifier %>-medals">
 							<% medal_graph_identifier = 'player-medals-' + identifier.to_s %>
 							<div class="graph-container hidden-xs">
-								<div id="<%= medal_graph_identifier %>" style="height: 250px; width: 700px;"></div>
+								<!-- Graphs Will Return! -->
+								<div id="<%= medal_graph_identifier %>" style="height: 250px; width: 700px; display: none;"></div>
 							</div>
 
 							<!-- Medal View Data Processing -->
@@ -459,42 +461,15 @@
 
 							<% content_for :scripts do %>
 									<script>
-											<%
-													medals = [ ]
-													team_a = 0
-													25.times do |i|
-															tmp = rand(0..2)
-															if tmp == 1
-																	tmp == rand(0..3)
-																	if tmp == 0
-																			team_a += 1
-																	elsif tmp == 1
-																			team_a += 2
-																	end
-															end
-
-
-															medals << team_a
-													end
-											%>
 											Morris.Area({
 													element: '<%= medal_graph_identifier %>',
 													data: [
-															<% 
-															index = 0
-															medals.each do |medals_entry|
-															%>
-																	<%= raw("{ y: '#{ index }', a: #{ medals_entry } },") %>
-															<% 
-																	index += 1
-															end
-															%>
+														<%= raw(generate_graph_from_single(player['MedalsOverTime'], @game['Duration'])) %>
 													],
 													lineColors: [ '<%= team['PrimaryRGB'] %>' ],
-													xkey: 'y',
-													xLabels: 'decade',
-													ykeys: [ 'a' ],
-													labels: [ '<%= player['Gamertag'] %>' ],
+													xkey: 'x',
+													ykeys: [ 'y' ],
+													labels: [ "<%= player['Gamertag'] %>" ],
 													behaveLikeLine: true,
 													hideHover: true,
 													hoverCallback: function (index, options, content) {
