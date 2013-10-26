@@ -134,6 +134,20 @@
 
 		<main>
 			<%= yield %>
+
+			<% if (current_user() == nil) %>
+				<div class="container ad-container">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- branch page footer -->
+					<ins class="adsbygoogle"
+						style="display:inline-block;width:970px;height:90px"
+						data-ad-client="ca-pub-3464186476417189"
+						data-ad-slot="5431701159"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			<% end %>
 		</main>
 
 		<% if content_for? :has_footer %>
