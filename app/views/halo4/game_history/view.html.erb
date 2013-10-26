@@ -11,9 +11,10 @@
 	function generateGraphHoverView(index, options, content, unit) {
 		var row = options.data[index];
 		var ykeys = options.ykeys;
+		var xkey = options.xkey;
 		var labels = options.labels;
 		
-		var output = '<div class="graph-hover-legend"><span class="time">' + index + '</span><br /><div class="key">';
+		var output = '<div class="graph-hover-legend"><span class="time">' + row[xkey] + ' Seconds</span><br /><div class="key">';
 		for(var i = 0; i < ykeys.length; i++) {
 			var label = labels[i];
 			var ykey = ykeys[i];
