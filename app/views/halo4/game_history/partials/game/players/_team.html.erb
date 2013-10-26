@@ -32,7 +32,7 @@
 							<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag: link_to(gamertag_validation(player['Gamertag'])))) %>
 						<% end %>
 						<br />
-						<strong><%= player['ServiceTag'] %></strong>
+						<strong><%= player['Servicetag'] %></strong>
 					</div>
 					<div class="col-md-1 score-indicator check-dat-paddin"><%= player['PersonalScore'] %></div>
 					<div class="col-md-1 kills-indicator check-dat-paddin"><%= player['Kills'] %></div>
@@ -49,9 +49,19 @@
 					<div class="expander-indicator">
 						<div class="player-details-expander" data-ref="<%= identifier %>">
 							<div class="player-indicator">
-								<%= gamertag_validation(player['Gamertag']) %>
-								<br />
-								<strong><%= player['ServiceTag'] %></strong>
+								<% if (player['IsGuest']) %>
+									<div class="col-md-1 visual-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url();">
+										<%= gamertag_validation(player['Gamertag']) %>
+										<br />
+										<strong><%= player['Servicetag'] %></strong>
+									</div>
+								<% else %>
+									<div class="col-md-1 visual-flair" style="background-color: <%= team['PrimaryRGB'] %>; background-image: url(<%= get_raw_asset_url(player['EmblemImageUrl'], 48) %>);">
+										<%= gamertag_validation(player['Gamertag']) %>
+										<br />
+										<strong><%= player['Servicetag'] %></strong>
+									</div>
+								<% end %>
 							</div>
 						</div>
 					</div>

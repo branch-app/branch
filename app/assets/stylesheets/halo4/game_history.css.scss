@@ -199,7 +199,16 @@ body.halo4_game_history {
 								> .expander-indicator {
 									.player-details-expander {
 										> .player-indicator {
-											padding: 20px 0 0 20px;
+											padding: 8px 0 0 22px;
+											text-align: center;
+
+											> .visual-flair {
+												height: 70px;
+												padding-top: 15px;
+												color: white;
+												background-position: 20px center;
+												background-repeat: no-repeat;
+											}
 										}
 									}
 								}
