@@ -82,7 +82,7 @@
 					<div class="player-stats tab-content">
 						<div class="tab-pane fade in active summary" id="<%= identifier %>-summary">
 							<div class="row">
-								<div class="col-md-6 hidden-sm player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
+								<div class="col-md-6 hidden-sm hidden-xs player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
 								<div class="col-md-6">
 									<% if (player['IsGuest']) %>
 										<h2><%= player['Gamertag'] %></h2>
