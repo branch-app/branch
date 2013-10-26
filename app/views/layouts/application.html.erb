@@ -184,6 +184,12 @@
 			<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
 			<%= javascript_include_tag "application" %>
 
+			<script>
+				$(document).ready(function() {
+					$('*[role="tooltip"]').tooltip();
+				});
+			</script>
+
 			<!-- Scripts -->
 			<%= yield(:scripts) if content_for? :scripts %>
 

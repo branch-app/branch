@@ -281,7 +281,9 @@
 										<% player['DamageTypeStats'].sort_by{ |d| -calculate_spread(d['Kills'], d['Deaths'] + d['Suicides']) }.each do |damage_type| %>
 											<tr>
 												<td>
-													<img data-toggle="tooltip" title="<%= damage_type['Name'] %>" src="<%= get_raw_asset_url(damage_type['ImageUrl']) %>" />
+													<a href="#" role="tooltip" title="<%= damage_type['Name'] %>">
+														<img alt="<%= damage_type['Name'] %>" src="<%= get_raw_asset_url(damage_type['ImageUrl']) %>" />
+													</a>
 												</td>
 												<td><%= damage_type['Kills'] %></td>
 												<td><%= damage_type['Headshots'] %></td>
@@ -391,7 +393,7 @@
 								<div class="row" id="top-medals" style="width: <%= top_medals.length * (100 + 20 + 20) %>px;">
 									<% top_medals.each do |medal| %>
 										<div class="entry">
-											<div class="medal" data-toggle="tooltip" title="<%= medal['MedalStats']['Name'] %>" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
+											<div class="medal" role="tooltip" title="<%= medal['MedalStats']['Name'] %>" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
 											<div class="count">
 												<%= medal['MedalStats']['TotalMedals'] %>
 											</div>
