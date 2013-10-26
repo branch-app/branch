@@ -4,6 +4,7 @@ body.halo4_game_history {
 
 		// le cover stuff
 		> .cover {
+			position: relative;
 			height: 374px;
 			width: 100%;
 			background-size: cover;
@@ -102,11 +103,11 @@ body.halo4_game_history {
 				height: 350px;
 				width: 255px;
 				position: absolute;
-				top: 163px;
+				top: 24px;
 				left: 0;
 
 				@media (min-width: 768px) and (max-width: 992px) {
-					top: 120px;
+					top: 21px;
 					height: 353px;
 				}
 			}
