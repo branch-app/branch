@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
 		if (return_url)
 			begin
 				uri = URI.parse(return_url)
-				if (uri.host == 'localhost' || uri.host == 'branchapp')
+				if (uri.host == 'localhost' || uri.host.downcase() == 'www.branchapp.co' || uri.host.downcase() == 'preview.branchapp.co')
 					redirect_to(return_url)
 					return true
 				end
