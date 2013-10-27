@@ -27,7 +27,26 @@ class Halo4::HomeController < ApplicationController
 	end
 
 	def index
-		
+		@playlist_data = H4Api.get_playlist_data()['Playlists']
+
+		@total_population = 0
+		@team_playlist_population = 0
+		@indv_playlist_population = 0
+
+		@playlist_data.each do |playlist|
+			@total_population += playlist['PopulationCount']
+
+			playlist_orientation = H4PlaylistOrientation.find_by_playlist_id(playlist['Id'])
+
+			if (playlist_orientation == nil)
+				next
+			elsif (playlist_orientation.is_team)
+				@team_playlist_population += playlist['PopulationCount']
+			elsif (playlist_orientation.is_individual)
+				@indv_playlist_population += playlist['PopulationCount']
+			end
+		end
+
 	end
 
 	def favourite
@@ -56,7 +75,7 @@ class Halo4::HomeController < ApplicationController
 			render json: { state: 'favourite', success: true, response: { happy_message: "You managed to un-favourite the game, well done." } }
 			return
 		else
-			#begin
+			begin
 				game_data = H4Api.get_player_game(owner, game.game_id)['Game']	
 				top_player = game_data['Players'].sort_by { |p| p['Standing'] }[0]
 
@@ -103,15 +122,10 @@ class Halo4::HomeController < ApplicationController
 
 				render json: { state: 'unfavourite', success: true, response: { happy_message: "You managed to favourite the game, well done." } }
 				return
-			#rescue
+			rescue
 				render json: { state: 'favourite', success: false, error: { name: 'error_loading_game', desc: "Couldn't load game JSON." } }
 				return
-			#end
+			end
 		end
-
-
-		# render json: { state: 'following', success: true, response: { happy_message: "You're now following #{user_a.username}. Good on you man :)" } }
-		# return
-
 	end
 end

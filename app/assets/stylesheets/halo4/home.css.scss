@@ -81,3 +81,21 @@ body.halo4 {
 		}
 	}
 }
+
+body.halo4_home {
+	.stats-marketing {
+		margin-top: 100px;
+
+		@media (min-width: 768px) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		> .central {
+			text-align: center;
+		}
+		> hr {
+			margin: 80px 0;
+		}
+	}
+}

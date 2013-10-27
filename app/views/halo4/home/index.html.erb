@@ -1,11 +1,84 @@
 <% content_for :halo4, true %>
 <% content_for :title, 'Halo 4' %>	
 <% content_for :has_footer, true %>
-<% content_for :template, 'halo4_home' %>
+<% content_for :template, 'halo4 halo4_home' %>
 
 <div class="bs-header welcome-header" id="content">
 	<div class="container">
 		<h1>Halo 4 Stats</h1>
 		<p>Browse, Search and Explore Halo 4 stats. Just how you want.</p>
+	</div>
+</div>
+
+<div class="container stats-marketing">
+
+	<div class="row central">
+		<div class="col-md-4">
+			<canvas id="total-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+				<script>
+					var ctx = document.getElementById("total-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @total_population %>,
+								color: '#949FB1'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>All Playlists!</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@total_population, delimiter: ',') %> people playing Halo 4 Online.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<canvas id="team-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("team-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @team_playlist_population %>,
+								color: '#F7464A'
+					 		},
+					 		{
+					 			value: <%= @indv_playlist_population %>,
+								color: '#4D5360'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Team Playlists!</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@team_playlist_population, delimiter: ',') %> people playing Team based CSR Playlists.
+			</p>
+		</div>
+
+		<div class="col-md-4">
+			<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("indvidual-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+					 		{
+					 			value: <%= @indv_playlist_population %>,
+								color: '#F7464A'
+					 		},
+							{
+								value: <%= @team_playlist_population %>,
+								color: '#4D5360'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Indvidual Playlists!</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@indv_playlist_population, delimiter: ',') %> people playing Indvidual based CSR Playlists.
+			</p>
+		</div>
 	</div>
 </div>
