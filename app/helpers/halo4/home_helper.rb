@@ -61,6 +61,46 @@ module Halo4::HomeHelper
 		return nil
 	end
 
+	def get_enemy_class_from_base_id(base_id)
+		@metadata['EnemiesMetadata']['EnemyClasses'].each do |enemy_class|
+			if (enemy_class['Id'] == base_id)
+				return enemy_class
+			end
+		end
+
+		return nil
+	end
+
+	def get_enemy_type_from_base_id(base_id)
+		@metadata['EnemiesMetadata']['EnemyTypes'].each do |enemy_type|
+			if (enemy_type['Id'] == base_id)
+				return enemy_type
+			end
+		end
+
+		return nil
+	end
+
+	def get_enemy_from_base_id(base_id)
+		@metadata['EnemiesMetadata']['Enemies'].each do |enemy|
+			if (enemy['Id'] == base_id)
+				return enemy
+			end
+		end
+
+		return nil
+	end
+
+	def get_faction_from_base_id(base_id)
+		@metadata['FactionsMetadata']['Factions'].each do |faction|
+			if (faction['Id'] == base_id)
+				return faction
+			end
+		end
+
+		return nil
+	end
+
 	def get_medal_class_from_base_id(base_id)
 		@metadata['MedalsMetadata']['MedalClasses'].each do |medal_class|
 			if (medal_class['Id'] == base_id)

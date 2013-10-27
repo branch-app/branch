@@ -44,15 +44,16 @@ class Halo4::GameHistoryController < Halo4::HomeController
 				@css_class = 'campaign'
 				@partial_type = 'campaign'
 			when 5
-				@css_class = 'spartan-ops'
+				@css_class = 'spartan_ops'
 				@partial_type = 'spartan-ops'
 			when 6
-				@css_class = 'custom-games'
+				@css_class = 'custom_games'
 				@partial_type = 'matchmaking'
 		end
 
 
-		@top_player = @game['Players'].sort_by { |p| p['Standing'] }[0]
+		@players_in_order = @game['Players'].sort_by { |p| p['Standing'] }
+		@top_player = @players_in_order[0]
 		@teams_in_order = @game['Teams'].sort_by { |t| t['Standing'] } if (@game['ModeId'] == 3 || @game['ModeId'] == 6)
 		@difficulty = get_full_difficulty(@game['Difficulty']) if (@game['ModeId'] == 4 || @game['ModeId'] == 5)
 		@chapter = get_spops_chapter_from_base_id(@game['ChapterId']) if (@game['ModeId'] == 5)

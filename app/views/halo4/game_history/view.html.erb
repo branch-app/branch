@@ -6,7 +6,7 @@
 <% content_for :scripts do %>
 <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.2/morris.min.js"></script>
 <script>
 	function generateGraphHoverView(index, options, content, unit) {
 		var row = options.data[index];
@@ -181,10 +181,10 @@
 										players = [ ]
 										@game['Players'].map{ |p| players << p if (p['TeamId'] == team['Id']) }
 									%>
-									<%= render partial: 'halo4/game_history/partials/game/players/team', locals: { team: team, players: players } %>
+									<%= render partial: "halo4/game_history/partials/game/players/player_list", locals: { team_name: team['Name'], team_colour: team['PrimaryRGB'], players: players } %>
 								<% end %>
 							<% else %>
-
+								<%= render partial: "halo4/game_history/partials/game/players/player_list", locals: { team_name: 'Players', team_colour: '#3d3d7c', players: @players_in_order } %>
 							<% end %>
 						</div>
 						<div class="tab-pane fade in" id="graph">

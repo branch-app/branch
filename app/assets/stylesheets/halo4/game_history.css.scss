@@ -328,6 +328,46 @@ body.halo4_game_history {
 								}
 							}
 						}
+						> .enemies {
+							> div {
+								.enemy-entry {
+									margin: 20px auto;
+
+									> .enemy-image {
+										background-repeat: no-repeat;
+										height: 100px;
+										width: 80px;
+										background-size: 80px 80px;
+										background-position: center center;
+									}
+									> .enemy-content {
+										> .name {
+											font-size: 16px;
+											font-weight: 600;
+										}
+
+										> .tab-content {
+											> div {
+												padding-top: 20px;
+											}
+										}
+									}
+									> .count {
+										text-align: center;
+
+										> .integer {
+											font-size: 50px;
+											font-weight: 100;
+										}
+										> .in-dick-ator {
+											font-size: 12px;
+											font-weight: 600;
+											text-transform: uppercase;
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
