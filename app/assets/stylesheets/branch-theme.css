@@ -1104,3 +1104,12 @@ h1[id] {
 li > .nav > li > .nav {
   margin-left: 20px;
 }
+
+/* - Custom Links
+-------------------------------------------- */
+a {
+  color: #43468c;
+}
+a:hover {
+  color: #4e51ac;
+}

@@ -12,10 +12,14 @@
  *= require_tree .
  */
 
+// ---- Le Navbar ----
+// --------------------------------------------
 body {
 	padding-top: 50px;
 }
 
+// ---- Float Helpers ----
+// --------------------------------------------
 .right {
 	float: right;
 }
@@ -23,11 +27,8 @@ body {
 	float: left;
 }
 
-.focus-col {
-	text-align: right;
-	margin-top: 35px;
-}	
-
+// ---- Padding and Spacing Helpers ----
+// --------------------------------------------
 .bitch-needs-a-break {
 	margin-top: 40px;
 }
@@ -39,6 +40,8 @@ body {
 	opacity: 0.6;
 }
 
+// ---- Custom Containers ----
+// --------------------------------------------
 .alert-container {
 	margin-top: 40px;
 	margin-bottom: 10px;
@@ -49,7 +52,8 @@ body {
 	margin: 100px auto 0 auto;
 }
 
-/* UL Helpers */
+// ---- Fuck Ul's ----
+// --------------------------------------------
 ul.no-style {
 	list-style-type: none;
 	margin: 0;
@@ -62,6 +66,8 @@ ul.no-style {
 	}
 }
 
+// ---- Footer sexy shit ----
+// --------------------------------------------
 footer > .container > .row > .col-md-2 > .made-in {
 	font-size: 12px;
 	color: #aaa;
