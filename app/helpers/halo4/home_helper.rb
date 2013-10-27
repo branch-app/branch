@@ -127,6 +127,6 @@ module Halo4::HomeHelper
 
 	#-- Misc --#
 	def remove_halo_guest_indentifier(gamertag)
-		return gamertag.gsub(/ \(\d\)/, '')
+		return gamertag.gsub(/\(\d\)/, '')
 	end
 end
