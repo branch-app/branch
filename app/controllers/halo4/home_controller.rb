@@ -28,6 +28,7 @@ class Halo4::HomeController < ApplicationController
 
 	def index
 		@playlist_data = H4Api.get_playlist_data()['Playlists']
+		@challenge_data = H4Api.get_challenge_data()['Challenges']
 
 		@total_population = 0
 		@team_playlist_population = 0
@@ -47,6 +48,23 @@ class Halo4::HomeController < ApplicationController
 			end
 		end
 
+		@total_credits = 0
+		@campaign_credits = 0
+		@spops_credits = 0
+		@matchmaking_credits = 0
+
+		@challenge_data.each do |challenge|
+			@total_credits += challenge['XpReward']
+
+			case(challenge['CategoryId'])
+				when 0
+					@campaign_credits += challenge['XpReward']
+				when 1
+					@spops_credits += challenge['XpReward']
+				when 2
+					@matchmaking_credits += challenge['XpReward']
+			end
+		end
 	end
 
 	def favourite
