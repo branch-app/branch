@@ -1,0 +1,3 @@
+[submodule "app/models"]
+	path = app/models
+	url = https://github.com/TheTree/Branch-Models.git
