@@ -4,3 +4,6 @@
 [submodule "db"]
 	path = db
 	url = https://github.com/TheTree/Branch-Database.git
+[submodule "lib"]
+	path = lib
+	url = https://github.com/TheTree/Branch-Libraries.git
