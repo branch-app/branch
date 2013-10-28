@@ -40,7 +40,7 @@
 						</h1>
 						<hr />
 						<div class="row">
-							<% @challenge_data.each do |challenge| %>
+							<% @challenge_data.sort_by{ |c| c['EndDate'] }.each do |challenge| %>
 								<% next if (challenge['CategoryId'] != category['Id']) %>
 								<% identifier = Digest::SHA1.hexdigest(rand(100000..999999).to_s)[0..8] %>
 								<div class="col-md-12 challenge-entry" style=""> <!-- background-image: url(<%= image_path('halo4/challenge_categories/' + challenge['CategoryName'].downcase().gsub(' ', '') + '.png') %>) -->
@@ -67,9 +67,15 @@
 														daysColor    : "#ff6565",
 														daysGlow     : "none",
 
-														startDate   : 1382926223 - 259200,
-														endDate     : 1382926223 + 172800,
-														now         : 1382926223
+														<%
+															end_date = parse_datetime(challenge['EndDate']).to_time.to_i
+															start_date = parse_datetime(challenge['BeginDate']).to_time.to_i
+															now = Time.now.to_i
+														%>
+
+														startDate   : <%= start_date %>,
+														endDate     : <%= end_date %>,
+														now         : <%= now %>,
 													}, '<%= identifier %>');
 												});
 											</script>
