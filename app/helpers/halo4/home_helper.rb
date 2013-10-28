@@ -111,6 +111,16 @@ module Halo4::HomeHelper
 		return nil
 	end
 
+	def get_challenge_category_from_base_id(base_id)
+		@metadata['ChallengesMetadata']['ChallengeCategories'].each do |challenge_category|
+			if (challenge_category['Id'] == base_id)
+				return challenge_category
+			end
+		end
+
+		return nil
+	end
+
 	def get_spops_chapter_from_base_id(base_id)
 		@metadata['SpartanOpsMetadata']['Seasons'].each do |season|
 			season['Episodes'].each do |episode|

@@ -1,0 +1,16 @@
+body.halo4_challenges {
+	.challenges-container {
+		margin-top: 60px;
+
+		#challenges-tab > .tab-pane > .row > .challenge-entry {
+			height: 220px;
+
+			@media (max-width: 991px) {
+				height: 125px;
+			}
+
+			background-position: left bottom;
+			background-repeat: no-repeat;
+		}
+	}
+}

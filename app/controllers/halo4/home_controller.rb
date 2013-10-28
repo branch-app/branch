@@ -7,7 +7,7 @@ class Halo4::HomeController < ApplicationController
 		@metadata = H4Api.get_meta_data()
 		
 		# hacky fix to get controller name/action, huehuehue
-		if (!(controller_name() == 'home' && (action_name() == 'index' || action_name() == 'favourite')))
+		if (!(controller_name() == 'home' && (action_name() == 'index' || action_name() == 'favourite')) && controller_name() != 'challenges' && controller_name() != 'playlists')
 			@gamertag = params[:gamertag]
 
 			new_gamertag = GamertagReplacement.find_by_replacement(@gamertag)

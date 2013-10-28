@@ -28,27 +28,27 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<%= link_to raw('Branch <sup>{εpsilon}</sup>'), root_url, { class: 'navbar-brand' } %>
+					<%= link_to(raw('Branch <sup>{εpsilon}</sup>'), root_url, { class: 'navbar-brand' }) %>
 				</div>
 				<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 					<ul class="nav navbar-nav">
 						<li class="<%= 'active' if content_for? :home %>">
-							<%= link_to 'Home', root_url %>
+							<%= link_to('Home', root_url()) %>
 						</li>
 						<li class="dropdown <%= 'active' if content_for? :halo4 %>">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li>
-									<%= link_to 'Halo 4', :halo4_home %>
+									<%= link_to('Halo 4', halo4_home_path()) %>
 								</li>
 
 								<li class="divider"></li>
 								<li class="dropdown-header">Waypoint</li>
 								<li>
-									<%= link_to 'Playlists', '#' %>
+									<%= link_to('Playlists', '#') %>
 								</li>
 								<li>
-									<%= link_to 'Challenges', '#' %>
+									<%= link_to('Challenges', halo4_challenges_path()) %>
 								</li>
 
 								<li class="divider"></li>
@@ -59,10 +59,10 @@
 							</ul>
 						</li>
 						<li class="<%= 'active' if content_for? :blog %>">
-							<%= link_to 'Blog', blog_home_path %>
+							<%= link_to('Blog', blog_home_path()) %>
 						</li>
 						<li class="<%= 'active' if content_for? :about %>">
-							<%= link_to 'About', about_home_path %>
+							<%= link_to('About', about_home_path()) %>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -77,7 +77,7 @@
 								</div>
 							</form>
 						</li>
-						<% if current_user %>
+						<% if (current_user()) %>
 							<li class="dropdown <%= 'active' if content_for? :user %>">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.username %> <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -196,6 +196,7 @@
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 			<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 			<%= javascript_include_tag "application" %>
+			<%= javascript_include_tag "jbclock" %>
 
 			<script>
 				$(document).ready(function() {
