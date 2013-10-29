@@ -29,7 +29,15 @@ class Halo4::CommendationsController < Halo4::HomeController
 
 		# pull stats
 		@commendations = [ ]
-		H4Api.get_player_commendations(@gamertag)['Commendations'].each do |commendation|
+		commendations = H4Api.get_player_commendations(@gamertag)
+
+		if (commendations == nil)
+			set_flash_message('failure', 'Well this is awkward..', 'We were unable to grab your commendation stats from Halo Waypoint. Sorry about this.')
+			redirect_to(halo4_servicerecord_path(@gamertag))
+			return
+		end
+
+		commendations['Commendations'].each do |commendation|
 			if (commendation['CategoryId'] == @category_id)
 				@commendations << commendation
 			end
