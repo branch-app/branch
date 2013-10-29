@@ -137,53 +137,55 @@
 				</div>
 			</div>
 
-			<div class="bs-branch-section game-history">
-				<div class="page-header">
-					<h1>Game History</h1>
-				</div>
+			<% if (@game_history != nil) %>
+				<div class="bs-branch-section game-history">
+					<div class="page-header">
+						<h1>Game History</h1>
+					</div>
 
-				<div class="row">
-					<% @game_history['Games'].each do |game_history| %>
-						<%
-							id = game_history['Id']
-							result = ''
-							friendly_result = ''
-							if (!game_history['Completed'])
-								result = 'dnf'
-								friendly_result = 'DNF'
-							elsif (game_history['Result'] == 2)
-								result = 'win'
-								friendly_result = 'Win'
-							elsif (game_history['Result'] == 0)
-								result = 'los'
-								friendly_result = 'Loss'
-							end
-						%>
+					<div class="row">
+						<% @game_history['Games'].each do |game_history| %>
+							<%
+								id = game_history['Id']
+								result = ''
+								friendly_result = ''
+								if (!game_history['Completed'])
+									result = 'dnf'
+									friendly_result = 'DNF'
+								elsif (game_history['Result'] == 2)
+									result = 'win'
+									friendly_result = 'Win'
+								elsif (game_history['Result'] == 0)
+									result = 'los'
+									friendly_result = 'Loss'
+								end
+							%>
 
-						<div id="history-entry-<%= id %>" class="col-lg-6 col-sm-12 game-history-entry">
-							<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(@gamertag), game_id: id) %>">
-								<div class="game-history-container" style="background-image: url(<%= get_raw_asset_url(game_history['MapImageUrl'], 'large') %>)">
-									<div class="mask <%= result %>"></div>
-									<div class="gametype-icon" style="background-image: url(<%= get_raw_asset_url(game_history['BaseVariantImageUrl'], 'large') %>)"></div>
-									<div class="inner">
-										<span class="gametype"><%= game_history['VariantName'] %></span>
-										<br class="visible-lg visible-xs" />
-										<span class="selector">on</span>
-										<span class="map-name"><%= game_history['MapVariantName'] %></span>
+							<div id="history-entry-<%= id %>" class="col-lg-6 col-sm-12 game-history-entry">
+								<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(@gamertag), game_id: id) %>">
+									<div class="game-history-container" style="background-image: url(<%= get_raw_asset_url(game_history['MapImageUrl'], 'large') %>)">
+										<div class="mask <%= result %>"></div>
+										<div class="gametype-icon" style="background-image: url(<%= get_raw_asset_url(game_history['BaseVariantImageUrl'], 'large') %>)"></div>
+										<div class="inner">
+											<span class="gametype"><%= game_history['VariantName'] %></span>
+											<br class="visible-lg visible-xs" />
+											<span class="selector">on</span>
+											<span class="map-name"><%= game_history['MapVariantName'] %></span>
 
-										<div class="stats">
-											<span class="type"><%= game_history['FeaturedStatName'] %></span>
-											<span class="stat"><%= game_history['FeaturedStatValue'] %></span>
+											<div class="stats">
+												<span class="type"><%= game_history['FeaturedStatName'] %></span>
+												<span class="stat"><%= game_history['FeaturedStatValue'] %></span>
+											</div>
+
+											<div class="windicator hidden-xs"><%= friendly_result %></div>
 										</div>
-
-										<div class="windicator hidden-xs"><%= friendly_result %></div>
 									</div>
-								</div>
-							</a>
-						</div>
-					<% end %>
-				</ul>
-			</div>
+								</a>
+							</div>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>
