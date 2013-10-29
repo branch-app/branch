@@ -56,8 +56,12 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def set_flash_message(type, title, desc)
-		flash[type.to_sym] = { title: title, desc: desc }
+	def set_flash_message(type, title, desc, discard = false)
+		if (discard)
+			flash.now[type.to_sym] = { title: title, desc: desc }
+		else
+			flash[type.to_sym] = { title: title, desc: desc }
+		end
 	end
 
 	def redirect_to_return_url(return_url)
