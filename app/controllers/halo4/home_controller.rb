@@ -5,6 +5,10 @@ class Halo4::HomeController < ApplicationController
 	@gamertag = nil
 	def get_gamertag
 		@metadata = H4Api.get_meta_data()
+
+		if (!H4Api.check_api_validity())
+			set_flash_message('info', 'Archive Mode', 'The Halo Waypoint API seems to be down. The site will continue working, but will only load data that we already have. No new player data can be loaded right now.', true)
+		end
 		
 		# hacky fix to get controller name/action, huehuehue
 		if (!(controller_name() == 'home' && (action_name() == 'index' || action_name() == 'favourite')) && controller_name() != 'challenges' && controller_name() != 'playlists')
