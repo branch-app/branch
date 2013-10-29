@@ -19,6 +19,12 @@ class Halo4::GameHistoryController < Halo4::HomeController
 		@mode_id = mode_id_from_mode_name(@sub_view)
 		@game_history = H4Api.get_player_game_history(@gamertag, @lower_bounds, 26, @mode_id)
 
+		if (@game_history == nil)
+			set_flash_message('failure', 'Well this is awkward..', "We were unable to grab your #{@friendly_name} game history from Halo Waypoint. Sorry about this.")
+			redirect_to(halo4_servicerecord_path(@gamertag))
+			return
+		end
+
 		if (@game_history['Games'].length == 26)
 			@is_last_page = false
 			@game_history['Games'].pop(1)
