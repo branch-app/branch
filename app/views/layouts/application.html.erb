@@ -45,7 +45,7 @@
 								<li class="divider"></li>
 								<li class="dropdown-header">Waypoint</li>
 								<li>
-									<%= link_to('Playlists', '#') %>
+									<%= link_to('Playlists', halo4_playlists_path()) %>
 								</li>
 								<li>
 									<%= link_to('Challenges', halo4_challenges_path()) %>
@@ -55,6 +55,9 @@
 								<li class="dropdown-header">Leaf</li>
 								<li>
 									<a href="http://leafapp.co/h4/leaderboards">Leaderboards</a>
+								</li>
+								<li>
+									<a href="http://leafapp.co/h4/top_ten">Top Ten Leaderboards</a>
 								</li>
 							</ul>
 						</li>
@@ -89,7 +92,7 @@
 										<li class="divider"></li>
 										<div class="dropdown-header">DOMAIN</div>
 										<li>
-											<%= link_to('Admin Portal', admin_home_path) %>
+											<%= link_to('Admin Portal', admin_home_path()) %>
 										</li>
 									<% end %>
 
@@ -106,10 +109,10 @@
 									<li class="divider"></li>
 									<li class="dropdown-header">SETTINGS</li>
 									<li>
-										<%= link_to('Edit Profile', settings_profile_path) %>
+										<%= link_to('Edit Profile', settings_profile_path()) %>
 									</li>
 									<li>
-										<%= link_to('Edit Sessions', settings_session_path) %>
+										<%= link_to('Edit Sessions', settings_session_path()) %>
 									</li>
 
 									<li class="divider"></li>
@@ -138,6 +141,7 @@
 			<% if (current_user() == nil) %>
 				<div class="container ad-container">
 					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					
 					<!-- branch page footer -->
 					<ins class="adsbygoogle"
 						style="display:inline-block;width:970px;height:90px"
