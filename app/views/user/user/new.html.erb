@@ -241,6 +241,27 @@ $(document).ready(function() {
 
 					<hr />
 
+					<section class="input-section email-section row">
+						<div class="col-md-6">
+							<span class="title">Invitation Code</span>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<%= f.text_field :invite_code, placeholder: 'Invitation Code', class: 'form-control' %>
+							</div>
+
+							<div class="bs-callout bs-callout-danger" style="<%= has_validation_errors(@user.errors, :invite_code) %>">
+								<h4>Invalid Invitation Code</h4>
+								<p class="reason">
+									<% for message in @user.errors[:invite_code] %>
+										Invite Code <%= message %> <br />
+									<% end %>
+								</p>
+							</div>
+						</div>
+					</section>
+
+					<hr />
+
 					<section class="input-section password-section row">
 						<div class="col-md-6">
 							<span class="title">Password</span>
