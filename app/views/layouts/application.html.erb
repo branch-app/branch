@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>
-			Branch <%= (" - " + yield(:title)) if content_for :title %>
+			Branch <%= raw(" - " + yield(:title)) if (content_for(:title)) %>
 		</title>
 
 		<!-- Stock third Party -->

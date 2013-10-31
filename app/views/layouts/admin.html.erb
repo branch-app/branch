@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>
-			Branch Domain <%= (" - " + yield(:title)) if content_for :title %>
+			Branch Domain <%= raw(" - " + yield(:title)) if (content_for(:title)) %>
 		</title>
 
 		<!-- Stock third Party -->
