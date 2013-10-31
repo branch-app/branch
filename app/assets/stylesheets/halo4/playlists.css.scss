@@ -8,6 +8,7 @@ body.halo4_playlists {
 
 				padding: 0;
 				height: 200px;
+				color: #eee;
 
 				.mask {
 					background: -moz-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
@@ -21,15 +22,32 @@ body.halo4_playlists {
 
 				}
 				.content {
-					color: #eee;
 					height: 200px;
 					position: absolute;
 					top: 0;
 					left: 0;
-					margin: 25px;
+					right: 0;
+					bottom: 0;
+					margin-top: 25px;
+					margin-left: 25px;
 
 					strong {
 						font-size: 25px;
+					}
+
+					.players {
+						opacity: 0.5;
+						position: absolute;
+						bottom: 11px;
+						right: 0;
+						overflow: hidden;
+
+						.count {
+							font-size: 80px;
+							font-weight: 500;
+							bottom: 0;
+							right: -10px;
+						}
 					}
 				}
 			}

@@ -54,6 +54,10 @@
 											<p>
 												<%= playlist['Description'] %>
 											</p>
+
+											<div class="players">
+												<div class="count"><%= number_with_delimiter(playlist['PopulationCount'], delimiter: ',') %> players</div>
+											</div>
 										</div>
 									</div>
 									<div class="extra-shit-is-in-tabs hahhaha-tabs-fuck-assembly">
@@ -76,7 +80,7 @@
 										<div class="tab-content" id="playlist-info-tab">
 											<div class="tab-pane fade in active" id="meta-<%= playlist['Id'] %>">
 												<ul class="no-style">
-													<% if(playlist['Orientation'] != nil) %>
+													<% if(playlist['ModeId'] == 3) %>
 														<li>
 															<strong>
 																<abbr title="How CSR is calculated for the playlist">Orientation</abbr>:
