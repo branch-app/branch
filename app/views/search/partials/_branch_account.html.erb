@@ -7,7 +7,7 @@ Guide;
 	<a class="nope" href="<%= user_view_path(branch_account.username) %>">
 		<% if (branch_account.gamertag != nil) %>
 			<% if (branch_account.gamertag.h4_service_record != nil) %>
-				<div class="spartan-image" style="background-image: url(<%= get_player_model_url(gamertag_validation(branch_account.gamertag.gamertag), 'large', 'posed') %>)"></div>
+				<div class="spartan-image" style="background-image: url(<%= get_player_model_url(branch_account.gamertag.gamertag, 'large', 'posed') %>)"></div>
 			<% end %>
 		<% end %>
 		<div class="mask"></div>
