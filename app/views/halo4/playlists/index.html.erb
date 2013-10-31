@@ -1,0 +1,174 @@
+<% content_for :halo4, true %>
+<% content_for :title, 'Halo 4 - Playlists' %>	
+<% content_for :has_footer, true %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_playlists' %>
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Halo 4 Playlists</h1>
+		<p>do this l8r</p>
+	</div>
+</div>
+
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>
+
+<div class="container playlists-container">
+	<div class="row">
+		<div class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+				<% first_entry = true %>
+				<% @modified_playlist_data.each do |playlist_category| %>
+					<li class="<%= 'active' if (first_entry) %>">
+						<%= link_to("#{playlist_category[:mode_name]} (#{number_with_delimiter(playlist_category[:total_population], delimiter: ',')} players)", '#' + playlist_category[:mode_name].to_slug(), id: 'tab-' + playlist_category[:mode_name].to_slug(), 'data-toggle' => 'tab') %>
+					</li>
+					<% first_entry = false %>
+				<% end %>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<div class="tab-content" id="playlists-tab">
+				<% first_entry = true %>
+				<% @modified_playlist_data.each do |playlist_category| %>
+					<div class="tab-pane fade in <%= 'active' if (first_entry) %>" id="<%= playlist_category[:mode_name].to_slug() %>">
+						<h1>
+							<%= playlist_category[:mode_name] %> Playlists
+						</h1>
+						<hr />
+						<div class="row">
+							<% playlist_category[:playlists].each do |playlist| %>
+								<% next if (!playlist['IsCurrent']) %>
+								<div class="col-md-12 playlist-entry">
+									<div class="col-md-12 meta" style="background-image: url(<%= get_raw_asset_url(playlist['ImageUrl'], 'large') %>)">
+										<div class="mask"></div>
+										<div class="content">
+											<strong>
+												<%= playlist['Name'] %>
+											</strong>
+											<p>
+												<%= playlist['Description'] %>
+											</p>
+										</div>
+									</div>
+									<div class="extra-shit-is-in-tabs hahhaha-tabs-fuck-assembly">
+										<ul class="nav nav-tabs">
+											<li class="active">
+												<%= link_to('Details', "#meta-#{playlist['Id']}", 'data-toggle' => 'tab')  %>
+											</li>
+											<% if (playlist['GameVariants'].length > 0) %>
+												<li>
+													<%= link_to('Game Types', "#gvar-#{playlist['Id']}", 'data-toggle' => 'tab')  %>
+												</li>
+											<% end %>
+											<% if (playlist['MapVariants'].length > 0) %>
+												<li>
+													<%= link_to('Map Variants', "#mvar-#{playlist['Id']}", 'data-toggle' => 'tab')  %>
+												</li>
+											<% end %>
+										</ul>
+
+										<div class="tab-content" id="playlist-info-tab">
+											<div class="tab-pane fade in active" id="meta-<%= playlist['Id'] %>">
+												<ul class="no-style">
+													<% if(playlist['Orientation'] != nil) %>
+														<li>
+															<strong>
+																<abbr title="How CSR is calculated for the playlist">Orientation</abbr>:
+															</strong>
+															<%= playlist['Orientation'] %>
+														</li>
+													<% end %>
+													<li>
+														<strong>
+															Player Grouping:
+														</strong>
+														<% if (playlist['IsFreeForAll']) %>
+															Free for All
+														<% else %>
+															Team vs Team
+														<% end %>
+													</li>
+													<li>
+														<strong>
+															Max Local Players:
+														</strong>
+														<%= playlist['MaxLocalPlayers'] %>
+													</li>
+													<li>
+														<strong>
+															Max Party Size:
+														</strong>
+														<%= playlist['MaxPartySize'] %>
+													</li>
+												</ul>
+											</div>
+											<% if (playlist['GameVariants'].length > 0) %>
+												<div class="gvar tab-pane fade in" id="gvar-<%= playlist['Id'] %>">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>*</th>
+																<th>Game Variant Name</th>
+																<th>Game Variant Description</th>
+																<th>Variant Based off of</th>
+															</tr>
+														</thead>
+														<tbody>
+															<% playlist['GameVariants'].each do |game_variant| %>
+																<tr class="entry">
+																	<td>
+																		<div class="icon-frame" style="background-image: url(<%= get_raw_asset_url(game_variant['GameBaseVariantImageUrl'], 'medium') %>);"></div>
+																	</td>
+																	<td><%= game_variant['GameVariantName'] %></td>
+																	<td><%= game_variant['GameVariantDescription'] %></td>
+																	<td><%= game_variant['GameBaseVariantName'] %></td>
+																</tr>
+															<% end %>
+														</tbody>
+													</table>
+												</div>
+											<% end %>
+											<% if (playlist['MapVariants'].length > 0) %>
+												<div class="mvar tab-pane fade in" id="mvar-<%= playlist['Id'] %>">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>*</th>
+																<th>Game Variant Name</th>
+																<th>Game Variant Description</th>
+															</tr>
+														</thead>
+														<tbody>
+															<% playlist['MapVariants'].each do |map_variant| %>
+																<% map = get_map_from_base_id(map_variant['MapId']) %>
+																<tr class="entry">
+																	<td>
+																		<div class="preview-frame" style="background-image: url(<%= get_raw_asset_url(map['ImageUrl'], 'medium') %>);"></div>
+																	</td>
+																	<td class="name"><%= map['Name'] %></td>
+																	<td><%= map['Description'] %></td>
+																</tr>
+															<% end %>
+														</tbody>
+													</table>
+												</div>
+											<% end %>
+										</div>
+									</div>
+								</div>
+								<hr />
+							<% end %>
+						</div>
+					</div>
+					<% first_entry = false %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
