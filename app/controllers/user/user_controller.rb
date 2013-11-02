@@ -1,6 +1,9 @@
 class User::UserController < User::HomeController
-	before_filter :validate_user_unauthed, only: [ :new, :create ]
+	before_filter :validate_user_unauthed, only: [ :new, :create, :reset_password ]
 	before_filter :validate_user_authed, only: [ :follow ]
+
+
+	# -- Filters -- #
 
 	def validate_user_unauthed
 		redirect_to(root_path()) if (current_user)
@@ -9,6 +12,9 @@ class User::UserController < User::HomeController
 	def validate_user_authed
 		redirect_to(root_path()) if (!current_user)
 	end
+
+
+	# -- Account Creation -- #
 
 	def new
 		@user = User.new()
@@ -37,6 +43,13 @@ class User::UserController < User::HomeController
 		end
 	end
 
+
+	# -- Account Management -- #
+
+	def reset_password
+
+	end
+
 	def resend_verification
 		if (!current_user)
 			redirect_to(user_signin_path()) 
@@ -52,6 +65,9 @@ class User::UserController < User::HomeController
 		set_flash_message('success', 'Check it', "Verification email resent")
 		redirect_to(user_view_path(id: current_user.username))
 	end
+
+
+	# -- Other Stuff -- #
 
 	def follow
 		user_a = User.find_by_id(params[:follow][:user_in_question].to_i)

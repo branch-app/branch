@@ -8,7 +8,7 @@ BranchApp::Application.routes.draw do
 	# Admin
 	get '/domain/' => 'admin/home#index', as: :admin_home
 
-	# User
+	# User (Sessions and Signed Out Management)
 	get '/user/signin' => 'user/session#new', as: :user_signin
 	post '/user/signin' => 'user/session#create', as: :session_create
 	get '/user/register' => 'user/user#new', as: :user_register
@@ -16,6 +16,7 @@ BranchApp::Application.routes.draw do
 	get '/user/signout' => 'user/session#destroy', as: :user_signout
 	get '/user/verify/:verification_id' => 'user/user#verify', as: :user_verify
 	get '/user/resend_verification' => 'user/user#resend_verification', as: :user_resend_verification
+	get '/user/reset_password' => 'user/user#reset_password', as: :user_reset_password
 	match '/user/follow' => 'user/user#follow', as: :user_follow, via: [ :post, :delete ]
 	match '/user/favourite/halo4/' => 'halo4/home#favourite', as: :user_halo4_favourite, via: [ :post, :delete ]
 

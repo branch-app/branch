@@ -10,13 +10,13 @@
 
 <%= render partial: 'user/partials/header', locals: { title: 'Sign into Branch', description: 'Signing into Branch gives you customized experience, with just what you want to see.' } %>
 
-<%= form_for :login, url: :session_create, method: :post do |f| %>
+<%= form_for(:login, url: :session_create, method: :post) do |f| %>
 	<%= hidden_field(:login, :return_url, value: @return_url) %>
 	<div class="container bitch-needs-a-break">
 		<div class="row">
 			<div class="col-md-12 panel panel-default">
 				<div class="panel-body details">
-					<% if @error %>
+					<% if (@error) %>
 						<section class="bs-callout bs-callout-danger validation-errors">
 							<h4>Sign In Error</h4>
 							<p>
@@ -30,7 +30,7 @@
 							<span class="title">Username or Email Address</span>
 							<div class="input-group">
 								<span class="input-group-addon">@</span>
-								<%= f.text_field :identifier, value: @identifier, placeholder: 'Username or Email Address', class: 'form-control' %>
+								<%= f.text_field(:identifier, value: @identifier, placeholder: 'Username or Email Address', class: 'form-control') %>
 							</div>
 						</div>
 					</section>
@@ -40,7 +40,7 @@
 							<span class="title">Password</span>
 							<div class="input-group">
 								<span class="input-group-addon">*</span>
-								<%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+								<%= f.password_field(:password, placeholder: 'Password', class: 'form-control') %>
 							</div>
 						</div>
 					</section>
@@ -59,11 +59,15 @@
 					<section class="input-section submit row">
 						<ul>
 							<li>
-								<%= f.submit 'Sign In', class: 'btn btn-primary btn-large' %>
+								<%= f.submit('Sign In', class: 'btn btn-primary btn-large') %>
 							</li>
-							<li>or</li>
+							<li>|</li>
 							<li>
-								<%= link_to 'Register', user_register_path, class: 'btn btn-info btn-large' %>
+								<%= link_to('Register', user_register_path(), class: 'btn btn-info btn-large') %>
+							</li>
+							<li>|</li>
+							<li>
+								<%= link_to('Forgot your Password?', user_reset_password_path(), class: 'btn btn-warning btn-large') %>
 							</li>
 						</ul>
 					</section>
