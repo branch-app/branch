@@ -35,6 +35,7 @@ gem 'modern-user-agent'
 gem 'geokit', '1.6.5'
 gem 'figaro'
 gem 'nokogiri'
+gem 'twilio-ruby'
 
 # AWS
 gem 'aws-sdk'
