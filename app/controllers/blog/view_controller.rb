@@ -13,6 +13,7 @@ class Blog::ViewController < Blog::HomeController
 			redirect_to(blog_home_path)
 			return
 		end
+		@focus = BlogCategory.find_by_id(@blog_post.blog_category_id)
 		@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
 	end
 end
