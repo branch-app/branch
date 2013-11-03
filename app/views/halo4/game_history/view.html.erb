@@ -89,7 +89,7 @@
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@alexerax">
 	<meta name="twitter:title" content="<%= "#{render partial: "halo4/game_history/partials/game/title/#{@partial_type}"}" %> as <%= gamertag_validation(@service_record['Gamertag']) %>">
-	<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> played <%= game %> on <%= map %>, on <%= parse_datetime(@game['EndDateUtc']) %> that lasted <%= duration_to_friendly(@game['Duration']) %>.">
+	<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> played <%= raw(game) %> on <%= raw(map) %>, on <%= parse_datetime(@game['EndDateUtc']) %> that lasted <%= duration_to_friendly(@game['Duration']) %>.">
 	<meta name="twitter:image:src" content="<%= map_url %>">
 	<meta name="twitter:domain" content="https://branchapp.co">
 
@@ -97,7 +97,7 @@
 	<meta property="og:title" content="<%= "#{render partial: "halo4/game_history/partials/game/title/#{@partial_type}"}" %> as <%= gamertag_validation(@service_record['Gamertag']) %>"/>
 	<meta property="og:image" content="<%= map_url %>"/>
 	<meta property="og:site_name" content="Branch"/>
-	<meta property="og:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> played <%= game %> on <%= map %>, on <%= parse_datetime(@game['EndDateUtc']) %> that lasted <%= duration_to_friendly(@game['Duration']) %>."/>
+	<meta property="og:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> played <%= raw(game) %> on <%= raw(map) %>, on <%= parse_datetime(@game['EndDateUtc']) %> that lasted <%= duration_to_friendly(@game['Duration']) %>."/>
 <% end %>
 <% content_for :template, 'halo4 halo4_game_history' %>
 
