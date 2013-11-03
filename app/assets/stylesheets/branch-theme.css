@@ -1113,3 +1113,12 @@ a {
 a:hover {
   color: #4e51ac;
 }
+
+/* - Custom Alternative Links
+-------------------------------------------- */
+a.alt {
+  color: #d4860c;
+}
+a.alt:hover {
+  color: #ffa210;
+}

@@ -14,9 +14,9 @@
 		<p><%= @blog_post.short_body %></p>
 
 		<div class="details">
-			Posted By <strong><%= link_to(@blog_post.user.username, user_view_path(@blog_post.user.username)) %></strong>, 
+			Posted By <strong><%= link_to(@blog_post.user.username, user_view_path(@blog_post.user.username), class: 'alt') %></strong>, 
 			at <strong><%= @blog_post.created_at.strftime('%B %-d, %Y') %></strong>, 
-			in <strong><%= link_to(@blog_post.blog_category.name, blog_home_path(page: 1, focus: @blog_post.blog_category.slug)) %></strong>
+			in <strong><%= link_to(@blog_post.blog_category.name, blog_home_path(page: 1, focus: @blog_post.blog_category.slug), class: 'alt') %></strong>
 		</div>
 	</div>
 </div>
