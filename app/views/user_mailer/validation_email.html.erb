@@ -9,7 +9,7 @@
       Now you've joined, you need to verify your account.
     </p>
     <p>
-    	<a href="<%= @verification.generate_url %>">Click Here</a>, or visit <%= @verification.generate_url %> to verify this email address.
+    	<a href="<%= @verification.generate_url() %>">Click Here</a>, or visit <%= @verification.generate_url() %> to verify this email address.
     </p>
     <p>
     	If you don't know what this is, and didn't sign up for branch, then just ignore this email.
