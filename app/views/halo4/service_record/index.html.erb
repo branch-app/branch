@@ -36,8 +36,8 @@
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@alexerax">
 	<meta name="twitter:title" content="<%= gamertag_validation(@service_record["Gamertag"]) %>'s Halo 4 Service Record">
-	<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> has played <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> games, has <%= number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], delimiter: ',') %> and has a K/D ratio of <%= @service_record['GameModes'][2]['KDRatio'] %>">
-	<meta name="twitter:image:src" content="">
+	<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> has played <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> Games, has <%= number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], delimiter: ',') %> Kills and has a K/D ratio of <%= @service_record['GameModes'][2]['KDRatio'] %>">
+	<meta name="twitter:image:src" content="<%= get_raw_asset_url(@service_record['EmblemImageUrl'], 100) %>">
 	<meta name="twitter:domain" content="https://branchapp.co">
 <% end %>
 <% content_for :template, 'halo4 halo4_service_record' %>
