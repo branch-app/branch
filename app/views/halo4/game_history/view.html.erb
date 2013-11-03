@@ -63,10 +63,10 @@
 <% content_for :social_meta do %>
 	<% 
 		map_url = ''
-		if (@game['MapImageUrl'] == nil)
-			map_url = get_raw_asset_url(@game['MapImageUrl'], 'large')
-		else
+		if (@game['ModeId'] == 5)
 			map_url = get_raw_asset_url(@chapter['ImageUrl'], 'large')
+		else
+			map_url = get_raw_asset_url(@game['MapImageUrl'], 'large')
 		end
 
 		game = ''
