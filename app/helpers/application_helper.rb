@@ -83,11 +83,11 @@ module ApplicationHelper
 
 	#-- Maths Helpers --#
 	def calculate_kd(kills, deaths, round_to = 2)
-		if (kills <= 0 || deaths <= 0)
-            return 0.0
-        else
-            return (kills.to_f() / deaths.to_f()).to_f().round(round_to)
-        end
+		if (deaths > 0)
+			return (kills.to_f() / deaths.to_f()).to_f().round(round_to)
+		else
+			return kills
+		end
 	end
 
 	def calculate_spread(kills, deaths)
