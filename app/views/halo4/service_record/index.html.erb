@@ -3,46 +3,38 @@
 <% content_for :has_footer, true %>
 <% content_for :halo4_active, 'overview' %>
 <% content_for :scripts do %>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-<script>
-	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
-	var chart = new Chart(ctx).Doughnut([ 
-			{
-				value: <%= @service_record['GameModes'][0]['TotalGamesStarted'] %>,
-				color: '#F7464A'
-			},
-			{
-				value: <%= @service_record['GameModes'][2]['TotalGamesStarted'] %>,
-				color: '#5880A0'
-			},
-			{
-				value: <%= @service_record['GameModes'][3]['TotalGamesStarted'] %>,
-				color: '#3d3d7c'
-			},
-			{
-				value: <%= @service_record['GameModes'][1]['TotalGamesStarted'] %>,
-				color: '#949FB1'
-			},
-		], 
-		{ 
-			animationStages : 500,
-			animateScale : false,
-			animateRotate : false
-		}
-	);
-</script>
-<% end %>
-<% content_for :social_meta do %>
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@alexerax">
-	<meta name="twitter:title" content="<%= gamertag_validation(@service_record["Gamertag"]) %>'s Halo 4 Service Record">
-	<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> has played <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> Games, has <%= number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], delimiter: ',') %> Kills and has a K/D ratio of <%= @service_record['GameModes'][2]['KDRatio'] %>">
-	<meta name="twitter:image:src" content="<%= get_raw_asset_url(@service_record['EmblemImageUrl'], 100) %>">
-	<meta name="twitter:domain" content="https://branchapp.co">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+	<script>
+		var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+		var chart = new Chart(ctx).Doughnut([ 
+				{
+					value: <%= @service_record['GameModes'][0]['TotalGamesStarted'] %>,
+					color: '#F7464A'
+				},
+				{
+					value: <%= @service_record['GameModes'][2]['TotalGamesStarted'] %>,
+					color: '#5880A0'
+				},
+				{
+					value: <%= @service_record['GameModes'][3]['TotalGamesStarted'] %>,
+					color: '#3d3d7c'
+				},
+				{
+					value: <%= @service_record['GameModes'][1]['TotalGamesStarted'] %>,
+					color: '#949FB1'
+				},
+			], 
+			{ 
+				animationStages : 500,
+				animateScale : false,
+				animateRotate : false
+			}
+		);
+	</script>
 <% end %>
 <% content_for :template, 'halo4 halo4_service_record' %>
 
-<%= render partial: 'halo4/partials/header' %>
+<%= render partial: 'halo4/partials/header', locals: { show_social: true } %>
 
 <div class="container">
 	<div class="row">

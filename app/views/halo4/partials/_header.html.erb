@@ -1,3 +1,21 @@
+<% if (show_social) %>
+	<% content_for :social_meta do %>
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:site" content="@alexerax">
+		<meta name="twitter:title" content="<%= gamertag_validation(@service_record["Gamertag"]) %>'s Halo 4 Service Record">
+		<meta name="twitter:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> has played <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> Games, has <%= number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], delimiter: ',') %> Kills and has a K/D ratio of <%= @service_record['GameModes'][2]['KDRatio'] %>">
+		<meta name="twitter:image:src" content="<%= get_raw_asset_url(@service_record['EmblemImageUrl'], 100) %>">
+		<meta name="twitter:domain" content="https://branchapp.co">
+
+		<!-- Facebook -->
+		<meta property="og:title" content="<%= gamertag_validation(@service_record["Gamertag"]) %>'s Halo 4 Service Record"/>
+		<meta property="og:image" content="<%= get_raw_asset_url(@service_record['EmblemImageUrl'], 100) %>"/>
+		<meta property="og:site_name" content="Branch"/>
+		<meta property="og:description" content="<%= gamertag_validation(@service_record["Gamertag"]) %> has played <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> Games, has <%= number_with_delimiter(@service_record['GameModes'][2]['TotalKills'], delimiter: ',') %> Kills and has a K/D ratio of <%= @service_record['GameModes'][2]['KDRatio'] %>"/>
+	<% end %>
+<% end %>
+
 <div class="bs-header halo4-header" id="content">
 	<div class="container">
 
