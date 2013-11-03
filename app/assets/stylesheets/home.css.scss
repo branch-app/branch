@@ -1,0 +1,131 @@
+body.home {
+	.welcome-header {
+		padding-bottom: 0;
+		text-align: center;
+	}
+
+	@media screen and (min-width: 992px) {
+		.bs-header h1,
+		.bs-header p {
+			margin-right: 0px;
+			text-align: center;
+		}
+	}
+
+	.project-stats {
+		margin: 0;
+		padding: 0;
+		margin-top: -10px;
+		margin-bottom: 0;
+		list-style-type: none;
+	}
+		.project-stats li {
+			display: inline;
+			margin-left: 10px;
+
+			font-size: 12px;
+		}
+		.project-stats li:first-child {
+			display: inline;
+			margin-left: 0px;
+		}
+			.project-stats li a {
+
+			}
+
+	.social-media-shit {
+		margin: 0;
+		padding: 0;
+		margin-top: 10px;
+		margin-bottom: 30px;
+		list-style-type: none;
+	}
+		.social-media-shit li {
+			display: inline;
+			margin-left: 20px;
+		}
+		.social-media-shit li:first-child {
+			display: inline;
+			margin-left: 0px;
+		}
+
+
+	.marketing {
+		margin-top: 100px;
+	}
+		.marketing > .central {
+			text-align: center;
+		}
+		.marketing > hr {
+			margin: 80px 0;
+		}
+
+	.featurette h2 {
+		font-weight: 300;
+		line-height: 1;
+		letter-spacing: -1px;
+	}
+	@media (min-width: 768px) {
+
+		.marketing {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.featurette h2 {
+			font-size: 50px;
+		}
+
+	}
+	@media (min-width: 992px) {
+		.featurette h2 {
+			margin-top: 120px;
+		}
+	}
+
+	.game-feed {
+
+		> .page-header > h1 {
+			font-size: 20px;
+		}
+
+		> ul {
+			margin: 0;
+			padding: 0;
+
+			list-style-type: none;
+
+			> li {
+				padding: 20px;
+				border-bottom: 1px solid #f1f1f1;
+
+				> .glyphicon {
+					margin-bottom: -20px;
+				}
+
+				> .info {
+					margin-left: 40px;
+					margin-top: -19px;
+
+					font-size: 13px;
+
+					> .time-info {
+						color: #bbb;
+						font-size: 12px;
+					}
+
+					> img {
+						opacity: 0.7;
+						border: 1px solid #eee;
+						padding: 2px;
+						margin-top: 8px;
+					}
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+	}
+}

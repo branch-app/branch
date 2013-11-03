@@ -1,0 +1,147 @@
+<% content_for :home, true %>
+<% content_for :title, "Welcome, #{current_user.username}" %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'home' %>
+<% content_for :scripts do %>
+	<script>
+		$(document).ready(function() {
+			$.getJSON('https://api.github.com/repos/thetree/branch/commits', function(data) {
+				var commit = data[0];
+
+				// Link to last commit
+				$('.project-stats > li > #last-commit').attr('href', "https://github.com/thetree/branch/commit/" + commit.sha);
+				$('.project-stats > li > #last-commit').text(commit.sha.substring(0,7));
+
+				// Link to last commiter
+				$('.project-stats > li > #last-commiter').attr('href', "https://github.com/" + commit.committer.login);
+				$('.project-stats > li > #last-commiter').text(commit.committer.login);
+
+				setTimeout(function() {
+					$('.project-stats').fadeIn(600);
+				}, 1000);
+			});
+		});
+	</script>
+<% end %>
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Welcome to Branch, <%= current_user.username %></h1>
+		<p>Detailed Halo Stats. Designed and Built with the community in mind.</p>
+
+		<ul class="project-stats" style="display: none;">
+			<li>
+				Last Commit: <a id="last-commit" target="_blank" href=""></a>
+			</li>
+
+			<li>
+				By: <a id="last-commiter" target="_blank" href=""></a>
+			</li>
+		</ul>
+
+		<%= render partial: 'home/social_buttons' %>
+
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="bs-sidebar" data-spy="affix" data-offset-top="254">
+				<ul class="nav bs-sidenav">
+					<li class="active">
+						<a href="#"><%= current_user.username %></a>
+						<ul class="nav">
+							<li class="active">
+								<a href="#">Game Feed</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section game-feed">
+				<%= render partial: 'partials/flash', locals: { flash: flash } %>
+				<div class="page-header">
+					<h1>Game Feed</h1>
+				</div>
+
+				<ul>
+					<li>
+						<span class="glyphicon glyphicon-tasks"></span>
+						<div class="info">
+							<span class="time-info">2 minutes ago</span>
+							<br />
+							<a href="#">gabe_k</a> played a <a href="#">game</a> of <b>Midnight FFA</b> on <b>Haven</b>
+							<br />
+							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/haven.png" />
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-user"></span>
+						<div class="info">
+							<a href="#">Xerax</a> added <a href="#">iBotPeaches</a> as a friend
+							<span class="time-info">12 minutes ago</span>
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-user"></span>
+						<div class="info">
+							<a href="#">Xerax</a> added <a href="#">gabe_k</a> as a friend
+							<span class="time-info">13 minutes ago</span>
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-tasks"></span>
+						<div class="info">
+							<span class="time-info">15 minutes ago</span>
+							<br />
+							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Team Infinity Slayer</b> on <b>Pitfall</b>
+							<br />
+							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/pitfall-4d905f5d-6e0c-467c-a592-de09d41f7517.png" />
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-tasks"></span>
+						<div class="info">
+							<span class="time-info">23 minutes ago</span>
+							<br />
+							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Team Infinity Slayer</b> on <b>Haven</b>
+							<br />
+							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/haven.png" />
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-tasks"></span>
+						<div class="info">
+							<span class="time-info">31 minutes ago</span>
+							<br />
+							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Capture the Flag</b> on <b>Narrows</b>
+							<br />
+							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/forge-island-a1ed2ce1-bf2c-4bef-adfe-2f6d2967a564.png" />
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-star"></span>
+						<div class="info">
+							<a href="#">Xerax</a> added a <a href="#">game</a> of <b>Team Slayer</b> to his favourites.
+							<span class="time-info">23 minutes ago</span>
+						</div>
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-tasks"></span>
+						<div class="info">
+							<span class="time-info">3 hours ago</span>
+							<br />
+							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Ricochet</b> on <b>Pitfall</b>
+							<br />
+							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/pitfall-4d905f5d-6e0c-467c-a592-de09d41f7517.png" />
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

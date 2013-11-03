@@ -1,0 +1,64 @@
+<% content_for :halo4, true %>
+<% content_for :title, "Halo 4 - #{gamertag_validation(@service_record['Gamertag'])}'s #{@friendly_name} Commendations" %>	
+<% content_for :has_footer, true %>
+<% content_for :halo4_active, 'commendations' %>
+<% content_for :halo4_commendations_active, @css_class %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_commendations' %>
+
+<%= render partial: 'halo4/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'halo4/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section commendations">
+				<%= render partial: 'partials/flash', locals: { flash: flash } %>
+				<div class="page-header">
+					<h1><%= @friendly_name %> Commendations</h1>
+				</div>
+
+				<div class="row">
+					<% @commendations.each do |commendation| %>
+						<div class="col-lg-5 col-md-6 entry">
+							<div class="title">
+								<span class="numerical"><%= commendation['LevelId'] %>/<%= commendation_max_level(commendation['Id']) %></span>
+								<% if commendation['LevelName'] == '' %>
+									<%= commendation['Name'] %> - Learner
+								<% else %>
+									<%= commendation['LevelName'] %>
+								<% end %>
+							</div>
+							<div class="description"><%= commendation['Description'] %></div>
+
+							<% percentage = (commendation['NextLevel']['ProgressToNextLevel'] * 100).round(2) %>
+							<div class="progression">
+								<div class="points">
+									<div class="lower"><%= commendation['LevelStartTicks'] %></div>
+									<div class="upper"><%= commendation['NextLevel']['NextLevelStartTicks'] %></div>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="progress">
+									<div class="progress-bar"  role="progressbar" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percentage %>%">
+										<span class="sr-only"><%= percentage %>% Complete</span>
+										<span class="progress-bar-indicator"><%= percentage %>% Complete</span>
+									</div>
+								</div>
+							</div>
+							<hr />
+						</div>
+						<div class="visible-lg col-md-1"></div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

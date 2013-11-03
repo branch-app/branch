@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-BranchApp::Application.config.session_store :cookie_store, key: '_Halo4StatViewer_session'
+BranchApp::Application.config.session_store :cookie_store, key: '_BranchApp_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information

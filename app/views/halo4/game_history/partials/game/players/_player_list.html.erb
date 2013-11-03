@@ -1,0 +1,615 @@
+<div class="team col-md-12" style="border-color: <%= team_colour %>;">
+	<div class="col-md-12 header">
+		<div class="row">
+			<div class="col-md-5 team-indicator"><%= team_name %></div>
+			<div class="col-md-1 score-indicator check-dat-paddin hidden-xs hidden-sm">Score</div>
+			<div class="col-md-1 kills-indicator check-dat-paddin hidden-xs hidden-sm">Kills</div>
+			<div class="col-md-1 deaths-indicator check-dat-paddin hidden-xs hidden-sm">Deaths</div>
+			<div class="col-md-2 kd-indicator check-dat-paddin hidden-xs hidden-sm">K/D Ratio</div>
+			<div class="col-md-1 assists-indicator check-dat-paddin hidden-xs hidden-sm">Assists</div>
+			<div class="col-md-1 csr-indicator check-dat-paddin hidden-xs hidden-sm">CSR</div>
+		</div>
+	</div>
+	<div class="team-players">
+		<% players.sort_by{ |p| p['Standing'] }.each do |player| %>
+			<% identifier = Digest::SHA1.hexdigest(player['Gamertag'])[0..8] %>
+			<div class="col-md-12" id="<%= identifier %>" style="border-color: <%= team_colour %>;">
+				<div class="desktop-view hidden-xs hidden-sm row">
+					<div class="col-md-1 expander-indicator">
+						<div class="expander-positioner">
+							<%= link_to('', '#', class: 'player-details-expander btn btn-default btn-large glyphicon glyphicon-chevron-down', 'data-ref' => identifier) %>
+						</div>
+					</div>
+					<% if (player['IsGuest']) %>
+						<div class="col-md-1 visual-flair" style="background-color: <%= team_colour %>; background-image: url();"></div>
+					<% else %>
+						<div class="col-md-1 visual-flair" style="background-color: <%= team_colour %>; background-image: url(<%= get_raw_asset_url(player['EmblemImageUrl'], 48) %>);"></div>
+					<% end %>
+					<div class="col-md-3 alphabetical-flair">
+						<% if (player['IsGuest']) %>
+							<%= player['Gamertag'] %>
+						<br />
+						<strong>GEST</strong>
+						<% else %>
+							<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag: link_to(gamertag_validation(player['Gamertag'])))) %>
+						<br />
+						<strong><%= player['Servicetag'] %></strong>
+						<% end %>
+					</div>
+					<div class="col-md-1 score-indicator check-dat-paddin"><%= player['PersonalScore'] %></div>
+					<div class="col-md-1 kills-indicator check-dat-paddin"><%= player['Kills'] %></div>
+					<div class="col-md-1 deaths-indicator check-dat-paddin"><%= player['Deaths'] %></div>
+					<div class="col-md-2 kd-indicator check-dat-paddin"><%= calculate_kd(player['Kills'], player['Deaths']) %></div>
+					<div class="col-md-1 assists-indicator check-dat-paddin"><%= player['Assists'] %></div>
+					<% if (player['IsGuest'] || player['SkillRank'] == nil ) %>
+						<div class="col-md-1 csr-indicator check-dat-paddin" style="background-image: url(<%= get_csr_level_url(0) %>);"></div>
+					<% else %>
+						<div class="col-md-1 csr-indicator check-dat-paddin" style="background-image: url(<%= get_csr_level_url(player['SkillRank']['CurrentSkillRank']) %>);"></div>
+					<% end %>
+				</div>
+				<div class="mobile-view visible-xs visible-sm row">
+					<div class="expander-indicator">
+						<div class="player-details-expander" data-ref="<%= identifier %>">
+							<div class="player-indicator">
+								<% if (player['IsGuest']) %>
+									<div class="col-md-1 visual-flair" style="background-color: <%= team_colour %>; background-image: url();">
+										<%= gamertag_validation(player['Gamertag']) %>
+										<br />
+										<strong>GEST</strong>
+									</div>
+								<% else %>
+									<div class="col-md-1 visual-flair" style="background-color: <%= team_colour %>; background-image: url(<%= get_raw_asset_url(player['EmblemImageUrl'], 48) %>);">
+										<%= gamertag_validation(player['Gamertag']) %>
+										<br />
+										<strong><%= player['Servicetag'] %></strong>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="player-data collapsed" style="display: none;">
+					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+						<li class="active">
+							<a id="tab-summary" href="#<%= identifier %>-summary" data-toggle="tab">Summary</a>
+						</li>
+						<li>
+							<a id="tab-weapons" href="#<%= identifier %>-weapons" data-toggle="tab">Weapons</a>
+						</li>
+						<% if (player['MedalStats'].length > 0) %>
+							<li>
+								<a id="tab-medals" href="#<%= identifier %>-medals" data-toggle="tab">Medals</a>
+							</li>
+						<% end %>
+						<% if (player['EnemyStats'].length > 0) %>
+							<li>
+								<a id="tab-enemy" href="#<%= identifier %>-enemys" data-toggle="tab">Enemies</a>
+							</li>
+						<% end %>
+					</ul>
+
+					<div class="player-stats tab-content">
+						<div class="tab-pane fade in active summary" id="<%= identifier %>-summary">
+							<div class="row">
+								<div class="col-md-6 hidden-sm hidden-xs player-model" style="background-image: url(<%= get_player_model_url(remove_halo_guest_indentifier(player['Gamertag'])) %>)"></div>
+								<div class="col-md-6">
+									<% if (player['IsGuest']) %>
+										<h2><%= player['Gamertag'] %></h2>
+										<h3 class="player-servicetag">GEST</h3>
+									<% else %>
+										<h2>
+											<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag_validation(player['Gamertag']))) %>
+										</h2>
+										<h3 class="player-servicetag"><%= player['Servicetag'] %></h3>
+									<% end %>
+									<hr />
+
+									<h2>
+										Score
+									</h2>
+									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge"><%= player['PersonalScore'] %></span>
+											Personal Score
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Kills'] %></span>
+											Kills
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Deaths'] %></span>
+											Deaths
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= calculate_kd(player['Kills'], player['Deaths']) %></span>
+											K/D Ratio
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Assists'] %></span>
+											Assists
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalMedals'] %></span>
+											Medals
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Betrayals'] + player['Suicides'] %></span>
+											Penalities (Betrayals, Suicides, etc)
+										</li>
+										<% if (player['FeaturedStatName'] != nil && player['FeaturedStatName'] != '') %>
+											<li class="list-group-item">
+												<span class="badge"><%= player['FeaturedStatValue'] %></span>
+												<%= player['FeaturedStatName'] %>
+											</li>
+										<% end %>
+									</ul>
+									<hr />
+
+									<h2>
+										Meta
+									</h2>
+									<ul class="list-group">
+										<% if (player['KilledMostGamertag'] != nil) %>
+											<li class="list-group-item">
+												<span class="badge">
+													<% if (player['KilledMostGamertag'] == remove_halo_guest_indentifier(player['KilledMostGamertag'])) # not guest %>
+														<%= link_to(player['KilledMostGamertag'], halo4_servicerecord_path(gamertag: player['KilledMostGamertag'])) %>
+													<% else %>
+														<%= player['KilledMostGamertag'] %>
+													<% end %>
+													(<%= player['KilledMostCount'] %>)
+												</span>
+												Most Killed
+											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
+												Most Killed
+											</li>
+										<% end %>
+										<% if (player['KilledByMostGamertag'] != nil) %>
+											<li class="list-group-item">
+												<span class="badge">
+													<% if (player['KilledByMostGamertag'] == remove_halo_guest_indentifier(player['KilledByMostGamertag'])) # not guest %>
+														<%= link_to(player['KilledByMostGamertag'], halo4_servicerecord_path(gamertag: player['KilledByMostGamertag'])) %>
+													<% else %>
+														<%= player['KilledByMostGamertag'] %>
+													<% end %>
+													(<%= player['KilledByMostCount'] %>)
+												</span>
+												Most Killed By
+											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
+												Most Killed By
+											</li>
+										<% end %>
+										<li class="list-group-item">
+											<span class="badge"><%= player['AverageKillDistance'] %> Meters</span>
+											Average Kill Distance
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['AverageDeathDistance'] %> Meters</span>
+											Average Death Distance
+										</li>
+									</ul>
+									<hr />
+								</div>
+
+								<div class="col-md-6">
+									<h2>
+										Medals
+									</h2>
+									<ul class="list-group">
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalKillMedals'] %></span>
+											Kill Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalBonusMedals'] %></span>
+											Bonus Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalAssistMedals'] %></span>
+											Assist Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalSpreeMedals'] %></span>
+											Spree Medals Earned
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['TotalModeMedals'] %></span>
+											Mode Medals Earned
+										</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<h2>
+										Player
+									</h2>
+									<ul class="list-group">
+										<% if (player['SkillRank'] == nil) %>
+											<li class="list-group-item">
+												<span class="badge">0</span>
+												CSR
+											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge"><%= player['SkillRank']['CurrentSkillRank'] %></span>
+												CSR
+											</li>
+										<% end %>
+										<% if (player['RankName'] == nil) %>
+											<li class="list-group-item">
+												<span class="badge">0</span>
+												Rank
+											</li>
+										<% else %>
+											<li class="list-group-item">
+												<span class="badge"><%= player['RankName'] %></span>
+												Rank
+											</li>
+										<% end %>
+										<li class="list-group-item">
+											<span class="badge">
+												<% if (player['IsCompleted']) %>
+													Finished the Fight
+												<% else %>
+													Did Not Finish
+												<% end %>
+											</span>
+											Completion Style
+										</li>
+										<li class="list-group-item">
+											<span class="badge">
+												<% if (player['JoinedInProgress']) %>
+													Joined In Progress
+												<% else %>
+													Played From the Start
+												<% end %>
+											</span>
+											Deployment Style
+										</li>
+										<li class="list-group-item">
+											<span class="badge"><%= player['Standing'] %></span>
+											Standing
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade in weapons" id="<%= identifier %>-weapons">
+							<% weapon_graph_identifier = 'player-weapons-' + identifier.to_s %>
+							<div class="graph-container hidden-xs">
+								<!-- Graphs Will Return! -->
+								<div id="<%= weapon_graph_identifier %>" style="height: 250px; width: 700px; display: none;">
+								</div>
+							</div>
+
+							<h2>All Weapons</h2>
+							<hr />
+							<table class="table weapons">
+									<thead>
+											<tr>
+													<th>Weapon</th>
+													<th>Kills</th>
+													<th>Headshots</th>
+													<th>Deaths</th>
+													<th>Penalties</th>
+													<th>Spread</th>
+											</tr>
+									</thead>
+									<tbody>
+										<% player['DamageTypeStats'].sort_by{ |d| -calculate_spread(d['Kills'], d['Deaths'] + d['Suicides']) }.each do |damage_type| %>
+											<tr>
+												<td>
+													<a href="#" role="tooltip" title="<%= damage_type['Name'] %>">
+														<img alt="<%= damage_type['Name'] %>" src="<%= get_raw_asset_url(damage_type['ImageUrl']) %>" />
+													</a>
+												</td>
+												<td><%= damage_type['Kills'] %></td>
+												<td><%= damage_type['Headshots'] %></td>
+												<td><%= damage_type['Deaths'] %></td>
+												<td><%= damage_type['Betrayals'] + damage_type['Suicides'] %></td>
+												<td><%= calculate_spread(damage_type['Kills'], damage_type['Deaths'] + damage_type['Suicides']) %></td>
+											</tr>
+										<% end %>
+									</tbody>
+							</table>
+
+							<% content_for :scripts do %>
+								<script>
+										<%
+												carnage = [ ]
+												kills = 0
+												deaths = 0
+												25.times do |i|
+														tmp = rand(0..2)
+														if tmp == 1
+																tmp == rand(0..3)
+																if tmp == 0
+																		kills += 1
+																elsif tmp == 1
+																		kills += 2
+																end
+														end
+
+
+														tmp = rand(0..2)
+														if tmp == 1
+																tmp == rand(0..3)
+																if tmp == 0
+																		deaths += 1
+																elsif tmp == 1
+																		deaths += 2
+																end
+														end
+
+
+														carnage << { kills: kills, deaths: deaths }
+												end
+										%>
+										Morris.Area({
+												element: '<%= weapon_graph_identifier %>',
+												data: [
+														<% 
+														index = 0
+														carnage.each do |carnage_entry|
+														%>
+																<%= raw("{ y: '#{ index }', a: #{ carnage_entry[:kills] }, b: #{ carnage_entry[:deaths] } },") %>
+														<% 
+																index += 1
+														end
+														%>
+												],
+												lineColors: [
+														'#51D951',
+														'#D96551'
+												],
+												xkey: 'y',
+												xLabels: 'decade',
+												ykeys: ['a', 'b'],
+												labels: ['Kills', 'Deaths'],
+												behaveLikeLine: true,
+												hideHover: true,
+												hoverCallback: function (index, options, content) {
+														return generateGraphHoverView(index, options, content, 'Kills');
+												}
+										});
+								</script>
+							<% end %>
+						</div>
+						<% if (player['MedalStats'].length > 0) %>
+							<div class="tab-pane fade in medals" id="<%= identifier %>-medals">
+								<% medal_graph_identifier = 'player-medals-' + identifier.to_s %>
+								<div class="graph-container hidden-xs">
+									<!-- Graphs Will Return! -->
+									<div id="<%= medal_graph_identifier %>" style="height: 250px; width: 700px; display: none;"></div>
+								</div>
+
+								<!-- Medal View Data Processing -->
+								<%
+									# woah, alot of medal calculation
+									sorted_medals = player['MedalStats'].sort_by{ |m| -m['TotalMedals'] }
+									top_medals = [ ]
+									all_medals = [ ]
+
+									@metadata['MedalsMetadata']['MedalClasses'].each do |medal_class|
+										container = { 'Medals' => [ ], 'MedalClass' => medal_class }
+										
+										sorted_medals.each do |medal|
+											if (medal['ClassId'] == medal_class['Id'])
+												raw_medal = get_medal_from_base_id(medal['Id'])
+												data_model = { 'RawMedal' => raw_medal, 'MedalStats' => medal }
+												container['Medals'] << data_model
+												
+												player['TopMedalIds'].map{ |m| top_medals << data_model if (m == medal['Id']) }
+											end
+										end
+
+										all_medals << container
+									end
+								%>
+
+								<% if (top_medals.length > 0) %>
+									<h2>Top Medals</h2>
+									<hr />
+									<div class="row" id="top-medals" style="width: <%= top_medals.length * (100 + 20 + 20) %>px;">
+										<% top_medals.each do |medal| %>
+											<div class="entry">
+												<div class="medal" role="tooltip" title="<%= medal['MedalStats']['Name'] %>" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
+												<div class="count">
+													<%= medal['MedalStats']['TotalMedals'] %>
+												</div>
+												<div class="earned">Earned</div>
+											</div>
+										<% end %>
+										<div class="clearfix"></div>
+									</div>
+								<% end %>
+
+								<%
+									user_has_fuckall_medals = true
+									all_medals.each do |medal_data|
+										if (medal_data['Medals'].length > 0)
+											user_has_fuckall_medals = false
+										end
+									end 
+								%>
+								<% if (!user_has_fuckall_medals) %>
+									<h2>All Medals</h2>
+									<hr />
+									<div class="row" id="all-medals">
+										<ul class="nav nav-tabs">
+											<% first_entry = true %>
+											<% all_medals.each do |medal_data| %>
+												<% if (medal_data['Medals'].length > 0) %>
+													<li class="<%= 'active' if (first_entry) %>">
+														<%= link_to(medal_data['MedalClass']['Name'], "#medal-tier-#{medal_data['MedalClass']['Name'].to_slug()}-#{identifier}", 'data-toggle' => 'tab') %>
+													</li>
+													<% first_entry = false %>
+												<% end %>
+											<% end %>
+										</ul>
+
+										<div id='player-medals' class="tab-content">
+											<% first_entry = true %>
+											<% all_medals.each do |medal_data| %>
+												<% if (medal_data['Medals'].length > 0) %>
+													<div class="tab-pane fade in <%= 'active' if (first_entry) %>" id="medal-tier-<%= medal_data['MedalClass']['Name'].to_slug() %>-<%= identifier %>">
+														<% medal_data['Medals'].each do |medal| %>
+															<div class="col-md-12 medal-entry row">
+																<div class="medal" style="background-image: url(<%= get_raw_asset_url(medal['MedalStats']['ImageUrl'], 'large') %>)"></div>
+																<div class="description">
+																		<span class="name"><%= medal['RawMedal']['Name'] %></span>
+																		<br />
+																		<%= medal['RawMedal']['Description'] %>
+																</div>
+																<div class="count">
+																		<span class="integer"><%= medal['MedalStats']['TotalMedals'] %></span>
+																		<br />
+																		<span class="in-dick-ator">earned</span> 
+																</div>
+															</div>
+															<hr />
+														<% end %>
+													</div>
+													<% first_entry = false %>
+												<% end %>
+											<% end %>
+										</div>
+									</div>
+								<% end %>
+
+								<% content_for :scripts do %>
+										<script>
+												Morris.Area({
+														element: '<%= medal_graph_identifier %>',
+														data: [
+															<%= raw(generate_graph_from_single(player['MedalsOverTime'], @game['Duration'])) %>
+														],
+														lineColors: [ '<%= team_colour %>' ],
+														xkey: 'x',
+														ykeys: [ 'y' ],
+														labels: [ "<%= player['Gamertag'] %>" ],
+														behaveLikeLine: true,
+														hideHover: true,
+														hoverCallback: function (index, options, content) {
+																return generateGraphHoverView(index, options, content, 'Medals');
+														}
+												});
+										</script>
+								<% end %>
+							</div>
+						<% end %>
+						<% if (player['EnemyStats'].length > 0) %>
+							<div class="tab-pane fade in enemies" id="<%= identifier %>-enemys">
+								<% enemy_graph_identifier = 'player-enemy-' + identifier.to_s %>
+								<div class="graph-container hidden-xs">
+									<!-- Graphs Will Return! -->
+									<div id="<%= enemy_graph_identifier %>" style="height: 250px; width: 700px; display: none;"></div>
+								</div>
+
+								<h2>All Enemies</h2>
+								<hr />
+
+								<div class="row">
+									<% player['EnemyStats'].sort_by{ |e| -e['Kills'] }.each do |enemy_stat| %>
+										<%
+											enemy_uuid = identifier + '-' + enemy_stat['EnemyId'].to_s
+											enemy = get_enemy_from_base_id(enemy_stat['EnemyId'])
+											enemy_class = get_enemy_class_from_base_id(enemy['ClassId'])
+											enemy_type = get_enemy_type_from_base_id(enemy['TypeId'])
+											enemy_faction = get_faction_from_base_id(enemy['FactionId'])
+										%>
+										<div class="col-md-12 enemy-entry row">
+											<div class="enemy-image col-md-1" style="background-image: url(<%= get_raw_asset_url(enemy['ImageUrl'], 'large') %>)"></div>
+											<div class="enemy-content col-md-8">
+												<span class="name"><%= enemy['Name'] %></span>
+												<ul class="nav nav-tabs" style="margin-top: 15px;">
+													<li class="active">
+														<a id="tab-stats" href="#<%= enemy_uuid %>-stats" data-toggle="tab">Stats</a>
+													</li>
+													<li>
+														<a id="tab-info" href="#<%= enemy_uuid %>-info" data-toggle="tab">Information</a>
+													</li>
+													<li>
+														<a id="tab-desc" href="#<%= enemy_uuid %>-desc" data-toggle="tab">Descirption</a>
+													</li>
+												</ul>
+												<div class="enemy-stats tab-content">
+													<div class="tab-pane fade in active statistics" id="<%= enemy_uuid %>-stats">
+														<span>
+															<strong>
+																Kills:
+															</strong>
+															<%= enemy_stat['Kills'] %>
+														</span>
+														<br />
+														<span>
+															<strong>
+																Deaths:
+															</strong>
+															<%= enemy_stat['Deaths'] %>
+														</span>
+														<br />
+														<span>
+															<strong>
+																Average Kill Distance:
+															</strong>
+															<%= enemy_stat['AverageKillDistance'] %>
+														</span>
+														<br />
+														<span>
+															<strong>
+																Average Death Distance:
+															</strong>
+															<%= enemy_stat['AverageDeathDistance'] %>
+														</span>
+													</div>
+													<div class="tab-pane fade in information" id="<%= enemy_uuid %>-info">
+														<span>
+															<strong>
+																Class:
+															</strong>
+															<%= enemy_class['Name'] %>
+														</span>
+														<br />
+														<span>
+															<strong>
+																Type:
+															</strong>
+															<%= enemy_type['Name'] %>
+														</span>
+														<br />
+														<span>
+															<strong>
+																Faction:
+															</strong>
+															<%= enemy_faction['Name'] %>
+														</span>
+													</div>
+													<div class="tab-pane fade in description" id="<%= enemy_uuid %>-desc">
+														<%= enemy['Description'] %>
+													</div>
+												</div>
+											</div>
+											<div class="count hidden-xs hidden-sm col-md-2">
+												<span class="integer"><%= enemy_stat['Kills'] %></span>
+												<br />
+												<span class="in-dick-ator">killed</span>
+											</div>
+										</div>
+										<hr />
+									<% end %>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<hr />
+		<% end %>
+	</div>
+</div>

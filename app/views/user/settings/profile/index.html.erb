@@ -1,0 +1,29 @@
+<% content_for :user, true %>
+<% content_for :title, "Edit Your Profile" %>	
+<% content_for :has_footer, true %>
+<% content_for :setting_active, 'profile' %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'account settings settings_session' %>
+
+<%= render partial: 'user/account/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'user/settings/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section overview">
+				<%= render partial: 'partials/flash', locals: { flash: flash } %>
+				<div class="page-header">
+					<h1>Profile</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

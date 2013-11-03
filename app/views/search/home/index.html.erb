@@ -1,0 +1,48 @@
+<% content_for :title, "Searching Branch for '#{@query}'" %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'search' %>
+
+<div class="container">
+	<div class="search-result-block">
+
+		<%= render partial: 'partials/flash', locals: { flash: flash } %>
+
+		<div class="page-header row">
+			<div class="col-md-11">
+				<h1 id="less">Branch Accounts</h1>
+			</div>
+			<div class="col-md-1 focus-col">
+				<%= link_to(raw('Focus On &raquo;'), search_branch_query_path(page: 1, q: @query), class: 'btn btn-default toggle', type: 'button') %>
+			</div>
+		</div>
+		<div class="row">
+			<% if @branch_accounts.length > 0 %>
+				<% @branch_accounts.each do |branch_account| %>
+					<%= render partial: 'search/partials/branch_account', locals: { branch_account: branch_account } %>
+				<% end %>
+			<% else %>
+				<p>There are no Branch Accounts that match the search query '<%= @query %>'...</p>
+			<% end %>
+		</div>
+
+		<div class="page-header row">
+			<div class="col-md-11">
+				<h1 id="less">Halo 4 Service Records</h1>
+			</div>
+			<div class="col-md-1 focus-col">
+				<%= link_to(raw('Focus On &raquo;'), search_halo4_query_path(page: 1, q: @query), class: 'btn btn-default toggle', type: 'button') %>
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<% if @halo4_accounts.length > 0 %>
+					<% @halo4_accounts.each do |halo4_account| %>
+						<%= render partial: 'search/partials/halo4_account', locals: { halo4_account: halo4_account } %>
+					<% end %>
+				<% else %>
+					<p>There are no Halo 4 Service Records that match the search query '<%= @query %>'...</p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

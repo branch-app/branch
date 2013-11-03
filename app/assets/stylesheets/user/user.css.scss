@@ -1,0 +1,103 @@
+body.user {
+	.user-auth-header {
+		height: 350px;
+
+		@media (max-width: 768px) {
+			height: 180px;
+		}
+
+		> .container  {
+
+			> h1 {
+				margin-top: 90px;
+
+				@media (max-width: 768px) {
+					margin-top: auto;
+				}
+			}
+
+			> .holy-shit-people {
+
+				position: absolute;
+				top: -40px;
+				right: 0;
+				width: 460px;
+				height: 360px;
+
+				> .player {
+					background-repeat: no-repeat;
+					position: absolute;
+					background-size: cover;
+
+					&.a {
+						top: 33px;
+						right: 91px;
+						z-index: 1000;
+						height: 327px;
+						width: 182px;
+					}
+					&.b {
+						top: 144px;
+						right: 4px;
+						z-index: 999;
+						width: 121px;
+						height: 216px;
+					}
+					&.c {
+						top: 161px;
+						right: 217px;
+						z-index: 998;
+						width: 111px;
+						height: 199px;
+
+						-moz-transform: scaleX(-1);
+						-o-transform: scaleX(-1);
+						-webkit-transform: scaleX(-1);
+						transform: scaleX(-1);
+						filter: FlipH;
+						-ms-filter: "FlipH";
+					}
+				}
+			}
+		}
+	}
+
+	.details {
+		.input-section {
+			margin: 40px auto;
+
+			.col-md-6 {
+				> .title {
+					font-size: 16px;
+					font-weight: 600;
+				}
+
+				> .input-group {
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}
+
+body.user_register {
+	.details {
+		.validation-errors {
+			> ul {
+				padding-left: 20px;
+				margin: 20px auto auto auto;
+				list-style-type: circle;
+
+				> li {
+
+				}
+			}
+
+			.input-section {
+				&.submit {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}

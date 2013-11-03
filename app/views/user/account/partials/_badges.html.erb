@@ -1,0 +1,13 @@
+<!--
+Guide;
+	storage :: user object of the user to load badges for
+-->
+
+<ul class="no-style inline">
+	<% if storage.role.identifier != 2 %>
+		<li><span class="label" style="background-color: #<%= storage.role.colour %>;"><%= storage.role.name %></span></li>
+	<% end %>
+	<% if (storage.get_h4_service_record != nil) %>
+		<li><span class="label label-info">Halo 4</span></li>
+	<% end %>
+</ul>

@@ -1,0 +1,461 @@
+body.halo4_game_history {
+
+	.game-details {
+
+		// le cover stuff
+		> .cover {
+			position: relative;
+			height: 374px;
+			width: 100%;
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			> .mask {
+				background: -moz-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,0,0,0.65)), color-stop(100%, rgba(0,0,0,0)));
+				background: -webkit-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				background: -o-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				background: -ms-linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				background: linear-gradient(45deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+				height: 100%;
+
+				> .inner {
+					padding: 10px;
+					color: #c5c5c5;
+
+					> .title {
+						text-align: center;
+
+						> h2 {
+							color: white;
+						}
+					}
+
+					> .game-icon {
+						width: 128px;
+						height: 128px;
+						margin: 0 auto;
+
+						background-repeat: no-repeat;
+					}
+
+					> .map {
+						font-size: 16px;
+						text-align: center;
+
+						> span.focus {
+							color: white;
+						}
+					}
+
+					> .victor {
+						margin: 0 auto;
+						text-align: center;
+
+						> .team-score-bollards {
+							margin: 0 auto;
+							margin-bottom: -10px;
+							color: white;
+
+							> .score-bollard {
+								float: left;
+								height: 75px;
+								width: 50px;
+								margin: 0 5px;
+
+								> .height-mask {
+									width: 100%;
+								}
+								> .score {
+									position: absolute;
+									width: 50px;
+									text-align: center;
+									margin-top: -45px;
+								}
+							}
+
+							> .team-score-bollard {
+								float: left;
+
+								height: 75px;
+								width: 50px;
+								margin: 0 5px;
+
+								> div {
+									line-height: 5em;
+								}
+							}
+						}
+
+						> .ffa-victor {
+							width: 300px;
+							margin: 0 auto;
+						}
+					}
+				}
+			}
+
+			> .victor-player-model {
+				background-repeat: no-repeat;
+				background-position: 30px 20px;
+
+				height: 350px;
+				width: 255px;
+				position: absolute;
+				top: 24px;
+				left: 0;
+
+				@media (min-width: 768px) and (max-width: 992px) {
+					top: 21px;
+					height: 353px;
+				}
+			}
+		}
+
+		> .social-shit {
+			margin: 10px 0;
+
+			> ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				display: inline;
+
+				> li {
+					display: inline;
+				}
+			}
+		}
+
+		.details {
+			> #player-listing {
+				margin-bottom: 40px;
+
+				> div > .team {
+					border-left: 4px solid;
+					border-top: 35px solid;
+
+					margin-bottom: 30px;
+
+					padding: 15px 0 0 10px;
+
+					.check-dat-paddin {
+						padding-left: 0px;
+					}
+
+					> .header {
+						margin-left: -13px;
+						margin-top: -43px;
+						color: white;
+						font-weight: 600;
+					}
+
+					> .team-players {
+						margin-top: 16px;
+
+						> div {
+							border-bottom: 0px;
+							margin-left: -10px;
+
+							&.expanded {
+								border-bottom: 4px solid;
+							}
+
+							> .desktop-view {
+								> .expander-indicator {
+									> .expander-positioner {
+										margin: 15px 0 0 -1px;
+										@media (min-width: 992px) and (max-width: 1199px) {
+											margin: 15px 0 0 -7px;
+											padding: 0 5px 0 0;
+										}
+									}
+
+								}
+
+								> .visual-flair {
+									// width: 60px;
+									height: 70px;
+									background-position: center;
+									background-repeat: no-repeat;
+								}
+
+								> .alphabetical-flair {
+									margin-top: 10px;
+								}
+
+								> .csr-indicator {
+									background-position: center;
+									background-repeat: no-repeat;
+									height: 60px;
+									background-size: contain;
+								}
+							}
+
+							> .mobile-view {
+								margin: -8px 0 0 -25px;
+
+								> .expander-indicator {
+									.player-details-expander {
+										> .player-indicator {
+											padding: 8px 0 0 22px;
+											text-align: center;
+
+											> .visual-flair {
+												height: 70px;
+												padding-top: 15px;
+												color: white;
+												background-position: 20px center;
+												background-repeat: no-repeat;
+											}
+										}
+									}
+								}
+							}
+
+							> .player-data {
+								margin: 20px auto;
+							}
+						}
+
+						> hr {
+							margin: 5px 0;
+						}
+					}
+
+
+					.player-stats {
+						> .summary {
+							> div {
+								> .player-model {
+									height: 660px;
+									background-repeat: no-repeat;
+									background-position: 50px 20px;
+
+									@media (min-width: 992px) and (max-width: 1199px) {
+										background-position: 5px 20px;
+									}
+								}
+							}
+
+							.player-servicetag {
+								margin-top: -10px;
+							}
+						}
+						> .weapons {
+							> .weapons > tbody > tr > .weapon {
+								
+							}
+						}
+						> .medals {
+							> #top-medals {
+								margin: 0 auto;
+
+								> div {
+									width: 100px;
+									min-height: 100px;
+									padding: 10px;
+									margin: auto 10px;
+									float: left;
+
+									text-align: center;
+									font-size: 25px;
+									font-weight: 100;
+
+									> .medal {
+										height: 100px;
+
+										background-repeat: no-repeat;
+										background-size: 80px 80px;
+									}
+
+									> .count {
+										height: 30px;
+									}
+
+									> .earned {
+										font-size: 11px;
+										font-weight: 600;
+										text-transform: uppercase;
+									}
+								}
+							}	
+
+							> #all-medals {
+								margin-left: 10px;
+
+								> #player-medals {
+									margin-bottom: 60px;
+									.medal-entry {
+										margin: 20px auto;
+										> .medal {
+											float: left;
+											background-repeat: no-repeat;
+											height: 100px;
+											width: 80px;
+											background-size: 80px 80px;
+											background-position: center center;
+										}
+										> .medal-small {
+
+										}
+										> .description {
+											float: left;
+											margin-left: 30px;
+											width: 250px;
+
+											> .name {
+												font-size: 16px;
+												font-weight: 600;
+											}
+										}
+										> .count {
+											float: right;
+											min-width: 100px;
+											text-align: center;
+											> .integer {
+												font-size: 50px;
+												font-weight: 100;
+											}
+											> .in-dick-ator {
+												font-size: 12px;
+												font-weight: 600;
+												text-transform: uppercase;
+											}
+										}
+									}
+								}
+							}
+						}
+						> .enemies {
+							> div {
+								.enemy-entry {
+									margin: 20px auto;
+
+									> .enemy-image {
+										background-repeat: no-repeat;
+										height: 100px;
+										width: 80px;
+										background-size: 80px 80px;
+										background-position: center center;
+									}
+									> .enemy-content {
+										> .name {
+											font-size: 16px;
+											font-weight: 600;
+										}
+
+										> .tab-content {
+											> div {
+												padding-top: 20px;
+											}
+										}
+									}
+									> .count {
+										text-align: center;
+
+										> .integer {
+											font-size: 50px;
+											font-weight: 100;
+										}
+										> .in-dick-ator {
+											font-size: 12px;
+											font-weight: 600;
+											text-transform: uppercase;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.team-table {
+				> thead > tr {
+					color: white;
+				}
+
+				> tbody {
+					> tr {
+						&.end-dnf {
+							background-color: #eee;
+							opacity: 0.3;
+						}
+						> td {
+							.player-emblem {
+								width: 60px;
+								height: 60px;
+								background-position: center;
+								background-repeat: no-repeat;
+
+								margin: 2px;
+
+								float: left;
+							}
+							.player-gamertag {
+								margin: 10px 0 0 5px;
+								float: left;
+							}
+							.player-csr {
+								height: 60px;
+								width: 40px;
+								background-size: contain;
+								background-position: 0% 100%;
+								background-repeat: no-repeat;
+								float: right;
+							}
+						}
+					}
+				}
+
+				.tab-pane {
+					> .click-helper {
+						color: #aaa;
+						font-size: 15px;
+					}
+				}
+			}
+		}
+
+		#overview {
+			margin-top: 40px;
+
+			.graph-container {
+				width: 700px;
+				margin: 20px auto;
+				margin-bottom: 40px;
+
+				> .name {
+					text-align: center;
+					color: #555;
+					width: 700px;
+					font-size: 20px;
+					font-weight: 100;
+				}
+
+				.morris-hover, .morris-default-style {
+
+					border-radius: 0px;
+					background-color: rgba(255, 255, 255, 0.4);
+					border: 2px solid rgba(230, 230, 230, 0.6);
+
+					> .graph-hover-legend {
+						margin: 5px 10px;
+
+						> .time {
+							font-weight: 600;
+							font-size: 14px;
+						}
+
+						> .key {
+							font-weight: 600;
+							font-size: 14px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,191 @@
+<% content_for :halo4, true %>
+<% content_for :title, "Halo 4 - #{gamertag_validation(@service_record['Gamertag'])}'s Service Record" %>	
+<% content_for :has_footer, true %>
+<% content_for :halo4_active, 'overview' %>
+<% content_for :scripts do %>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<script>
+	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+	var chart = new Chart(ctx).Doughnut([ 
+			{
+				value: <%= @service_record['GameModes'][0]['TotalGamesStarted'] %>,
+				color: '#F7464A'
+			},
+			{
+				value: <%= @service_record['GameModes'][2]['TotalGamesStarted'] %>,
+				color: '#5880A0'
+			},
+			{
+				value: <%= @service_record['GameModes'][3]['TotalGamesStarted'] %>,
+				color: '#3d3d7c'
+			},
+			{
+				value: <%= @service_record['GameModes'][1]['TotalGamesStarted'] %>,
+				color: '#949FB1'
+			},
+		], 
+		{ 
+			animationStages : 500,
+			animateScale : false,
+			animateRotate : false
+		}
+	);
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_service_record' %>
+
+<%= render partial: 'halo4/partials/header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<%= render partial: 'halo4/partials/sidebar' %>
+		</div>
+
+		<div class="col-md-9">
+			<div class="bs-branch-section overview">
+				<%= render partial: 'partials/flash', locals: { flash: flash } %>
+				<div class="page-header">
+					<h1>Overview</h1>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 game-history-split">
+						<div class="wrapper">
+							<div class="area">
+								<canvas id="game-history-split-chart" width="300" height="300"></canvas>
+							</div>
+							<div class="area-legend">
+								<%
+									total_games = @service_record['GameModes'][0]['TotalGamesStarted'] + @service_record['GameModes'][1]['TotalGamesStarted'] + @service_record['GameModes'][2]['TotalGamesStarted'] + @service_record['GameModes'][3]['TotalGamesStarted']
+								%>
+								<ul>
+									<li>
+										<div class="identifier war-games"></div>
+										War Games - <%= number_with_delimiter(@service_record['GameModes'][2]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][2]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
+									</li>
+									<li>
+										<div class="identifier campaign"></div>
+										Campaign - <%= number_with_delimiter(@service_record['GameModes'][0]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][0]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
+									</li>
+								</ul>
+								<br />
+								<ul>
+									<li>
+										<div class="identifier customs"></div>
+										Custom Games - <%= number_with_delimiter(@service_record['GameModes'][3]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][3]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
+									</li>
+									<li>
+										<div class="identifier spartan-ops"></div>
+										Spartan Ops - <%= number_with_delimiter(@service_record['GameModes'][1]['TotalGamesStarted'], delimiter: ',') %> (<%= ((@service_record['GameModes'][1]['TotalGamesStarted'].to_f() / total_games.to_f()).to_f() * 100).round(0) %>%)
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-5">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<span class="badge"><%= parse_datetime(@service_record['LastPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ', '%d.%m.%Y') %></span>
+								Last Played
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= @service_record['TotalLoadoutItemsPurchased'].to_s %>%</span>
+								Loadout Purchase Completion
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= @service_record['TotalChallengesCompleted'] %></span>
+								Challenges Completed
+							</li>
+							<li class="list-group-item">
+								<%
+									spartan_points = @service_record['SpartanPoints']
+									if (spartan_points == 52)
+										spartan_points = spartan_points.to_s + ' ;)'
+									end
+								%>
+								<span class="badge"><%= spartan_points %></span>
+								Spartan Points
+							</li>
+							<li class="list-group-item">
+								<% 
+									kills = @service_record['GameModes'][2]['TotalKills']
+									kd_ratio = @service_record['GameModes'][2]['KDRatio']
+								%>
+								<span class="badge"><%= number_with_delimiter(kills, delimiter: ',') %> (<%= kd_ratio %> K/D)</span>
+								War Games Kills
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['GameModes'][2]['TotalMedals'], delimiter: ',') %></span>
+								War Games Medals
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['GameModes'][0]['TotalKills'], delimiter: ',') %></span>
+								Covenant/Promethean Kills
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['TotalGamesStarted'], delimiter: ',') %></span>
+								Games Started
+							</li>
+							<li class="list-group-item">
+								<span class="badge"><%= parse_datetime(@service_record['FirstPlayedUtc'], '%Y-%m-%dT%H:%M:%SZ', '%d.%m.%Y') %></span>
+								Player Since
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<% if (@game_history != nil) %>
+				<div class="bs-branch-section game-history">
+					<div class="page-header">
+						<h1>Game History</h1>
+					</div>
+
+					<div class="row">
+						<% @game_history['Games'].each do |game_history| %>
+							<%
+								id = game_history['Id']
+								result = ''
+								friendly_result = ''
+								if (!game_history['Completed'])
+									result = 'dnf'
+									friendly_result = 'DNF'
+								elsif (game_history['Result'] == 2)
+									result = 'win'
+									friendly_result = 'Win'
+								elsif (game_history['Result'] == 0)
+									result = 'los'
+									friendly_result = 'Loss'
+								end
+							%>
+
+							<div id="history-entry-<%= id %>" class="col-lg-6 col-sm-12 game-history-entry">
+								<a href="<%= halo4_viewgame_path(gamertag: gamertag_validation(@gamertag), game_id: id) %>">
+									<div class="game-history-container" style="background-image: url(<%= get_raw_asset_url(game_history['MapImageUrl'], 'large') %>)">
+										<div class="mask <%= result %>"></div>
+										<div class="gametype-icon" style="background-image: url(<%= get_raw_asset_url(game_history['BaseVariantImageUrl'], 'large') %>)"></div>
+										<div class="inner">
+											<span class="gametype"><%= game_history['VariantName'] %></span>
+											<br class="visible-lg visible-xs" />
+											<span class="selector">on</span>
+											<span class="map-name"><%= game_history['MapVariantName'] %></span>
+
+											<div class="stats">
+												<span class="type"><%= game_history['FeaturedStatName'] %></span>
+												<span class="stat"><%= game_history['FeaturedStatValue'] %></span>
+											</div>
+
+											<div class="windicator hidden-xs"><%= friendly_result %></div>
+										</div>
+									</div>
+								</a>
+							</div>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,6 @@
-function JBCountDown(settings, challenge_id, start) {
+function JBCountDown(settings, id) {
     var glob = settings;
-    var chal_id = challenge_id;
-    var do_start = typeof start !== 'undefined' ? a : true;
+    var container_id = id;
    
     function deg(deg) {
         return (Math.PI/180)*deg - (Math.PI/180)*90
@@ -11,6 +10,7 @@ function JBCountDown(settings, challenge_id, start) {
     glob.days    = Math.floor((glob.endDate - glob.now ) / 86400);
     glob.hours   = 24 - Math.floor(((glob.endDate - glob.now) % 86400) / 3600);
     glob.minutes = 60 - Math.floor((((glob.endDate - glob.now) % 86400) % 3600) / 60) ;
+    glob.seconds = 60 - Math.floor((glob.endDate - glob.now) % 86400 % 3600 % 60);
     
     if (glob.now >= glob.endDate) {
         return;
@@ -19,7 +19,7 @@ function JBCountDown(settings, challenge_id, start) {
     var clock = {
         set: {
             days: function(){
-                var cdays = $("#canvas_days_"+chal_id).get(0);
+                var cdays = $("#" + container_id + " #canvas_days").get(0);
                 var ctx = cdays.getContext("2d");
                 ctx.clearRect(0, 0, cdays.width, cdays.height);
                 ctx.beginPath();
@@ -29,15 +29,15 @@ function JBCountDown(settings, challenge_id, start) {
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
                 ctx.shadowColor = glob.daysGlow;
-
-                ctx.arc(94/2,94/2,85/2, deg(0), deg((360/glob.total)*(glob.total - glob.days)));
-                ctx.lineWidth = 17/2;
+                
+                ctx.arc(47,47,40, deg(0), deg((360/glob.total)*(glob.total - glob.days)));
+                ctx.lineWidth = 8;
                 ctx.stroke();
-                $("#clock_days_"+chal_id+" .val").text(glob.days);
+                $("#" + container_id + " .clock_days .val").text(glob.days);
             },
             
             hours: function(){
-                var cHr = $("#canvas_hours_"+chal_id).get(0);
+                var cHr = $("#" + container_id + " #canvas_hours").get(0);
                 var ctx = cHr.getContext("2d");
                 ctx.clearRect(0, 0, cHr.width, cHr.height);
                 ctx.beginPath();
@@ -47,15 +47,15 @@ function JBCountDown(settings, challenge_id, start) {
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
                 ctx.shadowColor = glob.hoursGlow;
-
-                ctx.arc(94/2,94/2,85/2, deg(0), deg(15*glob.hours));
-                ctx.lineWidth = 17/2;
+                
+                ctx.arc(47,47,40, deg(0), deg(15*glob.hours));
+                ctx.lineWidth = 8;
                 ctx.stroke();
-                $("#clock_hours_"+chal_id+" .val").text(24 - glob.hours);
+                $(".clock_hours .val").text(24 - glob.hours);
             },
             
             minutes : function(){
-                var cMin = $("#canvas_minutes_"+chal_id).get(0);
+                var cMin = $("#" + container_id + " #canvas_minutes").get(0);
                 var ctx = cMin.getContext("2d");
                 ctx.clearRect(0, 0, cMin.width, cMin.height);
                 ctx.beginPath();
@@ -65,14 +65,14 @@ function JBCountDown(settings, challenge_id, start) {
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
                 ctx.shadowColor = glob.minutesGlow;
-
-                ctx.arc(94/2,94/2,85/2, deg(0), deg(6*glob.minutes));
-                ctx.lineWidth = 17/2;
+                
+                ctx.arc(47,47,40, deg(0), deg(6*glob.minutes));
+                ctx.lineWidth = 8;
                 ctx.stroke();
-                $("#clock_minutes_"+chal_id+" .val").text(60 - glob.minutes);
+                $("#" + container_id + " .clock_minutes .val").text(60 - glob.minutes);
             },
             seconds: function(){
-                var cSec = $("#canvas_seconds_"+chal_id).get(0);
+                var cSec = $("#" + container_id + " #canvas_seconds").get(0);
                 var ctx = cSec.getContext("2d");
                 ctx.clearRect(0, 0, cSec.width, cSec.height);
                 ctx.beginPath();
@@ -82,20 +82,16 @@ function JBCountDown(settings, challenge_id, start) {
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
                 ctx.shadowColor = glob.secondsGlow;
-
-                ctx.arc(94/2,94/2,85/2, deg(0), deg(6*glob.seconds));
-                ctx.lineWidth = 17/2;
+                
+                ctx.arc(47,47,40, deg(0), deg(6*glob.seconds));
+                ctx.lineWidth = 8;
                 ctx.stroke();
         
-                $("#clock_seconds_"+chal_id+" .val").text(60 - glob.seconds);
+                $("#" + container_id + " .clock_seconds .val").text(60 - glob.seconds);
             }
         },
        
         start: function(){
-            if (!do_start) {
-                return
-            }
-
             /* Seconds */
             var cdown = setInterval(function(){
                 if ( glob.seconds > 59 ) {

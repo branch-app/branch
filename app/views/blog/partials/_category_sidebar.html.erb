@@ -1,0 +1,17 @@
+<div class="bs-sidebar" data-spy="affix" data-offset-top="<%= yield(:data_affix_height) %>">
+	<ul class="nav bs-sidenav">
+		<li class="active">
+			<a href="#">Blog</a>
+			<ul class="nav">
+				<li class="<%= 'active' if (@focus == nil) %>">
+					<%= link_to('All Posts', blog_home_path(page: 1)) %>
+				</li>
+				<% BlogCategory.all.each do |blog_category| %>
+					<li class="<%= 'active' if (@focus != nil && blog_category.id == @focus.id) %>">
+						<%= link_to blog_category.name, blog_home_path(page: 1, focus: blog_category.slug) %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+	</ul>
+</div>

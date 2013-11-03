@@ -1,50 +1,82 @@
 class ApplicationController < ActionController::Base
+	include ApplicationHelper
+	helper_method :current_user
+	helper_method :set_flash_message
+	helper_method :redirect_to_return_url
+	before_filter :set_flash
 	protect_from_forgery
-	include I343ApiH4
 
-	def index
-		# Challanges
-		@challenge_metadata = I343ApiH4.get_meta_data()['ChallengesMetadata']
-		@challenge_categories = @challenge_metadata['ChallengeCategories']
-		@challenge_periods = @challenge_metadata['ChallengePeriods']
-
-		@friendly_challenge_data = { }
-		challenges = I343ApiH4.get_challenge_data()['Challenges']
-		@challenge_categories.each do |category|
-			relevant_challenges = [ ]
-			challenges.each do |challenge|
-				if challenge['CategoryId'] == category['Id']
-					relevant_challenges << challenge
-				end
-			end
-			@friendly_challenge_data[category['Id']] = relevant_challenges
+	def set_flash()
+		if (params[:force_flash].to_i == 1)
+			set_flash_message('success', 'Woo!', 'This is a success message!')
+			set_flash_message('failure', 'Fuck...', 'Something bad happened, and im here to tell you that.')
+			set_flash_message('warning', 'ehh..', 'Something bad might happen, so heads up.')
+			set_flash_message('info', 'hey m8!', "Did you know this is a information message? I know right, it's pretty cool")
 		end
-
-
-		# H4Playlists
-		@game_mode_metadata = I343ApiH4.get_meta_data()['GameModesMetadata']
-		@game_modes = @game_mode_metadata['GameModes']
-		@total_population = 0
-
-		@friendly_playlist_data = { }
-		playlists = I343ApiH4.get_playlist_data()['Playlists']
-		@game_modes.each do |mode|
-			relevant_playlists = [ ]
-			playlists.each do |playlist|
-				if playlist['ModeId'] == mode['Id']
-					relevant_playlists << playlist
-
-					@total_population += playlist['PopulationCount']
-				end
-			end
-			@friendly_playlist_data[mode['Id']] = relevant_playlists
-		end
-
-		# Blogs
-		@blog_posts = BlogPost.where('is_published=1').order('id ASC')
 	end
 
-	def about
+	# -- Internal Functions
+	def sub_view_to_friendly(sub_view)
+		return sub_view.gsub('-', ' ').titlecase()
+	end
 
+	def sub_view_to_css_class(sub_view)
+		return sub_view.gsub('-', '_')
+	end
+
+	def validate_param(param, valid_responses = nil, default_response = nil)
+		return default_response || nil, false if (param == nil || param.strip == '')
+		return param, true if (valid_responses == nil || default_response == nil)
+
+		# check valid responses
+		valid_responses.each { |r| return param, true if (param.strip.downcase == r) }
+		return default_response, false
+	end
+
+	def validate_numerical_param(param, min = 0, max = 0xFFFFFFFF)
+		param = param.to_i
+		return 0, false if (param == nil)
+
+		if (param >= min && param <= max)
+			return param, true
+		else
+			return 0, false
+		end
+	end
+
+	# -- Helpers
+	def current_user
+		begin
+			user_session = Session.find_by_identifier(session[:identifier]) if (session[:identifier])
+			raise if (user_session == nil || user_session.expired || user_session.expires_at < DateTime.now)
+			@current_user = User.find_by_id(user_session.user_id)
+		rescue
+			reset_session
+			@current_user = nil
+		end
+	end
+
+	def set_flash_message(type, title, desc, discard = false)
+		if (discard)
+			flash.now[type.to_sym] = { title: title, desc: desc }
+		else
+			flash[type.to_sym] = { title: title, desc: desc }
+		end
+	end
+
+	def redirect_to_return_url(return_url)
+		if (return_url)
+			begin
+				uri = URI.parse(return_url)
+				if (uri.host == 'localhost' || uri.host.downcase() == 'www.branchapp.co' || uri.host.downcase() == 'preview.branchapp.co')
+					redirect_to(return_url)
+					return true
+				end
+			rescue
+				return false
+			end
+		end
+
+		return false
 	end
 end

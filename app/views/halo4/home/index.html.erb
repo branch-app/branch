@@ -1,0 +1,201 @@
+<% content_for :halo4, true %>
+<% content_for :title, 'Halo 4' %>	
+<% content_for :has_footer, true %>
+<% content_for :template, 'halo4 halo4_home' %>
+<% content_for :scripts do %>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+<% end %>
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Halo 4 Stats</h1>
+		<p>Browse, Search and Explore Halo 4 stats. Just how you want.</p>
+	</div>
+</div>
+
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>
+
+<div class="container stats-marketing">
+	<div class="row central">
+		<div class="col-md-4">
+			<canvas id="total-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("total-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @total_population %>,
+								color: '#949FB1'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>All Playlists</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@total_population, delimiter: ',') %> people playing Halo 4 Online.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<canvas id="team-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("team-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @team_playlist_population %>,
+								color: '#4D5360'
+					 		},
+					 		{
+					 			value: <%= @indv_playlist_population %>,
+								color: '#F7464A'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Team Playlists</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@team_playlist_population, delimiter: ',') %> people playing Team based CSR Playlists.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("indvidual-playlist-population").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+					 		{
+					 			value: <%= @indv_playlist_population %>,
+								color: '#4D5360'
+					 		},
+							{
+								value: <%= @team_playlist_population %>,
+								color: '#F7464A'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Indvidual Playlists</h2>
+			<p>
+				There are currently <%= number_with_delimiter(@indv_playlist_population, delimiter: ',') %> people playing Indvidual based CSR Playlists.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="leaferboards highlight-sector" style="background-image: url(<%= image_path('halo4/leaderboard-overview.png') %>);">
+	<div class="container">
+		<h1>CSR Leaderboards</h1>
+		<p>
+			Check how you compare to your friends in CSR leaderboards over on
+			<%= link_to('Leaf', 'http://leafapp.co/h4/csr_leaderboards', target: '_blank') %>!
+		</p>
+	</div>
+</div>
+
+<div class="container stats-marketing">
+	<div class="row central">
+		<div class="col-md-3">
+			<canvas id="total-challenge-credits" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("total-challenge-credits").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @total_credits %>,
+								color: '#949FB1'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>All Halo 4 Challenges</h2>
+			<p>
+				There is currently <%= number_with_delimiter(@total_credits, delimiter: ',') %>Xp avaiable though all challenges.
+			</p>
+		</div>
+		<div class="col-md-3">
+			<canvas id="campaign-challenge-credits" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("campaign-challenge-credits").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @campaign_credits %>,
+								color: '#4D5360'
+					 		},
+							{
+								value: <%= @total_credits - @campaign_credits %>,
+								color: '#F7464A'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Campaign Challenges</h2>
+			<p>
+				There is currently <%= number_with_delimiter(@campaign_credits, delimiter: ',') %>Xp avaiable though Campaign challenges.
+			</p>
+		</div>
+		<div class="col-md-3">
+			<canvas id="spops-challenge-credits" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("spops-challenge-credits").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @spops_credits %>,
+								color: '#4D5360'
+					 		},
+							{
+								value: <%= @total_credits - @spops_credits %>,
+								color: '#F7464A'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>Spartan Ops Challenges</h2>
+			<p>
+				There is currently <%= number_with_delimiter(@spops_credits, delimiter: ',') %>Xp avaiable though Spartan Ops challenges.
+			</p>
+		</div>
+		<div class="col-md-3">
+			<canvas id="matchmaking-challenge-credits" width="140" height="140"></canvas>
+			<% content_for :scripts do %>
+				<script>
+					var ctx = document.getElementById("matchmaking-challenge-credits").getContext("2d");
+					new Chart(ctx).Doughnut(
+						[
+							{
+								value: <%= @matchmaking_credits %>,
+								color: '#4D5360'
+					 		},
+							{
+								value: <%= @total_credits - @matchmaking_credits %>,
+								color: '#F7464A'
+					 		}
+					 	]);
+				</script>
+			<% end %>
+			<h2>War Games Challenges</h2>
+			<p>
+				There is currently <%= number_with_delimiter(@matchmaking_credits, delimiter: ',') %>Xp avaiable though War Games challenges.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="top-ten highlight-sector" style="background-image: url(<%= image_path('halo4/top-ten-overview.png') %>);">
+	<div class="container">
+		<h1>Top Ten Leaderboards</h1>
+		<p>
+			Check the top ten players in the world in a variety of achievements over on
+			<%= link_to('Leaf', 'http://leafapp.co/h4/top_ten', target: '_blank') %>!
+		</p>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+<% content_for :title, "Searching Branch - Halo 4 Service Records - '#{@query}'" %>	
+<% content_for :has_footer, true %>
+<% content_for :search_overide, search_halo4_query_path(page: @previous_page) %>
+<% content_for :template, 'search' %>
+
+<div class="container">
+	<div class="search-result-block">
+
+		<%= render partial: 'partials/flash', locals: { flash: flash } %>
+
+		<div class="page-header row">
+			<div class="col-md-11">
+				<h1 id="less">Halo 4 Service Records</h1>
+			</div>
+			<div class="col-md-1 focus-col">
+				<%= link_to(raw('&laquo; Focus Off'), search_query_path(q: @query), class: 'btn btn-default toggle', type: 'button') %>
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<% if (@halo4_accounts.length > 0) %>
+					<% @halo4_accounts.each do |halo4_account| %>
+						<%= render partial: 'search/partials/halo4_account', locals: { halo4_account: halo4_account } %>
+					<% end %>
+				<% elsif (@halo4_accounts.length > 0 && @page <= 1) %>
+					<p>There are no Halo 4 Service Records that match the search query '<%= @query %>'...</p>
+				<% else %>
+					<p>There are no more Halo 4 Service Records that match the search query '<%= @query %>'...</p>
+				<% end %>
+			</div>
+			<ul class="pager">
+				<li class="previous <%= 'disabled' if !@has_less %>">
+					<%= link_to(raw('&larr; Older'), search_halo4_query_path(q: @query, page: @previous_page)) %>
+				</li>
+				<li class="next <%= 'disabled' if !@has_more %>">
+					<%= link_to(raw('Newer &rarr;'), search_halo4_query_path(q: @query, page: @next_page)) %>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

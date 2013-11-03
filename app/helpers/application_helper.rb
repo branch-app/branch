@@ -1,81 +1,96 @@
 module ApplicationHelper
-	def title(page_title)
-		content_for :title, 'Branch' + page_title.to_s
+	#-- Html Helpers --#
+	def gamertag_to_html(gamertag)
+		return CGI.escape(gamertag)
 	end
 
-	def container_type(container_type)
-		content_for :container_type, container_type.to_s
+	def gamertag_to_leaf_html(gamertag)
+		return gamertag.gsub(' ', '_')
 	end
 
-	def head_style(header_style)
-		content_for :head_style, header_style.to_s
+	#-- Social Shit --#
+	def generate_facebook_share_url()
+		return "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(request.original_url())}"
 	end
 
-	def active_home(active_home)
-		content_for :active_home, active_home.to_s
-	end
-	def active_halo4(active_halo4)
-		content_for :active_halo4, active_halo4.to_s
-	end
-	def active_blog(active_blog)
-		content_for :active_blog, active_blog.to_s
-	end
-	def active_about(active_about)
-		content_for :active_about, active_about.to_s
+	def generate_twitter_share_url(text, via = 'alexerax', hashtag = 'branchapp', related = nil)
+		url = "https://twitter.com/intent/tweet?original_referer=#{CGI.escape(request.original_url())}"
+		url += "&related=#{related}" if related
+		url += "&text=#{text}"
+		url += "&tw_p=tweetbutton"
+		url += "&url=#{CGI.escape(request.original_url())}"
+		url += "&hashtags=#{hashtag}" if hashtag
+		url += "&via=#{via}" if via
+
+		return url
 	end
 
-	def search_query(search_query)
-		content_for :search_query, search_query.to_s
+	#-- Branch Helpers --#
+	def gamertag_validation(gamertag)
+		replacement = GamertagReplacement.find_by_target(gamertag)
+		if replacement == nil
+			return gamertag
+		else
+			return replacement.replacement
+		end
 	end
 
+	def create_return_url()
+		return "?return_url=#{CGI.escape(request.url)}"
+	end
 
-	# halo 4 sidebar
-	def h4_gamertag(h4_gamertag)
-		content_for :h4_gamertag, h4_gamertag.to_s
-	end
-	def h4_sidebar_overview(h4_sidebar_overview)
-		content_for :h4_sidebar_overview, h4_sidebar_overview.to_s
-	end
-	def h4_sidebar_game_history(h4_sidebar_game_history)
-		content_for :h4_sidebar_game_history, h4_sidebar_game_history.to_s
-	end
-	def h4_sidebar_csr(h4_sidebar_csr)
-		content_for :h4_sidebar_csr, h4_sidebar_csr.to_s
-	end
-	def h4_sidebar_commendations(h4_sidebar_commendations)
-		content_for :h4_sidebar_commendations, h4_sidebar_commendations.to_s
-	end
-	def h4_sidebar_specializations(h4_sidebar_specializations)
-		content_for :h4_sidebar_specializations, h4_sidebar_specializations.to_s
-	end
-	def h4_sidebar_summary(h4_sidebar_summary)
-		content_for :h4_sidebar_summary, h4_sidebar_summary.to_s
-	end
-	def h4_sidebar_by_playlist(h4_sidebar_by_playlist)
-		content_for :h4_sidebar_by_playlist, h4_sidebar_by_playlist.to_s
-	end
-	def h4_sidebar_by_map(h4_sidebar_by_map)
-		content_for :h4_sidebar_by_map, h4_sidebar_by_map.to_s
-	end
-	def h4_sidebar_medals(h4_sidebar_medals)
-		content_for :h4_sidebar_medals, h4_sidebar_medals.to_s
-	end
-	def h4_sidebar_weapons(h4_sidebar_weapons)
-		content_for :h4_sidebar_weapons, h4_sidebar_weapons.to_s
-	end
-	def h4_sidebar_enemies(h4_sidebar_enemies)
-		content_for :h4_sidebar_enemies, h4_sidebar_enemies.to_s
+	def flash_class(level)
+		case level
+			when :success then "success"
+			when :failure then "danger"
+			when :warning then "warning"
+			when :info then "info"
+		end
 	end
 
 
-	# leaf
-	def gamertag_to_safe_leaf(gamertag)
-		return gamertag.downcase.tr(" ", "_").strip
+	#-- Date Helpers --#
+	def parse_datetime(date_string, in_format = '%Y-%m-%dT%H:%M:%SZ', out_format = '%d/%m/%Y')
+		return DateTime.strptime(date_string, in_format).strftime(out_format)
 	end
 
-	# errorz
-	def setup_error_notification(type, message)
-		flash[:type] = type
-		flash[:notice] = message
+	def duration_to_seconds(duration_str)
+		duration = Time.strptime(duration_str, "%H:%M:%S")
+
+		return duration.seconds_since_midnight.to_i
+	end
+
+	#-- Graph Helpers --#
+	def generate_graph_from_single(dataset, duration)
+		output = ""
+		running_total = 0
+		duration_sec = duration_to_seconds(duration)
+		duration_sec.times do |i|
+			if (i == 0 || (i + 1) == duration_sec)
+				output += "{ x: '#{i}', a: '#{ running_total }' },"
+			end
+
+			dataset.each do |medal_entry|
+				if (medal_entry['Time'] == i)
+					running_total += medal_entry['Ticks']
+					output += "{ x: '#{i}', y: '#{ running_total }' },"
+				end
+			end
+		end
+
+		output = output[0..-1]
+	end
+
+	#-- Maths Helpers --#
+	def calculate_kd(kills, deaths, round_to = 2)
+		if (kills <= 0 || deaths <= 0)
+            return 0.0
+        else
+            return (kills.to_f() / deaths.to_f()).to_f().round(round_to)
+        end
+	end
+
+	def calculate_spread(kills, deaths)
+		return (kills - deaths)
 	end
 end

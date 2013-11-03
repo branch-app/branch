@@ -1,0 +1,90 @@
+/* System */
+gamertags
+	id					||		integer
+	gamertag			|| 		string
+
+gamertag_replacements
+	id 					||		integer
+	target_gamertag		||		string
+	replacement_gamertag||		string
+
+
+/* Halo 4 */
+h4_service_records
+	id					||		integer
+	gamertag_id			||		integer
+
+h4_game_historys
+	id					||		integer
+	gamertag_id			||		integer
+	mode				||		integer
+	lower				||		integer
+	upper				||		integer
+	from				||		integer
+
+h4_commendations
+	id					||		integer
+	gamertag_id			||		integer
+
+h4_games
+	id					||		integer
+	gamertag_id			||		integer
+	game_id				||		integer
+
+h4_playlists
+	id					||		integer
+	name				||		string
+	description			||		string
+	playlist_id			||		integer
+	is_csr_team			||		boolean
+
+h4_services
+	id					||		integer
+	type				||		string
+	name				||		string
+	url					||		string
+
+h4_auths
+	id					||		integer
+	access_token		||		string
+	auth_token			||		string
+	expires_at			||		datetime
+	spartan_token		||		string
+
+
+/* User Stuff */
+users
+	id					||		integer
+	username			||		string
+	name				|| 		string
+	email				||		string
+	password			||		string
+	gamertag_id			||		integer
+	role_id				||		integer
+
+roles
+	id					||		integer
+	name				|| 		string
+	description			||		string
+	colour				||		string
+	int_identifier		||		integer
+
+friendship
+	id 					||		integer
+	user_id				||		integer
+	friend_id			||		integer
+
+sessions
+	id					||		integer
+	hash				||		string
+	user_id				||		integer
+	expired				||		boolean
+	owner_ip			||		string
+	expires_at			||		datetime
+
+favourites
+	id 					||		integer
+	game 				||		string
+	type				||		string
+	data				||		string
+	user_id				||		integer

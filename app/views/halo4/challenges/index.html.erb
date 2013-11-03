@@ -1,0 +1,133 @@
+<% content_for :halo4, true %>
+<% content_for :title, 'Halo 4 - Challenges' %>	
+<% content_for :has_footer, true %>
+<% content_for :scripts do %>
+<script>
+
+</script>
+<% end %>
+<% content_for :template, 'halo4 halo4_challenges' %>
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Halo 4 Challenges</h1>
+		<p>Earn Bonus Xp by completing daily, weekly and monthy challenges.</p>
+	</div>
+</div>
+
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>
+
+<div class="container challenges-container">
+	<div class="row">
+		<div class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+				<%
+				first_entry = true
+				@challenge_categories.each do |category| %>
+					<li class="<%= 'active' if (first_entry) %>">
+						<%= link_to(category['Name'], '#' + category['Name'].to_slug(), id: 'tab-' + category['Name'].to_slug(), 'data-toggle' => 'tab') %>
+					</li>
+					<% first_entry = false %>
+				<% end %>
+			</ul>
+		</div>
+		<div class="col-md-9">
+			<div class="tab-content" id="challenges-tab">
+				<%
+				first_entry = true
+				@challenge_categories.each do |category| %>
+					<div class="tab-pane fade in <%= 'active' if (first_entry) %>" id="<%= category['Name'].to_slug() %>">
+						<h1>
+							<%= category['Name'] %> Challenges
+						</h1>
+						<hr />
+						<div class="row">
+							<% @challenge_data.sort_by{ |c| c['EndDate'] }.each do |challenge| %>
+								<% next if (challenge['CategoryId'] != category['Id']) %>
+								<% identifier = Digest::SHA1.hexdigest(rand(100000..999999).to_s)[0..8] %>
+								<div class="col-md-12 challenge-entry" style=""> <!-- background-image: url(<%= image_path('halo4/challenge_categories/' + challenge['CategoryName'].downcase().gsub(' ', '') + '.png') %>) -->
+									<h2>
+										<%= challenge['Name'] %>
+									</h2>
+									<p>
+										<%= challenge['Description'] %>
+									</p>
+									<span>
+										<strong>Worth:</strong>
+										<%= challenge['XpReward'] %> Xp
+									</span>
+									<div class="countdown hidden-xs hidden-sm">
+										<% content_for :scripts do %>
+											<script type="text/javascript">
+												$(document).ready(function(){
+													JBCountDown({
+														secondsColor : "#ffdc50",
+														secondsGlow  : "none",
+
+														minutesColor : "#9cdb7d",
+														minutesGlow  : "none",
+
+														hoursColor   : "#378cff",
+														hoursGlow    : "none",
+
+														daysColor    : "#ff6565",
+														daysGlow     : "none",
+
+														<%
+															end_date = parse_datetime(challenge['EndDate']).to_time.to_i
+															start_date = parse_datetime(challenge['BeginDate']).to_time.to_i
+															now = Time.now.to_i
+														%>
+
+														startDate   : <%= start_date %>,
+														endDate     : <%= end_date %>,
+														now         : <%= now %>,
+													}, '<%= identifier %>');
+												});
+											</script>
+										<% end %>
+										<div class="clock" id="<%= identifier %>">
+											<div class="clock_face clock_days">
+												<canvas height="190px" width="190px" id="canvas_days"></canvas>
+												<div class="text">
+													<p class="val">0</p>
+													<p class="type type_days">Days</p>
+												</div>
+											</div>
+											<div class="clock_face clock_hours">
+												<canvas height="190px" width="190px" id="canvas_hours"></canvas>
+												<div class="text">
+													<p class="val">0</p>
+													<p class="type type_hours">Hours</p>
+												</div>
+											</div>
+											<div class="clock_face clock_minutes">
+												<canvas height="190px" width="190px" id="canvas_minutes"></canvas>
+												<div class="text">
+													<p class="val">0</p>
+													<p class="type type_minutes">Minutes</p>
+												</div>
+											</div>
+											<div class="clock_face clock_seconds">
+												<canvas height="190px" width="190px" id="canvas_seconds"></canvas>
+												<div class="text">
+													<p class="val">0</p>
+													<p class="type type_seconds">Seconds</p>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+								<hr />
+							<% end %>
+						</div>
+					</div>
+				<% first_entry = false %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

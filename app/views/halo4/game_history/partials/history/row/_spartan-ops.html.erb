@@ -1,0 +1,18 @@
+<tr>
+	<td>
+		<%= link_to(game['EpisodeName'], halo4_viewgame_path(game_id: game['Id'])) %>
+	</td>
+	<td><%= game['ChapterName'] %></td>
+	<td><%= get_victory_type(game)[:friendly_result] %></td>
+	<td><%= get_full_difficulty(game['Difficulty'])['Name'] %></td>
+	<td>
+		<% if (game['SinglePlayer']) %>
+			Single Player
+		<% else %>
+			Co-op
+		<% end %>
+	</td>
+	<td><%= game['PersonalScore'] %></td>
+	<td><%= parse_datetime(game['EndDateUtc'], '%Y-%m-%dT%H:%M:%SZ', '%d/%m/%Y') %></td>
+	<td><%= game['Duration'] %></td>
+</tr>

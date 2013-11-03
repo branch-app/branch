@@ -1,0 +1,216 @@
+body.halo4_service_record {
+
+	.overview {
+		> .row > .game-history-split {
+			> .wrapper {
+				margin: 0 auto;
+				width: 500px;
+
+				// responsive state 2
+				@media (min-width: 992px) and (max-width: 1199px) {
+					margin-left: -15%;
+				}
+
+				> .area {
+					margin: 0 auto;
+					width: 300px; 
+				}
+
+				> .area-legend {
+					margin: 0 auto;
+					margin-top: 10px;
+					width: 450px;
+					height: 80px;
+
+					> ul {
+						list-style: none; 
+						position: relative; 
+						float: left; 
+						display: block;
+						left: 50%;
+						margin-left: -20px;
+
+						> li {
+							position: relative; 
+							float: left; 
+							display: block;
+							right: 50%;
+
+							> .identifier {
+								width: 10px;
+								height: 10px;
+
+								margin-bottom: -15px;
+								margin-left: -15px;
+
+								&.campaign {
+									background-color: #F7464A;
+								}
+								&.war-games {
+									background-color: #5880A0;
+								}
+								&.customs {
+									background-color: #3d3d7c;
+								}
+								&.spartan-ops {
+									background-color: #949FB1;
+								}
+							}
+
+							display: block;
+							float: left;
+
+							margin: 0;
+							padding: 0;
+							padding-right: 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.game-history {
+		.row > .game-history-entry {
+			margin: 20px 0;
+			padding: 0 10px;
+			height: 220px;
+			overflow: hidden;
+
+			&.selected {
+				box-shadow: 0px 0px 10px red;
+			}
+
+			> a {
+				color: white;
+
+				&:hover {
+					text-decoration: none;
+					color: white;
+				}
+
+				> .game-history-container {
+					background-size: cover;
+					background-repeat: no-repeat;
+
+					height: 100%;
+
+					-moz-box-sizing: border-box; 
+					-webkit-box-sizing: border-box; 
+					box-sizing: border-box;
+
+					> .mask {
+						width: 100%;
+						height: 100%;
+
+						-moz-box-sizing: border-box; 
+						-webkit-box-sizing: border-box; 
+						box-sizing: border-box;
+
+						&.dnf {
+							/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+							background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+							background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%, rgba(114,114,114,1) 100%); /* FF3.6+ */
+							background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(114,114,114,1))); /* Chrome,Safari4+ */
+							background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(114,114,114,1) 100%); /* Chrome10+,Safari5.1+ */
+							background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(114,114,114,1) 100%); /* Opera 12+ */
+							background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(114,114,114,1) 100%); /* IE10+ */
+							background: radial-gradient(ellipse at center, rgba(255,255,255,0) 0%,rgba(114,114,114,1) 100%); /* W3C */
+							filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#727272',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+						}
+						&.los {
+							/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+							background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+							background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%, rgba(213,19,14,0.5) 100%); /* FF3.6+ */
+							background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(213,19,14,0.5))); /* Chrome,Safari4+ */
+							background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(213,19,14,0.5) 100%); /* Chrome10+,Safari5.1+ */
+							background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(213,19,14,0.5) 100%); /* Opera 12+ */
+							background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(213,19,14,0.5) 100%); /* IE10+ */
+							background: radial-gradient(ellipse at center, rgba(255,255,255,0) 0%,rgba(213,19,14,0.5) 100%); /* W3C */
+							filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#aad5130e',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+						}
+						&.win {
+							/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+							background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+							background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%, rgba(10,133,190,0.5) 100%); /* FF3.6+ */
+							background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(10,133,190,0.5))); /* Chrome,Safari4+ */
+							background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(10,133,190,0.5) 100%); /* Chrome10+,Safari5.1+ */
+							background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(10,133,190,0.5) 100%); /* Opera 12+ */
+							background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(10,133,190,0.5) 100%); /* IE10+ */
+							background: radial-gradient(ellipse at center, rgba(255,255,255,0) 0%,rgba(10,133,190,0.5) 100%); /* W3C */
+							filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#aa0a85be',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+						}
+					}
+
+					> .gametype-icon {
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						width: 100%;
+						overflow: hidden;
+						opacity: 0.3;
+						display: none;
+
+						background-repeat: no-repeat;
+						background-position: center center;
+					}
+
+					> .inner {
+						position: absolute;
+						top: 10px;
+						left: 20px;
+						height: 100%;
+						width: 100%;
+						overflow: hidden;
+
+						.gametype {
+							font-size: 25px;
+							font-weight: 600;
+							opacity: 0.7;
+						}
+						.selector {
+							opacity: 0.7;
+						}
+						.map-name {
+							font-size: 20px;
+							font-weight: 500;
+						}
+
+						.stats {
+							position: absolute;
+							bottom: -5px;
+							left: 0;
+
+							> .type {
+								font-size: 20px;
+							}
+							> .stat {
+								font-size: 80px;
+								opacity: 0.6;
+							}
+						}
+
+						.windicator {
+							position: absolute;
+							right: 25px;
+							bottom: -10px;
+
+							opacity: 0.3;	
+							font-size: 60px;
+							font-weight: 900;
+							text-transform: uppercase;
+
+							@media (min-width: 1200px) {
+								opacity: 0.3;	
+								font-size: 40px;
+								bottom: -5px;
+								font-weight: 900;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

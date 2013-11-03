@@ -1,0 +1,14 @@
+<% content_for :user, true %>
+<% content_for :title, 'Account Verification' %>	
+<% content_for :has_footer, true %>
+<% content_for :scripts do %>
+<script>
+</script>
+<% end %>
+<% content_for :template, 'user user_verify' %>
+
+<%= render partial: 'user/partials/header', locals: { title: 'Account Verification', description: 'Oops... Seems some weird shit happened, and that verification token has expired. Sorry about that.' } %>
+
+<div class="container">
+	<%= render partial: 'partials/flash', locals: { flash: flash } %>
+</div>
