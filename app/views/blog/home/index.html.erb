@@ -53,10 +53,10 @@
 
 				<ul class="pager">
 					<li class="previous <%= 'disabled' if !@has_less %>">
-						<%= link_to(raw('&larr; Older'), blog_home_path(page: @previous_page)) %>
+						<%= link_to(raw('&larr; Newer'), blog_home_path(page: @previous_page)) %>
 					</li>
 					<li class="next <%= 'disabled' if !@has_more %>">
-						<%= link_to(raw('Newer &rarr;'), blog_home_path(page: @next_page)) %>
+						<%= link_to(raw('Older &rarr;'), blog_home_path(page: @next_page)) %>
 					</li>
 				</ul>
 			</div>
