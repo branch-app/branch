@@ -4,5 +4,7 @@ scheduler = Rufus::Scheduler.new
 
 	# re-authenticate windows live and spartan tokens
 	scheduler.every '45m' do
-		I343Auth.update_authentication()
+		if (Rails.env.development?)
+			I343Auth.update_authentication()
+		end
 	end
