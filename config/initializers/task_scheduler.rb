@@ -11,5 +11,5 @@ scheduler = Rufus::Scheduler.new
 
 	# Updated Services List
 	scheduler.every('1h') do
-		I343Auth.update_services_list()
+		H4Api.update_services_list()
 	end
