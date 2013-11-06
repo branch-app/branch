@@ -60,6 +60,10 @@ module ApplicationHelper
 		return duration.seconds_since_midnight.to_i
 	end
 
+	def datetime_to_friendly(datetime)
+		time_ago_in_words(datetime)
+	end
+
 	#-- Graph Helpers --#
 	def generate_graph_from_single(dataset, duration)
 		output = ""
