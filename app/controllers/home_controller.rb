@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-
+	include Halo4::HomeHelper
 	def index
 		redirect_to(root_path()) if (!current_user)
 	end
