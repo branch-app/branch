@@ -12,23 +12,6 @@ module Halo4::GameHistoryHelper
 
 
 	#-- Game Meta Stuff --#
-	def get_victory_type(game)
-		result = ''
-		friendly_result = ''
-		if (!game['Completed'])
-			result = 'dnf'
-			friendly_result = 'DNF'
-		elsif (game['Result'] == 2)
-			result = 'win'
-			friendly_result = 'Won'
-		elsif (game['Result'] == 0)
-			result = 'los'
-			friendly_result = 'Lost'
-		end
-
-		return { result: result, friendly_result: friendly_result }
-	end
-
 	def get_page_title(game)
 		case(game['ModeId'])
 			when 3

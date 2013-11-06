@@ -26,6 +26,41 @@ module Halo4::HomeHelper
 		return "https://assets.halowaypoint.com/games/h4/csr/#{version}/#{size}/#{csr}.png"
 	end
 
+	#-- Meta Parser --#
+	def get_victory_type(game)
+		result = ''
+		friendly_result = ''
+		if (!game['Completed'])
+			result = 'dnf'
+			friendly_result = 'DNF'
+		elsif (game['Result'] == 2)
+			result = 'win'
+			friendly_result = 'Won'
+		elsif (game['Result'] == 0)
+			result = 'los'
+			friendly_result = 'Lost'
+		end
+
+		return { result: result, friendly_result: friendly_result }
+	end
+
+	def get_victory_type_alternative(game)
+		result = ''
+		friendly_result = ''
+		if (!game.completed)
+			result = 'dnf'
+			friendly_result = 'DNF'
+		elsif (game.result == 2)
+			result = 'win'
+			friendly_result = 'Won'
+		elsif (game.result == 0)
+			result = 'los'
+			friendly_result = 'Lost'
+		end
+
+		return { result: result, friendly_result: friendly_result }
+	end
+
 	#-- Get Shit From an Id --#
 	def get_map_from_base_id(base_id)
 		@metadata['MapsMetadata']['Maps'].each do |map|
