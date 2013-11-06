@@ -18,8 +18,13 @@ module Halo4::HomeHelper
 		end
 	end
 
-	def get_raw_asset_url(raw_asset_object, size = 'medium')
-		return H4Api.asset_url_generator_basic(raw_asset_object['BaseUrl'], raw_asset_object['AssetUrl'], size.to_s)
+	def get_raw_asset_url(raw_asset_object, size = 'medium', spec = '343')
+
+		if (spec == '343')
+			return H4Api.asset_url_generator_basic(raw_asset_object['BaseUrl'], raw_asset_object['AssetUrl'], size.to_s)
+		elsif (spec == 'rails')
+			return H4Api.asset_url_generator_basic(raw_asset_object['base_url'], raw_asset_object['asset_url'], size.to_s)
+		end
 	end
 
 	def get_csr_level_url(csr, size = 'medium', version = 'v1')
