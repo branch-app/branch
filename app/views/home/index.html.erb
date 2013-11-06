@@ -53,7 +53,7 @@
 						<a href="#"><%= current_user.username %></a>
 						<ul class="nav">
 							<li class="active">
-								<a href="#">Game Feed</a>
+								<a href="#">Activity Feed</a>
 							</li>
 						</ul>
 					</li>
@@ -64,6 +64,9 @@
 		<div class="col-md-9">
 			<div class="bs-branch-section game-feed">
 				<%= render partial: 'partials/flash', locals: { flash: flash } %>
+				<div class="page-header">
+					<h1>Activity Feed</h1>
+				</div>
 				<div class="page-header">
 					<h1>Game Feed</h1>
 				</div>
