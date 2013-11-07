@@ -62,87 +62,16 @@
 		</div>
 
 		<div class="col-md-9">
-			<div class="bs-branch-section game-feed">
+			<div class="bs-branch-section activity-feed">
 				<%= render partial: 'partials/flash', locals: { flash: flash } %>
 				<div class="page-header">
 					<h1>Activity Feed</h1>
 				</div>
-				<div class="page-header">
-					<h1>Game Feed</h1>
-				</div>
 
 				<ul>
-					<li>
-						<span class="glyphicon glyphicon-tasks"></span>
-						<div class="info">
-							<span class="time-info">2 minutes ago</span>
-							<br />
-							<a href="#">gabe_k</a> played a <a href="#">game</a> of <b>Midnight FFA</b> on <b>Haven</b>
-							<br />
-							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/haven.png" />
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-user"></span>
-						<div class="info">
-							<a href="#">Xerax</a> added <a href="#">iBotPeaches</a> as a friend
-							<span class="time-info">12 minutes ago</span>
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-user"></span>
-						<div class="info">
-							<a href="#">Xerax</a> added <a href="#">gabe_k</a> as a friend
-							<span class="time-info">13 minutes ago</span>
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-tasks"></span>
-						<div class="info">
-							<span class="time-info">15 minutes ago</span>
-							<br />
-							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Team Infinity Slayer</b> on <b>Pitfall</b>
-							<br />
-							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/pitfall-4d905f5d-6e0c-467c-a592-de09d41f7517.png" />
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-tasks"></span>
-						<div class="info">
-							<span class="time-info">23 minutes ago</span>
-							<br />
-							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Team Infinity Slayer</b> on <b>Haven</b>
-							<br />
-							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/haven.png" />
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-tasks"></span>
-						<div class="info">
-							<span class="time-info">31 minutes ago</span>
-							<br />
-							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Capture the Flag</b> on <b>Narrows</b>
-							<br />
-							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/forge-island-a1ed2ce1-bf2c-4bef-adfe-2f6d2967a564.png" />
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-star"></span>
-						<div class="info">
-							<a href="#">Xerax</a> added a <a href="#">game</a> of <b>Team Slayer</b> to his favourites.
-							<span class="time-info">23 minutes ago</span>
-						</div>
-					</li>
-					<li>
-						<span class="glyphicon glyphicon-tasks"></span>
-						<div class="info">
-							<span class="time-info">3 hours ago</span>
-							<br />
-							<a href="#">Xerax</a> played a <a href="#">game</a> of <b>Ricochet</b> on <b>Pitfall</b>
-							<br />
-							<img width="100" height="80" src="https://assets.halowaypoint.com/games/h4/maps/v1/large/pitfall-4d905f5d-6e0c-467c-a592-de09d41f7517.png" />
-						</div>
-					</li>
+					<% @activity_feed.each do |activity| %>
+						<%= render partial: "home/partials/#{activity[:type]}", locals: { activity: activity } %>
+					<% end %>
 				</ul>
 			</div>
 		</div>

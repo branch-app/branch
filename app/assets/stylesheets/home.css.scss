@@ -83,8 +83,7 @@ body.home {
 		}
 	}
 
-	.game-feed {
-
+	.activity-feed {
 		> .page-header > h1 {
 			font-size: 20px;
 		}
@@ -103,22 +102,81 @@ body.home {
 					margin-bottom: -20px;
 				}
 
+				&.halo4-multi-task {
+					> .info {
+						> .history {
+							margin-top: 20px;
+
+							> .preview {
+								float: left;
+
+								> .map-preview-frame {
+									padding: 5px;
+									border: 1px solid #eee;
+
+									> .col {
+										float: left;
+										background-size: cover;
+
+										&.col-cover {
+											width: 140px;
+											height: 100px;
+										}
+										&.col-part {
+											width: 70px;
+											height: 50px;
+										}
+									}
+								}
+							}
+							> .game-list {
+								float: left;
+								> ul {
+									margin: 0px 0 0 20px;
+									> li {
+										line-height: 16.6666666667px;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				&.halo4-single-task {
+					> .info {
+						> .details > .victory-indicator {
+							text-transform: lowercase;
+						}
+						> img {
+							opacity: 0.7;
+							padding: 5px;
+							margin-top: 8px;
+						}
+					}
+				}
+
 				> .info {
 					margin-left: 40px;
 					margin-top: -19px;
 
 					font-size: 13px;
 
-					> .time-info {
+					> attr > .time-info {
 						color: #bbb;
 						font-size: 12px;
 					}
 
-					> img {
-						opacity: 0.7;
-						border: 1px solid #eee;
-						padding: 2px;
-						margin-top: 8px;
+					// helpers
+					.victory-indicator {
+						&.win {
+							color: rgb(10,133,190);
+						}
+						&.los {
+							color: rgb(213,19,14);
+						}
+						&.dnf {
+							color: #727272;
+						}
 					}
 				}
 

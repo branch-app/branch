@@ -1,0 +1,57 @@
+<%
+	content = activity[:content]
+	gamertag = content[:gamertag]
+	user = content[:user]
+	maps = [ ]
+	content[:games].each do |game|
+		url = get_raw_asset_url(JSON.parse(game.map_image_url), 'large', 'rails')
+		maps << url if (!maps.include?(url))
+	end
+
+	background_options = [ '#eee', '#aaa', '#ccc', '#999', '#888', '#555' ]
+%>
+<li class="halo4-multi-task">
+	<span class="glyphicon glyphicon-tasks"></span>
+	<div class="info">
+		<attr title="Date's might be in-accurate.">
+			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span><br />
+		</attr>
+		<%= link_to(user.username, user_view_path(id: user.username)) %> played <%= content[:games].length %> games of Halo 4
+		<br />
+		<div class="history">
+			<div class="preview hidden-xs">
+				<div class="map-preview-frame">
+					<% if (maps.length == 1) %>
+						<div class="col col-cover" style="background-image: url('<%= maps[0] %>'); background-color: <%= background_options.sample %>;"></div>
+					<% else %>
+						<% count = (content[:games].length.to_f() / 3.to_f()).to_f().ceil() %>
+						<% count.times do |i| %>
+							<div class="col col-part col-left" style="background-image: url('<%= maps.sample %>'); background-color: <%= background_options.sample %>;"></div>
+							<div class="col col-part col-right" style="background-image: url('<%= maps.sample %>'); background-color: <%= background_options.sample %>;"></div>
+							<div class="clearfix"></div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+			<div class="game-list">
+				<ul class="no-style">
+					<% content[:games].each do |game| %>
+						<li>
+							<% result = get_victory_type_alternative(game) %>
+							<strong class="victory-indicator <%= result[:result] %>">
+								<%= result[:friendly_result] %>
+							</strong>
+							a game of
+							<strong>
+								<%= game.gametype_name %>
+							</strong>
+							on
+							<%= link_to(game.map_name, halo4_viewgame_path(gamertag: gamertag.gamertag, game_id: game.game_id)) %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</li>

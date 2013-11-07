@@ -1,0 +1,32 @@
+<%
+	content = activity[:content]
+	gamertag = content[:gamertag]
+	user = content[:user]
+	result = get_victory_type_alternative(content[:h4_content])
+%>
+
+<li class="halo4-single-task">
+	<span class="glyphicon glyphicon-tasks"></span>
+	<div class="info">
+		<attr title="Date's might be in-accurate.">
+			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span>
+		</attr>
+		<div class="details">
+			<%= link_to(user.username, user_view_path(id: user.username)) %>
+			<strong class="victory-indicator <%= result[:result] %>">
+				<%= result[:friendly_result] %>
+			</strong>
+			a
+			<%= link_to('game', halo4_viewgame_path(gamertag: gamertag.gamertag, game_id: content[:h4_content]['game_id'])) %>
+			of
+			<strong>
+				<%= content[:h4_content]['gametype_name'] %>
+			</strong>
+			on
+			<strong>
+				<%= content[:h4_content]['map_name'] %>
+			</strong>
+		</div>
+		<img width="140" height="100" src="<%= get_raw_asset_url(JSON.parse(content[:h4_content]['map_image_url']), 'medium', 'rails') %>" />
+	</div>
+</li>
