@@ -20,10 +20,12 @@ class HomeController < ApplicationController
 
 			# get dem people you follow
 			cool_guys = User.joins(:followers).where('follows.follower_id = ?', current_user().id).uniq
+			cool_guys << current_user()
 
 			# load social events
 			cool_guys.each do |cool_guy|
-				cool_guy.gamertag.social_event.order('created_at DESC, id DESC').limit(40).each do |social_event|
+				social_events = cool_guy.gamertag.social_event.order('created_at DESC, id DESC').limit(40)
+				social_events.each do |social_event|
 					if (social_event.is_h4_matchmaking_event?())
 						h4_matchmaking_event = social_event.h4_matchmaking_event
 						output << {
@@ -56,10 +58,8 @@ class HomeController < ApplicationController
 			end
 
 			# followings
-			index = 0
 			cool_guys.each do |cool_guy|
 				follows = Follow.where('follower_id = ?', cool_guy.id).order('created_at DESC, id DESC').limit(40)
-				follows += Follow.where('following_id = ?', current_user().id).order('created_at DESC, id DESC').limit(40) if (index == 0)
 				follows.each do |follow|
 					new_obj = {
 						event_date: follow.created_at,
@@ -74,10 +74,7 @@ class HomeController < ApplicationController
 					output.map{ |o| continue = false if (o[:type] == 'user_follow' && o[:event_id] == follow.id) }
 					output << new_obj if (continue)
 				end
-
-				index += 1
 			end
-			puts output
 
 			# Sort Everything Pre-Consolidating
 			output = output.sort_by{ |o| o[:event_date] }.reverse

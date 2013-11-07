@@ -12,7 +12,11 @@
 			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span>
 		</attr>
 		<div class="details">
-			<%= link_to(user.username, user_view_path(id: user.username)) %>
+			<% if (current_user() == user) %>
+				<%= link_to('You', user_view_path(id: user.username)) %>
+			<% else %>
+				<%= link_to(user.username, user_view_path(id: user.username)) %>
+			<% end %>
 			<strong class="victory-indicator <%= result[:result] %>">
 				<%= result[:friendly_result] %>
 			</strong>

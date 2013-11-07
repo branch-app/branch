@@ -19,7 +19,22 @@
 				end
 			%>
 
-			<%= link_to(user.username, user_view_path(id: user.username)) %> added a <%= link_to('game', halo4_viewgame_path(gamertag: favourite.mvp_gamertag, game_id: favourite.game_id)) %> of <strong><%= part_a %></strong> on <strong><%= part_b %></strong> to their favourites.
+			<% if (user == current_user()) %>
+				<%= link_to('You', user_view_path(id: user.username)) %>
+			<% else %>
+				<%= link_to(user.username, user_view_path(id: user.username)) %>
+			<% end %>
+			added a 
+			<%= link_to('game', halo4_viewgame_path(gamertag: favourite.mvp_gamertag, game_id: favourite.game_id)) %> 
+			of 
+			<strong>
+				<%= part_a %>
+			</strong>
+			on
+			<strong>
+				<%= part_b %>
+			</strong>
+			to their favourites.
 		<% end %>
 		<attr title="Date's might be in-accurate.">
 			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span>

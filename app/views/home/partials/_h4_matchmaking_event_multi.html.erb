@@ -16,7 +16,11 @@
 		<attr title="Date's might be in-accurate.">
 			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span><br />
 		</attr>
-		<%= link_to(user.username, user_view_path(id: user.username)) %>
+		<% if (current_user() == user) %>
+			<%= link_to('You', user_view_path(id: user.username)) %>
+		<% else %>
+			<%= link_to(user.username, user_view_path(id: user.username)) %>
+		<% end %>
 		played
 		<%= content[:games].length %>
 		games of Halo 4 in
