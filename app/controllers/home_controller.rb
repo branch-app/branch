@@ -82,10 +82,11 @@ class HomeController < ApplicationController
 			# Sort Everything Pre-Consolidating
 			output = output.sort_by{ |o| o[:event_date] }.reverse
 
-			# Consolidate Halo 4 Matches
+			# Consolidate Halo 4 Events
 			cool_guys.each do |selected_cool_guy|
 				current_ones = [ ]
 				chain = 0
+				last_time = nil
 				output.each do |out|
 					if (chain > 8)
 						output = output.reject{ |c| current_ones.include?(c) }
@@ -96,7 +97,10 @@ class HomeController < ApplicationController
 					end
 
 					if (out[:content][:user] == selected_cool_guy && 
-						out[:type] == 'h4_matchmaking_event_single')
+						out[:type] == 'h4_matchmaking_event_single' &&
+						(last_time == nil || last_time.to_i + 20.minutes.to_i >= out[:event_date].to_i))
+
+						last_time = out[:event_date]
 						current_ones << out
 						chain += 1
 					else
