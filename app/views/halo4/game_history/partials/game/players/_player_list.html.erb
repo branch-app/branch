@@ -31,7 +31,7 @@
 						<br />
 						<strong>GEST</strong>
 						<% else %>
-							<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag: link_to(gamertag_validation(player['Gamertag'])))) %>
+							<%= link_to(gamertag_validation(player['Gamertag']), halo4_servicerecord_path(gamertag: gamertag_validation(player['Gamertag']))) %>
 						<br />
 						<strong><%= player['Servicetag'] %></strong>
 						<% end %>
