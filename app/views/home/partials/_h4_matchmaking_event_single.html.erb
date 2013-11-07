@@ -17,7 +17,7 @@
 				<%= result[:friendly_result] %>
 			</strong>
 			a
-			<%= link_to('game', halo4_viewgame_path(gamertag: gamertag.gamertag, game_id: content[:h4_content]['game_id'])) %>
+			<%= link_to('game', halo4_viewgame_path(gamertag: gamertag_validation(gamertag.gamertag), game_id: content[:h4_content]['game_id'])) %>
 			of
 			<strong>
 				<%= content[:h4_content]['gametype_name'] %>
