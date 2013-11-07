@@ -69,7 +69,7 @@ class HomeController < ApplicationController
 						}
 					}
 					continue = true
-					output.map{ |o| continue = false if (o[:type] == 'user_favourite' && o[:event_id] == follow.id) }
+					output.map{ |o| continue = false if (o[:type] == 'user_follow' && o[:event_id] == follow.id) }
 					output << new_obj if (continue)
 				end
 
@@ -114,6 +114,7 @@ class HomeController < ApplicationController
 				end
 			end
 
+			# Sort again, and return shit
 			return output.sort_by{ |o| o[:event_date] }.reverse.first(25)
 		end
 
