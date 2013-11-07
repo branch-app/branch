@@ -41,12 +41,16 @@
 							<strong class="victory-indicator <%= result[:result] %>">
 								<%= result[:friendly_result] %>
 							</strong>
-							a game of
+							a
+							<%= link_to('game', halo4_viewgame_path(gamertag: gamertag.gamertag, game_id: game.game_id)) %>
+							of
 							<strong>
 								<%= game.gametype_name %>
 							</strong>
 							on
-							<%= link_to(game.map_name, halo4_viewgame_path(gamertag: gamertag.gamertag, game_id: game.game_id)) %>
+							<strong>
+								<%= game.map_name %>
+							</strong>
 						</li>
 					<% end %>
 				</ul>
