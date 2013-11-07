@@ -54,7 +54,7 @@ module Halo4::HomeHelper
 		friendly_result = ''
 		if (!game.completed)
 			result = 'dnf'
-			friendly_result = 'DNF'
+			friendly_result = 'Quit'
 		elsif (game.result == 2)
 			result = 'win'
 			friendly_result = 'Won'
