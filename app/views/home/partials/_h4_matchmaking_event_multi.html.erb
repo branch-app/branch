@@ -16,7 +16,13 @@
 		<attr title="Date's might be in-accurate.">
 			<span class="time-info"><%= time_ago_in_words(activity[:event_date]) %> ago</span><br />
 		</attr>
-		<%= link_to(user.username, user_view_path(id: user.username)) %> played <%= content[:games].length %> games of Halo 4
+		<%= link_to(user.username, user_view_path(id: user.username)) %>
+		played
+		<%= content[:games].length %>
+		games of Halo 4 in
+		<strong>
+			<%= content[:games][0].playlist_name %>
+		</strong>
 		<br />
 		<div class="history">
 			<div class="preview hidden-xs">

@@ -87,6 +87,7 @@ class HomeController < ApplicationController
 				current_ones = [ ]
 				chain = 0
 				last_time = nil
+				last_playlist_id = -1
 				output.each do |out|
 					if (chain > 8)
 						output = output.reject{ |c| current_ones.include?(c) }
@@ -98,9 +99,11 @@ class HomeController < ApplicationController
 
 					if (out[:content][:user] == selected_cool_guy && 
 						out[:type] == 'h4_matchmaking_event_single' &&
-						(last_time == nil || last_time.to_i + 20.minutes.to_i >= out[:event_date].to_i))
+						(last_time == nil || last_time.to_i + 20.minutes.to_i >= out[:event_date].to_i) &&
+						(last_playlist_id == -1 || last_playlist_id == out[:content][:h4_content].playlist_id))
 
 						last_time = out[:event_date]
+						last_playlist_id = out[:content][:h4_content].playlist_id
 						current_ones << out
 						chain += 1
 					else
