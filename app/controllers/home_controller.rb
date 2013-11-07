@@ -18,9 +18,11 @@ class HomeController < ApplicationController
 		def load_social_shit(page)
 			output = [ ]
 
+			# get dem people you follow
 			cool_guys = User.joins(:followers).where('follows.follower_id = ?', current_user().id).uniq
+
+			# load social events
 			cool_guys.each do |cool_guy|
-				# social events
 				cool_guy.gamertag.social_event.order('created_at DESC, id DESC').limit(40).each do |social_event|
 					if (social_event.is_h4_matchmaking_event?())
 						h4_matchmaking_event = social_event.h4_matchmaking_event
