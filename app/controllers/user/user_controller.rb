@@ -26,7 +26,7 @@ class User::UserController < User::HomeController
 			user_session = Session.new(expired: false, expires_at: 2.weeks.from_now, owner_ip: request.remote_ip, location: '', user_agent: request.env['HTTP_USER_AGENT'], user_id: @user.id)
 			user_session.save!()
 			session[:identifier] = user_session.identifier
-			set_flash_message('info', 'Welcome!', "The Activity Feed shows the recent activity of everyone you follow on Branch. So thats why it's empty. New accounts will have inaccurage game histories dispayed in the activity feed. But from that point on they will be accurate (within 5 minutes or so). Enjoy!")
+			set_flash_message('info', 'Welcome!', "The Activity Feed shows the recent activity of everyone you follow on Branch. So thats why it's empty. New accounts will have inaccurate game histories dispayed in the activity feed. But from that point on they will be accurate (within 5 minutes or so). Enjoy!")
 			redirect_to(home_dashboard_path())
 		else
 			render 'user/user/new'
