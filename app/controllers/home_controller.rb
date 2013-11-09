@@ -11,7 +11,9 @@ class HomeController < ApplicationController
 	end
 
 	def welcome
-		redirect_to(home_dashboard_path()) if (current_user)
+		if (current_user)
+			redirect_to(home_dashboard_path())
+		end
 	end
 
 	private
