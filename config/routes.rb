@@ -1,5 +1,11 @@
 BranchApp::Application.routes.draw do
 
+	# SSL
+	match "*path" => redirect("https://www.branchapp.co/%{path}"), :constraints => { :protocol => "http://" }
+	match "*path" => redirect("https://www.branchapp.co/%{path}"), :constraints => { :subdomain => "" }
+	match "*path" => redirect("https://branchapp.co/%{path}"), :constraints => { :protocol => "http://" }
+	match "*path" => redirect("https://branchapp.co/%{path}"), :constraints => { :subdomain => "" }
+
 	# Core
 	root :to => 'home#welcome'
 	get '/' => 'home#welcome', as: :home_welcome
