@@ -5,17 +5,40 @@ namespace Branch.Models.Services.Halo4
 {
 	public class TaskEntity : BaseEntity
 	{
-		public const string RowKeyString = "H4Task{0}";
-		public static string FormatRowKey(string ending)
+		/// <summary>
+		/// </summary>
+		public enum TaskType
 		{
-			return String.Format(RowKeyString, ending.ToTitleCase());
+			Auth = 0x00
 		}
 
-		public TaskEntity() { }
+		public const string RowKeyString = "H4Task{0}";
+
+		public TaskEntity()
+		{
+		}
+
 		public TaskEntity(TaskType type)
 		{
 			Type = type;
 			SetKeys(null, type.ToString());
+		}
+
+		/// <summary>
+		/// </summary>
+		public TaskType Type { get; set; }
+
+		/// <summary>
+		/// </summary>
+		public int Interval { get; set; }
+
+		/// <summary>
+		/// </summary>
+		public DateTime LastRun { get; set; }
+
+		public static string FormatRowKey(string ending)
+		{
+			return String.Format(RowKeyString, ending.ToTitleCase());
 		}
 
 		public override sealed void SetKeys(string partitionKey, string rowKey)
@@ -24,29 +47,6 @@ namespace Branch.Models.Services.Halo4
 				partitionKey = "Halo4ServiceTasks";
 
 			base.SetKeys(partitionKey, FormatRowKey(rowKey));
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public TaskType Type { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Interval { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public DateTime LastRun { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public enum TaskType
-		{
-			Auth = 0x00
 		}
 	}
 }

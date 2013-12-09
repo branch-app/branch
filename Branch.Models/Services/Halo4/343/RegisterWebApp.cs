@@ -8,7 +8,7 @@ namespace Branch.Models.Services.Halo4._343
 		public string Identifier { get; set; }
 		public Enums.ResponseCode ResponseCode { get; set; }
 		public Dictionary<string, string> ServiceList { get; set; }
-		public Dictionary<string, string> Settings { get; set; } 
+		public Dictionary<string, string> Settings { get; set; }
 		public int State { get; set; }
 		public int TokenResponseCode { get; set; }
 	}

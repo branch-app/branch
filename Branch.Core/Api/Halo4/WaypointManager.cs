@@ -15,25 +15,25 @@ namespace Branch.Core.Api.Halo4
 {
 	public class WaypointManager
 	{
-		private readonly TableStorage _storage;
-		private RegisterWebApp _registeredWebApp;
+		private const string RegisterWebAppLocation =
+			"https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
 
-		private const string RegisterWebAppLocation = "https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
 		private const string Language = "en-US";
 		private const string Game = "h4";
 		private const string GameLong = "halo4";
+		private readonly TableStorage _storage;
+		private RegisterWebApp _registeredWebApp;
 
 		public WaypointManager(TableStorage storage)
 		{
 			_storage = storage;
-
-			// Ugh, Load Settings
+			Settings.LoadSettings();
 			RegisterWebApp();
 		}
 
 		public void RegisterWebApp()
 		{
-			var response = UnauthorizedRequest(RegisterWebAppLocation);
+			HttpResponse response = UnauthorizedRequest(RegisterWebAppLocation);
 
 			if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText))
 			{
@@ -57,7 +57,7 @@ namespace Branch.Core.Api.Halo4
 		#region Helpers
 
 		/// <summary>
-		/// Returns a URL from a key and endpoint type.
+		///     Returns a URL from a key and endpoint type.
 		/// </summary>
 		/// <param name="endpointType">The type of endpoint you need to call (ie; ServiceList)</param>
 		/// <param name="key">The key url in that endpoint.</param>
@@ -71,14 +71,14 @@ namespace Branch.Core.Api.Halo4
 
 				case EndpointType.Settings:
 					return _registeredWebApp.Settings[key];
-			
+
 				default:
 					throw new ArgumentException();
 			}
 		}
 
 		/// <summary>
-		/// Populates a url with the default params populated.
+		///     Populates a url with the default params populated.
 		/// </summary>
 		/// <param name="url">The url to populate.</param>
 		/// <returns>A string representation of the populated url</returns>
@@ -88,7 +88,7 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		/// <summary>
-		/// Populates a url with the default params populated, and also populates custom params.
+		///     Populates a url with the default params populated, and also populates custom params.
 		/// </summary>
 		/// <param name="url">The url to populate.</param>
 		/// <param name="customDefaults">Custom params to populate the url with, auto wrapped in the {} brackets.</param>
@@ -101,11 +101,12 @@ namespace Branch.Core.Api.Halo4
 			if (customDefaults == null)
 				throw new ArgumentException("Custom Defaults can't be null");
 
-			return customDefaults.Aggregate(url, (current, customDefault) => current.Replace("{" + customDefault.Key + "}", customDefault.Value));
+			return customDefaults.Aggregate(url,
+				(current, customDefault) => current.Replace("{" + customDefault.Key + "}", customDefault.Value));
 		}
 
 		/// <summary>
-		/// Checks is a HttpResponse is valid or not.
+		///     Checks is a HttpResponse is valid or not.
 		/// </summary>
 		/// <param name="response">The HttpResponse</param>
 		/// <returns>Boolean representation of the validity of the response.</returns>
@@ -115,7 +116,7 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		/// <summary>
-		/// Checks is a HttpResponse is valid or not, and parses it into a model
+		///     Checks is a HttpResponse is valid or not, and parses it into a model
 		/// </summary>
 		/// <param name="modelType">The type of model to parse to.</param>
 		/// <param name="response">The HttpResponse we are checking and parsing</param>
@@ -123,7 +124,7 @@ namespace Branch.Core.Api.Halo4
 		public TModelType ValidateAndParseResponse<TModelType>(TModelType modelType, HttpResponse response)
 			where TModelType : Base
 		{
-			if (!ValidateResponse(response)) 
+			if (!ValidateResponse(response))
 				return null;
 
 			try
@@ -136,6 +137,20 @@ namespace Branch.Core.Api.Halo4
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// </summary>
+		/// <returns></returns>
+		public bool CheckApiValidity()
+		{
+			var auth = _storage.RetrieveSingleEntity<WaypointTokenEntity>("Authentication", WaypointTokenEntity.FormatRowKey(),
+				_storage.AuthenticationCloudTable);
+
+			if (auth == null)
+				return false;
+
+			return (auth.ResponseCode == 1);
 		}
 
 		#endregion
@@ -213,18 +228,18 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		#endregion
-		
+
 		#region Enums
+
+		public enum AuthType
+		{
+			Spartan
+		}
 
 		public enum EndpointType
 		{
 			ServiceList,
 			Settings
-		}
-
-		public enum AuthType
-		{
-			Spartan
 		}
 
 		#endregion

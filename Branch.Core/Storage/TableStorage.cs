@@ -6,23 +6,15 @@ using Microsoft.WindowsAzure.Storage.Table;
 namespace Branch.Core.Storage
 {
 	/// <summary>
-	/// 
 	/// </summary>
 	public class TableStorage
 	{
-		public CloudStorageAccount StorageAccount { get; private set; }
-		public CloudTableClient TableClient { get; private set; }
-
-		// Tables
-		public CloudTable AuthenticationCloudTable { get; private set; }
-		public CloudTable Halo4ServiceTasksCloudTable { get; private set; }
-
 		/// <summary>
-		/// 
 		/// </summary>
 		public TableStorage()
 		{
-			StorageAccount = CloudStorageAccount.DevelopmentStorageAccount; //.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+			StorageAccount = CloudStorageAccount.DevelopmentStorageAccount;
+				//.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
 			// Attempt to set up shit
 			TableClient = StorageAccount.CreateCloudTableClient();
@@ -41,19 +33,17 @@ namespace Branch.Core.Storage
 		#region Entity Operations
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="dataEntity"></param>
 		/// <param name="cloudTable"></param>
 		public bool InsertSingleEntity(object dataEntity, CloudTable cloudTable)
 		{
-			var insertOperation = TableOperation.Insert((TableEntity)dataEntity);
-			var operationResult = cloudTable.Execute(insertOperation);
+			TableOperation insertOperation = TableOperation.Insert((TableEntity) dataEntity);
+			TableResult operationResult = cloudTable.Execute(insertOperation);
 			return (operationResult.HttpStatusCode == 201);
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <typeparam name="TEntityType"></typeparam>
 		/// <param name="partitionKey"></param>
@@ -63,26 +53,25 @@ namespace Branch.Core.Storage
 		public TEntityType RetrieveSingleEntity<TEntityType>(string partitionKey, string rowKey, CloudTable cloudTable)
 			where TEntityType : BaseEntity
 		{
-			var retrieveOperation = TableOperation.Retrieve<TEntityType>(partitionKey, rowKey);
-			var operationResult = cloudTable.Execute(retrieveOperation);
+			TableOperation retrieveOperation = TableOperation.Retrieve<TEntityType>(partitionKey, rowKey);
+			TableResult operationResult = cloudTable.Execute(retrieveOperation);
 
 			if (operationResult.Result != null && operationResult.Result.GetType() == typeof (TEntityType))
-				return (TEntityType)operationResult.Result;
+				return (TEntityType) operationResult.Result;
 
 			return null;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <typeparam name="TEntityType"></typeparam>
 		/// <param name="partitionKey"></param>
 		/// <param name="cloudTable"></param>
 		/// <returns></returns>
 		public IEnumerable<TEntityType> RetrieveMultipleEntities<TEntityType>(string partitionKey, CloudTable cloudTable)
-			where TEntityType : BaseEntity, new ()
+			where TEntityType : BaseEntity, new()
 		{
-			var rangeQuery =
+			TableQuery<TEntityType> rangeQuery =
 				new TableQuery<TEntityType>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal,
 					partitionKey));
 
@@ -90,16 +79,22 @@ namespace Branch.Core.Storage
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="dataEntity"></param>
 		/// <param name="cloudTable"></param>
 		public void UpdateEntity(object dataEntity, CloudTable cloudTable)
 		{
-			var updateOperation = TableOperation.Replace((TableEntity)dataEntity);
+			TableOperation updateOperation = TableOperation.Replace((TableEntity) dataEntity);
 			cloudTable.Execute(updateOperation);
 		}
 
 		#endregion
+
+		public CloudStorageAccount StorageAccount { get; private set; }
+		public CloudTableClient TableClient { get; private set; }
+
+		// Tables
+		public CloudTable AuthenticationCloudTable { get; private set; }
+		public CloudTable Halo4ServiceTasksCloudTable { get; private set; }
 	}
 }

@@ -7,9 +7,5 @@
 	//  The SettingsSaving event is raised before the setting values are saved.
 	internal sealed partial class Settings
 	{
-		public Settings()
-		{
-
-		}
 	}
 }
