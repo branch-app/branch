@@ -46,6 +46,8 @@ namespace Branch.Core.Api.Authentication
 						currentWaypointTokenEntity.ResponseCode = waypointToken.ResponseCode;
 						currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
 						currentWaypointTokenEntity.UserInformation = waypointToken.UserInformation;
+
+						storage.UpdateEntity(currentWaypointTokenEntity, storage.AuthenticationCloudTable);
 					}
 					else
 						everythingWentGucci = storage.InsertSingleEntity(waypointToken, storage.AuthenticationCloudTable);

@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Branch.Core.Api.Halo4
 {
-	public class Halo4
+	public class WaypointManager
 	{
 		private readonly TableStorage _storage;
 		private RegisterWebApp _registeredWebApp;
@@ -23,7 +23,7 @@ namespace Branch.Core.Api.Halo4
 		private const string Game = "h4";
 		private const string GameLong = "halo4";
 
-		public Halo4(TableStorage storage)
+		public WaypointManager(TableStorage storage)
 		{
 			_storage = storage;
 
