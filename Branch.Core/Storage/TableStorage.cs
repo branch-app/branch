@@ -79,7 +79,7 @@ namespace Branch.Core.Storage
 		/// <param name="partitionKey"></param>
 		/// <param name="cloudTable"></param>
 		/// <returns></returns>
-		public IEnumerable<TEntityType> RetrieveMultipleEntity<TEntityType>(string partitionKey, CloudTable cloudTable)
+		public IEnumerable<TEntityType> RetrieveMultipleEntities<TEntityType>(string partitionKey, CloudTable cloudTable)
 			where TEntityType : BaseEntity, new ()
 		{
 			var rangeQuery =
