@@ -5,7 +5,6 @@ namespace Branch.Helpers.Extenders
 	public static class StringExtenders
 	{
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>

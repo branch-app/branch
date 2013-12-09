@@ -7,6 +7,16 @@ namespace Branch.Core
 {
 	public static class Settings
 	{
+		// Wlid Settings
+		public static string WlidAuthEmail = null;
+		public static string WlidAuthPassword = null;
+
+		// Twilio Settings
+		public static string TwilioSid = null;
+		public static string TwilioAuthToken = null;
+		public static string TwilioFromNumber = null;
+		public static string TwilioToNumber = null;
+
 		public static bool NeedsSettings()
 		{
 			return (String.IsNullOrEmpty(WlidAuthEmail) ||
@@ -32,15 +42,5 @@ namespace Branch.Core
 			TwilioFromNumber = settings["TwilioFromNumber"];
 			TwilioToNumber = settings["TwilioToNumber"];
 		}
-
-		// Wlid Settings
-		public static string WlidAuthEmail = null;
-		public static string WlidAuthPassword = null;
-
-		// Twilio Settings
-		public static string TwilioSid = null;
-		public static string TwilioAuthToken = null;
-		public static string TwilioFromNumber = null;
-		public static string TwilioToNumber = null;
 	}
 }
