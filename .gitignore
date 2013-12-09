@@ -44,6 +44,9 @@ _ReSharper*/
 #Project files
 [Bb]uild/
 
+#Settings
+[Bb]ranch.[Cc]ore/[Ss]ettings.json
+
 #Subversion files
 .svn
 
