@@ -1,6 +1,11 @@
-﻿using System.Text;
+﻿using System;
+using System.Data;
+using System.Diagnostics;
+using System.Text;
+using Branch.Models.Services.Halo4._343;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
 
 namespace Branch.Core.Storage
 {
@@ -25,6 +30,64 @@ namespace Branch.Core.Storage
 		}
 
 		#region Blob Operations
+
+		public ICloudBlob GetBlob(CloudBlobContainer blobContainer, string blobName)
+		{
+			try
+			{
+				return blobContainer.GetBlobReferenceFromServer(blobName);
+			}
+			catch (StorageException storageException)
+			{
+				Trace.TraceError(storageException.ToString());
+				return null;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TDataModel"></typeparam>
+		/// <param name="blobContainer"></param>
+		/// <param name="blobName"></param>
+		/// <returns></returns>
+		public TDataModel FindAndDownloadBlob<TDataModel>(CloudBlobContainer blobContainer, string blobName)
+			where TDataModel : WaypointResponse
+		{
+			ICloudBlob blob;
+			try
+			{
+				blob = blobContainer.GetBlobReferenceFromServer(blobName);
+			}
+			catch (StorageException storageException)
+			{
+				Trace.TraceError(storageException.ToString());
+				return null;
+			}
+
+			var blobData = new byte[blob.Properties.Length];
+			blob.DownloadToByteArray(blobData, 0);
+			var blobTextRepresentation = Encoding.ASCII.GetString(blobData);
+			return JsonConvert.DeserializeObject<TDataModel>(blobTextRepresentation);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TDataModel"></typeparam>
+		/// <param name="blob"></param>
+		/// <returns></returns>
+		public TDataModel DownloadBlob<TDataModel>(ICloudBlob blob)
+			where TDataModel : WaypointResponse
+		{
+			if (blob == null)
+				throw new ArgumentException("Can't download blob, specified blob is null.");
+
+			var blobData = new byte[blob.Properties.Length];
+			blob.DownloadToByteArray(blobData, 0);
+			var blobTextRepresentation = Encoding.ASCII.GetString(blobData);
+			return JsonConvert.DeserializeObject<TDataModel>(blobTextRepresentation);
+		}
 
 		public void UploadBlob(CloudBlobContainer blobContainer, string blobName, string blobData)
 		{

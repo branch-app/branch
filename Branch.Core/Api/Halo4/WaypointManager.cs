@@ -6,10 +6,12 @@ using System.Net;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using Branch.Models.Services.Halo4;
+using Branch.Models.Services.Halo4.Branch;
 using Branch.Models.Services.Halo4._343;
 using Branch.Models.Services.Halo4._343.Responses;
 using EasyHttp.Http;
 using EasyHttp.Infrastructure;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 
 namespace Branch.Core.Api.Halo4
@@ -21,22 +23,32 @@ namespace Branch.Core.Api.Halo4
 
 		private const string Language = "en-US";
 		private const string Game = "h4";
-		private const string GameLong = "halo4";
 		private readonly AzureStorage _storage;
-		private RegisterWebApp _registeredWebApp;
 
+		public RegisterWebApp RegisteredWebApp { get; private set; }
 		public Metadata Metadata { get; private set; }
+		public Playlist Playlists { get; private set; }
+		public Challenge Challenges { get; private set; }
+
 
 		public WaypointManager(AzureStorage storage)
 		{
 			_storage = storage;
 			Settings.LoadSettings();
 			RegisterWebApp();
+
+			// Setup
+			GetMetadata();
+			GetPlaylists();
+			GetChallenges();
 		}
 
 
 		#region Setup Waypoint Manager
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void RegisterWebApp()
 		{
 			var response = UnauthorizedRequest(RegisterWebAppLocation);
@@ -45,7 +57,7 @@ namespace Branch.Core.Api.Halo4
 			{
 				try
 				{
-					_registeredWebApp = JsonConvert.DeserializeObject<RegisterWebApp>(response.RawText);
+					RegisteredWebApp = JsonConvert.DeserializeObject<RegisterWebApp>(response.RawText);
 				}
 				catch (JsonReaderException jsonReaderException)
 				{
@@ -60,9 +72,46 @@ namespace Branch.Core.Api.Halo4
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void GetMetadata()
 		{
-			
+			var metadata = _storage.Blob.FindAndDownloadBlob<Metadata>(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.Other, "metadata"));
+
+			if (metadata == null)
+				UpdateMetadata();
+			else
+				Metadata = metadata;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void GetPlaylists()
+		{
+			var playlists = _storage.Blob.FindAndDownloadBlob<Playlist>(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.Other, "playlists"));
+
+			if (playlists == null)
+				UpdatePlaylists();
+			else
+				Playlists = playlists;
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		public void GetChallenges()
+		{
+			var challenges = _storage.Blob.FindAndDownloadBlob<Challenge>(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.Other, "challenges"));
+
+			if (challenges == null)
+				UpdateChallenges();
+			else
+				Challenges = challenges;
 		}
 
 		#endregion
@@ -75,16 +124,36 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
 		/// <returns>The raw JSON of their Service Record</returns>
-		public string GetServiceRecord(string gamertag)
+		public ServiceRecord GetServiceRecord(string gamertag)
 		{
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(BlobType.PlayerServiceRecord, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<ServiceRecord>(blob, new TimeSpan(0, 8, 0));
 
+			// Check if blob exists & expire date
+			if (blobValidity.Item1)
+				return blobValidity.Item2;
 
-			return null;
+			// Try and get new blob
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetServiceRecord"),
+				new Dictionary<string, string> { { "gamertag", gamertag } });
+			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(url));
+			var serviceRecord = ParseText<ServiceRecord>(serviceRecordRaw);
+			if (serviceRecord == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.PlayerServiceRecord, escapedGamertag), serviceRecordRaw);
+
+			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
+			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
+
+			return serviceRecord;
 		}
 
 		#endregion
 
-		#region Meta Endpoints
+		#region Other Endpoints
 
 		/// <summary>
 		/// 
@@ -96,10 +165,42 @@ namespace Branch.Core.Api.Halo4
 					UnauthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameMetadata"))));
 
 			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, BlobContainerPath(BlobType.Other, "metadata"), metaData);
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "metadata"), metaData);
 
 			// Update in Class
 			Metadata = ParseText<Metadata>(metaData);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void UpdatePlaylists()
+		{
+			var playlists =
+				ValidateResponseAndGetRawText(AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetPlaylists")),
+					AuthType.Spartan));
+
+			// Save Metadata
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "playlists"), playlists);
+
+			// Update in Class
+			Playlists = ParseText<Playlist>(playlists);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void UpdateChallenges()
+		{
+			var challenges =
+				ValidateResponseAndGetRawText(AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGlobalChallenges")),
+					AuthType.Spartan));
+
+			// Save Metadata
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "challenges"), challenges);
+
+			// Update in Class
+			Challenges = ParseText<Challenge>(challenges);
 		}
 
 		#endregion
@@ -186,15 +287,15 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="endpointType">The type of endpoint you need to call (ie; ServiceList)</param>
 		/// <param name="key">The key url in that endpoint.</param>
 		/// <returns>A string representation of the url.</returns>
-		public string UrlFromIds(EndpointType endpointType, string key)
+		private string UrlFromIds(EndpointType endpointType, string key)
 		{
 			switch (endpointType)
 			{
 				case EndpointType.ServiceList:
-					return _registeredWebApp.ServiceList[key];
+					return RegisteredWebApp.ServiceList[key];
 
 				case EndpointType.Settings:
-					return _registeredWebApp.Settings[key];
+					return RegisteredWebApp.Settings[key];
 
 				default:
 					throw new ArgumentException();
@@ -206,7 +307,7 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		/// <param name="url">The url to populate.</param>
 		/// <returns>A string representation of the populated url</returns>
-		public string PopulateUrl(string url)
+		private static string PopulateUrl(string url)
 		{
 			return PopulateUrl(url, new Dictionary<string, string>());
 		}
@@ -217,7 +318,7 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="url">The url to populate.</param>
 		/// <param name="customDefaults">Custom params to populate the url with, auto wrapped in the {} brackets.</param>
 		/// <returns>A string representation of the populated url</returns>
-		public string PopulateUrl(string url, Dictionary<string, string> customDefaults)
+		private static string PopulateUrl(string url, Dictionary<string, string> customDefaults)
 		{
 			url = url.Replace("{language}", Language);
 			url = url.Replace("{game}", Game);
@@ -234,16 +335,20 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		/// <param name="response">The HttpResponse</param>
 		/// <returns>Boolean representation of the validity of the response.</returns>
-		public bool ValidateResponse(HttpResponse response)
+		private static bool ValidateResponse(HttpResponse response)
 		{
-			return (response != null && response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText));
+			if (response == null || response.StatusCode != HttpStatusCode.OK || String.IsNullOrEmpty(response.RawText))
+				return false;
+
+			var parsedResponse = JsonConvert.DeserializeObject<WaypointResponse>(response.RawText);
+			return (parsedResponse != null && (parsedResponse.StatusCode == Enums.ResponseCode.Okay || parsedResponse.StatusCode == Enums.ResponseCode.PlayerFound));
 		}
 
 		/// <summary>
 		///     Checks is a HttpResponse is valid or not, and if not returns the Raw Text.
 		/// </summary>
 		/// <param name="response">The HttpResponse</param>
-		public string ValidateResponseAndGetRawText(HttpResponse response)
+		private static string ValidateResponseAndGetRawText(HttpResponse response)
 		{
 			return !ValidateResponse(response) ? null : response.RawText;
 		}
@@ -251,11 +356,10 @@ namespace Branch.Core.Api.Halo4
 		/// <summary>
 		///     Checks is a HttpResponse is valid or not, and parses it into a model
 		/// </summary>
-		/// <param name="modelType">The type of model to parse to.</param>
 		/// <param name="response">The HttpResponse we are checking and parsing</param>
 		/// <returns>Returns null if the response is not valid, and the parsed model if it is.</returns>
-		public TModelType ValidateAndParseResponse<TModelType>(TModelType modelType, HttpResponse response)
-			where TModelType : Base
+		private static TModelType ValidateAndParseResponse<TModelType>(HttpResponse response)
+			where TModelType : WaypointResponse
 		{
 			if (!ValidateResponse(response))
 				return null;
@@ -325,6 +429,9 @@ namespace Branch.Core.Api.Halo4
 		{
 			if (jsonData == null) return null;
 
+#if DEBUG
+			return JsonConvert.DeserializeObject<TBlam>(jsonData);
+#else
 			try
 			{
 				return JsonConvert.DeserializeObject<TBlam>(jsonData);
@@ -333,6 +440,7 @@ namespace Branch.Core.Api.Halo4
 			{
 				return null;
 			}
+#endif
 		}
 
 		/// <summary>
@@ -341,7 +449,7 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="blobType"></param>
 		/// <param name="fileName"></param>
 		/// <returns></returns>
-		public string BlobContainerPath(BlobType blobType, string fileName)
+		public string GenerateBlobContainerPath(BlobType blobType, string fileName)
 		{
 			string path;
 
@@ -372,6 +480,40 @@ namespace Branch.Core.Api.Halo4
 			}
 
 			return string.Format("{0}/{1}.json", path, fileName);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
+		/// <returns></returns>
+		public string EscapeGamertag(string gamertag)
+		{
+			gamertag = gamertag.ToLower();
+			gamertag = gamertag.Replace(" ", "-"); // Spaces to hyphens
+			return gamertag;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TDataModel"></typeparam>
+		/// <param name="blob"></param>
+		/// <param name="expireLength"></param>
+		/// <returns></returns>
+		public Tuple<bool, TDataModel> CheckBlobValidity<TDataModel>(ICloudBlob blob, TimeSpan expireLength)
+			where TDataModel : WaypointResponse
+		{
+			if (blob == null || !blob.Exists()) 
+				return new Tuple<bool, TDataModel>(false, null);
+
+			var blobData = _storage.Blob.DownloadBlob<TDataModel>(blob);
+			if (blobData == null) return new Tuple<bool, TDataModel>(false, null);
+
+			if (blob.Properties.LastModified == null || DateTime.UtcNow > blob.Properties.LastModified + expireLength)
+				return new Tuple<bool, TDataModel>(false, null);
+
+			return new Tuple<bool, TDataModel>(true, blobData);
 		}
 
 		#endregion

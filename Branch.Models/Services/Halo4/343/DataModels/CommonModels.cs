@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Branch.Models.Services.Halo4._343.DataModels
 {
@@ -9,6 +10,49 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public string BaseUrl { get; set; }
 
 			public string AssetUrl { get; set; }
+		}
+
+		public class TopMedal
+		{
+			public int Id { get; set; }
+
+			public string Name { get; set; }
+
+			public string Description { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+
+			public int TotalMedals { get; set; }
+		}
+
+		#region Multiplayer Specific
+
+		public class FavoriteVariant
+		{
+			public ImageUrl ImageUrl { get; set; }
+
+			public string TotalDuration { get; set; }
+
+			public int TotalGamesStarted { get; set; }
+
+			public int TotalGamesCompleted { get; set; }
+
+			public int TotalGamesWon { get; set; }
+
+			public int TotalMedals { get; set; }
+
+			public int TotalKills { get; set; }
+
+			public int TotalDeaths { get; set; }
+
+			[JsonProperty("KDRatio")]
+			public double KdRatio { get; set; }
+
+			public double AveragePersonalScore { get; set; }
+
+			public int Id { get; set; }
+
+			public string Name { get; set; }
 		}
 
 		public class GameVariant
@@ -27,6 +71,64 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 		}
 
+		public class GameMode
+		{
+			public string TotalDuration { get; set; }
+
+			public int TotalKills { get; set; }
+
+			public int TotalDeaths { get; set; }
+
+			public IList<DifficultyLevel> DifficultyLevels { get; set; }
+
+			public IList<Mission> SinglePlayerMissions { get; set; }
+
+			public IList<Mission> CoopMissions { get; set; }
+
+			public int TotalTerminalsVisited { get; set; }
+
+			public long NarrativeFlags { get; set; }
+
+			[JsonProperty("SinglePlayerDASO")]
+			public object SinglePlayerDaso { get; set; }
+
+			public object SinglePlayerDifficulty { get; set; }
+
+			[JsonProperty("CoopDASO")]
+			public object CoopDaso { get; set; }
+
+			public object CoopDifficulty { get; set; }
+
+			public int PresentationId { get; set; }
+
+			public Enums.Mode Id { get; set; }
+
+			public string Name { get; set; }
+
+			public int TotalGamesStarted { get; set; }
+
+			public int? TotalSinglePlayerMissionsCompleted { get; set; }
+
+			public int? TotalCoopMissionsCompleted { get; set; }
+
+			public int? TotalMissionsPossible { get; set; }
+
+			public int? TotalMedals { get; set; }
+
+			public int? TotalGamesWon { get; set; }
+
+			public int? TotalGamesCompleted { get; set; }
+
+			public int? AveragePersonalScore { get; set; }
+
+			[JsonProperty("KDRatio")]
+			public double? KdRatio { get; set; }
+
+			public int? TotalGameBaseVariantMedals { get; set; }
+
+			public FavoriteVariant FavoriteVariant { get; set; }
+		}
+
 		public class MapVariant
 		{
 			[JsonProperty("MapID")]
@@ -34,6 +136,68 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public string MapVariantName { get; set; }
 		}
+
+		public class Specialization
+		{
+			public int Id { get; set; }
+
+			public string Name { get; set; }
+
+			public string Description { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+
+			public int Level { get; set; }
+
+			public string LevelName { get; set; }
+
+			public double PercentComplete { get; set; }
+
+			public bool IsCurrent { get; set; }
+
+			public bool Completed { get; set; }
+		}
+
+		public class CurrentSkillRank
+		{
+			[JsonProperty("CurrentSkillRank")]
+			public int? CompetitiveSkillRank { get; set; }
+
+			public string PlaylistDescription { get; set; }
+
+			public ImageUrl PlaylistImageUrl { get; set; }
+
+			public string PlaylistName { get; set; }
+		}
+
+		#endregion
+
+		#region Campaign Specific
+
+		public class DifficultyLevel
+		{
+			public int Id { get; set; }
+
+			public string Name { get; set; }
+
+			public string Description { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+		}
+
+		public class Mission
+		{
+			public int MapId { get; set; }
+
+			[JsonProperty("Mission")]
+			public int MissionId { get; set; }
+
+			public int Difficulty { get; set; }
+		}
+
+		#endregion
+
+
 
 	}
 }

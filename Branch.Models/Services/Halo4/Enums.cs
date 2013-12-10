@@ -4,7 +4,8 @@
 	{
 		public enum ResponseCode
 		{
-			Ok = 1,
+			Okay = 0,
+			PlayerFound = 1,
 			InvalidGamertag = 3,
 			PlayerHasNotPlayedHalo4 = 4
 		}
