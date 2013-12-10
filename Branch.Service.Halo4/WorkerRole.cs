@@ -16,61 +16,62 @@ namespace Branch.Service.Halo4
 	{
 		private readonly Dictionary<TaskEntity.TaskType, TimeSpan> _tasks = new Dictionary<TaskEntity.TaskType, TimeSpan>
 		{
-			{TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0)}
+			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
+			{ TaskEntity.TaskType.Metadata, new TimeSpan(1, 0, 0, 0) },
 		};
+
+		private AzureStorage _storage;
+		private WaypointManager _h4WaypointManager;
 
 		public override void Run()
 		{
-			Trace.TraceInformation("Branch.Service.Halo4 entry point called", "Information");
-			var storage = new TableStorage();
-			var h4WaypointManager = new WaypointManager(storage);
+			Trace.TraceInformation("Branch.Service.Halo4 entry point called");
 
 			// Update Stuff
-			IEnumerable<TaskEntity> tasks = storage.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
-				storage.Halo4ServiceTasksCloudTable);
+			var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
+				_storage.Table.Halo4ServiceTasksCloudTable);
 
 			#region Check to Execute Tasks
 
-			foreach (TaskEntity task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
+			foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 			{
 				switch (task.Type)
 				{
 					case TaskEntity.TaskType.Auth:
-						bool auth = I343.UpdateAuthentication(storage);
-						if (auth)
-						{
-							task.LastRun = DateTime.UtcNow;
-							task.Interval = (int) new TimeSpan(0, 45, 0).TotalSeconds;
-						}
-						else
-						{
-							task.LastRun = DateTime.UtcNow;
-							task.Interval = (int) new TimeSpan(0, 20, 0).TotalSeconds;
-						}
+						var auth = I343.UpdateAuthentication(_storage);
+						if (!auth)
+							task.Interval = (int) new TimeSpan(0, 15, 0).TotalSeconds;
+						break;
+
+					case TaskEntity.TaskType.Metadata:
+						_h4WaypointManager.UpdateMetadata();
 						break;
 				}
 
-				storage.UpdateEntity(task, storage.Halo4ServiceTasksCloudTable);
+				task.Interval = (int)_tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
+				task.LastRun = DateTime.UtcNow;
+				_storage.Table.UpdateEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
 			}
 
 			#endregion
 
 			// Sleep for 5 minutes until we need to update stuff again. yolo
-			Thread.Sleep(TimeSpan.FromMinutes(5));
+			Thread.Sleep(TimeSpan.FromMinutes(10));
 		}
 
 		public override bool OnStart()
 		{
-			Trace.TraceInformation("Branch.Service.Halo4 service started", "Information");
+			Trace.TraceInformation("Branch.Service.Halo4 service started");
 			ServicePointManager.DefaultConnectionLimit = 1;
-			var storage = new TableStorage();
+			_storage = new AzureStorage();
+			_h4WaypointManager = new WaypointManager(_storage);
 
 			#region Create Tasks if they don't exist
 
-			foreach (TaskEntity entity in from task in _tasks
+			foreach (var entity in from task in _tasks
 				let entity =
-					storage.RetrieveSingleEntity<TaskEntity>("Halo4ServiceTasks", TaskEntity.FormatRowKey(task.Key.ToString()),
-						storage.Halo4ServiceTasksCloudTable)
+					_storage.Table.RetrieveSingleEntity<TaskEntity>("Halo4ServiceTasks", TaskEntity.FormatRowKey(task.Key.ToString()),
+						_storage.Table.Halo4ServiceTasksCloudTable)
 				where entity == null
 				select new TaskEntity(task.Key)
 				{
@@ -78,7 +79,7 @@ namespace Branch.Service.Halo4
 					Interval = (int) task.Value.TotalSeconds
 				})
 			{
-				storage.InsertSingleEntity(entity, storage.Halo4ServiceTasksCloudTable);
+				_storage.Table.InsertSingleEntity(entity, _storage.Table.Halo4ServiceTasksCloudTable);
 			}
 
 			#endregion

@@ -92,6 +92,8 @@
     </Compile>
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Storage\AzureStorage.cs" />
+    <Compile Include="Storage\BlobStorage.cs" />
     <Compile Include="Storage\TableStorage.cs" />
   </ItemGroup>
   <ItemGroup>
