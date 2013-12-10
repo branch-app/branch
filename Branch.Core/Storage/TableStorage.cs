@@ -9,12 +9,15 @@ namespace Branch.Core.Storage
 	/// </summary>
 	public class TableStorage
 	{
+		public CloudTableClient TableClient { get; private set; }
+		public CloudStorageAccount StorageAccount { get; private set; }
+
 		/// <summary>
+		/// 
 		/// </summary>
-		public TableStorage()
+		public TableStorage(CloudStorageAccount storage)
 		{
-			StorageAccount = CloudStorageAccount.DevelopmentStorageAccount;
-				//.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+			StorageAccount = storage;
 
 			// Attempt to set up shit
 			TableClient = StorageAccount.CreateCloudTableClient();
@@ -38,8 +41,8 @@ namespace Branch.Core.Storage
 		/// <param name="cloudTable"></param>
 		public bool InsertSingleEntity(object dataEntity, CloudTable cloudTable)
 		{
-			TableOperation insertOperation = TableOperation.Insert((TableEntity) dataEntity);
-			TableResult operationResult = cloudTable.Execute(insertOperation);
+			var insertOperation = TableOperation.Insert((TableEntity)dataEntity);
+			var operationResult = cloudTable.Execute(insertOperation);
 			return (operationResult.HttpStatusCode == 201);
 		}
 
@@ -53,8 +56,8 @@ namespace Branch.Core.Storage
 		public TEntityType RetrieveSingleEntity<TEntityType>(string partitionKey, string rowKey, CloudTable cloudTable)
 			where TEntityType : BaseEntity
 		{
-			TableOperation retrieveOperation = TableOperation.Retrieve<TEntityType>(partitionKey, rowKey);
-			TableResult operationResult = cloudTable.Execute(retrieveOperation);
+			var retrieveOperation = TableOperation.Retrieve<TEntityType>(partitionKey, rowKey);
+			var operationResult = cloudTable.Execute(retrieveOperation);
 
 			if (operationResult.Result != null && operationResult.Result.GetType() == typeof (TEntityType))
 				return (TEntityType) operationResult.Result;
@@ -71,7 +74,7 @@ namespace Branch.Core.Storage
 		public IEnumerable<TEntityType> RetrieveMultipleEntities<TEntityType>(string partitionKey, CloudTable cloudTable)
 			where TEntityType : BaseEntity, new()
 		{
-			TableQuery<TEntityType> rangeQuery =
+			var rangeQuery =
 				new TableQuery<TEntityType>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal,
 					partitionKey));
 
@@ -84,14 +87,11 @@ namespace Branch.Core.Storage
 		/// <param name="cloudTable"></param>
 		public void UpdateEntity(object dataEntity, CloudTable cloudTable)
 		{
-			TableOperation updateOperation = TableOperation.Replace((TableEntity) dataEntity);
+			var updateOperation = TableOperation.Replace((TableEntity)dataEntity);
 			cloudTable.Execute(updateOperation);
 		}
 
 		#endregion
-
-		public CloudStorageAccount StorageAccount { get; private set; }
-		public CloudTableClient TableClient { get; private set; }
 
 		// Tables
 		public CloudTable AuthenticationCloudTable { get; private set; }

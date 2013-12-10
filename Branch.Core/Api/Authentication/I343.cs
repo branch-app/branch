@@ -18,7 +18,7 @@ namespace Branch.Core.Api.Authentication
 		///     Updates the stored spartan tokens used for authenticating with 343's backend api systems.
 		/// </summary>
 		/// <returns>A boolean saying if everything was</returns>
-		public static bool UpdateAuthentication(TableStorage storage)
+		public static bool UpdateAuthentication(AzureStorage storage)
 		{
 			Settings.LoadSettings();
 
@@ -33,8 +33,8 @@ namespace Branch.Core.Api.Authentication
 			{
 				try
 				{
-					var currentWaypointTokenEntity = storage.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
-						WaypointTokenEntity.FormatRowKey(), storage.AuthenticationCloudTable);
+					var currentWaypointTokenEntity = storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
+						WaypointTokenEntity.FormatRowKey(), storage.Table.AuthenticationCloudTable);
 
 					var waypointToken = JsonConvert.DeserializeObject<WaypointTokenEntity>(response.RawText);
 
@@ -47,10 +47,10 @@ namespace Branch.Core.Api.Authentication
 						currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
 						currentWaypointTokenEntity.UserInformation = waypointToken.UserInformation;
 
-						storage.UpdateEntity(currentWaypointTokenEntity, storage.AuthenticationCloudTable);
+						storage.Table.UpdateEntity(currentWaypointTokenEntity, storage.Table.AuthenticationCloudTable);
 					}
 					else
-						everythingWentGucci = storage.InsertSingleEntity(waypointToken, storage.AuthenticationCloudTable);
+						everythingWentGucci = storage.Table.InsertSingleEntity(waypointToken, storage.Table.AuthenticationCloudTable);
 				}
 				catch (JsonReaderException jsonReaderException)
 				{
@@ -70,7 +70,7 @@ namespace Branch.Core.Api.Authentication
 				ResponseCode = -1,
 				UserInformation = null
 			};
-			storage.InsertSingleEntity(customWaypointResponse, storage.AuthenticationCloudTable);
+			storage.Table.InsertSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
 
 			// send sms
 			new TwilioRestClient(Settings.TwilioSid, Settings.TwilioAuthToken).SendSmsMessage(

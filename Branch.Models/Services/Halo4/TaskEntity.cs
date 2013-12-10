@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Branch.Helpers.Extenders;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Branch.Models.Services.Halo4
 {
@@ -9,7 +12,8 @@ namespace Branch.Models.Services.Halo4
 		/// </summary>
 		public enum TaskType
 		{
-			Auth = 0x00
+			Auth = 0x00,
+			Metadata = 0x01
 		}
 
 		public const string RowKeyString = "H4Task{0}";
@@ -26,7 +30,12 @@ namespace Branch.Models.Services.Halo4
 
 		/// <summary>
 		/// </summary>
-		public TaskType Type { get; set; }
+		public int FakeType { get; set; }
+		public TaskType Type
+		{
+			get { return (TaskType)FakeType; }
+			set { FakeType = (int)value; }
+		}
 
 		/// <summary>
 		/// </summary>
@@ -41,6 +50,8 @@ namespace Branch.Models.Services.Halo4
 			return String.Format(RowKeyString, ending.ToTitleCase());
 		}
 
+		#region Overrides
+
 		public override sealed void SetKeys(string partitionKey, string rowKey)
 		{
 			if (partitionKey == null)
@@ -48,5 +59,7 @@ namespace Branch.Models.Services.Halo4
 
 			base.SetKeys(partitionKey, FormatRowKey(rowKey));
 		}
+
+		#endregion
 	}
 }
