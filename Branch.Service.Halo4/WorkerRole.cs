@@ -16,6 +16,7 @@ namespace Branch.Service.Halo4
 	{
 		private readonly Dictionary<TaskEntity.TaskType, TimeSpan> _tasks = new Dictionary<TaskEntity.TaskType, TimeSpan>
 		{
+			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
 			{ TaskEntity.TaskType.Metadata, new TimeSpan(1, 0, 0, 0) },
 		};
@@ -31,12 +32,24 @@ namespace Branch.Service.Halo4
 			var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
 				_storage.Table.Halo4ServiceTasksCloudTable);
 
+#if DEBUG
+			var doofette = _h4WaypointManager.GetServiceRecord("Doofette");
+			var peaches = _h4WaypointManager.GetServiceRecord("iBotPeaches v5");
+			var test = _h4WaypointManager.GetServiceRecord("AuntieDot Test");
+			var unknown = _h4WaypointManager.GetServiceRecord("65utrfgkt7fj");
+			var erroneous = _h4WaypointManager.GetServiceRecord(")(^&^");
+#endif
+
 			#region Check to Execute Tasks
 
 			foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 			{
 				switch (task.Type)
 				{
+					case TaskEntity.TaskType.Playlist:
+						_h4WaypointManager.UpdatePlaylists();
+						break;
+
 					case TaskEntity.TaskType.Auth:
 						var auth = I343.UpdateAuthentication(_storage);
 						if (!auth)
@@ -50,7 +63,7 @@ namespace Branch.Service.Halo4
 
 				task.Interval = (int)_tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
 				task.LastRun = DateTime.UtcNow;
-				_storage.Table.UpdateEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
+				_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
 			}
 
 			#endregion

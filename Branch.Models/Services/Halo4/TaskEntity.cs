@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Branch.Helpers.Extenders;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Branch.Models.Services.Halo4
 {
@@ -13,7 +10,8 @@ namespace Branch.Models.Services.Halo4
 		public enum TaskType
 		{
 			Auth = 0x00,
-			Metadata = 0x01
+			Metadata = 0x01,
+			Playlist = 0x02
 		}
 
 		public const string RowKeyString = "H4Task{0}";

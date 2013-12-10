@@ -27,8 +27,11 @@ namespace Branch.Core.Storage
 			AuthenticationCloudTable = TableClient.GetTableReference("Authentication");
 			AuthenticationCloudTable.CreateIfNotExists();
 
+			// le Halo 4
 			Halo4ServiceTasksCloudTable = TableClient.GetTableReference("Halo4ServiceTasks");
 			Halo4ServiceTasksCloudTable.CreateIfNotExists();
+			Halo4CloudTable = TableClient.GetTableReference("Halo4");
+			Halo4CloudTable.CreateIfNotExists();
 
 			#endregion
 		}
@@ -39,11 +42,32 @@ namespace Branch.Core.Storage
 		/// </summary>
 		/// <param name="dataEntity"></param>
 		/// <param name="cloudTable"></param>
-		public bool InsertSingleEntity(object dataEntity, CloudTable cloudTable)
+		public bool InsertSingleEntity(BaseEntity dataEntity, CloudTable cloudTable)
 		{
-			var insertOperation = TableOperation.Insert((TableEntity)dataEntity);
+			var insertOperation = TableOperation.Insert(dataEntity);
 			var operationResult = cloudTable.Execute(insertOperation);
 			return (operationResult.HttpStatusCode == 201);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="dataEntity"></param>
+		/// <param name="cloudTable"></param>
+		public void InsertOrReplaceSingleEntity(BaseEntity dataEntity, CloudTable cloudTable)
+		{
+			var insertOrReplaceOperation = TableOperation.InsertOrReplace(dataEntity);
+			cloudTable.Execute(insertOrReplaceOperation);
+		}
+
+		/// <summary>
+		/// </summary>
+		/// <param name="dataEntity"></param>
+		/// <param name="cloudTable"></param>
+		public void ReplaceSingleEntity(object dataEntity, CloudTable cloudTable)
+		{
+			var updateOperation = TableOperation.Replace((TableEntity)dataEntity);
+			cloudTable.Execute(updateOperation);
 		}
 
 		/// <summary>
@@ -81,20 +105,11 @@ namespace Branch.Core.Storage
 			return cloudTable.ExecuteQuery(rangeQuery);
 		}
 
-		/// <summary>
-		/// </summary>
-		/// <param name="dataEntity"></param>
-		/// <param name="cloudTable"></param>
-		public void UpdateEntity(object dataEntity, CloudTable cloudTable)
-		{
-			var updateOperation = TableOperation.Replace((TableEntity)dataEntity);
-			cloudTable.Execute(updateOperation);
-		}
-
 		#endregion
 
 		// Tables
 		public CloudTable AuthenticationCloudTable { get; private set; }
 		public CloudTable Halo4ServiceTasksCloudTable { get; private set; }
+		public CloudTable Halo4CloudTable { get; private set; }
 	}
 }
