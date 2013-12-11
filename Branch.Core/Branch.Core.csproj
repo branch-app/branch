@@ -131,4 +131,5 @@
     <Message Text="Getting settings from server, and loading them into Branch.Core" Importance="high" />
     <Copy SourceFiles="C:\TeamCity\buildHelpers\settings\branch\settings.json" ContinueOnError="false" DestinationFolder="$(MSBuildProjectDirectory)" />
   </Target>
+  <Import Project="$(SolutionDir)\.octopack\OctoPack.targets" />
 </Project>
