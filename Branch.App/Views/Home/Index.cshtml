@@ -17,6 +17,47 @@
 				By: <a class="alt" id="last-commiter" target="_blank" href=""></a>
 			</li>
 		</ul>
+		
+		<!-- Social Networks are such a fad -->
+		<ul class="social-media-shit">
+			<li>
+				<!-- NeckbeardHub -->
+				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=watch"
+						allowtransparency="true"
+						frameborder="0"
+						scrolling="0"
+						width="50"
+						height="20"></iframe>
+			</li>
+
+			<li>
+				<!-- NeckbeardHub 2 -->
+				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=fork"
+						allowtransparency="true"
+						frameborder="0"
+						scrolling="0"
+						width="55"
+						height="20"></iframe>
+			</li>
+
+			<li>
+				<!-- Fuckbook -->
+				<div class="fb-like"
+					 data-width="300"
+					 data-layout="button_count"
+					 data-show-faces="false"
+					 data-send="false"></div>
+			</li>
+
+			<li>
+				<!-- Twitter -->
+				<a href="https://twitter.com/share"
+				   class="twitter-share-button"
+				   data-via="alexerax"
+				   data-hashtags="branchapp"
+				   data-dnt="true">Tweet</a>
+			</li>
+		</ul>
 	</div>
 </div>
 
@@ -53,27 +94,35 @@
 </div>
 
 <div class="games">
-	<div class="game Halo4" count-data-ref="1">
-		<div class="mask">
-			<div class="container">
-				<h1>
-					Halo 4 Stats
-				</h1>
-				<p>
-					check em out
-				</p>
+	<div id="Halo4" class="game" count-data-ref="1">
+		<div class="game-backup-cover Halo4">
+			<div class="game-cover Halo4"></div>
+			<div class="mask">
+				<div class="container">
+					<a href="" class="alt">
+						<h1>
+							Halo 4 Stats
+						</h1>
+						<p>
+							Service Records, to Game Histories, to Commendation progress, to in-depth game details - B.net 2.0
+						</p>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="game Destiny" count-data-ref="1">
-		<div class="mask soon">
-			<div class="container">
-				<h1>
-					Destiny
-				</h1>
-				<p>
-					sooooon
-				</p>
+	<div id="Destiny" class="game" count-data-ref="1">
+		<div class="game-backup-cover Destiny">
+			<div class="game-cover Destiny"></div>
+			<div class="mask soon">
+				<div class="container text-right">
+					<h1>
+						Destiny Stats
+					</h1>
+					<p>
+						Coming, 2014.
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,12 +133,11 @@
 	<script>
 		var games = ["Halo4", "Destiny"];
 		var imagesCount = 4;
-		
 
+		$(document).ready(function() {
 
-		$(document).ready(function () {
-			
 			var images = new Array();
+
 			function preload() {
 				for (var i = 1; i < games.length + 1; i++) {
 					for (var j = 1; j < imagesCount + 1; j++) {
@@ -98,23 +146,36 @@
 						images[index] = new Image();
 						images[index].src = '/Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
 					}
-					
 				}
 			}
+			function updateGameImage(index) {
+				var game = games[index];
+				var gameDom = $(".game#" + game);
+				var currentIndex = gameDom.attr('count-data-ref');
+				var gameBackupCover = $(".game#" + game + " > .game-backup-cover");
+				var gameCover = $(".game#" + game + " > .game-backup-cover > .game-cover");
+
+				var oldIndex = currentIndex;
+				currentIndex++;
+				if (currentIndex > imagesCount) {
+					currentIndex = 1;
+				}
+
+				gameBackupCover.css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + oldIndex + '.jpg)');
+				$(gameCover).fadeOut(800, function () {
+					gameCover.css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
+					$(gameCover).fadeIn(800, function () {
+						$(gameDom).attr('count-data-ref', currentIndex);
+					});
+				});
+			}
+
 			preload();
 
 			setInterval(function () {
-				for (var i = 0; i < games.length; i++) {
-					var game = games[i];
-					var currentIndex = $(".game." + game).attr('count-data-ref');
-					currentIndex++;
-					if (currentIndex > imagesCount) {
-						currentIndex = 1;
-					}
-					$(".game." + game).attr('count-data-ref', currentIndex);
-					$(".game." + game).css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
-				}
-			}, 5000);
+				var index = Math.floor(Math.random() * games.length - 1) + 1;
+				updateGameImage(index);
+			}, 4000);
 
 			$.getJSON('https://api.github.com/repos/thetree/branch/commits', function(data) {
 				var commit = data[0];
