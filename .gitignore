@@ -70,3 +70,4 @@ packages/
 
 #Test files
 *.testsettings
+Branch.Azure/Profiles/branchProduction.azurePubxml

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Folder Include="Branch.AppContent\" />
     <Folder Include="Branch.Service.Halo4Content\" />
+    <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Branch.AppContent\diagnostics.wadcfg">
@@ -65,6 +66,9 @@
     <Content Include="Branch.Service.Halo4Content\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\branchProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
