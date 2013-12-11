@@ -1,42 +1,138 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My ASP.NET Application</title>
-		@Styles.Render("~/Content/css")
+		<title>
+			Branch - @ViewBag.Title
+		</title>
+
+		<!-- Style Sheets -->
+		@Styles.Render("~/bundles/bootstrap-custom")
+		@Styles.Render("~/bundles/branch-specific")
 		@Scripts.Render("~/bundles/modernizr")
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
 	</head>
-	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
+
+	<body class="@ViewBag.Template">
+		<a class="sr-only">Skip navigation</a>
+		<header class="navbar navbar-inverse navbar-fixed-top bs-branch-nav" role="banner">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					@Html.ActionLink("Application name", "Index", "Home", null, new {@class = "navbar-brand"})
+					@Html.ActionLink("Branch", "Index", "Home", null, new { @class = "navbar-brand" })
 				</div>
-				<div class="navbar-collapse collapse">
+				<nav class="collapse navbar-collapse" role="navigation">
 					<ul class="nav navbar-nav">
-						<li>@Html.ActionLink("Home", "Index", "Home")</li>
-						<li>@Html.ActionLink("About", "About", "Home")</li>
-						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+						<li class="">
+							@Html.ActionLink("Home", "Index", "Home")
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									@Html.ActionLink("Halo 4", "Index", "Home")
+								</li>
+
+								<li class="divider"></li>
+								<li class="dropdown-header">Waypoint</li>
+								<li>
+									@Html.ActionLink("Playlists", "Index", "Home")
+								</li>
+								<li>
+									@Html.ActionLink("Challenges", "Index", "Home")
+								</li>
+
+								<li class="divider"></li>
+								<li class="dropdown-header">Leaf</li>
+								<li>
+									<a href="http://leafapp.co/h4/csr_leaderboards">Leaderboards</a>
+								</li>
+								<li>
+									<a href="http://leafapp.co/h4/top_ten">Top Ten Leaderboards</a>
+								</li>
+							</ul>
+						</li>
+						<li class="">
+							@Html.ActionLink("Blog", "Index", "Home")
+						</li>
+						<li class="">
+							@Html.ActionLink("About", "Index", "Home")
+						</li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<form class="navbar-form" method="GET" action="">
+								<div class="form-group">
+									<input type="text" name="q" placeholder="Search Gamertag" class="form-control" value="">
+								</div>
+							</form>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		
+		<article>
+			@RenderBody()
+		</article>
+		
+		<footer class="bs-footer" role="contentinfo">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<p>Developed by <a href="http://twitter.com/alexerax" target="_blank">&#64;alexerax</a>.</p>
+						<p>Code licensed under the <a href="http://www.dbad-license.org/" target="_blank">Don't Be A Dick</a> Public License.</p>
+						<p>&copy; @DateTime.Now.Year - Branch</p>
+						<ul class="footer-links">
+							<li><a href="https://github.com/TheTree/Branch" target="_blank">Github</a></li>
+							<li>·</li>
+							<li><a href="http://xboxchaos.com/" target="_blank">Xbox Chaos</a></li>
+							<li>·</li>
+							<li><a href="http://halo.reddit.com/" target="_blank">r/halo</a></li>
+							<li>·</li>
+							<li><a href="http://unscwarfare.com/" target="_blank">UNSC Warfare</a></li>
+							<li>·</li>
+							<li><a href="http://onyx.io/" target="_blank">Onyx</a></li>
+							<li>·</li>
+							<li><a href="#" target="_blank">Blog</a></li>
+						</ul>
+						<ul class="footer-links">
+							<li>
+								@Html.ActionLink("Privacy Policy", "Index", "Home")
+							</li>
+							<li>·</li>
+							<li>
+								@Html.ActionLink("Terms", "Index", "Home")
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-md-2 hidden-xs hidden-sm">
+						<img src="@Url.Content("~/Content/Images/uk-map.png")" class="img-circle" alt="" style="width: 60px; height: 77px;" />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container body-content">
-			@RenderBody()
-			<hr />
-			<footer>
-				<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-			</footer>
-		</div>
+		</footer>
 
-		@Scripts.Render("~/bundles/jquery")
-		@Scripts.Render("~/bundles/bootstrap")
-		@RenderSection("scripts", false)
+		
+		<div id="scripts">
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+			<script>
+				$(document).ready(function () {
+					$('*[role="tooltip"]').tooltip();
+				});
+			</script>
+
+			@RenderSection("scripts", false)
+		</div>
 	</body>
 </html>

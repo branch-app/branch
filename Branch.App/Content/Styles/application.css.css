@@ -1,0 +1,144 @@
+body {
+  padding-top: 50px; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.bitch-needs-a-break {
+  margin-top: 40px; }
+
+.seperator {
+  margin: 10px;
+  height: 1px;
+  border: 1px solid #aaa;
+  opacity: 0.6; }
+
+.alert-container {
+  margin-top: 40px;
+  margin-bottom: 10px; }
+
+.ad-container {
+  width: 790px;
+  margin: 100px auto 0 auto; }
+
+ul.no-style {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul.no-style.inline > li {
+    display: inline; }
+
+footer > .container > .row > .col-md-2 > .made-in {
+  font-size: 12px;
+  color: #aaa; }
+
+body.home .welcome-header {
+  padding-bottom: 0;
+  text-align: center; }
+@media screen and (min-width: 992px) {
+  body.home .bs-header h1,
+  body.home .bs-header p {
+    margin-right: 0px;
+    text-align: center; } }
+body.home .project-stats {
+  margin: 0;
+  padding: 0;
+  margin-top: -10px;
+  margin-bottom: 0;
+  list-style-type: none; }
+body.home .project-stats li {
+  display: inline;
+  margin-left: 10px;
+  font-size: 12px; }
+body.home .project-stats li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .social-media-shit {
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  list-style-type: none; }
+body.home .social-media-shit li {
+  display: inline;
+  margin-left: 20px; }
+body.home .social-media-shit li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .marketing {
+  margin-top: 100px; }
+body.home .marketing > .central {
+  text-align: center; }
+body.home .marketing > hr {
+  margin: 80px 0; }
+body.home .featurette h2 {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px; }
+@media (min-width: 768px) {
+  body.home .marketing {
+    padding-left: 0;
+    padding-right: 0; }
+  body.home .featurette h2 {
+    font-size: 50px; } }
+@media (min-width: 992px) {
+  body.home .featurette h2 {
+    margin-top: 120px; } }
+body.home .activity-feed > .page-header > h1 {
+  font-size: 20px; }
+body.home .activity-feed > ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+  body.home .activity-feed > ul > li {
+    padding: 20px;
+    border-bottom: 1px solid #f1f1f1; }
+    body.home .activity-feed > ul > li > .glyphicon {
+      margin-bottom: -20px; }
+    body.home .activity-feed > ul > li.halo4-multi-task > .info > .history {
+      margin-top: 20px; }
+      body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .preview {
+        float: left; }
+        body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .preview > .map-preview-frame {
+          padding: 5px;
+          border: 1px solid #eee; }
+          body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .preview > .map-preview-frame > .col {
+            float: left;
+            background-size: cover; }
+            body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .preview > .map-preview-frame > .col.col-cover {
+              width: 140px;
+              height: 100px; }
+            body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .preview > .map-preview-frame > .col.col-part {
+              width: 70px;
+              height: 50px; }
+      body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .game-list {
+        float: left; }
+        body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .game-list > ul {
+          margin: 0px 0 0 20px; }
+          body.home .activity-feed > ul > li.halo4-multi-task > .info > .history > .game-list > ul > li {
+            line-height: 16.6666666667px; }
+    body.home .activity-feed > ul > li.halo4-single-task > .info > .details > .victory-indicator {
+      text-transform: lowercase; }
+    body.home .activity-feed > ul > li.halo4-single-task > .info > img {
+      opacity: 0.7;
+      padding: 5px;
+      margin-top: 8px; }
+    body.home .activity-feed > ul > li > .info {
+      margin-left: 40px;
+      margin-top: -19px;
+      font-size: 13px; }
+      body.home .activity-feed > ul > li > .info > attr > .time-info {
+        color: #bbb;
+        font-size: 12px; }
+      body.home .activity-feed > ul > li > .info .victory-indicator.win {
+        color: #0a85be; }
+      body.home .activity-feed > ul > li > .info .victory-indicator.los {
+        color: #d5130e; }
+      body.home .activity-feed > ul > li > .info .victory-indicator.dnf {
+        color: #727272; }
+    body.home .activity-feed > ul > li:last-child {
+      border-bottom: none; }
+
