@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Branch.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+  <Role name="Branch.Service.Halo4">
+    <Instances count="1" />    
+  </Role>
+  <Role name="Branch.App">
+    <Instances count="1" />    
+  </Role>
+</ServiceConfiguration>
