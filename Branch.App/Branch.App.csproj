@@ -157,6 +157,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\forerunner.png" />
+    <Content Include="Content\Images\Home\Covers\Destiny\cover1.jpg" />
+    <Content Include="Content\Images\Home\Covers\Destiny\cover2.jpg" />
+    <Content Include="Content\Images\Home\Covers\Destiny\cover3.jpg" />
+    <Content Include="Content\Images\Home\Covers\Destiny\cover4.jpg" />
+    <Content Include="Content\Images\Home\Covers\Halo4\cover1.jpg" />
+    <Content Include="Content\Images\Home\Covers\Halo4\cover2.jpg" />
+    <Content Include="Content\Images\Home\Covers\Halo4\cover3.jpg" />
+    <Content Include="Content\Images\Home\Covers\Halo4\cover4.jpg" />
+    <Content Include="Content\Images\Home\preview-responsive.png" />
+    <Content Include="Content\Images\Home\preview-social.png" />
+    <Content Include="Content\Images\Home\preview-speed.png" />
+    <Content Include="Content\Images\uk-map.png" />
+    <Content Include="Content\Styles\application.css">
+      <DependentUpon>application.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\bootstrap-branch.css" />
+    <Content Include="Content\Styles\bootstrap-custom.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -185,6 +203,12 @@
       <Project>{8ad17440-0040-4cc4-9169-c02fe8d419cd}</Project>
       <Name>Branch.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\application.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Home\_index.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

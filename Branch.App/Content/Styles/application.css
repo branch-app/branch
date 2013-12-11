@@ -1,0 +1,137 @@
+body {
+  padding-top: 50px; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.bitch-needs-a-break {
+  margin-top: 40px; }
+
+.seperator {
+  margin: 10px;
+  height: 1px;
+  border: 1px solid #aaa;
+  opacity: 0.6; }
+
+.alert-container {
+  margin-top: 40px;
+  margin-bottom: 10px; }
+
+.ad-container {
+  width: 790px;
+  margin: 100px auto 0 auto; }
+
+ul.no-style {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul.no-style.inline > li {
+    display: inline; }
+
+footer > .container > .row > .col-md-2 > .made-in {
+  font-size: 12px;
+  color: #aaa; }
+
+body.home .welcome-header {
+  padding-bottom: 0;
+  text-align: center;
+  padding-bottom: 50px; }
+@media screen and (min-width: 992px) {
+  body.home .bs-header h1,
+  body.home .bs-header p {
+    margin-right: 0px;
+    text-align: center; } }
+body.home .project-stats {
+  margin: 0;
+  padding: 0;
+  margin-top: -10px;
+  margin-bottom: 0;
+  list-style-type: none; }
+body.home .project-stats li {
+  display: inline;
+  margin-left: 10px;
+  font-size: 12px; }
+body.home .project-stats li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .social-media-shit {
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  list-style-type: none; }
+body.home .social-media-shit li {
+  display: inline;
+  margin-left: 20px; }
+body.home .social-media-shit li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .marketing {
+  margin-top: 100px;
+  margin-bottom: 50px; }
+body.home .marketing > .central {
+  text-align: center; }
+body.home .marketing > hr {
+  margin: 80px 0; }
+body.home .games .game {
+  background: #ffffff no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 400px; }
+  body.home .games .game.Halo4 {
+    background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
+  body.home .games .game.Destiny {
+    background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
+  body.home .games .game .mask {
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0.5)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#80000000',GradientType=1 );
+    /* IE6-8 */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff; }
+    body.home .games .game .mask.soon {
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(0, 0, 0, 0.8)));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      /* IE10+ */
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#A0000000', endColorstr='#80000000',GradientType=1 );
+      /* IE6-8 */ }
+    body.home .games .game .mask .container {
+      padding: 20px; }
+      body.home .games .game .mask .container h1 {
+        font-weight: 100;
+        font-size: 60px; }
+      body.home .games .game .mask .container p {
+        font-size: 20px; }
+

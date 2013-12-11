@@ -33,11 +33,11 @@ namespace Branch.Service.Halo4
 				_storage.Table.Halo4ServiceTasksCloudTable);
 
 #if DEBUG
-			var doofette = _h4WaypointManager.GetServiceRecord("Doofette");
-			var peaches = _h4WaypointManager.GetServiceRecord("iBotPeaches v5");
-			var test = _h4WaypointManager.GetServiceRecord("AuntieDot Test");
-			var unknown = _h4WaypointManager.GetServiceRecord("65utrfgkt7fj");
-			var erroneous = _h4WaypointManager.GetServiceRecord(")(^&^");
+			//var doofette = _h4WaypointManager.GetServiceRecord("Doofette");
+			//var peaches = _h4WaypointManager.GetServiceRecord("iBotPeaches v5");
+			//var test = _h4WaypointManager.GetServiceRecord("AuntieDot Test");
+			//var unknown = _h4WaypointManager.GetServiceRecord("65utrfgkt7fj");
+			//var erroneous = _h4WaypointManager.GetServiceRecord(")(^&^");
 #endif
 
 			#region Check to Execute Tasks

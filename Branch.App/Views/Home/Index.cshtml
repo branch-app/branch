@@ -1,31 +1,136 @@
 ﻿@{
-	ViewBag.Title = "Home Page";
+	ViewBag.Title = "Welcome";
+	ViewBag.Template = "home";
 }
 
-<div class="jumbotron">
-	<h1>ASP.NET</h1>
-	<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-	<p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Welcome to Branch</h1>
+		<p>Detailed Halo Stats. Designed and Built with the community in mind.</p>
+
+		<ul class="project-stats" style="display: none;">
+			<li>
+				Last Commit: <a class="alt" id="last-commit" target="_blank" href=""></a>
+			</li>
+
+			<li>
+				By: <a class="alt" id="last-commiter" target="_blank" href=""></a>
+			</li>
+		</ul>
+	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-4">
-		<h2>Getting started</h2>
-		<p>
-			ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-			enables a clean separation of concerns and gives you full control over markup
-			for enjoyable, agile development.
-		</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-	</div>
-	<div class="col-md-4">
-		<h2>Get more libraries</h2>
-		<p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-	</div>
-	<div class="col-md-4">
-		<h2>Web Hosting</h2>
-		<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-		<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div class="container">
+	@*<%= render partial: 'partials/flash', locals: { flash: flash } %>*@
+</div>
+
+<div class="container marketing">
+	<div class="row central">
+		<div class="col-md-4">
+			<img src="@Url.Content("~/Content/Images/Home/preview-responsive.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<h2>Simple</h2>
+			<p>
+				Branch is designed from top to bottom to show your stats in a clean, and simple mannor. And it is entirely responsive to work on every device you own.
+			</p>
+		</div>
+
+		<div class="col-md-4">
+			<img src="@Url.Content("~/Content/Images/Home/preview-speed.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<h2>Fast</h2>
+			<p>
+				Branch is built without fancy background videos, 'edgy' animated buttons, and 2.2mb of clutter. So you can spend less time waiting, and more time viewing.
+			</p>
+		</div>
+
+		<div class="col-md-4">
+			<img src="@Url.Content("~/Content/Images/Home/preview-social.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<h2>Social</h2>
+			<p>
+				What fun is getting a K/D of 6.9, or camping in lighting flag to get 1,000's of kills if you can't even brag about it on your favourite social network?
+			</p>
+		</div>
 	</div>
 </div>
+
+<div class="games">
+	<div class="game Halo4" count-data-ref="1">
+		<div class="mask">
+			<div class="container">
+				<h1>
+					Halo 4 Stats
+				</h1>
+				<p>
+					check em out
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="game Destiny" count-data-ref="1">
+		<div class="mask soon">
+			<div class="container">
+				<h1>
+					Destiny
+				</h1>
+				<p>
+					sooooon
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<script>
+		var games = ["Halo4", "Destiny"];
+		var imagesCount = 4;
+		
+
+
+		$(document).ready(function () {
+			
+			var images = new Array();
+			function preload() {
+				for (var i = 1; i < games.length + 1; i++) {
+					for (var j = 1; j < imagesCount + 1; j++) {
+						var index = (i * j) - 1;
+						var game = games[i - 1];
+						images[index] = new Image();
+						images[index].src = '/Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
+					}
+					
+				}
+			}
+			preload();
+
+			setInterval(function () {
+				for (var i = 0; i < games.length; i++) {
+					var game = games[i];
+					var currentIndex = $(".game." + game).attr('count-data-ref');
+					currentIndex++;
+					if (currentIndex > imagesCount) {
+						currentIndex = 1;
+					}
+					$(".game." + game).attr('count-data-ref', currentIndex);
+					$(".game." + game).css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
+				}
+			}, 5000);
+
+			$.getJSON('https://api.github.com/repos/thetree/branch/commits', function(data) {
+				var commit = data[0];
+
+				// Link to last commit
+				$('.project-stats > li > #last-commit').attr('href', "https://github.com/thetree/branch/commit/" + commit.sha);
+				$('.project-stats > li > #last-commit').text(commit.sha.substring(0, 7));
+
+				// Link to last commiter
+				$('.project-stats > li > #last-commiter').attr('href', "https://github.com/" + commit.committer.login);
+				$('.project-stats > li > #last-commiter').text(commit.committer.login);
+
+				setTimeout(function() {
+					$('.project-stats').fadeIn(600);
+				}, 1000);
+			});
+		});
+	</script>
+}
