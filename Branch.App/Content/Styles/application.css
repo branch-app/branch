@@ -10,6 +10,9 @@ body {
 .bitch-needs-a-break {
   margin-top: 40px; }
 
+.text-right {
+  text-align: right; }
+
 .seperator {
   margin: 10px;
   height: 1px;
@@ -60,8 +63,7 @@ body.home .project-stats li:first-child {
 body.home .social-media-shit {
   margin: 0;
   padding: 0;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 15px;
   list-style-type: none; }
 body.home .social-media-shit li {
   display: inline;
@@ -77,61 +79,86 @@ body.home .marketing > .central {
 body.home .marketing > hr {
   margin: 80px 0; }
 body.home .games .game {
-  background: #ffffff no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 400px; }
-  body.home .games .game.Halo4 {
-    background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
-  body.home .games .game.Destiny {
-    background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
+  height: 450px; }
+  body.home .games .game .game-backup-cover {
+    background: #ffffff no-repeat center 40px fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative; }
+    body.home .games .game .game-backup-cover.Halo4 {
+      background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
+    body.home .games .game .game-backup-cover.Destiny {
+      background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
+    body.home .games .game .game-backup-cover .game-cover {
+      background: #ffffff no-repeat center 40px fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      width: 100%;
+      height: 100%; }
+      body.home .games .game .game-backup-cover .game-cover.Halo4 {
+        background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
+      body.home .games .game .game-backup-cover .game-cover.Destiny {
+        background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
   body.home .games .game .mask {
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.5)), color-stop(100%, rgba(0, 0, 0, 0.5)));
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
     /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     /* Opera 11.10+ */
-    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     /* IE10+ */
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
     /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#80000000',GradientType=1 );
-    /* IE6-8 */
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    position: absolute;
     width: 100%;
-    height: 100%;
-    color: #fff; }
+    height: 450px;
+    color: #aaa; }
     body.home .games .game .mask.soon {
       background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(100%, rgba(0, 0, 0, 0.8)));
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.9)), color-stop(100%, rgba(0, 0, 0, 0.9)));
       /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       /* Opera 11.10+ */
-      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
       /* IE10+ */
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
-      /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#A0000000', endColorstr='#80000000',GradientType=1 );
-      /* IE6-8 */ }
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* W3C */ }
     body.home .games .game .mask .container {
       padding: 20px; }
+      body.home .games .game .mask .container a,
+      body.home .games .game .mask .container a:link,
+      body.home .games .game .mask .container a:visited,
+      body.home .games .game .mask .container a:active {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s ease; }
+      body.home .games .game .mask .container a:hover {
+        color: #aaa; }
       body.home .games .game .mask .container h1 {
-        font-weight: 100;
-        font-size: 60px; }
+        font-family: 'Segoe UI', 'Open Sans Condensed';
+        font-weight: 300;
+        font-size: 90px; }
       body.home .games .game .mask .container p {
-        font-size: 20px; }
+        font-family: 'Segoe UI', 'Open Sans Condensed';
+        font-weight: 300;
+        font-size: 25px; }
 

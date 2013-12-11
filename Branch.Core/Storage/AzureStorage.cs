@@ -8,10 +8,9 @@ namespace Branch.Core.Storage
 		public TableStorage Table { get; private set; }
 		public CloudStorageAccount StorageAccount { get; private set; }
 
-		public AzureStorage()
+		public AzureStorage(string connectionString = null)
 		{
-			StorageAccount = CloudStorageAccount.DevelopmentStorageAccount;
-				//.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+			StorageAccount = connectionString == null ? CloudStorageAccount.DevelopmentStorageAccount : CloudStorageAccount.Parse(connectionString);
 
 			Blob = new BlobStorage(StorageAccount);
 			Table = new TableStorage(StorageAccount);
