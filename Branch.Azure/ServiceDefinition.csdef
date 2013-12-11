@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
-<ServiceDefinition name="Branch.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition"
-                   schemaVersion="2013-10.2.2">
-	<WorkerRole name="Branch.Service.Halo4" vmsize="ExtraSmall">
-		<Imports>
-			<Import moduleName="Diagnostics" />
-		</Imports>
-		<ConfigurationSettings>
-			<Setting name="StorageConnectionString" />
-		</ConfigurationSettings>
-	</WorkerRole>
-	<WebRole name="Branch.App" vmsize="ExtraSmall">
-		<Sites>
-			<Site name="Web">
-				<Bindings>
-					<Binding name="Endpoint1" endpointName="Endpoint1" />
-				</Bindings>
-			</Site>
-		</Sites>
-		<Endpoints>
-			<InputEndpoint name="Endpoint1" protocol="http" port="80" />
-		</Endpoints>
-		<Imports>
-			<Import moduleName="Diagnostics" />
-		</Imports>
-	</WebRole>
+<ServiceDefinition name="Branch.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-10.2.2">
+  <WorkerRole name="Branch.Service.Halo4" vmsize="ExtraSmall">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="StorageConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
+  <WebRole name="Branch.App" vmsize="ExtraSmall">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+    </Imports>
+  </WebRole>
 </ServiceDefinition>
