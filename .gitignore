@@ -74,3 +74,5 @@ packages/
 #Test files
 *.testsettings
 Branch.Azure/Profiles/branchProduction.azurePubxml
+Branch.Azure/ServiceConfiguration.Cloud.cscfg
+Branch.Azure/ServiceConfiguration.Local.cscfg
