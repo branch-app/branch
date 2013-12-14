@@ -28,11 +28,11 @@ namespace Branch.Models.Services.Halo4
 
 		/// <summary>
 		/// </summary>
-		public int FakeType { get; set; }
+		public int TaskTypeInt { get; set; }
 		public TaskType Type
 		{
-			get { return (TaskType)FakeType; }
-			set { FakeType = (int)value; }
+			get { return (TaskType)TaskTypeInt; }
+			set { TaskTypeInt = (int)value; }
 		}
 
 		/// <summary>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
+using Branch.Core.Properties;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using EasyHttp.Http;
+using Microsoft.WindowsAzure;
 using Newtonsoft.Json;
 using Twilio;
 
@@ -20,14 +22,12 @@ namespace Branch.Core.Api.Authentication
 		/// <returns>A boolean saying if everything was</returns>
 		public static bool UpdateAuthentication(AzureStorage storage)
 		{
-			Settings.LoadSettings();
-
 			bool everythingWentGucci;
 			var httpClient = new HttpClient();
-			HttpResponse response =
+			var response =
 				httpClient.Get(string.Format("http://authentication.xeraxic.com/api/halo4/?email={0}&password={1}",
-					Settings.WlidAuthEmail,
-					Settings.WlidAuthPassword));
+					CloudConfigurationManager.GetSetting("WlidAuthEmail"),
+					CloudConfigurationManager.GetSetting("WlidAuthPassword")));
 
 			if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText.Trim()))
 			{
@@ -73,9 +73,10 @@ namespace Branch.Core.Api.Authentication
 			storage.Table.InsertSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
 
 			// send sms
-			new TwilioRestClient(Settings.TwilioSid, Settings.TwilioAuthToken).SendSmsMessage(
-				Settings.TwilioFromNumber, Settings.TwilioToNumber,
+			new TwilioRestClient(CloudConfigurationManager.GetSetting("TwilioSid"), CloudConfigurationManager.GetSetting("TwilioAuthToken")).SendSmsMessage(
+				CloudConfigurationManager.GetSetting("TwilioFromNumber"), CloudConfigurationManager.GetSetting("TwilioToNumber"),
 				"Branch just failed to update it's Halo 4 Authentication Tokens. fuck.");
+
 			return false;
 		}
 	}

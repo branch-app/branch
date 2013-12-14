@@ -1,0 +1,9 @@
+﻿@model Branch.App.Areas.Halo4.Models.ServiceRecordData
+@{
+	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", @Model.ServiceRecord.Gamertag);
+	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("HeaderServiceRecord", @Model.ServiceRecord)
+
+ello

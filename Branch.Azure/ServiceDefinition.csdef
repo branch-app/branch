@@ -3,14 +3,18 @@
   <WorkerRole name="Branch.Service.Halo4" vmsize="ExtraSmall">
     <Imports>
       <Import moduleName="Diagnostics" />
-      <Import moduleName="RemoteAccess" />
-      <Import moduleName="RemoteForwarder" />
     </Imports>
     <ConfigurationSettings>
+      <Setting name="WlidAuthEmail" />
+      <Setting name="WlidAuthPassword" />
+      <Setting name="TwilioSid" />
+      <Setting name="TwilioAuthToken" />
+      <Setting name="TwilioFromNumber" />
+      <Setting name="TwilioToNumber" />
       <Setting name="StorageConnectionString" />
     </ConfigurationSettings>
   </WorkerRole>
-  <WebRole name="Branch.App" vmsize="ExtraSmall">
+  <WebRole name="Branch.App" vmsize="Small">
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -23,7 +27,15 @@
     </Endpoints>
     <Imports>
       <Import moduleName="Diagnostics" />
-      <Import moduleName="RemoteAccess" />
     </Imports>
+    <ConfigurationSettings>
+      <Setting name="StorageConnectionString" />
+      <Setting name="WlidAuthEmail" />
+      <Setting name="WlidAuthPassword" />
+      <Setting name="TwilioSid" />
+      <Setting name="TwilioAuthToken" />
+      <Setting name="TwilioFromNumber" />
+      <Setting name="TwilioToNumber" />
+    </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

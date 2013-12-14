@@ -45,7 +45,9 @@ _ReSharper*/
 [Bb]uild/
 
 #Settings
-[Bb]ranch.[Cc]ore/[Ss]ettings.json
+Branch.Azure/Profiles/branchProduction.azurePubxml
+Branch.Azure/ServiceConfiguration.Cloud.cscfg
+Branch.Azure/ServiceConfiguration.Local.cscfg
 
 #Subversion files
 .svn
@@ -73,6 +75,3 @@ packages/
 
 #Test files
 *.testsettings
-Branch.Azure/Profiles/branchProduction.azurePubxml
-Branch.Azure/ServiceConfiguration.Cloud.cscfg
-Branch.Azure/ServiceConfiguration.Local.cscfg

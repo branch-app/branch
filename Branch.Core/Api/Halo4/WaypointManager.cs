@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using Branch.Core.Api.Authentication;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using Branch.Models.Services.Halo4;
@@ -31,13 +32,14 @@ namespace Branch.Core.Api.Halo4
 		public Challenge Challenges { get; private set; }
 
 
-		public WaypointManager(AzureStorage storage)
+		public WaypointManager(AzureStorage storage, bool updateAuthentication = false)
 		{
 			_storage = storage;
-			Settings.LoadSettings();
 			RegisterWebApp();
+			
+			if (updateAuthentication)
+				I343.UpdateAuthentication(_storage);
 
-			// Setup
 			GetMetadata();
 			GetPlaylists();
 			GetChallenges();
@@ -269,7 +271,7 @@ namespace Branch.Core.Api.Halo4
 			switch (authType)
 			{
 				case AuthType.Spartan:
-					headers.Add("X-343-Authorization-Spartan", auth.SpartanToken);
+					headers.Add("X-343-Authorization-Spartan", auth == null ? "" : auth.SpartanToken); // error catch
 					break;
 
 				default:

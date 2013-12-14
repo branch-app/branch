@@ -48,9 +48,8 @@
     <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
@@ -150,7 +149,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Halo4\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
+    <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
+    <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -203,12 +208,35 @@
       <Project>{8ad17440-0040-4cc4-9169-c02fe8d419cd}</Project>
       <Name>Branch.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Branch.Helpers\Branch.Helpers.csproj">
+      <Project>{75affbab-90c2-447f-aa93-59c8bfa505af}</Project>
+      <Name>Branch.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Branch.Models\Branch.Models.csproj">
+      <Project>{9232fbb8-7da5-4ad6-9b57-c34fcccf8ce6}</Project>
+      <Name>Branch.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\application.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\Home\_index.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\ServiceRecord\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Shared\HeaderServiceRecord.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -248,7 +276,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="$(SolutionDir)\.octopack\OctoPack.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

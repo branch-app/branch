@@ -8,6 +8,7 @@ using Branch.Core.Api.Authentication;
 using Branch.Core.Api.Halo4;
 using Branch.Core.Storage;
 using Branch.Models.Services.Halo4;
+using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Branch.Service.Halo4
@@ -33,11 +34,7 @@ namespace Branch.Service.Halo4
 				_storage.Table.Halo4ServiceTasksCloudTable);
 
 #if DEBUG
-			//var doofette = _h4WaypointManager.GetServiceRecord("Doofette");
-			//var peaches = _h4WaypointManager.GetServiceRecord("iBotPeaches v5");
-			//var test = _h4WaypointManager.GetServiceRecord("AuntieDot Test");
-			//var unknown = _h4WaypointManager.GetServiceRecord("65utrfgkt7fj");
-			//var erroneous = _h4WaypointManager.GetServiceRecord(")(^&^");
+			var doofette = _h4WaypointManager.GetServiceRecord("bs angel");
 #endif
 
 			#region Check to Execute Tasks
@@ -77,7 +74,7 @@ namespace Branch.Service.Halo4
 			Trace.TraceInformation("Branch.Service.Halo4 service started");
 			ServicePointManager.DefaultConnectionLimit = 1;
 			_storage = new AzureStorage();
-			_h4WaypointManager = new WaypointManager(_storage);
+			_h4WaypointManager = new WaypointManager(_storage, true);
 
 			#region Create Tasks if they don't exist
 
