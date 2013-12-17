@@ -152,12 +152,15 @@
     <Compile Include="Areas\Halo4\Controllers\HomeController.cs" />
     <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
+    <Compile Include="Areas\Halo4\Models\Base.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Razor\BranchHelpers.cs" />
+    <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +210,9 @@
       <Project>{8ad17440-0040-4cc4-9169-c02fe8d419cd}</Project>
       <Name>Branch.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Branch.Helpers\Branch.Helpers.csproj">
-      <Project>{75affbab-90c2-447f-aa93-59c8bfa505af}</Project>
-      <Name>Branch.Helpers</Name>
+    <ProjectReference Include="..\Branch.Extenders\Branch.Extenders.csproj">
+      <Project>{8766681b-89e8-4bb8-bde1-87a2a6d43e7b}</Project>
+      <Name>Branch.Extenders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Branch.Models\Branch.Models.csproj">
       <Project>{9232fbb8-7da5-4ad6-9b57-c34fcccf8ce6}</Project>
@@ -237,6 +239,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Shared\HeaderServiceRecord.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Halo4\_home.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Halo4\_service_record.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

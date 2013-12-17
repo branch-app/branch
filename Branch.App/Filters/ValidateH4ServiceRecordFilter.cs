@@ -17,7 +17,7 @@ namespace Branch.App.Filters
 				throw new ArgumentOutOfRangeException("filterContext", "This gamertag is not within the range of gamertags in our or 343's database. sorry m8.");
 			}
 
-			filterContext.Controller.ViewBag["ServiceRecord"] = filterContext.ActionParameters["ServiceRecord"] = serviceRecord;
+			filterContext.ActionParameters["ServiceRecord"] = serviceRecord;
 		}
 	}
 }

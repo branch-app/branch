@@ -1,0 +1,125 @@
+body.halo4 {
+	.halo4-header {
+		height: 300px;
+
+		@media (max-width: 767px) {
+			height: 350px;
+		}
+
+
+		.container {
+			height: 100%;
+
+			.name-flairs {
+				.col-md-12 { 
+					h1 > img {
+						margin-top: -45px;
+
+						@media (max-width: 767px) {
+							display: none !important;
+						}
+					}
+				}
+
+				h2 {
+					margin-top: -10px;
+				}
+
+				img {
+					margin: -20px auto;
+				}
+			}
+			.rank-flairs {
+				margin-top: 30px;
+
+				> .col-md-8 {
+					> img {
+						margin-bottom: 5px;
+						@media (max-width: 767px) {
+							margin: 15px auto 0px auto;
+						}
+					}
+
+					> .progress {
+						margin-bottom: 0;
+					}
+
+					> .xp {
+						font-size: 14px;
+					}
+				}
+			}
+
+			.spartan-image {
+				height: 140%;		
+				width: 300px;
+
+				background-repeat: no-repeat;
+				-moz-transform: scaleX(-1);
+				-o-transform: scaleX(-1);
+				-webkit-transform: scaleX(-1);
+				transform: scaleX(-1);
+				filter: FlipH;
+				-ms-filter: "FlipH";
+
+				position: absolute;
+				bottom: 0;
+				right: 0;		
+				margin-bottom: -40px;	
+			}
+			.spartan-insignia {
+				height: 420px;
+				width: 300px;
+
+				background-repeat: no-repeat;
+				background-position: top left;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		}
+	}
+}
+
+body.halo4_home {
+	.stats-marketing {
+		margin-top: 100px;
+
+		@media (min-width: 768px) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		> .central {
+			text-align: center;
+		}
+		> hr {
+			margin: 80px 0;
+		}
+	}
+	.highlight-sector {
+		margin-top: 80px;
+		background: #eee;
+		height: 350px;
+		background-repeat: no-repeat;
+
+		> .container {
+			> h1 {
+				margin-top: 70px;
+				font-size: 55px;
+			}
+			> p {
+				font-size: 20px;
+			}
+		}
+	}
+	.leaferboards {
+		text-align: left;
+		background-position: right center;
+	}
+	.top-ten {
+		text-align: right;
+		background-position: left center;
+	}
+}

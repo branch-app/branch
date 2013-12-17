@@ -1,5 +1,5 @@
 ﻿using System;
-using Branch.Helpers.Extenders;
+using Branch.Extenders;
 
 namespace Branch.Models.Services.Halo4
 {

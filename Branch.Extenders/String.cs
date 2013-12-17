@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Branch.Helpers.Extenders
+namespace Branch.Extenders
 {
 	public static class StringExtenders
 	{

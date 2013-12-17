@@ -103,9 +103,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Branch.Helpers\Branch.Helpers.csproj">
-      <Project>{75affbab-90c2-447f-aa93-59c8bfa505af}</Project>
-      <Name>Branch.Helpers</Name>
+    <ProjectReference Include="..\Branch.Extenders\Branch.Extenders.csproj">
+      <Project>{8766681b-89e8-4bb8-bde1-87a2a6d43e7b}</Project>
+      <Name>Branch.Extenders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Branch.Models\Branch.Models.csproj">
       <Project>{9232fbb8-7da5-4ad6-9b57-c34fcccf8ce6}</Project>

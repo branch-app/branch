@@ -420,6 +420,20 @@ namespace Branch.Core.Api.Halo4
 
 		#endregion
 
+		#region Public Helpers
+
+		public string GetPlayerModelUrl(string gamertag, string size = "large", string pose = "fullbody")
+		{
+			return PopulateUrl(RegisteredWebApp.ServiceList["GetSpartanImage"], new Dictionary<string, string>
+			{
+				{"gamertag", gamertag},
+				{"size", size},
+				{"pose", pose}
+			});
+		}
+
+		#endregion
+
 		#region General Helpers
 
 		/// <summary>

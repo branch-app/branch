@@ -2,8 +2,9 @@
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", @Model.ServiceRecord.Gamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "halo4 halo4_service_record";
 }
 
-@Html.Partial("HeaderServiceRecord", @Model.ServiceRecord)
+@Html.Partial("HeaderServiceRecord", @Model)
 
 ello
