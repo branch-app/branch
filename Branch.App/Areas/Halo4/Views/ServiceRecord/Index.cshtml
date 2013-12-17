@@ -1,10 +1,143 @@
-﻿@model Branch.App.Areas.Halo4.Models.ServiceRecordData
+﻿@using System.Globalization
+@using Branch.App.Helpers.Razor
+@model Branch.App.Areas.Halo4.Models.ServiceRecordData
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", @Model.ServiceRecord.Gamertag);
+	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
-	ViewBag.Template = "halo4 halo4_service_record";
+	ViewBag.Template = "halo4_service_record";
+	var serviceRecord = @Model.ServiceRecord;
 }
 
-@Html.Partial("HeaderServiceRecord", @Model)
+<div class="bs-branch-section overview">
+	<div class="page-header">
+		<h1>Overview</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6 game-history-split">
+			<div class="wrapper">
+				<div class="area">
+					<canvas id="game-history-split-chart" width="300" height="300"></canvas>
+				</div>
+				<div class="area-legend">
+					@{
+						var totalGames = @serviceRecord.GameModes[0].TotalGamesStarted +
+						                 @serviceRecord.GameModes[1].TotalGamesStarted +
+						                 @serviceRecord.GameModes[2].TotalGamesStarted +
+						                 @serviceRecord.GameModes[3].TotalGamesStarted;
+					}
 
-ello
+					<ul>
+						<li>
+							<div class="identifier war-games"></div>
+							War Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[2].TotalGamesStarted, ",")
+							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[2].TotalGamesStarted, totalGames, 0)%)
+						</li>
+						<li>
+							<div class="identifier campaign"></div>
+							Campaign - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[0].TotalGamesStarted, ",")
+							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[0].TotalGamesStarted, totalGames, 0)%)
+						</li>
+					</ul>
+					<br />
+					<ul>
+						<li>
+							<div class="identifier customs"></div>
+							Custom Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[3].TotalGamesStarted, ",")
+							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[3].TotalGamesStarted, totalGames, 0)%)
+						</li>
+						<li>
+							<div class="identifier spartan-ops"></div>
+							Spartan Ops - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[1].TotalGamesStarted, ",")
+							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[1].TotalGamesStarted, totalGames, 0)%)
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-5">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.MakeDateTimeFriendly(@serviceRecord.LastPlayedUtc)</span>
+					<span title="343 recently updated their systems. Dates are only accurate for the player signed in to the API requests. But i'll leave this here for if they change their mind.'">
+						Last Played*
+					</span>
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@serviceRecord.TotalLoadoutItemsPurchased%</span>
+					Loadout Purchase Completion
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@serviceRecord.TotalChallengesCompleted</span>
+					Challenges Completed
+				</li>
+				<li class="list-group-item">
+					@{
+						var spartanPoints = serviceRecord.SpartanPoints.ToString(CultureInfo.InvariantCulture);
+						if (spartanPoints == "52") { spartanPoints += " ;)"; }
+					}
+					<span class="badge">@spartanPoints</span>
+					Spartan Points
+				</li>
+				<li class="list-group-item">
+					@{
+						var kills = @serviceRecord.GameModes[2].TotalKills;
+						var kdRatio = @serviceRecord.GameModes[2].KdRatio;
+					}
+					
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(kills) (@kdRatio K/D)</span>
+					War Games Kills
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.GameModes[2].TotalMedals ?? 0)</span>
+					War Games Medals
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.GameModes[0].TotalKills)</span>
+					Covenant/Promethean Kills
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.TotalGamesStarted)</span>
+					Games Started
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.MakeDateTimeFriendly(@serviceRecord.FirstPlayedUtc)</span>
+					<span title="343 recently updated their systems. Dates are only accurate for the player signed in to the API requests. But i'll leave this here for if they change their mind.'">
+						Player Since*
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+	<script>
+		var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+		var chart = new Chart(ctx).Doughnut([
+			{
+				value: @(serviceRecord.GameModes[0].TotalGamesStarted),
+				color: '#F7464A'
+			},
+			{
+				value: @(serviceRecord.GameModes[2].TotalGamesStarted),
+				color: '#5880A0'
+			},
+			{
+				value: @(serviceRecord.GameModes[3].TotalGamesStarted),
+				color: '#3d3d7c'
+			},
+			{
+				value: @(serviceRecord.GameModes[1].TotalGamesStarted),
+				color: '#949FB1'
+			}],
+			{
+				animationStages : 500,
+				animateScale : false,
+				animateRotate : false
+			}
+		);
+	</script>
+}

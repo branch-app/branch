@@ -164,6 +164,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\forerunner.png" />
     <Content Include="Content\Images\Home\Covers\Destiny\cover1.jpg" />
     <Content Include="Content\Images\Home\Covers\Destiny\cover2.jpg" />
@@ -245,6 +246,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\Halo4\_service_record.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Shared\Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
