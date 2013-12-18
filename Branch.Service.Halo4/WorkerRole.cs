@@ -8,7 +8,6 @@ using Branch.Core.Api.Authentication;
 using Branch.Core.Api.Halo4;
 using Branch.Core.Storage;
 using Branch.Models.Services.Halo4;
-using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Branch.Service.Halo4
@@ -29,44 +28,48 @@ namespace Branch.Service.Halo4
 		{
 			Trace.TraceInformation("Branch.Service.Halo4 entry point called");
 
-			// Update Stuff
-			var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
-				_storage.Table.Halo4ServiceTasksCloudTable);
-
-#if DEBUG
-			var doofette = _h4WaypointManager.GetServiceRecord("bs angel");
-#endif
-
-			#region Check to Execute Tasks
-
-			foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
+			try
 			{
-				switch (task.Type)
+
+				// Update Stuff
+				var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
+					_storage.Table.Halo4ServiceTasksCloudTable);
+
+				#region Check to Execute Tasks
+
+				foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 				{
-					case TaskEntity.TaskType.Playlist:
-						_h4WaypointManager.UpdatePlaylists();
-						break;
+					switch (task.Type)
+					{
+						case TaskEntity.TaskType.Playlist:
+							_h4WaypointManager.UpdatePlaylists();
+							break;
 
-					case TaskEntity.TaskType.Auth:
-						var auth = I343.UpdateAuthentication(_storage);
-						if (!auth)
-							task.Interval = (int) new TimeSpan(0, 15, 0).TotalSeconds;
-						break;
+						case TaskEntity.TaskType.Auth:
+							var auth = I343.UpdateAuthentication(_storage);
+							if (!auth)
+								task.Interval = (int) new TimeSpan(0, 15, 0).TotalSeconds;
+							break;
 
-					case TaskEntity.TaskType.Metadata:
-						_h4WaypointManager.UpdateMetadata();
-						break;
+						case TaskEntity.TaskType.Metadata:
+							_h4WaypointManager.UpdateMetadata();
+							break;
+					}
+
+					task.Interval = (int) _tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
+					task.LastRun = DateTime.UtcNow;
+					_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
 				}
 
-				task.Interval = (int)_tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
-				task.LastRun = DateTime.UtcNow;
-				_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
+				#endregion
+
+				// Sleep for 5 minutes until we need to update stuff again. yolo
+				Thread.Sleep(TimeSpan.FromMinutes(10));
 			}
-
-			#endregion
-
-			// Sleep for 5 minutes until we need to update stuff again. yolo
-			Thread.Sleep(TimeSpan.FromMinutes(10));
+			catch (Exception ex)
+			{
+				Trace.TraceError(ex.ToString());
+			}
 		}
 
 		public override bool OnStart()

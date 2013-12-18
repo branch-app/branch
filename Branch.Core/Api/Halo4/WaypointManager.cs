@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Branch.Core.Api.Authentication;
@@ -14,6 +15,7 @@ using EasyHttp.Http;
 using EasyHttp.Infrastructure;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
+using Branch343Enums = Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.Core.Api.Halo4
 {
@@ -153,7 +155,50 @@ namespace Branch.Core.Api.Halo4
 			return serviceRecord;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
+		/// <param name="startIndex"></param>
+		/// <param name="count"></param>
+		/// <param name="mode"></param>
+		/// <param name="chapterId"></param>
+		/// <returns></returns>
+		public GameHistory GetGameHistory(string gamertag, int startIndex = 0, int count = 5,
+			Branch343Enums.Enums.Mode mode = Branch343Enums.Enums.Mode.WarGames, int chapterId = -1)
+		{
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var gameHistoryNameFormat = string.Format("{0}-{1}-{2}-{3}-{4}", escapedGamertag, startIndex, count, (int) mode, chapterId);
+			var blobContainerPath = GenerateBlobContainerPath(BlobType.PlayerGameHistory, gameHistoryNameFormat);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 8, 0));
 
+			// Check if blob exists & expire date
+			if (blobValidity.Item1)
+				return blobValidity.Item2;
+
+			// Try and get new blob
+			var customUrlParams = new Dictionary<string, string>
+			{
+				{"gamertag", gamertag},
+				{"gamemodeid", ((int) mode).ToString(CultureInfo.InvariantCulture)},
+				{"count", count.ToString(CultureInfo.InvariantCulture)},
+				{"startat", startIndex.ToString(CultureInfo.InvariantCulture)},
+			};
+			if (chapterId != -1) customUrlParams.Add("chapterid", chapterId.ToString(CultureInfo.InvariantCulture));
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameHistory"), customUrlParams);
+			var gameHistoryRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(url));
+			var gameHistory = ParseText<GameHistory>(gameHistoryRaw);
+			if (gameHistory == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.PlayerGameHistory, gameHistoryNameFormat), gameHistoryRaw);
+
+			var gameHistoryEntity = JsonConvert.DeserializeObject<GameHistoryEntity>(gameHistoryRaw);
+			_storage.Table.InsertOrReplaceSingleEntity(gameHistoryEntity, _storage.Table.Halo4CloudTable);
+
+			return gameHistory;
+		}
 
 		#endregion
 
