@@ -15,6 +15,7 @@ using EasyHttp.Http;
 using EasyHttp.Infrastructure;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
+using RestSharp.Contrib;
 using Branch343Enums = Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.Core.Api.Halo4
@@ -178,25 +179,22 @@ namespace Branch.Core.Api.Halo4
 				return blobValidity.Item2;
 
 			// Try and get new blob
-			var customUrlParams = new Dictionary<string, string>
+			var customUrlParams = new Dictionary<string, string> {{"gamertag", gamertag}};
+			var customQueryParams = new Dictionary<string, string>
 			{
-				{"gamertag", gamertag},
 				{"gamemodeid", ((int) mode).ToString(CultureInfo.InvariantCulture)},
 				{"count", count.ToString(CultureInfo.InvariantCulture)},
-				{"startat", startIndex.ToString(CultureInfo.InvariantCulture)},
+				{"startat", startIndex.ToString(CultureInfo.InvariantCulture)}
 			};
-			if (chapterId != -1) customUrlParams.Add("chapterid", chapterId.ToString(CultureInfo.InvariantCulture));
-			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameHistory"), customUrlParams);
-			var gameHistoryRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(url));
+			if (chapterId != -1) customQueryParams.Add("chapterid", chapterId.ToString(CultureInfo.InvariantCulture));
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameHistory"), customUrlParams, customQueryParams);
+			var gameHistoryRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
 			var gameHistory = ParseText<GameHistory>(gameHistoryRaw);
 			if (gameHistory == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(BlobType.PlayerGameHistory, gameHistoryNameFormat), gameHistoryRaw);
-
-			var gameHistoryEntity = JsonConvert.DeserializeObject<GameHistoryEntity>(gameHistoryRaw);
-			_storage.Table.InsertOrReplaceSingleEntity(gameHistoryEntity, _storage.Table.Halo4CloudTable);
-
+			
 			return gameHistory;
 		}
 
@@ -362,18 +360,41 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		/// <summary>
-		///     Populates a url with the default params populated, and also populates custom params.
+		///     Populates a url with the default params populated.
 		/// </summary>
 		/// <param name="url">The url to populate.</param>
 		/// <param name="customDefaults">Custom params to populate the url with, auto wrapped in the {} brackets.</param>
 		/// <returns>A string representation of the populated url</returns>
 		private static string PopulateUrl(string url, Dictionary<string, string> customDefaults)
 		{
+			return PopulateUrl(url, customDefaults, new Dictionary<string, string>());
+		}
+
+		/// <summary>
+		///     Populates a url with the default params populated, and also populates custom params.
+		/// </summary>
+		/// <param name="url">The url to populate.</param>
+		/// <param name="customDefaults">Custom params to populate the url with, auto wrapped in the {} brackets.</param>
+		/// <param name="queryParams"></param>
+		/// <returns>A string representation of the populated url</returns>
+		private static string PopulateUrl(string url, Dictionary<string, string> customDefaults, Dictionary<string, string> queryParams)
+		{
 			url = url.Replace("{language}", Language);
 			url = url.Replace("{game}", Game);
 
 			if (customDefaults == null)
 				throw new ArgumentException("Custom Defaults can't be null");
+			if (queryParams == null)
+				throw new ArgumentException("Query Params can't be null");
+
+			var startOfParams = !url.Contains("?");
+			foreach (var queryParam in queryParams)
+			{
+				url += startOfParams ? "?" : "&";
+				url += string.Format("{0}={1}", queryParam.Key, HttpUtility.HtmlEncode(queryParam.Value));
+
+				startOfParams = false;
+			}
 
 			return customDefaults.Aggregate(url,
 				(current, customDefault) => current.Replace("{" + customDefault.Key + "}", customDefault.Value));

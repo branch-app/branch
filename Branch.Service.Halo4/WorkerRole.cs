@@ -30,6 +30,9 @@ namespace Branch.Service.Halo4
 
 			try
 			{
+#if DEBUG
+				//var doofyHistory = _h4WaypointManager.GetGameHistory("doofette");
+#endif
 
 				// Update Stuff
 				var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",

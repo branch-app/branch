@@ -75,10 +75,12 @@
     <Compile Include="Services\Halo4\343\DataModels\ChallengeModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\CommonModels.cs" />
     <Compile Include="Services\Halo4\343\DataModels\Enums.cs" />
+    <Compile Include="Services\Halo4\343\DataModels\GameHistoryModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\MetadataModels.cs" />
     <Compile Include="Services\Halo4\343\DataModels\PlaylistModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\ServiceRecordModels.cs" />
     <Compile Include="Services\Halo4\343\Responses\Challenge.cs" />
+    <Compile Include="Services\Halo4\343\Responses\GameHistory.cs" />
     <Compile Include="Services\Halo4\343\Responses\Metadata.cs" />
     <Compile Include="Services\Halo4\343\RegisterWebApp.cs" />
     <Compile Include="Services\Halo4\343\Responses\Playlist.cs" />

@@ -153,6 +153,7 @@
     <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
     <Compile Include="Areas\Halo4\Models\Base.cs" />
+    <Compile Include="Areas\Halo4\Models\Enums.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />

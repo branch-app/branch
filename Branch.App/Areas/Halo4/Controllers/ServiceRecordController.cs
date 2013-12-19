@@ -12,7 +12,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View(new ServiceRecordData(serviceRecord));
+			return View(new ServiceRecordData(serviceRecord, GlobalStorage.H4WaypointManager.GetGameHistory(serviceRecord.Gamertag, 0, 20)));
 		}
 	}
 }

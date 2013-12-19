@@ -17,5 +17,12 @@
 			WarGames = 2,
 			Waypoint = 3
 		}
+
+		public enum Result
+		{
+			Lost = 0,
+			Draw = 1,
+			Won = 2
+		}
 	}
 }

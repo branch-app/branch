@@ -1,7 +1,10 @@
-﻿@using Branch.App.Helpers.Razor
-@model Branch.App.Areas.Halo4.Models.Base
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Halo4
+@model Base
 @{
 	var serviceRecord = @Model.ServiceRecord;
+	Enums.Pages currentPage = ViewBag.CurrentH4Page;
 }
 <div class="bs-sidebar" data-spy="affix" data-offset-top="302">
 	<ul class="nav bs-sidenav">
@@ -11,8 +14,24 @@
 			</a>
 			
 			<ul class="nav">
-				<li class="<%= 'active' if content_for(:halo4_active) == 'overview' %>">
+				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.ServiceRecord, "active")">
 					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) } }, new Dictionary<string, object>())
+				</li>
+
+				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.GameHistory, "active")">
+					<a href="#">Game History</a>
+				</li>
+
+				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
+					<a href="#">Competitive Skill Rank</a>
+				</li>
+
+				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.Commendations, "active")">
+					<a href="#">Commendations</a>
+				</li>
+
+				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.Specializations, "active")">
+					<a href="#">Specializations</a>
 				</li>
 
 				@*<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">

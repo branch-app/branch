@@ -4,9 +4,12 @@ namespace Branch.App.Areas.Halo4.Models
 {
 	public class ServiceRecordData : Base
 	{
-		public ServiceRecordData(ServiceRecord serviceRecord)
+		public ServiceRecordData(ServiceRecord serviceRecord, GameHistory gameHistory)
 		{
 			ServiceRecord = serviceRecord;
+			GameHistory = gameHistory;
 		}
+
+		public GameHistory GameHistory { get; set; }
 	}
 }

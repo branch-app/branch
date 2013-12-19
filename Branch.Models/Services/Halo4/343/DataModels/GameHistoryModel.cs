@@ -45,7 +45,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 		public bool Completed { get; set; }
 
-		public int Result { get; set; }
+		public Enums.Result Result { get; set; }
 
 		public DateTime EndDateUtc { get; set; }
 	}

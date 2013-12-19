@@ -1,11 +1,15 @@
 ﻿@using System.Globalization
+@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
-@model Branch.App.Areas.Halo4.Models.ServiceRecordData
+@using Branch.App.Helpers.Razor.Halo4
+@model ServiceRecordData
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_service_record";
+	ViewBag.CurrentH4Page = Enums.Pages.ServiceRecord;
 	var serviceRecord = @Model.ServiceRecord;
+	var gameHistory = @Model.GameHistory;
 }
 
 <div class="bs-branch-section overview">
@@ -29,12 +33,12 @@
 					<ul>
 						<li>
 							<div class="identifier war-games"></div>
-							War Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[2].TotalGamesStarted, ",")
+							War Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[2].TotalGamesStarted)
 							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[2].TotalGamesStarted, totalGames, 0)%)
 						</li>
 						<li>
 							<div class="identifier campaign"></div>
-							Campaign - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[0].TotalGamesStarted, ",")
+							Campaign - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[0].TotalGamesStarted)
 							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[0].TotalGamesStarted, totalGames, 0)%)
 						</li>
 					</ul>
@@ -42,12 +46,12 @@
 					<ul>
 						<li>
 							<div class="identifier customs"></div>
-							Custom Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[3].TotalGamesStarted, ",")
+							Custom Games - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[3].TotalGamesStarted)
 							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[3].TotalGamesStarted, totalGames, 0)%)
 						</li>
 						<li>
 							<div class="identifier spartan-ops"></div>
-							Spartan Ops - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[1].TotalGamesStarted, ",")
+							Spartan Ops - @BranchHelpers.NumberWithDelimiter(@serviceRecord.GameModes[1].TotalGamesStarted)
 							(@BranchHelpers.CalculatePercentage(serviceRecord.GameModes[1].TotalGamesStarted, totalGames, 0)%)
 						</li>
 					</ul>
@@ -110,6 +114,45 @@
 		</div>
 	</div>
 </div>
+@{
+	if (gameHistory != null)
+	{
+	<div class="bs-branch-section game-history">
+		<div class="page-header">
+			<h1>Game History</h1>
+		</div>
+		
+		<div class="row">
+			@foreach (var game in gameHistory.Games)
+			{
+				var result = GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed);
+				
+				<div id="history-entry-@game.Id" class="col-lg-6 col-sm-12 game-history-entry">
+					<a href="#">
+						<div class="game-history-container" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(game.MapImageUrl)')">
+							<div class="mask @result.Item1"></div>
+							<div class="gametype-icon" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(game.BaseVariantImageUrl)')"></div>
+							<div class="inner">
+								<span class="gametype">@game.VariantName</span>
+								<br class="visible-lg visible-xs" />
+								<span class="selector">on</span>
+								<span class="map-name">@game.MapVariantName</span>
+
+								<div class="stats">
+									<span class="type">@game.FeaturedStatName</span>
+									<span class="stat">@game.FeaturedStatValue</span>
+								</div>
+
+								<div class="windicator hidden-xs">@result.Item2</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			}
+		</div>
+	</div>
+	}
+}
 
 @section scripts
 {
