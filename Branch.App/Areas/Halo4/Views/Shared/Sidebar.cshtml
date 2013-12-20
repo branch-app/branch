@@ -50,7 +50,6 @@
 				@*<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
 					<%= link_to('Game History', halo4_gamehistory_path(gamertag_validation(@serviceRecord.Gamertag))) %>
 
-
 					<% if content_for(:halo4_active) == 'game_history' %>
 					<ul class="nav">
 						<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'matchmaking' %>">
@@ -67,36 +66,6 @@
 						</li>
 					</ul>
 					<% end %>
-				</li>
-				<li class="<%= 'active' if content_for(:halo4_active) == 'csr' %>">
-					<%= link_to('Competitive Skill Rank', halo4_csr_path(gamertag_validation(@serviceRecord.Gamertag))) %>
-				</li>
-				<li class="<%= 'active' if content_for(:halo4_active) == 'commendations' %>">
-					<%= link_to('Commendations', halo4_commendations_path(gamertag_validation(@serviceRecord.Gamertag))) %>
-
-
-					<% if content_for(:halo4_active) == 'commendations' %>
-					<ul class="nav">
-						<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'weapon' %>">
-							<%= link_to('Weapons', halo4_commendations_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'weapon' )) %>
-						</li>
-						<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'enemy' %>">
-							<%= link_to('Enemies', halo4_commendations_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'enemy' )) %>
-						</li>
-						<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'vehicle' %>">
-							<%= link_to('Vehicles', halo4_commendations_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'vehicle' )) %>
-						</li>
-						<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'player' %>">
-							<%= link_to('Player', halo4_commendations_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'player' )) %>
-						</li>
-						<li class="<%= 'active' if content_for(:halo4_commendations_active) == 'game_type' %>">
-							<%= link_to('Game Types', halo4_commendations_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'game-type' )) %>
-						</li>
-					</ul>
-					<% end %>
-				</li>
-				<li class="<%= 'active' if content_for(:halo4_active) == 'specialization' %>">
-					<%= link_to('Specializations', halo4_specialization_path(gamertag_validation(@serviceRecord.Gamertag))) %>
 				</li>*@
 			</ul>
 		</li>
