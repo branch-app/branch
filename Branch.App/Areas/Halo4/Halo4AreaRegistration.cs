@@ -25,10 +25,16 @@ namespace Branch.App.Areas.Halo4
 
 			context.MapRoute(
 				"Halo4_ServiceRecord",
-				"Halo4/ServiceRecord/{gamertag}",
+				"Halo4/{gamertag}",
 				new { controller = "ServiceRecord", action = "Index"},
 				namespaces
 			);
+
+			// Specializations
+			context.MapRoute("Halo4_Specializations", "Halo4/{gamertag}/Specializations", new { controller = "Specializations", action = "Index" }, namespaces);
+
+			// Commendations
+			context.MapRoute("Halo4_Commendations", "Halo4/{gamertag}/Commendations/{slug}", new { controller = "Commendations", slug = "Weapons", action = "Index" }, namespaces);
 		}
 	}
 }

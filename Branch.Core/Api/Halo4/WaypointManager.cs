@@ -131,14 +131,14 @@ namespace Branch.Core.Api.Halo4
 		/// <returns>The raw JSON of their Service Record</returns>
 		public ServiceRecord GetServiceRecord(string gamertag)
 		{
+			const BlobType blobType = BlobType.PlayerServiceRecord;
 			var escapedGamertag = EscapeGamertag(gamertag);
-			var blobContainerPath = GenerateBlobContainerPath(BlobType.PlayerServiceRecord, escapedGamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
 			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
 			var blobValidity = CheckBlobValidity<ServiceRecord>(blob, new TimeSpan(0, 8, 0));
 
 			// Check if blob exists & expire date
-			if (blobValidity.Item1)
-				return blobValidity.Item2;
+			if (blobValidity.Item1) return blobValidity.Item2;
 
 			// Try and get new blob
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetServiceRecord"),
@@ -148,10 +148,12 @@ namespace Branch.Core.Api.Halo4
 			if (serviceRecord == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
-				GenerateBlobContainerPath(BlobType.PlayerServiceRecord, escapedGamertag), serviceRecordRaw);
+				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
 
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
+
+			CreateBlobRecord(blobType, escapedGamertag);
 
 			return serviceRecord;
 		}
@@ -165,18 +167,18 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="mode"></param>
 		/// <param name="chapterId"></param>
 		/// <returns></returns>
-		public GameHistory GetGameHistory(string gamertag, int startIndex = 0, int count = 5,
+		public GameHistory GetPlayerGameHistory(string gamertag, int startIndex = 0, int count = 5,
 			Branch343Enums.Enums.Mode mode = Branch343Enums.Enums.Mode.WarGames, int chapterId = -1)
 		{
+			const BlobType blobType = BlobType.PlayerGameHistory;
 			var escapedGamertag = EscapeGamertag(gamertag);
 			var gameHistoryNameFormat = string.Format("{0}-{1}-{2}-{3}-{4}", escapedGamertag, startIndex, count, (int) mode, chapterId);
-			var blobContainerPath = GenerateBlobContainerPath(BlobType.PlayerGameHistory, gameHistoryNameFormat);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, gameHistoryNameFormat);
 			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
 			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 8, 0));
 
 			// Check if blob exists & expire date
-			if (blobValidity.Item1)
-				return blobValidity.Item2;
+			if (blobValidity.Item1) return blobValidity.Item2;
 
 			// Try and get new blob
 			var customUrlParams = new Dictionary<string, string> {{"gamertag", gamertag}};
@@ -193,9 +195,40 @@ namespace Branch.Core.Api.Halo4
 			if (gameHistory == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
-				GenerateBlobContainerPath(BlobType.PlayerGameHistory, gameHistoryNameFormat), gameHistoryRaw);
+				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameHistoryRaw);
+
+			CreateBlobRecord(blobType, escapedGamertag);
 			
 			return gameHistory;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
+		/// <returns></returns>
+		public Commendation GetPlayerCommendations(string gamertag)
+		{
+			const BlobType blobType = BlobType.PlayerCommendation;
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<Commendation>(blob, new TimeSpan(0, 8, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetCommendations"), new Dictionary<string, string> { { "gamertag", gamertag } });
+			var commendationRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
+			var commendation = ParseText<Commendation>(commendationRaw);
+			if (commendation == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(blobType, escapedGamertag), commendationRaw);
+
+			CreateBlobRecord(blobType, escapedGamertag);
+
+			return commendation;
 		}
 
 		#endregion
@@ -564,6 +597,18 @@ namespace Branch.Core.Api.Halo4
 			}
 
 			return string.Format("{0}/{1}.json", path, fileName);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="blobType"></param>
+		/// <param name="ident"></param>
+		private void CreateBlobRecord(BlobType blobType, string ident)
+		{
+			ident = ident.Replace(" ", "_");
+			_storage.Table.InsertOrReplaceSingleEntity(new BlobRecordEntity(ident, (int) blobType, blobType.ToString()),
+				_storage.Table.Halo4CloudTable);
 		}
 
 		/// <summary>

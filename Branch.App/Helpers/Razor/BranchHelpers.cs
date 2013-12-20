@@ -7,13 +7,13 @@ namespace Branch.App.Helpers.Razor
 	{
 		public static string CheckGamertagPrivacy(string gamertag)
 		{
-			if (gamertag == "Doofette") return "Evie";
+			//if (gamertag == "Doofette") return "Evie";
 			return gamertag;
 		}
 
 		public static string GamertagToLeaf(string gamertag, bool alsoValidate = true)
 		{
-			if (gamertag == "Doofette") gamertag = "Evie";
+			//if (gamertag == "Doofette") gamertag = "Evie";
 			return gamertag.Replace(" ", "_");
 		}
 
@@ -30,6 +30,12 @@ namespace Branch.App.Helpers.Razor
 		public static string CalculatePercentage(float a, float b, int roundTo = 2)
 		{
 			return Math.Round((a/b)*100, roundTo).ToString(CultureInfo.InvariantCulture);
+		}
+
+		public static string CompareEnum(object currentPage,
+			object desiredPage, string output)
+		{
+			return currentPage.Equals(desiredPage) ? output : "";
 		}
 	}
 }

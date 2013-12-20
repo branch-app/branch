@@ -73,6 +73,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Halo4\343\DataModels\ChallengeModel.cs" />
+    <Compile Include="Services\Halo4\343\DataModels\CommendationModels.cs" />
     <Compile Include="Services\Halo4\343\DataModels\CommonModels.cs" />
     <Compile Include="Services\Halo4\343\DataModels\Enums.cs" />
     <Compile Include="Services\Halo4\343\DataModels\GameHistoryModel.cs" />
@@ -80,12 +81,14 @@
     <Compile Include="Services\Halo4\343\DataModels\PlaylistModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\ServiceRecordModels.cs" />
     <Compile Include="Services\Halo4\343\Responses\Challenge.cs" />
+    <Compile Include="Services\Halo4\343\Responses\Commendation.cs" />
     <Compile Include="Services\Halo4\343\Responses\GameHistory.cs" />
     <Compile Include="Services\Halo4\343\Responses\Metadata.cs" />
     <Compile Include="Services\Halo4\343\RegisterWebApp.cs" />
     <Compile Include="Services\Halo4\343\Responses\Playlist.cs" />
     <Compile Include="Services\Halo4\343\Responses\ServiceRecord.cs" />
     <Compile Include="Services\Halo4\343\WaypointResponse.cs" />
+    <Compile Include="Services\Halo4\Branch\BlobRecordEntity.cs" />
     <Compile Include="Services\Halo4\Branch\ServiceRecordEntity.cs" />
     <Compile Include="Services\Halo4\Enums.cs" />
     <Compile Include="Services\Halo4\TaskEntity.cs" />

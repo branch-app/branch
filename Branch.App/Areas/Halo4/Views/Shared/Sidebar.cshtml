@@ -1,10 +1,11 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
-@using Branch.App.Helpers.Razor.Halo4
+@using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 @model Base
 @{
 	var serviceRecord = @Model.ServiceRecord;
 	Enums.Pages currentPage = ViewBag.CurrentH4Page;
+	_343Enums.CommendationCategory currentCommendationCategory = ViewBag.CurrentCommendationCategory;
 }
 <div class="bs-sidebar" data-spy="affix" data-offset-top="302">
 	<ul class="nav bs-sidenav">
@@ -14,24 +15,36 @@
 			</a>
 			
 			<ul class="nav">
-				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.ServiceRecord, "active")">
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.ServiceRecord, "active")">
 					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) } }, new Dictionary<string, object>())
 				</li>
 
-				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.GameHistory, "active")">
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.GameHistory, "active")">
 					<a href="#">Game History</a>
 				</li>
 
-				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
 					<a href="#">Competitive Skill Rank</a>
 				</li>
 
-				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.Commendations, "active")">
-					<a href="#">Commendations</a>
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Commendations, "active")">
+					@Html.RouteLink("Commendations", "Halo4_Commendations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					
+					@if (currentPage == Enums.Pages.Commendations)
+					{
+						<ul class="nav">
+							@foreach (var commendationCategory in (_343Enums.CommendationCategory[]) Enum.GetValues(typeof (_343Enums.CommendationCategory)))
+							{
+								<li class="@BranchHelpers.CompareEnum(currentCommendationCategory, commendationCategory, "active")">
+									@Html.RouteLink(commendationCategory.ToString(), "Halo4_Commendations", new { slug = commendationCategory.ToString(), gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+								</li>
+							}
+						</ul>
+					}
 				</li>
 
-				<li class="@GeneralHelpers.CheckCurrentPage(currentPage, Enums.Pages.Specializations, "active")">
-					<a href="#">Specializations</a>
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Specializations, "active")">
+					@Html.RouteLink("Specializations", "Halo4_Specializations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
 				</li>
 
 				@*<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">

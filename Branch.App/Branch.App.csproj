@@ -149,12 +149,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Halo4\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Halo4\Controllers\HomeController.cs" />
     <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
+    <Compile Include="Areas\Halo4\Controllers\SpecializationsController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
     <Compile Include="Areas\Halo4\Models\Base.cs" />
     <Compile Include="Areas\Halo4\Models\Enums.cs" />
+    <Compile Include="Areas\Halo4\Models\CommendationsData.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
+    <Compile Include="Areas\Halo4\Models\SpecializationsData.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -162,6 +166,7 @@
     </Compile>
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
+    <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +260,18 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Specializations\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Halo4\_specializations.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Commendations\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Halo4\_commendations.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

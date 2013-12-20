@@ -410,3 +410,37 @@ body.halo4_service_record .game-history .row > .game-history-entry {
               bottom: -5px;
               font-weight: 900; } }
 
+body.halo4_specializations .specialization .title {
+  font-size: 16px;
+  font-weight: 600; }
+body.halo4_specializations .specialization .description {
+  font-size: 14px; }
+body.halo4_specializations .specialization .level-progression {
+  margin-top: 20px; }
+body.halo4_specializations .specialization .specialization-icon {
+  background-repeat: no-repeat;
+  height: 130px; }
+body.halo4_specializations .specialization .other-shit {
+  margin-top: 60px; }
+
+body.halo4_commendations .commendations .entry {
+  margin-bottom: 35px;
+  height: 200px; }
+  body.halo4_commendations .commendations .entry > .title {
+    font-size: 16px; }
+    body.halo4_commendations .commendations .entry > .title > .numerical {
+      font-size: 30px;
+      font-weight: 500; }
+  body.halo4_commendations .commendations .entry > .description {
+    font-size: 14px;
+    color: #aaa; }
+  body.halo4_commendations .commendations .entry > .progression {
+    margin-top: 20px; }
+    body.halo4_commendations .commendations .entry > .progression > .points {
+      display: inline;
+      color: #aaa; }
+      body.halo4_commendations .commendations .entry > .progression > .points > .lower {
+        float: left; }
+      body.halo4_commendations .commendations .entry > .progression > .points > .upper {
+        float: right; }
+

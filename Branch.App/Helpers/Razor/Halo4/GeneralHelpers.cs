@@ -56,11 +56,5 @@ namespace Branch.App.Helpers.Razor.Halo4
 					return new Tuple<string, string>("", "");
 			}
 		}
-
-		public static string CheckCurrentPage(Areas.Halo4.Models.Enums.Pages currentPage,
-			Areas.Halo4.Models.Enums.Pages desiredPage, string output)
-		{
-			return currentPage == desiredPage ? output : "";
-		}
 	}
 }

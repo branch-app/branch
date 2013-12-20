@@ -31,7 +31,7 @@ namespace Branch.Service.Halo4
 			try
 			{
 #if DEBUG
-				//var doofyHistory = _h4WaypointManager.GetGameHistory("doofette");
+				var dooftComms = _h4WaypointManager.GetPlayerCommendations("doofette");
 #endif
 
 				// Update Stuff

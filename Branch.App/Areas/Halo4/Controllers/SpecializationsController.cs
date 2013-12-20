@@ -5,14 +5,14 @@ using Branch.Models.Services.Halo4._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
-	public class ServiceRecordController : Controller
+	public class SpecializationsController : Controller
 	{
 		//
-		// GET: /Halo4/ServiceRecord/{gamertag}
+		// GET: /Halo4/{gamertag}/Specializations/
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View(new ServiceRecordData(serviceRecord, GlobalStorage.H4WaypointManager.GetPlayerGameHistory(serviceRecord.Gamertag, 0, 20)));
+			return View(new SpecializationsData(serviceRecord));
 		}
 	}
 }

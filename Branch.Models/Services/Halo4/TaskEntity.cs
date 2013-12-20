@@ -32,7 +32,7 @@ namespace Branch.Models.Services.Halo4
 		public TaskType Type
 		{
 			get { return (TaskType)TaskTypeInt; }
-			set { TaskTypeInt = (int)value; }
+			set { TaskTypeInt = (int) value; }
 		}
 
 		/// <summary>
