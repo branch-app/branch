@@ -31,7 +31,12 @@ namespace Branch.Service.Halo4
 			try
 			{
 #if DEBUG
-				var dooftComms = _h4WaypointManager.GetPlayerCommendations("doofette");
+				//_h4WaypointManager.SetPlaylistOrientation("unk1", 101, false);
+				//_h4WaypointManager.SetPlaylistOrientation("unk2", 104, false);
+				//_h4WaypointManager.SetPlaylistOrientation("unk3", 113, false);
+				//_h4WaypointManager.SetPlaylistOrientation("unk4", 100, true);
+				//_h4WaypointManager.SetPlaylistOrientation("unk5", 105, true);
+				//_h4WaypointManager.SetPlaylistOrientation("unk6", 117, true);
 #endif
 
 				// Update Stuff

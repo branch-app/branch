@@ -39,7 +39,7 @@ namespace Branch.Core.Api.Halo4
 		{
 			_storage = storage;
 			RegisterWebApp();
-			
+
 			if (updateAuthentication)
 				I343.UpdateAuthentication(_storage);
 
@@ -104,7 +104,7 @@ namespace Branch.Core.Api.Halo4
 			else
 				Playlists = playlists;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -120,7 +120,7 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		#endregion
-		
+
 
 		#region Player Endpoints
 
@@ -142,7 +142,7 @@ namespace Branch.Core.Api.Halo4
 
 			// Try and get new blob
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetServiceRecord"),
-				new Dictionary<string, string> { { "gamertag", gamertag } });
+				new Dictionary<string, string> {{"gamertag", gamertag}});
 			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(url));
 			var serviceRecord = ParseText<ServiceRecord>(serviceRecordRaw);
 			if (serviceRecord == null) return blobValidity.Item2;
@@ -172,7 +172,8 @@ namespace Branch.Core.Api.Halo4
 		{
 			const BlobType blobType = BlobType.PlayerGameHistory;
 			var escapedGamertag = EscapeGamertag(gamertag);
-			var gameHistoryNameFormat = string.Format("{0}-{1}-{2}-{3}-{4}", escapedGamertag, startIndex, count, (int) mode, chapterId);
+			var gameHistoryNameFormat = string.Format("{0}-{1}-{2}-{3}-{4}", escapedGamertag, startIndex, count, (int) mode,
+				chapterId);
 			var blobContainerPath = GenerateBlobContainerPath(blobType, gameHistoryNameFormat);
 			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
 			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 8, 0));
@@ -198,7 +199,7 @@ namespace Branch.Core.Api.Halo4
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameHistoryRaw);
 
 			CreateBlobRecord(blobType, escapedGamertag);
-			
+
 			return gameHistory;
 		}
 
@@ -218,7 +219,8 @@ namespace Branch.Core.Api.Halo4
 			// Check if blob exists & expire date
 			if (blobValidity.Item1) return blobValidity.Item2;
 
-			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetCommendations"), new Dictionary<string, string> { { "gamertag", gamertag } });
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetCommendations"),
+				new Dictionary<string, string> {{"gamertag", gamertag}});
 			var commendationRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
 			var commendation = ParseText<Commendation>(commendationRaw);
 			if (commendation == null) return blobValidity.Item2;
@@ -245,7 +247,8 @@ namespace Branch.Core.Api.Halo4
 					UnauthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameMetadata"))));
 
 			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "metadata"), metaData);
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "metadata"),
+				metaData);
 
 			// Update in Class
 			Metadata = ParseText<Metadata>(metaData);
@@ -261,7 +264,8 @@ namespace Branch.Core.Api.Halo4
 					AuthType.Spartan));
 
 			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "playlists"), playlists);
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "playlists"),
+				playlists);
 
 			// Update in Class
 			Playlists = ParseText<Playlist>(playlists);
@@ -273,11 +277,13 @@ namespace Branch.Core.Api.Halo4
 		public void UpdateChallenges()
 		{
 			var challenges =
-				ValidateResponseAndGetRawText(AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGlobalChallenges")),
-					AuthType.Spartan));
+				ValidateResponseAndGetRawText(
+					AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGlobalChallenges")),
+						AuthType.Spartan));
 
 			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "challenges"), challenges);
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "challenges"),
+				challenges);
 
 			// Update in Class
 			Challenges = ParseText<Challenge>(challenges);
@@ -341,7 +347,8 @@ namespace Branch.Core.Api.Halo4
 				headers = new Dictionary<string, string>();
 
 			// get auth
-			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication", WaypointTokenEntity.FormatRowKey(),
+			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
+				WaypointTokenEntity.FormatRowKey(),
 				_storage.Table.AuthenticationCloudTable);
 
 			switch (authType)
@@ -410,7 +417,8 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="customDefaults">Custom params to populate the url with, auto wrapped in the {} brackets.</param>
 		/// <param name="queryParams"></param>
 		/// <returns>A string representation of the populated url</returns>
-		private static string PopulateUrl(string url, Dictionary<string, string> customDefaults, Dictionary<string, string> queryParams)
+		private static string PopulateUrl(string url, Dictionary<string, string> customDefaults,
+			Dictionary<string, string> queryParams)
 		{
 			url = url.Replace("{language}", Language);
 			url = url.Replace("{game}", Game);
@@ -444,7 +452,9 @@ namespace Branch.Core.Api.Halo4
 				return false;
 
 			var parsedResponse = JsonConvert.DeserializeObject<WaypointResponse>(response.RawText);
-			return (parsedResponse != null && (parsedResponse.StatusCode == Enums.ResponseCode.Okay || parsedResponse.StatusCode == Enums.ResponseCode.PlayerFound));
+			return (parsedResponse != null &&
+			        (parsedResponse.StatusCode == Enums.ResponseCode.Okay ||
+			         parsedResponse.StatusCode == Enums.ResponseCode.PlayerFound));
 		}
 
 		/// <summary>
@@ -484,7 +494,8 @@ namespace Branch.Core.Api.Halo4
 		/// <returns></returns>
 		public bool CheckApiValidity()
 		{
-			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication", WaypointTokenEntity.FormatRowKey(),
+			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
+				WaypointTokenEntity.FormatRowKey(),
 				_storage.Table.AuthenticationCloudTable);
 
 			if (auth == null)
@@ -633,7 +644,7 @@ namespace Branch.Core.Api.Halo4
 		public Tuple<bool, TDataModel> CheckBlobValidity<TDataModel>(ICloudBlob blob, TimeSpan expireLength)
 			where TDataModel : WaypointResponse
 		{
-			if (blob == null || !blob.Exists()) 
+			if (blob == null || !blob.Exists())
 				return new Tuple<bool, TDataModel>(false, null);
 
 			var blobData = _storage.Blob.DownloadBlob<TDataModel>(blob);
@@ -646,5 +657,43 @@ namespace Branch.Core.Api.Halo4
 		}
 
 		#endregion
+
+		#region Branch Data Management
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="playlistName"></param>
+		/// <param name="playlistId"></param>
+		/// <param name="isTeam"></param>
+		public void SetPlaylistOrientation(string playlistName, int playlistId, bool isTeam)
+		{
+			var playlistOrientationEntity = new PlaylistOrientationEntity(playlistName, playlistId, isTeam);
+			_storage.Table.InsertOrReplaceSingleEntity(playlistOrientationEntity, _storage.Table.Halo4CloudTable);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="playlistId"></param>
+		/// <returns></returns>
+		public PlaylistOrientationEntity GetPlaylistOrientation(int playlistId)
+		{
+			return _storage.Table.RetrieveSingleEntity<PlaylistOrientationEntity>(PlaylistOrientationEntity.PartitionKeyString,
+				string.Format(PlaylistOrientationEntity.RowKeyString, playlistId), _storage.Table.Halo4CloudTable);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public IEnumerable<PlaylistOrientationEntity> GetPlaylistOrientations()
+		{
+			return
+				_storage.Table.RetrieveMultipleEntities<PlaylistOrientationEntity>(PlaylistOrientationEntity.PartitionKeyString,
+					_storage.Table.Halo4CloudTable);
+		}
+
+	#endregion
 	}
 }

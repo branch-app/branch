@@ -24,7 +24,7 @@
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
-					<a href="#">Competitive Skill Rank</a>
+					@Html.RouteLink("Competitive Skill Rank", "Halo4_Csr", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Commendations, "active")">

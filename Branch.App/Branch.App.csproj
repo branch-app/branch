@@ -150,11 +150,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Halo4\Controllers\CommendationsController.cs" />
+    <Compile Include="Areas\Halo4\Controllers\CsrController.cs" />
     <Compile Include="Areas\Halo4\Controllers\HomeController.cs" />
     <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Halo4\Controllers\SpecializationsController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
     <Compile Include="Areas\Halo4\Models\Base.cs" />
+    <Compile Include="Areas\Halo4\Models\CsrData.cs" />
+    <Compile Include="Areas\Halo4\Models\CsrDetailData.cs" />
     <Compile Include="Areas\Halo4\Models\Enums.cs" />
     <Compile Include="Areas\Halo4\Models\CommendationsData.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
@@ -272,6 +275,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\Halo4\_commendations.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Csr\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Csr\SkillRankContainer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Styles\Halo4\_csr.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Halo4\Views\Csr\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

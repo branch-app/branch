@@ -35,6 +35,10 @@ namespace Branch.App.Areas.Halo4
 
 			// Commendations
 			context.MapRoute("Halo4_Commendations", "Halo4/{gamertag}/Commendations/{slug}", new { controller = "Commendations", slug = "Weapons", action = "Index" }, namespaces);
+
+			// CSR
+			context.MapRoute("Halo4_Csr", "Halo4/{gamertag}/Csr/", new { controller = "Csr", action = "Index" }, namespaces);
+			context.MapRoute("Halo4_CsrDetails", "Halo4/{gamertag}/Csr/{id}/{slug}", new { controller = "Csr", action = "Details" }, namespaces);
 		}
 	}
 }

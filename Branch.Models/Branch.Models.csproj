@@ -89,6 +89,7 @@
     <Compile Include="Services\Halo4\343\Responses\ServiceRecord.cs" />
     <Compile Include="Services\Halo4\343\WaypointResponse.cs" />
     <Compile Include="Services\Halo4\Branch\BlobRecordEntity.cs" />
+    <Compile Include="Services\Halo4\Branch\PlaylistOrientationEntity.cs" />
     <Compile Include="Services\Halo4\Branch\ServiceRecordEntity.cs" />
     <Compile Include="Services\Halo4\Enums.cs" />
     <Compile Include="Services\Halo4\TaskEntity.cs" />

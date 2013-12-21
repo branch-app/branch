@@ -444,3 +444,65 @@ body.halo4_commendations .commendations .entry {
       body.halo4_commendations .commendations .entry > .progression > .points > .upper {
         float: right; }
 
+body.halo4_csr .chart {
+  max-width: 100%;
+  height: auto; }
+body.halo4_csr .csr > .row > div > div > div > table
+> tbody > tr > td > .csr-table-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 100px; }
+body.halo4_csr .outer-container {
+  display: table;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute; }
+body.halo4_csr .inner-container {
+  display: table-cell;
+  vertical-align: middle; }
+body.halo4_csr .canvas-container {
+  position: relative;
+  max-width: 1024px;
+  min-width: 350px;
+  margin: 0 auto; }
+body.halo4_csr .csr-details > .row {
+  text-align: center; }
+  body.halo4_csr .csr-details > .row > .playlist-image {
+    background-size: cover;
+    height: 260px; }
+    body.halo4_csr .csr-details > .row > .playlist-image > .csr {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 78px;
+      height: 99px;
+      background-repeat: no-repeat; }
+  body.halo4_csr .csr-details > .row > .playlist-data {
+    background-position: 5% 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 20px; }
+    body.halo4_csr .csr-details > .row > .playlist-data > .description {
+      font-size: 17px; }
+    body.halo4_csr .csr-details > .row > .playlist-data > .meta {
+      margin-top: 25px;
+      font-size: 15px; }
+  body.halo4_csr .csr-details > .row > .playlist-advanced-data {
+    text-align: left; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #gvar .entry > td > .icon-frame {
+      width: 120px;
+      height: 120px;
+      background-color: #3d3d7c;
+      background-position: center;
+      background-repeat: no-repeat; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #mvar .entry > td > .preview-frame {
+      width: 180px;
+      height: 130px;
+      background-color: #3d3d7c;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #mvar .entry > td > .name {
+      width: 130px; }
+

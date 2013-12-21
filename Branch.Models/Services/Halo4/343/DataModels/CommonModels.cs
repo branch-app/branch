@@ -168,6 +168,8 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public ImageUrl PlaylistImageUrl { get; set; }
 
 			public string PlaylistName { get; set; }
+
+			public int PlaylistId { get; set; }
 		}
 
 		#endregion
