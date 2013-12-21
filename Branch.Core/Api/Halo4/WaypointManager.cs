@@ -16,7 +16,7 @@ using EasyHttp.Infrastructure;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RestSharp.Contrib;
-using Branch343Enums = Branch.Models.Services.Halo4._343.DataModels;
+using Branch343DataModels = Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.Core.Api.Halo4
 {
@@ -167,8 +167,9 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="mode"></param>
 		/// <param name="chapterId"></param>
 		/// <returns></returns>
-		public GameHistory GetPlayerGameHistory(string gamertag, int startIndex = 0, int count = 5,
-			Branch343Enums.Enums.Mode mode = Branch343Enums.Enums.Mode.WarGames, int chapterId = -1)
+		public GameHistory<T> GetPlayerGameHistory<T>(string gamertag, int startIndex = 0, int count = 5,
+			Branch343DataModels.Enums.Mode mode = Branch343DataModels.Enums.Mode.WarGames, int chapterId = -1)
+			where T : Branch343DataModels.GameHistoryModel.Base
 		{
 			const BlobType blobType = BlobType.PlayerGameHistory;
 			var escapedGamertag = EscapeGamertag(gamertag);
@@ -176,7 +177,7 @@ namespace Branch.Core.Api.Halo4
 				chapterId);
 			var blobContainerPath = GenerateBlobContainerPath(blobType, gameHistoryNameFormat);
 			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
-			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 8, 0));
+			var blobValidity = CheckBlobValidity <GameHistory<T>>(blob, new TimeSpan(0, 8, 0));
 
 			// Check if blob exists & expire date
 			if (blobValidity.Item1) return blobValidity.Item2;
@@ -192,7 +193,7 @@ namespace Branch.Core.Api.Halo4
 			if (chapterId != -1) customQueryParams.Add("chapterid", chapterId.ToString(CultureInfo.InvariantCulture));
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameHistory"), customUrlParams, customQueryParams);
 			var gameHistoryRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
-			var gameHistory = ParseText<GameHistory>(gameHistoryRaw);
+			var gameHistory = ParseText<GameHistory<T>>(gameHistoryRaw);
 			if (gameHistory == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,

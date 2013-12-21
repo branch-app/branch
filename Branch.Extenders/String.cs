@@ -34,5 +34,15 @@ namespace Branch.Extenders
 
 			return str;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static string MakeCamelCaseFriendly(this string value)
+		{
+			return Regex.Replace(value, @"(\B[A-Z]+?(?=[A-Z][^A-Z])|\B[A-Z]+?(?=[^A-Z]))", " $1");
+		}
 	}
 }

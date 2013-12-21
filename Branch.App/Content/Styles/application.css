@@ -506,3 +506,271 @@ body.halo4_csr .csr-details > .row {
     body.halo4_csr .csr-details > .row > .playlist-advanced-data #mvar .entry > td > .name {
       width: 130px; }
 
+body.halo4_game_history .game-details > .cover {
+  position: relative;
+  height: 374px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  body.halo4_game_history .game-details > .cover > .mask {
+    background: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0, 0, 0, 0.65)), color-stop(100%, rgba(0, 0, 0, 0)));
+    background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -o-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -ms-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+    height: 100%; }
+    body.halo4_game_history .game-details > .cover > .mask > .inner {
+      padding: 10px;
+      color: #c5c5c5; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .title {
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .title > h2 {
+          color: white; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .game-icon {
+        width: 128px;
+        height: 128px;
+        margin: 0 auto;
+        background-repeat: no-repeat; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .map {
+        font-size: 16px;
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .map > span.focus {
+          color: white; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .victor {
+        margin: 0 auto;
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards {
+          margin: 0 auto;
+          margin-bottom: -10px;
+          color: white; }
+          body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard {
+            float: left;
+            height: 75px;
+            width: 50px;
+            margin: 0 5px; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard > .height-mask {
+              width: 100%; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard > .score {
+              position: absolute;
+              width: 50px;
+              text-align: center;
+              margin-top: -45px; }
+          body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .team-score-bollard {
+            float: left;
+            height: 75px;
+            width: 50px;
+            margin: 0 5px; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .team-score-bollard > div {
+              line-height: 5em; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .ffa-victor {
+          width: 300px;
+          margin: 0 auto; }
+  body.halo4_game_history .game-details > .cover > .victor-player-model {
+    background-repeat: no-repeat;
+    background-position: 30px 20px;
+    height: 350px;
+    width: 255px;
+    position: absolute;
+    top: 24px;
+    left: 0; }
+    @media (min-width: 768px) and (max-width: 992px) {
+      body.halo4_game_history .game-details > .cover > .victor-player-model {
+        top: 21px;
+        height: 353px; } }
+body.halo4_game_history .game-details > .social-shit {
+  margin: 10px 0; }
+  body.halo4_game_history .game-details > .social-shit > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline; }
+    body.halo4_game_history .game-details > .social-shit > ul > li {
+      display: inline; }
+body.halo4_game_history .game-details .details > #player-listing {
+  margin-bottom: 40px; }
+  body.halo4_game_history .game-details .details > #player-listing > div > .team {
+    border-left: 4px solid;
+    border-top: 35px solid;
+    margin-bottom: 30px;
+    padding: 15px 0 0 10px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .check-dat-paddin {
+      padding-left: 0px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team > .header {
+      margin-left: -13px;
+      margin-top: -43px;
+      color: white;
+      font-weight: 600; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players {
+      margin-top: 16px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div {
+        border-bottom: 0px;
+        margin-left: -10px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div.expanded {
+          border-bottom: 4px solid; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .expander-indicator > .expander-positioner {
+          margin: 15px 0 0 -1px; }
+          @media (min-width: 992px) and (max-width: 1199px) {
+            body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .expander-indicator > .expander-positioner {
+              margin: 15px 0 0 -7px;
+              padding: 0 5px 0 0; } }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .visual-flair {
+          height: 70px;
+          background-position: center;
+          background-repeat: no-repeat; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .alphabetical-flair {
+          margin-top: 10px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .csr-indicator {
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 60px;
+          background-size: contain; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view {
+          margin: -8px 0 0 -25px; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view > .expander-indicator .player-details-expander > .player-indicator {
+            padding: 8px 0 0 22px;
+            text-align: center; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view > .expander-indicator .player-details-expander > .player-indicator > .visual-flair {
+              height: 70px;
+              padding-top: 15px;
+              color: white;
+              background-position: 20px center;
+              background-repeat: no-repeat; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .player-data {
+          margin: 20px auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > hr {
+        margin: 5px 0; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary > div > .player-model {
+      height: 660px;
+      background-repeat: no-repeat;
+      background-position: 50px 20px; }
+      @media (min-width: 992px) and (max-width: 1199px) {
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary > div > .player-model {
+          background-position: 5px 20px; } }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary .player-servicetag {
+      margin-top: -10px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals {
+      margin: 0 auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div {
+        width: 100px;
+        min-height: 100px;
+        padding: 10px;
+        margin: auto 10px;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 100; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .medal {
+          height: 100px;
+          background-repeat: no-repeat;
+          background-size: 80px 80px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .count {
+          height: 30px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .earned {
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals {
+      margin-left: 10px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals {
+        margin-bottom: 60px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry {
+          margin: 20px auto; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .medal {
+            float: left;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 80px;
+            background-size: 80px 80px;
+            background-position: center center; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .description {
+            float: left;
+            margin-left: 30px;
+            width: 250px; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .description > .name {
+              font-size: 16px;
+              font-weight: 600; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count {
+            float: right;
+            min-width: 100px;
+            text-align: center; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count > .integer {
+              font-size: 50px;
+              font-weight: 100; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count > .in-dick-ator {
+              font-size: 12px;
+              font-weight: 600;
+              text-transform: uppercase; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry {
+      margin: 20px auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-image {
+        background-repeat: no-repeat;
+        height: 100px;
+        width: 80px;
+        background-size: 80px 80px;
+        background-position: center center; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-content > .name {
+        font-size: 16px;
+        font-weight: 600; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-content > .tab-content > div {
+        padding-top: 20px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count {
+        text-align: center; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count > .integer {
+          font-size: 50px;
+          font-weight: 100; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count > .in-dick-ator {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase; }
+body.halo4_game_history .game-details .details .team-table > thead > tr {
+  color: white; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr.end-dnf {
+  background-color: #eee;
+  opacity: 0.3; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-emblem {
+  width: 60px;
+  height: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 2px;
+  float: left; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-gamertag {
+  margin: 10px 0 0 5px;
+  float: left; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-csr {
+  height: 60px;
+  width: 40px;
+  background-size: contain;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  float: right; }
+body.halo4_game_history .game-details .details .team-table .tab-pane > .click-helper {
+  color: #aaa;
+  font-size: 15px; }
+body.halo4_game_history .game-details #overview {
+  margin-top: 40px; }
+  body.halo4_game_history .game-details #overview .graph-container {
+    width: 700px;
+    margin: 20px auto;
+    margin-bottom: 40px; }
+    body.halo4_game_history .game-details #overview .graph-container > .name {
+      text-align: center;
+      color: #555;
+      width: 700px;
+      font-size: 20px;
+      font-weight: 100; }
+    body.halo4_game_history .game-details #overview .graph-container .morris-hover, body.halo4_game_history .game-details #overview .graph-container .morris-default-style {
+      border-radius: 0px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(230, 230, 230, 0.6); }
+      body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend {
+        margin: 5px 10px; }
+        body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend > .time, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend > .time {
+          font-weight: 600;
+          font-size: 14px; }
+        body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend > .key, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend > .key {
+          font-weight: 600;
+          font-size: 14px; }
+

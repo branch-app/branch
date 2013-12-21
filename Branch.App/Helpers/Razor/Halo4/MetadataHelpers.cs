@@ -27,5 +27,11 @@ namespace Branch.App.Helpers.Razor.Halo4
 		{
 			return GlobalStorage.H4WaypointManager.Metadata.MapsMetadata.Maps.FirstOrDefault(m => m.Id == mapId);
 		}
+
+		public static MetadataModels.Difficulty GetDifficultyInfo(int difficultyId)
+		{
+			return
+				GlobalStorage.H4WaypointManager.Metadata.DifficultiesMetadata.Difficulties.FirstOrDefault(d => d.Id == difficultyId);
+		}
 	}
 }
