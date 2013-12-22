@@ -187,6 +187,8 @@
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />

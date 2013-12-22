@@ -1,6 +1,102 @@
-﻿@{
-	ViewBag.Title = "Halo 4";
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Branch - Halo 4
+		</title>
 
-<h2>Index</h2>
+		<!-- Style Sheets -->
+		@Styles.Render("~/bundles/bootstrap-custom")
+		@Styles.Render("~/bundles/branch-specific")
+		@Scripts.Render("~/bundles/modernizr")
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="description" content="" />
+	</head>
+
+	<body class="halo4 halo4_homepage page-bg-backup-cover" count-data-ref="1">
+		<div class="page-bg-cover"></div>
+		<div id="page-bg-mask" class="mask">
+
+			@Html.Partial("Header")
+
+			<article>
+				<div class="container">
+					d
+				</div>
+			</article>
+
+			@Html.Partial("Footer", true)
+
+			<div id="scripts">
+				<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+				<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+				<script>
+					$(document).ready(function () {
+						$('*[role="tooltip"]').tooltip();
+					});
+				</script>
+
+				<script>
+					var imagesCount = 4;
+
+					$(document).ready(function () {
+
+						var images = new Array();
+
+						function preload() {
+							for (var i = 1; i < 2; i++) {
+								for (var j = 1; j < imagesCount + 1; j++) {
+									var index = (i * j) - 1;
+									images[index] = new Image();
+									images[index].src = '/Content/Images/Home/Covers/Halo4/cover' + j + '.jpg';
+								}
+							}
+						}
+						function updateGameImage() {
+							var pageBgCoverBackupDom = $(".page-bg-backup-cover");
+							var currentIndex = pageBgCoverBackupDom.attr('count-data-ref');
+							var pageBgCover = $(".page-bg-backup-cover > .page-bg-cover");
+
+							var oldIndex = currentIndex;
+							currentIndex++;
+							if (currentIndex > imagesCount) currentIndex = 1;
+
+							pageBgCoverBackupDom.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + oldIndex + '.jpg)');
+							$(pageBgCover).fadeOut(800, function () {
+								pageBgCover.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + currentIndex + '.jpg)');
+								$(pageBgCover).fadeIn(800, function () {
+									$(pageBgCoverBackupDom).attr('count-data-ref', currentIndex);
+								});
+							});
+						}
+
+						preload();
+
+						setInterval(function () {
+							updateGameImage();
+						}, 4500);
+					});
+				</script>
+
+				<!-- Social Media Button Scripts -->
+				<div id="fb-root"></div>
+				<script>
+					(function (d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk')
+					);
+				</script>
+				<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+			</div>
+		</div>
+	</body>
+</html>
