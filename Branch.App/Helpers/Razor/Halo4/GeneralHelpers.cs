@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.App.Helpers.Razor.Halo4
@@ -34,6 +35,11 @@ namespace Branch.App.Helpers.Razor.Halo4
 		public static string GetPlayerModelUrl(string gamertag, string size = "large", string pose = "fullbody")
 		{
 			return GlobalStorage.H4WaypointManager.GetPlayerModelUrl(gamertag, size, pose);
+		}
+
+		public static string RemoveGuestIdentifier(string gamertag)
+		{
+			return Regex.Replace(gamertag, @"\s\((\d)\)", "");
 		}
 
 		public static Tuple<string, string> GetGameVictoryStatus(Enums.Result result, bool completed)

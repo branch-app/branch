@@ -8,17 +8,17 @@
 	var game = Model.ElapsedGame.Game;
 	var difficulty = MetadataHelpers.GetDifficultyInfo(game.Difficulty ?? 0);
 	var title = "";
-	
+
 	switch (game.ModeId)
 	{
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
-			title = string.Format("{0} on {1} - {2}", 
-				game.GameVariantName, 
-				game.MapVariantName, 
+			title = string.Format("{0} on {1} - {2}",
+				game.GameVariantName,
+				game.MapVariantName,
 				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
 			break;
-			
+
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.SpartanOps:
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Campaign:
 			title = string.Format("{0} on {1} - {2}",
@@ -32,6 +32,8 @@
 	ViewBag.CurrentHistoryMode = game.ModeId;
 	ViewBag.Template = "halo4_game_history";
 	ViewBag.CurrentH4Page = Enums.Pages.GameHistory;
+
+	var orderedPlayers = game.Players.OrderBy(p => p.Standing);
 }
 
 <div class="bs-branch-section game-details">
@@ -40,8 +42,8 @@
 			<h1> @title </h1>
 		</div>
 	</div>
-	
-	@switch(game.ModeId)
+
+	@switch (game.ModeId)
 	{
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
@@ -56,6 +58,51 @@
 			Html.RenderPartial("Covers/Campaign", Model);
 			break;
 	}
+
+	<div class="social-shit">
+		<ul>
+			<li>
+				<a href="@SocialHelpers.GenerateTwitterShareLink(title, HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #4099FF;">
+					<span class="glyphicon glyphicon-retweet" style="padding-right: 8px;"></span>
+					Tweet
+				</a>
+			</li>
+
+			<li>
+				<a href="@SocialHelpers.GenerateFacebookShareLink(HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #3B5998;">
+					<span class="glyphicon glyphicon-thumbs-up" style="padding-right: 8px;"></span>
+					Like
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<hr style="margin: 10px 0 30px 0;" />
+
+	<div class="details">
+		<h2>Players</h2>
+		<hr />
+		<div id="player-listing">
+			<div class="tab-pane fade active in" id="overview">
+				@if (game.Teams != null && game.Teams.Any())
+				{
+					foreach (var team in game.Teams)
+					{
+						Html.RenderPartial("PlayerList",
+							new GamePlayerListViewModel(serviceRecord,
+								game.Players.Where(p => p.TeamId == team.Id)
+									.OrderBy(p => p.StandingInTeam).ToList(), team));
+					}
+				}
+				else
+				{
+					Html.RenderPartial("PlayerList",
+						new GamePlayerListViewModel(serviceRecord,
+							orderedPlayers.ToList(), null));
+				}
+			</div>
+		</div>
+	</div>
 </div>
 
 @section scripts

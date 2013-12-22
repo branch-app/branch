@@ -592,18 +592,27 @@ body.halo4_game_history .game-details .details > #player-listing {
   margin-bottom: 40px; }
   body.halo4_game_history .game-details .details > #player-listing > div > .team {
     border-left: 4px solid;
-    border-top: 35px solid;
+    border-top: 63px solid;
     margin-bottom: 30px;
     padding: 15px 0 0 10px; }
     body.halo4_game_history .game-details .details > #player-listing > div > .team .check-dat-paddin {
       padding-left: 0px; }
     body.halo4_game_history .game-details .details > #player-listing > div > .team > .header {
       margin-left: -13px;
-      margin-top: -43px;
+      margin-top: -78px;
       color: white;
       font-weight: 600; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row {
+        height: 100%; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row div {
+          padding-top: 20px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row > .team-indicator {
+          background-position: 2px 0;
+          background-repeat: no-repeat;
+          height: 64px;
+          padding-left: 72px; }
     body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players {
-      margin-top: 16px; }
+      margin-top: 5px; }
       body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div {
         border-bottom: 0px;
         margin-left: -10px; }

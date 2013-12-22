@@ -162,6 +162,7 @@
     <Compile Include="Areas\Halo4\Models\CsrDetailViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\Enums.cs" />
     <Compile Include="Areas\Halo4\Models\CommendationsViewModel.cs" />
+    <Compile Include="Areas\Halo4\Models\GamePlayerListViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\GameViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordViewModel.cs" />
@@ -172,16 +173,19 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\WarGames.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
+    <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Cryptography\Sha1Crypto.cs" />
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
+    <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -139,7 +139,7 @@
 
 				> div > .team {
 					border-left: 4px solid;
-					border-top: 35px solid;
+					border-top: 63px solid;
 
 					margin-bottom: 30px;
 
@@ -151,13 +151,28 @@
 
 					> .header {
 						margin-left: -13px;
-						margin-top: -43px;
+						margin-top: -78px;
 						color: white;
 						font-weight: 600;
+
+						> .row {
+							height: 100%;
+
+							div {
+								padding-top: 20px;
+							}
+
+							> .team-indicator {
+								background-position: 2px 0;
+								background-repeat: no-repeat;
+								height: 64px;
+								padding-left: 72px;
+							}
+						}
 					}
 
 					> .team-players {
-						margin-top: 16px;
+						margin-top: 5px;
 
 						> div {
 							border-bottom: 0px;
