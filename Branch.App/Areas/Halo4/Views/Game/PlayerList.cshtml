@@ -143,22 +143,22 @@
 					</ul>
 
 					<div class="player-stats tab-content">
-						<div class="tab-pane fade in active summary" id="<%= identifier %>-summary">
+						<div class="tab-pane fade in active summary" id="@ident-summary">
 							<div class="row">
 								<div class="col-md-6 hidden-sm hidden-xs player-model" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(BranchHelpers.CheckGamertagPrivacy(GeneralHelpers.RemoveGuestIdentifier(player.Gamertag)))')"></div>
 								<div class="col-md-6">
 									@if (player.IsGuest)
 									{
-									<h2>@player.Gamertag</h2>
-									<h3 class="player-servicetag">GEST</h3>
+										<h2>@player.Gamertag</h2>
+										<h3 class="player-servicetag">GEST</h3>
 									}
 									else
 									{
-									<h2>
-										@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.Gamertag), "Index", "ServiceRecord",
+										<h2>
+											@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.Gamertag), "Index", "ServiceRecord",
 												 new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.Gamertag) }, new Dictionary<string, object>())
-									</h2>
-									<h3 class="player-servicetag">@player.ServiceTag</h3>
+										</h2>
+										<h3 class="player-servicetag">@player.ServiceTag</h3>
 									}
 									<hr />
 
@@ -196,10 +196,10 @@
 										</li>
 										@if (!String.IsNullOrEmpty(player.FeaturedStatName))
 										{
-										<li class="list-group-item">
-											<span class="badge">@player.FeaturedStatValue</span>
-											@player.FeaturedStatName
-										</li>
+											<li class="list-group-item">
+												<span class="badge">@player.FeaturedStatValue</span>
+												@player.FeaturedStatName
+											</li>
 										}
 									</ul>
 									<hr />
@@ -210,55 +210,55 @@
 									<ul class="list-group">
 										@if (player.KilledMostGamertag != null)
 										{
-										<li class="list-group-item">
-											<span class="badge">
-												@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
+											<li class="list-group-item">
+												<span class="badge">
+													@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
 													{
 														// Not a Guest
-													@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledMostGamertag), "Index", "ServiceRecord",
+														@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledMostGamertag), "Index", "ServiceRecord",
 															new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.KilledMostGamertag) }, new Dictionary<string, object>())
 													}
 													else
 													{
-													@player.KilledMostGamertag
+														@player.KilledMostGamertag
 													}
-												(@player.KilledMostCount)
-											</span>
-											Most Killed
-										</li>
+													(@player.KilledMostCount)
+												</span>
+												Most Killed
+											</li>
 										}
 										else
 										{
-										<li class="list-group-item">
-											<span class="badge">Nobody</span>
-											Most Killed
-										</li>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
+												Most Killed
+											</li>
 										}
 										@if (player.KilledByMostGamertag != null)
 										{
-										<li class="list-group-item">
-											<span class="badge">
-												@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
+											<li class="list-group-item">
+												<span class="badge">
+													@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
 													{
 														// Not a Guest
-													@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag), "Index", "ServiceRecord",
+														@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag), "Index", "ServiceRecord",
 															 new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag) }, new Dictionary<string, object>())
 													}
 													else
 													{
-													@player.KilledByMostGamertag
+														@player.KilledByMostGamertag
 													}
-												(@player.KilledByMostCount)
-											</span>
-											Most Killed By
-										</li>
+													(@player.KilledByMostCount)
+												</span>
+												Most Killed By
+											</li>
 										}
 										else
 										{
-										<li class="list-group-item">
-											<span class="badge">Nobody</span>
-											Most Killed By
-										</li>
+											<li class="list-group-item">
+												<span class="badge">Nobody</span>
+												Most Killed By
+											</li>
 										}
 										<li class="list-group-item">
 											<span class="badge">@player.AverageKillDistance Meters</span>
@@ -306,31 +306,31 @@
 									<ul class="list-group">
 										@if (player.SkillRank == null)
 										{
-										<li class="list-group-item">
-											<span class="badge">0</span>
-											CSR
-										</li>
+											<li class="list-group-item">
+												<span class="badge">0</span>
+												CSR
+											</li>
 										}
 										else
 										{
-										<li class="list-group-item">
-											<span class="badge">@(player.SkillRank.CompetitiveSkillRank ?? 0)</span>
-											CSR
-										</li>
+											<li class="list-group-item">
+												<span class="badge">@(player.SkillRank.CompetitiveSkillRank ?? 0)</span>
+												CSR
+											</li>
 										}
 										@if (player.RankName == null)
 										{
-										<li class="list-group-item">
-											<span class="badge">0</span>
-											Rank
-										</li>
+											<li class="list-group-item">
+												<span class="badge">0</span>
+												Rank
+											</li>
 										}
 										else
 										{
-										<li class="list-group-item">
-											<span class="badge">@player.RankName</span>
-											Rank
-										</li>
+											<li class="list-group-item">
+												<span class="badge">@player.RankName</span>
+												Rank
+											</li>
 										}
 										<li class="list-group-item">
 											<span class="badge">
