@@ -4,11 +4,11 @@ using Branch.Models.Services.Halo4._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Models
 {
-	public class CsrData : Base
+	public class CsrViewModel : Base
 	{
-		public CsrData(ServiceRecord serviceRecord, IEnumerable<PlaylistOrientationEntity> playlistOrientations)
+		public CsrViewModel(ServiceRecord serviceRecord, IEnumerable<PlaylistOrientationEntity> playlistOrientations) :
+			base(serviceRecord)
 		{
-			ServiceRecord = serviceRecord;
 			PlaylistOrientations = playlistOrientations;
 		}
 

@@ -35,7 +35,6 @@
 							}
 						</ul>
 					}
-				
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
@@ -61,27 +60,6 @@
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Specializations, "active")">
 					@Html.RouteLink("Specializations", "Halo4_Specializations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
 				</li>
-
-				@*<li class="<%= 'active' if content_for(:halo4_active) == 'game_history' %>">
-				<%= link_to('Game History', halo4_gamehistory_path(gamertag_validation(@serviceRecord.Gamertag))) %>
-
-				<% if content_for(:halo4_active) == 'game_history' %>
-				<ul class="nav">
-					<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'matchmaking' %>">
-						<%= link_to('Matchmaking', halo4_gamehistory_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'matchmaking', page: 0 )) %>
-					</li>
-					<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'custom_games' %>">
-						<%= link_to('Custom Games', halo4_gamehistory_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'custom-games', page: 0 )) %>
-					</li>
-					<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'spartan_ops' %>">
-						<%= link_to('Spartan Ops', halo4_gamehistory_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'spartan-ops', page: 0 )) %>
-					</li>
-					<li class="<%= 'active' if content_for(:halo4_game_history_active) == 'campaign' %>">
-						<%= link_to('Campaign', halo4_gamehistory_path( gamertag: gamertag_validation(@serviceRecord.Gamertag), sub_view: 'campaign', page: 0 )) %>
-					</li>
-				</ul>
-				<% end %>
-			</li>*@
 			</ul>
 		</li>
 		<li class="active">

@@ -29,21 +29,21 @@ namespace Branch.App.Areas.Halo4.Controllers
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
-					return View("WarGames", new HistoryData<GameHistoryModel.WarGames>(
+					return View("WarGames", new HistoryViewModel<GameHistoryModel.WarGames>(
 						serviceRecord, gameHistory, gameMode, page));
 
 				case Enums.Mode.Campaign:
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
-					return View("Campaign", new HistoryData<GameHistoryModel.Campaign>(
+					return View("Campaign", new HistoryViewModel<GameHistoryModel.Campaign>(
 						serviceRecord, gameHistory, gameMode, page));
 
 				case Enums.Mode.SpartanOps:
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
-					return View("SpartanOps", new HistoryData<GameHistoryModel.SpartanOps>(
+					return View("SpartanOps", new HistoryViewModel<GameHistoryModel.SpartanOps>(
 						serviceRecord, gameHistory, gameMode, page));
 
 				default:

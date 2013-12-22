@@ -14,7 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
 			return
-				View(new ServiceRecordData(serviceRecord,
+				View(new ServiceRecordViewModel(serviceRecord,
 					GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(serviceRecord.Gamertag, 0, 20)));
 		}
 	}

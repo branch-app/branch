@@ -6,6 +6,7 @@
 		{
 			ServiceRecord,
 			GameHistory,
+			Game,
 			CompetitiveSkillRank,
 			Commendations,
 			Specializations

@@ -3,11 +3,11 @@ using Branch.Models.Services.Halo4._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Models
 {
-	public class ServiceRecordData : Base
+	public class ServiceRecordViewModel : Base
 	{
-		public ServiceRecordData(ServiceRecord serviceRecord, GameHistory<GameHistoryModel.WarGames> gameHistory)
+		public ServiceRecordViewModel(ServiceRecord serviceRecord, GameHistory<GameHistoryModel.WarGames> gameHistory) :
+			base (serviceRecord)
 		{
-			ServiceRecord = serviceRecord;
 			GameHistory = gameHistory;
 		}
 

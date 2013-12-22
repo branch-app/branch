@@ -5,11 +5,11 @@ using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 
 namespace Branch.App.Areas.Halo4.Models
 {
-	public class CommendationsData : Base
+	public class CommendationsViewModel : Base
 	{
-		public CommendationsData(ServiceRecord serviceRecord, IList<CommendationModels.Commendation> commendations, _343Enums.CommendationCategory commendationCategory)
+		public CommendationsViewModel(ServiceRecord serviceRecord, IList<CommendationModels.Commendation> commendations, _343Enums.CommendationCategory commendationCategory)
+			: base (serviceRecord)
 		{
-			ServiceRecord = serviceRecord;
 			Commendations = commendations;
 			CommendationCategory = commendationCategory;
 		}

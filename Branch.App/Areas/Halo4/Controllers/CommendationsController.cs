@@ -24,7 +24,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 			if (!Enum.TryParse(slug, out commendationCategory))
 				RedirectToAction("Index", "Commendations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), slug = _343Enums.CommendationCategory.Weapons.ToString() });
 
-			return View(new CommendationsData(serviceRecord, commendations.Commendations, commendationCategory));
+			return View(new CommendationsViewModel(serviceRecord, commendations.Commendations, commendationCategory));
 		}
 	}
 }

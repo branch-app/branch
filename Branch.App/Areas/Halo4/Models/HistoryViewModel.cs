@@ -3,12 +3,12 @@ using _343Enums = Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.App.Areas.Halo4.Models
 {
-	public class HistoryData<T> : Base
+	public class HistoryViewModel<T> : Base
 		where T : _343Enums.GameHistoryModel.Base
 	{
-		public HistoryData(ServiceRecord serviceRecord, GameHistory<T> gameHistory, _343Enums.Enums.Mode gameMode, int page)
+		public HistoryViewModel(ServiceRecord serviceRecord, GameHistory<T> gameHistory, _343Enums.Enums.Mode gameMode, int page) :
+			base(serviceRecord)
 		{
-			ServiceRecord = serviceRecord;
 			GameHistory = gameHistory;
 			GameMode = gameMode;
 			Page = page;

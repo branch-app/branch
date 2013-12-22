@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Emit;
 using Newtonsoft.Json;
 
 namespace Branch.Models.Services.Halo4._343.DataModels
@@ -23,6 +24,62 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public ImageUrl ImageUrl { get; set; }
 
 			public int TotalMedals { get; set; }
+		}
+
+		public class MedalStat
+		{
+			public int ClassId { get; set; }
+
+			public string Name { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+
+			public int Id { get; set; }
+
+			public int TotalMedals { get; set; }
+		}
+
+		public class DamageStat
+		{
+			public int Id { get; set; }
+
+			public string Name { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+
+			public int Kills { get; set; }
+
+			public int Deaths { get; set; }
+
+			public int Headshots { get; set; }
+
+			public int Betrayals { get; set; }
+
+			public int Suicides { get; set; }
+		}
+
+		public class EnemyStat
+		{
+			public int EnemyId { get; set; }
+
+			public string Name { get; set; }
+
+			public ImageUrl ImageUrl { get; set; }
+
+			public int Kills { get; set; }
+
+			public int Deaths { get; set; }
+
+			public float AverageKillDistance { get; set; }
+
+			public float AverageDeathDistance { get; set; }
+		}
+
+		public class TickEvent
+		{
+			public int Time { get; set; }
+
+			public int Ticks { get; set; }
 		}
 
 		#region Multiplayer Specific
@@ -172,6 +229,20 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public int PlaylistId { get; set; }
 		}
 
+		public class GameSkillRank
+		{
+			[JsonProperty("GameSkillRank")]
+			public int? CompetitiveSkillRank { get; set; }
+
+			public string PlaylistDescription { get; set; }
+
+			public ImageUrl PlaylistImageUrl { get; set; }
+
+			public string PlaylistName { get; set; }
+
+			public int PlaylistId { get; set; }
+		}
+
 		#endregion
 
 		#region Campaign Specific
@@ -198,8 +269,6 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 		}
 
 		#endregion
-
-
 
 	}
 }

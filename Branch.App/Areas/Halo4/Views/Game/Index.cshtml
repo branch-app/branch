@@ -1,0 +1,118 @@
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Halo4
+@model GameViewModel
+@{
+	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
+	var serviceRecord = Model.ServiceRecord;
+	var game = Model.ElapsedGame.Game;
+	var difficulty = MetadataHelpers.GetDifficultyInfo(game.Difficulty ?? 0);
+	var title = "";
+	
+	switch (game.ModeId)
+	{
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
+			title = string.Format("{0} on {1} - {2}", 
+				game.GameVariantName, 
+				game.MapVariantName, 
+				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
+			break;
+			
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.SpartanOps:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Campaign:
+			title = string.Format("{0} on {1} - {2}",
+				game.MapName,
+				difficulty.Name,
+				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
+			break;
+	}
+
+	ViewBag.Title = title;
+	ViewBag.CurrentHistoryMode = game.ModeId;
+	ViewBag.Template = "halo4_game_history";
+	ViewBag.CurrentH4Page = Enums.Pages.GameHistory;
+}
+
+<div class="bs-branch-section game-details">
+	<div class="page-header row">
+		<div class="col-md-12">
+			<h1> @title </h1>
+		</div>
+	</div>
+	
+	@switch(game.ModeId)
+	{
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
+			Html.RenderPartial("Covers/WarGames", Model);
+			break;
+
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.SpartanOps:
+			Html.RenderPartial("Covers/SpartanOps", Model);
+			break;
+
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Campaign:
+			Html.RenderPartial("Covers/Campaign", Model);
+			break;
+	}
+</div>
+
+@section scripts
+{
+	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.2/morris.min.js"></script>
+	<script>
+		function generateGraphHoverView(index, options, content, unit) {
+			var row = options.data[index];
+			var ykeys = options.ykeys;
+			var xkey = options.xkey;
+			var labels = options.labels;
+
+			var output = '<div class="graph-hover-legend"><span class="time">' + row[xkey] + ' Seconds</span><br /><div class="key">';
+			for (var i = 0; i < ykeys.length; i++) {
+				var label = labels[i];
+				var ykey = ykeys[i];
+				var colour = options.lineColors[i];
+
+				output += '<span class="row" style="color: ' + colour + ';">' + label + ': ' + row[ykey] + ' ' + unit + '</span><br />';
+			}
+			output += '</div></div>';
+			return output;
+		}
+
+		$('.player-details-expander').click(function (e) {
+			e.preventDefault();
+
+			var identifier = $(this).attr('data-ref');
+			var entry = $('#' + identifier);
+			var expander = $('#' + identifier + ' > div > .expander-indicator > div > .player-details-expander');
+			var detailsView = $('#' + identifier + ' > .player-data');
+
+			if (detailsView.hasClass('collapsed')) {
+				detailsView.removeClass('collapsed');
+				detailsView.addClass('expanded');
+
+				entry.removeClass('collapsed');
+				entry.addClass('expanded');
+
+				detailsView.show(400, function () { });
+
+				expander.removeClass('glyphicon-chevron-down');
+				expander.addClass('glyphicon-chevron-up');
+			} else {
+				detailsView.removeClass('expanded');
+				detailsView.addClass('collapsed');
+
+				entry.removeClass('expanded');
+				entry.addClass('collapsed');
+
+				detailsView.hide(400, function () { });
+
+				expander.removeClass('glyphicon-chevron-up');
+				expander.addClass('glyphicon-chevron-down');
+			}
+		});
+	</script>
+}

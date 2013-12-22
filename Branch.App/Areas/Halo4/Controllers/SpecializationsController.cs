@@ -12,7 +12,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View(new SpecializationsData(serviceRecord));
+			return View(new SpecializationsViewModel(serviceRecord));
 		}
 	}
 }

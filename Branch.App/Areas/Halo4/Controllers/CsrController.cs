@@ -15,7 +15,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View(new CsrData(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientations()));
+			return View(new CsrViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientations()));
 		}
 
 		//
@@ -32,7 +32,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 				throw new ArgumentException("hue hue, nice try, don't change the slug u arse.");
 
 			return
-				View(new CsrDetailData(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientation(skillRank.PlaylistId),
+				View(new CsrDetailViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientation(skillRank.PlaylistId),
 					serviceRecord.SkillRanks.FirstOrDefault(r => r.PlaylistId == id)));
 		}
 	}

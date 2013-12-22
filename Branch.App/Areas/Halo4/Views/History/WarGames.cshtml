@@ -4,7 +4,7 @@
 @using Branch.Extenders
 @using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
-@model HistoryData<GameHistoryModel.WarGames>
+@model HistoryViewModel<GameHistoryModel.WarGames>
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 War Games History", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
@@ -16,80 +16,78 @@
 	var gameHistory = Model.GameHistory;
 }
 
-<div class="col-md-10">
-	<div class="bs-branch-section overview">
-		<div class="page-header">
-			<h1>War Games History</h1>
-		</div>
-		
-		@if (Model.GameHistory.Games.Any())
-		{
-			<table class="table game-history">
-				<thead>
-					<tr>
-						<th>Game Type</th>
-						<th>Standing</th>
-						<th>Date</th>
-						<th>Score</th>
-						<th>Map</th>
-						<th>Playlist</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					@foreach (var game in gameHistory.Games)
-					{
-						<tr class="history-row">
-							<td>
-								@Html.RouteLink(game.VariantName, "Halo4_Game",
-									new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
-							</td>
-
-							<td>
-								@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
-								@if (game.Completed)
-								{
-									@:(@game.Standing.Ordinal())
-								}
-
-							</td>
-							<td>
-								@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
-							</td>
-							<td>
-								@game.PersonalScore
-							</td>
-							<td>
-								@game.MapVariantName
-							</td>
-							<td>
-								@Html.RouteLink(game.PlaylistName, "Halo4_CsrDetails",
-									new
-									{
-										gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag),
-										id = game.PlaylistId,
-										slug = game.PlaylistName.ToSlug()
-									})
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		}
-		else
-		{
-			<h6>
-				There are no more Multiplaer Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
-			</h6>
-		}
-
-		<ul class="pager">
-			<li class="previous @(Model.Page == 0 ? "disabled" : "")">
-				@Html.RouteLink("← Newer", "Halo4_History", new { page = Model.Page - 1 })
-			</li>
-			<li class="next @(Model.GameHistory.Games.Any() ? "" : "disabled")">
-				@Html.RouteLink("Older →", "Halo4_History", new { page = Model.Page + 1 })
-			</li>
-		</ul>
+<div class="bs-branch-section overview">
+	<div class="page-header">
+		<h1>War Games History</h1>
 	</div>
+		
+	@if (Model.GameHistory.Games.Any())
+	{
+		<table class="table game-history">
+			<thead>
+				<tr>
+					<th>Game Type</th>
+					<th>Standing</th>
+					<th>Date</th>
+					<th>Score</th>
+					<th>Map</th>
+					<th>Playlist</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var game in gameHistory.Games)
+				{
+					<tr class="history-row">
+						<td>
+							@Html.RouteLink(game.VariantName, "Halo4_Game",
+								new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
+						</td>
+
+						<td>
+							@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
+							@if (game.Completed)
+							{
+								@:(@game.Standing.Ordinal())
+							}
+
+						</td>
+						<td>
+							@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
+						</td>
+						<td>
+							@game.PersonalScore
+						</td>
+						<td>
+							@game.MapVariantName
+						</td>
+						<td>
+							@Html.RouteLink(game.PlaylistName, "Halo4_CsrDetails",
+								new
+								{
+									gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag),
+									id = game.PlaylistId,
+									slug = game.PlaylistName.ToSlug()
+								})
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h6>
+			There are no more Multiplaer Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
+		</h6>
+	}
+
+	<ul class="pager">
+		<li class="previous @(Model.Page == 0 ? "disabled" : "")">
+			@Html.RouteLink("← Newer", "Halo4_History", new { page = Model.Page - 1 })
+		</li>
+		<li class="next @(Model.GameHistory.Games.Any() ? "" : "disabled")">
+			@Html.RouteLink("Older →", "Halo4_History", new { page = Model.Page + 1 })
+		</li>
+	</ul>
 </div>

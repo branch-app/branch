@@ -3,7 +3,7 @@
 @using Branch.App.Helpers.Razor.Halo4
 @using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
-@model HistoryData<GameHistoryModel.SpartanOps>
+@model HistoryViewModel<GameHistoryModel.SpartanOps>
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Spartan Ops History", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
@@ -15,77 +15,75 @@
 	var gameHistory = Model.GameHistory;
 }
 
-<div class="col-md-10">
-	<div class="bs-branch-section overview">
-		<div class="page-header">
-			<h1>Spartan Ops History</h1>
-		</div>
-		
-		@if (Model.GameHistory.Games.Any())
-		{
-			<table class="table game-history">
-				<thead>
-					<tr>
-						<th>Episode</th>
-						<th>Chapter</th>
-						<th>Standing</th>
-						<th>Difficulty</th>
-						<th>Type</th>
-						<th>Score</th>
-						<th>Date</th>
-						<th>Game Length</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					@foreach (var game in gameHistory.Games)
-					{
-						<tr class="history-row ">
-							<td>
-								@Html.RouteLink(game.EpisodeName, "Halo4_Game",
-									new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
-							</td>
-
-							<td>
-								@game.ChapterName
-							</td>
-							<td>
-								@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
-							</td>
-							<td>
-								@MetadataHelpers.GetDifficultyInfo(game.Difficulty).Name
-							</td>
-							<td>
-								@(game.SinglePlayer ? "Single Player" : "Co Op")
-							</td>
-							<td>
-								@game.PersonalScore
-							</td>
-							<td>
-								@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
-							</td>
-							<td>
-								@game.Duration.ToString()
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		}
-		else
-		{
-			<h6>
-				There are no more Spartan Ops Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
-			</h6>
-		}
-
-		<ul class="pager">
-			<li class="previous @(Model.Page == 0 ? "disabled" : "")">
-				@Html.RouteLink("← Newer", "Halo4_History", new { page = Model.Page - 1 })
-			</li>
-			<li class="next @(Model.GameHistory.Games.Any() ? "" : "disabled")">
-				@Html.RouteLink("Older →", "Halo4_History", new { page = Model.Page + 1 })
-			</li>
-		</ul>
+<div class="bs-branch-section overview">
+	<div class="page-header">
+		<h1>Spartan Ops History</h1>
 	</div>
+		
+	@if (Model.GameHistory.Games.Any())
+	{
+		<table class="table game-history">
+			<thead>
+				<tr>
+					<th>Episode</th>
+					<th>Chapter</th>
+					<th>Standing</th>
+					<th>Difficulty</th>
+					<th>Type</th>
+					<th>Score</th>
+					<th>Date</th>
+					<th>Game Length</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var game in gameHistory.Games)
+				{
+					<tr class="history-row ">
+						<td>
+							@Html.RouteLink(game.EpisodeName, "Halo4_Game",
+								new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
+						</td>
+
+						<td>
+							@game.ChapterName
+						</td>
+						<td>
+							@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
+						</td>
+						<td>
+							@MetadataHelpers.GetDifficultyInfo(game.Difficulty).Name
+						</td>
+						<td>
+							@(game.SinglePlayer ? "Single Player" : "Co Op")
+						</td>
+						<td>
+							@game.PersonalScore
+						</td>
+						<td>
+							@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
+						</td>
+						<td>
+							@game.Duration.ToString()
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h6>
+			There are no more Spartan Ops Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
+		</h6>
+	}
+
+	<ul class="pager">
+		<li class="previous @(Model.Page == 0 ? "disabled" : "")">
+			@Html.RouteLink("← Newer", "Halo4_History", new { page = Model.Page - 1 })
+		</li>
+		<li class="next @(Model.GameHistory.Games.Any() ? "" : "disabled")">
+			@Html.RouteLink("Older →", "Halo4_History", new { page = Model.Page + 1 })
+		</li>
+	</ul>
 </div>

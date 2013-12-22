@@ -1,0 +1,75 @@
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Halo4
+@model GameViewModel
+@{
+	var game = Model.ElapsedGame.Game;
+	var gametype = MetadataHelpers.GetGameVariant(game.GameBaseVariantId);
+	var orderedTeams = game.Teams.OrderBy(t => t.Standing);
+	var topPlayer = game.Players.OrderBy(t => t.Standing).First();
+}
+
+<div class="cover" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(game.MapImageUrl, "large")');">
+	<div class="mask">
+		<div class="inner">
+			<div class="title">
+				<h2>@game.GameVariantName</h2>
+				<p>
+					@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d") | @game.Duration
+				</p>
+			</div>
+
+			<div class="game-icon" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(gametype.ImageUrl, "large")')"></div>
+
+			<div class="map">
+				on
+				<br />
+				<span class="focus">
+					@game.MapVariantName @(game.MapVariantName == game.MapName ? "" : string.Format(" - {0}", game.MapName))
+				</span>
+			</div>
+
+			<div class="seperator"></div>
+
+			<div class="victor">
+				@if (game.Teams.Any())
+				{
+					var modifier = (orderedTeams.Reverse().ToList()[orderedTeams.Count() - 1].Score/75f);
+					if (Math.Abs(modifier) < 0.01)
+					{
+						modifier = 1;
+					}
+					var width = (50 + (5*2))*game.Teams.Count();
+					
+					<div class="team-score-bollards" style="width: @(width)px;">
+						@foreach (var team in orderedTeams.ToList())
+						{
+							<div class="score-bollard">
+							<div class="height-mask" style="height: @(team.Score / modifier)px; margin-top: @(75 - (team.Score / modifier))px; background-color: @team.PrimaryRgb;"></div>
+							<div class="score">
+								@team.Score
+							</div>
+						</div>
+						}
+						<div class="clearfix"></div>
+					</div>
+				}
+				else
+				{
+					<div class="ffa-victor">
+						@if (topPlayer.IsGuest)
+						{
+							<strong>@BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag)</strong>
+						}
+						else
+						{
+							@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag), "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag) } }, new { @class = "alt" })
+						}
+						led the game with a personal score of @topPlayer.PersonalScore, and a K/D of @MathHelpers.CalculateKd(topPlayer.Kills, topPlayer.Deaths, 2)
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+	<div class="victor-player-model hidden-xs" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(topPlayer.Gamertag, "medium")')"></div>
+</div>

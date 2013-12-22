@@ -594,9 +594,9 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public int CurrentEpisode { get; set; }
 
-			public IList<Season> Seasons { get; set; }
+			public IList<SpartanOpsSeason> Seasons { get; set; }
 		}
-		public class Episode
+		public class SpartanOpsEpisode
 		{
 			public int Id { get; set; }
 
@@ -604,21 +604,21 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public string Description { get; set; }
 
-			public IList<Video> Videos { get; set; }
+			public IList<SpartanOpsVideo> Videos { get; set; }
 
-			public IList<Chapter> Chapters { get; set; }
+			public IList<SpartanOpsChapter> Chapters { get; set; }
 
 			public CommonModels.ImageUrl ImageUrl { get; set; }
 		}
-		public class Season
+		public class SpartanOpsSeason
 		{
 			public int Id { get; set; }
 
-			public IList<Episode> Episodes { get; set; }
+			public IList<SpartanOpsEpisode> Episodes { get; set; }
 
 			public object Epilogue { get; set; }
 		}
-		public class Chapter
+		public class SpartanOpsChapter
 		{
 			public int Id { get; set; }
 
@@ -630,7 +630,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public CommonModels.ImageUrl ImageUrl { get; set; }
 		}
-		public class Video
+		public class SpartanOpsVideo
 		{
 			public string Language { get; set; }
 

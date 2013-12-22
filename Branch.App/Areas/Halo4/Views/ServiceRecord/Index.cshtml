@@ -2,7 +2,7 @@
 @using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
-@model ServiceRecordData
+@model ServiceRecordViewModel
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";

@@ -3,11 +3,11 @@ using Branch.Models.Services.Halo4._343.DataModels;
 using Branch.Models.Services.Halo4._343.Responses;
 namespace Branch.App.Areas.Halo4.Models
 {
-	public class CsrDetailData : Base
+	public class CsrDetailViewModel : Base
 	{
-		public CsrDetailData(ServiceRecord serviceRecord, PlaylistOrientationEntity playlistOrientation, CommonModels.CurrentSkillRank currentSkillRank)
+		public CsrDetailViewModel(ServiceRecord serviceRecord, PlaylistOrientationEntity playlistOrientation, CommonModels.CurrentSkillRank currentSkillRank) :
+			base(serviceRecord)
 		{
-			ServiceRecord = serviceRecord;
 			PlaylistOrientation = playlistOrientation;
 			CurrentSkillRank = currentSkillRank;
 		}

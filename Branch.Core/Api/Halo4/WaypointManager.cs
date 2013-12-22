@@ -208,6 +208,37 @@ namespace Branch.Core.Api.Halo4
 		/// 
 		/// </summary>
 		/// <param name="gamertag"></param>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public ElapsedGame GetPlayerGame(string gamertag, string id)
+		{
+			const BlobType blobType = BlobType.PlayerGame;
+			var gameHistoryNameFormat = id;
+			var blobContainerPath = GenerateBlobContainerPath(blobType, gameHistoryNameFormat);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<ElapsedGame>(blob, new TimeSpan(36500, 0, 0, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			var customUrlParams = new Dictionary<string, string> { { "gamertag", gamertag} , {"gameid", id } };
+			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameDetails"), customUrlParams);
+			var gameRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
+			var game = ParseText<ElapsedGame>(gameRaw);
+			if (game == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameRaw);
+
+			CreateBlobRecord(blobType, id);
+
+			return game;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
 		/// <returns></returns>
 		public Commendation GetPlayerCommendations(string gamertag)
 		{

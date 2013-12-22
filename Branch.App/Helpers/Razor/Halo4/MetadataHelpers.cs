@@ -33,5 +33,20 @@ namespace Branch.App.Helpers.Razor.Halo4
 			return
 				GlobalStorage.H4WaypointManager.Metadata.DifficultiesMetadata.Difficulties.FirstOrDefault(d => d.Id == difficultyId);
 		}
+
+		public static MetadataModels.GameBaseVariant GetGameVariant(int baseId)
+		{
+			return
+				GlobalStorage.H4WaypointManager.Metadata.GameBaseVariantsMetadata.GameBaseVariants.FirstOrDefault(
+					g => g.Id == baseId);
+		}
+
+		public static MetadataModels.SpartanOpsChapter GetChapter(int chapterId)
+		{
+			return (from season in GlobalStorage.H4WaypointManager.Metadata.SpartanOpsMetadata.Seasons
+				from episode in season.Episodes
+				from chapter in episode.Chapters
+				select chapter).FirstOrDefault();
+		}
 	}
 }
