@@ -165,10 +165,8 @@
     <Compile Include="Areas\Halo4\Models\HistoryData.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordData.cs" />
     <Compile Include="Areas\Halo4\Models\SpecializationsData.cs" />
-    <Content Include="Areas\Halo4\Views\History\Partials\Header\SpartanOps.cshtml" />
-    <Content Include="Areas\Halo4\Views\History\Partials\Row\WarGames.cshtml" />
-    <Content Include="Areas\Halo4\Views\History\Partials\Row\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\History\Campaign.cshtml" />
+    <Content Include="Areas\Halo4\Views\History\SpartanOps.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />

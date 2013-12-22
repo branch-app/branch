@@ -16,73 +16,79 @@
 	var gameHistory = Model.GameHistory;
 }
 
-<div class="col-md-9">
+<div class="col-md-10">
 	<div class="bs-branch-section overview">
 		<div class="page-header">
 			<h1>War Games History</h1>
 		</div>
-
-		<table class="table game-history">
-			<thead>
-				<tr>
-					<th>Game Type</th>
-					<th>Standing</th>
-					<th>Date</th>
-					<th>Score</th>
-					<th>Map</th>
-					<th>Playlist</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				@foreach (var game in gameHistory.Games)
-				{
-					<tr class="history-row">
-						<td>
-							@Html.RouteLink(game.VariantName, "Halo4_Game",
-								new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
-						</td>
-
-						<td>
-							@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
-							@if (game.Completed)
-							{
-								@:(@game.Standing.Ordinal())
-							}
-
-						</td>
-						<td>
-							@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
-						</td>
-						<td>
-							@game.PersonalScore
-						</td>
-						<td>
-							@game.MapVariantName
-						</td>
-						<td>
-							@Html.RouteLink(game.PlaylistName, "Halo4_CsrDetails",
-								new
-								{
-									gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag),
-									id = game.PlaylistId,
-									slug = game.PlaylistName.ToSlug()
-								})
-						</td>
+		
+		@if (Model.GameHistory.Games.Any())
+		{
+			<table class="table game-history">
+				<thead>
+					<tr>
+						<th>Game Type</th>
+						<th>Standing</th>
+						<th>Date</th>
+						<th>Score</th>
+						<th>Map</th>
+						<th>Playlist</th>
 					</tr>
-				}
-			</tbody>
+				</thead>
 
-		</table>
+				<tbody>
+					@foreach (var game in gameHistory.Games)
+					{
+						<tr class="history-row">
+							<td>
+								@Html.RouteLink(game.VariantName, "Halo4_Game",
+									new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
+							</td>
+
+							<td>
+								@GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed).Item2
+								@if (game.Completed)
+								{
+									@:(@game.Standing.Ordinal())
+								}
+
+							</td>
+							<td>
+								@BranchHelpers.MakeDateTimeFriendly(game.EndDateUtc, "d")
+							</td>
+							<td>
+								@game.PersonalScore
+							</td>
+							<td>
+								@game.MapVariantName
+							</td>
+							<td>
+								@Html.RouteLink(game.PlaylistName, "Halo4_CsrDetails",
+									new
+									{
+										gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag),
+										id = game.PlaylistId,
+										slug = game.PlaylistName.ToSlug()
+									})
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+		else
+		{
+			<h6>
+				There are no more Multiplaer Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
+			</h6>
+		}
 
 		<ul class="pager">
-			<li class="previous
-				<%= 'disabled' if page == 0 %> ">
-				<%= link_to('← Newer', halo4_gamehistory_path( sub_view: sub_view, page: update_pagination(page, 'older'))) %>
+			<li class="previous @(Model.Page == 0 ? "disabled" : "")">
+				@Html.RouteLink("← Newer", "Halo4_History", new { page = Model.Page - 1 })
 			</li>
-			<li class="next
-				<%= 'disabled' if is_last_page %>">
-				<%= link_to('Older →', halo4_gamehistory_path( sub_view: sub_view, page: update_pagination(page, 'newer'))) %>
+			<li class="next @(Model.GameHistory.Games.Any() ? "" : "disabled")">
+				@Html.RouteLink("Older →", "Halo4_History", new { page = Model.Page + 1 })
 			</li>
 		</ul>
 	</div>

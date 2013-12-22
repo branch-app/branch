@@ -11,12 +11,15 @@ namespace Branch.App.Areas.Halo4.Controllers
 	public class HistoryController : Controller
 	{
 		//
-		// GET: /Halo4/History/
+		// GET: /360/{gamertag}/Halo4/History/{slug}?{page}
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string slug)
 		{
 			Enums.Mode gameMode;
 			Enum.TryParse(slug, out gameMode);
+			var page = int.Parse(Request.QueryString["page"] ?? "0");
+			if (page < 0) page = 0;
+			const int count = 25;
 
 			dynamic gameHistory;
 			switch (gameMode)
@@ -24,24 +27,27 @@ namespace Branch.App.Areas.Halo4.Controllers
 				case Enums.Mode.Customs:
 				case Enums.Mode.WarGames:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(serviceRecord.Gamertag, 0, 25,
-							gameMode);
-					return View("WarGames", new HistoryData<GameHistoryModel.WarGames>(serviceRecord, gameHistory, gameMode));
+						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
+							serviceRecord.Gamertag, (page * count), count, gameMode);
+					return View("WarGames", new HistoryData<GameHistoryModel.WarGames>(
+						serviceRecord, gameHistory, gameMode, page));
 
 				case Enums.Mode.Campaign:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.Campaign>(serviceRecord.Gamertag, 0, 25,
-							gameMode);
-					return View("Campaign", new HistoryData<GameHistoryModel.Campaign>(serviceRecord, gameHistory, gameMode));
+						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
+							serviceRecord.Gamertag, (page * count), count, gameMode);
+					return View("Campaign", new HistoryData<GameHistoryModel.Campaign>(
+						serviceRecord, gameHistory, gameMode, page));
 
 				case Enums.Mode.SpartanOps:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(serviceRecord.Gamertag, 0, 25,
-							gameMode);
-					return View("SpartanOps", new HistoryData<GameHistoryModel.SpartanOps>(serviceRecord, gameHistory, gameMode));
+						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
+							serviceRecord.Gamertag, (page * count), count, gameMode);
+					return View("SpartanOps", new HistoryData<GameHistoryModel.SpartanOps>(
+						serviceRecord, gameHistory, gameMode, page));
 
 				default:
-					throw new Exception();
+					throw new ArgumentException("Invalid game mode, m8.");
 			}
 		}
 	}
