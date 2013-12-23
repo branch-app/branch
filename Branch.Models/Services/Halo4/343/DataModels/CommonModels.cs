@@ -268,6 +268,5 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 		}
 
 		#endregion
-
 	}
 }
