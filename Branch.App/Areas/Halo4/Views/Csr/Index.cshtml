@@ -58,15 +58,15 @@
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade active in" id="team">
-					@Html.Partial("SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(teamSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(teamSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
 				</div>
 				<div class="tab-pane fade" id="individual">
-					@Html.Partial("SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(individualSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(individualSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
 				</div>
 				@if (unknownSkillRanks.Any())
 				{
 					<div class="tab-pane fade" id="unk">
-						@Html.Partial("SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(unknownSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+						@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(unknownSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
 					</div>
 				}
 			</div>
