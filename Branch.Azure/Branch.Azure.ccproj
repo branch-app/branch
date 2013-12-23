@@ -58,8 +58,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PublishProfile Include="Profiles\branchProduction.azurePubxml" />
-    <PublishProfile Include="Profiles\branchProduction1.azurePubxml" />
+    <PublishProfile Include="Profiles\Branch-Prod-Release.azurePubxml" />
+    <PublishProfile Include="Profiles\Branch-Prod-RemoteDebug.azurePubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Branch.App\Branch.App.csproj">
