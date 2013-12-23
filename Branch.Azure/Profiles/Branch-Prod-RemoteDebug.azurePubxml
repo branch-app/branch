@@ -14,9 +14,11 @@
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
-    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
+    <AzureSolutionConfiguration>RemoteDebug</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>branchapp</AzureStorageAccountLabel>
     <AzureStorageAccountName>branchapp</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableRemoteDebugger>True</EnableRemoteDebugger>
+    <RemoteDebuggerConnectorCertificateThumbprint>F77B131693810A61098E86C454A63C39B96C07A5</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>

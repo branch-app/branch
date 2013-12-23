@@ -40,6 +40,15 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'RemoteDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\RemoteDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -90,7 +99,6 @@
     <Compile Include="Services\Halo4\343\Responses\Playlist.cs" />
     <Compile Include="Services\Halo4\343\Responses\ServiceRecord.cs" />
     <Compile Include="Services\Halo4\343\WaypointResponse.cs" />
-    <Compile Include="Services\Halo4\Branch\BlobRecordEntity.cs" />
     <Compile Include="Services\Halo4\Branch\PlaylistOrientationEntity.cs" />
     <Compile Include="Services\Halo4\Branch\ServiceRecordEntity.cs" />
     <Compile Include="Services\Halo4\Enums.cs" />

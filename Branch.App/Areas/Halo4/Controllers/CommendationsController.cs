@@ -22,7 +22,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 
 			_343Enums.CommendationCategory commendationCategory;
 			if (!Enum.TryParse(slug, out commendationCategory))
-				RedirectToAction("Index", "Commendations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), slug = _343Enums.CommendationCategory.Weapons.ToString() });
+				return RedirectToAction("Index", "Commendations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), slug = _343Enums.CommendationCategory.Weapons.ToString() });
 
 			return View(new CommendationsViewModel(serviceRecord, commendations.Commendations, commendationCategory));
 		}

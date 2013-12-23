@@ -3,6 +3,8 @@
   <WorkerRole name="Branch.Service.Halo4" vmsize="ExtraSmall">
     <Imports>
       <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
     </Imports>
     <ConfigurationSettings>
       <Setting name="WlidAuthEmail" />
@@ -27,6 +29,7 @@
     </Endpoints>
     <Imports>
       <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
     </Imports>
     <ConfigurationSettings>
       <Setting name="StorageConnectionString" />

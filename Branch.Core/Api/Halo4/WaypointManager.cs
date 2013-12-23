@@ -153,8 +153,6 @@ namespace Branch.Core.Api.Halo4
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
-			CreateBlobRecord(blobType, escapedGamertag);
-
 			return serviceRecord;
 		}
 
@@ -199,8 +197,6 @@ namespace Branch.Core.Api.Halo4
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameHistoryRaw);
 
-			CreateBlobRecord(blobType, escapedGamertag);
-
 			return gameHistory;
 		}
 
@@ -230,8 +226,6 @@ namespace Branch.Core.Api.Halo4
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameRaw);
 
-			CreateBlobRecord(blobType, id);
-
 			return game;
 		}
 
@@ -259,8 +253,6 @@ namespace Branch.Core.Api.Halo4
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), commendationRaw);
-
-			CreateBlobRecord(blobType, escapedGamertag);
 
 			return commendation;
 		}
@@ -640,18 +632,6 @@ namespace Branch.Core.Api.Halo4
 			}
 
 			return string.Format("{0}/{1}.json", path, fileName);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="blobType"></param>
-		/// <param name="ident"></param>
-		private void CreateBlobRecord(BlobType blobType, string ident)
-		{
-			ident = ident.Replace(" ", "_");
-			_storage.Table.InsertOrReplaceSingleEntity(new BlobRecordEntity(ident, (int) blobType, blobType.ToString()),
-				_storage.Table.Halo4CloudTable);
 		}
 
 		/// <summary>

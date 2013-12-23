@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Branch.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -56,8 +58,15 @@ namespace Branch.Core.Storage
 		/// <param name="cloudTable"></param>
 		public void InsertOrReplaceSingleEntity(BaseEntity dataEntity, CloudTable cloudTable)
 		{
-			var insertOrReplaceOperation = TableOperation.InsertOrReplace(dataEntity);
-			cloudTable.Execute(insertOrReplaceOperation);
+			try
+			{
+				var insertOrReplaceOperation = TableOperation.InsertOrReplace(dataEntity);
+				cloudTable.Execute(insertOrReplaceOperation);
+			}
+			catch (Exception ex)
+			{
+				Trace.TraceError(ex.ToString());
+			}
 		}
 
 		/// <summary>

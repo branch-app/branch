@@ -1,7 +1,7 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
-@model CommendationsData
+@model CommendationsViewModel
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Commendations", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";

@@ -2,7 +2,7 @@
 @using Branch.App.Helpers.Razor
 @using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
-@model CsrData
+@model CsrViewModel
 
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 Csr", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
