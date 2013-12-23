@@ -2,7 +2,7 @@
 {
 	public sealed class PlaylistOrientationEntity : BaseEntity
 	{
-		public static string RowKeyString = "H4PlaylistOrientation_{0}";
+		public static string RowKeyString = "PlaylistId_{0}";
 		public static string PartitionKeyString = "H4PlaylistOrientation";
 
 		public PlaylistOrientationEntity() { }
@@ -13,7 +13,7 @@
 			PlaylistId = playlistId;
 			IsTeam = isTeam;
 
-			SetKeys("H4PlaylistOrientation", string.Format(RowKeyString, playlistId));
+			SetKeys(PartitionKeyString, string.Format(RowKeyString, playlistId));
 		}
 
 		public string PlaylistName { get; set; }

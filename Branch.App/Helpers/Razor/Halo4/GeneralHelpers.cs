@@ -39,7 +39,7 @@ namespace Branch.App.Helpers.Razor.Halo4
 
 		public static string RemoveGuestIdentifier(string gamertag)
 		{
-			return Regex.Replace(gamertag, @"\s\((\d)\)", "");
+			return Regex.Replace(gamertag, @"\((\d)\)", "", RegexOptions.None);
 		}
 
 		public static Tuple<string, string> GetGameVictoryStatus(Enums.Result result, bool completed)

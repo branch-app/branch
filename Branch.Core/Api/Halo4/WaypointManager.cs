@@ -7,7 +7,7 @@ using System.Net;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
-using Branch.Models.Services.Halo4;
+using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4.Branch;
 using Branch.Models.Services.Halo4._343;
 using Branch.Models.Services.Halo4._343.Responses;
@@ -17,6 +17,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RestSharp.Contrib;
 using Branch343DataModels = Branch.Models.Services.Halo4._343.DataModels;
+using Enums = Branch.Models.Services.Halo4.Enums;
 
 namespace Branch.Core.Api.Halo4
 {
@@ -67,13 +68,17 @@ namespace Branch.Core.Api.Halo4
 				catch (JsonReaderException jsonReaderException)
 				{
 					Trace.TraceError(jsonReaderException.ToString());
+#if DEBUG
 					throw;
+#endif
 				}
 			}
 			else
 			{
 				Trace.TraceError("Unable to register web application.");
-				throw new HttpException();
+#if DEBUG
+				throw new HttpException(response.StatusCode, "fuk, can't register web app.");
+#endif
 			}
 		}
 
@@ -153,6 +158,8 @@ namespace Branch.Core.Api.Halo4
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
+			AddPlayerToStorage(gamertag);
+
 			return serviceRecord;
 		}
 
@@ -197,6 +204,8 @@ namespace Branch.Core.Api.Halo4
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameHistoryRaw);
 
+			AddPlayerToStorage(gamertag);
+
 			return gameHistory;
 		}
 
@@ -226,6 +235,8 @@ namespace Branch.Core.Api.Halo4
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameRaw);
 
+			AddPlayerToStorage(gamertag);
+
 			return game;
 		}
 
@@ -254,12 +265,14 @@ namespace Branch.Core.Api.Halo4
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), commendationRaw);
 
+			AddPlayerToStorage(gamertag);
+
 			return commendation;
 		}
 
 		#endregion
 
-		#region Other Endpoints
+		#region Misc Endpoints
 
 		/// <summary>
 		/// 
@@ -495,6 +508,7 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		/// <param name="response">The HttpResponse we are checking and parsing</param>
 		/// <returns>Returns null if the response is not valid, and the parsed model if it is.</returns>
+		// ReSharper disable once UnusedMember.Local
 		private static TModelType ValidateAndParseResponse<TModelType>(HttpResponse response)
 			where TModelType : WaypointResponse
 		{
@@ -642,7 +656,7 @@ namespace Branch.Core.Api.Halo4
 		public string EscapeGamertag(string gamertag)
 		{
 			gamertag = gamertag.ToLower();
-			gamertag = gamertag.Replace(" ", "-"); // Spaces to hyphens
+			gamertag = gamertag.Replace(" ", "-");
 			return gamertag;
 		}
 
@@ -671,6 +685,16 @@ namespace Branch.Core.Api.Halo4
 		#endregion
 
 		#region Branch Data Management
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
+		private void AddPlayerToStorage(string gamertag)
+		{
+			_storage.Table.InsertOrReplaceSingleEntity(
+				new GamerIdEntity(gamertag, Models.Services.Branch.Enums.GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
+		}
 
 		/// <summary>
 		/// 

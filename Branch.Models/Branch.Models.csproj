@@ -81,6 +81,8 @@
     <Compile Include="Authentication\WaypointTokenEntity.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Branch\Enums.cs" />
+    <Compile Include="Services\Branch\GamerIdEntity.cs" />
     <Compile Include="Services\Halo4\343\DataModels\ChallengeModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\CommendationModels.cs" />
     <Compile Include="Services\Halo4\343\DataModels\CommonModels.cs" />

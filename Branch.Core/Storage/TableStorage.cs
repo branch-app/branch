@@ -26,6 +26,11 @@ namespace Branch.Core.Storage
 
 			#region Initialize Tables
 
+			// le Branch
+			BranchCloudTable = TableClient.GetTableReference("Branch");
+			BranchCloudTable.CreateIfNotExists();
+
+			// le Auth
 			AuthenticationCloudTable = TableClient.GetTableReference("Authentication");
 			AuthenticationCloudTable.CreateIfNotExists();
 
@@ -117,6 +122,7 @@ namespace Branch.Core.Storage
 		#endregion
 
 		// Tables
+		public CloudTable BranchCloudTable { get; private set; }
 		public CloudTable AuthenticationCloudTable { get; private set; }
 		public CloudTable Halo4ServiceTasksCloudTable { get; private set; }
 		public CloudTable Halo4CloudTable { get; private set; }
