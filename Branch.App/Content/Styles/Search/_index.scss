@@ -1,0 +1,80 @@
+﻿body.search {
+	.row {
+		list-style-type: none;
+		padding: 0;
+
+		.no-results {
+			font-size: 20px;
+			margin-left: 45px;
+			margin-top: 20px;
+			color: #666;
+		}
+
+		.entry {
+			height: 220px;
+			margin-bottom: 50px;
+
+			a.nope {
+				color: inherit;
+				text-decoration: none;
+
+				&:hover {
+					color: inherit;
+					text-decoration: none;
+				}
+			}
+
+			.spartan-image {
+				height: 100%;
+
+				background-repeat: no-repeat;
+				background-position-x: right;
+			}
+
+			.mask {
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				height: 100%;
+				width: 100%;
+
+				background-image: -webkit-gradient(
+					linear,
+					left bottom,
+					right bottom,
+					color-stop(0, rgba(255, 255, 255, 0.0)),
+					color-stop(1, rgb(255, 255, 255))
+				);
+				background-image: -o-linear-gradient(right, rgba(255, 255, 255, 0.0) 0%, rgb(255, 255, 255) 100%);
+				background-image: -moz-linear-gradient(right, rgba(255, 255, 255, 0.0) 0%, rgb(255, 255, 255) 100%);
+				background-image: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.0) 0%, rgb(255, 255, 255) 100%);
+				background-image: -ms-linear-gradient(right, rgba(255, 255, 255, 0.0) 0%, rgb(255, 255, 255) 100%);
+				background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0) 0%, rgb(255, 255, 255) 100%);
+			}
+
+			.text-container {
+				position: absolute;
+				top: 5px;
+				left: 15px;
+
+				height: 100%;
+				width: 100%;
+
+				> h2 {
+					margin-bottom: 0px;
+					color: #d4860c;
+				}
+				> h3 {
+					margin-top: 0px;
+					font-size: 18px;
+				}
+			}
+		}
+	}
+	
+	.focus-col {
+		text-align: right;
+		margin-top: 35px;
+	}
+}

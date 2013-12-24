@@ -50,11 +50,12 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<form class="navbar-form" method="GET" action="">
+					@using (Html.BeginForm("Index", "Search", new { }, FormMethod.Get, new { @class = "navbar-form" }))
+					{
 						<div class="form-group">
 							<input type="text" name="q" placeholder="Search Gamertag" class="form-control" value="">
 						</div>
-					</form>
+					}
 				</li>
 			</ul>
 		</nav>

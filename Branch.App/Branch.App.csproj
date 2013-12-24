@@ -176,6 +176,7 @@
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,10 +187,14 @@
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Content\Styles\Search\_index.scss" />
+    <Content Include="Views\Search\Partials\Halo4ServiceRecord.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -231,7 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

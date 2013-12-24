@@ -162,6 +162,55 @@ body.home .games .game {
         font-weight: 300;
         font-size: 25px; }
 
+body.search .row {
+  list-style-type: none;
+  padding: 0; }
+  body.search .row .no-results {
+    font-size: 20px;
+    margin-left: 45px;
+    margin-top: 20px;
+    color: #666; }
+  body.search .row .entry {
+    height: 220px;
+    margin-bottom: 50px; }
+    body.search .row .entry a.nope {
+      color: inherit;
+      text-decoration: none; }
+      body.search .row .entry a.nope:hover {
+        color: inherit;
+        text-decoration: none; }
+    body.search .row .entry .spartan-image {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position-x: right; }
+    body.search .row .entry .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, white));
+      background-image: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -moz-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -ms-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%); }
+    body.search .row .entry .text-container {
+      position: absolute;
+      top: 5px;
+      left: 15px;
+      height: 100%;
+      width: 100%; }
+      body.search .row .entry .text-container > h2 {
+        margin-bottom: 0px;
+        color: #d4860c; }
+      body.search .row .entry .text-container > h3 {
+        margin-top: 0px;
+        font-size: 18px; }
+body.search .focus-col {
+  text-align: right;
+  margin-top: 35px; }
+
 body.halo4 .halo4-header {
   height: 300px; }
   @media (max-width: 767px) {

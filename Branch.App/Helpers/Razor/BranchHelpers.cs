@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Globalization;
+using Branch.Models.Services.Branch;
 
 namespace Branch.App.Helpers.Razor
 {
 	public class BranchHelpers
 	{
-		public static string CheckGamertagPrivacy(string gamertag)
+		public static string CheckGamertagPrivacy(string gamertag, Enums.GamerId gamerIdType = Enums.GamerId.X360XblGamertag)
 		{
 			//if (gamertag == "Doofette") return "Evie";
 			return gamertag;

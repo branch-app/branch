@@ -1,0 +1,34 @@
+﻿@using Branch.App.Models
+@using Microsoft.WindowsAzure.Storage
+@model SearchViewModel
+@{
+	ViewBag.Title = string.Format("Searching for {0}", Model.Query);
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "search";
+}
+
+<div class="container">
+	<div class="page-header row">
+		<div class="col-md-12">
+			<h1 id="less">Search results for '@(Model.Query)'...</h1>
+		</div>
+	</div>
+	<div>
+		<div class="row">
+			@if (Model.Halo4ServiceRecord != null)
+			{
+				@Html.Partial("Partials/Halo4ServiceRecord", Model.Halo4ServiceRecord)
+			}
+
+			@if (Model.Halo4ServiceRecord == null)
+			{
+				<div class="no-results">
+					<p>
+						No results found for @Model.Query, sorry
+					</p>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
