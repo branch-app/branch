@@ -6,7 +6,10 @@
 		$.cookie("FlashMessage", null, { path: '/' });
 	}
 
-	var json = $.parseJSON(options.message);
+	var json;
+	try { json = $.parseJSON(options.message); }
+	catch (err) { return null; }
+
 	if (json == null) return null;
 	var alertClass = "alert-";
 
