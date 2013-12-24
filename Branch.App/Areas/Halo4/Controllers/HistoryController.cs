@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Models;
 using Branch.App.Filters;
-using Branch.App.Helpers.Razor;
+using Branch.App.Helpers.Mvc;
 using Branch.Models.Services.Halo4._343.DataModels;
 using Branch.Models.Services.Halo4._343.Responses;
 using Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
@@ -48,7 +48,9 @@ namespace Branch.App.Areas.Halo4.Controllers
 						serviceRecord, gameHistory, gameMode, page));
 
 				default:
-					return RedirectToAction("Index", "History", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), slug = Enums.Mode.WarGames.ToString() });
+					return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "History", new { slug = Enums.Mode.WarGames.ToString() }),
+						FlashMessage.FlashMessageType.Info, "Couldn't find specified Game Mode",
+						"Branch was unable to find that specific game mode, so we took you to a familiar, and safe place.");
 			}
 		}
 	}
