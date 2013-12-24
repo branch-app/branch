@@ -42,7 +42,7 @@
 					var width = (50 + (5*2))*game.Teams.Count();
 					
 					<div class="team-score-bollards" style="width: @(width)px;">
-						@foreach (var team in orderedTeams.ToList())
+						@foreach (var team in orderedTeams.Reverse().ToList())
 						{
 							<div class="score-bollard">
 							<div class="height-mask" style="height: @(team.Score / modifier)px; margin-top: @(75 - (team.Score / modifier))px; background-color: @team.PrimaryRgb;"></div>

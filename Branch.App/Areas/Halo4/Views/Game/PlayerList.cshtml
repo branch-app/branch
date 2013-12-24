@@ -51,11 +51,11 @@
 					</div>
 					@if (player.IsGuest)
 					{
-					<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb;"></div>
+						<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('http://emblems.svc.halowaypoint.com/h4/emblems/violet_117-on-recruit?size=48');"></div>
 					}
 					else
 					{
-					<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url(@GeneralHelpers.GetRawAssetUrl(player.EmblemImageUrl, 48));"></div>
+						<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url(@GeneralHelpers.GetRawAssetUrl(player.EmblemImageUrl, 48));"></div>
 					}
 
 					<div class="col-md-3 alphabetical-flair">
@@ -102,19 +102,19 @@
 							<div class="player-indicator">
 								@if (player.IsGuest)
 								{
-								<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb;">
-									@player.Gamertag
-									<br />
-									<strong>GEST</strong>
-								</div>
+									<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('http://emblems.svc.halowaypoint.com/h4/emblems/violet_117-on-recruit?size=48');">
+										@player.Gamertag
+										<br />
+										<strong>GEST</strong>
+									</div>
 								}
 								else
 								{
-								<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url(@GeneralHelpers.GetRawAssetUrl(player.EmblemImageUrl, 48));">
-									@BranchHelpers.CheckGamertagPrivacy(player.Gamertag)
-									<br />
-									<strong>@player.ServiceTag</strong>
-								</div>
+									<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url(@GeneralHelpers.GetRawAssetUrl(player.EmblemImageUrl, 48));">
+										@BranchHelpers.CheckGamertagPrivacy(player.Gamertag)
+										<br />
+										<strong>@player.ServiceTag</strong>
+									</div>
 								}
 							</div>
 						</div>
