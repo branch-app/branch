@@ -42,7 +42,7 @@
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Commendations, "active")">
-					@Html.RouteLink("Commendations", "Halo4_Commendations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					@Html.RouteLink("Commendations", "Halo4_Commendations", new { slug = "Weapons", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
 
 					@if (currentPage == Enums.Pages.Commendations)
 					{
