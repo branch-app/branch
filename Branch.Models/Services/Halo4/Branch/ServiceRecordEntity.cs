@@ -4,6 +4,11 @@ namespace Branch.Models.Services.Halo4.Branch
 {
 	public class ServiceRecordEntity : BaseEntity
 	{
+		public ServiceRecordEntity()
+		{
+			
+		}
+
 		public ServiceRecordEntity(string gamertag)
 		{
 			SetKeys(null, gamertag);
@@ -40,6 +45,20 @@ namespace Branch.Models.Services.Halo4.Branch
 		public string FavoriteWeaponDescription { get; set; }
 
 		public int FavoriteWeaponTotalKills { get; set; }
+
+		#region BranchStuff
+
+		public int WarGamesKills { get; set; }
+
+		public int WarGamesDeaths { get; set; }
+
+		public int WarGamesMedals { get; set; }
+
+		public int WarGamesGames { get; set; }
+
+		public string WarGamesDuration { get; set; }
+
+		#endregion
 
 		#region Overrides
 

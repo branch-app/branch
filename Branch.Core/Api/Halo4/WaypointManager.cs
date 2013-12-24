@@ -156,6 +156,19 @@ namespace Branch.Core.Api.Halo4
 				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
 
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
+			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
+
+			var warGamesMode = serviceRecord.GameModes.FirstOrDefault(m => m.Id == Branch343DataModels.Enums.Mode.WarGames);
+			if (warGamesMode != null)
+			{
+				serviceRecordEntity.WarGamesKills = warGamesMode.TotalKills;
+				serviceRecordEntity.WarGamesDeaths = warGamesMode.TotalDeaths;
+				serviceRecordEntity.WarGamesGames = warGamesMode.TotalGamesStarted;
+				serviceRecordEntity.WarGamesMedals = warGamesMode.TotalMedals ?? 0;
+				serviceRecordEntity.WarGamesDuration = warGamesMode.TotalDuration ?? 
+					TimeSpan.FromTicks(0).ToString();
+			}
+
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
 			AddPlayerToStorage(gamertag);

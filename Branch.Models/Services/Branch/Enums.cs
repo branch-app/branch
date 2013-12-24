@@ -11,5 +11,11 @@
 			PcOriginTag = 0x40,
 			PcSteamTag = 0x50
 		}
+
+		public enum Halo4StatType
+		{
+			Weekly,
+			AllTime
+		}
 	}
 }

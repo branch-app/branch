@@ -128,7 +128,7 @@
 				var result = GeneralHelpers.GetGameVictoryStatus(game.Result, game.Completed);
 				
 				<div id="history-entry-@game.Id" class="col-lg-6 col-sm-12 game-history-entry">
-					<a href="#">
+					<a href="@Url.RouteUrl("Halo4_Game", new { id = game.Id })">
 						<div class="game-history-container" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(game.MapImageUrl)')">
 							<div class="mask @result.Item1"></div>
 							<div class="gametype-icon" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(game.BaseVariantImageUrl)')"></div>

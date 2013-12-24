@@ -7,8 +7,11 @@ using System.Threading;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Api.Halo4;
 using Branch.Core.Storage;
+using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4;
+using Branch.Models.Services.Halo4.Branch;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using Enums = Branch.Models.Services.Branch.Enums;
 
 namespace Branch.Service.Halo4
 {
@@ -19,6 +22,7 @@ namespace Branch.Service.Halo4
 			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
 			{ TaskEntity.TaskType.Metadata, new TimeSpan(1, 0, 0, 0) },
+			{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
 		};
 
 		private AzureStorage _storage;
@@ -28,20 +32,20 @@ namespace Branch.Service.Halo4
 		{
 			Trace.TraceInformation("Branch.Service.Halo4 entry point called");
 
+#if !DEBUG
 			try
 			{
-#if DEBUG
-				
 #endif
-
 				// Update Stuff
-				var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>("Halo4ServiceTasks",
-					_storage.Table.Halo4ServiceTasksCloudTable);
+			var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>(TaskEntity.PartitionKeyString,
+					_storage.Table.Halo4CloudTable);
 
 				#region Check to Execute Tasks
 
 				foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 				{
+					var updateLastRun = false;
+
 					switch (task.Type)
 					{
 						case TaskEntity.TaskType.Playlist:
@@ -57,22 +61,80 @@ namespace Branch.Service.Halo4
 						case TaskEntity.TaskType.Metadata:
 							_h4WaypointManager.UpdateMetadata();
 							break;
+
+						case TaskEntity.TaskType.StatUpdate:
+							//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
+							//	break;
+							updateLastRun = true;
+
+							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",
+								_storage.Table.Halo4CloudTable);
+
+							var allTimeStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
+								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??
+							                   new Halo4StatsEntity(Enums.Halo4StatType.AllTime);
+							var weeklyStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
+								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.Weekly), _storage.Table.BranchCloudTable) ??
+											   new Halo4StatsEntity(Enums.Halo4StatType.Weekly);
+
+							var kills = 0;
+							var deaths = 0;
+							var medals = 0;
+							var games = 0;
+							var duration = new TimeSpan(0);
+
+							foreach (var player in players)
+							{
+								kills += player.WarGamesKills;
+								deaths += player.WarGamesDeaths;
+								medals += player.WarGamesMedals;
+								games += player.WarGamesGames;
+								duration += TimeSpan.Parse(player.WarGamesDuration ?? TimeSpan.FromTicks(0).ToString());
+							}
+							
+							#region Weekly
+
+							weeklyStats.WarGamesKills = kills - allTimeStats.WarGamesKills;
+							weeklyStats.WarGamesDeaths = deaths - allTimeStats.WarGamesKills;
+							weeklyStats.WarGamesMedals = medals - allTimeStats.WarGamesKills;
+							weeklyStats.WarGamesGames = games - allTimeStats.WarGamesKills;
+							weeklyStats.WarGamesDuration =
+								(duration - TimeSpan.Parse(allTimeStats.WarGamesDuration ?? 
+									TimeSpan.FromTicks(0).ToString())).ToString();
+
+							#endregion
+							#region All Time
+
+							allTimeStats.WarGamesKills += kills;
+							allTimeStats.WarGamesDeaths += deaths;
+							allTimeStats.WarGamesMedals += medals;
+							allTimeStats.WarGamesGames += games;
+							allTimeStats.WarGamesDuration = duration.ToString();
+
+							#endregion
+
+							_storage.Table.InsertOrReplaceSingleEntity(weeklyStats, _storage.Table.BranchCloudTable);
+							_storage.Table.InsertOrReplaceSingleEntity(allTimeStats, _storage.Table.BranchCloudTable);
+
+							break;
 					}
 
 					task.Interval = (int) _tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
-					task.LastRun = DateTime.UtcNow;
-					_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4ServiceTasksCloudTable);
+					if (updateLastRun) task.LastRun = DateTime.UtcNow;
+					_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4CloudTable);
 				}
 
 				#endregion
-
-				// Sleep for 5 minutes until we need to update stuff again. yolo
-				Thread.Sleep(TimeSpan.FromMinutes(10));
+#if !DEBUG
 			}
 			catch (Exception ex)
 			{
 				Trace.TraceError(ex.ToString());
 			}
+#endif
+
+			// Sleep for 10 minutes until we need to update stuff again. yolo
+			Thread.Sleep(TimeSpan.FromMinutes(10));
 		}
 
 		public override bool OnStart()
@@ -86,8 +148,8 @@ namespace Branch.Service.Halo4
 
 			foreach (var entity in from task in _tasks
 				let entity =
-					_storage.Table.RetrieveSingleEntity<TaskEntity>("Halo4ServiceTasks", TaskEntity.FormatRowKey(task.Key.ToString()),
-						_storage.Table.Halo4ServiceTasksCloudTable)
+					_storage.Table.RetrieveSingleEntity<TaskEntity>(TaskEntity.PartitionKeyString, TaskEntity.FormatRowKey(task.Key.ToString()),
+						_storage.Table.Halo4CloudTable)
 				where entity == null
 				select new TaskEntity(task.Key)
 				{
@@ -95,7 +157,7 @@ namespace Branch.Service.Halo4
 					Interval = (int) task.Value.TotalSeconds
 				})
 			{
-				_storage.Table.InsertSingleEntity(entity, _storage.Table.Halo4ServiceTasksCloudTable);
+				_storage.Table.InsertOrReplaceSingleEntity(entity, _storage.Table.Halo4CloudTable);
 			}
 
 			#endregion

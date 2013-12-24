@@ -2,8 +2,8 @@
 {
 	public sealed class PlaylistOrientationEntity : BaseEntity
 	{
-		public static string RowKeyString = "PlaylistId_{0}";
-		public static string PartitionKeyString = "H4PlaylistOrientation";
+		public static string RowKeyString = "{0}";
+		public static string PartitionKeyString = "PlaylistOrientation";
 
 		public PlaylistOrientationEntity() { }
 

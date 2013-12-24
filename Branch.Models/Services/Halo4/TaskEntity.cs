@@ -11,10 +11,12 @@ namespace Branch.Models.Services.Halo4
 		{
 			Auth = 0x00,
 			Metadata = 0x01,
-			Playlist = 0x02
+			Playlist = 0x02,
+			StatUpdate = 0x03
 		}
 
-		public const string RowKeyString = "H4Task{0}";
+		public const string PartitionKeyString = "ServiceTask";
+		public const string RowKeyString = "{0}";
 
 		public TaskEntity()
 		{

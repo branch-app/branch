@@ -35,8 +35,6 @@ namespace Branch.Core.Storage
 			AuthenticationCloudTable.CreateIfNotExists();
 
 			// le Halo 4
-			Halo4ServiceTasksCloudTable = TableClient.GetTableReference("Halo4ServiceTasks");
-			Halo4ServiceTasksCloudTable.CreateIfNotExists();
 			Halo4CloudTable = TableClient.GetTableReference("Halo4");
 			Halo4CloudTable.CreateIfNotExists();
 
@@ -124,7 +122,6 @@ namespace Branch.Core.Storage
 		// Tables
 		public CloudTable BranchCloudTable { get; private set; }
 		public CloudTable AuthenticationCloudTable { get; private set; }
-		public CloudTable Halo4ServiceTasksCloudTable { get; private set; }
 		public CloudTable Halo4CloudTable { get; private set; }
 	}
 }
