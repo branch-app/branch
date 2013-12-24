@@ -40,7 +40,7 @@
 			<tbody>
 				@foreach (var game in gameHistory.Games)
 				{
-					<tr class="history-row ">
+					<tr class="history-row">
 						<td>
 							@Html.RouteLink(game.MapName, "Halo4_Game",
 								new {gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id})
