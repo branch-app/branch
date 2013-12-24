@@ -12,6 +12,9 @@ namespace Branch.App.App_Start
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 				"~/Scripts/modernizr-*"));
 
+			bundles.Add(new ScriptBundle("~/bundles/flash").Include(
+				"~/Scripts/flash-cookie.js"));
+
 			// le bootstrap
 			bundles.Add(new StyleBundle("~/bundles/bootstrap-custom").Include(new [] {
 				"~/Content/Styles/bootstrap-custom.min.css",

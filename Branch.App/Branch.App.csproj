@@ -182,6 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Cryptography\Sha1Crypto.cs" />
+    <Compile Include="Helpers\Mvc\FlashMessage.cs" />
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
@@ -189,12 +190,14 @@
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\flash-cookie.js" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Content\Styles\Search\_index.scss" />
     <Content Include="Views\Search\Partials\Halo4ServiceRecord.cshtml" />
+    <Content Include="Views\Shared\FlashMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

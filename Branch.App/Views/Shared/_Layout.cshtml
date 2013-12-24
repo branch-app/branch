@@ -8,7 +8,7 @@
 			Branch - @ViewBag.Title
 		</title>
 
-		<!-- Style Sheets -->
+		<!-- Style Sheets and Scripts -->
 		@Styles.Render("~/bundles/bootstrap-custom")
 		@Styles.Render("~/bundles/branch-specific")
 		@Scripts.Render("~/bundles/modernizr")
@@ -18,45 +18,49 @@
 		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="description" content="todo" />
-</head>
+	</head>
 
-<body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
-	<div class="page-bg-cover"></div>
-	<div id="page-bg-mask" class="mask">
-		@Html.Partial("Header")
+	<body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
+		<div class="page-bg-cover"></div>
+		<div id="page-bg-mask" class="mask">
+			@Html.Partial("Header")
 
-		<article>
-			@RenderBody()
-		</article>
+			<article>
+				@RenderBody()
+			</article>
+			
+			<!-- How Kawaii;~~; -->
+			@Html.Partial("Footer", altFooter)
+		</div>
 
-		@Html.Partial("Footer", altFooter)
-	</div>
+		<div id="scripts">
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+			@Scripts.Render("~/bundles/flash")
 
-	<div id="scripts">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+			<script>
+				$(function () { $("#flash-message-box").flashMessage(); });
+				$(document).ready(function () {
+					$('*[role="tooltip"]').tooltip();
+				});
+			</script>
 
-	<script>
-		$(document).ready(function () {
-			$('*[role="tooltip"]').tooltip();
-		});
-	</script>
+			@RenderSection("scripts", false)
 
-	@RenderSection("scripts", false)
-
-	<!-- Social Media Button Scripts -->
-	<div id="fb-root"></div>
-	<script>
-		(function (d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk')
-		);
-	</script>
-	<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-</div>
-</body>
+			<!-- ;_; Social Media Button Scripts -->
+			<div id="fb-root"></div>
+			<script>
+				(function (d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk')
+				);
+			</script>
+			<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+		</div>
+	</body>
 </html>
