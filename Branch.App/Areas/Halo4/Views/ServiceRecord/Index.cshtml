@@ -152,6 +152,13 @@
 					</a>
 				</div>
 			}
+			
+			@if (!gameHistory.Games.Any())
+			{
+				<h4>
+					@(BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)) has not played any games of War Games.
+				</h4>
+			}
 		</div>
 	</div>
 	}
