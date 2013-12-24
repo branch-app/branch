@@ -20,9 +20,9 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 		public string ModeName { get; set; }
 
-		public int MaxPartySize { get; set; }
+		public int? MaxPartySize { get; set; }
 
-		public int MaxLocalPlayers { get; set; }
+		public int? MaxLocalPlayers { get; set; }
 
 		public bool IsFreeForAll { get; set; }
 

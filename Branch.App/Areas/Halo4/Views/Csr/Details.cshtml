@@ -11,7 +11,7 @@
 
 	var serviceRecord = Model.ServiceRecord;
 	var currentSkillRank = Model.CurrentSkillRank;
-	var playlist = MetadataHelpers.GetPlaylist(currentSkillRank.PlaylistId);
+	var playlist = Model.Playlist;
 }
 
 <div class="bs-branch-section csr-details">
@@ -38,12 +38,12 @@
 			<div class="meta">
 				<span class="party-size">
 					Max Party Size:
-					<strong>@playlist.MaxPartySize</strong>
+					<strong>@(playlist.MaxPartySize)</strong>
 				</span>
 				<br />
 				<span class="local-party-size">
 					Max Local Party Size:
-					<strong>@playlist.MaxLocalPlayers</strong>
+					<strong>@(playlist.MaxLocalPlayers)</strong>
 				</span>
 				<br />
 				<span class="player-grouping">
@@ -79,7 +79,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach (var gameVariant in playlist.GameVariants)
+							@foreach (var gameVariant in playlist.RelatedGameVariants)
 							{
 								<tr class="entry">
 									<td>
@@ -103,7 +103,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach (var map in playlist.MapVariants.Select(mapVariant => MetadataHelpers.GetMapInfo(mapVariant.MapId)))
+							@foreach (var map in playlist.RelatedMapVariants.Select(mapVariant => MetadataHelpers.GetMapInfo(mapVariant.BaseMapId)))
 							{
 								<tr class="entry">
 									<td>

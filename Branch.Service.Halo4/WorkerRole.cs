@@ -21,7 +21,7 @@ namespace Branch.Service.Halo4
 		{
 			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
-			{ TaskEntity.TaskType.Metadata, new TimeSpan(1, 0, 0, 0) },
+			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 6, 0, 0) },
 			{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
 		};
 

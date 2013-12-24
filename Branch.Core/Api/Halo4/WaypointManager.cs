@@ -15,6 +15,7 @@ using EasyHttp.Http;
 using EasyHttp.Infrastructure;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
 using RestSharp.Contrib;
 using Branch343DataModels = Branch.Models.Services.Halo4._343.DataModels;
 using Enums = Branch.Models.Services.Halo4.Enums;
@@ -87,10 +88,13 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		public void GetMetadata()
 		{
+			var metadataBlob = _storage.Blob.GetBlob(_storage.Blob.H4BlobContainer,
+				GenerateBlobContainerPath(BlobType.Other, "metadata"));
 			var metadata = _storage.Blob.FindAndDownloadBlob<Metadata>(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(BlobType.Other, "metadata"));
 
-			if (metadata == null)
+			if (metadataBlob == null || metadata == null || 
+				metadataBlob.Properties.LastModified + TimeSpan.FromMinutes(14) < DateTime.UtcNow)
 				UpdateMetadata();
 			else
 				Metadata = metadata;

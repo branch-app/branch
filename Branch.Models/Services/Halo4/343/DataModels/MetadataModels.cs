@@ -450,6 +450,14 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 		#endregion
 
 		#region Playlists
+
+		public class RelatedMapVariant
+		{
+			public int BaseMapId { get; set; }
+
+			public string Name { get; set; }
+		}
+
 		public class PlaylistsMetadata
 		{
 			public IList<Playlist> Playlists { get; set; }
@@ -476,7 +484,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public IList<CommonModels.GameVariant> RelatedGameVariants { get; set; }
 
-			public IList<CommonModels.MapVariant> RelatedMapVariants { get; set; }
+			public IList<RelatedMapVariant> RelatedMapVariants { get; set; }
 
 			public string EffectiveOn { get; set; }
 

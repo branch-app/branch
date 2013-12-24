@@ -18,9 +18,9 @@ namespace Branch.App.Helpers.Razor.Halo4
 			return (commendationFinal == null) ? -1 : commendationFinal.Level + 1;
 		}
 
-		public static PlaylistModel GetPlaylist(int playlistId)
+		public static MetadataModels.Playlist GetPlaylist(int playlistId)
 		{
-			return GlobalStorage.H4WaypointManager.Playlists.Playlists.FirstOrDefault(p => p.Id == playlistId);
+			return GlobalStorage.H4WaypointManager.Metadata.PlaylistsMetadata.Playlists.FirstOrDefault(p => p.Id == playlistId);
 		}
 
 		public static MetadataModels.Map GetMapInfo(int mapId)
