@@ -21,7 +21,7 @@ namespace Branch.Service.Halo4
 		{
 			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
-			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 6, 0, 0) },
+			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 30, 0) },
 			{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
 		};
 
@@ -44,7 +44,8 @@ namespace Branch.Service.Halo4
 
 				foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 				{
-					var updateLastRun = false;
+// ReSharper disable once ConvertToConstant.Local
+					var updateLastRun = true;
 
 					switch (task.Type)
 					{
@@ -65,7 +66,7 @@ namespace Branch.Service.Halo4
 						case TaskEntity.TaskType.StatUpdate:
 							//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
 							//	break;
-							updateLastRun = true;
+							//updateLastRun = false;
 
 							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",
 								_storage.Table.Halo4CloudTable);
@@ -120,6 +121,7 @@ namespace Branch.Service.Halo4
 					}
 
 					task.Interval = (int) _tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
+// ReSharper disable once ConditionIsAlwaysTrueOrFalse
 					if (updateLastRun) task.LastRun = DateTime.UtcNow;
 					_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4CloudTable);
 				}
