@@ -458,6 +458,21 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public string Name { get; set; }
 		}
 
+		public class RelatedGameVariant
+		{
+			public string Name { get; set; }
+
+			public string Description { get; set; }
+
+			public int GameBaseVariantId { get; set; }
+
+			public string GameBaseVariantName { get; set; }
+
+			public string GameBaseVariantDescription { get; set; }
+
+			public CommonModels.ImageUrl GameBaseVariantImageUrl { get; set; }
+		}
+
 		public class PlaylistsMetadata
 		{
 			public IList<Playlist> Playlists { get; set; }
@@ -482,7 +497,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public bool IsFreeForAll { get; set; }
 
-			public IList<CommonModels.GameVariant> RelatedGameVariants { get; set; }
+			public IList<RelatedGameVariant> RelatedGameVariants { get; set; }
 
 			public IList<RelatedMapVariant> RelatedMapVariants { get; set; }
 

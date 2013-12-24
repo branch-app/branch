@@ -36,17 +36,17 @@
 
 
 			<div class="meta">
-				<span class="party-size">
+				<span>
 					Max Party Size:
 					<strong>@(playlist.MaxPartySize)</strong>
 				</span>
 				<br />
-				<span class="local-party-size">
+				<span>
 					Max Local Party Size:
 					<strong>@(playlist.MaxLocalPlayers)</strong>
 				</span>
 				<br />
-				<span class="player-grouping">
+				<span>
 					Player Grouping:
 					<strong>
 						@(playlist.IsFreeForAll ? "Free for All" : "Team vs Team")
@@ -85,8 +85,8 @@
 									<td>
 										<div class="icon-frame" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(gameVariant.GameBaseVariantImageUrl)');"></div>
 									</td>
-									<td>@gameVariant.GameVariantName</td>
-									<td>@gameVariant.GameVariantDescription</td>
+									<td>@gameVariant.Name</td>
+									<td>@gameVariant.Description</td>
 									<td>@gameVariant.GameBaseVariantName</td>
 								</tr>
 							}
