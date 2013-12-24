@@ -174,7 +174,9 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
+    <Content Include="Content\Styles\About\_index.scss" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
@@ -198,6 +200,7 @@
     <Content Include="Content\Styles\Search\_index.scss" />
     <Content Include="Views\Search\Partials\Halo4ServiceRecord.cshtml" />
     <Content Include="Views\Shared\FlashMessage.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

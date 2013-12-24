@@ -162,6 +162,9 @@ body.home .games .game {
         font-weight: 300;
         font-size: 25px; }
 
+body.about_home .faq > .faq-entry {
+  margin-top: 20px; }
+
 body.search .row {
   list-style-type: none;
   padding: 0; }
