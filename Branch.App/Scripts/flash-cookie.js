@@ -1,41 +1,31 @@
 ﻿$.fn.flashMessage = function (options) {
-	var target = this;
+	
 	options = $.extend({}, options);
 	if (!options.message) {
 		options.message = $.cookie("FlashMessage");
 		$.cookie("FlashMessage", null, { path: '/' });
 	}
-	if (options.message) {
-		var json = $.parseJSON(options.message);
-		var alertClass = "alert-";
 
-		switch (json[0]) {
-			case "success":
-			case "info":
-			case "warning":
-				alertClass += json[0];
-				break;
+	var json = $.parseJSON(options.message);
+	if (json == null) return null;
+	var alertClass = "alert-";
 
-			case "failure":
-				alertClass += "danger";
-				break;
-		}
+	switch (json[0]) {
+		case "success":
+		case "info":
+		case "warning":
+			alertClass += json[0];
+			break;
 
-		$(this).addClass(alertClass);
-		$('strong', this).text(json[1]);
-		$('span', this).text(json[2]);
+		case "failure":
+			alertClass += "danger";
+			break;
 	}
 
-	if (target.children().length === 0)
-		return null;
-
-	target.fadeIn().one("click", function () {
-		$(this).fadeOut();
-	});
-
-	if (options.timeout > 0) {
-		setTimeout(function () { target.fadeOut(); }, options.timeout);
-	}
+	$(this).parent().css('display', 'block');
+	$(this).addClass(alertClass);
+	$('strong', this).text(json[1]);
+	$('span', this).text(json[2]);
 
 	return this;
 };
