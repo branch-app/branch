@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Models;
 using Branch.App.Filters;
+using Branch.App.Helpers.Mvc;
 using Branch.App.Helpers.Razor.Halo4;
 using Branch.Extenders;
 using Branch.Models.Services.Halo4._343.Responses;
@@ -24,16 +24,24 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ServiceRecordFilter]
 		public ActionResult Details(string gamertag, ServiceRecord serviceRecord, int? id, string slug)
 		{
-			if (id == null) throw new ArgumentException("Uh Oh, playlist Id is null.");
+			if (id == null)
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "Csr"),
+					FlashMessage.FlashMessageType.Failure, "Playlist Error", "There was no specified playlist id, the url must have been malformed.");
 
 			var skillRank = serviceRecord.SkillRanks.FirstOrDefault(r => r.PlaylistId == id);
-			if (skillRank == null) throw new ArgumentException("Uh Oh, playlist Id is not valid.");
+			if (skillRank == null)
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "Csr"),
+					FlashMessage.FlashMessageType.Failure, "Playlist Error", "The specified playlist doesn't exist. It either was purged by 343, or never existed.");
+
 			var playlist = MetadataHelpers.GetPlaylist(skillRank.PlaylistId);
-			if (playlist == null) throw new ArgumentException("Unknown Playlist. Wait wait for 343 to update their systems");
+			if (playlist == null)
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "Csr"),
+					FlashMessage.FlashMessageType.Failure, "Playlist Error", "The specified playlist doesn't exist. It either was purged by 343, or never existed. Try waiting for 343 to update their systems and try again in 30 minutes.");
 
 
 			if (skillRank.PlaylistName.ToSlug() != slug)
-				throw new ArgumentException("hue hue, nice try, don't change the slug u arse.");
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Details", "Csr", new { id, slug = skillRank.PlaylistName.ToSlug() }),
+					FlashMessage.FlashMessageType.Warning, "Haha!", "Nice try changing the slug m8.");
 
 			return
 				View(new CsrDetailViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientation(skillRank.PlaylistId),
