@@ -1,5 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.Routing;
+using Branch.App.Helpers.Mvc;
 
 namespace Branch.App.Filters
 {
@@ -11,10 +12,12 @@ namespace Branch.App.Filters
 			var serviceRecord = GlobalStorage.H4WaypointManager.GetServiceRecord(gamertag);
 			if (serviceRecord == null)
 			{
-				// Set Flash Message
-				// Redirect to search page with this string
-
-				throw new ArgumentOutOfRangeException("filterContext", "This gamertag is not within the range of gamertags in our or 343's database. sorry m8.");
+				filterContext.Result = FlashMessage.RedirectAndFlash(filterContext.HttpContext.Response,
+					new RedirectToRouteResult("Search",
+						new RouteValueDictionary {{"q", gamertag}}),
+					FlashMessage.FlashMessageType.Info, "Unknown Halo 4 Player",
+					string.Format("The gamertag '{0}' has not played Halo 4.", gamertag));
+				return;
 			}
 
 			filterContext.ActionParameters["ServiceRecord"] = serviceRecord;

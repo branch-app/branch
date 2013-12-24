@@ -7,6 +7,9 @@
 }
 
 <div class="container">
+	
+	@Html.Partial("FlashMessage", true)
+
 	<div class="page-header row">
 		<div class="col-md-12">
 			<h1 id="less">Search results for '@(Model.Query)'...</h1>
