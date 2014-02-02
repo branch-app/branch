@@ -8,6 +8,8 @@ namespace Branch.Models.Services.Halo4._343.Responses
 
 		public MetadataModels.ArmorGroupMetadata ArmorGroupMetadata { get; set; }
 
+		public MetadataModels.ChallengesMetadata ChallengesMetadata { get; set; }
+
 		public MetadataModels.CommendationsMetadata CommendationsMetadata { get; set; }
 
 		public MetadataModels.DamageMetadata DamageMetadata { get; set; }

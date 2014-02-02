@@ -149,11 +149,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Halo4\Controllers\ChallengesController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CsrController.cs" />
     <Compile Include="Areas\Halo4\Controllers\GameController.cs" />
     <Compile Include="Areas\Halo4\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Halo4\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Halo4\Controllers\PlaylistsController.cs" />
     <Compile Include="Areas\Halo4\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Halo4\Controllers\SpecializationsController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
@@ -175,6 +177,8 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
     <Content Include="Content\Styles\About\_index.scss" />
+    <Content Include="Content\Styles\Halo4\_challenges.scss" />
+    <Content Include="Content\Styles\Halo4\_playlists.scss" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +246,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Halo4\Views\Challenges\" />
+    <Folder Include="Areas\Halo4\Views\Playlists\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

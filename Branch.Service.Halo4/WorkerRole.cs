@@ -23,6 +23,7 @@ namespace Branch.Service.Halo4
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
 			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 30, 0) },
 			{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
+			{ TaskEntity.TaskType.Challenge, new TimeSpan(0, 1, 0, 0) },
 		};
 
 		private AzureStorage _storage;
@@ -63,8 +64,14 @@ namespace Branch.Service.Halo4
 							_h4WaypointManager.UpdateMetadata();
 							break;
 
+						case TaskEntity.TaskType.Challenge:
+							_h4WaypointManager.UpdateChallenges();
+							break;
+
 						case TaskEntity.TaskType.StatUpdate:
-							//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
+							#region Shink me pls
+							
+						//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
 							//	break;
 							//updateLastRun = false;
 
@@ -116,7 +123,8 @@ namespace Branch.Service.Halo4
 
 							_storage.Table.InsertOrReplaceSingleEntity(weeklyStats, _storage.Table.BranchCloudTable);
 							_storage.Table.InsertOrReplaceSingleEntity(allTimeStats, _storage.Table.BranchCloudTable);
-
+							
+							#endregion
 							break;
 					}
 

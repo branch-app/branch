@@ -73,5 +73,10 @@ namespace Branch.App.Helpers.Razor.Halo4
 		{
 			return GlobalStorage.H4WaypointManager.Metadata.FactionsMetadata.Factions.FirstOrDefault(e => e.Id == factionId);
 		}
+
+		public static MetadataModels.ChallengeCategory GetChallengeCategory(int categoryId)
+		{
+			return GlobalStorage.H4WaypointManager.Metadata.ChallengesMetadata.ChallengeCategories.FirstOrDefault(c => c.Id == categoryId);
+		}
 	}
 }

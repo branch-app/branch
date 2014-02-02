@@ -81,8 +81,12 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 		public class ChallengePeriod
 		{
 			public int Id { get; set; }
+
 			public string Name { get; set; }
+
 			public string Namely { get; set; }
+
+			public CommonModels.ImageUrl ImageUrl { get; set; }
 		}
 		#endregion
 

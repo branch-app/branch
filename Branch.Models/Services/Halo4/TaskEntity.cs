@@ -12,7 +12,8 @@ namespace Branch.Models.Services.Halo4
 			Auth = 0x00,
 			Metadata = 0x01,
 			Playlist = 0x02,
-			StatUpdate = 0x03
+			StatUpdate = 0x03,
+			Challenge = 0x04
 		}
 
 		public const string PartitionKeyString = "ServiceTask";
