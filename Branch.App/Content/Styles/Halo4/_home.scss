@@ -1,0 +1,180 @@
+body.halo4 {
+	.halo4-header {
+		height: 300px;
+
+		@media (max-width: 767px) {
+			height: 350px;
+		}
+
+
+		.container {
+			height: 100%;
+
+			.name-flairs {
+				.col-md-12 { 
+					h1 > img {
+						margin-top: -45px;
+
+						@media (max-width: 767px) {
+							display: none !important;
+						}
+					}
+				}
+
+				h2 {
+					margin-top: -10px;
+				}
+
+				img {
+					margin: -20px auto;
+				}
+			}
+			.rank-flairs {
+				margin-top: 30px;
+
+				> .col-md-8 {
+					> img {
+						margin-bottom: 5px;
+						@media (max-width: 767px) {
+							margin: 15px auto 0px auto;
+						}
+					}
+
+					> .progress {
+						margin-bottom: 0;
+					}
+
+					> .xp {
+						font-size: 14px;
+					}
+				}
+			}
+
+			.spartan-image {
+				height: 140%;		
+				width: 300px;
+
+				background-repeat: no-repeat;
+				-moz-transform: scaleX(-1);
+				-o-transform: scaleX(-1);
+				-webkit-transform: scaleX(-1);
+				transform: scaleX(-1);
+				filter: FlipH;
+				-ms-filter: "FlipH";
+
+				position: absolute;
+				bottom: 0;
+				right: 0;		
+				margin-bottom: -40px;	
+			}
+			.spartan-insignia {
+				height: 420px;
+				width: 300px;
+
+				background-repeat: no-repeat;
+				background-position: top left;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		}
+	}
+}
+
+body.halo4_home {
+	.stats-marketing {
+		margin-top: 100px;
+
+		@media (min-width: 768px) {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		> .central {
+			text-align: center;
+		}
+		> hr {
+			margin: 80px 0;
+		}
+	}
+	.highlight-sector {
+		margin-top: 80px;
+		background: #eee;
+		height: 350px;
+		background-repeat: no-repeat;
+
+		> .container {
+			> h1 {
+				margin-top: 70px;
+				font-size: 55px;
+			}
+			> p {
+				font-size: 20px;
+			}
+		}
+	}
+	.leaferboards {
+		text-align: left;
+		background-position: right center;
+	}
+	.top-ten {
+		text-align: right;
+		background-position: left center;
+	}
+}
+
+body.halo4_homepage {
+	&.page-bg-backup-cover {
+		background: url('/Content/Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 40px fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+
+		.page-bg-cover {
+			background: url('/Content/Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 40px fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			width: 100%;
+			min-height: 100%;
+			position: fixed;
+			top: 0;
+			bottom: 0;
+		}
+
+		#page-bg-mask {
+			padding-top: 59px;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			position: fixed;
+			width: 100%;
+
+			&.mask {
+				background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+				background: -moz-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.4)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(left, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(left, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(left, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%); /* IE10+ */
+				background: linear-gradient(to right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%); /* W3C */
+			}
+		}
+	}
+}
+
+@import "service_record";
+@import "specializations";
+@import "commendations";
+@import "csr";
+@import "game_history";
+@import "challenges";
+@import "playlists";

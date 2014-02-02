@@ -1,0 +1,881 @@
+body {
+  padding-top: 50px; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.bitch-needs-a-break {
+  margin-top: 40px; }
+
+.text-right {
+  text-align: right; }
+
+.seperator {
+  margin: 10px;
+  height: 1px;
+  border: 1px solid #aaa;
+  opacity: 0.6; }
+
+.alert-container {
+  margin-top: 40px;
+  margin-bottom: 10px; }
+
+.ad-container {
+  width: 790px;
+  margin: 100px auto 0 auto; }
+
+ul.no-style {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul.no-style.inline > li {
+    display: inline; }
+
+footer > .container > .row > .col-md-2 > .made-in {
+  font-size: 12px;
+  color: #aaa; }
+
+body.home .welcome-header {
+  padding-bottom: 0;
+  text-align: center;
+  padding-bottom: 50px; }
+@media screen and (min-width: 992px) {
+  body.home .bs-header h1,
+  body.home .bs-header p {
+    margin-right: 0px;
+    text-align: center; } }
+body.home .project-stats {
+  margin: 0;
+  padding: 0;
+  margin-top: -10px;
+  margin-bottom: 0;
+  list-style-type: none; }
+body.home .project-stats li {
+  display: inline;
+  margin-left: 10px;
+  font-size: 12px; }
+body.home .project-stats li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .social-media-shit {
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  list-style-type: none; }
+body.home .social-media-shit li {
+  display: inline;
+  margin-left: 20px; }
+body.home .social-media-shit li:first-child {
+  display: inline;
+  margin-left: 0px; }
+body.home .marketing {
+  margin-top: 100px;
+  margin-bottom: 50px; }
+body.home .marketing > .central {
+  text-align: center; }
+body.home .marketing > hr {
+  margin: 80px 0; }
+body.home .games .game {
+  height: 450px; }
+  body.home .games .game .game-backup-cover {
+    background: #ffffff no-repeat center 40px fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative; }
+    body.home .games .game .game-backup-cover.Halo4 {
+      background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
+    body.home .games .game .game-backup-cover.Destiny {
+      background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
+    body.home .games .game .game-backup-cover .game-cover {
+      background: #ffffff no-repeat center 40px fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      width: 100%;
+      height: 100%; }
+      body.home .games .game .game-backup-cover .game-cover.Halo4 {
+        background-image: url("/Content/Images/Home/Covers/Halo4/cover1.jpg"); }
+      body.home .games .game .game-backup-cover .game-cover.Destiny {
+        background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
+  body.home .games .game .mask {
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+    /* W3C */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 450px;
+    color: #aaa; }
+    body.home .games .game .mask.soon {
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.9)), color-stop(100%, rgba(0, 0, 0, 0.9)));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* IE10+ */
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+      /* W3C */ }
+    body.home .games .game .mask .container {
+      padding: 20px; }
+      body.home .games .game .mask .container a,
+      body.home .games .game .mask .container a:link,
+      body.home .games .game .mask .container a:visited,
+      body.home .games .game .mask .container a:active {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s ease; }
+      body.home .games .game .mask .container a:hover {
+        color: #aaa; }
+      body.home .games .game .mask .container h1 {
+        font-family: 'Segoe UI', 'Open Sans Condensed';
+        font-weight: 300;
+        font-size: 90px; }
+      body.home .games .game .mask .container p {
+        font-family: 'Segoe UI', 'Open Sans Condensed';
+        font-weight: 300;
+        font-size: 25px; }
+
+body.about_home .faq > .faq-entry {
+  margin-top: 20px; }
+
+body.search .row {
+  list-style-type: none;
+  padding: 0; }
+  body.search .row .no-results {
+    font-size: 20px;
+    margin-left: 45px;
+    margin-top: 20px;
+    color: #666; }
+  body.search .row .entry {
+    height: 220px;
+    margin-bottom: 50px; }
+    body.search .row .entry a.nope {
+      color: inherit;
+      text-decoration: none; }
+      body.search .row .entry a.nope:hover {
+        color: inherit;
+        text-decoration: none; }
+    body.search .row .entry .spartan-image {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position-x: right; }
+    body.search .row .entry .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, white));
+      background-image: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -moz-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: -ms-linear-gradient(right, rgba(255, 255, 255, 0) 0%, white 100%);
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%); }
+    body.search .row .entry .text-container {
+      position: absolute;
+      top: 5px;
+      left: 15px;
+      height: 100%;
+      width: 100%; }
+      body.search .row .entry .text-container > h2 {
+        margin-bottom: 0px;
+        color: #d4860c; }
+      body.search .row .entry .text-container > h3 {
+        margin-top: 0px;
+        font-size: 18px; }
+body.search .focus-col {
+  text-align: right;
+  margin-top: 35px; }
+
+body.halo4 .halo4-header {
+  height: 300px; }
+  @media (max-width: 767px) {
+    body.halo4 .halo4-header {
+      height: 350px; } }
+  body.halo4 .halo4-header .container {
+    height: 100%; }
+    body.halo4 .halo4-header .container .name-flairs .col-md-12 h1 > img {
+      margin-top: -45px; }
+      @media (max-width: 767px) {
+        body.halo4 .halo4-header .container .name-flairs .col-md-12 h1 > img {
+          display: none !important; } }
+    body.halo4 .halo4-header .container .name-flairs h2 {
+      margin-top: -10px; }
+    body.halo4 .halo4-header .container .name-flairs img {
+      margin: -20px auto; }
+    body.halo4 .halo4-header .container .rank-flairs {
+      margin-top: 30px; }
+      body.halo4 .halo4-header .container .rank-flairs > .col-md-8 > img {
+        margin-bottom: 5px; }
+        @media (max-width: 767px) {
+          body.halo4 .halo4-header .container .rank-flairs > .col-md-8 > img {
+            margin: 15px auto 0px auto; } }
+      body.halo4 .halo4-header .container .rank-flairs > .col-md-8 > .progress {
+        margin-bottom: 0; }
+      body.halo4 .halo4-header .container .rank-flairs > .col-md-8 > .xp {
+        font-size: 14px; }
+    body.halo4 .halo4-header .container .spartan-image {
+      height: 140%;
+      width: 300px;
+      background-repeat: no-repeat;
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-bottom: -40px; }
+    body.halo4 .halo4-header .container .spartan-insignia {
+      height: 420px;
+      width: 300px;
+      background-repeat: no-repeat;
+      background-position: top left;
+      position: absolute;
+      top: 0;
+      right: 0; }
+
+body.halo4_home .stats-marketing {
+  margin-top: 100px; }
+  @media (min-width: 768px) {
+    body.halo4_home .stats-marketing {
+      padding-left: 0;
+      padding-right: 0; } }
+  body.halo4_home .stats-marketing > .central {
+    text-align: center; }
+  body.halo4_home .stats-marketing > hr {
+    margin: 80px 0; }
+body.halo4_home .highlight-sector {
+  margin-top: 80px;
+  background: #eee;
+  height: 350px;
+  background-repeat: no-repeat; }
+  body.halo4_home .highlight-sector > .container > h1 {
+    margin-top: 70px;
+    font-size: 55px; }
+  body.halo4_home .highlight-sector > .container > p {
+    font-size: 20px; }
+body.halo4_home .leaferboards {
+  text-align: left;
+  background-position: right center; }
+body.halo4_home .top-ten {
+  text-align: right;
+  background-position: left center; }
+
+body.halo4_homepage.page-bg-backup-cover {
+  background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 40px fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0; }
+  body.halo4_homepage.page-bg-backup-cover .page-bg-cover {
+    background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 40px fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0; }
+  body.halo4_homepage.page-bg-backup-cover #page-bg-mask {
+    padding-top: 59px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    width: 100%; }
+    body.halo4_homepage.page-bg-backup-cover #page-bg-mask.mask {
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      /* IE10+ */
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      /* W3C */ }
+
+body.halo4_service_record .overview > .row > .game-history-split > .wrapper {
+  margin: 0 auto;
+  width: 500px; }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    body.halo4_service_record .overview > .row > .game-history-split > .wrapper {
+      margin-left: -15%; } }
+  body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area {
+    margin: 0 auto;
+    width: 300px; }
+  body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 450px;
+    height: 80px; }
+    body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul {
+      list-style: none;
+      position: relative;
+      float: left;
+      display: block;
+      left: 50%;
+      margin-left: -20px; }
+      body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li {
+        position: relative;
+        float: left;
+        display: block;
+        right: 50%;
+        display: block;
+        float: left;
+        margin: 0;
+        padding: 0;
+        padding-right: 25px; }
+        body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier {
+          width: 10px;
+          height: 10px;
+          margin-bottom: -15px;
+          margin-left: -15px; }
+          body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.campaign {
+            background-color: #F7464A; }
+          body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.war-games {
+            background-color: #5880A0; }
+          body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.customs {
+            background-color: #3d3d7c; }
+          body.halo4_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.spartan-ops {
+            background-color: #949FB1; }
+body.halo4_service_record .game-history .row > .game-history-entry {
+  margin: 20px 0;
+  padding: 0 10px;
+  height: 220px;
+  overflow: hidden; }
+  body.halo4_service_record .game-history .row > .game-history-entry.selected {
+    box-shadow: 0px 0px 10px red; }
+  body.halo4_service_record .game-history .row > .game-history-entry > a {
+    color: white; }
+    body.halo4_service_record .game-history .row > .game-history-entry > a:hover {
+      text-decoration: none;
+      color: white; }
+    body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container {
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box; }
+      body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .mask {
+        width: 100%;
+        height: 100%;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .mask.dnf {
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, #727272 100%);
+          /* FF3.6+ */
+          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, #727272));
+          /* Chrome,Safari4+ */
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, #727272 100%);
+          /* Chrome10+,Safari5.1+ */
+          background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, #727272 100%);
+          /* Opera 12+ */
+          background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, #727272 100%);
+          /* IE10+ */
+          background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, #727272 100%);
+          /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#727272',GradientType=1 );
+          /* IE6-8 fallback on horizontal gradient */ }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .mask.los {
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(213, 19, 14, 0.5) 100%);
+          /* FF3.6+ */
+          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(213, 19, 14, 0.5)));
+          /* Chrome,Safari4+ */
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(213, 19, 14, 0.5) 100%);
+          /* Chrome10+,Safari5.1+ */
+          background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(213, 19, 14, 0.5) 100%);
+          /* Opera 12+ */
+          background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(213, 19, 14, 0.5) 100%);
+          /* IE10+ */
+          background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(213, 19, 14, 0.5) 100%);
+          /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#aad5130e',GradientType=1 );
+          /* IE6-8 fallback on horizontal gradient */ }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .mask.win {
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNzI3MjcyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(10, 133, 190, 0.5) 100%);
+          /* FF3.6+ */
+          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(10, 133, 190, 0.5)));
+          /* Chrome,Safari4+ */
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(10, 133, 190, 0.5) 100%);
+          /* Chrome10+,Safari5.1+ */
+          background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(10, 133, 190, 0.5) 100%);
+          /* Opera 12+ */
+          background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0) 0%, rgba(10, 133, 190, 0.5) 100%);
+          /* IE10+ */
+          background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 0%, rgba(10, 133, 190, 0.5) 100%);
+          /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#aa0a85be',GradientType=1 );
+          /* IE6-8 fallback on horizontal gradient */ }
+      body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .gametype-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        opacity: 0.3;
+        display: none;
+        background-repeat: no-repeat;
+        background-position: center center; }
+      body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        height: 100%;
+        width: 100%;
+        overflow: hidden; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .gametype {
+          font-size: 25px;
+          font-weight: 600;
+          opacity: 0.7; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .selector {
+          opacity: 0.7; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .map-name {
+          font-size: 20px;
+          font-weight: 500; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .stats {
+          position: absolute;
+          bottom: -5px;
+          left: 0; }
+          body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .stats > .type {
+            font-size: 20px; }
+          body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .stats > .stat {
+            font-size: 80px;
+            opacity: 0.6; }
+        body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .windicator {
+          position: absolute;
+          right: 25px;
+          bottom: -10px;
+          opacity: 0.3;
+          font-size: 60px;
+          font-weight: 900;
+          text-transform: uppercase; }
+          @media (min-width: 1200px) {
+            body.halo4_service_record .game-history .row > .game-history-entry > a > .game-history-container > .inner .windicator {
+              opacity: 0.3;
+              font-size: 40px;
+              bottom: -5px;
+              font-weight: 900; } }
+
+body.halo4_specializations .specialization .title {
+  font-size: 16px;
+  font-weight: 600; }
+body.halo4_specializations .specialization .description {
+  font-size: 14px; }
+body.halo4_specializations .specialization .level-progression {
+  margin-top: 20px; }
+body.halo4_specializations .specialization .specialization-icon {
+  background-repeat: no-repeat;
+  height: 130px; }
+body.halo4_specializations .specialization .other-shit {
+  margin-top: 60px; }
+
+body.halo4_commendations .commendations .entry {
+  margin-bottom: 35px;
+  height: 200px; }
+  body.halo4_commendations .commendations .entry > .title {
+    font-size: 16px; }
+    body.halo4_commendations .commendations .entry > .title > .numerical {
+      font-size: 30px;
+      font-weight: 500; }
+  body.halo4_commendations .commendations .entry > .description {
+    font-size: 14px;
+    color: #aaa; }
+  body.halo4_commendations .commendations .entry > .progression {
+    margin-top: 20px; }
+    body.halo4_commendations .commendations .entry > .progression > .points {
+      display: inline;
+      color: #aaa; }
+      body.halo4_commendations .commendations .entry > .progression > .points > .lower {
+        float: left; }
+      body.halo4_commendations .commendations .entry > .progression > .points > .upper {
+        float: right; }
+
+body.halo4_csr .chart {
+  max-width: 100%;
+  height: auto; }
+body.halo4_csr .csr > .row > div > div > div > table
+> tbody > tr > td > .csr-table-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100px;
+  height: 100px; }
+body.halo4_csr .outer-container {
+  display: table;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute; }
+body.halo4_csr .inner-container {
+  display: table-cell;
+  vertical-align: middle; }
+body.halo4_csr .canvas-container {
+  position: relative;
+  max-width: 1024px;
+  min-width: 350px;
+  margin: 0 auto; }
+body.halo4_csr .csr-details > .row {
+  text-align: center; }
+  body.halo4_csr .csr-details > .row > .playlist-image {
+    background-size: cover;
+    height: 260px; }
+    body.halo4_csr .csr-details > .row > .playlist-image > .csr {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 78px;
+      height: 99px;
+      background-repeat: no-repeat; }
+  body.halo4_csr .csr-details > .row > .playlist-data {
+    background-position: 5% 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 20px; }
+    body.halo4_csr .csr-details > .row > .playlist-data > .description {
+      font-size: 17px; }
+    body.halo4_csr .csr-details > .row > .playlist-data > .meta {
+      margin-top: 25px;
+      font-size: 15px; }
+  body.halo4_csr .csr-details > .row > .playlist-advanced-data {
+    text-align: left; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #gvar .entry > td > .icon-frame {
+      width: 120px;
+      height: 120px;
+      background-color: #3d3d7c;
+      background-position: center;
+      background-repeat: no-repeat; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #mvar .entry > td > .preview-frame {
+      width: 180px;
+      height: 130px;
+      background-color: #3d3d7c;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat; }
+    body.halo4_csr .csr-details > .row > .playlist-advanced-data #mvar .entry > td > .name {
+      width: 130px; }
+
+body.halo4_game_history .game-details > .cover {
+  position: relative;
+  height: 374px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  body.halo4_game_history .game-details > .cover > .mask {
+    background: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0, 0, 0, 0.65)), color-stop(100%, rgba(0, 0, 0, 0)));
+    background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -o-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: -ms-linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+    height: 100%; }
+    body.halo4_game_history .game-details > .cover > .mask > .inner {
+      padding: 10px;
+      color: #c5c5c5; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .title {
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .title > h2 {
+          color: white; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .game-icon {
+        width: 128px;
+        height: 128px;
+        margin: 0 auto;
+        background-repeat: no-repeat; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .map {
+        font-size: 16px;
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .map > span.focus {
+          color: white; }
+      body.halo4_game_history .game-details > .cover > .mask > .inner > .victor {
+        margin: 0 auto;
+        text-align: center; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards {
+          margin: 0 auto;
+          margin-bottom: -10px;
+          color: white; }
+          body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard {
+            float: left;
+            height: 75px;
+            width: 50px;
+            margin: 0 5px; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard > .height-mask {
+              width: 100%; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .score-bollard > .score {
+              position: absolute;
+              width: 50px;
+              text-align: center;
+              margin-top: -45px; }
+          body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .team-score-bollard {
+            float: left;
+            height: 75px;
+            width: 50px;
+            margin: 0 5px; }
+            body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .team-score-bollards > .team-score-bollard > div {
+              line-height: 5em; }
+        body.halo4_game_history .game-details > .cover > .mask > .inner > .victor > .ffa-victor {
+          width: 300px;
+          margin: 0 auto; }
+  body.halo4_game_history .game-details > .cover > .victor-player-model {
+    background-repeat: no-repeat;
+    background-position: 30px 20px;
+    height: 350px;
+    width: 255px;
+    position: absolute;
+    top: 24px;
+    left: 0; }
+    @media (min-width: 768px) and (max-width: 992px) {
+      body.halo4_game_history .game-details > .cover > .victor-player-model {
+        top: 21px;
+        height: 353px; } }
+body.halo4_game_history .game-details > .social-shit {
+  margin: 10px 0; }
+  body.halo4_game_history .game-details > .social-shit > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline; }
+    body.halo4_game_history .game-details > .social-shit > ul > li {
+      display: inline; }
+body.halo4_game_history .game-details .details > #player-listing {
+  margin-bottom: 40px; }
+  body.halo4_game_history .game-details .details > #player-listing > div > .team {
+    border-left: 4px solid;
+    border-top: 63px solid;
+    margin-bottom: 30px;
+    padding: 15px 0 0 10px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .check-dat-paddin {
+      padding-left: 0px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team > .header {
+      margin-left: -13px;
+      margin-top: -78px;
+      color: white;
+      font-weight: 600; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row {
+        height: 100%; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row div {
+          padding-top: 20px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .header > .row > .team-indicator {
+          background-position: 2px 0;
+          background-repeat: no-repeat;
+          height: 64px;
+          padding-left: 72px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players {
+      margin-top: 5px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div {
+        border-bottom: 0px;
+        margin-left: -10px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div.expanded {
+          border-bottom: 4px solid; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .expander-indicator > .expander-positioner {
+          margin: 15px 0 0 -1px; }
+          @media (min-width: 992px) and (max-width: 1199px) {
+            body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .expander-indicator > .expander-positioner {
+              margin: 15px 0 0 -7px;
+              padding: 0 5px 0 0; } }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .visual-flair {
+          height: 70px;
+          background-position: center;
+          background-repeat: no-repeat; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .alphabetical-flair {
+          margin-top: 10px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .csr-indicator {
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 60px;
+          background-size: contain; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view {
+          margin: -8px 0 0 -25px; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view > .expander-indicator .player-details-expander > .player-indicator {
+            padding: 8px 0 0 22px;
+            text-align: center; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view > .expander-indicator .player-details-expander > .player-indicator > .visual-flair {
+              height: 70px;
+              padding-top: 15px;
+              color: white;
+              background-position: 20px center;
+              background-repeat: no-repeat; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .player-data {
+          margin: 20px auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team > .team-players > hr {
+        margin: 5px 0; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary > div > .player-model {
+      height: 660px;
+      background-repeat: no-repeat;
+      background-position: 50px 20px; }
+      @media (min-width: 992px) and (max-width: 1199px) {
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary > div > .player-model {
+          background-position: 5px 20px; } }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .summary .player-servicetag {
+      margin-top: -10px; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals {
+      margin: 0 auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div {
+        width: 100px;
+        min-height: 100px;
+        padding: 10px;
+        margin: auto 10px;
+        float: left;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 100; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .medal {
+          height: 100px;
+          background-repeat: no-repeat;
+          background-size: 80px 80px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .count {
+          height: 30px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #top-medals > div > .earned {
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals {
+      margin-left: 10px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals {
+        margin-bottom: 60px; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry {
+          margin: 20px auto; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .medal {
+            float: left;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 80px;
+            background-size: 80px 80px;
+            background-position: center center; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .description {
+            float: left;
+            margin-left: 30px;
+            width: 250px; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .description > .name {
+              font-size: 16px;
+              font-weight: 600; }
+          body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count {
+            float: right;
+            min-width: 100px;
+            text-align: center; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count > .integer {
+              font-size: 50px;
+              font-weight: 100; }
+            body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .medals > #all-medals > #player-medals .medal-entry > .count > .in-dick-ator {
+              font-size: 12px;
+              font-weight: 600;
+              text-transform: uppercase; }
+    body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry {
+      margin: 20px auto; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-image {
+        background-repeat: no-repeat;
+        height: 100px;
+        width: 80px;
+        background-size: 80px 80px;
+        background-position: center center; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-content > .name {
+        font-size: 16px;
+        font-weight: 600; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-content > .tab-content > div {
+        padding-top: 20px; }
+      body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count {
+        text-align: center; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count > .integer {
+          font-size: 50px;
+          font-weight: 100; }
+        body.halo4_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .count > .in-dick-ator {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase; }
+body.halo4_game_history .game-details .details .team-table > thead > tr {
+  color: white; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr.end-dnf {
+  background-color: #eee;
+  opacity: 0.3; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-emblem {
+  width: 60px;
+  height: 60px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 2px;
+  float: left; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-gamertag {
+  margin: 10px 0 0 5px;
+  float: left; }
+body.halo4_game_history .game-details .details .team-table > tbody > tr > td .player-csr {
+  height: 60px;
+  width: 40px;
+  background-size: contain;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  float: right; }
+body.halo4_game_history .game-details .details .team-table .tab-pane > .click-helper {
+  color: #aaa;
+  font-size: 15px; }
+body.halo4_game_history .game-details #overview {
+  margin-top: 40px; }
+  body.halo4_game_history .game-details #overview .graph-container {
+    width: 700px;
+    margin: 20px auto;
+    margin-bottom: 40px; }
+    body.halo4_game_history .game-details #overview .graph-container > .name {
+      text-align: center;
+      color: #555;
+      width: 700px;
+      font-size: 20px;
+      font-weight: 100; }
+    body.halo4_game_history .game-details #overview .graph-container .morris-hover, body.halo4_game_history .game-details #overview .graph-container .morris-default-style {
+      border-radius: 0px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(230, 230, 230, 0.6); }
+      body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend {
+        margin: 5px 10px; }
+        body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend > .time, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend > .time {
+          font-weight: 600;
+          font-size: 14px; }
+        body.halo4_game_history .game-details #overview .graph-container .morris-hover > .graph-hover-legend > .key, body.halo4_game_history .game-details #overview .graph-container .morris-default-style > .graph-hover-legend > .key {
+          font-weight: 600;
+          font-size: 14px; }
+

@@ -1,0 +1,125 @@
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Halo4
+@using Enums = Branch.App.Areas.Halo4.Models.Enums
+@model CsrDetailViewModel
+@{
+	ViewBag.Title = string.Format("{0}'s Halo 4 Csr - {1}", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag), Model.CurrentSkillRank.PlaylistName);
+	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "halo4_csr";
+	ViewBag.CurrentH4Page = Enums.Pages.CompetitiveSkillRank;
+
+	var serviceRecord = Model.ServiceRecord;
+	var currentSkillRank = Model.CurrentSkillRank;
+	var playlist = Model.Playlist;
+}
+
+<div class="bs-branch-section csr-details">
+	
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)'s @currentSkillRank.PlaylistName CSR</h1>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12 playlist-image" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(currentSkillRank.PlaylistImageUrl, "large")')">
+			<div class="csr" style="background-image: url('@GeneralHelpers.GetCsrLevelUrl(currentSkillRank.CompetitiveSkillRank ?? 0)')"></div>
+		</div>
+
+
+		<div class="col-md-12">
+			<hr />
+		</div>
+
+
+		<div class="col-md-12 playlist-data">
+			<span class="description">@currentSkillRank.PlaylistDescription</span>
+
+
+			<div class="meta">
+				<span>
+					Max Party Size:
+					<strong>@(playlist.MaxPartySize)</strong>
+				</span>
+				<br />
+				<span>
+					Max Local Party Size:
+					<strong>@(playlist.MaxLocalPlayers)</strong>
+				</span>
+				<br />
+				<span>
+					Player Grouping:
+					<strong>
+						@(playlist.IsFreeForAll ? "Free for All" : "Team vs Team")
+					</strong>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-md-12 hidden-xs">
+			<hr />
+		</div>
+		<div class="col-md-12 hidden-xs playlist-advanced-data">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#gvar" data-toggle="tab">Game Variants</a>
+				</li>
+				<li>
+					<a href="#mvar" data-toggle="tab">Map Variants</a>
+				</li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="gvar">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>*</th>
+								<th>Game Variant Name</th>
+								<th>Game Variant Description</th>
+								<th>Variant Based off of</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var gameVariant in playlist.RelatedGameVariants)
+							{
+								<tr class="entry">
+									<td>
+										<div class="icon-frame" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(gameVariant.GameBaseVariantImageUrl)');"></div>
+									</td>
+									<td>@gameVariant.Name</td>
+									<td>@gameVariant.Description</td>
+									<td>@gameVariant.GameBaseVariantName</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade in" id="mvar">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>*</th>
+								<th style="width: 150px;">Map Variant Name</th>
+								<th>Map Variant Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var map in playlist.RelatedMapVariants.Select(mapVariant => MetadataHelpers.GetMapInfo(mapVariant.BaseMapId)))
+							{
+								<tr class="entry">
+									<td>
+										<div class="preview-frame" style="background-image: url('@GeneralHelpers.GetRawAssetUrl(map.ImageUrl)');"></div>
+									</td>
+									<td class="name">@map.Name</td>
+									<td>@map.Description</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

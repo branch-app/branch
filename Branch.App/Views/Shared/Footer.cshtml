@@ -1,0 +1,49 @@
+﻿@model bool
+@{
+	var customStyle = "";
+	var linkType = "";
+	if (Model)
+	{
+		customStyle = "color: #fff; border-top: 0px;";
+		linkType = "alt";
+	}
+}
+
+<footer class="bs-footer" role="contentinfo" style="@customStyle">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10">
+				<p>Developed by <a class="@linkType" href="http://twitter.com/alexerax" target="_blank">&#64;alexerax</a>.</p>
+				<p>Developed in C# | ASP.NET on Windows Azure</p>
+				<p>Code licensed under the <a class="@linkType" href="http://www.dbad-license.org/" target="_blank">Don't Be A Dick</a> Public License.</p>
+				<p>&copy; @DateTime.Now.Year - Branch</p>
+				<ul class="footer-links">
+					<li><a class="@linkType" href="https://github.com/TheTree/Branch" target="_blank">Github</a></li>
+					<li>·</li>
+					<li><a class="@linkType" href="http://xboxchaos.com/" target="_blank">Xbox Chaos</a></li>
+					<li>·</li>
+					<li><a class="@linkType" href="http://halo.reddit.com/" class="" target="_blank">r/halo</a></li>
+					<li>·</li>
+					<li><a class="@linkType" href="http://unscwarfare.com/" target="_blank">UNSC Warfare</a></li>
+					<li>·</li>
+					<li><a class="@linkType" href="http://onyx.io/" target="_blank">Onyx</a></li>
+					<li>·</li>
+					<li><a class="@linkType" href="#" target="_blank">Blog</a></li>
+				</ul>
+				<ul class="footer-links">
+					<li>
+						@Html.ActionLink("Privacy Policy", "Index", "Home", new { }, new { @class = linkType })
+					</li>
+					<li>·</li>
+					<li>
+						@Html.ActionLink("Terms", "Index", "Home", new { }, new { @class = linkType })
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-md-2 hidden-xs hidden-sm">
+				<img src="@Url.Content("~/Content/Images/uk-map.png")" class="img-circle" alt="" style="width: 60px; height: 77px;" />
+			</div>
+		</div>
+	</div>
+</footer>

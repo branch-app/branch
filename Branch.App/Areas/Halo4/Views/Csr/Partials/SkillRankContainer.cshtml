@@ -1,0 +1,33 @@
+﻿@using Branch.App.Helpers.Razor.Halo4
+@using Branch.Extenders
+@model Tuple<IEnumerable<Branch.Models.Services.Halo4._343.DataModels.CommonModels.CurrentSkillRank>, string>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Ranking</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var skillRank in Model.Item1)
+		{
+			<tr>
+				<td>
+					<img alt="" src="@GeneralHelpers.GetRawAssetUrl(skillRank.PlaylistImageUrl, "small")" />
+				</td>
+				<td>
+					@Html.RouteLink(skillRank.PlaylistName, "Halo4_CsrDetails", new { id = skillRank.PlaylistId, slug = skillRank.PlaylistName.ToSlug(), gamertag = Model.Item2 })
+				</td>
+				<td>
+					@skillRank.PlaylistDescription
+				</td>
+				<td>
+					<div class="csr-table-icon" style="background-image: url('@GeneralHelpers.GetCsrLevelUrl(skillRank.CompetitiveSkillRank ?? 0)')"></div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

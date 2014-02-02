@@ -1,0 +1,94 @@
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@using Branch.Extenders
+@using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
+@model Base
+@{
+	var serviceRecord = @Model.ServiceRecord;
+	Enums.Pages currentPage = ViewBag.CurrentH4Page;
+	_343Enums.CommendationCategory? currentCommendationCategory = ViewBag.CurrentCommendationCategory;
+	_343Enums.Mode? currentHistoryMode = ViewBag.CurrentHistoryMode;
+}
+<div class="bs-sidebar" data-spy="affix" data-offset-top="302">
+	<ul class="nav bs-sidenav">
+		<li class="active">
+			<a href="@Url.Action("Index", "ServiceRecord", new RouteValueDictionary { {"gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)} })">
+				<span class="glyphicon glyphicon-tree-deciduous"></span> Branch
+			</a>
+			
+			<ul class="nav">
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.ServiceRecord, "active")">
+					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) } }, new Dictionary<string, object>())
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.GameHistory, "active")">
+					@Html.RouteLink("Game History", "Halo4_History", new { slug = "WarGames", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					
+					@if (currentPage == Enums.Pages.GameHistory)
+					{
+						<ul class="nav">
+							@foreach (var gameMode in (_343Enums.Mode[])Enum.GetValues(typeof(_343Enums.Mode)))
+							{
+								<li class="@BranchHelpers.CompareEnum(currentHistoryMode, gameMode, "active")">
+									@Html.RouteLink(gameMode.ToString().MakeCamelCaseFriendly(), "Halo4_History", new { slug = gameMode.ToString(), gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+								</li>
+							}
+						</ul>
+					}
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
+					@Html.RouteLink("Competitive Skill Rank", "Halo4_Csr", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Commendations, "active")">
+					@Html.RouteLink("Commendations", "Halo4_Commendations", new { slug = "Weapons", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+
+					@if (currentPage == Enums.Pages.Commendations)
+					{
+						<ul class="nav">
+							@foreach (var commendationCategory in (_343Enums.CommendationCategory[])Enum.GetValues(typeof(_343Enums.CommendationCategory)))
+							{
+								<li class="@BranchHelpers.CompareEnum(currentCommendationCategory, commendationCategory, "active")">
+									@Html.RouteLink(commendationCategory.ToString().MakeCamelCaseFriendly(), "Halo4_Commendations", new { slug = commendationCategory.ToString(), gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+								</li>
+							}
+						</ul>
+					}
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Specializations, "active")">
+					@Html.RouteLink("Specializations", "Halo4_Specializations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+				</li>
+			</ul>
+		</li>
+		<li class="active">
+			<a href="#">
+				<span class="glyphicon glyphicon-leaf"></span> Leaf
+			</a>
+			<ul class="nav">
+				<li>
+					<a href="http://leafapp.co/h4/record/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+						Overview
+					</a>
+				</li>
+				<li>
+					<a href="http://leafapp.co/h4/compare/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+						Compare
+					</a>
+				</li>
+				<li>
+					<a href="http://leafapp.co/h4/star/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+						Star
+					</a>
+				</li>
+				<li>
+					<a href="http://leafapp.co/h4/flag/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+						Flag as Cheater/Booster
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
