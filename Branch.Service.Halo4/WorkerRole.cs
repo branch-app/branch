@@ -13,6 +13,8 @@ using Branch.Models.Services.Halo4.Branch;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Enums = Branch.Models.Services.Branch.Enums;
 
+// ReSharper disable ConvertToConstant.Local
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 namespace Branch.Service.Halo4
 {
 	public class WorkerRole : RoleEntryPoint
@@ -45,7 +47,6 @@ namespace Branch.Service.Halo4
 
 				foreach (var task in tasks.Where(task => DateTime.UtcNow >= (task.LastRun.AddSeconds(task.Interval))))
 				{
-// ReSharper disable once ConvertToConstant.Local
 					var updateLastRun = true;
 
 					switch (task.Type)
@@ -129,7 +130,6 @@ namespace Branch.Service.Halo4
 					}
 
 					task.Interval = (int) _tasks.First(t => t.Key == task.Type).Value.TotalSeconds;
-// ReSharper disable once ConditionIsAlwaysTrueOrFalse
 					if (updateLastRun) task.LastRun = DateTime.UtcNow;
 					_storage.Table.ReplaceSingleEntity(task, _storage.Table.Halo4CloudTable);
 				}
