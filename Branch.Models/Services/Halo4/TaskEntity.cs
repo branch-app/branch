@@ -16,7 +16,7 @@ namespace Branch.Models.Services.Halo4
 			Challenge = 0x04
 		}
 
-		public const string PartitionKeyString = "ServiceTask";
+		public const string PartitionKeyString = "Halo4ServiceTasks";
 		public const string RowKeyString = "{0}";
 
 		public TaskEntity()

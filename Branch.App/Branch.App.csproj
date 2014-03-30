@@ -167,6 +167,7 @@
     <Compile Include="Areas\Halo4\Models\GamePlayerListViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\GameViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\HistoryViewModel.cs" />
+    <Compile Include="Areas\Halo4\Models\HomeViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\SpecializationsViewModel.cs" />
     <Content Include="Areas\Halo4\Views\History\Campaign.cshtml" />
@@ -176,6 +177,8 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
+    <Content Include="Content\Images\Area\Halo4\leaderboard-overview.png" />
+    <Content Include="Content\Images\Area\Halo4\top-ten-overview.png" />
     <Content Include="Content\Styles\About\_index.scss" />
     <Content Include="Content\Styles\bootstrap-branch.css">
       <DependentUpon>bootstrap-branch.scss</DependentUpon>

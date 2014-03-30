@@ -84,7 +84,7 @@ body.home .marketing > hr {
 body.home .games .game {
   height: 450px; }
   body.home .games .game .game-backup-cover {
-    background: #ffffff no-repeat center 40px fixed;
+    background: #ffffff no-repeat center 0 fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -97,7 +97,7 @@ body.home .games .game {
     body.home .games .game .game-backup-cover.Destiny {
       background-image: url("/Content/Images/Home/Covers/Destiny/cover1.jpg"); }
     body.home .games .game .game-backup-cover .game-cover {
-      background: #ffffff no-repeat center 40px fixed;
+      background: #ffffff no-repeat center 0 fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -270,35 +270,35 @@ body.halo4 .halo4-header {
       top: 0;
       right: 0; }
 
-body.halo4_home .stats-marketing {
+body.halo4_homepage .stats-marketing {
+  color: white;
   margin-top: 100px; }
   @media (min-width: 768px) {
-    body.halo4_home .stats-marketing {
+    body.halo4_homepage .stats-marketing {
       padding-left: 0;
       padding-right: 0; } }
-  body.halo4_home .stats-marketing > .central {
+  body.halo4_homepage .stats-marketing > .central {
     text-align: center; }
-  body.halo4_home .stats-marketing > hr {
+  body.halo4_homepage .stats-marketing > hr {
     margin: 80px 0; }
-body.halo4_home .highlight-sector {
+body.halo4_homepage .highlight-sector {
   margin-top: 80px;
   background: #eee;
   height: 350px;
   background-repeat: no-repeat; }
-  body.halo4_home .highlight-sector > .container > h1 {
+  body.halo4_homepage .highlight-sector > .container > h1 {
     margin-top: 70px;
     font-size: 55px; }
-  body.halo4_home .highlight-sector > .container > p {
+  body.halo4_homepage .highlight-sector > .container > p {
     font-size: 20px; }
-body.halo4_home .leaferboards {
+body.halo4_homepage .leaferboards {
   text-align: left;
   background-position: right center; }
-body.halo4_home .top-ten {
+body.halo4_homepage .top-ten {
   text-align: right;
   background-position: left center; }
-
 body.halo4_homepage.page-bg-backup-cover {
-  background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 40px fixed;
+  background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 0 fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -308,7 +308,7 @@ body.halo4_homepage.page-bg-backup-cover {
   top: 0;
   left: 0; }
   body.halo4_homepage.page-bg-backup-cover .page-bg-cover {
-    background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 40px fixed;
+    background: url("/Content/Images/Home/Covers/Halo4/cover1.jpg") no-repeat center 0 fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -323,22 +323,7 @@ body.halo4_homepage.page-bg-backup-cover {
     bottom: 0;
     left: 0;
     right: 0;
-    position: fixed;
-    width: 100%; }
-    body.halo4_homepage.page-bg-backup-cover #page-bg-mask.mask {
-      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-      background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-      /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.4)));
-      /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-      /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-      /* Opera 11.10+ */
-      background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-      /* IE10+ */
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-      /* W3C */ }
+    position: absolute; }
 
 body.halo4_service_record .overview > .row > .game-history-split > .wrapper {
   margin: 0 auto;

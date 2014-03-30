@@ -1,9 +1,16 @@
-﻿namespace Branch.Models.Services.Branch
+﻿using System;
+
+namespace Branch.Models.Services.Branch
 {
 	public sealed class Halo4StatsEntity : BaseEntity
 	{
 		public static readonly string PartitionKeyString = "Halo4Stats";
 		public static readonly string RowKeyString = "{0}";
+
+		public static string FormatRowKey(string ending)
+		{
+			return String.Format(RowKeyString, ending);
+		}
 
 		public Halo4StatsEntity() { }
 

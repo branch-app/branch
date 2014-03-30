@@ -172,6 +172,10 @@ namespace Branch.Service.Halo4
 
 			#endregion
 
+			//var statsTask = _storage.Table.RetrieveSingleEntity<TaskEntity>(TaskEntity.PartitionKeyString, TaskEntity.FormatRowKey(TaskEntity.TaskType.StatUpdate.ToString()), _storage.Table.Halo4CloudTable);
+			//statsTask.LastRun = new DateTime(2007, 01, 01);
+			//_storage.Table.InsertOrReplaceSingleEntity(statsTask, _storage.Table.BranchCloudTable);
+
 			return base.OnStart();
 		}
 	}

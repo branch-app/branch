@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 using Branch.Models.Services.Branch;
 
 namespace Branch.App.Helpers.Razor
@@ -26,6 +27,40 @@ namespace Branch.App.Helpers.Razor
 		public static string MakeDateTimeFriendly(DateTime dateTime, string format = "G")
 		{
 			return dateTime.ToString(format);
+		}
+
+		public static string MakeTimeSpanFriendly(TimeSpan timeSpan)
+		{
+			var years = timeSpan.Days / 365; //no leap year accounting
+			var months = (timeSpan.Days % 365) / 30; //naive guess at month size
+			var weeks = ((timeSpan.Days % 365) % 30) / 7;
+			var days = (((timeSpan.Days % 365) % 30) % 7);
+			var total = 0;
+
+			var sb = new StringBuilder();
+			if (years > 0)
+			{
+				sb.Append(years + " years, ");
+				total++;
+			}
+			if (months > 0)
+			{
+				sb.Append(months + " months, ");
+				total++;
+			}
+			if (weeks > 0)
+			{
+				sb.Append(weeks + " weeks, ");
+				total++;
+			}
+			if (days <= 0) return sb.ToString();
+
+			if (total > 0)
+				sb.Append("and " + days + " days");
+			else
+				sb.Append(days + " days");
+
+			return sb.ToString();
 		}
 
 		public static string CalculatePercentage(float a, float b, int roundTo = 2)

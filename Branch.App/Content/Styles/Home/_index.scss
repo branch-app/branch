@@ -66,7 +66,7 @@
 			height: 450px;
 
 			.game-backup-cover {
-				background: #ffffff no-repeat center 40px fixed;
+				background: #ffffff no-repeat center 0 fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;
@@ -79,7 +79,7 @@
 				&.Destiny { background-image: url('/Content/Images/Home/Covers/Destiny/cover1.jpg'); }
 
 				.game-cover {
-					background: #ffffff no-repeat center 40px fixed;
+					background: #ffffff no-repeat center 0 fixed;
 					-webkit-background-size: cover;
 					-moz-background-size: cover;
 					-o-background-size: cover;

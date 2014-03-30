@@ -238,7 +238,7 @@
 										{
 											<li class="list-group-item">
 												<span class="badge">
-													@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
+													@if (player.KilledByMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledByMostGamertag))
 													{
 														// Not a Guest
 														@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag), "Index", "ServiceRecord",
