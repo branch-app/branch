@@ -90,6 +90,9 @@ namespace Branch.Core.Storage
 
 		public void UploadBlob(CloudBlobContainer blobContainer, string blobName, string blobData)
 		{
+			if (blobData == null)
+				throw new ArgumentNullException("blobData", "BlobData in UploadBlob is broken.");
+
 			var blob = blobContainer.GetBlockBlobReference(blobName);
 			blob.UploadText(blobData);
 		}

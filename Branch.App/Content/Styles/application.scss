@@ -1,10 +1,4 @@
-﻿// ---- Le Navbar ----
-// --------------------------------------------
-body {
-	padding-top: 50px;
-}
-
-// ---- Float Helpers ----
+﻿// ---- Float Helpers ----
 // --------------------------------------------
 .right {
 	float: right;
@@ -16,10 +10,12 @@ body {
 // ---- Padding and Spacing Helpers ----
 // --------------------------------------------
 .bitch-needs-a-break {
-	margin-top: 40px;
+	/*margin-top: 40px;*/
 }
 
 .text-right {
+
+
 	text-align: right;
 }
 
@@ -61,6 +57,15 @@ ul.no-style {
 footer > .container > .row > .col-md-2 > .made-in {
 	font-size: 12px;
 	color: #aaa;
+}
+
+// ---- Custom Anchors ----
+// --------------------------------------------
+a {
+    color: #3d3d7c;
+}
+a.alt {
+	color: #ffa210;
 }
 
 @import "Home/index";

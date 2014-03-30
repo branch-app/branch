@@ -4,14 +4,11 @@ namespace Branch.Models.Services.Halo4.Branch
 {
 	public class ServiceRecordEntity : BaseEntity
 	{
-		public ServiceRecordEntity()
-		{
-			
-		}
+		public ServiceRecordEntity() {  }
 
 		public ServiceRecordEntity(string gamertag)
 		{
-			SetKeys(null, gamertag);
+			SetKeys(null, gamertag.ToLowerInvariant());
 
 			Gamertag = gamertag;
 		}
@@ -46,7 +43,7 @@ namespace Branch.Models.Services.Halo4.Branch
 
 		public int FavoriteWeaponTotalKills { get; set; }
 
-		#region BranchStuff
+		#region Global Branch Stuff
 
 		public int WarGamesKills { get; set; }
 

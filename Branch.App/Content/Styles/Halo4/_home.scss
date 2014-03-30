@@ -51,7 +51,7 @@ body.halo4 {
 			}
 
 			.spartan-image {
-				height: 140%;		
+				height: 321px;		
 				width: 300px;
 
 				background-repeat: no-repeat;
@@ -63,7 +63,7 @@ body.halo4 {
 				-ms-filter: "FlipH";
 
 				position: absolute;
-				bottom: 0;
+				top: -51px;
 				right: 0;		
 				margin-bottom: -40px;	
 			}
@@ -150,7 +150,6 @@ body.halo4_homepage {
 		}
 
 		#page-bg-mask {
-			padding-top: 59px;
 			top: 0;
 			bottom: 0;
 			left: 0;

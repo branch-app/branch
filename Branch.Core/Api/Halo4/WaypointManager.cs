@@ -295,16 +295,7 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		public void UpdateMetadata()
 		{
-			var metaData =
-				ValidateResponseAndGetRawText(
-					UnauthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameMetadata"))));
-
-			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "metadata"),
-				metaData);
-
-			// Update in Class
-			Metadata = ParseText<Metadata>(metaData);
+			Metadata = UpdateOther<Metadata>("metadata", "GetGameMetadata");
 		}
 
 		/// <summary>
@@ -312,16 +303,7 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		public void UpdatePlaylists()
 		{
-			var playlists =
-				ValidateResponseAndGetRawText(AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetPlaylists")),
-					AuthType.Spartan));
-
-			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "playlists"),
-				playlists);
-
-			// Update in Class
-			Playlists = ParseText<Playlist>(playlists);
+			Playlists = UpdateOther<Playlist>("playlists", "GetPlaylists");
 		}
 
 		/// <summary>
@@ -329,17 +311,38 @@ namespace Branch.Core.Api.Halo4
 		/// </summary>
 		public void UpdateChallenges()
 		{
-			var challenges =
-				ValidateResponseAndGetRawText(
-					AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGlobalChallenges")),
-						AuthType.Spartan));
+			Challenges = UpdateOther<Challenge>("challenges", "GetGlobalChallenges");
+		}
 
-			// Save Metadata
-			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, "challenges"),
-				challenges);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="blobFileName"></param>
+		/// <param name="serviceListName"></param>
+		/// <returns></returns>
+		private T UpdateOther<T>(string blobFileName, string serviceListName)
+			where T : WaypointResponse
+		{
+			var blobPath = GenerateBlobContainerPath(BlobType.Other, blobFileName);
+			var otherData = _storage.Blob.FindAndDownloadBlob<T>(_storage.Blob.H4BlobContainer, blobPath);
 
-			// Update in Class
-			Challenges = ParseText<Challenge>(challenges);
+			if (otherData == null)
+			{
+				var otherDataString =
+					ValidateResponseAndGetRawText(
+						AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, serviceListName)), AuthType.Spartan));
+
+				if (otherDataString == null)
+					return null;
+
+				// Save
+				_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, blobFileName),
+					otherDataString);
+
+				otherData = ParseText<T>(otherDataString);
+			}
+			return otherData;
 		}
 
 		#endregion

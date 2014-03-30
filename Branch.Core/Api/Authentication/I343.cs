@@ -70,12 +70,12 @@ namespace Branch.Core.Api.Authentication
 				ResponseCode = -1,
 				UserInformation = null
 			};
-			storage.Table.InsertSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
+			storage.Table.InsertOrReplaceSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
 
-			// send sms
-			new TwilioRestClient(CloudConfigurationManager.GetSetting("TwilioSid"), CloudConfigurationManager.GetSetting("TwilioAuthToken")).SendSmsMessage(
-				CloudConfigurationManager.GetSetting("TwilioFromNumber"), CloudConfigurationManager.GetSetting("TwilioToNumber"),
-				"Branch just failed to update it's Halo 4 Authentication Tokens. fuck.");
+			//// send sms
+			//new TwilioRestClient(CloudConfigurationManager.GetSetting("TwilioSid"), CloudConfigurationManager.GetSetting("TwilioAuthToken")).SendSmsMessage(
+			//	CloudConfigurationManager.GetSetting("TwilioFromNumber"), CloudConfigurationManager.GetSetting("TwilioToNumber"),
+			//	"Branch just failed to update it's Halo 4 Authentication Tokens. fuck.");
 
 			return false;
 		}

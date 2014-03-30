@@ -1,5 +1,5 @@
 ﻿<a class="sr-only">Skip navigation</a>
-<header class="navbar navbar-inverse navbar-fixed-top bs-branch-nav" role="banner">
+<header class="navbar navbar-static-top" role="banner">
 	<div class="container">
 		<div class="navbar-header">
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -19,7 +19,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Halo 4 <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li>
-							@Html.ActionLink("Halo 4", "Index", "Home")
+							@Html.ActionLink("Halo 4", "Index", "Home", new { area = "Halo4" }, null)
 						</li>
 
 						<li class="divider"></li>

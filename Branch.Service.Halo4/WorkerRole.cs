@@ -72,8 +72,8 @@ namespace Branch.Service.Halo4
 						case TaskEntity.TaskType.StatUpdate:
 							#region Shink me pls
 							
-						//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
-							//	break;
+							//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
+								//	break;
 							//updateLastRun = false;
 
 							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",

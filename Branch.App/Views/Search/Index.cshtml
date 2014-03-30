@@ -6,15 +6,17 @@
 	ViewBag.Template = "search";
 }
 
+<div class="bs-header">
+	<div class="container">
+		<h1>@(Model.Query)</h1>
+		<h1><strong>Search results</strong></h1>
+	</div>
+</div>
+
 <div class="container">
 	
 	@Html.Partial("FlashMessage", true)
 
-	<div class="page-header row">
-		<div class="col-md-12">
-			<h1 id="less">Search results for '@(Model.Query)'...</h1>
-		</div>
-	</div>
 	<div>
 		<div class="row">
 			@if (Model.Halo4ServiceRecord != null)

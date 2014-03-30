@@ -177,6 +177,9 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
     <Content Include="Content\Styles\About\_index.scss" />
+    <Content Include="Content\Styles\bootstrap-branch.css">
+      <DependentUpon>bootstrap-branch.scss</DependentUpon>
+    </Content>
     <Content Include="Content\Styles\Halo4\_challenges.scss" />
     <Content Include="Content\Styles\Halo4\_playlists.scss" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
@@ -233,7 +236,7 @@
     <Content Include="Content\Styles\application.css">
       <DependentUpon>application.scss</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\bootstrap-branch.css" />
+    <None Include="Content\Styles\bootstrap-branch.scss" />
     <Content Include="Content\Styles\bootstrap-custom.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
