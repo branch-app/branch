@@ -9,13 +9,13 @@
 	_343Enums.CommendationCategory? currentCommendationCategory = ViewBag.CurrentCommendationCategory;
 	_343Enums.Mode? currentHistoryMode = ViewBag.CurrentHistoryMode;
 }
-<div class="bs-sidebar" data-spy="affix" data-offset-top="302">
+<div class="bs-sidebar" data-spy="affix" data-offset-top="308">
 	<ul class="nav bs-sidenav">
 		<li class="active">
 			<a href="@Url.Action("Index", "ServiceRecord", new RouteValueDictionary { {"gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)} })">
 				<span class="glyphicon glyphicon-tree-deciduous"></span> Branch
 			</a>
-			
+
 			<ul class="nav">
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.ServiceRecord, "active")">
 					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) } }, new Dictionary<string, object>())
@@ -23,7 +23,7 @@
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.GameHistory, "active")">
 					@Html.RouteLink("Game History", "Halo4_History", new { slug = "WarGames", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
-					
+
 					@if (currentPage == Enums.Pages.GameHistory)
 					{
 						<ul class="nav">

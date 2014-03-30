@@ -475,9 +475,15 @@
 
 .bs-sidebar {
 	margin-top: 50px;
+	padding-left: 40px;
 
-	.affix {
-		position: static;
+	&.affix {
+		position: fixed;
+		top: 25px;
+
+		@media (max-width: 992px) {
+			position: static;
+		}
 	}
 
 	.bs-sidenav {
@@ -512,7 +518,7 @@
 			font-weight: 700;
 			color: #563d7c;
 			background-color: transparent;
-			border-left: 2px solid #563d7c;
+			border-left: 1px solid #563d7c;
 		}
 
 		.nav {
@@ -531,6 +537,23 @@
 			.active:focus > a {
 				font-weight: 500;
 				padding-left: 38px;
+			}
+
+			.nav {
+				> li > a {
+					padding-top: 1px;
+					padding-bottom: 1px;
+					padding-left: 60px;
+					font-size: 13px;
+					font-weight: 400;
+				}
+
+				.active > a,
+				.active:hover > a,
+				.active:focus > a {
+					font-weight: 500;
+					padding-left: 58px;
+				}
 			}
 		}
 	}

@@ -65,14 +65,14 @@
 	<div class="social-shit">
 		<ul>
 			<li>
-				<a href="@SocialHelpers.GenerateTwitterShareLink(title, HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #4099FF;">
+				<a role="button" href="@SocialHelpers.GenerateTwitterShareLink(title, HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #4099FF;">
 					<span class="glyphicon glyphicon-retweet" style="padding-right: 8px;"></span>
 					Tweet
 				</a>
 			</li>
 
 			<li>
-				<a href="@SocialHelpers.GenerateFacebookShareLink(HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #3B5998;">
+				<a role="button" href="@SocialHelpers.GenerateFacebookShareLink(HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #3B5998;">
 					<span class="glyphicon glyphicon-thumbs-up" style="padding-right: 8px;"></span>
 					Like
 				</a>
