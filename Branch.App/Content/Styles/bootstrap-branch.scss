@@ -397,10 +397,38 @@
 }
 /*# sourceMappingURL=bootstrap-theme.css.map */
 
+// ---- Control Overrides ----
+// ---------------------------
+.progress {
+    margin-bottom: 0px;
+    background: transparent;
+    border-radius: 0px;
+	border: 1px solid #428bca;
+}
+.progress-bar {
+	float: left;
+	width: 0;
+	height: 100%;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	background: #428bca;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-webkit-transition: width .6s ease;
+	transition: width .6s ease;
+}
+
+.well {
+	border-radius: 0px;
+}
+
 .navbar {
 	background-color: white;
 	border-bottom: 1px solid #3d3d7c;
 }
+
 
 .bs-header {
 	padding: 40px 0;
@@ -425,6 +453,7 @@
 	}
 }
 
+
 .bs-footer {
 	text-align: left;
 	padding: 40px 0;
@@ -439,6 +468,70 @@
 		li {
 			display: inline;
 			padding: 0 2px;
+		}
+	}
+}
+
+
+.bs-sidebar {
+	margin-top: 50px;
+
+	.affix {
+		position: static;
+	}
+
+	.bs-sidenav {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.nav {
+		> li {
+			> a {
+				display: block;
+				font-size: 15px;
+				font-weight: 500;
+				color: #999;
+				padding: 4px 20px;
+
+				&:hover, 
+				&:focus {
+					padding-left: 19px;
+					color: #563d7c;
+					text-decoration: none;
+					background-color: transparent;
+					border-left: 1px solid #563d7c;
+				}
+			}
+		}
+
+		> .active > a,
+		> .active:hover > a,
+		> .active:focus > a {
+			padding-left: 18px;
+			font-weight: 700;
+			color: #563d7c;
+			background-color: transparent;
+			border-left: 2px solid #563d7c;
+		}
+
+		.nav {
+			padding-bottom: 10px;
+
+			> li > a {
+				padding-top: 1px;
+				padding-bottom: 1px;
+				padding-left: 40px;
+				font-size: 13px;
+				font-weight: 400;
+			}
+
+			.active > a,
+			.active:hover > a,
+			.active:focus > a {
+				font-weight: 500;
+				padding-left: 38px;
+			}
 		}
 	}
 }

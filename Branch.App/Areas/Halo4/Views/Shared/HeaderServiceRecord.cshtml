@@ -8,9 +8,9 @@
 <div class="bs-header halo4-header" id="content">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<div class="row name-flairs">
-					<div class="col-md-12">
+					<div class="col-md-10">
 						<h1>
 							@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)
 							<img class="" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="row rank-flairs">
-					<div class="col-md-8">
+					<div class="col-md-10">
 						<img class="hidden-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl, "medium")" />
 
 						@{
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="spartan-insignia hidden-sm hidden-xs" style="background-image: url(@GeneralHelpers.GetRawAssetUrl(@serviceRecord.EmblemImageUrl, 100));"></div>
 				<div class="spartan-image hidden-sm hidden-xs" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(@serviceRecord.Gamertag)');"></div>
 			</div>
