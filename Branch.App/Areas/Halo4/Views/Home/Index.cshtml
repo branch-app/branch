@@ -1,4 +1,5 @@
 ﻿@using Branch.App.Helpers.Razor
+@using Branch.Models.Services.Halo4._343.DataModels
 @model Branch.App.Areas.Halo4.Models.HomeViewModel
 @{
 	ViewBag.Title = "Halo 4";
@@ -19,13 +20,19 @@
 </div>
 	
 <div class="container stats-marketing">
+	@{
+		var totalPopulation = Model.Playlists.Playlists.Sum(p => p.PopulationCount);
+		var totalTeamPopulation = Model.Playlists.Playlists.Where(p => !p.IsFreeForAll).Sum(p => p.PopulationCount);
+		var totalFfaPopulation = Model.Playlists.Playlists.Where(p => p.IsFreeForAll).Sum(p => p.PopulationCount);
+	}
+
 	<div class="row central">
 		<div class="col-md-4">
 			<canvas id="total-playlist-population" width="140" height="140"></canvas>
-
+			
 			<h2>All Playlists</h2>
 			<p>
-				There are currently 69 people playing Halo 4 Online.
+				There are currently @totalPopulation people playing Halo 4 Online.
 			</p>
 		</div>
 		<div class="col-md-4">
@@ -33,7 +40,7 @@
 
 			<h2>Team Playlists</h2>
 			<p>
-				There are currently 69 people playing Team based CSR Playlists.
+				There are currently @totalTeamPopulation people playing Team based CSR Playlists.
 			</p>
 		</div>
 		<div class="col-md-4">
@@ -41,7 +48,7 @@
 
 			<h2>Indvidual Playlists</h2>
 			<p>
-				There are currently 69 people playing Indvidual based CSR Playlists.
+				There are currently @totalFfaPopulation people playing Indvidual based CSR Playlists.
 			</p>
 		</div>
 	</div>
@@ -108,6 +115,58 @@
 	</div>
 </div>
 
+<div class="container stats-marketing">
+	@{
+		var totalCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Sum(c => c.XpReward));
+		var campaignCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward));
+		var matchmakingCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward));
+		var spOpsCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward));
+	}
+
+	<div class="row central">
+		<div class="col-md-3">
+			<canvas id="challenges-total-credits" width="140" height="140"></canvas>
+			
+			<h2>All Halo 4 Challenges</h2>
+			<p>
+				There is currently @(totalCredits)Xp avaiable though all challenges.
+			</p>
+		</div>
+
+		<div class="col-md-3">
+			<canvas id="challenges-campaign-credits" width="140" height="140"></canvas>
+
+			<h2>Campaign Challenges</h2>
+			<p>
+				There is currently @(campaignCredits)Xp avaiable though all Campaign challenges.
+			</p>
+		</div>
+
+		<div class="col-md-3">
+			<canvas id="challenges-matchmaking-credits" width="140" height="140"></canvas>
+
+			<h2>War Games Challenges</h2>
+			<p>
+				There is currently @(matchmakingCredits)Xp avaiable though all War Games challenges.
+			</p>
+		</div>
+
+		<div class="col-md-3">
+			<canvas id="challenges-spops-credits" width="140" height="140"></canvas>
+
+			<h2>Spartan Ops Challenges</h2>
+			<p>
+				There is currently @(spOpsCredits)Xp avaiable though all Spartan Ops challenges.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="highlight-sector">
+	<div class="container">
+		<h1>Put stuff here</h1>
+	</div>
+</div>
 
 @section scripts {
 	<!-- Playlist Stats -->
@@ -124,24 +183,24 @@
 		new Chart(ctx).Doughnut(
 			[
 				{
-					value: 69,
-					color: '#4D5360'
+					value: @(totalTeamPopulation),
+					color: '#F7464A'
 				},
 				{
-					value: 69,
-					color: '#F7464A'
+					value: @(totalFfaPopulation),
+					color: '#4D5360'
 				}
 			]);
 		ctx = document.getElementById("indvidual-playlist-population").getContext("2d");
 		new Chart(ctx).Doughnut(
 			[
 				{
-					value: 69,
-					color: '#4D5360'
+					value: @(totalFfaPopulation),
+					color: '#F7464A'
 				},
 				{
-					value: 69,
-					color: '#F7464A'
+					value: @(totalTeamPopulation),
+					color: '#4D5360'
 				}
 			]);
 	</script>
@@ -200,7 +259,18 @@
 
 	<!-- Challenge Stats -->
 	<script>
-		
+		var stuffNames = ["challenges-total-credits", "challenges-campaign-credits", "challenges-matchmaking-credits", "challenges-spops-credits"];
+		var stuffColours = ["#F7464A", "#949FB1", "#4D5360", "#F7464A"];
+		for (var i = 0; i < stuffNames.length; i++) {
+			ctx = document.getElementById(stuffNames[i]).getContext("2d");
+			new Chart(ctx).Doughnut(
+				[
+					{
+						value: 69,
+						color: stuffColours[i]
+					}
+				]);
+		}
 	</script>
 
 	<!-- Background Images -->
@@ -245,5 +315,4 @@
 			}, 4500);
 		});
 	</script>
-
 }

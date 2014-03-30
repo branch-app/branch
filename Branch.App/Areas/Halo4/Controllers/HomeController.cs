@@ -11,6 +11,9 @@ namespace Branch.App.Areas.Halo4.Controllers
 		// GET: /Halo4/
 		public ActionResult Index()
 		{
+			var challenges = GlobalStorage.H4WaypointManager.Challenges;
+			var playlists = GlobalStorage.H4WaypointManager.Playlists;
+
 			var weeklyStats =
 				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
 					Halo4StatsEntity.FormatRowKey(_Enums.Halo4StatType.Weekly.ToString()),
@@ -21,7 +24,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 					Halo4StatsEntity.FormatRowKey(_Enums.Halo4StatType.AllTime.ToString()),
 					GlobalStorage.AzureStorage.Table.BranchCloudTable);
 
-			return View(new HomeViewModel(weeklyStats, allTimeStats));
+			return View(new HomeViewModel(challenges, playlists, weeklyStats, allTimeStats));
 		}
 	}
 }

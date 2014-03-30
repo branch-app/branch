@@ -21,7 +21,7 @@ namespace Branch.App.Helpers.Razor
 
 		public static string NumberWithDelimiter(int number, string delimiter = ",")
 		{
-			return number >= 10000 ? number.ToString("n0") : number.ToString("d");
+			return number >= 1000 ? number.ToString("n0") : number.ToString("d");
 		}
 
 		public static string MakeDateTimeFriendly(DateTime dateTime, string format = "G")
