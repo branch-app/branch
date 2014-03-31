@@ -158,7 +158,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 			public int PresentationId { get; set; }
 
-			public Enums.Mode Id { get; set; }
+			public Enums.GameMode Id { get; set; }
 
 			public string Name { get; set; }
 

@@ -17,7 +17,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string slug)
 		{
-			Enums.Mode gameMode;
+			Enums.GameMode gameMode;
 			Enum.TryParse(slug, out gameMode);
 			var page = int.Parse(Request.QueryString["page"] ?? "0");
 			if (page < 0) page = 0;
@@ -26,22 +26,22 @@ namespace Branch.App.Areas.Halo4.Controllers
 			dynamic gameHistory;
 			switch (gameMode)
 			{
-				case Enums.Mode.Customs:
-				case Enums.Mode.WarGames:
+				case Enums.GameMode.Customs:
+				case Enums.GameMode.WarGames:
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
 					return View("WarGames", new HistoryViewModel<GameHistoryModel.WarGames>(
 						serviceRecord, gameHistory, gameMode, page));
 
-				case Enums.Mode.Campaign:
+				case Enums.GameMode.Campaign:
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
 					return View("Campaign", new HistoryViewModel<GameHistoryModel.Campaign>(
 						serviceRecord, gameHistory, gameMode, page));
 
-				case Enums.Mode.SpartanOps:
+				case Enums.GameMode.SpartanOps:
 					gameHistory =
 						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
@@ -49,7 +49,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 						serviceRecord, gameHistory, gameMode, page));
 
 				default:
-					return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "History", new { slug = Enums.Mode.WarGames.ToString() }),
+					return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "History", new { slug = Enums.GameMode.WarGames.ToString() }),
 						FlashMessage.FlashMessageType.Info, "Couldn't find specified Game Mode",
 						"Branch was unable to find that specific game mode, so we took you to a familiar, and safe place.");
 			}

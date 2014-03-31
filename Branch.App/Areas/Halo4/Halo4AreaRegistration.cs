@@ -17,17 +17,17 @@ namespace Branch.App.Areas.Halo4
 			var namespaces = new[] { "Branch.App.Areas.Halo4.Controllers" };
 
 			context.MapRoute( "Halo4_Default", "Game/Halo4/", 
-				new { controller = "Home", action = "Index" }, namespaces);
+				new {controller = "Home", action = "Index"}, namespaces);
 
 			// Stuff
 			context.MapRoute("Halo4_Challenges", "Game/Halo4/Challenges",
-				new { controller = "Challenges", action = "Index" }, namespaces);
-			context.MapRoute("Halo4_Playlists", "Game/Halo4/Playlists",
-				new { controller = "Playlists", action = "Index" }, namespaces);
+				new {controller = "Challenges", action = "Index"}, namespaces);
+			context.MapRoute("Halo4_Playlists", "Game/Halo4/Playlists/{slug}",
+				new {controller = "Playlists", slug = "wargames", action = "Index"}, namespaces);
 
 			// Service Record
 			context.MapRoute("Halo4_ServiceRecord", "360/{gamertag}/Halo4/", 
-				new { controller = "ServiceRecord", action = "Index"}, namespaces);
+				new {controller = "ServiceRecord", action = "Index"}, namespaces);
 
 			// Specializations
 			context.MapRoute("Halo4_Specializations", "360/{gamertag}/Halo4/Specializations",

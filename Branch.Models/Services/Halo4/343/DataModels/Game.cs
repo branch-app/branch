@@ -60,7 +60,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 
 		public string Id { get; set; }
 
-		public Enums.Mode ModeId { get; set; }
+		public Enums.GameMode ModeId { get; set; }
 
 		public string ModeName { get; set; }
 

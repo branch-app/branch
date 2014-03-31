@@ -95,7 +95,7 @@ namespace Branch.Service.Halo4
 							foreach (
 								var warGamesStats in
 									playerServiceRecords.Select(
-										player => player.GameModes.First(m => m.Id == Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames)))
+										player => player.GameModes.First(m => m.Id == Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames)))
 							{
 								kills += warGamesStats.TotalKills;
 								deaths += warGamesStats.TotalDeaths;

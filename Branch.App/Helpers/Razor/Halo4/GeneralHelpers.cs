@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Branch.Models.Services.Halo4;
 using Branch.Models.Services.Halo4._343.DataModels;
 
 namespace Branch.App.Helpers.Razor.Halo4
@@ -61,6 +62,15 @@ namespace Branch.App.Helpers.Razor.Halo4
 				default:
 					return new Tuple<string, string>("", "");
 			}
+		}
+
+		public static CsrType GetPlaylistCsrOrientation(PlaylistModel playlist)
+		{
+			var playlistOrientation = GlobalStorage.H4WaypointManager.GetPlaylistOrientation(playlist.Id);
+			if (playlistOrientation == null)
+				return CsrType.Unknown;
+
+			return playlistOrientation.IsTeam ? CsrType.Team : CsrType.Individual;
 		}
 	}
 }

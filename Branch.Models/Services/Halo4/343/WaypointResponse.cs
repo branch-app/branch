@@ -2,7 +2,7 @@
 {
 	public class WaypointResponse
 	{
-		public Enums.ResponseCode StatusCode { get; set; }
+		public ResponseCode StatusCode { get; set; }
 		public string StatusResponse { get; set; }
 	}
 }

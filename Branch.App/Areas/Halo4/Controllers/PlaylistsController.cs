@@ -1,5 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Branch.App.Areas.Halo4.Models;
 using Branch.App.Filters;
+using _Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
@@ -8,9 +11,14 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/Playlists/
 		[ValidateH4ApiStatus]
-		public ActionResult Index()
+		public ActionResult Index(string slug)
 		{
-			return View();
+			_Enums.GameMode selectedMode;
+
+			if (!Enum.TryParse(slug, true, out selectedMode))
+				selectedMode = _Enums.GameMode.WarGames;
+
+			return View(new PlaylistsViewModel(selectedMode, GlobalStorage.H4WaypointManager.Playlists));
 		}
 	}
 }

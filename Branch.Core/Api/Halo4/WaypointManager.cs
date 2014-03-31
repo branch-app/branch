@@ -8,6 +8,7 @@ using Branch.Core.Api.Authentication;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using Branch.Models.Services.Branch;
+using Branch.Models.Services.Halo4;
 using Branch.Models.Services.Halo4.Branch;
 using Branch.Models.Services.Halo4._343;
 using Branch.Models.Services.Halo4._343.Responses;
@@ -17,7 +18,6 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RestSharp.Contrib;
 using Branch343DataModels = Branch.Models.Services.Halo4._343.DataModels;
-using Enums = Branch.Models.Services.Halo4.Enums;
 
 namespace Branch.Core.Api.Halo4
 {
@@ -161,7 +161,7 @@ namespace Branch.Core.Api.Halo4
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
 			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
 
-			var warGamesMode = serviceRecord.GameModes.FirstOrDefault(m => m.Id == Branch343DataModels.Enums.Mode.WarGames);
+			var warGamesMode = serviceRecord.GameModes.FirstOrDefault(m => m.Id == Branch343DataModels.Enums.GameMode.WarGames);
 			if (warGamesMode != null)
 			{
 				serviceRecordEntity.WarGamesKills = warGamesMode.TotalKills;
@@ -189,7 +189,7 @@ namespace Branch.Core.Api.Halo4
 		/// <param name="chapterId"></param>
 		/// <returns></returns>
 		public GameHistory<T> GetPlayerGameHistory<T>(string gamertag, int startIndex = 0, int count = 5,
-			Branch343DataModels.Enums.Mode mode = Branch343DataModels.Enums.Mode.WarGames, int chapterId = -1)
+			Branch343DataModels.Enums.GameMode mode = Branch343DataModels.Enums.GameMode.WarGames, int chapterId = -1)
 			where T : Branch343DataModels.GameHistoryModel.Base
 		{
 			const BlobType blobType = BlobType.PlayerGameHistory;
@@ -509,8 +509,8 @@ namespace Branch.Core.Api.Halo4
 
 			var parsedResponse = JsonConvert.DeserializeObject<WaypointResponse>(response.RawText);
 			return (parsedResponse != null &&
-			        (parsedResponse.StatusCode == Enums.ResponseCode.Okay ||
-			         parsedResponse.StatusCode == Enums.ResponseCode.PlayerFound));
+			        (parsedResponse.StatusCode == ResponseCode.Okay ||
+			         parsedResponse.StatusCode == ResponseCode.PlayerFound));
 		}
 
 		/// <summary>

@@ -1,12 +1,21 @@
-﻿namespace Branch.Models.Services.Halo4._343.DataModels
+﻿using System.ComponentModel;
+
+namespace Branch.Models.Services.Halo4._343.DataModels
 {
 	public class Enums
 	{
-		public enum Mode
+		public enum GameMode
 		{
+			[Description("War Games")]
 			WarGames = 3,
+
+			[Description("Campaign")]
 			Campaign = 4,
+
+			[Description("Spartan Ops")]
 			SpartanOps = 5,
+
+			[Description("Custom Games")]
 			Customs = 6
 		}
 

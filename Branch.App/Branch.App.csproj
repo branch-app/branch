@@ -168,6 +168,7 @@
     <Compile Include="Areas\Halo4\Models\GameViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\HomeViewModel.cs" />
+    <Compile Include="Areas\Halo4\Models\PlaylistsViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\ServiceRecordViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\SpecializationsViewModel.cs" />
     <Content Include="Areas\Halo4\Views\History\Campaign.cshtml" />
@@ -186,6 +187,7 @@
     </Content>
     <Content Include="Content\Styles\Halo4\_challenges.scss" />
     <Content Include="Content\Styles\Halo4\_playlists.scss" />
+    <Content Include="Areas\Halo4\Views\Playlists\Index.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -255,7 +257,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Halo4\Views\Challenges\" />
-    <Folder Include="Areas\Halo4\Views\Playlists\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

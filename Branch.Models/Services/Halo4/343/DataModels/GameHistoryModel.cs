@@ -23,7 +23,7 @@ namespace Branch.Models.Services.Halo4._343.DataModels
 			public string Id { get; set; }
 
 			[JsonProperty("ModeId")]
-			public Enums.Mode Mode { get; set; }
+			public Enums.GameMode Mode { get; set; }
 
 			public string ModeName { get; set; }
 
