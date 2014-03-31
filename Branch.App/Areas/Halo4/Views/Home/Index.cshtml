@@ -122,10 +122,10 @@
 <div class="stats-marketing">
 	<div class="container">
 		@{
-			var totalCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Sum(c => c.XpReward));
-			var campaignCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward));
-			var matchmakingCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward));
-			var spOpsCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward));
+			var totalCredits = Model.Challenges.Challenges.Sum(c => c.XpReward);
+			var campaignCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward);
+			var matchmakingCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward);
+			var spOpsCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward);
 		}
 
 		<div class="row central">
@@ -134,7 +134,7 @@
 
 				<h2>All Halo 4 Challenges</h2>
 				<p>
-					There is currently @(totalCredits)Xp avaiable though all challenges.
+					There is currently @(BranchHelpers.NumberWithDelimiter(totalCredits))Xp avaiable though all challenges.
 				</p>
 			</div>
 
@@ -143,7 +143,7 @@
 
 				<h2>Campaign Challenges</h2>
 				<p>
-					There is currently @(campaignCredits)Xp avaiable though all Campaign challenges.
+					There is currently @(BranchHelpers.NumberWithDelimiter(campaignCredits))Xp avaiable though all Campaign challenges.
 				</p>
 			</div>
 
@@ -152,7 +152,7 @@
 
 				<h2>War Games Challenges</h2>
 				<p>
-					There is currently @(matchmakingCredits)Xp avaiable though all War Games challenges.
+					There is currently @(BranchHelpers.NumberWithDelimiter(matchmakingCredits))Xp avaiable though all War Games challenges.
 				</p>
 			</div>
 
@@ -161,7 +161,7 @@
 
 				<h2>Spartan Ops Challenges</h2>
 				<p>
-					There is currently @(spOpsCredits)Xp avaiable though all Spartan Ops challenges.
+					There is currently @(BranchHelpers.NumberWithDelimiter(spOpsCredits))Xp avaiable though all Spartan Ops challenges.
 				</p>
 			</div>
 		</div>
@@ -190,9 +190,9 @@
 </div>
 
 @section scripts {
-	<!-- Playlist Stats -->
-	<script>
-	var ctx = document.getElementById("total-playlist-population").getContext("2d");
+<!-- Playlist Stats -->
+<script>
+	ctx = document.getElementById("total-playlist-population").getContext("2d");
 	new Chart(ctx).Doughnut(
 		[
 			{
@@ -224,10 +224,10 @@
 				color: '#4D5360'
 			}
 		]);
-	</script>
+</script>
 
-	<!-- WarGames Stats -->
-	<script>
+<!-- War Games Stats -->
+<script>
 	var ctx = document.getElementById("alltime-player-kills-deaths").getContext("2d");
 	new Chart(ctx).Doughnut(
 		[
@@ -276,26 +276,78 @@
 				color: '#F7464A'
 			}
 		]);
-	</script>
+</script>
 
-	<!-- Challenge Stats -->
-	<script>
-	var stuffNames = ["challenges-total-credits", "challenges-campaign-credits", "challenges-matchmaking-credits", "challenges-spops-credits"];
-	var stuffColours = ["#F7464A", "#949FB1", "#4D5360", "#F7464A"];
-	for (var i = 0; i < stuffNames.length; i++) {
-		ctx = document.getElementById(stuffNames[i]).getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: 69,
-					color: stuffColours[i]
-				}
-			]);
-	}
-	</script>
+<!-- Challenge Stats -->
+<script>
+	ctx = document.getElementById("challenges-total-credits").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(campaignCredits),
+				color: '#F7464A'
+			},
+			{
+				value: @(matchmakingCredits),
+				color: '#949FB1'
+			},
+			{
+				value: @(spOpsCredits),
+				color: '#4D5360'
+			}
+		]);
+	ctx = document.getElementById("challenges-campaign-credits").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(campaignCredits),
+				color: '#F7464A'
+			},
+			{
+				value: @(matchmakingCredits),
+				color: '#949FB1'
+			},
+			{
+				value: @(spOpsCredits),
+				color: '#4D5360'
+			}
+		]);
+	ctx = document.getElementById("challenges-matchmaking-credits").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(matchmakingCredits),
+				color: '#F7464A'
+			},
+			{
+				value: @(campaignCredits),
+				color: '#949FB1'
+			},
+			{
+				value: @(spOpsCredits),
+				color: '#4D5360'
+			}
+		]);
+	ctx = document.getElementById("challenges-spops-credits").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(spOpsCredits),
+				color: '#F7464A'
+			},
+			{
+				value: @(matchmakingCredits),
+				color: '#949FB1'
+			},
+			{
+				value: @(campaignCredits),
+				color: '#4D5360'
+			}
+		]);
+</script>
 
-	<!-- Background Images -->
-	<script>
+<!-- Background Images -->
+<script>
 	var imagesCount = 4;
 
 	$(document).ready(function () {
@@ -335,5 +387,5 @@
 			updateGameImage();
 		}, 4500);
 	});
-	</script>
+</script>
 }
