@@ -7,13 +7,12 @@
       <Import moduleName="RemoteForwarder" />
     </Imports>
     <ConfigurationSettings>
-      <Setting name="WlidAuthEmail" />
-      <Setting name="WlidAuthPassword" />
       <Setting name="TwilioSid" />
       <Setting name="TwilioAuthToken" />
       <Setting name="TwilioFromNumber" />
       <Setting name="TwilioToNumber" />
       <Setting name="StorageConnectionString" />
+      <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
   </WorkerRole>
   <WebRole name="Branch.App" vmsize="Small">
@@ -33,12 +32,11 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="StorageConnectionString" />
-      <Setting name="WlidAuthEmail" />
-      <Setting name="WlidAuthPassword" />
       <Setting name="TwilioSid" />
       <Setting name="TwilioAuthToken" />
       <Setting name="TwilioFromNumber" />
       <Setting name="TwilioToNumber" />
+      <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

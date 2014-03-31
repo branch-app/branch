@@ -65,12 +65,6 @@
 		<div class="col-md-5">
 			<ul class="list-group">
 				<li class="list-group-item">
-					<span class="badge">@BranchHelpers.MakeDateTimeFriendly(@serviceRecord.LastPlayedUtc)</span>
-					<span title="343 recently updated their systems. Dates are only accurate for the player signed in to the API requests. But i'll leave this here for if they change their mind.'">
-						Last Played*
-					</span>
-				</li>
-				<li class="list-group-item">
 					<span class="badge">@serviceRecord.TotalLoadoutItemsPurchased%</span>
 					Loadout Purchase Completion
 				</li>
@@ -106,12 +100,6 @@
 				<li class="list-group-item">
 					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.TotalGamesStarted)</span>
 					Games Started
-				</li>
-				<li class="list-group-item">
-					<span class="badge">@BranchHelpers.MakeDateTimeFriendly(@serviceRecord.FirstPlayedUtc)</span>
-					<span title="343 recently updated their systems. Dates are only accurate for the player signed in to the API requests. But i'll leave this here for if they change their mind.'">
-						Player Since*
-					</span>
 				</li>
 			</ul>
 		</div>

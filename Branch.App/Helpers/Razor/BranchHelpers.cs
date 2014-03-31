@@ -40,25 +40,24 @@ namespace Branch.App.Helpers.Razor
 			var sb = new StringBuilder();
 			if (years > 0)
 			{
-				sb.Append(years + " years, ");
+				sb.Append(String.Format("{0} {1}, ", years, years == 1 ? "year" : "years"));
 				total++;
 			}
 			if (months > 0)
 			{
-				sb.Append(months + " months, ");
+				sb.Append(String.Format("{0} {1}, ", months, months == 1 ? "month" : "months"));
 				total++;
 			}
 			if (weeks > 0)
 			{
-				sb.Append(weeks + " weeks, ");
+				sb.Append(String.Format("{0} {1}, ", weeks, weeks == 1 ? "week" : "weeks"));
 				total++;
 			}
 			if (days <= 0) return sb.ToString();
 
-			if (total > 0)
-				sb.Append("and " + days + " days");
-			else
-				sb.Append(days + " days");
+			sb.Append(total > 0
+				? String.Format("and {0} {1}", days, days == 1 ? "day" : "days")
+				: String.Format("{0} {1}", days, days == 1 ? "day" : "days"));
 
 			return sb.ToString();
 		}

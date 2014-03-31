@@ -177,6 +177,7 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
+    <Content Include="Content\Images\Area\Halo4\auntiediag.png" />
     <Content Include="Content\Images\Area\Halo4\leaderboard-overview.png" />
     <Content Include="Content\Images\Area\Halo4\top-ten-overview.png" />
     <Content Include="Content\Styles\About\_index.scss" />

@@ -40,7 +40,7 @@ namespace Branch.Service.Halo4
 			{
 #endif
 				// Update Stuff
-			var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>(TaskEntity.PartitionKeyString,
+				var tasks = _storage.Table.RetrieveMultipleEntities<TaskEntity>(TaskEntity.PartitionKeyString,
 					_storage.Table.Halo4CloudTable);
 
 				#region Check to Execute Tasks
@@ -71,20 +71,20 @@ namespace Branch.Service.Halo4
 
 						case TaskEntity.TaskType.StatUpdate:
 							#region Shink me pls
-							
-							//if (DateTime.UtcNow.DayOfWeek != DayOfWeek.Tuesday)
-								//	break;
-							//updateLastRun = false;
 
 							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",
-								_storage.Table.Halo4CloudTable);
+								_storage.Table.Halo4CloudTable).ToArray();
+
+							// Update Service Records
+							var playerServiceRecords = players.Select(player => _h4WaypointManager.GetServiceRecord(player.Gamertag)).ToList();
 
 							var allTimeStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
 								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??
-							                   new Halo4StatsEntity(Enums.Halo4StatType.AllTime);
+												new Halo4StatsEntity(Enums.Halo4StatType.AllTime);
+
 							var weeklyStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
 								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.Weekly), _storage.Table.BranchCloudTable) ??
-											   new Halo4StatsEntity(Enums.Halo4StatType.Weekly);
+												new Halo4StatsEntity(Enums.Halo4StatType.Weekly);
 
 							var kills = 0;
 							var deaths = 0;
@@ -92,17 +92,21 @@ namespace Branch.Service.Halo4
 							var games = 0;
 							var duration = new TimeSpan(0);
 
-							foreach (var player in players)
+							foreach (
+								var warGamesStats in
+									playerServiceRecords.Select(
+										player => player.GameModes.First(m => m.Id == Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames)))
 							{
-								kills += player.WarGamesKills;
-								deaths += player.WarGamesDeaths;
-								medals += player.WarGamesMedals;
-								games += player.WarGamesGames;
-								duration += TimeSpan.Parse(player.WarGamesDuration ?? TimeSpan.FromTicks(0).ToString());
+								kills += warGamesStats.TotalKills;
+								deaths += warGamesStats.TotalDeaths;
+								medals += warGamesStats.TotalMedals ?? 0;
+								games += warGamesStats.TotalGamesStarted;
+								duration += TimeSpan.Parse(warGamesStats.TotalDuration ?? TimeSpan.FromTicks(0).ToString());
 							}
 							
 							#region Weekly
 
+							weeklyStats.Players = players.Count();
 							weeklyStats.WarGamesKills = kills - allTimeStats.WarGamesKills;
 							weeklyStats.WarGamesDeaths = deaths - allTimeStats.WarGamesKills;
 							weeklyStats.WarGamesMedals = medals - allTimeStats.WarGamesKills;
@@ -114,6 +118,7 @@ namespace Branch.Service.Halo4
 							#endregion
 							#region All Time
 
+							allTimeStats.Players = players.Count();
 							allTimeStats.WarGamesKills += kills;
 							allTimeStats.WarGamesDeaths += deaths;
 							allTimeStats.WarGamesMedals += medals;
@@ -171,10 +176,6 @@ namespace Branch.Service.Halo4
 			}
 
 			#endregion
-
-			//var statsTask = _storage.Table.RetrieveSingleEntity<TaskEntity>(TaskEntity.PartitionKeyString, TaskEntity.FormatRowKey(TaskEntity.TaskType.StatUpdate.ToString()), _storage.Table.Halo4CloudTable);
-			//statsTask.LastRun = new DateTime(2007, 01, 01);
-			//_storage.Table.InsertOrReplaceSingleEntity(statsTask, _storage.Table.BranchCloudTable);
 
 			return base.OnStart();
 		}

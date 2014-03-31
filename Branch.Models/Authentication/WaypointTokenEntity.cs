@@ -15,19 +15,9 @@ namespace Branch.Models.Authentication
 		}
 
 		/// <summary>
-		///     Indicates the result of the request
-		/// </summary>
-		public int ResponseCode { get; set; }
-
-		/// <summary>
 		///     Actual token - compatible with X-343-Authorization-Spartan
 		/// </summary>
 		public string SpartanToken { get; set; }
-
-		/// <summary>
-		///     Identifies the user token is for
-		/// </summary>
-		public UserInfo UserInformation { get; set; }
 
 		public static string FormatRowKey()
 		{
@@ -40,23 +30,6 @@ namespace Branch.Models.Authentication
 				partitionKey = "Authentication";
 
 			base.SetKeys(partitionKey, FormatRowKey());
-		}
-
-		/// <summary>
-		///     Information about the user identified by the Spartan auth
-		/// </summary>
-		public class UserInfo
-		{
-			/// <summary>
-			///     Xbox Live gamertag of user
-			/// </summary>
-			public string Gamertag { get; set; }
-
-			/// <summary>
-			///     Used to track API usage
-			/// </summary>
-			/// <remarks>Unused</remarks>
-			public string AnalyticsToken { get; set; }
 		}
 	}
 }

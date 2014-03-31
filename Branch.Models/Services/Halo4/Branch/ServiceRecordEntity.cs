@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Branch.Models.Services.Halo4.Branch
+﻿namespace Branch.Models.Services.Halo4.Branch
 {
 	public class ServiceRecordEntity : BaseEntity
 	{
@@ -18,10 +16,6 @@ namespace Branch.Models.Services.Halo4.Branch
 		public string ServiceTag { get; set; }
 
 		public int SpartanPoints { get; set; }
-
-		public DateTime LastPlayedUtc { get; set; }
-
-		public DateTime FirstPlayedUtc { get; set; }
 
 		public int TotalGamesStarted { get; set; }
 

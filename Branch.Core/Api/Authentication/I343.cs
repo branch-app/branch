@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
-using Branch.Core.Properties;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using EasyHttp.Http;
@@ -25,9 +24,7 @@ namespace Branch.Core.Api.Authentication
 			bool everythingWentGucci;
 			var httpClient = new HttpClient();
 			var response =
-				httpClient.Get(string.Format("http://authentication.xeraxic.com/api/halo4/?email={0}&password={1}",
-					CloudConfigurationManager.GetSetting("WlidAuthEmail"),
-					CloudConfigurationManager.GetSetting("WlidAuthPassword")));
+				httpClient.Get(CloudConfigurationManager.GetSetting("SpartanTokenApi"));
 
 			if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText.Trim()))
 			{
@@ -43,9 +40,7 @@ namespace Branch.Core.Api.Authentication
 					{
 						everythingWentGucci = true;
 
-						currentWaypointTokenEntity.ResponseCode = waypointToken.ResponseCode;
 						currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
-						currentWaypointTokenEntity.UserInformation = waypointToken.UserInformation;
 
 						storage.Table.ReplaceSingleEntity(currentWaypointTokenEntity, storage.Table.AuthenticationCloudTable);
 					}
@@ -67,15 +62,14 @@ namespace Branch.Core.Api.Authentication
 			// Add custom model
 			var customWaypointResponse = new WaypointTokenEntity
 			{
-				ResponseCode = -1,
-				UserInformation = null
+				SpartanToken = null
 			};
 			storage.Table.InsertOrReplaceSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
 
 			//// send sms
-			//new TwilioRestClient(CloudConfigurationManager.GetSetting("TwilioSid"), CloudConfigurationManager.GetSetting("TwilioAuthToken")).SendSmsMessage(
-			//	CloudConfigurationManager.GetSetting("TwilioFromNumber"), CloudConfigurationManager.GetSetting("TwilioToNumber"),
-			//	"Branch just failed to update it's Halo 4 Authentication Tokens. fuck.");
+			new TwilioRestClient(CloudConfigurationManager.GetSetting("TwilioSid"), CloudConfigurationManager.GetSetting("TwilioAuthToken")).SendSmsMessage(
+				CloudConfigurationManager.GetSetting("TwilioFromNumber"), CloudConfigurationManager.GetSetting("TwilioToNumber"),
+				"Branch just failed to update it's Halo 4 Authentication Tokens. fuck.");
 
 			return false;
 		}

@@ -18,38 +18,40 @@
 		</p>
 	</div>
 </div>
-	
-<div class="container stats-marketing">
-	@{
-		var totalPopulation = Model.Playlists.Playlists.Sum(p => p.PopulationCount);
-		var totalTeamPopulation = Model.Playlists.Playlists.Where(p => !p.IsFreeForAll).Sum(p => p.PopulationCount);
-		var totalFfaPopulation = Model.Playlists.Playlists.Where(p => p.IsFreeForAll).Sum(p => p.PopulationCount);
-	}
 
-	<div class="row central">
-		<div class="col-md-4">
-			<canvas id="total-playlist-population" width="140" height="140"></canvas>
-			
-			<h2>All Playlists</h2>
-			<p>
-				There are currently @totalPopulation people playing Halo 4 Online.
-			</p>
-		</div>
-		<div class="col-md-4">
-			<canvas id="team-playlist-population" width="140" height="140"></canvas>
+<div class="stats-marketing">
+	<div class="container">
+		@{
+			var totalPopulation = Model.Playlists.Playlists.Sum(p => p.PopulationCount);
+			var totalTeamPopulation = Model.Playlists.Playlists.Where(p => !p.IsFreeForAll).Sum(p => p.PopulationCount);
+			var totalFfaPopulation = Model.Playlists.Playlists.Where(p => p.IsFreeForAll).Sum(p => p.PopulationCount);
+		}
 
-			<h2>Team Playlists</h2>
-			<p>
-				There are currently @totalTeamPopulation people playing Team based CSR Playlists.
-			</p>
-		</div>
-		<div class="col-md-4">
-			<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
+		<div class="row central">
+			<div class="col-md-4">
+				<canvas id="total-playlist-population" width="140" height="140"></canvas>
 
-			<h2>Indvidual Playlists</h2>
-			<p>
-				There are currently @totalFfaPopulation people playing Indvidual based CSR Playlists.
-			</p>
+				<h2>All Playlists</h2>
+				<p>
+					There are currently @(BranchHelpers.NumberWithDelimiter(totalPopulation)) people playing Halo 4 Online.
+				</p>
+			</div>
+			<div class="col-md-4">
+				<canvas id="team-playlist-population" width="140" height="140"></canvas>
+
+				<h2>Team Playlists</h2>
+				<p>
+					There are currently @(BranchHelpers.NumberWithDelimiter(totalTeamPopulation)) people playing Team based CSR Playlists.
+				</p>
+			</div>
+			<div class="col-md-4">
+				<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
+
+				<h2>Indvidual Playlists</h2>
+				<p>
+					There are currently @(BranchHelpers.NumberWithDelimiter(totalFfaPopulation)) people playing Indvidual based CSR Playlists.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -64,43 +66,45 @@
 	</div>
 </div>
 
-<div class="container stats-marketing">
-	<div class="row central">
-		<div class="col-md-3">
-			<canvas id="alltime-player-kills-deaths" width="140" height="140"></canvas>
-			
-			<h2>Kills/Deaths</h2>
-			<p>
-				Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesDeaths)) 
-				deaths in @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames)) games in all time.
-			</p>
-		</div>
-		<div class="col-md-3">
-			<canvas id="alltime-player-wins-losses" width="140" height="140"></canvas>
-			
-			<h2>Games Played</h2>
-			<p>
-				Players have played @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week and have played @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames)) 
-				games in total.
-			</p>
-		</div>
-		<div class="col-md-3">
-			<canvas id="weekly-player-kills-deaths" width="140" height="140"></canvas>
+<div class="stats-marketing">
+	<div class="container">
+		<div class="row central">
+			<div class="col-md-3">
+				<canvas id="alltime-player-kills-deaths" width="140" height="140"></canvas>
 
-			<h2>Kills/Deaths</h2>
-			<p>
-				Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesDeaths)) 
-				deaths in @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week.
-			</p>
-		</div>
-		<div class="col-md-3">
-			<canvas id="alltime-wargames-time" width="140" height="140"></canvas>
+				<h2>Kills/Deaths</h2>
+				<p>
+					Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesDeaths))
+					deaths in @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames)) games in all time.
+				</p>
+			</div>
+			<div class="col-md-3">
+				<canvas id="alltime-player-wins-losses" width="140" height="140"></canvas>
 
-			<h2>Time Played</h2>
-			<p>
-				Players have played @BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 this week, and
-				@BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 since launch.
-			</p>
+				<h2>Games Played</h2>
+				<p>
+					Players have played @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week and have played @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames))
+					games in total.
+				</p>
+			</div>
+			<div class="col-md-3">
+				<canvas id="weekly-player-kills-deaths" width="140" height="140"></canvas>
+
+				<h2>Kills/Deaths</h2>
+				<p>
+					Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesDeaths))
+					deaths in @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week.
+				</p>
+			</div>
+			<div class="col-md-3">
+				<canvas id="alltime-wargames-time" width="140" height="140"></canvas>
+
+				<h2>Time Played</h2>
+				<p>
+					Players have played @BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 this week, and
+					@BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 since launch.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -115,204 +119,221 @@
 	</div>
 </div>
 
-<div class="container stats-marketing">
-	@{
-		var totalCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Sum(c => c.XpReward));
-		var campaignCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward));
-		var matchmakingCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward));
-		var spOpsCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward));
-	}
+<div class="stats-marketing">
+	<div class="container">
+		@{
+			var totalCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Sum(c => c.XpReward));
+			var campaignCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward));
+			var matchmakingCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward));
+			var spOpsCredits = BranchHelpers.NumberWithDelimiter(Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward));
+		}
 
-	<div class="row central">
-		<div class="col-md-3">
-			<canvas id="challenges-total-credits" width="140" height="140"></canvas>
-			
-			<h2>All Halo 4 Challenges</h2>
-			<p>
-				There is currently @(totalCredits)Xp avaiable though all challenges.
-			</p>
-		</div>
+		<div class="row central">
+			<div class="col-md-3">
+				<canvas id="challenges-total-credits" width="140" height="140"></canvas>
 
-		<div class="col-md-3">
-			<canvas id="challenges-campaign-credits" width="140" height="140"></canvas>
+				<h2>All Halo 4 Challenges</h2>
+				<p>
+					There is currently @(totalCredits)Xp avaiable though all challenges.
+				</p>
+			</div>
 
-			<h2>Campaign Challenges</h2>
-			<p>
-				There is currently @(campaignCredits)Xp avaiable though all Campaign challenges.
-			</p>
-		</div>
+			<div class="col-md-3">
+				<canvas id="challenges-campaign-credits" width="140" height="140"></canvas>
 
-		<div class="col-md-3">
-			<canvas id="challenges-matchmaking-credits" width="140" height="140"></canvas>
+				<h2>Campaign Challenges</h2>
+				<p>
+					There is currently @(campaignCredits)Xp avaiable though all Campaign challenges.
+				</p>
+			</div>
 
-			<h2>War Games Challenges</h2>
-			<p>
-				There is currently @(matchmakingCredits)Xp avaiable though all War Games challenges.
-			</p>
-		</div>
+			<div class="col-md-3">
+				<canvas id="challenges-matchmaking-credits" width="140" height="140"></canvas>
 
-		<div class="col-md-3">
-			<canvas id="challenges-spops-credits" width="140" height="140"></canvas>
+				<h2>War Games Challenges</h2>
+				<p>
+					There is currently @(matchmakingCredits)Xp avaiable though all War Games challenges.
+				</p>
+			</div>
 
-			<h2>Spartan Ops Challenges</h2>
-			<p>
-				There is currently @(spOpsCredits)Xp avaiable though all Spartan Ops challenges.
-			</p>
+			<div class="col-md-3">
+				<canvas id="challenges-spops-credits" width="140" height="140"></canvas>
+
+				<h2>Spartan Ops Challenges</h2>
+				<p>
+					There is currently @(spOpsCredits)Xp avaiable though all Spartan Ops challenges.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="highlight-sector">
+<div class="highlight-sector" style="margin-bottom: -100px;">
 	<div class="container">
-		<h1>Put stuff here</h1>
+		<h1>Player Stats</h1>
+
+		<p>
+			This week <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.Players))</strong> players have
+			executed <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesKills))</strong> kills,
+			suffered <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesDeaths))</strong> deaths,
+			earned <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesMedals))</strong> medals
+			and played <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames))</strong> games
+			during <strong>@(BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)))</strong> of game time.
+		</p>
+	</div>
+</div>
+
+<div class="stats-marketing spacing">
+	<div class="container auntie-dot">
+		
 	</div>
 </div>
 
 @section scripts {
 	<!-- Playlist Stats -->
 	<script>
-		var ctx = document.getElementById("total-playlist-population").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: 69,
-					color: '#949FB1'
-				}
-			]);
-		ctx = document.getElementById("team-playlist-population").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(totalTeamPopulation),
-					color: '#F7464A'
-				},
-				{
-					value: @(totalFfaPopulation),
-					color: '#4D5360'
-				}
-			]);
-		ctx = document.getElementById("indvidual-playlist-population").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(totalFfaPopulation),
-					color: '#F7464A'
-				},
-				{
-					value: @(totalTeamPopulation),
-					color: '#4D5360'
-				}
-			]);
+	var ctx = document.getElementById("total-playlist-population").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: 69,
+				color: '#949FB1'
+			}
+		]);
+	ctx = document.getElementById("team-playlist-population").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(totalTeamPopulation),
+				color: '#F7464A'
+			},
+			{
+				value: @(totalFfaPopulation),
+				color: '#4D5360'
+			}
+		]);
+	ctx = document.getElementById("indvidual-playlist-population").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(totalFfaPopulation),
+				color: '#F7464A'
+			},
+			{
+				value: @(totalTeamPopulation),
+				color: '#4D5360'
+			}
+		]);
 	</script>
 
 	<!-- WarGames Stats -->
 	<script>
-		var ctx = document.getElementById("alltime-player-kills-deaths").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(Model.AllTimeStats.WarGamesKills),
-					color: '#949FB1'
-				},
-				{
-					value: @(Model.AllTimeStats.WarGamesDeaths),
-					color: '#F7464A'
-				}
-			]);
-		ctx = document.getElementById("alltime-player-wins-losses").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(Model.WeeklyStats.WarGamesGames),
-					color: '#949FB1'
-				},
-				{
-					value: @(Model.AllTimeStats.WarGamesGames),
-					color: '#F7464A'
-				}
-			]);
-		ctx = document.getElementById("weekly-player-kills-deaths").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(Model.WeeklyStats.WarGamesKills),
-					color: '#949FB1'
-				},
-				{
-					value: @(Model.WeeklyStats.WarGamesDeaths),
-					color: '#F7464A'
-				}
-			]);
-		ctx = document.getElementById("alltime-wargames-time").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration).Minutes),
-					color: '#949FB1'
-				},
-				{
-					value: @(TimeSpan.Parse(Model.AllTimeStats.WarGamesDuration).Minutes),
-					color: '#F7464A'
-				}
-			]);
-	</Script>
+	var ctx = document.getElementById("alltime-player-kills-deaths").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(Model.AllTimeStats.WarGamesKills),
+				color: '#949FB1'
+			},
+			{
+				value: @(Model.AllTimeStats.WarGamesDeaths),
+				color: '#F7464A'
+			}
+		]);
+	ctx = document.getElementById("alltime-player-wins-losses").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(Model.WeeklyStats.WarGamesGames),
+				color: '#949FB1'
+			},
+			{
+				value: @(Model.AllTimeStats.WarGamesGames),
+				color: '#F7464A'
+			}
+		]);
+	ctx = document.getElementById("weekly-player-kills-deaths").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(Model.WeeklyStats.WarGamesKills),
+				color: '#949FB1'
+			},
+			{
+				value: @(Model.WeeklyStats.WarGamesDeaths),
+				color: '#F7464A'
+			}
+		]);
+	ctx = document.getElementById("alltime-wargames-time").getContext("2d");
+	new Chart(ctx).Doughnut(
+		[
+			{
+				value: @(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration).Minutes),
+				color: '#949FB1'
+			},
+			{
+				value: @(TimeSpan.Parse(Model.AllTimeStats.WarGamesDuration).Minutes),
+				color: '#F7464A'
+			}
+		]);
+	</script>
 
 	<!-- Challenge Stats -->
 	<script>
-		var stuffNames = ["challenges-total-credits", "challenges-campaign-credits", "challenges-matchmaking-credits", "challenges-spops-credits"];
-		var stuffColours = ["#F7464A", "#949FB1", "#4D5360", "#F7464A"];
-		for (var i = 0; i < stuffNames.length; i++) {
-			ctx = document.getElementById(stuffNames[i]).getContext("2d");
-			new Chart(ctx).Doughnut(
-				[
-					{
-						value: 69,
-						color: stuffColours[i]
-					}
-				]);
-		}
+	var stuffNames = ["challenges-total-credits", "challenges-campaign-credits", "challenges-matchmaking-credits", "challenges-spops-credits"];
+	var stuffColours = ["#F7464A", "#949FB1", "#4D5360", "#F7464A"];
+	for (var i = 0; i < stuffNames.length; i++) {
+		ctx = document.getElementById(stuffNames[i]).getContext("2d");
+		new Chart(ctx).Doughnut(
+			[
+				{
+					value: 69,
+					color: stuffColours[i]
+				}
+			]);
+	}
 	</script>
 
 	<!-- Background Images -->
 	<script>
-		var imagesCount = 4;
+	var imagesCount = 4;
 
-		$(document).ready(function () {
+	$(document).ready(function () {
 
-			var images = new Array();
+		var images = new Array();
 
-			function preload() {
-				for (var i = 1; i < 2; i++) {
-					for (var j = 1; j < imagesCount + 1; j++) {
-						var index = (i * j) - 1;
-						images[index] = new Image();
-						images[index].src = '/Content/Images/Home/Covers/Halo4/cover' + j + '.jpg';
-					}
+		function preload() {
+			for (var i = 1; i < 2; i++) {
+				for (var j = 1; j < imagesCount + 1; j++) {
+					var index = (i * j) - 1;
+					images[index] = new Image();
+					images[index].src = '/Content/Images/Home/Covers/Halo4/cover' + j + '.jpg';
 				}
 			}
-			function updateGameImage() {
-				var pageBgCoverBackupDom = $(".page-bg-backup-cover");
-				var currentIndex = pageBgCoverBackupDom.attr('count-data-ref');
-				var pageBgCover = $(".page-bg-backup-cover > .page-bg-cover");
+		}
+		function updateGameImage() {
+			var pageBgCoverBackupDom = $(".page-bg-backup-cover");
+			var currentIndex = pageBgCoverBackupDom.attr('count-data-ref');
+			var pageBgCover = $(".page-bg-backup-cover > .page-bg-cover");
 
-				var oldIndex = currentIndex;
-				currentIndex++;
-				if (currentIndex > imagesCount) currentIndex = 1;
+			var oldIndex = currentIndex;
+			currentIndex++;
+			if (currentIndex > imagesCount) currentIndex = 1;
 
-				pageBgCoverBackupDom.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + oldIndex + '.jpg)');
-				$(pageBgCover).fadeOut(800, function () {
-					pageBgCover.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + currentIndex + '.jpg)');
-					$(pageBgCover).fadeIn(800, function () {
-						$(pageBgCoverBackupDom).attr('count-data-ref', currentIndex);
-					});
+			pageBgCoverBackupDom.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + oldIndex + '.jpg)');
+			$(pageBgCover).fadeOut(800, function () {
+				pageBgCover.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + currentIndex + '.jpg)');
+				$(pageBgCover).fadeIn(800, function () {
+					$(pageBgCoverBackupDom).attr('count-data-ref', currentIndex);
 				});
-			}
+			});
+		}
 
-			preload();
+		preload();
 
-			setInterval(function () {
-				updateGameImage();
-			}, 4500);
-		});
+		setInterval(function () {
+			updateGameImage();
+		}, 4500);
+	});
 	</script>
 }

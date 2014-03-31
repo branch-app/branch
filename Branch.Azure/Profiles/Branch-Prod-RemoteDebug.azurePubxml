@@ -19,6 +19,6 @@
     <AzureStorageAccountName>branchapp</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
     <EnableRemoteDebugger>True</EnableRemoteDebugger>
-    <RemoteDebuggerConnectorCertificateThumbprint>F77B131693810A61098E86C454A63C39B96C07A5</RemoteDebuggerConnectorCertificateThumbprint>
+    <RemoteDebuggerConnectorCertificateThumbprint>950240E7F491FD4994A3DAB89B0A9638307469B9</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>
