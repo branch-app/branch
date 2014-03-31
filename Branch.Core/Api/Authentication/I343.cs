@@ -21,7 +21,7 @@ namespace Branch.Core.Api.Authentication
 		/// <returns>A boolean saying if everything was</returns>
 		public static bool UpdateAuthentication(AzureStorage storage)
 		{
-			bool everythingWentGucci;
+			var everythingWentGucci = false;
 			var httpClient = new HttpClient();
 			var response =
 				httpClient.Get(CloudConfigurationManager.GetSetting("SpartanTokenApi"));
@@ -35,17 +35,15 @@ namespace Branch.Core.Api.Authentication
 
 					var waypointToken = JsonConvert.DeserializeObject<WaypointTokenEntity>(response.RawText);
 
-					// save this data to BranchStorage
-					if (currentWaypointTokenEntity != null)
-					{
-						everythingWentGucci = true;
-
-						currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
-
-						storage.Table.ReplaceSingleEntity(currentWaypointTokenEntity, storage.Table.AuthenticationCloudTable);
-					}
-					else
-						everythingWentGucci = storage.Table.InsertSingleEntity(waypointToken, storage.Table.AuthenticationCloudTable);
+					if (waypointToken != null)
+						if (currentWaypointTokenEntity != null)
+						{
+							everythingWentGucci = true;
+							currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
+							storage.Table.ReplaceSingleEntity(currentWaypointTokenEntity, storage.Table.AuthenticationCloudTable);
+						}
+						else
+							everythingWentGucci = storage.Table.InsertSingleEntity(waypointToken, storage.Table.AuthenticationCloudTable);
 				}
 				catch (JsonReaderException jsonReaderException)
 				{
@@ -53,8 +51,6 @@ namespace Branch.Core.Api.Authentication
 					everythingWentGucci = false;
 				}
 			}
-			else
-				everythingWentGucci = false;
 
 			if (everythingWentGucci)
 				return true;

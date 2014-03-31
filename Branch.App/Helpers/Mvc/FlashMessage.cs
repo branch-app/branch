@@ -14,24 +14,21 @@ namespace Branch.App.Helpers.Mvc
 			Info
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="response"></param>
-		/// <param name="redirectResult"></param>
-		/// <param name="flashMessageType"></param>
-		/// <param name="title"></param>
-		/// <param name="body"></param>
 		public static ActionResult RedirectAndFlash(HttpResponseBase response, ActionResult redirectResult, FlashMessageType flashMessageType, string title,
 			string body)
 		{
-			response.Cookies.Add(new HttpCookie("FlashMessage", 
-				JsonConvert.SerializeObject(new[] { flashMessageType.ToString().ToLower(), title, body}))
+			AddFlashMessage(response, flashMessageType, title, body);
+			return redirectResult;
+		}
+
+		public static void AddFlashMessage(HttpResponseBase response, FlashMessageType flashMessageType, string title,
+			string body)
+		{
+			response.Cookies.Add(new HttpCookie("FlashMessage",
+				JsonConvert.SerializeObject(new[] { flashMessageType.ToString().ToLower(), title, body }))
 			{
 				Path = "/"
 			});
-
-			return redirectResult;
 		}
 	}
 }

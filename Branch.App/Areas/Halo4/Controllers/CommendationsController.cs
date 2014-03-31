@@ -14,6 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/{gamertag}/Commendations/
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, string slug, ServiceRecord serviceRecord)
 		{
 			var commendations = GlobalStorage.H4WaypointManager.GetPlayerCommendations(serviceRecord.Gamertag);

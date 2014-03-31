@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Models;
+using Branch.App.Filters;
 using Branch.Models.Services.Branch;
 using _Enums = Branch.Models.Services.Branch.Enums;
 
@@ -9,6 +10,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 	{
 		//
 		// GET: /Halo4/
+		[ValidateH4ApiStatus]
 		public ActionResult Index()
 		{
 			var challenges = GlobalStorage.H4WaypointManager.Challenges;

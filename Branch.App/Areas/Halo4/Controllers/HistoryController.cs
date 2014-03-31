@@ -14,6 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /360/{gamertag}/Halo4/History/{slug}?{page}
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string slug)
 		{
 			Enums.Mode gameMode;

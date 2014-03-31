@@ -14,6 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/{gamertag}/Csr/
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
 			return View(new CsrViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientations()));
@@ -22,6 +23,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/{gamertag}/Csr/{id}-{slug}
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Details(string gamertag, ServiceRecord serviceRecord, int? id, string slug)
 		{
 			if (id == null)

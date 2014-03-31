@@ -11,6 +11,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/Game/
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string id)
 		{
 			var game = GlobalStorage.H4WaypointManager.GetPlayerGame(serviceRecord.Gamertag, id);

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Branch.App.Filters;
 using Branch.App.Helpers.Razor.Halo4;
 using Branch.Models.Services.Halo4._343.DataModels;
-using Microsoft.Ajax.Utilities;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
@@ -11,6 +11,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 	{
 		//
 		// GET: /Halo4/Challenges/
+		[ValidateH4ApiStatus]
 		public ActionResult Index()
 		{
 			var challenges = GlobalStorage.H4WaypointManager.Challenges.Challenges;

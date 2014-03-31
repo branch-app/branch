@@ -10,6 +10,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		//
 		// GET: /Halo4/{gamertag}/Specializations/
 		[ValidateH4ServiceRecordFilter]
+		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
 			return View(new SpecializationsViewModel(serviceRecord));

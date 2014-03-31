@@ -558,7 +558,7 @@ namespace Branch.Core.Api.Halo4
 			if (auth == null)
 				return false;
 
-			return (auth.SpartanToken == null);
+			return (auth.SpartanToken != null);
 		}
 
 		#endregion
