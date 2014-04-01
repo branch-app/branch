@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTime.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Int.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

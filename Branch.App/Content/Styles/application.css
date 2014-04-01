@@ -892,6 +892,18 @@ body.halo4_game_history .game-details #overview {
           font-weight: 600;
           font-size: 14px; }
 
+body.halo4_challenges .challenges-container {
+  margin-top: 60px; }
+  body.halo4_challenges .challenges-container .challenge-entry {
+    height: 180px;
+    margin: 20px 0;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #eee; }
+    @media (max-width: 991px) {
+      body.halo4_challenges .challenges-container .challenge-entry {
+        height: 90px; } }
+
 body.halo4_playlists .playlist-entry .meta {
   background-size: cover;
   background-repeat: no-repeat;

@@ -160,6 +160,7 @@
     <Compile Include="Areas\Halo4\Controllers\SpecializationsController.cs" />
     <Compile Include="Areas\Halo4\Halo4AreaRegistration.cs" />
     <Compile Include="Areas\Halo4\Models\Base.cs" />
+    <Compile Include="Areas\Halo4\Models\ChallengesViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\CsrViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\CsrDetailViewModel.cs" />
     <Compile Include="Areas\Halo4\Models\Enums.cs" />
@@ -188,6 +189,7 @@
     <Content Include="Content\Styles\Halo4\_challenges.scss" />
     <Content Include="Content\Styles\Halo4\_playlists.scss" />
     <Content Include="Areas\Halo4\Views\Playlists\Index.cshtml" />
+    <Content Include="Areas\Halo4\Views\Challenges\Index.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -206,7 +208,11 @@
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\Styles\jbclock.css">
+      <DependentUpon>jbclock.scss</DependentUpon>
+    </Content>
     <Content Include="Scripts\flash-cookie.js" />
+    <Content Include="Scripts\jbclock.js" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Web.config" />
@@ -215,6 +221,7 @@
     <Content Include="Views\Search\Partials\Halo4ServiceRecord.cshtml" />
     <Content Include="Views\Shared\FlashMessage.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Content\Styles\jbclock.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -256,7 +263,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Halo4\Views\Challenges\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

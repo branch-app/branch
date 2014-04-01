@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Text;
 using Branch.Models.Services.Branch;
@@ -58,6 +59,39 @@ namespace Branch.App.Helpers.Razor
 			sb.Append(total > 0
 				? String.Format("and {0} {1}", days, days == 1 ? "day" : "days")
 				: String.Format("{0} {1}", days, days == 1 ? "day" : "days"));
+
+			return sb.ToString();
+		}
+
+		public static string MakeTimeSpanFriendlyPrecise(TimeSpan timeSpan)
+		{
+			var days = (((timeSpan.Days % 365) % 30) % 7);
+			var hours = timeSpan.Hours;
+			var minutes = timeSpan.Minutes;
+			var seconds = timeSpan.Seconds;
+			var total = 0;
+
+			var sb = new StringBuilder();
+			if (days > 0)
+			{
+				sb.Append(String.Format("{0} {1}, ", days, days == 1 ? "day" : "days"));
+				total++;
+			}
+			if (hours > 0)
+			{
+				sb.Append(String.Format("{0} {1}, ", hours, hours == 1 ? "hour" : "hours"));
+				total++;
+			}
+			if (minutes > 0)
+			{
+				sb.Append(String.Format("{0} {1}, ", minutes, minutes == 1 ? "minute" : "minutes"));
+				total++;
+			}
+			if (seconds <= 0) return sb.ToString();
+
+			sb.Append(total > 0
+				? String.Format("and {0} {1}", seconds, seconds == 1 ? "second" : "seconds")
+				: String.Format("{0} {1}", seconds, seconds == 1 ? "second" : "seconds"));
 
 			return sb.ToString();
 		}

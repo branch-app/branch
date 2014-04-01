@@ -1,0 +1,59 @@
+﻿@using Branch.App.Areas.Halo4.Models
+@using Branch.App.Helpers.Razor
+@model ChallengesViewModel
+
+@{
+	ViewBag.Title = "Halo 4 Active Challenges";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "halo4 halo4_challenges";
+}
+
+<div class="bs-header welcome-header" id="content">
+	<div class="container">
+		<h1>Halo 4 Challenges</h1>
+		<p>Showing currently active playlists for the <strong>@Model.SelectedChallengeCategory.Name</strong> Hopper</p>
+	</div>
+</div>
+
+<div class="container challenges-container">
+	<div class="row">
+		<div class="col-md-9">
+			@Html.Partial("FlashMessage", false)
+
+			@foreach (var challenge in Model.Challenges.Where(c => c.CategoryName == Model.SelectedChallengeCategory.Name))
+			{
+				<div class="col-md-12 challenge-entry">
+					<h2>
+						@challenge.Name
+					</h2>
+					<p>
+						@challenge.Description
+					</p>
+					<span>
+						<strong>Worth:</strong>
+						@BranchHelpers.NumberWithDelimiter(challenge.XpReward) <sup>XP</sup>
+					</span>
+					<br />
+					<span>
+						<strong>This challenge expires in </strong>
+						@BranchHelpers.MakeTimeSpanFriendlyPrecise(DateTime.UtcNow - challenge.EndDate).
+					</span>
+				</div>
+			}
+		</div>
+		<div class="col-md-3">
+			<div class="bs-sidebar" data-spy="affix" data-offset-top="205">
+				<ul class="nav bs-sidenav">
+					@foreach (var category in Model.ChallengeCategories)
+					{
+						var isActive = (category == Model.SelectedChallengeCategory);
+
+						<li class="@(isActive ? "active" : "")">
+							@Html.ActionLink(category.Name, "Index", "Challenges", new { area = "Halo4", slug = category.Name.ToLowerInvariant().Replace(" ", "") }, null)
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

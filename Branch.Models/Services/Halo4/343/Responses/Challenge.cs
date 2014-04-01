@@ -8,7 +8,7 @@ namespace Branch.Models.Services.Halo4._343.Responses
 	{
 		public DateTime Date { get; set; }
 
-		public IList<ChallengeModel> Challenges { get; set; }
+		public List<ChallengeModel> Challenges { get; set; }
 
 		public int TotalCompleted { get; set; }
 	}

@@ -20,8 +20,8 @@ namespace Branch.App.Areas.Halo4
 				new {controller = "Home", action = "Index"}, namespaces);
 
 			// Stuff
-			context.MapRoute("Halo4_Challenges", "Game/Halo4/Challenges",
-				new {controller = "Challenges", action = "Index"}, namespaces);
+			context.MapRoute("Halo4_Challenges", "Game/Halo4/Challenges/{slug}",
+				new {controller = "Challenges", slug = "wargames", action = "Index"}, namespaces);
 			context.MapRoute("Halo4_Playlists", "Game/Halo4/Playlists/{slug}",
 				new {controller = "Playlists", slug = "wargames", action = "Index"}, namespaces);
 

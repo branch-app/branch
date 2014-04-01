@@ -15,6 +15,11 @@ namespace Branch.App.App_Start
 			bundles.Add(new ScriptBundle("~/bundles/flash").Include(
 				"~/Scripts/flash-cookie.js"));
 
+			bundles.Add(new ScriptBundle("~/bundles/jbclock").Include(
+				"~/Scripts/jbclock.js"));
+			bundles.Add(new StyleBundle("~/bundles/jbclock-styles").Include(
+				"~/Content/Styles/jbclock.css"));
+
 			// le bootstrap
 			bundles.Add(new StyleBundle("~/bundles/bootstrap-custom").Include(new [] {
 				"~/Content/Styles/bootstrap-custom.min.css",
