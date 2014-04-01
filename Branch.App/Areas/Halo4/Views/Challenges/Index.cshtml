@@ -36,7 +36,7 @@
 					<br />
 					<span>
 						<strong>This challenge expires in </strong>
-						@BranchHelpers.MakeTimeSpanFriendlyPrecise(DateTime.UtcNow - challenge.EndDate).
+						@BranchHelpers.MakeTimeSpanFriendlyPrecise(challenge.EndDate - DateTime.UtcNow).
 					</span>
 				</div>
 			}

@@ -94,7 +94,7 @@ namespace Branch.Core.Api.Halo4
 
 			if (metadataBlob == null || metadata == null || 
 				metadataBlob.Properties.LastModified + TimeSpan.FromMinutes(14) < DateTime.UtcNow)
-				UpdateMetadata();
+				UpdateMetadata(true);
 			else
 				Metadata = metadata;
 		}
@@ -108,7 +108,7 @@ namespace Branch.Core.Api.Halo4
 				GenerateBlobContainerPath(BlobType.Other, "playlists"));
 
 			if (playlists == null)
-				UpdatePlaylists();
+				UpdatePlaylists(true);
 			else
 				Playlists = playlists;
 		}
@@ -122,7 +122,7 @@ namespace Branch.Core.Api.Halo4
 				GenerateBlobContainerPath(BlobType.Other, "challenges"));
 
 			if (challenges == null)
-				UpdateChallenges();
+				UpdateChallenges(true);
 			else
 				Challenges = challenges;
 		}
@@ -293,25 +293,25 @@ namespace Branch.Core.Api.Halo4
 		/// <summary>
 		/// 
 		/// </summary>
-		public void UpdateMetadata()
+		public void UpdateMetadata(bool useCached = false)
 		{
-			Metadata = UpdateOther<Metadata>("metadata", "GetGameMetadata");
+			Metadata = UpdateOther<Metadata>("metadata", "GetGameMetadata", useCached);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public void UpdatePlaylists()
+		public void UpdatePlaylists(bool useCached = false)
 		{
-			Playlists = UpdateOther<Playlist>("playlists", "GetPlaylists");
+			Playlists = UpdateOther<Playlist>("playlists", "GetPlaylists", useCached);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public void UpdateChallenges()
+		public void UpdateChallenges(bool useCached = false)
 		{
-			Challenges = UpdateOther<Challenge>("challenges", "GetGlobalChallenges");
+			Challenges = UpdateOther<Challenge>("challenges", "GetGlobalChallenges", useCached);
 		}
 
 		/// <summary>
@@ -320,28 +320,28 @@ namespace Branch.Core.Api.Halo4
 		/// <typeparam name="T"></typeparam>
 		/// <param name="blobFileName"></param>
 		/// <param name="serviceListName"></param>
+		/// <param name="useCached"></param>
 		/// <returns></returns>
-		private T UpdateOther<T>(string blobFileName, string serviceListName)
+		private T UpdateOther<T>(string blobFileName, string serviceListName, bool useCached = false)
 			where T : WaypointResponse
 		{
 			var blobPath = GenerateBlobContainerPath(BlobType.Other, blobFileName);
 			var otherData = _storage.Blob.FindAndDownloadBlob<T>(_storage.Blob.H4BlobContainer, blobPath);
 
-			if (otherData == null)
-			{
-				var otherDataString =
-					ValidateResponseAndGetRawText(
-						AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, serviceListName)), AuthType.Spartan));
+			if (otherData != null && useCached) return otherData;
 
-				if (otherDataString == null)
-					return null;
+			var otherDataString =
+				ValidateResponseAndGetRawText(
+					AuthorizedRequest(PopulateUrl(UrlFromIds(EndpointType.ServiceList, serviceListName)), AuthType.Spartan));
 
-				// Save
-				_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, blobFileName),
-					otherDataString);
+			if (otherDataString == null)
+				return null;
 
-				otherData = ParseText<T>(otherDataString);
-			}
+			// Save
+			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, blobFileName),
+				otherDataString);
+
+			otherData = ParseText<T>(otherDataString);
 			return otherData;
 		}
 
