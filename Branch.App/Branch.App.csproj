@@ -192,6 +192,7 @@
     <Content Include="Areas\Halo4\Views\Challenges\Index.cshtml" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\ValidateH4ApiStatus.cs" />
@@ -222,6 +223,7 @@
     <Content Include="Views\Shared\FlashMessage.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Content\Styles\jbclock.scss" />
+    <Content Include="Views\Blog\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

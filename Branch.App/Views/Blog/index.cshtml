@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Branch.Models.Services.Branch.BlogPostEntity>
+
+@{
+	ViewBag.Title = "Blog";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content" class="bs-header" style="text-align: center;">
+	<div class="container">
+		<h1>
+			Blog
+		</h1>
+		<p>
+			sysops and stuff
+		</p>
+	</div>
+</div>
+
+@foreach (var post in Model)
+{
+	@post.Title
+}

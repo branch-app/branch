@@ -905,8 +905,6 @@ body.halo4_challenges .challenges-container {
         height: 90px; } }
 
 body.halo4_playlists .playlist-entry .meta {
-  background-size: cover;
-  background-repeat: no-repeat;
   margin-top: 10px;
   padding: 0;
   height: 200px;

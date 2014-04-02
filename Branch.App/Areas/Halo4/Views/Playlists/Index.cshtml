@@ -25,7 +25,7 @@
 			@foreach (var playlist in Model.Playlists.Playlists.Where(p => p.Mode == Model.SelectedMode && p.IsCurrent))
 			{
 				<div class="col-md-12 playlist-entry">
-					<div class="col-md-12 meta" style="background-image: url(@(GeneralHelpers.GetRawAssetUrl(playlist.ImageUrl, "large")))">
+					<div class="col-md-12 meta" style="background: url(@(GeneralHelpers.GetRawAssetUrl(playlist.ImageUrl, "large"))) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
 						<div class="mask"></div>
 						<div class="content">
 							<strong>

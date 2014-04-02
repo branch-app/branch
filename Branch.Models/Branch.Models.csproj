@@ -81,6 +81,7 @@
     <Compile Include="Authentication\WaypointTokenEntity.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Branch\BlogPostEntity.cs" />
     <Compile Include="Services\Branch\Enums.cs" />
     <Compile Include="Services\Branch\GamerIdEntity.cs" />
     <Compile Include="Services\Branch\Halo4StatsEntity.cs" />
