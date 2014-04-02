@@ -1,30 +1,39 @@
 ﻿@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Extenders
 @model Branch.App.Areas.Halo4.Models.Base
 @{
 	var serviceRecord = Model.ServiceRecord;
+	string mapBackDrop = null;
+	if (Model.RecentWarGamesHistory != null && Model.RecentWarGamesHistory.Games.Any())
+	{
+		var selectedWarGame = Model.RecentWarGamesHistory.Games.RandomEntity();
+		mapBackDrop = GeneralHelpers.GetRawAssetUrl(selectedWarGame.MapImageUrl, "large");
+	}
 }
 
-<div class="bs-header halo4-header" id="content">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<div class="row name-flairs">
-					<div class="col-md-10">
-						<h1>
-							@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)
-							<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
-						</h1>
-						<h2>@serviceRecord.ServiceTag</h2>
-						<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+<div class="bs-header halo4-header" id="content" 
+	 style="background-image: url('@(mapBackDrop ?? "")');">
+	<div class="mask">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="row name-flairs">
+						<div class="col-md-10">
+							<h1>
+								@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)
+								<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+							</h1>
+							<h2>@serviceRecord.ServiceTag</h2>
+							<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+						</div>
 					</div>
-				</div>
 
-				<div class="row rank-flairs">
-					<div class="col-md-10">
-						<img class="hidden-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl, "medium")" />
+					<div class="row rank-flairs">
+						<div class="col-md-10">
+							<img class="hidden-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl)" />
 
-						@{
+							@{
 							Branch.Models.Services.Halo4._343.DataModels.CommonModels.Specialization activeSpecialization = null;
 							foreach (var specialization in serviceRecord.Specializations.Where(specialization => specialization.IsCurrent))
 							{
@@ -67,15 +76,16 @@
 									<div class="clearfix"></div>
 								</div>
 							}
-						}
-						<img class="visible-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl, "medium")" />
+							}
+							<img class="visible-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl, "medium")" />
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="col-md-3">
-				<div class="spartan-insignia hidden-sm hidden-xs" style="background-image: url(@GeneralHelpers.GetRawAssetUrl(@serviceRecord.EmblemImageUrl, 100));"></div>
-				<div class="spartan-image hidden-sm hidden-xs" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(@serviceRecord.Gamertag)');"></div>
+				<div class="col-md-3">
+					<div class="spartan-insignia hidden-sm hidden-xs" style="background-image: url(@GeneralHelpers.GetRawAssetUrl(@serviceRecord.EmblemImageUrl, 100));"></div>
+					<div class="spartan-image hidden-sm hidden-xs" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(@serviceRecord.Gamertag)');"></div>
+				</div>
 			</div>
 		</div>
 	</div>

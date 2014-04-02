@@ -11,16 +11,16 @@
 
 	switch (game.ModeId)
 	{
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Customs:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames:
 			title = string.Format("{0} on {1} - {2}",
 				game.GameVariantName,
 				game.MapVariantName,
 				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.SpartanOps:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Campaign:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.SpartanOps:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Campaign:
 			title = string.Format("{0} on {1} - {2}",
 				game.MapName,
 				difficulty.Name,
@@ -48,16 +48,16 @@
 
 	@switch (game.ModeId)
 	{
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Customs:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.WarGames:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Customs:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames:
 			Html.RenderPartial("Covers/WarGames", Model);
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.SpartanOps:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.SpartanOps:
 			Html.RenderPartial("Covers/SpartanOps", Model);
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.Mode.Campaign:
+		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Campaign:
 			Html.RenderPartial("Covers/Campaign", Model);
 			break;
 	}

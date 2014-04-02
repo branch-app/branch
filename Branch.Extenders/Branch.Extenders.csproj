@@ -51,6 +51,7 @@
     <Compile Include="DateTime.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Int.cs" />
+    <Compile Include="List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String.cs" />
   </ItemGroup>

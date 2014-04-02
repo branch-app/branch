@@ -3,7 +3,7 @@
 @using Branch.Models.Services.Halo4._343.DataModels
 @model Branch.Models.Services.Halo4._343.Responses.ServiceRecord
 @{
-	var gameMode = Model.GameModes.FirstOrDefault(m => m.Id == Enums.Mode.WarGames);
+	var gameMode = Model.GameModes.FirstOrDefault(m => m.Id == Enums.GameMode.WarGames);
 	var highestSkillRank = 0;
 	if (Model.TopSkillRank != null)
 	{
