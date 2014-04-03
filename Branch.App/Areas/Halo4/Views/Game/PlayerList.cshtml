@@ -3,6 +3,7 @@
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
 @using Branch.Extenders
+@using Branch.Models.Services.Branch
 @using Branch.Models.Services.Halo4._343.DataModels
 @model GamePlayerListViewModel
 @{
@@ -66,8 +67,8 @@
 						}
 						else
 						{
-						@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.Gamertag), "Index", "ServiceRecord",
-									 new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.Gamertag) }, new Dictionary<string, object>())
+						@Html.ActionLink(BranchHelpers.CheckGamerIdPrivacy(player.Gamertag, GamerId.X360XblGamertag), "Index", "ServiceRecord",
+									 new { gamertag = BranchHelpers.CheckGamerIdPrivacy(player.Gamertag, GamerId.X360XblGamertag) }, new Dictionary<string, object>())
 						<br />
 						<strong>@player.ServiceTag</strong>
 						}
@@ -111,7 +112,7 @@
 								else
 								{
 									<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url(@GeneralHelpers.GetRawAssetUrl(player.EmblemImageUrl, 48));">
-										@BranchHelpers.CheckGamertagPrivacy(player.Gamertag)
+										@BranchHelpers.CheckGamerIdPrivacy(player.Gamertag, GamerId.X360XblGamertag)
 										<br />
 										<strong>@player.ServiceTag</strong>
 									</div>
@@ -145,7 +146,7 @@
 					<div class="player-stats tab-content">
 						<div class="tab-pane fade in active summary" id="@ident-summary">
 							<div class="row">
-								<div class="col-md-6 hidden-sm hidden-xs player-model" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(BranchHelpers.CheckGamertagPrivacy(GeneralHelpers.RemoveGuestIdentifier(player.Gamertag)))')"></div>
+								<div class="col-md-6 hidden-sm hidden-xs player-model" style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(GeneralHelpers.RemoveGuestIdentifier(player.Gamertag))')"></div>
 								<div class="col-md-6">
 									@if (player.IsGuest)
 									{
@@ -155,8 +156,8 @@
 									else
 									{
 										<h2>
-											@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.Gamertag), "Index", "ServiceRecord",
-												 new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.Gamertag) }, new Dictionary<string, object>())
+											@Html.ActionLink(BranchHelpers.CheckGamerIdPrivacy(player.Gamertag, GamerId.X360XblGamertag), "Index", "ServiceRecord",
+												 new { gamertag = BranchHelpers.CheckGamerIdPrivacy(player.Gamertag, GamerId.X360XblGamertag) }, new Dictionary<string, object>())
 										</h2>
 										<h3 class="player-servicetag">@player.ServiceTag</h3>
 									}
@@ -215,8 +216,8 @@
 													@if (player.KilledMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledMostGamertag))
 													{
 														// Not a Guest
-														@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledMostGamertag), "Index", "ServiceRecord",
-															new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.KilledMostGamertag) }, new Dictionary<string, object>())
+														@Html.ActionLink(BranchHelpers.CheckGamerIdPrivacy(player.KilledMostGamertag, GamerId.X360XblGamertag), "Index", "ServiceRecord",
+																 new { gamertag = BranchHelpers.CheckGamerIdPrivacy(player.KilledMostGamertag, GamerId.X360XblGamertag) }, new Dictionary<string, object>())
 													}
 													else
 													{
@@ -241,8 +242,8 @@
 													@if (player.KilledByMostGamertag == GeneralHelpers.RemoveGuestIdentifier(player.KilledByMostGamertag))
 													{
 														// Not a Guest
-														@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag), "Index", "ServiceRecord",
-															 new { gamertag = BranchHelpers.CheckGamertagPrivacy(player.KilledByMostGamertag) }, new Dictionary<string, object>())
+														@Html.ActionLink(BranchHelpers.CheckGamerIdPrivacy(player.KilledByMostGamertag, GamerId.X360XblGamertag), "Index", "ServiceRecord",
+																  new { gamertag = BranchHelpers.CheckGamerIdPrivacy(player.KilledByMostGamertag, GamerId.X360XblGamertag) }, new Dictionary<string, object>())
 													}
 													else
 													{
@@ -354,7 +355,7 @@
 						</div>
 						<div class="tab-pane fade in weapons" id="@ident-weapons">
 							@{
-			var weaponGraphIdent = string.Format("player-weapons-{0}", ident);
+								var weaponGraphIdent = string.Format("player-weapons-{0}", ident);
 							}
 							<div class="graph-container hidden-xs">
 								<!-- Graphs Will Return! -->

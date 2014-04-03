@@ -2,9 +2,10 @@
 @using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Models.Services.Branch
 @model ServiceRecordViewModel
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
+	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_service_record";
 	ViewBag.CurrentH4Page = Enums.Pages.ServiceRecord;
@@ -144,7 +145,7 @@
 			@if (!gameHistory.Games.Any())
 			{
 				<h4>
-					@(BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)) has not played any games of War Games.
+					@(Model.PublicGamertag) has not played any games of War Games.
 				</h4>
 			}
 		</div>

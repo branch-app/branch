@@ -16,7 +16,7 @@
 			title = string.Format("{0} on {1} - {2}",
 				game.GameVariantName,
 				game.MapVariantName,
-				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
+				Model.PublicGamertag);
 			break;
 
 		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.SpartanOps:
@@ -24,7 +24,7 @@
 			title = string.Format("{0} on {1} - {2}",
 				game.MapName,
 				difficulty.Name,
-				BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag));
+				Model.PublicGamertag);
 			break;
 	}
 
@@ -36,7 +36,7 @@
 	var orderedPlayers = game.Players.OrderBy(p => p.Standing);
 }
 
-<div class="bs-branch-section game-details">
+<div class="game-details">
 	
 	@Html.Partial("FlashMessage", false)
 

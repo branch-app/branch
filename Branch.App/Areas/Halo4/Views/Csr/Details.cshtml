@@ -1,10 +1,9 @@
 ﻿@using Branch.App.Areas.Halo4.Models
-@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
 @model CsrDetailViewModel
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Csr - {1}", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag), Model.CurrentSkillRank.PlaylistName);
+	ViewBag.Title = string.Format("{0}'s Halo 4 Csr - {1}", Model.PublicGamertag, Model.CurrentSkillRank.PlaylistName);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_csr";
 	ViewBag.CurrentH4Page = Enums.Pages.CompetitiveSkillRank;
@@ -19,7 +18,7 @@
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
-		<h1>@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)'s @currentSkillRank.PlaylistName CSR</h1>
+		<h1>@Model.PublicGamertag's @currentSkillRank.PlaylistName CSR</h1>
 	</div>
 
 

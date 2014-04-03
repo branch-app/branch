@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Helpers.Mvc;
 
-namespace Branch.App.Filters
+namespace Branch.App.Areas.Halo4.Filters
 {
 	public class ValidateH4ApiStatus : ActionFilterAttribute
 	{

@@ -21,15 +21,14 @@
 					<div class="row name-flairs">
 						<div class="col-md-10">
 							<h1>
-								
-								@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)
+								@Model.PublicGamertag
 								@if (serviceRecord.TopSkillRank == null)
 								{
 									<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
 								}
 								else
 								{
-									<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = serviceRecord.Gamertag })">
+									<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = Model.PublicGamertag })">
 										<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
 									</a>
 								}
@@ -41,7 +40,7 @@
 							}
 							else
 							{
-								<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = serviceRecord.Gamertag })">
+								<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = Model.PublicGamertag })">
 									<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
 								</a>
 							}
@@ -72,7 +71,7 @@
 									</div>
 								</div>
 								<div class="XP">
-									<div class="left lower-bound">@BranchHelpers.NumberWithDelimiter(@serviceRecord.RankStartXp, ",") Xp</div>
+									<div class="left lower-bound">@BranchHelpers.NumberWithDelimiter(@serviceRecord.RankStartXp) Xp</div>
 									<div class="right upper-bound"></div>
 									<div class="clearfix"></div>
 								</div>
@@ -81,22 +80,22 @@
 							{
 								float a = (serviceRecord.Xp - serviceRecord.RankStartXp);
 								float b = (serviceRecord.NextRankStartXp - serviceRecord.RankStartXp);
-								var perc = ((a / b) * 100);
+								var percentage = ((a / b) * 100);
 
 								<div class="progress">
-									<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: @perc%">
-										<span class="progress-bar-indicator">@perc % (@BranchHelpers.NumberWithDelimiter(@serviceRecord.Xp, ",") Xp)</span>
-										<span class="sr-only">@perc % (@BranchHelpers.NumberWithDelimiter(@serviceRecord.Xp, ",") Xp)</span>
+									<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: @percentage%">
+										<span class="progress-bar-indicator">@percentage % (@BranchHelpers.NumberWithDelimiter(@serviceRecord.Xp) Xp)</span>
+										<span class="sr-only">@percentage % (@BranchHelpers.NumberWithDelimiter(@serviceRecord.Xp) Xp)</span>
 									</div>
 								</div>
 								<div class="XP">
-									<div class="left lower-bound">@BranchHelpers.NumberWithDelimiter(@serviceRecord.RankStartXp, ",") Xp</div>
-									<div class="right upper-bound">@BranchHelpers.NumberWithDelimiter((int)@serviceRecord.NextRankStartXp, ",") Xp</div>
+									<div class="left lower-bound">@BranchHelpers.NumberWithDelimiter(@serviceRecord.RankStartXp) Xp</div>
+									<div class="right upper-bound">@BranchHelpers.NumberWithDelimiter((int)@serviceRecord.NextRankStartXp) Xp</div>
 									<div class="clearfix"></div>
 								</div>
 							}
 							}
-							<img class="visible-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl, "medium")" />
+							<img class="visible-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl)" />
 						</div>
 					</div>
 				</div>

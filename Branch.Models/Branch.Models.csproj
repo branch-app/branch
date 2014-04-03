@@ -84,6 +84,7 @@
     <Compile Include="Services\Branch\BlogPostEntity.cs" />
     <Compile Include="Services\Branch\Enums.cs" />
     <Compile Include="Services\Branch\GamerIdEntity.cs" />
+    <Compile Include="Services\Branch\GamerIdReplacementEntity.cs" />
     <Compile Include="Services\Branch\Halo4StatsEntity.cs" />
     <Compile Include="Services\Halo4\343\DataModels\ChallengeModel.cs" />
     <Compile Include="Services\Halo4\343\DataModels\CommendationModels.cs" />

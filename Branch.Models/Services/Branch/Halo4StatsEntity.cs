@@ -14,16 +14,16 @@ namespace Branch.Models.Services.Branch
 
 		public Halo4StatsEntity() { }
 
-		public Halo4StatsEntity(Enums.Halo4StatType statType)
+		public Halo4StatsEntity(Halo4StatType statType)
 		{
 			Type = statType;
 			SetKeys(PartitionKeyString, string.Format(RowKeyString, statType));
 		}
 
 		public int TypeInt { get; set; }
-		public Enums.Halo4StatType Type
+		public Halo4StatType Type
 		{
-			get { return (Enums.Halo4StatType) TypeInt; }
+			get { return (Halo4StatType) TypeInt; }
 			set { TypeInt = (int) value; }
 		}
 

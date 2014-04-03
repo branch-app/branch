@@ -712,7 +712,7 @@ namespace Branch.Core.Api.Halo4
 		private void AddPlayerToStorage(string gamertag)
 		{
 			_storage.Table.InsertOrReplaceSingleEntity(
-				new GamerIdEntity(gamertag, Models.Services.Branch.Enums.GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
+				new GamerIdEntity(gamertag, GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
 		}
 
 		/// <summary>

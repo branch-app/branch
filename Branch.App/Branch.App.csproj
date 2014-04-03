@@ -200,8 +200,8 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Filters\ValidateH4ApiStatus.cs" />
-    <Compile Include="Filters\ValidateH4ServiceRecordFilter.cs" />
+    <Compile Include="Areas\Halo4\Filters\ValidateH4ApiStatus.cs" />
+    <Compile Include="Areas\Halo4\Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

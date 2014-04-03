@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Configuration;
 using System.Globalization;
 using System.Text;
+using Branch.Core.BranchStuff;
 using Branch.Models.Services.Branch;
 
 namespace Branch.App.Helpers.Razor
 {
 	public class BranchHelpers
 	{
-		public static string CheckGamertagPrivacy(string gamertag, Enums.GamerId gamerIdType = Enums.GamerId.X360XblGamertag)
+		public static string CheckGamerIdPrivacy(string gamerId, GamerId gamerIdType)
 		{
-			//if (gamertag == "Doofette") return "Evie";
-			return gamertag;
+			return GamerIdReplacementManager.GetReplacementGamerId(gamerId, GlobalStorage.AzureStorage, gamerIdType);
 		}
 
 		public static string GamertagToLeaf(string gamertag, bool alsoValidate = true)
 		{
-			//if (gamertag == "Doofette") gamertag = "Evie";
 			return gamertag.Replace(" ", "_");
 		}
 

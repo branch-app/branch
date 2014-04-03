@@ -1,6 +1,7 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Models.Services.Branch
 @model GameViewModel
 @{
 	var game = Model.ElapsedGame.Game;
@@ -59,11 +60,11 @@
 					<div class="ffa-victor">
 						@if (topPlayer.IsGuest)
 						{
-							<strong>@BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag)</strong>
+							<strong>@BranchHelpers.CheckGamerIdPrivacy(topPlayer.Gamertag, GamerId.X360XblGamertag)</strong>
 						}
 						else
 						{
-							@Html.ActionLink(BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag), "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(topPlayer.Gamertag) } }, new { @class = "alt" })
+							@Html.ActionLink(BranchHelpers.CheckGamerIdPrivacy(topPlayer.Gamertag, GamerId.X360XblGamertag), "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamerIdPrivacy(topPlayer.Gamertag, GamerId.X360XblGamertag) } }, new { @class = "alt" })
 						}
 						led the game with a personal score of @topPlayer.PersonalScore, and a K/D of @MathHelpers.CalculateKd(topPlayer.Kills, topPlayer.Deaths, 2)
 					</div>

@@ -1,6 +1,7 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.Extenders
+@using Branch.Models.Services.Branch
 @using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 @model Base
 @{
@@ -12,17 +13,17 @@
 <div class="bs-sidebar" data-spy="affix" data-offset-top="308">
 	<ul class="nav bs-sidenav">
 		<li class="active">
-			<a href="@Url.Action("Index", "ServiceRecord", new RouteValueDictionary { {"gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)} })">
+			<a href="@Url.Action("Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", Model.PublicGamertag } })">
 				<span class="glyphicon glyphicon-tree-deciduous"></span> Branch
 			</a>
 
 			<ul class="nav">
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.ServiceRecord, "active")">
-					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) } }, new Dictionary<string, object>())
+					@Html.ActionLink("Service Record", "Index", "ServiceRecord", new RouteValueDictionary { { "gamertag", Model.PublicGamertag } }, new Dictionary<string, object>())
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.GameHistory, "active")">
-					@Html.RouteLink("Game History", "Halo4_History", new { slug = "WarGames", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					@Html.RouteLink("Game History", "Halo4_History", new { slug = "WarGames", gamertag = Model.PublicGamertag })
 
 					@if (currentPage == Enums.Pages.GameHistory)
 					{
@@ -30,7 +31,7 @@
 							@foreach (var gameMode in (_343Enums.GameMode[])Enum.GetValues(typeof(_343Enums.GameMode)))
 							{
 								<li class="@BranchHelpers.CompareEnum(currentHistoryMode, gameMode, "active")">
-									@Html.RouteLink(gameMode.ToString().MakeCamelCaseFriendly(), "Halo4_History", new { slug = gameMode.ToString(), gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+									@Html.RouteLink(gameMode.ToString().MakeCamelCaseFriendly(), "Halo4_History", new { slug = gameMode.ToString(), gamertag = Model.PublicGamertag })
 								</li>
 							}
 						</ul>
@@ -38,11 +39,11 @@
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.CompetitiveSkillRank, "active")">
-					@Html.RouteLink("Competitive Skill Rank", "Halo4_Csr", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					@Html.RouteLink("Competitive Skill Rank", "Halo4_Csr", new { gamertag = Model.PublicGamertag })
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Commendations, "active")">
-					@Html.RouteLink("Commendations", "Halo4_Commendations", new { slug = "Weapons", gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					@Html.RouteLink("Commendations", "Halo4_Commendations", new { slug = "Weapons", gamertag = Model.PublicGamertag })
 
 					@if (currentPage == Enums.Pages.Commendations)
 					{
@@ -50,7 +51,7 @@
 							@foreach (var commendationCategory in (_343Enums.CommendationCategory[])Enum.GetValues(typeof(_343Enums.CommendationCategory)))
 							{
 								<li class="@BranchHelpers.CompareEnum(currentCommendationCategory, commendationCategory, "active")">
-									@Html.RouteLink(commendationCategory.ToString().MakeCamelCaseFriendly(), "Halo4_Commendations", new { slug = commendationCategory.ToString(), gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+									@Html.RouteLink(commendationCategory.ToString().MakeCamelCaseFriendly(), "Halo4_Commendations", new { slug = commendationCategory.ToString(), gamertag = Model.PublicGamertag })
 								</li>
 							}
 						</ul>
@@ -58,7 +59,7 @@
 				</li>
 
 				<li class="@BranchHelpers.CompareEnum(currentPage, Enums.Pages.Specializations, "active")">
-					@Html.RouteLink("Specializations", "Halo4_Specializations", new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag) })
+					@Html.RouteLink("Specializations", "Halo4_Specializations", new { gamertag = Model.PublicGamertag })
 				</li>
 			</ul>
 		</li>
@@ -68,22 +69,22 @@
 			</a>
 			<ul class="nav">
 				<li>
-					<a href="http://leafapp.co/h4/record/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+					<a href="http://leafapp.co/h4/record/@BranchHelpers.GamertagToLeaf(BranchHelpers.CheckGamerIdPrivacy(serviceRecord.Gamertag, GamerId.X360XblGamertag))">
 						Overview
 					</a>
 				</li>
 				<li>
-					<a href="http://leafapp.co/h4/compare/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+					<a href="http://leafapp.co/h4/compare/@BranchHelpers.GamertagToLeaf(BranchHelpers.CheckGamerIdPrivacy(serviceRecord.Gamertag, GamerId.X360XblGamertag))">
 						Compare
 					</a>
 				</li>
 				<li>
-					<a href="http://leafapp.co/h4/star/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+					<a href="http://leafapp.co/h4/star/@BranchHelpers.GamertagToLeaf(BranchHelpers.CheckGamerIdPrivacy(serviceRecord.Gamertag, GamerId.X360XblGamertag))">
 						Star
 					</a>
 				</li>
 				<li>
-					<a href="http://leafapp.co/h4/flag/@BranchHelpers.GamertagToLeaf(serviceRecord.Gamertag)">
+					<a href="http://leafapp.co/h4/flag/@BranchHelpers.GamertagToLeaf(BranchHelpers.CheckGamerIdPrivacy(serviceRecord.Gamertag, GamerId.X360XblGamertag))">
 						Flag as Cheater/Booster
 					</a>
 				</li>

@@ -1,9 +1,10 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Models.Services.Branch
 @model CommendationsViewModel
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Commendations", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
+	ViewBag.Title = string.Format("{0}'s Halo 4 Commendations", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_commendations";
 	ViewBag.CurrentH4Page = Enums.Pages.Commendations;

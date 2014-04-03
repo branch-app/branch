@@ -173,7 +173,7 @@ namespace Branch.Core.Storage
 			return QueryAndRetrieveSingleEntity<TEntityType>(
 				TableQuery.CombineFilters(queryA, op, queryB), cloudTable);
 		}
-
+		
 
 		/// <summary>
 		/// </summary>

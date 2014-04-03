@@ -1,8 +1,7 @@
 ﻿using System.Web.Mvc;
+using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
-using Branch.App.Filters;
 using Branch.Models.Services.Branch;
-using _Enums = Branch.Models.Services.Branch.Enums;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
@@ -18,12 +17,12 @@ namespace Branch.App.Areas.Halo4.Controllers
 
 			var weeklyStats =
 				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-					Halo4StatsEntity.FormatRowKey(_Enums.Halo4StatType.Weekly.ToString()),
+					Halo4StatsEntity.FormatRowKey(Halo4StatType.Weekly.ToString()),
 					GlobalStorage.AzureStorage.Table.BranchCloudTable);
 
 			var allTimeStats =
 				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-					Halo4StatsEntity.FormatRowKey(_Enums.Halo4StatType.AllTime.ToString()),
+					Halo4StatsEntity.FormatRowKey(Halo4StatType.AllTime.ToString()),
 					GlobalStorage.AzureStorage.Table.BranchCloudTable);
 
 			return View(new HomeViewModel(challenges, playlists, weeklyStats, allTimeStats));

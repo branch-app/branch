@@ -11,7 +11,6 @@ using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4;
 using Branch.Models.Services.Halo4.Branch;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Enums = Branch.Models.Services.Branch.Enums;
 
 // ReSharper disable ConvertToConstant.Local
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
@@ -79,12 +78,12 @@ namespace Branch.Service.Halo4
 							var playerServiceRecords = players.Select(player => _h4WaypointManager.GetServiceRecord(player.Gamertag)).ToList();
 
 							var allTimeStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??
-												new Halo4StatsEntity(Enums.Halo4StatType.AllTime);
+								string.Format(Halo4StatsEntity.RowKeyString, Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??
+												new Halo4StatsEntity(Halo4StatType.AllTime);
 
 							var weeklyStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-								string.Format(Halo4StatsEntity.RowKeyString, Enums.Halo4StatType.Weekly), _storage.Table.BranchCloudTable) ??
-												new Halo4StatsEntity(Enums.Halo4StatType.Weekly);
+								string.Format(Halo4StatsEntity.RowKeyString, Halo4StatType.Weekly), _storage.Table.BranchCloudTable) ??
+												new Halo4StatsEntity(Halo4StatType.Weekly);
 
 							var kills = 0;
 							var deaths = 0;

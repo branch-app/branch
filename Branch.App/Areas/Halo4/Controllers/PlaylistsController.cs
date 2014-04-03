@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
+using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
-using Branch.App.Filters;
 using _Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 
 namespace Branch.App.Areas.Halo4.Controllers

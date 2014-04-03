@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
+using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
-using Branch.App.Filters;
 using Branch.App.Helpers.Mvc;
 using Branch.Models.Services.Halo4._343.DataModels;
 using Branch.Models.Services.Halo4._343.Responses;

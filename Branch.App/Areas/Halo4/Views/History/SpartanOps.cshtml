@@ -5,17 +5,15 @@
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
 @model HistoryViewModel<GameHistoryModel.SpartanOps>
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Spartan Ops History", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
+	ViewBag.Title = string.Format("{0}'s Halo 4 Spartan Ops History", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_game_history";
 	ViewBag.CurrentH4Page = Enums.Pages.GameHistory;
 	ViewBag.CurrentHistoryMode = Model.GameMode;
-
-	var serviceRecord = Model.ServiceRecord;
 	var gameHistory = Model.GameHistory;
 }
 
-<div class="bs-branch-section overview">
+<div class="overview">
 	
 	@Html.Partial("FlashMessage", false)
 
@@ -42,10 +40,10 @@
 			<tbody>
 				@foreach (var game in gameHistory.Games)
 				{
-					<tr class="history-row ">
+					<tr>
 						<td>
 							@Html.RouteLink(game.EpisodeName, "Halo4_Game",
-								new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
+						  new { gamertag = Model.PublicGamertag, id = game.Id })
 						</td>
 
 						<td>
@@ -77,7 +75,7 @@
 	else
 	{
 		<h6>
-			There are no more Spartan Ops Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
+			There are no more Spartan Ops Games in <strong>@Model.PublicGamertag's</strong> Game History
 		</h6>
 	}
 

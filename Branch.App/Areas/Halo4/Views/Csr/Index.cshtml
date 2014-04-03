@@ -1,11 +1,10 @@
 ﻿@using Branch.App.Areas.Halo4.Models
-@using Branch.App.Helpers.Razor
 @using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
 @model CsrViewModel
 
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 Csr", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
+	ViewBag.Title = string.Format("{0}'s Halo 4 Csr", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_csr";
 	ViewBag.CurrentH4Page = Enums.Pages.CompetitiveSkillRank;
@@ -28,19 +27,19 @@
 		{
 			teamSkillRanks.Add(skillRank);
 		}
-		else if (!playlistOrientation.IsTeam)
+		else
 		{
 			individualSkillRanks.Add(skillRank);
 		}
 	}
 }
 
-<div class="bs-branch-section csr">
+<div class="csr">
 	
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
-		<h1>@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)'s CSR</h1>
+		<h1>@Model.PublicGamertag's CSR</h1>
 	</div>
 
 	<div class="row">
@@ -61,15 +60,15 @@
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade active in" id="team">
-					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(teamSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(teamSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), Model.PublicGamertag))
 				</div>
 				<div class="tab-pane fade" id="individual">
-					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(individualSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+					@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(individualSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), Model.PublicGamertag))
 				</div>
 				@if (unknownSkillRanks.Any())
 				{
 					<div class="tab-pane fade" id="unk">
-						@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(unknownSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), serviceRecord.Gamertag))
+						@Html.Partial("Partials/SkillRankContainer", new Tuple<IEnumerable<CommonModels.CurrentSkillRank>, string>(unknownSkillRanks.OrderByDescending(r => r.CompetitiveSkillRank ?? 0), Model.PublicGamertag))
 					</div>
 				}
 			</div>

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
+using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
-using Branch.App.Filters;
 using Branch.Models.Services.Halo4._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Controllers

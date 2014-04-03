@@ -2,11 +2,12 @@
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
 @using Branch.Extenders
+@using Branch.Models.Services.Branch
 @using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
 @model HistoryViewModel<GameHistoryModel.WarGames>
 @{
-	ViewBag.Title = string.Format("{0}'s Halo 4 War Games History", BranchHelpers.CheckGamertagPrivacy(@Model.ServiceRecord.Gamertag));
+	ViewBag.Title = string.Format("{0}'s Halo 4 War Games History", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_game_history";
 	ViewBag.CurrentH4Page = Enums.Pages.GameHistory;
@@ -44,7 +45,7 @@
 					<tr class="history-row">
 						<td>
 							@Html.RouteLink(game.VariantName, "Halo4_Game",
-								new { gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag), id = game.Id })
+						  new { gamertag = Model.PublicGamertag, id = game.Id })
 						</td>
 
 						<td>
@@ -68,7 +69,7 @@
 							@Html.RouteLink(game.PlaylistName, "Halo4_CsrDetails",
 								new
 								{
-									gamertag = BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag),
+									gamertag = Model.PublicGamertag,
 									id = game.PlaylistId,
 									slug = game.PlaylistName.ToSlug()
 								})
@@ -81,7 +82,7 @@
 	else
 	{
 		<h6>
-			There are no more Multiplaer Games in @BranchHelpers.CheckGamertagPrivacy(Model.ServiceRecord.Gamertag)'s Game History
+			There are no more Multiplaer Games in <strong>@Model.PublicGamertag's</strong> Game History
 		</h6>
 	}
 
