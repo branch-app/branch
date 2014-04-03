@@ -168,6 +168,26 @@ body.home .games .game {
 body.about_home .faq > .faq-entry {
   margin-top: 20px; }
 
+body.blog_home .blog-entry {
+  margin: 20px 0; }
+  body.blog_home .blog-entry > .details {
+    margin-top: 25px; }
+    body.blog_home .blog-entry > .details > ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; }
+      body.blog_home .blog-entry > .details > ul > li > strong {
+        font-weight: 500; }
+
+body.blog_view .blog-header > .container > .details {
+  margin-top: 20px;
+  margin-bottom: -20px;
+  font-size: 14px; }
+body.blog_view .blog-post {
+  margin-top: 30px; }
+  body.blog_view .blog-post img {
+    max-width: 100%; }
+
 body.search .bs-header h1 {
   font-size: 30px;
   text-align: center; }
@@ -229,7 +249,9 @@ body.halo4 .halo4-header {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; }
+  background-size: cover;
+  -webkit-filter: contrast(150%);
+  filter: contrast(150%); }
   @media (max-width: 767px) {
     body.halo4 .halo4-header {
       height: 350px; } }

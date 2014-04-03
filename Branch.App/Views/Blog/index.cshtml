@@ -1,8 +1,11 @@
-﻿@model IEnumerable<Branch.Models.Services.Branch.BlogPostEntity>
+﻿@using Branch.App.Helpers.Razor
+@using Branch.Extenders
+@model IEnumerable<Branch.Models.Services.Branch.BlogPostEntity>
 
 @{
 	ViewBag.Title = "Blog";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "blog blog_home";
 }
 
 <div id="content" class="bs-header" style="text-align: center;">
@@ -16,7 +19,42 @@
 	</div>
 </div>
 
-@foreach (var post in Model)
-{
-	@post.Title
-}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="bs-branch-section blog">
+				@Html.Partial("FlashMessage", true)
+				
+				@foreach (var blogPost in Model)
+				{
+					<div class="row">
+						<div class="col-md-12">
+							<blockquote class="blog-entry">
+								<h4>
+									@Html.RouteLink(blogPost.Title, "Blog", new { slug = blogPost.Slug }, null)
+								</h4>
+								<p>
+									@blogPost.Description
+								</p>
+
+								<div class="details">
+									<ul>
+										<li>
+											Posted By: <strong>@blogPost.Author</strong>
+										</li>
+										<li>
+											Posted At: <strong>@BranchHelpers.MakeDateTimeFriendly(blogPost.Timestamp.ToDateTime(), "D")</strong>
+										</li>
+										<li>
+											Posted In: <strong>@blogPost.Category</strong>
+										</li>
+									</ul>
+								</div>
+							</blockquote>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

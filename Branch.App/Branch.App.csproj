@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.NET.1.4\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -190,6 +193,8 @@
     <Content Include="Content\Styles\Halo4\_playlists.scss" />
     <Content Include="Areas\Halo4\Views\Playlists\Index.cshtml" />
     <Content Include="Areas\Halo4\Views\Challenges\Index.cshtml" />
+    <Content Include="Content\Styles\Blog\_index.scss" />
+    <Content Include="Content\Styles\Blog\_view.scss" />
     <None Include="Content\Styles\Halo4\_game_history.scss" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -201,6 +206,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Cryptography\Sha1Crypto.cs" />
+    <Compile Include="Helpers\MarkdownHelper.cs" />
     <Compile Include="Helpers\Mvc\FlashMessage.cs" />
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
@@ -224,6 +230,7 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Content\Styles\jbclock.scss" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

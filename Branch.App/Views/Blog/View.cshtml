@@ -1,0 +1,36 @@
+﻿@model Branch.Models.Services.Branch.BlogPostEntity
+
+@{
+    ViewBag.Title = String.Format("Blog - {0}", Model.Title);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "blog blog_view";
+}
+
+<div id="content" class="bs-header" style="text-align: center;">
+	<div class="container">
+		<h1>
+			@Model.Title
+		</h1>
+		<p>
+			@Model.Description
+		</p>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="bs-branch-section blog">
+				@Html.Partial("FlashMessage", true)
+
+				<div class="bs-branch-section blog-post">
+					<div class="row">
+						<div class="col-md-12 panel">
+							@Html.Raw(Model.Body)
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTime.cs" />
+    <Compile Include="DateTimeOffset.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Int.cs" />
     <Compile Include="List.cs" />
