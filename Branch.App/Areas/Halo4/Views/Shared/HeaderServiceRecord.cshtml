@@ -21,11 +21,30 @@
 					<div class="row name-flairs">
 						<div class="col-md-10">
 							<h1>
+								
 								@BranchHelpers.CheckGamertagPrivacy(serviceRecord.Gamertag)
-								<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+								@if (serviceRecord.TopSkillRank == null)
+								{
+									<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+								}
+								else
+								{
+									<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = serviceRecord.Gamertag })">
+										<img class="hidden-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+									</a>
+								}
 							</h1>
 							<h2>@serviceRecord.ServiceTag</h2>
-							<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+							@if (serviceRecord.TopSkillRank == null)
+							{
+								<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+							}
+							else
+							{
+								<a href="@Url.RouteUrl("Halo4_CsrDetails", new { id = serviceRecord.TopSkillRank.PlaylistId, slug = serviceRecord.TopSkillRank.PlaylistName.ToSlug(), gamertag = serviceRecord.Gamertag })">
+									<img class="visible-xs" alt="" src="@GeneralHelpers.GetCsrLevelUrl(GeneralHelpers.GetHighestCsr(serviceRecord.TopSkillRank))" />
+								</a>
+							}
 						</div>
 					</div>
 
