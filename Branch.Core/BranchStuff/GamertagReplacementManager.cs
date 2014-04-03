@@ -17,7 +17,7 @@ namespace Branch.Core.BranchStuff
 					TableOperators.And,
 					TableQuery.GenerateFilterConditionForInt("TypeInt", QueryComparisons.Equal, (int)gamerIdType),
 					TableOperators.And,
-					TableQuery.GenerateFilterCondition("ReplacementId", QueryComparisons.Equal, gamerId.ToLowerInvariant()),
+					TableQuery.GenerateFilterCondition("SafeReplacementId", QueryComparisons.Equal, gamerId.ToLowerInvariant()),
 					storage.Table.BranchCloudTable);
 
 			return replacement != null ? replacement.OriginalId : gamerId;
