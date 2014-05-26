@@ -11,10 +11,7 @@ body.halo4 {
 		-moz-background-size: cover; 
 		-o-background-size: cover; 
 		background-size: cover;
-
-		-webkit-filter: contrast(150%);
-		filter: contrast(150%);
-
+		
 		@media (max-width: 767px) {
 			height: 350px;
 		}
