@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30219.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Branch.Core", "Branch.Core\Branch.Core.csproj", "{8AD17440-0040-4CC4-9169-C02FE8D419CD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{28C377D4-057C-4D2C-8DD5-020AA1EE4A3C}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Branch.Core", "Branch.Core\Branch.Core.csproj", "{8AD17440-0040-4CC4-9169-C02FE8D419CD}"
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Branch.Azure", "Branch.Azure\Branch.Azure.ccproj", "{3944F1AD-FE9B-4C7A-8B66-921F5217F215}"
 EndProject
