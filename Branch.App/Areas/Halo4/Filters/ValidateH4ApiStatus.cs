@@ -7,7 +7,7 @@ namespace Branch.App.Areas.Halo4.Filters
 	{
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			var apiStatus = GlobalStorage.H4WaypointManager.CheckApiValidity();
+			var apiStatus = GlobalStorage.H4Manager.CheckApiValidity();
 			if (apiStatus) return;
 
 			FlashMessage.AddFlashMessage(filterContext.HttpContext.Response, FlashMessage.FlashMessageType.Info, "Archive Mode",

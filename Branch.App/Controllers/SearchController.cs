@@ -14,7 +14,7 @@ namespace Branch.App.Controllers
 				throw new ArgumentException("yo, query can't be null/empty");
 
 			// find halo 4 players
-			var halo4ServiceRecord = GlobalStorage.H4WaypointManager.GetServiceRecord(q);
+			var halo4ServiceRecord = GlobalStorage.H4Manager.GetServiceRecord(q);
 
 			// le render le model le
 			return View(new SearchViewModel(q, halo4ServiceRecord));

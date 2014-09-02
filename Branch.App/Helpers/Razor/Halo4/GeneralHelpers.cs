@@ -25,19 +25,19 @@ namespace Branch.App.Helpers.Razor.Halo4
 
 		public static string GetRawAssetUrl(CommonModels.ImageUrl imageUrl, string size = "medium")
 		{
-			return string.Format("{0}{1}", GlobalStorage.H4WaypointManager.RegisteredWebApp.Settings[imageUrl.BaseUrl],
+			return string.Format("{0}{1}", GlobalStorage.H4Manager.RegisteredWebApp.Settings[imageUrl.BaseUrl],
 				imageUrl.AssetUrl.Replace("{size}", size));
 		}
 
 		public static string GetRawAssetUrl(CommonModels.ImageUrl imageUrl, int size)
 		{
-			return string.Format("{0}{1}", GlobalStorage.H4WaypointManager.RegisteredWebApp.Settings[imageUrl.BaseUrl],
+			return string.Format("{0}{1}", GlobalStorage.H4Manager.RegisteredWebApp.Settings[imageUrl.BaseUrl],
 				imageUrl.AssetUrl.Replace("{size}", size.ToString(CultureInfo.InvariantCulture)));
 		}
 
 		public static string GetPlayerModelUrl(string gamertag, string size = "large", string pose = "fullbody")
 		{
-			var url = GlobalStorage.H4WaypointManager.GetPlayerModelUrl(gamertag, size, pose);
+			var url = GlobalStorage.H4Manager.GetPlayerModelUrl(gamertag, size, pose);
 
 			return GamerIdReplacementManager.GetReplacementGamerId(gamertag, GlobalStorage.AzureStorage) == gamertag
 				? url
@@ -72,7 +72,7 @@ namespace Branch.App.Helpers.Razor.Halo4
 
 		public static CsrType GetPlaylistCsrOrientation(PlaylistModel playlist)
 		{
-			var playlistOrientation = GlobalStorage.H4WaypointManager.GetPlaylistOrientation(playlist.Id);
+			var playlistOrientation = GlobalStorage.H4Manager.GetPlaylistOrientation(playlist.Id);
 			if (playlistOrientation == null)
 				return CsrType.Unknown;
 

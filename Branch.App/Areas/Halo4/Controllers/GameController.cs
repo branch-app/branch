@@ -14,7 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string id)
 		{
-			var game = GlobalStorage.H4WaypointManager.GetPlayerGame(serviceRecord.Gamertag, id);
+			var game = GlobalStorage.H4Manager.GetPlayerGame(serviceRecord.Gamertag, id);
 			if (game == null)
 			{
 				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "ServiceRecord"),

@@ -17,7 +17,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View(new CsrViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientations()));
+			return View(new CsrViewModel(serviceRecord, GlobalStorage.H4Manager.GetPlaylistOrientations()));
 		}
 
 		//
@@ -46,7 +46,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 					FlashMessage.FlashMessageType.Warning, "Haha!", "Nice try changing the slug m8.");
 
 			return
-				View(new CsrDetailViewModel(serviceRecord, GlobalStorage.H4WaypointManager.GetPlaylistOrientation(skillRank.PlaylistId),
+				View(new CsrDetailViewModel(serviceRecord, GlobalStorage.H4Manager.GetPlaylistOrientation(skillRank.PlaylistId),
 					serviceRecord.SkillRanks.FirstOrDefault(r => r.PlaylistId == id), MetadataHelpers.GetPlaylist(skillRank.PlaylistId)));
 		}
 	}

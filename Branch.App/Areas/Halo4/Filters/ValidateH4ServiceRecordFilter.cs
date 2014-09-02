@@ -11,7 +11,7 @@ namespace Branch.App.Areas.Halo4.Filters
 		{
 			var gamertag = GamerIdReplacementManager.GetOriginalGamerId(filterContext.ActionParameters["gamertag"].ToString(), GlobalStorage.AzureStorage);
 
-			var serviceRecord = GlobalStorage.H4WaypointManager.GetServiceRecord(gamertag);
+			var serviceRecord = GlobalStorage.H4Manager.GetServiceRecord(gamertag);
 			if (serviceRecord != null)
 			{
 				filterContext.ActionParameters["ServiceRecord"] = serviceRecord;

@@ -29,7 +29,7 @@ namespace Branch.Service.Halo4
 		};
 
 		private AzureStorage _storage;
-		private WaypointManager _h4WaypointManager;
+		private Manager _h4WaypointManager;
 
 		public override void Run()
 		{
@@ -157,7 +157,7 @@ namespace Branch.Service.Halo4
 			Trace.TraceInformation("Branch.Service.Halo4 service started");
 			ServicePointManager.DefaultConnectionLimit = 1;
 			_storage = new AzureStorage();
-			_h4WaypointManager = new WaypointManager(_storage, true);
+			_h4WaypointManager = new Manager(_storage, true);
 
 			#region Create Tasks if they don't exist
 

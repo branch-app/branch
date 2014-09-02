@@ -29,21 +29,21 @@ namespace Branch.App.Areas.Halo4.Controllers
 				case GameMode.Customs:
 				case GameMode.WarGames:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
+						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
 					return View("WarGames", new HistoryViewModel<GameHistoryModel.WarGames>(
 						serviceRecord, gameHistory, gameMode, page));
 
 				case GameMode.Campaign:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
+						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
 					return View("Campaign", new HistoryViewModel<GameHistoryModel.Campaign>(
 						serviceRecord, gameHistory, gameMode, page));
 
 				case GameMode.SpartanOps:
 					gameHistory =
-						GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
+						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
 					return View("SpartanOps", new HistoryViewModel<GameHistoryModel.SpartanOps>(
 						serviceRecord, gameHistory, gameMode, page));

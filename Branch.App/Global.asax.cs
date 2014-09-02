@@ -5,7 +5,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Branch.App.App_Start;
 using Branch.App_Start;
-using Branch.Core.Game.Halo4.Api;
 using Branch.Core.Storage;
 
 namespace Branch.App
@@ -21,7 +20,8 @@ namespace Branch.App
 
 			// le
 			GlobalStorage.AzureStorage = new AzureStorage();
-			GlobalStorage.H4WaypointManager = new WaypointManager(GlobalStorage.AzureStorage);
+			GlobalStorage.H4Manager = new Core.Game.Halo4.Api.Manager(GlobalStorage.AzureStorage);
+			GlobalStorage.HReachManager = new Core.Game.HaloReach.Api.Manager(GlobalStorage.AzureStorage);
 		}
 	}
 
@@ -29,6 +29,8 @@ namespace Branch.App
 	{
 		public static AzureStorage AzureStorage { get; set; }
 
-		public static WaypointManager H4WaypointManager { get; set; }
+		public static Core.Game.Halo4.Api.Manager H4Manager { get; set; }
+
+		public static Core.Game.HaloReach.Api.Manager HReachManager { get; set; }
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Branch.Core.Game.Halo4.Models._343.Responses
 {
-	public class Metadata : WaypointResponse
+	public class Metadata : Response
 	{
 		public MetadataModels.AchievementMetadata AchievementsMetadata { get; set; }
 

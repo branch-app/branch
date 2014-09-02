@@ -18,7 +18,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 			if (!Enum.TryParse(slug, true, out selectedMode))
 				selectedMode = GameMode.WarGames;
 
-			return View(new PlaylistsViewModel(selectedMode, GlobalStorage.H4WaypointManager.Playlists));
+			return View(new PlaylistsViewModel(selectedMode, GlobalStorage.H4Manager.Playlists));
 		}
 	}
 }

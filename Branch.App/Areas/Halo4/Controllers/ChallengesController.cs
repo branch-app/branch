@@ -15,7 +15,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string slug)
 		{
-			var challenges = GlobalStorage.H4WaypointManager.Challenges.Challenges;
+			var challenges = GlobalStorage.H4Manager.Challenges.Challenges;
 			var challengeCategories = new List<MetadataModels.ChallengeCategory>();
 
 			foreach (var challenge in from challenge in challenges

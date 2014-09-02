@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Game.Halo4.Enums;
 using Branch.Core.Game.Halo4.Models._343;
@@ -22,7 +21,7 @@ using HttpMethod = Branch.Core.Enums.HttpMethod;
 
 namespace Branch.Core.Game.Halo4.Api
 {
-	public class WaypointManager
+	public class Manager
 	{
 		private const string RegisterWebAppLocation =
 			"https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
@@ -36,7 +35,7 @@ namespace Branch.Core.Game.Halo4.Api
 		public Playlist Playlists { get; private set; }
 		public Challenge Challenges { get; private set; }
 
-		public WaypointManager(AzureStorage storage, bool updateAuthentication = false)
+		public Manager(AzureStorage storage, bool updateAuthentication = false)
 		{
 			_storage = storage;
 			RegisterWebApp();
@@ -58,11 +57,11 @@ namespace Branch.Core.Game.Halo4.Api
 		{
 			var response = UnauthorizedRequest(RegisterWebAppLocation);
 
-			if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(Task.Run(() => response.Content.ReadAsStringAsync()).Result))
+			if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
 			{
 				try
 				{
-					RegisteredWebApp = JsonConvert.DeserializeObject<RegisterWebApp>(Task.Run(() => response.Content.ReadAsStringAsync()).Result);
+					RegisteredWebApp = JsonConvert.DeserializeObject<RegisterWebApp>(response.Content.ReadAsStringAsync().Result);
 				}
 				catch (JsonReaderException jsonReaderException)
 				{
@@ -321,7 +320,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <param name="useCached"></param>
 		/// <returns></returns>
 		private T UpdateOther<T>(string blobFileName, string serviceListName, bool useCached = false)
-			where T : WaypointResponse
+			where T : Response
 		{
 			var blobPath = GenerateBlobContainerPath(BlobType.Other, blobFileName);
 			var otherData = _storage.Blob.FindAndDownloadBlob<T>(_storage.Blob.H4BlobContainer, blobPath);
@@ -371,7 +370,7 @@ namespace Branch.Core.Game.Halo4.Api
 			switch (requestType)
 			{
 				case HttpMethod.Get:
-					return Task.Run(() => httpClient.GetAsync(url)).Result;
+					return httpClient.GetAsync(url).Result;
 
 				default:
 					throw new ArgumentException();
@@ -501,10 +500,10 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <returns>Boolean representation of the validity of the response.</returns>
 		private static bool ValidateResponse(HttpResponseMessage response)
 		{
-			if (response == null || response.StatusCode != HttpStatusCode.OK || String.IsNullOrEmpty(Task.Run(() => response.Content.ReadAsStringAsync()).Result))
+			if (response == null || response.StatusCode != HttpStatusCode.OK || String.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
 				return false;
 
-			var parsedResponse = JsonConvert.DeserializeObject<WaypointResponse>(Task.Run(() => response.Content.ReadAsStringAsync()).Result);
+			var parsedResponse = JsonConvert.DeserializeObject<Response>(response.Content.ReadAsStringAsync().Result);
 			return (parsedResponse != null && (parsedResponse.StatusCode == ResponseCode.Okay || parsedResponse.StatusCode == ResponseCode.PlayerFound));
 		}
 
@@ -514,7 +513,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <param name="response">The HttpResponse</param>
 		private static string ValidateResponseAndGetRawText(HttpResponseMessage response)
 		{
-			return !ValidateResponse(response) ? null : Task.Run(() => response.Content.ReadAsStringAsync()).Result;
+			return !ValidateResponse(response) ? null : response.Content.ReadAsStringAsync().Result;
 		}
 
 		/// <summary>
@@ -524,14 +523,14 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <returns>Returns null if the response is not valid, and the parsed model if it is.</returns>
 		// ReSharper disable once UnusedMember.Local
 		private static TModelType ValidateAndParseResponse<TModelType>(HttpResponseMessage response)
-			where TModelType : WaypointResponse
+			where TModelType : Response
 		{
 			if (!ValidateResponse(response))
 				return null;
 
 			try
 			{
-				return JsonConvert.DeserializeObject<TModelType>(Task.Run(() => response.Content.ReadAsStringAsync()).Result);
+				return JsonConvert.DeserializeObject<TModelType>(response.Content.ReadAsStringAsync().Result);
 			}
 			catch (JsonReaderException jsonReaderException)
 			{
@@ -605,7 +604,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <param name="jsonData"></param>
 		/// <returns></returns>
 		public TBlam ParseText<TBlam>(string jsonData)
-			where TBlam : WaypointResponse
+			where TBlam : Response
 		{
 			if (jsonData == null) return null;
 
@@ -682,7 +681,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <param name="expireLength"></param>
 		/// <returns></returns>
 		public Tuple<bool, TDataModel> CheckBlobValidity<TDataModel>(ICloudBlob blob, TimeSpan expireLength)
-			where TDataModel : WaypointResponse
+			where TDataModel : Response
 		{
 			if (blob == null || !blob.Exists())
 				return new Tuple<bool, TDataModel>(false, null);

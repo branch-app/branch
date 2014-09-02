@@ -12,8 +12,8 @@ namespace Branch.App.Areas.Halo4.Controllers
 		[ValidateH4ApiStatus]
 		public ActionResult Index()
 		{
-			var challenges = GlobalStorage.H4WaypointManager.Challenges;
-			var playlists = GlobalStorage.H4WaypointManager.Playlists;
+			var challenges = GlobalStorage.H4Manager.Challenges;
+			var playlists = GlobalStorage.H4Manager.Playlists;
 
 			var weeklyStats =
 				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,

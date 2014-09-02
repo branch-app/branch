@@ -10,7 +10,7 @@ namespace Branch.App.Areas.Halo4.Models
 		{
 			ServiceRecord = serviceRecord;
 			RecentWarGamesHistory = recentWarGamesHistory ??
-										GlobalStorage.H4WaypointManager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
+										GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
 											serviceRecord.Gamertag, 0, 20);
 
 			PublicGamertag = GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Gamertag, GlobalStorage.AzureStorage);

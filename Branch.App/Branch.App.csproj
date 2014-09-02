@@ -285,6 +285,10 @@
       <Project>{eaa9b0bb-f6be-4707-886f-54b4a7c55397}</Project>
       <Name>Branch.Core.Game.Halo4</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Branch.Core.Game.HaloReach\Branch.Core.Game.HaloReach.csproj">
+      <Project>{54825b25-5c46-4b8c-8bee-6a8c635fe545}</Project>
+      <Name>Branch.Core.Game.HaloReach</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Branch.Core\Branch.Core.csproj">
       <Project>{8ad17440-0040-4cc4-9169-c02fe8d419cd}</Project>
       <Name>Branch.Core</Name>

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Branch.Core.Game.Halo4.Models._343.Responses
 {
-	public class ServiceRecord : WaypointResponse
+	public class ServiceRecord : Response
 	{
 		public int DateFidelity { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
+using Branch.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
@@ -23,6 +24,10 @@ namespace Branch.Core.Storage
 			H4BlobContainer = BlobClient.GetContainerReference("h4-blob-container");
 			H4BlobContainer.CreateIfNotExists();
 			H4BlobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Off });
+
+			HReachBlobContainer = BlobClient.GetContainerReference("hreach-blob-container");
+			HReachBlobContainer.CreateIfNotExists();
+			HReachBlobContainer.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Off });
 
 			#endregion
 		}
@@ -50,7 +55,7 @@ namespace Branch.Core.Storage
 		/// <param name="blobName"></param>
 		/// <returns></returns>
 		public TDataModel FindAndDownloadBlob<TDataModel>(CloudBlobContainer blobContainer, string blobName)
-			where TDataModel : class
+			where TDataModel : BaseResponse
 		{
 			ICloudBlob blob;
 			try
@@ -76,7 +81,7 @@ namespace Branch.Core.Storage
 		/// <param name="blob"></param>
 		/// <returns></returns>
 		public TDataModel DownloadBlob<TDataModel>(ICloudBlob blob)
-			where TDataModel : class
+			where TDataModel : BaseResponse
 		{
 			if (blob == null)
 				throw new ArgumentException("Can't download blob, specified blob is null.");
@@ -104,5 +109,6 @@ namespace Branch.Core.Storage
 		#endregion
 
 		public CloudBlobContainer H4BlobContainer { get; private set; }
+		public CloudBlobContainer HReachBlobContainer { get; private set; }
 	}
 }
