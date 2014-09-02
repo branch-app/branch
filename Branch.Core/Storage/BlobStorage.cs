@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using Branch.Models.Services.Halo4._343;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
@@ -51,7 +50,7 @@ namespace Branch.Core.Storage
 		/// <param name="blobName"></param>
 		/// <returns></returns>
 		public TDataModel FindAndDownloadBlob<TDataModel>(CloudBlobContainer blobContainer, string blobName)
-			where TDataModel : WaypointResponse
+			where TDataModel : class
 		{
 			ICloudBlob blob;
 			try
@@ -77,7 +76,7 @@ namespace Branch.Core.Storage
 		/// <param name="blob"></param>
 		/// <returns></returns>
 		public TDataModel DownloadBlob<TDataModel>(ICloudBlob blob)
-			where TDataModel : WaypointResponse
+			where TDataModel : class
 		{
 			if (blob == null)
 				throw new ArgumentException("Can't download blob, specified blob is null.");

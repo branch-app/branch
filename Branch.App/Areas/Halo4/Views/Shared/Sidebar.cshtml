@@ -1,14 +1,14 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
+@using Branch.Core.Game.Halo4.Enums
 @using Branch.Extenders
 @using Branch.Models.Services.Branch
-@using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
 @model Base
 @{
 	var serviceRecord = @Model.ServiceRecord;
 	Enums.Pages currentPage = ViewBag.CurrentH4Page;
-	_343Enums.CommendationCategory? currentCommendationCategory = ViewBag.CurrentCommendationCategory;
-	_343Enums.GameMode? currentHistoryMode = ViewBag.CurrentHistoryMode;
+	CommendationCategory? currentCommendationCategory = ViewBag.CurrentCommendationCategory;
+	GameMode? currentHistoryMode = ViewBag.CurrentHistoryMode;
 }
 <div class="bs-sidebar" data-spy="affix" data-offset-top="308">
 	<ul class="nav bs-sidenav">
@@ -28,7 +28,7 @@
 					@if (currentPage == Enums.Pages.GameHistory)
 					{
 						<ul class="nav">
-							@foreach (var gameMode in (_343Enums.GameMode[])Enum.GetValues(typeof(_343Enums.GameMode)))
+							@foreach (var gameMode in (GameMode[])Enum.GetValues(typeof(GameMode)))
 							{
 								<li class="@BranchHelpers.CompareEnum(currentHistoryMode, gameMode, "active")">
 									@Html.RouteLink(gameMode.ToString().MakeCamelCaseFriendly(), "Halo4_History", new { slug = gameMode.ToString(), gamertag = Model.PublicGamertag })
@@ -48,7 +48,7 @@
 					@if (currentPage == Enums.Pages.Commendations)
 					{
 						<ul class="nav">
-							@foreach (var commendationCategory in (_343Enums.CommendationCategory[])Enum.GetValues(typeof(_343Enums.CommendationCategory)))
+							@foreach (var commendationCategory in (CommendationCategory[])Enum.GetValues(typeof(CommendationCategory)))
 							{
 								<li class="@BranchHelpers.CompareEnum(currentCommendationCategory, commendationCategory, "active")">
 									@Html.RouteLink(commendationCategory.ToString().MakeCamelCaseFriendly(), "Halo4_Commendations", new { slug = commendationCategory.ToString(), gamertag = Model.PublicGamertag })

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
 using Branch.App.Helpers.Razor.Halo4;
-using Branch.Models.Services.Halo4._343.DataModels;
+using Branch.Core.Game.Halo4.Models._343.DataModels;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {

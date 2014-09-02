@@ -1,5 +1,6 @@
 ﻿@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Core.Game.Halo4.Models._343.DataModels
 @using Branch.Extenders
 @model Branch.App.Areas.Halo4.Models.Base
 @{
@@ -52,7 +53,7 @@
 							<img class="hidden-xs" alt="" src="@GeneralHelpers.GetRawAssetUrl(@serviceRecord.RankImageUrl)" />
 
 							@{
-							Branch.Models.Services.Halo4._343.DataModels.CommonModels.Specialization activeSpecialization = null;
+							CommonModels.Specialization activeSpecialization = null;
 							foreach (var specialization in serviceRecord.Specializations.Where(specialization => specialization.IsCurrent))
 							{
 								activeSpecialization = specialization;

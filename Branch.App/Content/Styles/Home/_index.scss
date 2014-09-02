@@ -77,6 +77,7 @@
 
 				&.Halo4 { background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
 				&.Destiny { background-image: url('/Content/Images/Home/Covers/Destiny/cover1.jpg'); }
+				&.MCC { background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
 
 				.game-cover {
 					background: #ffffff no-repeat center 0 fixed;
@@ -89,6 +90,7 @@
 
 					&.Halo4 { background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
 					&.Destiny { background-image: url('/Content/Images/Home/Covers/Destiny/cover1.jpg'); }
+					&.MCC { background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
 				}
 			}
 
@@ -137,12 +139,12 @@
 					}
 
 					h1 {
-						font-family: 'Segoe UI', 'Open Sans Condensed';
+						font-family: 'Segoe UI', Helvetica, Arial;
 						font-weight: 300;
 						font-size: 90px;
 					}
 					p {
-						font-family: 'Segoe UI', 'Open Sans Condensed';
+						font-family: 'Segoe UI', Helvetica, Arial;
 						font-weight: 300;
 						font-size: 25px;
 					}

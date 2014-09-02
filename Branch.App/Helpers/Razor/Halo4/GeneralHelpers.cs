@@ -2,11 +2,9 @@
 using System.Globalization;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Branch.Core.BranchStuff;
-using Branch.Models.Services.Branch;
-using Branch.Models.Services.Halo4;
-using Branch.Models.Services.Halo4._343.DataModels;
+using Branch.Core.Game.Halo4.Enums;
+using Branch.Core.Game.Halo4.Models._343.DataModels;
 
 namespace Branch.App.Helpers.Razor.Halo4
 {
@@ -51,20 +49,20 @@ namespace Branch.App.Helpers.Razor.Halo4
 			return Regex.Replace(gamertag, @"\((\d)\)", "", RegexOptions.None);
 		}
 
-		public static Tuple<string, string> GetGameVictoryStatus(Enums.Result result, bool completed)
+		public static Tuple<string, string> GetGameVictoryStatus(Result result, bool completed)
 		{
 			if (!completed)
 				return new Tuple<string, string>("dnf", "DNF");
 
 			switch (result)
 			{
-				case Enums.Result.Draw:
+				case Result.Draw:
 					return new Tuple<string, string>("dnf", "DNF");
 
-				case Enums.Result.Lost:
+				case Result.Lost:
 					return new Tuple<string, string>("los", "Lost");
 
-				case Enums.Result.Won:
+				case Result.Won:
 					return new Tuple<string, string>("win", "Won");
 
 				default:

@@ -1,5 +1,5 @@
 ﻿@using Branch.App.Helpers.Razor
-@using Branch.Models.Services.Halo4._343.DataModels
+@using Branch.Core.Game.Halo4.Enums
 @model Branch.App.Areas.Halo4.Models.HomeViewModel
 @{
 	ViewBag.Title = "Halo 4";
@@ -123,9 +123,9 @@
 	<div class="container">
 		@{
 			var totalCredits = Model.Challenges.Challenges.Sum(c => c.XpReward);
-			var campaignCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.Campaign).Sum(c => c.XpReward);
-			var matchmakingCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.WarGames).Sum(c => c.XpReward);
-			var spOpsCredits = Model.Challenges.Challenges.Where(c => c.Category == Enums.ChallengeCategory.SpartanOps).Sum(c => c.XpReward);
+			var campaignCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.Campaign).Sum(c => c.XpReward);
+			var matchmakingCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.WarGames).Sum(c => c.XpReward);
+			var spOpsCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.SpartanOps).Sum(c => c.XpReward);
 		}
 
 		<div class="row central">

@@ -5,7 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Branch.App.App_Start;
 using Branch.App_Start;
-using Branch.Core.Api.Halo4;
+using Branch.Core.Game.Halo4.Api;
 using Branch.Core.Storage;
 
 namespace Branch.App

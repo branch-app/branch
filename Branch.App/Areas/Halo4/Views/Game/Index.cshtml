@@ -1,6 +1,7 @@
 ﻿@using Branch.App.Areas.Halo4.Models
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Core.Game.Halo4.Enums
 @model GameViewModel
 @{
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
@@ -11,16 +12,16 @@
 
 	switch (game.ModeId)
 	{
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Customs:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames:
+		case GameMode.Customs:
+		case GameMode.WarGames:
 			title = string.Format("{0} on {1} - {2}",
 				game.GameVariantName,
 				game.MapVariantName,
 				Model.PublicGamertag);
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.SpartanOps:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Campaign:
+		case GameMode.SpartanOps:
+		case GameMode.Campaign:
 			title = string.Format("{0} on {1} - {2}",
 				game.MapName,
 				difficulty.Name,
@@ -48,16 +49,16 @@
 
 	@switch (game.ModeId)
 	{
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Customs:
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames:
+		case GameMode.Customs:
+		case GameMode.WarGames:
 			Html.RenderPartial("Covers/WarGames", Model);
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.SpartanOps:
+		case GameMode.SpartanOps:
 			Html.RenderPartial("Covers/SpartanOps", Model);
 			break;
 
-		case Branch.Models.Services.Halo4._343.DataModels.Enums.GameMode.Campaign:
+		case GameMode.Campaign:
 			Html.RenderPartial("Covers/Campaign", Model);
 			break;
 	}

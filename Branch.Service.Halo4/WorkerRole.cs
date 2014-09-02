@@ -5,7 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using Branch.Core.Api.Authentication;
-using Branch.Core.Api.Halo4;
+using Branch.Core.Game.Halo4.Api;
+using Branch.Core.Game.Halo4.Enums;
 using Branch.Core.Storage;
 using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4;
@@ -94,7 +95,7 @@ namespace Branch.Service.Halo4
 							foreach (
 								var warGamesStats in
 									playerServiceRecords.Select(
-										player => player.GameModes.First(m => m.Id == Models.Services.Halo4._343.DataModels.Enums.GameMode.WarGames)))
+										player => player.GameModes.First(m => m.Id == GameMode.WarGames)))
 							{
 								kills += warGamesStats.TotalKills;
 								deaths += warGamesStats.TotalDeaths;

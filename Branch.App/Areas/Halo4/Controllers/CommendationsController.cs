@@ -4,8 +4,8 @@ using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
 using Branch.App.Helpers.Mvc;
-using Branch.Models.Services.Halo4._343.Responses;
-using _343Enums = Branch.Models.Services.Halo4._343.DataModels.Enums;
+using Branch.Core.Game.Halo4.Enums;
+using Branch.Core.Game.Halo4.Models._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
@@ -21,9 +21,9 @@ namespace Branch.App.Areas.Halo4.Controllers
 			if (commendations == null)
 				throw new NetworkInformationException();
 
-			_343Enums.CommendationCategory commendationCategory;
+			CommendationCategory commendationCategory;
 			if (!Enum.TryParse(slug, out commendationCategory))
-				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "Commendations", new { slug = _343Enums.CommendationCategory.Weapons.ToString() }),
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "Commendations", new { slug = CommendationCategory.Weapons.ToString() }),
 					FlashMessage.FlashMessageType.Info, "Couldn't find Commendation Type", 
 					"Branch was unable to find that specific commendation type, so we took you to a familiar, and safe place.");
 

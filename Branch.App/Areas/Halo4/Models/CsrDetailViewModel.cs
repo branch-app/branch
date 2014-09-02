@@ -1,6 +1,6 @@
-﻿using Branch.Models.Services.Halo4.Branch;
-using Branch.Models.Services.Halo4._343.DataModels;
-using Branch.Models.Services.Halo4._343.Responses;
+﻿using Branch.Core.Game.Halo4.Models._343.DataModels;
+using Branch.Core.Game.Halo4.Models._343.Responses;
+using Branch.Models.Services.Halo4.Branch;
 namespace Branch.App.Areas.Halo4.Models
 {
 	public class CsrDetailViewModel : Base

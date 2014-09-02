@@ -2,10 +2,8 @@
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
 @using Branch.Extenders
-@using Branch.Models.Services.Branch
-@using Branch.Models.Services.Halo4._343.DataModels
 @using Enums = Branch.App.Areas.Halo4.Models.Enums
-@model HistoryViewModel<GameHistoryModel.WarGames>
+@model HistoryViewModel<Branch.Core.Game.Halo4.Models._343.DataModels.GameHistoryModel.WarGames>
 @{
 	ViewBag.Title = string.Format("{0}'s Halo 4 War Games History", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";

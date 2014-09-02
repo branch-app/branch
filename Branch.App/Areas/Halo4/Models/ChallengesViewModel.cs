@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Branch.Models.Services.Halo4._343.DataModels;
+using Branch.Core.Game.Halo4.Models._343.DataModels;
 
 namespace Branch.App.Areas.Halo4.Models
 {
