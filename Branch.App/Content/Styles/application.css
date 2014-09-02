@@ -249,9 +249,7 @@ body.halo4 .halo4-header {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-  -webkit-filter: contrast(150%);
-  filter: contrast(150%); }
+  background-size: cover; }
   @media (max-width: 767px) {
     body.halo4 .halo4-header {
       height: 350px; } }
