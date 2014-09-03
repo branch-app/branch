@@ -1,0 +1,14 @@
+﻿@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Halo4
+@using Branch.App.Models
+@using Branch.App.Models.Enums
+@model Branch.App.Areas.Reach.Models.Base
+
+<div class="bs-header halo4-header" id="content" 
+	 style="background-image: url('');">
+	<div class="mask">
+		<!-- Render switcher -->
+		@Html.Partial("GameSwitcher", new GameSwitcherViewModel(Model.PublicGamertag, Game.HaloReach))
+		
+	</div>
+</div>

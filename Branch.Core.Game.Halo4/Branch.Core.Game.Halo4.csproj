@@ -95,6 +95,8 @@
     <Compile Include="Models\343\Responses\Playlist.cs" />
     <Compile Include="Models\343\Responses\ServiceRecord.cs" />
     <Compile Include="Models\343\WaypointResponse.cs" />
+    <Compile Include="Models\Branch\PlaylistOrientationEntity.cs" />
+    <Compile Include="Models\Branch\ServiceRecordEntity.cs" />
     <Compile Include="Models\TaskEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

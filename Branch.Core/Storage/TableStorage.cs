@@ -40,6 +40,10 @@ namespace Branch.Core.Storage
 			Halo4CloudTable = TableClient.GetTableReference("Halo4");
 			Halo4CloudTable.CreateIfNotExists();
 
+			// le Halo: Reach
+			HReachCloudTable = TableClient.GetTableReference("HReach");
+			HReachCloudTable.CreateIfNotExists();
+
 			#endregion
 		}
 
@@ -261,10 +265,10 @@ namespace Branch.Core.Storage
 
 		#endregion
 
-
 		// Tables
 		public CloudTable BranchCloudTable { get; private set; }
 		public CloudTable AuthenticationCloudTable { get; private set; }
 		public CloudTable Halo4CloudTable { get; private set; }
+		public CloudTable HReachCloudTable { get; private set; }
 	}
 }

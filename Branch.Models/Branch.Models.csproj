@@ -87,8 +87,6 @@
     <Compile Include="Services\Branch\GamerIdEntity.cs" />
     <Compile Include="Services\Branch\GamerIdReplacementEntity.cs" />
     <Compile Include="Services\Branch\Halo4StatsEntity.cs" />
-    <Compile Include="Services\Halo4\Branch\PlaylistOrientationEntity.cs" />
-    <Compile Include="Services\Halo4\Branch\ServiceRecordEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

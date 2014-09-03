@@ -68,8 +68,23 @@ a.alt {
 	color: #ffa210;
 }
 
+a.plain {
+	color: white;
+	text-decoration: none;
+
+	&:hover,
+	&:visited,
+	&:active {
+		color: white;
+		text-decoration: none;
+	}
+}
+
 @import "Home/index";
 @import "About/index";
 @import "Blog/index";
 @import "Search/index";
-@import "Halo4/home";
+
+@import "Shared/_game_switcher.scss";
+
+@import "Areas/Halo4/home";

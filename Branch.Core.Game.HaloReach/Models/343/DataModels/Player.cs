@@ -1,4 +1,5 @@
 ﻿using System;
+using Branch.Core.Game.HaloReach.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Branch.Core.Game.HaloReach.Models._343.DataModels
@@ -31,10 +32,10 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 		public int CampaignKills { get; set; }
 
 		[JsonProperty("campaign_level_progress_coop")]
-		public int CampaignLevelProgressCoop { get; set; }
+		public long CampaignLevelProgressCoop { get; set; }
 
 		[JsonProperty("campaign_level_progress_sp")]
-		public int CampaignLevelProgressSp { get; set; }
+		public long CampaignLevelProgressSp { get; set; }
 
 		[JsonProperty("current_rank_image")]
 		public string CurrentRankImage { get; set; }
@@ -85,7 +86,8 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 		public int MultiplayerKills { get; set; }
 
 		[JsonProperty("multiplayer_time")]
-		public TimeSpan MultiplayerTime { get; set; }
+		//[JsonConverter(typeof(PlayTimeConverter))] TODO: Write the converter for this...
+		public string MultiplayerTime { get; set; }
 
 		[JsonProperty("multiplayer_wins")]
 		public int MultiplayerWins { get; set; }

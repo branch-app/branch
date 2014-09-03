@@ -1,4 +1,6 @@
-﻿namespace Branch.Models.Services.Halo4.Branch
+﻿using Branch.Models;
+
+namespace Branch.Core.Game.Halo4.Models.Branch
 {
 	public class ServiceRecordEntity : BaseEntity
 	{

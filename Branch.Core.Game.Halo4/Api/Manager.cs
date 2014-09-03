@@ -7,17 +7,18 @@ using System.Net;
 using System.Net.Http;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Game.Halo4.Enums;
+using Branch.Core.Game.Halo4.Models.Branch;
 using Branch.Core.Game.Halo4.Models._343;
 using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 using Branch.Core.Storage;
 using Branch.Models.Authentication;
 using Branch.Models.Services.Branch;
-using Branch.Models.Services.Halo4.Branch;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RestSharp.Contrib;
 using HttpMethod = Branch.Core.Enums.HttpMethod;
+using PlaylistOrientationEntity = Branch.Core.Game.Halo4.Models.Branch.PlaylistOrientationEntity;
 
 namespace Branch.Core.Game.Halo4.Api
 {
@@ -149,7 +150,7 @@ namespace Branch.Core.Game.Halo4.Api
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetServiceRecord"),
 				new Dictionary<string, string> {{"gamertag", gamertag}});
 			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(url));
-			var serviceRecord = ParseText<ServiceRecord>(serviceRecordRaw);
+			var serviceRecord = ParseJsonResponse<ServiceRecord>(serviceRecordRaw);
 			if (serviceRecord == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
@@ -211,7 +212,7 @@ namespace Branch.Core.Game.Halo4.Api
 			if (chapterId != -1) customQueryParams.Add("chapterid", chapterId.ToString(CultureInfo.InvariantCulture));
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameHistory"), customUrlParams, customQueryParams);
 			var gameHistoryRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
-			var gameHistory = ParseText<GameHistory<T>>(gameHistoryRaw);
+			var gameHistory = ParseJsonResponse<GameHistory<T>>(gameHistoryRaw);
 			if (gameHistory == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
@@ -242,7 +243,7 @@ namespace Branch.Core.Game.Halo4.Api
 			var customUrlParams = new Dictionary<string, string> { { "gamertag", gamertag} , {"gameid", id } };
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetGameDetails"), customUrlParams);
 			var gameRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
-			var game = ParseText<ElapsedGame>(gameRaw);
+			var game = ParseJsonResponse<ElapsedGame>(gameRaw);
 			if (game == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
@@ -272,7 +273,7 @@ namespace Branch.Core.Game.Halo4.Api
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetCommendations"),
 				new Dictionary<string, string> {{"gamertag", gamertag}});
 			var commendationRaw = ValidateResponseAndGetRawText(AuthorizedRequest(url, AuthType.Spartan));
-			var commendation = ParseText<Commendation>(commendationRaw);
+			var commendation = ParseJsonResponse<Commendation>(commendationRaw);
 			if (commendation == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
@@ -338,7 +339,7 @@ namespace Branch.Core.Game.Halo4.Api
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer, GenerateBlobContainerPath(BlobType.Other, blobFileName),
 				otherDataString);
 
-			otherData = ParseText<T>(otherDataString);
+			otherData = ParseJsonResponse<T>(otherDataString);
 			return otherData;
 		}
 
@@ -603,7 +604,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <typeparam name="TBlam"></typeparam>
 		/// <param name="jsonData"></param>
 		/// <returns></returns>
-		public TBlam ParseText<TBlam>(string jsonData)
+		public TBlam ParseJsonResponse<TBlam>(string jsonData)
 			where TBlam : Response
 		{
 			if (jsonData == null) return null;
@@ -743,6 +744,6 @@ namespace Branch.Core.Game.Halo4.Api
 					_storage.Table.Halo4CloudTable);
 		}
 
-	#endregion
+		#endregion
 	}
 }

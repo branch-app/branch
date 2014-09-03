@@ -190,16 +190,34 @@
     <Content Include="Content\Images\Home\Covers\MCC\cover3.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover4.jpg" />
     <Content Include="Content\Styles\About\_index.scss" />
+    <Content Include="Content\Styles\application.min.css">
+      <DependentUpon>application.css</DependentUpon>
+    </Content>
     <Content Include="Content\Styles\bootstrap-branch.css">
       <DependentUpon>bootstrap-branch.scss</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\Halo4\_challenges.scss" />
-    <Content Include="Content\Styles\Halo4\_playlists.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_challenges.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_playlists.scss" />
     <Content Include="Areas\Halo4\Views\Playlists\Index.cshtml" />
     <Content Include="Areas\Halo4\Views\Challenges\Index.cshtml" />
     <Content Include="Content\Styles\Blog\_index.scss" />
     <Content Include="Content\Styles\Blog\_view.scss" />
-    <None Include="Content\Styles\Halo4\_game_history.scss" />
+    <Content Include="Content\Styles\application.css.map">
+      <DependentUpon>application.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Reach\Views\web.config" />
+    <Content Include="Areas\Reach\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Reach\Views\Shared\HeaderServiceRecord.cshtml" />
+    <Content Include="Areas\Reach\Views\Shared\Sidebar.cshtml" />
+    <Content Include="Areas\Reach\Views\ServiceRecord\Index.cshtml" />
+    <None Include="Content\Styles\Areas\Halo4\_game_history.scss" />
+    <Compile Include="Areas\Reach\Controllers\ServiceRecordController.cs" />
+    <Compile Include="Areas\Reach\Filters\ValidateReachApiStatus.cs" />
+    <Compile Include="Areas\Reach\Filters\ValidateReachServiceRecordFilter.cs" />
+    <Compile Include="Areas\Reach\Models\Base.cs" />
+    <Compile Include="Areas\Reach\Models\Enums\CurrentPage.cs" />
+    <Compile Include="Areas\Reach\Models\ServiceRecordViewModel.cs" />
+    <Compile Include="Areas\Reach\ReachAreaRegistration.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,6 +235,8 @@
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
+    <Compile Include="Models\Enums\Game.cs" />
+    <Compile Include="Models\GameSwitcherViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\Styles\jbclock.css">
@@ -235,6 +255,8 @@
     <Content Include="Content\Styles\jbclock.scss" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\View.cshtml" />
+    <Content Include="Views\Shared\GameSwitcher.cshtml" />
+    <Content Include="Content\Styles\Shared\_game_switcher.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -276,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Styles\Areas\Reach\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -324,10 +347,10 @@
     <Content Include="Areas\Halo4\Views\Shared\HeaderServiceRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Styles\Halo4\_home.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_home.scss" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Styles\Halo4\_service_record.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_service_record.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Shared\Sidebar.cshtml" />
@@ -341,13 +364,13 @@
     <Content Include="Areas\Halo4\Views\Specializations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Styles\Halo4\_specializations.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_specializations.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Commendations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Styles\Halo4\_commendations.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_commendations.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Csr\Index.cshtml" />
@@ -356,7 +379,7 @@
     <Content Include="Areas\Halo4\Views\Csr\Partials\SkillRankContainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Styles\Halo4\_csr.scss" />
+    <Content Include="Content\Styles\Areas\Halo4\_csr.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Csr\Details.cshtml" />

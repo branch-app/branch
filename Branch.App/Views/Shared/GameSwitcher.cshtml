@@ -1,0 +1,16 @@
+﻿@using Branch.App.Models.Enums
+@model Branch.App.Models.GameSwitcherViewModel
+<div class="game-switcher">
+	<div class="container">
+		<div class="selector-nav">
+			<ul class="nav-of-bar">
+				<li class="@(Model.ActiveGame == Game.HaloReach ? "active" : "")">
+					@Html.ActionLink("Halo: Reach", "Index", "ServiceRecord", new { area = "Reach", gamertag = Model.Gamertag }, new { @class = "plain" })
+				</li>
+				<li class="@(Model.ActiveGame == Game.Halo4 ? "active" : "")">
+					@Html.ActionLink("Halo 4", "Index", "ServiceRecord", new { area = "Halo4", gamertag = Model.Gamertag }, new { @class = "plain" })
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

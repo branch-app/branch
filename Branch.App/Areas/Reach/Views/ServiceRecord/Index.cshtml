@@ -1,0 +1,17 @@
+﻿@using Branch.App.Areas.Reach.Models.Enums
+@model Branch.App.Areas.Reach.Models.ServiceRecordViewModel
+@{
+	ViewBag.Title = string.Format("{0}'s Halo: Reach Service Record", Model.PublicGamertag);
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_service_record";
+	ViewBag.CurrentReachPage = CurrentPage.ServiceRecord;
+}
+
+<div class="bs-branch-section overview">
+	
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>Overview</h1>
+	</div>
+</div>

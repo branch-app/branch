@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Branch.Models.Services.Halo4.Branch;
+using Branch.Core.Game.Halo4.Models.Branch;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Models

@@ -7,10 +7,10 @@ using System.Threading;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Game.Halo4.Api;
 using Branch.Core.Game.Halo4.Enums;
+using Branch.Core.Game.Halo4.Models.Branch;
 using Branch.Core.Storage;
 using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4;
-using Branch.Models.Services.Halo4.Branch;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 // ReSharper disable ConvertToConstant.Local

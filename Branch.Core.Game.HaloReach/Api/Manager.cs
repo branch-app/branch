@@ -5,8 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using Branch.Core.Game.HaloReach.Enums;
+using Branch.Core.Game.HaloReach.Models.Branch;
 using Branch.Core.Game.HaloReach.Models._343;
 using Branch.Core.Storage;
+using Branch.Models.Services.Branch;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using HttpMethod = Branch.Core.Enums.HttpMethod;
@@ -51,6 +53,45 @@ namespace Branch.Core.Game.HaloReach.Api
 
 		#endregion
 
+		#region Player Endpoints
+
+		/// <summary>
+		/// Gets a Players Halo 4 Service Record
+		/// </summary>
+		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <returns>The raw JSON of their Service Record</returns>
+		public ServiceRecord GetServiceRecord(string gamertag)
+		{
+			const BlobType blobType = BlobType.PlayerServiceRecord;
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<ServiceRecord>(blob, new TimeSpan(0, 8, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("player/details/nostats/{0}/{1}", ApiKey, gamertag);
+			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var serviceRecord = ParseJsonResponse<ServiceRecord>(serviceRecordRaw);
+			if (serviceRecord == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
+				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
+
+			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
+			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
+
+			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
+
+			AddPlayerToStorage(gamertag);
+
+			return serviceRecord;
+		}
+
+		#endregion
+
 		#region Misc Endpoints
 
 		/// <summary>
@@ -73,7 +114,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			where T : Response
 		{
 			var blobPath = GenerateBlobContainerPath(BlobType.Other, blobFileName);
-			var otherData = _storage.Blob.FindAndDownloadBlob<T>(_storage.Blob.H4BlobContainer, blobPath);
+			var otherData = _storage.Blob.FindAndDownloadBlob<T>(_storage.Blob.HReachBlobContainer, blobPath);
 
 			if (otherData != null && otherData.Reason != null && useCached) return otherData;
 			var otherDataString = ValidateResponseAndGetRawText(UnauthorizedRequest(PopulateUrl(endpoint)));
@@ -83,7 +124,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer, GenerateBlobContainerPath(BlobType.Other, blobFileName),
 				otherDataString);
 
-			otherData = ParseText<T>(otherDataString);
+			otherData = ParseJsonResponse<T>(otherDataString);
 			return otherData;
 		}
 
@@ -224,7 +265,7 @@ namespace Branch.Core.Game.HaloReach.Api
 		/// <typeparam name="TBlam"></typeparam>
 		/// <param name="jsonData"></param>
 		/// <returns></returns>
-		public TBlam ParseText<TBlam>(string jsonData)
+		public TBlam ParseJsonResponse<TBlam>(string jsonData)
 			where TBlam : Response
 		{
 			if (jsonData == null) return null;
@@ -302,6 +343,20 @@ namespace Branch.Core.Game.HaloReach.Api
 				return new Tuple<bool, TDataModel>(false, null);
 
 			return new Tuple<bool, TDataModel>(true, blobData);
+		}
+
+		#endregion
+
+		#region Branch Data Management
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gamertag"></param>
+		private void AddPlayerToStorage(string gamertag)
+		{
+			_storage.Table.InsertOrReplaceSingleEntity(
+				new GamerIdEntity(gamertag, GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
 		}
 
 		#endregion
