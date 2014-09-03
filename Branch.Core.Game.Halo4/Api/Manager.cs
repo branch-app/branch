@@ -135,7 +135,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// </summary>
 		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
 		/// <returns>The raw JSON of their Service Record</returns>
-		public ServiceRecord GetServiceRecord(string gamertag)
+		public ServiceRecord GetPlayerServiceRecord(string gamertag)
 		{
 			const BlobType blobType = BlobType.PlayerServiceRecord;
 			var escapedGamertag = EscapeGamertag(gamertag);

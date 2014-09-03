@@ -71,15 +71,18 @@
     <Compile Include="Api\Manager.cs" />
     <Compile Include="Enums\AssetSize.cs" />
     <Compile Include="Enums\Difficulty.cs" />
+    <Compile Include="Enums\GameVariantIcon.cs" />
     <Compile Include="Enums\MapType.cs" />
     <Compile Include="Enums\ResponseStatus.cs" />
     <Compile Include="Enums\VariantClass.cs" />
+    <Compile Include="Helpers\AssetHelpers.cs" />
     <Compile Include="JsonConverters\MapTypeConverter.cs" />
     <Compile Include="JsonConverters\PlayTimeConverter.cs" />
     <Compile Include="Models\343\DataModels\Commendation.cs" />
     <Compile Include="Models\343\DataModels\CommendationState.cs" />
     <Compile Include="Models\343\DataModels\Emblem.cs" />
     <Compile Include="Models\343\DataModels\Enemy.cs" />
+    <Compile Include="Models\343\DataModels\GameHistoryEntry.cs" />
     <Compile Include="Models\343\DataModels\GameVariantClass.cs" />
     <Compile Include="Models\343\DataModels\KeyValue.cs" />
     <Compile Include="Models\343\DataModels\Map.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Models\343\DataModels\PlaylistStatistics.cs" />
     <Compile Include="Models\343\DataModels\Rank.cs" />
     <Compile Include="Models\343\DataModels\Weapon.cs" />
+    <Compile Include="Models\343\Responces\GameHistory.cs" />
     <Compile Include="Models\343\Responces\Metadata.cs" />
     <Compile Include="Models\343\Responces\ServiceRecord.cs" />
     <Compile Include="Models\343\Response.cs" />

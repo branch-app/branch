@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net;
 using System.Text;
 using Branch.Models;
 using Microsoft.WindowsAzure.Storage;
@@ -43,6 +44,12 @@ namespace Branch.Core.Storage
 			catch (StorageException storageException)
 			{
 				Trace.TraceError(storageException.ToString());
+				return null;
+			}
+			catch (WebException webException)
+			{
+				if (!webException.Message.Contains("(404) Not Found")) throw;
+				Trace.TraceError(webException.ToString());
 				return null;
 			}
 		}

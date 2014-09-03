@@ -1,4 +1,5 @@
-﻿using Branch.Core.Game.HaloReach.Api;
+﻿using System;
+using Branch.Core.Game.HaloReach.Helpers;
 
 namespace Branch.App.Helpers.Razor.Reach
 {
@@ -6,7 +7,19 @@ namespace Branch.App.Helpers.Razor.Reach
 	{
 		public static int GetRankStartXp(string rankName)
 		{
-			return Manager.RankStartXpDictionary[rankName.ToLowerInvariant()];
+			return AssetHelpers.RankStartXpDictionary[rankName.ToLowerInvariant()];
+		}
+
+		public static Tuple<string, string> GetGameVictoryStatus(int standing)
+		{
+			switch (standing)
+			{
+				case 0:
+					return new Tuple<string, string>("win", "Won");
+
+				default:
+					return new Tuple<string, string>("los", "Lost");
+			}
 		}
 	}
 }

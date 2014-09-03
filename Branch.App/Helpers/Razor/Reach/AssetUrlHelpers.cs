@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Branch.Core.Game.HaloReach.Api;
 using Branch.Core.Game.HaloReach.Enums;
+using Branch.Core.Game.HaloReach.Helpers;
 
 namespace Branch.App.Helpers.Razor.Reach
 {
@@ -42,6 +43,18 @@ namespace Branch.App.Helpers.Razor.Reach
 		public static string GetPlayerModelUrl(string gamertag, AssetSize assetSize)
 		{
 			return String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, assetSize);
+		}
+
+		public static string GetMapImageUrl(string mapName, AssetSize assetSize = AssetSize.Large)
+		{
+			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, AssetHelpers.MapNameToNameId[mapName]);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
+
+		public static string GetIconImageUrl(GameVariantIcon icon, AssetSize assetSize)
+		{
+			var path = String.Format("gametypes/{0}/{1}.png", assetSize, (int) icon);
+			return String.Format(Manager.ApiAssetUrl, path);
 		}
 	}
 }

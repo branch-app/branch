@@ -1,4 +1,5 @@
 ﻿using Branch.Core.BranchStuff;
+using Branch.Core.Game.HaloReach.Enums;
 using Branch.Core.Game.HaloReach.Models._343.Responces;
 
 namespace Branch.App.Areas.Reach.Models
@@ -8,8 +9,12 @@ namespace Branch.App.Areas.Reach.Models
 		public Base(ServiceRecord serviceRecord)
 		{
 			ServiceRecord = serviceRecord;
-			PublicGamertag = GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Player.Gamertag, GlobalStorage.AzureStorage);
+			RecentGamesHistory = GlobalStorage.HReachManager.GetPlayerGameHistory(ServiceRecord.Player.Gamertag, VariantClass.Unknown);
+			PublicGamertag = GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Player.Gamertag,
+				GlobalStorage.AzureStorage);
 		}
+
+		public GameHistory RecentGamesHistory { get; set; }
 
 		public string PublicGamertag { get; set; }
 

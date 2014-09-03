@@ -6,10 +6,16 @@
 @model Branch.App.Areas.Reach.Models.Base
 @{
 	var serviceRecord = Model.ServiceRecord;
+	var gameHistory = Model.RecentGamesHistory;
+	var imagePath = "";
+	if (gameHistory != null && gameHistory.RecentGames != null && gameHistory.RecentGames.Any())
+	{
+		imagePath = AssetUrlHelpers.GetMapImageUrl(gameHistory.RecentGames.First().MapName, AssetSize.Large);
+	}
 }
 
 <div class="bs-header reach-header" id="content" 
-	 style="background-image: url('');">
+	 style="background-image: url('@(imagePath)');">
 	<div class="mask">
 		<!-- Render switcher -->
 		@Html.Partial("GameSwitcher", new GameSwitcherViewModel(Model.PublicGamertag, Game.HaloReach))

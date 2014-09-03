@@ -1,5 +1,6 @@
 ﻿@using Branch.App.Areas.Reach.Models.Enums
 @using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Reach
 @using Branch.Core.Game.HaloReach.Enums
 @model Branch.App.Areas.Reach.Models.ServiceRecordViewModel
 @{
@@ -9,10 +10,10 @@
 	ViewBag.CurrentReachPage = CurrentPage.ServiceRecord;
 
 	var serviceRecord = Model.ServiceRecord;
+	var gameHistory = Model.RecentGamesHistory;
 }
 
 <div class="bs-branch-section overview">
-
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
@@ -138,33 +139,78 @@
 	</div>
 </div>
 
+<div class="bs-branch-section game-history">
+	<div class="page-header">
+		<h1>Game History</h1>
+	</div>
+
+	<div class="row">
+		@if (gameHistory != null && gameHistory.RecentGames != null && gameHistory.RecentGames.Any())
+		{
+			foreach (var game in gameHistory.RecentGames)
+			{
+				var result = GeneralHelpers.GetGameVictoryStatus(game.RequestedPlayerStanding);
+
+				<div id="history-entry-@game.GameId" class="col-lg-6 col-sm-12 game-history-entry">
+					<a href="#">
+						<div class="game-history-container" style="background-image: url('@AssetUrlHelpers.GetMapImageUrl(game.MapName)')">
+							<div class="mask @result.Item1"></div>
+							<div class="gametype-icon" style="background-image: url('@AssetUrlHelpers.GetIconImageUrl(game.GameVariantIconIndex, AssetSize.Large)')"></div>
+							<div class="inner">
+								<span class="gametype">@game.GameVariantName</span>
+								<br class="visible-lg visible-xs" />
+								<span class="selector">on</span>
+								<span class="map-name">@game.MapName</span>
+
+								<div class="stats">
+									<span class="type">Kills</span>
+									<span class="stat">@game.RequestedPlayerKills</span>
+								</div>
+
+								<div class="windicator hidden-xs">@result.Item2</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			}
+		}
+		else
+		{
+			<h4>
+				@(Model.PublicGamertag) has not played any games.
+			</h4>
+		}
+	</div>
+
+</div>
+
 @section scripts
 {
-	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-	<script>
-	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
-	var chart = new Chart(ctx).Doughnut([
-		{
-			value: @competitiveGames,
-			color: '#F7464A'
-		},
-		{
-			value: @invastionGames,
-			color: '#46BFBD'
-		},
-		{
-			value: @firefightGames,
-			color: '#4D5360'
-		},
-		{
-			value: @campaignGames,
-			color: '#3d3d7c'
-		}],
-		{
-			animationStages : 500,
-			animateScale : false,
-			animateRotate : false
+			<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+			<script>
+				var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+				var chart = new Chart(ctx).Doughnut([
+					{
+						value: @competitiveGames,
+						color: '#F7464A'
+					},
+					{
+						value: @invastionGames,
+						color: '#46BFBD'
+					},
+					{
+						value: @firefightGames,
+						color: '#4D5360'
+					},
+					{
+						value: @campaignGames,
+						color: '#3d3d7c'
+					}],
+					{
+						animationStages : 500,
+						animateScale : false,
+						animateRotate : false
+					}
+				);
+			</script>
 		}
-	);
-	</script>
-}

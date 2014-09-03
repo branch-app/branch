@@ -185,6 +185,47 @@
     <Content Include="Content\Images\Area\Halo4\auntiediag.png" />
     <Content Include="Content\Images\Area\Halo4\leaderboard-overview.png" />
     <Content Include="Content\Images\Area\Halo4\top-ten-overview.png" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\beachhead.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\cp_spoiler.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\exodus.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_corvette.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_courtyard.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_glacier.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_halo.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_holdout.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_outpost.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_overlook.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_unearthed.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\ff_waterfront.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\lonewolf.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\longnightofsolace.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_anchor9.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_beaver_creek.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_boardwalk.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_boneyard.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_breakpoint.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_condemned.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_countdown.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_damnation.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_forgeworld.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_hangemhigh.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_headlong.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_highlands.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_powerhouse.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_prisoner.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_reflection.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_spire.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_swordbase.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_tempest.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_timberland.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\mp_zealot.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\newalexandria.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\nightfall.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\oni.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\pillarofautumn.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\thepackage.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\tipofthespear.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\wintercontingency.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover1.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover2.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover3.jpg" />
@@ -245,8 +286,14 @@
     <Compile Include="Models\GameSwitcherViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\Styles\bootstrap-branch.min.css">
+      <DependentUpon>bootstrap-branch.css</DependentUpon>
+    </Content>
     <Content Include="Content\Styles\jbclock.css">
       <DependentUpon>jbclock.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\jbclock.min.css">
+      <DependentUpon>jbclock.css</DependentUpon>
     </Content>
     <Content Include="Scripts\flash-cookie.js" />
     <Content Include="Scripts\jbclock.js" />
@@ -303,7 +350,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Area\Reach\Assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

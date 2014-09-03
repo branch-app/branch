@@ -11,7 +11,7 @@ namespace Branch.App.Areas.Reach.Filters
 		{
 			var gamertag = GamerIdReplacementManager.GetOriginalGamerId(filterContext.ActionParameters["gamertag"].ToString(), GlobalStorage.AzureStorage);
 
-			var serviceRecord = GlobalStorage.HReachManager.GetServiceRecord(gamertag);
+			var serviceRecord = GlobalStorage.HReachManager.GetPlayerServiceRecord(gamertag);
 			if (serviceRecord != null)
 			{
 				filterContext.ActionParameters["ServiceRecord"] = serviceRecord;

@@ -24,64 +24,7 @@ namespace Branch.Core.Game.HaloReach.Api
 		public const string ApiAssetUrl = "https://assets.halowaypoint.com/website/statsimages/v1/reach/{0}";
 		public const string ApiEmblemAssetUrl = "https://emblems.svc.halowaypoint.com/{0}";
 		private readonly AzureStorage _storage;
-
-		#region Horrible Rank Xp Dictionary
-
-		public static readonly Dictionary<string, int> RankStartXpDictionary = new Dictionary<string, int>
-		{
-			{ "recruit", 0 },
-			{ "private", 7500 },
-			{ "corporal", 10000 },
-			{ "corporal grade 1", 15000 },
-			{ "sergeant", 20000 },
-			{ "sergeant grade 1", 26250 },
-			{ "sergeant grade 2", 32500 },
-			{ "warrant officer", 45000 },
-			{ "warrant officer grade 1", 78000 },
-			{ "warrant officer grade 2", 111000 },
-			{ "warrant officer grade 3", 144000 },
-			{ "captain", 210000 },
-			{ "captain grade 1", 233000 },
-			{ "captain grade 2", 256000 },
-			{ "captain grade 3", 279000 },
-			{ "major", 325000 },
-			{ "major grade 1", 350000 },
-			{ "major grade 2", 375000 },
-			{ "major grade 3", 400000 },
-			{ "lt. colonel", 450000 },
-			{ "lt. colonel grade 1", 480000 },
-			{ "lt. colonel grade 2", 510000 },
-			{ "lt. colonel grade 3", 540000 },
-			{ "commander", 600000 },
-			{ "commander grade 1", 650000 },
-			{ "commander grade 2", 700000 },
-			{ "commander grade 3", 750000 },
-			{ "colonel", 850000 },
-			{ "colonel grade 1", 960000 },
-			{ "colonel grade 2", 1070000 },
-			{ "colonel grade 3", 1180000 },
-			{ "brigadier", 1400000 },
-			{ "brigadier grade 1", 1520000 },
-			{ "brigadier grade 2", 1640000 },
-			{ "brigadier grade 3", 1760000 },
-			{ "general", 2000000 },
-			{ "general grade 1", 2200000 },
-			{ "general grade 2", 2350000 },
-			{ "general grade 3", 2500000 },
-			{ "field marshall", 3000000 },
-			{ "hero", 3700000 },
-			{ "legend", 4600000 },
-			{ "mythic", 5650000 },
-			{ "noble", 7000000 },
-			{ "eclipse", 8500000 },
-			{ "nova", 11000000 },
-			{ "forerunner", 13000000 },
-			{ "reclaimer", 16500000 },
-			{ "inheritor", 20000000 }
-		};
-
-		#endregion
-
+		
 		public Manager(AzureStorage storage)
 		{
 			_storage = storage;
@@ -115,11 +58,11 @@ namespace Branch.Core.Game.HaloReach.Api
 		#region Player Endpoints
 
 		/// <summary>
-		/// Gets a Players Halo 4 Service Record
+		/// Gets a Players Halo: Reach Service Record
 		/// </summary>
 		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
-		/// <returns>The raw JSON of their Service Record</returns>
-		public ServiceRecord GetServiceRecord(string gamertag)
+		/// <returns>Retuens a <see cref="ServiceRecord"/> model.</returns>
+		public ServiceRecord GetPlayerServiceRecord(string gamertag)
 		{
 			const BlobType blobType = BlobType.PlayerServiceRecord;
 			var escapedGamertag = EscapeGamertag(gamertag);
@@ -147,6 +90,37 @@ namespace Branch.Core.Game.HaloReach.Api
 			AddPlayerToStorage(gamertag);
 
 			return serviceRecord;
+		}
+
+		/// <summary>
+		/// Gets a Players Halo: Reach Game History
+		/// </summary>
+		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <param name="variantClass">The variant to get history from.</param>
+		/// <param name="page">The pagination index.</param>
+		/// <returns>Retuens a <see cref="GameHistory"/> model.</returns>
+		public GameHistory GetPlayerGameHistory(string gamertag, VariantClass variantClass, uint page = 0)
+		{
+			const BlobType blobType = BlobType.PlayerGameHistory;
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 5, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("player/gamehistory/{0}/{1}/{2}/{3}", ApiKey, gamertag, variantClass, page);
+			var gameHistoryRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var gameHistory = ParseJsonResponse<GameHistory>(gameHistoryRaw);
+			if (gameHistory == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer, blobContainerPath, gameHistoryRaw);
+
+			AddPlayerToStorage(gamertag);
+
+			return gameHistory;
 		}
 
 		#endregion
@@ -311,7 +285,8 @@ namespace Branch.Core.Game.HaloReach.Api
 		public enum BlobType
 		{
 			Other,
-			PlayerServiceRecord
+			PlayerServiceRecord,
+			PlayerGameHistory
 		}
 
 		#endregion
@@ -361,6 +336,10 @@ namespace Branch.Core.Game.HaloReach.Api
 
 				case BlobType.PlayerServiceRecord:
 					path = "player-service-record";
+					break;
+
+				case BlobType.PlayerGameHistory:
+					path = "player-game-history";
 					break;
 
 				default:

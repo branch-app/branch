@@ -76,7 +76,7 @@ namespace Branch.Service.Halo4
 								_storage.Table.Halo4CloudTable).ToArray();
 
 							// Update Service Records
-							var playerServiceRecords = players.Select(player => _h4WaypointManager.GetServiceRecord(player.Gamertag)).ToList();
+							var playerServiceRecords = players.Select(player => _h4WaypointManager.GetPlayerServiceRecord(player.Gamertag)).ToList();
 
 							var allTimeStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
 								string.Format(Halo4StatsEntity.RowKeyString, Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??

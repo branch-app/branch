@@ -6,14 +6,13 @@ namespace Branch.App.Areas.Halo4.Models
 {
 	public class Base
 	{
-		public Base(ServiceRecord serviceRecord, GameHistory<GameHistoryModel.WarGames> recentWarGamesHistory = null)
+		public Base(ServiceRecord serviceRecord)
 		{
 			ServiceRecord = serviceRecord;
-			RecentWarGamesHistory = recentWarGamesHistory ??
-										GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
-											serviceRecord.Gamertag, 0, 20);
-
-			PublicGamertag = GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Gamertag, GlobalStorage.AzureStorage);
+			RecentWarGamesHistory =
+				GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(serviceRecord.Gamertag, 0, 20);
+			PublicGamertag = 
+				GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Gamertag, GlobalStorage.AzureStorage);
 		}
 
 		public GameHistory<GameHistoryModel.WarGames> RecentWarGamesHistory { get; set; }
