@@ -1151,13 +1151,15 @@ body.reach_service_record .overview > .row > .game-history-split > .wrapper {
           height: 10px;
           margin-bottom: -15px;
           margin-left: -15px; }
-          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.campaign {
+          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.competitive {
             background-color: #F7464A; }
-          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.war-games {
-            background-color: #5880A0; }
-          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.customs {
+          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.invasion {
+            background-color: #46BFBD; }
+          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.arena {
+            background-color: #FDB45C; }
+          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.firefight {
+            background-color: #4D5360; }
+          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.campaign {
             background-color: #3d3d7c; }
-          body.reach_service_record .overview > .row > .game-history-split > .wrapper > .area-legend > ul > li > .identifier.spartan-ops {
-            background-color: #949FB1; }
 
 /*# sourceMappingURL=application.css.map */

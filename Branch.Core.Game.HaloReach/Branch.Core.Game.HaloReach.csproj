@@ -70,8 +70,10 @@
   <ItemGroup>
     <Compile Include="Api\Manager.cs" />
     <Compile Include="Enums\AssetSize.cs" />
+    <Compile Include="Enums\Difficulty.cs" />
     <Compile Include="Enums\MapType.cs" />
     <Compile Include="Enums\ResponseStatus.cs" />
+    <Compile Include="Enums\VariantClass.cs" />
     <Compile Include="JsonConverters\MapTypeConverter.cs" />
     <Compile Include="JsonConverters\PlayTimeConverter.cs" />
     <Compile Include="Models\343\DataModels\Commendation.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Models\343\DataModels\Metadata.cs" />
     <Compile Include="Models\343\DataModels\Player.cs" />
     <Compile Include="Models\343\DataModels\Playlist.cs" />
+    <Compile Include="Models\343\DataModels\PlaylistStatistics.cs" />
     <Compile Include="Models\343\DataModels\Rank.cs" />
     <Compile Include="Models\343\DataModels\Weapon.cs" />
     <Compile Include="Models\343\Responces\Metadata.cs" />

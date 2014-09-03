@@ -131,7 +131,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			if (blobValidity.Item1) return blobValidity.Item2;
 
 			// Try and get new blob
-			var endpoint = String.Format("player/details/nostats/{0}/{1}", ApiKey, gamertag);
+			var endpoint = String.Format("player/details/byplaylist/{0}/{1}", ApiKey, gamertag);
 			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
 			var serviceRecord = ParseJsonResponse<ServiceRecord>(serviceRecordRaw);
 			if (serviceRecord == null) return blobValidity.Item2;

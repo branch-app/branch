@@ -42,17 +42,20 @@
 								margin-bottom: -15px;
 								margin-left: -15px;
 
-								&.campaign {
+								&.competitive {
 									background-color: #F7464A;
 								}
-								&.war-games {
-									background-color: #5880A0;
+								&.invasion {
+									background-color: #46BFBD;
 								}
-								&.customs {
+								&.arena {
+									background-color: #FDB45C;
+								}
+								&.firefight {
+									background-color: #4D5360;
+								}
+								&.campaign {
 									background-color: #3d3d7c;
-								}
-								&.spartan-ops {
-									background-color: #949FB1;
 								}
 							}
 

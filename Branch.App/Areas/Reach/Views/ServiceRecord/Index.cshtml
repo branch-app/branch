@@ -1,17 +1,170 @@
 ﻿@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.App.Helpers.Razor
+@using Branch.Core.Game.HaloReach.Enums
 @model Branch.App.Areas.Reach.Models.ServiceRecordViewModel
 @{
 	ViewBag.Title = string.Format("{0}'s Halo: Reach Service Record", Model.PublicGamertag);
 	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "reach_service_record";
 	ViewBag.CurrentReachPage = CurrentPage.ServiceRecord;
+
+	var serviceRecord = Model.ServiceRecord;
 }
 
 <div class="bs-branch-section overview">
-	
+
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
 		<h1>Overview</h1>
 	</div>
+	<div class="row">
+		<div class="col-md-6 game-history-split">
+			<div class="wrapper">
+				@{
+					var competitiveGames = 0;
+					var campaignGames = 0;
+					var firefightGames = 0;
+					var invastionGames = 0;
+					var arenaGames = 0;
+
+					foreach (var aiStatistic in serviceRecord.AiStatistics)
+					{
+						switch (aiStatistic.VariantClass)
+						{
+							case VariantClass.Campaign:
+								campaignGames += aiStatistic.GameCount;
+								break;
+							case VariantClass.Firefight:
+								firefightGames += aiStatistic.GameCount;
+								break;
+						}
+					}
+					foreach (var playlistStatistic in serviceRecord.StatisticsByPlaylist)
+					{
+						switch (playlistStatistic.VariantClass)
+						{
+							case VariantClass.Competitive:
+								competitiveGames += playlistStatistic.GameCount;
+								break;
+							case VariantClass.Invasion:
+								invastionGames += playlistStatistic.GameCount;
+								break;
+							case VariantClass.Arena:
+								arenaGames += playlistStatistic.GameCount;
+								break;
+						}
+					}
+				}
+				<div class="area">
+					<canvas id="game-history-split-chart" width="300" height="300"></canvas>
+				</div>
+				<div class="area-legend">
+					@{
+						var totalGames = competitiveGames + campaignGames + firefightGames +
+						                 invastionGames + arenaGames;
+					}
+
+					<ul>
+						<li>
+							<div class="identifier competitive"></div>
+							Competitive - @BranchHelpers.NumberWithDelimiter(competitiveGames)
+							(@BranchHelpers.CalculatePercentage(competitiveGames, totalGames, 0)%)
+						</li>
+						<li>
+							<div class="identifier invasion"></div>
+							Invasion - @BranchHelpers.NumberWithDelimiter(invastionGames)
+							(@BranchHelpers.CalculatePercentage(invastionGames, totalGames, 0)%)
+						</li>
+					</ul>
+					<br />
+					<ul>
+						<li>
+							<div class="identifier arena"></div>
+							Arena - @BranchHelpers.NumberWithDelimiter(arenaGames)
+							(@BranchHelpers.CalculatePercentage(arenaGames, totalGames, 0)%)
+						</li>
+						<li>
+							<div class="identifier campaign"></div>
+							Campaign - @BranchHelpers.NumberWithDelimiter(campaignGames)
+							(@BranchHelpers.CalculatePercentage(campaignGames, totalGames, 0)%)
+						</li>
+					</ul>
+					<br />
+					<ul>
+						<li>
+							<div class="identifier firefight"></div>
+							Firefight - @BranchHelpers.NumberWithDelimiter(firefightGames)
+							(@BranchHelpers.CalculatePercentage(firefightGames, totalGames, 0)%)
+						</li>
+						<li></li> <!-- Need this, for no reason apparently -->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-5">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.FriendlyPercentage(serviceRecord.Player.ArmorCompletionPercentage)%</span>
+					Armour Purchase Completion
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.Player.DailyChallangesCompleted)</span>
+					Daily Challenges Completed
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.Player.WeeklyChallengesCompleted)</span>
+					Weekly Challenges Completed
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.FriendlyPercentage(serviceRecord.Player.CommendationCompletionPercentage)%</span>
+					Commendation Completetion
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.Player.MultiplayerKills) (@MathHelpers.CalculateKd(serviceRecord.Player.MultiplayerKills, serviceRecord.Player.MultiplayerDeaths))</span>
+					Competitive Kills
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@BranchHelpers.NumberWithDelimiter(serviceRecord.Player.GamesTotal)</span>
+					Total Games Played
+				</li>
+				<li class="list-group-item">
+					<span class="badge">@serviceRecord.Player.Bpr</span>
+					Battle Proficiency Rating
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
+
+@section scripts
+{
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+	<script>
+	var ctx = document.getElementById('game-history-split-chart').getContext('2d');
+	var chart = new Chart(ctx).Doughnut([
+		{
+			value: @competitiveGames,
+			color: '#F7464A'
+		},
+		{
+			value: @invastionGames,
+			color: '#46BFBD'
+		},
+		{
+			value: @firefightGames,
+			color: '#4D5360'
+		},
+		{
+			value: @campaignGames,
+			color: '#3d3d7c'
+		}],
+		{
+			animationStages : 500,
+			animateScale : false,
+			animateRotate : false
+		}
+	);
+	</script>
+}

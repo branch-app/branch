@@ -96,7 +96,13 @@ namespace Branch.App.Helpers.Razor
 
 		public static string CalculatePercentage(float a, float b, int roundTo = 2)
 		{
-			return Math.Round((a/b)*100, roundTo).ToString(CultureInfo.InvariantCulture);
+			var raw = (a/b) * 100;
+			return Math.Round(Convert.ToDouble(raw), roundTo, MidpointRounding.AwayFromZero).ToString(CultureInfo.InvariantCulture);
+		}
+
+		public static string FriendlyPercentage(double percentage)
+		{
+			return Math.Round(percentage*100, 2, MidpointRounding.AwayFromZero).ToString(CultureInfo.InvariantCulture);
 		}
 
 		public static string CompareEnum(object currentPage,
