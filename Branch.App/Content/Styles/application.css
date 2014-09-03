@@ -97,8 +97,8 @@ body.home .games .game {
     position: relative; }
     body.home .games .game .game-backup-cover.Halo4 {
       background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
-    body.home .games .game .game-backup-cover.Destiny {
-      background-image: url('/Content/Images/Home/Covers/Destiny/cover1.jpg'); }
+    body.home .games .game .game-backup-cover.Reach {
+      background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
     body.home .games .game .game-backup-cover.MCC {
       background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
     body.home .games .game .game-backup-cover .game-cover {
@@ -111,8 +111,8 @@ body.home .games .game {
       height: 100%; }
       body.home .games .game .game-backup-cover .game-cover.Halo4 {
         background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
-      body.home .games .game .game-backup-cover .game-cover.Destiny {
-        background-image: url('/Content/Images/Home/Covers/Destiny/cover1.jpg'); }
+      body.home .games .game .game-backup-cover .game-cover.Reach {
+        background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
       body.home .games .game .game-backup-cover .game-cover.MCC {
         background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
   body.home .games .game .mask {

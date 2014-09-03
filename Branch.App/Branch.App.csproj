@@ -189,6 +189,10 @@
     <Content Include="Content\Images\Home\Covers\MCC\cover2.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover3.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover4.jpg" />
+    <Content Include="Content\Images\Home\Covers\Reach\cover1.jpg" />
+    <Content Include="Content\Images\Home\Covers\Reach\cover2.jpg" />
+    <Content Include="Content\Images\Home\Covers\Reach\cover3.jpg" />
+    <Content Include="Content\Images\Home\Covers\Reach\cover4.jpg" />
     <Content Include="Content\Styles\About\_index.scss" />
     <Content Include="Content\Styles\application.min.css">
       <DependentUpon>application.css</DependentUpon>
@@ -275,10 +279,6 @@
   <ItemGroup>
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\forerunner.png" />
-    <Content Include="Content\Images\Home\Covers\Destiny\cover1.jpg" />
-    <Content Include="Content\Images\Home\Covers\Destiny\cover2.jpg" />
-    <Content Include="Content\Images\Home\Covers\Destiny\cover3.jpg" />
-    <Content Include="Content\Images\Home\Covers\Destiny\cover4.jpg" />
     <Content Include="Content\Images\Home\Covers\Halo4\cover1.jpg" />
     <Content Include="Content\Images\Home\Covers\Halo4\cover2.jpg" />
     <Content Include="Content\Images\Home\Covers\Halo4\cover3.jpg" />
