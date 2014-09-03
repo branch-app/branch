@@ -103,7 +103,8 @@ namespace Branch.Core.Game.HaloReach.Api
 		{
 			const BlobType blobType = BlobType.PlayerGameHistory;
 			var escapedGamertag = EscapeGamertag(gamertag);
-			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var gameHistoryNameFormat = string.Format("{0}-{1}-{2}", escapedGamertag, (int) variantClass, page);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, gameHistoryNameFormat);
 			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
 			var blobValidity = CheckBlobValidity<GameHistory>(blob, new TimeSpan(0, 5, 0));
 
@@ -111,7 +112,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			if (blobValidity.Item1) return blobValidity.Item2;
 
 			// Try and get new blob
-			var endpoint = String.Format("player/gamehistory/{0}/{1}/{2}/{3}", ApiKey, gamertag, variantClass, page);
+			var endpoint = String.Format("player/gamehistory/{0}/{1}/{2}/{3}", ApiKey, gamertag, (int) variantClass, page);
 			var gameHistoryRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
 			var gameHistory = ParseJsonResponse<GameHistory>(gameHistoryRaw);
 			if (gameHistory == null) return blobValidity.Item2;

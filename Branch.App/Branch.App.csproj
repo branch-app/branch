@@ -255,12 +255,21 @@
     <Content Include="Areas\Reach\Views\Shared\HeaderServiceRecord.cshtml" />
     <Content Include="Areas\Reach\Views\Shared\Sidebar.cshtml" />
     <Content Include="Areas\Reach\Views\ServiceRecord\Index.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Index.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Entries\Multiplayer.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Headers\Multiplayer.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Entries\Campaign.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Headers\Campaign.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Entries\Firefight.cshtml" />
+    <Content Include="Areas\Reach\Views\History\Partials\Headers\Firefight.cshtml" />
     <None Include="Content\Styles\Areas\Halo4\_game_history.scss" />
+    <Compile Include="Areas\Reach\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Reach\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachApiStatus.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachServiceRecordFilter.cs" />
     <Compile Include="Areas\Reach\Models\Base.cs" />
     <Compile Include="Areas\Reach\Models\Enums\CurrentPage.cs" />
+    <Compile Include="Areas\Reach\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Reach\Models\ServiceRecordViewModel.cs" />
     <Compile Include="Areas\Reach\ReachAreaRegistration.cs" />
     <Compile Include="Controllers\AboutController.cs" />
@@ -313,6 +322,7 @@
     <Content Include="Content\Styles\Areas\Reach\_service_record.scss" />
     <Content Include="Content\Styles\Areas\Reach\_home.scss" />
     <Content Include="Views\Search\Partials\HaloReachServiceRecord.cshtml" />
+    <Content Include="Content\Styles\Areas\Reach\_game_history.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

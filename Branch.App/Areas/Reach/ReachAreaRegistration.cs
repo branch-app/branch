@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Branch.Core.Game.HaloReach.Enums;
 
 namespace Branch.App.Areas.Reach
 {
@@ -18,7 +19,13 @@ namespace Branch.App.Areas.Reach
 
 			// Service Record
 			context.MapRoute("Reach_ServiceRecord", "360/{gamertag}/Reach/",
-				new { controller = "ServiceRecord", action = "Index" }, namespaces);
+				new { controller = "ServiceRecord", action = "Index" }, 
+				namespaces);
+
+			// Game History
+			context.MapRoute("Reach_History", "360/{gamertag}/Reach/History/{slug}",
+				new { controller = "History", action = "Index", slug = VariantClass.Competitive }, 
+				namespaces);
 		}
 	}
 }

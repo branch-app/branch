@@ -24,7 +24,7 @@ namespace Branch.Service.Halo4
 			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
 			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 30, 0) },
-			{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
+			//{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
 			{ TaskEntity.TaskType.Challenge, new TimeSpan(0, 1, 0, 0) },
 		};
 
@@ -70,6 +70,8 @@ namespace Branch.Service.Halo4
 							break;
 
 						case TaskEntity.TaskType.StatUpdate:
+							break;
+							// TODO: re-code this, make it actually work.
 							#region Shink me pls
 
 							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",

@@ -2,6 +2,7 @@
 {
 	public enum CurrentPage
 	{
-		ServiceRecord
+		ServiceRecord,
+		GameHistory
 	}
 }

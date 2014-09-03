@@ -1,0 +1,82 @@
+﻿@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.Core.Game.HaloReach.Enums
+@model Branch.App.Areas.Reach.Models.HistoryViewModel
+@{
+	ViewBag.Title = string.Format("{0}'s Halo: Reach Campaign History", Model.PublicGamertag);
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_game_history";
+	ViewBag.CurrentReachPage = CurrentPage.GameHistory;
+	ViewBag.CurrentHistoryMode = Model.VariantClass;
+}
+
+<div class="overview">
+
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>@Model.VariantClass History</h1>
+	</div>
+	
+	@if (Model.GameHistory.RecentGames.Any())
+	{
+		<table class="table game-history">
+			<thead>
+				@switch (Model.VariantClass)
+				{
+					case VariantClass.Arena:
+					case VariantClass.Competitive:
+					case VariantClass.Custom:
+					case VariantClass.Invasion:
+						Html.RenderPartial("Partials/Headers/Multiplayer");
+						break;
+
+					case VariantClass.Campaign:
+						Html.RenderPartial("Partials/Headers/Campaign");
+						break;
+
+					case VariantClass.Firefight:
+						Html.RenderPartial("Partials/Headers/Firefight");
+						break;
+				}
+			</thead>
+
+			<tbody>
+				@foreach (var game in Model.GameHistory.RecentGames)
+				{
+					switch (Model.VariantClass)
+					{
+						case VariantClass.Arena:
+						case VariantClass.Competitive:
+						case VariantClass.Custom:
+						case VariantClass.Invasion:
+							Html.RenderPartial("Partials/Entries/Multiplayer", game);
+							break;
+
+						case VariantClass.Campaign:
+							Html.RenderPartial("Partials/Entries/Campaign", game);
+							break;
+
+						case VariantClass.Firefight:
+							Html.RenderPartial("Partials/Entries/Firefight", game);
+							break;
+					}
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h6>
+			There are no more @Model.VariantClass Games in <strong>@Model.PublicGamertag's</strong> Game History
+		</h6>
+	}
+
+	<ul class="pager">
+		<li class="previous @(Model.Page == 0 ? "disabled" : "")">
+			@Html.RouteLink("← Newer", "Reach_History", new { page = Model.Page - 1 })
+		</li>
+		<li class="next @(Model.GameHistory.HasMorePages ? "" : "disabled")">
+			@Html.RouteLink("Older →", "Reach_History", new { page = Model.Page + 1 })
+		</li>
+	</ul>
+</div>

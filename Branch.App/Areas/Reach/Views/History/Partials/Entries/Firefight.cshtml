@@ -1,0 +1,34 @@
+﻿@using Branch.Core.Game.HaloReach.Models._343.DataModels;
+@using Branch.App.Helpers.Razor;
+@using Branch.Extenders
+@model GameHistoryEntry
+
+<tr>
+	<td>
+		<a href="#">
+			@Model.MapName
+		</a>
+	</td>
+
+	<td>
+		@((Model.RequestedPlayerStanding + 1).Ordinal())
+	</td>
+	<td>
+		@Model.PlayerCount
+	</td>
+	<td>
+		@Model.CampaignDifficulty
+	</td>
+	<td>
+		@(Model.CampaignMetagameEnabled ? BranchHelpers.NumberWithDelimiter(Model.CampaignGlobalScore) : "Scoring disabled")
+	</td>
+	<td>
+		@Model.RequestedPlayerKills
+	</td>
+	<td>
+		@Model.RequestedPlayerDeaths
+	</td>
+	<td>
+		@BranchHelpers.MakeDateTimeFriendly(Model.GameTimestamp, "d")
+	</td>
+</tr>
