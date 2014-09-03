@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Manager.cs" />
+    <Compile Include="Enums\AssetSize.cs" />
     <Compile Include="Enums\MapType.cs" />
     <Compile Include="Enums\ResponseStatus.cs" />
     <Compile Include="JsonConverters\MapTypeConverter.cs" />

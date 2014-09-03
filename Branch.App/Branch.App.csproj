@@ -234,6 +234,8 @@
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
+    <Compile Include="Helpers\Razor\Reach\AssetUrlHelpers.cs" />
+    <Compile Include="Helpers\Razor\Reach\GeneralHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Models\Enums\Game.cs" />
     <Compile Include="Models\GameSwitcherViewModel.cs" />
@@ -257,6 +259,8 @@
     <Content Include="Views\Blog\View.cshtml" />
     <Content Include="Views\Shared\GameSwitcher.cshtml" />
     <Content Include="Content\Styles\Shared\_game_switcher.scss" />
+    <Content Include="Content\Styles\Areas\Reach\_service_record.scss" />
+    <Content Include="Content\Styles\Areas\Reach\_home.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,7 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Styles\Areas\Reach\" />
+    <Folder Include="Content\Images\Area\Reach\Assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

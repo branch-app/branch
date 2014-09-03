@@ -1,0 +1,71 @@
+﻿body.reach_service_record {
+	.overview {
+		> .row > .game-history-split {
+			> .wrapper {
+				margin: 0 auto;
+				width: 500px;
+
+				// responsive state 2
+				@media (min-width: 992px) and (max-width: 1199px) {
+					margin-left: -15%;
+				}
+
+				> .area {
+					margin: 0 auto;
+					width: 300px; 
+				}
+
+				> .area-legend {
+					margin: 0 auto;
+					margin-top: 10px;
+					width: 450px;
+					height: 80px;
+
+					> ul {
+						list-style: none; 
+						position: relative; 
+						float: left; 
+						display: block;
+						left: 50%;
+						margin-left: -20px;
+
+						> li {
+							position: relative; 
+							float: left; 
+							display: block;
+							right: 50%;
+
+							> .identifier {
+								width: 10px;
+								height: 10px;
+
+								margin-bottom: -15px;
+								margin-left: -15px;
+
+								&.campaign {
+									background-color: #F7464A;
+								}
+								&.war-games {
+									background-color: #5880A0;
+								}
+								&.customs {
+									background-color: #3d3d7c;
+								}
+								&.spartan-ops {
+									background-color: #949FB1;
+								}
+							}
+
+							display: block;
+							float: left;
+
+							margin: 0;
+							padding: 0;
+							padding-right: 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

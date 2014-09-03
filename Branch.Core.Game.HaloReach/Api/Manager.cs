@@ -21,7 +21,66 @@ namespace Branch.Core.Game.HaloReach.Api
 		private const string Game = "reach";
 		private const string ApiKey = "waypoint";
 		private const string ApiBase = "https://mobile-service-ssl.halo.xbox.com/{0}/{0}apijson.svc/{1}";
+		public const string ApiAssetUrl = "https://assets.halowaypoint.com/website/statsimages/v1/reach/{0}";
+		public const string ApiEmblemAssetUrl = "https://emblems.svc.halowaypoint.com/{0}";
 		private readonly AzureStorage _storage;
+
+		#region Horrible Rank Xp Dictionary
+
+		public static readonly Dictionary<string, int> RankStartXpDictionary = new Dictionary<string, int>
+		{
+			{ "recruit", 0 },
+			{ "private", 7500 },
+			{ "corporal", 10000 },
+			{ "corporal grade 1", 15000 },
+			{ "sergeant", 20000 },
+			{ "sergeant grade 1", 26250 },
+			{ "sergeant grade 2", 32500 },
+			{ "warrant officer", 45000 },
+			{ "warrant officer grade 1", 78000 },
+			{ "warrant officer grade 2", 111000 },
+			{ "warrant officer grade 3", 144000 },
+			{ "captain", 210000 },
+			{ "captain grade 1", 233000 },
+			{ "captain grade 2", 256000 },
+			{ "captain grade 3", 279000 },
+			{ "major", 325000 },
+			{ "major grade 1", 350000 },
+			{ "major grade 2", 375000 },
+			{ "major grade 3", 400000 },
+			{ "lt. colonel", 450000 },
+			{ "lt. colonel grade 1", 480000 },
+			{ "lt. colonel grade 2", 510000 },
+			{ "lt. colonel grade 3", 540000 },
+			{ "commander", 600000 },
+			{ "commander grade 1", 650000 },
+			{ "commander grade 2", 700000 },
+			{ "commander grade 3", 750000 },
+			{ "colonel", 850000 },
+			{ "colonel grade 1", 960000 },
+			{ "colonel grade 2", 1070000 },
+			{ "colonel grade 3", 1180000 },
+			{ "brigadier", 1400000 },
+			{ "brigadier grade 1", 1520000 },
+			{ "brigadier grade 2", 1640000 },
+			{ "brigadier grade 3", 1760000 },
+			{ "general", 2000000 },
+			{ "general grade 1", 2200000 },
+			{ "general grade 2", 2350000 },
+			{ "general grade 3", 2500000 },
+			{ "field marshall", 3000000 },
+			{ "hero", 3700000 },
+			{ "legend", 4600000 },
+			{ "mythic", 5650000 },
+			{ "noble", 7000000 },
+			{ "eclipse", 8500000 },
+			{ "nova", 11000000 },
+			{ "forerunner", 13000000 },
+			{ "reclaimer", 16500000 },
+			{ "inheritor", 20000000 }
+		};
+
+		#endregion
 
 		public Manager(AzureStorage storage)
 		{
