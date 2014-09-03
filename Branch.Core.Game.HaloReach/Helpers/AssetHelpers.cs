@@ -50,7 +50,7 @@ namespace Branch.Core.Game.HaloReach.Helpers
 			{ "Ridgeline", "mp_timberland" },
 			{ "Breakneck", "mp_headlong" },
 			{ "High Noon", "mp_hangemhigh" },
-			{ "Solitary", "mp_prisoner" },
+			{ "Solitary", "mp_prisoner" }
 		};
 
 		public static readonly Dictionary<string, int> RankStartXpDictionary = new Dictionary<string, int>
