@@ -16,8 +16,11 @@ namespace Branch.App.Controllers
 			// find halo 4 players
 			var halo4ServiceRecord = GlobalStorage.H4Manager.GetServiceRecord(q);
 
+			// find halo reach players
+			var haloReachServiceRecord = GlobalStorage.HReachManager.GetServiceRecord(q);
+
 			// le render le model le
-			return View(new SearchViewModel(q, halo4ServiceRecord));
+			return View(new SearchViewModel(q, halo4ServiceRecord, haloReachServiceRecord));
 		}
 	}
 }

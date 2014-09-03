@@ -14,17 +14,23 @@
 </div>
 
 <div class="container">
-	
+
 	@Html.Partial("FlashMessage", true)
 
 	<div>
 		<div class="row">
+			@if (Model.HaloReachServiceRecord != null)
+			{
+				@Html.Partial("Partials/HaloReachServiceRecord", Model.HaloReachServiceRecord)
+			}
+
 			@if (Model.Halo4ServiceRecord != null)
 			{
 				@Html.Partial("Partials/Halo4ServiceRecord", Model.Halo4ServiceRecord)
 			}
 
-			@if (Model.Halo4ServiceRecord == null)
+			@if (Model.Halo4ServiceRecord == null &&
+				 Model.HaloReachServiceRecord == null)
 			{
 				<div class="no-results">
 					<p>

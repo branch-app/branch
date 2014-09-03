@@ -1,0 +1,38 @@
+﻿@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Reach
+@using Branch.Core.Game.HaloReach.Enums
+@using Branch.Models.Services.Branch
+@model Branch.Core.Game.HaloReach.Models._343.Responces.ServiceRecord
+
+<div class="col-md-6 entry">
+	<a class="nope" 
+	   href="@Url.RouteUrl("Reach_ServiceRecord", new { gamertag = BranchHelpers.CheckGamerIdPrivacy(Model.Player.Gamertag, GamerId.X360XblGamertag) })">
+		<div class="spartan-image" 
+			 style="background-image: url('@AssetUrlHelpers.GetPlayerModelUrl(Model.Player.Gamertag, AssetSize.Large)')"></div>
+		<div class="mask"></div>
+		<div class="text-container">
+			<h2>
+				@BranchHelpers.CheckGamerIdPrivacy(Model.Player.Gamertag, GamerId.X360XblGamertag)
+			</h2>
+			<h3>
+				@Model.Player.ServiceTag
+			</h3>
+			<div class="info">
+				<strong>Game: </strong>
+				Halo: Reach | Xbox 360
+
+				<br /><strong>Competitive Kills: </strong>
+				@BranchHelpers.NumberWithDelimiter(Model.Player.MultiplayerKills)
+
+				<br /><strong>KD Ratio: </strong>
+				@MathHelpers.CalculateKd(Model.Player.MultiplayerKills, Model.Player.MultiplayerDeaths)
+
+				<br /><strong>Rank: </strong>
+				@Model.Player.CurrentRankName
+
+				<br /><strong>Total Games: </strong>
+				@Model.Player.GamesTotal
+			</div>
+		</div>
+	</a>
+</div>

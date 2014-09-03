@@ -261,6 +261,7 @@
     <Content Include="Content\Styles\Shared\_game_switcher.scss" />
     <Content Include="Content\Styles\Areas\Reach\_service_record.scss" />
     <Content Include="Content\Styles\Areas\Reach\_home.scss" />
+    <Content Include="Views\Search\Partials\HaloReachServiceRecord.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
