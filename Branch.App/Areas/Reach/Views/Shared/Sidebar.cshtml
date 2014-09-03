@@ -5,7 +5,8 @@
 @model Branch.App.Areas.Reach.Models.Base
 @{
 	var currentPage = ViewBag.CurrentReachPage ?? CurrentPage.ServiceRecord;
-	VariantClass? currentHistoryMode = ViewBag.CurrentHistoryMode;
+	VariantClass? currentHistoryClass = ViewBag.CurrentHistoryMode;
+	CommendationVariantClass? currentCommendationClass = ViewBag.CurrentCommendationClass;
 }
 <div class="bs-sidebar" data-spy="affix" data-offset-top="358">
 	<ul class="nav bs-sidenav">
@@ -20,15 +21,31 @@
 				</li>
 				
 				<li class="@BranchHelpers.CompareEnum(currentPage, CurrentPage.GameHistory, "active")">
-					@Html.RouteLink("Game History", "Reach_History", new { slug = "WarGames", gamertag = Model.PublicGamertag })
+					@Html.RouteLink("Game History", "Reach_History", new { gamertag = Model.PublicGamertag })
 
 					@if (currentPage == CurrentPage.GameHistory)
 					{
 						<ul class="nav">
 							@foreach (var variantClass in ((VariantClass[])Enum.GetValues(typeof(VariantClass))).Where(gameMode => gameMode != VariantClass.Unknown))
 							{
-								<li class="@BranchHelpers.CompareEnum(currentHistoryMode, variantClass, "active")">
+								<li class="@BranchHelpers.CompareEnum(currentHistoryClass, variantClass, "active")">
 									@Html.RouteLink(variantClass.ToString().MakeCamelCaseFriendly(), "Reach_History", new { slug = variantClass.ToString(), gamertag = Model.PublicGamertag })
+								</li>
+							}
+						</ul>
+					}
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, CurrentPage.Commendations, "active")">
+					@Html.RouteLink("Commendations", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+
+					@if (currentPage == CurrentPage.Commendations)
+					{
+						<ul class="nav">
+							@foreach (var commendationVariantClass in ((CommendationVariantClass[])Enum.GetValues(typeof(CommendationVariantClass))))
+							{
+								<li class="@BranchHelpers.CompareEnum(currentCommendationClass, commendationVariantClass, "active")">
+									@Html.RouteLink(commendationVariantClass.ToString().MakeCamelCaseFriendly(), "Reach_Commendations", new { slug = commendationVariantClass.ToString(), gamertag = Model.PublicGamertag })
 								</li>
 							}
 						</ul>

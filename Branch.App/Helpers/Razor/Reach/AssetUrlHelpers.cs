@@ -56,5 +56,15 @@ namespace Branch.App.Helpers.Razor.Reach
 			var path = String.Format("gametypes/{0}/{1}.png", assetSize, (int) icon);
 			return String.Format(Manager.ApiAssetUrl, path);
 		}
+
+		public static string GetCommendationImageUrl(int id, string tier, CommendationVariantClass variantClass, AssetSize assetSize)
+		{
+			if (tier.ToLowerInvariant() == "beginner") 
+				tier = "none";
+
+			var path = String.Format("commendations/{0}/{0}_{1}_{2}_{3}.png", tier.ToLowerInvariant(),
+				assetSize.ToString().ToLowerInvariant(), id, variantClass.ToString().ToLowerInvariant());
+			return String.Format(Manager.ApiAssetUrl, path);
+		}
 	}
 }

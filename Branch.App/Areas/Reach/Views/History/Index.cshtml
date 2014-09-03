@@ -2,21 +2,20 @@
 @using Branch.Core.Game.HaloReach.Enums
 @model Branch.App.Areas.Reach.Models.HistoryViewModel
 @{
-	ViewBag.Title = string.Format("{0}'s Halo: Reach Campaign History", Model.PublicGamertag);
+	ViewBag.Title = string.Format("{0}'s Halo: Reach {1} History", Model.PublicGamertag, Model.VariantClass);
 	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "reach_game_history";
 	ViewBag.CurrentReachPage = CurrentPage.GameHistory;
 	ViewBag.CurrentHistoryMode = Model.VariantClass;
 }
 
-<div class="overview">
-
+<div class="game-details">
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
 		<h1>@Model.VariantClass History</h1>
 	</div>
-	
+
 	@if (Model.GameHistory.RecentGames.Any())
 	{
 		<table class="table game-history">

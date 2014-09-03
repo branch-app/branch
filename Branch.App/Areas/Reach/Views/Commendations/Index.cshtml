@@ -1,0 +1,160 @@
+﻿@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Reach
+@using Branch.Core.Game.HaloReach.Enums
+@using Branch.Core.Game.HaloReach.Models._343.DataModels
+@model Branch.App.Areas.Reach.Models.CommendationsViewModel
+@{
+	ViewBag.Title = string.Format("{0}'s Halo: Reach {1} Commendations", Model.PublicGamertag, Model.CommendationVariantClass);
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_commendations";
+	ViewBag.CurrentReachPage = CurrentPage.Commendations;
+	ViewBag.CurrentCommendationClass = Model.CommendationVariantClass;
+}
+
+<div class="bs-branch-section commendations">
+
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>Commendations for @Model.CommendationVariantClass</h1>
+	</div>
+
+	<div class="row">
+		@{
+			var commendations = (from commendation in Model.ServiceRecord.Player.CommendationState
+								 let commendationDetails = MetadataHelpers.GetCommendationById(commendation.Key).CommendationDetails
+								 where commendationDetails.Type == Model.CommendationVariantClass
+								 let deets = MetadataHelpers.GetNextAndCurrentCommendationLevel(commendation.Value, commendationDetails)
+								 let tierIndex = MetadataHelpers.GetCurrentCommendationTierIndex(deets.Item1)
+								 select new Tuple<int, CommendationDetails, int>(commendation.Value, commendationDetails, tierIndex))
+				.ToList().OrderByDescending(c => c.Item3).ThenByDescending(c => c.Item1);
+
+			foreach (var commendation in commendations)
+			{
+				var deets = MetadataHelpers.GetNextAndCurrentCommendationLevel(commendation.Item1, commendation.Item2);
+				var currentTeir = deets.Item1;
+				var currentTeirStartXp = deets.Item2;
+				var nextTeir = deets.Item3;
+				var nextTeirStartXp = deets.Item4;
+
+				<div class="row commendation-entry col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-12">
+					<div class="col-md-5 commendation-image"
+						 style="background-image: url('@AssetUrlHelpers.GetCommendationImageUrl(commendation.Item2.Id, currentTeir, commendation.Item2.Type, AssetSize.Large)')">
+					</div>
+					<div class="col-md-6 commendation-details">
+						<h3>
+							@commendation.Item2.Name
+						</h3>
+						<p>
+							@commendation.Item2.Description
+						</p>
+
+						@if (nextTeirStartXp == -1)
+						{
+							// Beat the commendation yo! good job
+							<div class="progression">
+								<div class="points">
+									<div class="lower left">@BranchHelpers.NumberWithDelimiter(currentTeirStartXp)</div>
+									<div class="upper right">∞</div>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"
+										 aria-valuenow="100" aria-valuemin="0"
+										 aria-valuemax="100" style="width: 100%">
+										<span class="sr-only">100% Complete</span>
+										<span class="progress-bar-indicator">100% Complete</span>
+									</div>
+								</div>
+							</div>
+						}
+						else
+						{
+							var raw = (float)commendation.Item1 / nextTeirStartXp;
+							var percentage = Math.Round(Convert.ToDouble(raw) * 100, 2);
+
+							<div class="progression">
+								<div class="points">
+									<div class="lower left">@BranchHelpers.NumberWithDelimiter(currentTeirStartXp)</div>
+									<div class="upper right">@BranchHelpers.NumberWithDelimiter(nextTeirStartXp)</div>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"
+										 aria-valuenow="@(percentage)" aria-valuemin="0"
+										 aria-valuemax="100" style="width: @percentage%">
+										<span class="sr-only">@percentage% Complete</span>
+										<span class="progress-bar-indicator">@percentage% Complete</span>
+									</div>
+								</div>
+								<div class="lower left">Next Teir: @nextTeir</div>
+							</div>
+						}
+					</div>
+
+					<div class="col-md-12">
+						<hr />
+					</div>
+				</div>
+			}
+		}
+
+		@*<div class="col-lg-5 col-md-6 entry">
+				<div class="title">
+					@commendationDetails.Name - @currentTeir
+					@if (nextTeir != null)
+					{
+						@:(Next: @nextTeir)
+					}
+				</div>
+				<div class="description">@commendationDetails.Description</div>
+
+				@if (nextTeir != null)
+				{
+					float raw = commendation.Value/nextTeirStartXp;
+					var percentage = Math.Round(Convert.ToDouble(raw)*100, 2);
+
+					<div class="progression">
+						<div class="points">
+							<div class="lower">@BranchHelpers.NumberWithDelimiter(currentTeirStartXp)</div>
+							<div class="upper">@BranchHelpers.NumberWithDelimiter(nextTeirStartXp)</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="progress">
+							<div class="progress-bar" role="progressbar"
+									aria-valuenow="@(percentage)" aria-valuemin="0"
+									aria-valuemax="100" style="width: @percentage%">
+								<span class="sr-only">@percentage% Complete</span>
+								<span class="progress-bar-indicator">@percentage% Complete</span>
+							</div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="progression">
+						<div class="points">
+							<div class="lower">@BranchHelpers.NumberWithDelimiter(currentTeirStartXp)</div>
+							<div class="upper">∞</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="progress">
+							<div class="progress-bar" role="progressbar"
+									aria-valuenow="100" aria-valuemin="0"
+									aria-valuemax="100" style="width: 100%">
+								<span class="sr-only">100% Complete</span>
+								<span class="progress-bar-indicator">100% Complete</span>
+							</div>
+						</div>
+					</div>
+				}
+				<hr />
+			</div>
+			<div class="visible-lg col-md-1"></div>*@
+	</div>
+</div>

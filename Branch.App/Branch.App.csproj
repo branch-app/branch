@@ -262,12 +262,15 @@
     <Content Include="Areas\Reach\Views\History\Partials\Headers\Campaign.cshtml" />
     <Content Include="Areas\Reach\Views\History\Partials\Entries\Firefight.cshtml" />
     <Content Include="Areas\Reach\Views\History\Partials\Headers\Firefight.cshtml" />
+    <Content Include="Areas\Reach\Views\Commendations\Index.cshtml" />
     <None Include="Content\Styles\Areas\Halo4\_game_history.scss" />
+    <Compile Include="Areas\Reach\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Reach\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Reach\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachApiStatus.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachServiceRecordFilter.cs" />
     <Compile Include="Areas\Reach\Models\Base.cs" />
+    <Compile Include="Areas\Reach\Models\CommendationsViewModel.cs" />
     <Compile Include="Areas\Reach\Models\Enums\CurrentPage.cs" />
     <Compile Include="Areas\Reach\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Reach\Models\ServiceRecordViewModel.cs" />
@@ -290,6 +293,7 @@
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
     <Compile Include="Helpers\Razor\Reach\AssetUrlHelpers.cs" />
     <Compile Include="Helpers\Razor\Reach\GeneralHelpers.cs" />
+    <Compile Include="Helpers\Razor\Reach\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Models\Enums\Game.cs" />
     <Compile Include="Models\GameSwitcherViewModel.cs" />
@@ -323,6 +327,7 @@
     <Content Include="Content\Styles\Areas\Reach\_home.scss" />
     <Content Include="Views\Search\Partials\HaloReachServiceRecord.cshtml" />
     <Content Include="Content\Styles\Areas\Reach\_game_history.scss" />
+    <Content Include="Content\Styles\Areas\Reach\_commendations.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

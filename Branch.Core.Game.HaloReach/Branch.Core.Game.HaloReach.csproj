@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Api\Manager.cs" />
     <Compile Include="Enums\AssetSize.cs" />
+    <Compile Include="Enums\CommendationVariantClass.cs" />
     <Compile Include="Enums\Difficulty.cs" />
     <Compile Include="Enums\GameVariantIcon.cs" />
     <Compile Include="Enums\MapType.cs" />
