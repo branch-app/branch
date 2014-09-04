@@ -25,6 +25,14 @@ namespace Branch.App.Areas.Reach
 			context.MapRoute("Reach_Commendations", "360/{gamertag}/Reach/Commendations/{slug}",
 				new { controller = "Commendations", action = "Index", slug = CommendationVariantClass.Multiplayer.ToString() },
 				namespaces);
+
+			// File Share
+			context.MapRoute("Reach_FileShare", "360/{gamertag}/Reach/FileShare",
+				new { controller = "FileShare", action = "Index" },
+				namespaces);
+			context.MapRoute("Reach_File", "360/{gamertag}/Reach/FileShare/File/{fileId}",
+				new { controller = "FileShare", action = "File" },
+				namespaces);
 		}
 	}
 }

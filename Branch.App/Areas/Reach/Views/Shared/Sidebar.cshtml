@@ -7,6 +7,7 @@
 	var currentPage = ViewBag.CurrentReachPage ?? CurrentPage.ServiceRecord;
 	VariantClass? currentHistoryClass = ViewBag.CurrentHistoryMode;
 	CommendationVariantClass? currentCommendationClass = ViewBag.CurrentCommendationClass;
+	CurrentFileSharePage? currentFileSharePage = ViewBag.CurrentFileSharePage;
 }
 <div class="bs-sidebar" data-spy="affix" data-offset-top="358">
 	<ul class="nav bs-sidenav">
@@ -48,6 +49,25 @@
 									@Html.RouteLink(commendationVariantClass.ToString().MakeCamelCaseFriendly(), "Reach_Commendations", new { slug = commendationVariantClass.ToString(), gamertag = Model.PublicGamertag })
 								</li>
 							}
+						</ul>
+					}
+				</li>
+
+				<li class="@BranchHelpers.CompareEnum(currentPage, CurrentPage.FileShare, "active")">
+					@Html.RouteLink("File Share", "Reach_FileShare", new { gamertag = Model.PublicGamertag })
+
+					@if (currentPage == CurrentPage.FileShare)
+					{
+						<ul class="nav">
+							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.Index, "active")">
+								@Html.RouteLink("File Share", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+							</li>
+							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.File, "active", "hide")">
+								@Html.RouteLink("File", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+							</li>
+							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.RecentScreenshots, "active")">
+								@Html.RouteLink("Recent Screenshots", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+							</li>
 						</ul>
 					}
 				</li>

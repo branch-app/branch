@@ -1,0 +1,23 @@
+﻿@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.App.Areas.Reach.Models
+@model FileShareFileViewModel
+
+@{
+	ViewBag.Title = string.Format("{0} by {1}", Model.File.Title, Model.File.Author);
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_file_share_file";
+	ViewBag.CurrentReachPage = CurrentPage.FileShare;
+	ViewBag.CurrentFileSharePage = CurrentFileSharePage.File;
+}
+
+<div class="bs-branch-section file-share-file">
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>@Model.File.Title by @Model.File.Author</h1>
+	</div>
+
+	<div class="row">
+		
+	</div>
+</div>

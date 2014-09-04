@@ -4,6 +4,7 @@
 	{
 		ServiceRecord,
 		GameHistory,
-		Commendations
+		Commendations,
+		FileShare
 	}
 }

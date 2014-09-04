@@ -106,9 +106,9 @@ namespace Branch.App.Helpers.Razor
 		}
 
 		public static string CompareEnum(object currentPage,
-			object desiredPage, string output)
+			object desiredPage, string output, string outputNegative = "")
 		{
-			return currentPage.Equals(desiredPage) ? output : "";
+			return currentPage.Equals(desiredPage) ? output : outputNegative;
 		}
 	}
 }

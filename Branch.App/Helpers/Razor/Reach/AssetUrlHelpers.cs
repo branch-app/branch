@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Branch.Core.Game.HaloReach.Api;
 using Branch.Core.Game.HaloReach.Enums;
@@ -51,10 +52,17 @@ namespace Branch.App.Helpers.Razor.Reach
 			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
 		}
 
+		public static string GetMapImageUrl(int mapId, AssetSize assetSize = AssetSize.Large)
+		{
+			var map = GlobalStorage.HReachManager.Metadata.Data.Maps.FirstOrDefault(m => m.Id == mapId);
+			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, map.MapDetails.ImageName);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
+
 		public static string GetIconImageUrl(GameVariantIcon icon, AssetSize assetSize)
 		{
-			var path = String.Format("gametypes/{0}/{1}.png", assetSize, (int) icon);
-			return String.Format(Manager.ApiAssetUrl, path);
+			var path = String.Format("Gametypes/{0}/{1}.png", assetSize, (int) icon);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
 		}
 
 		public static string GetCommendationImageUrl(int id, string tier, CommendationVariantClass variantClass, AssetSize assetSize)

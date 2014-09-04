@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Web;
@@ -122,6 +123,64 @@ namespace Branch.Core.Game.HaloReach.Api
 			AddPlayerToStorage(gamertag);
 
 			return gameHistory;
+		}
+
+		/// <summary>
+		/// Gets a Players Halo: Reach File Share
+		/// </summary>
+		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <returns>Retuens a <see cref="FileShare"/> model.</returns>
+		public FileShare GetPlayerFileShare(string gamertag)
+		{
+			const BlobType blobType = BlobType.PlayerFileShare;
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<FileShare>(blob, new TimeSpan(0, 8, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("file/share/{0}/{1}", ApiKey, gamertag);
+			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var serviceRecord = ParseJsonResponse<FileShare>(serviceRecordRaw);
+			if (serviceRecord == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
+				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
+
+			AddPlayerToStorage(gamertag);
+
+			return serviceRecord;
+		}
+
+		/// <summary>
+		/// Gets a Players Halo: Reach File Share
+		/// </summary>
+		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <param name="fileId">The if of the file.</param>
+		/// <returns>Retuens a <see cref="FileShare"/> model.</returns>
+		public FileShare GetPlayerFile(long fileId)
+		{
+			const BlobType blobType = BlobType.PlayerFile;
+			var blobContainerPath = GenerateBlobContainerPath(blobType, fileId.ToString(CultureInfo.InvariantCulture));
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<FileShare>(blob, new TimeSpan(0, 5, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("file/details/{0}/{1}", ApiKey, fileId);
+			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var serviceRecord = ParseJsonResponse<FileShare>(serviceRecordRaw);
+			if (serviceRecord == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
+				GenerateBlobContainerPath(blobType, fileId.ToString(CultureInfo.InvariantCulture)), serviceRecordRaw);
+			
+			return serviceRecord;
 		}
 
 		#endregion
@@ -287,7 +346,9 @@ namespace Branch.Core.Game.HaloReach.Api
 		{
 			Other,
 			PlayerServiceRecord,
-			PlayerGameHistory
+			PlayerGameHistory,
+			PlayerFileShare,
+			PlayerFile
 		}
 
 		#endregion
@@ -341,6 +402,14 @@ namespace Branch.Core.Game.HaloReach.Api
 
 				case BlobType.PlayerGameHistory:
 					path = "player-game-history";
+					break;
+
+				case BlobType.PlayerFileShare:
+					path = "player-file-share";
+					break;
+
+				case BlobType.PlayerFile:
+					path = "player-file";
 					break;
 
 				default:

@@ -1,0 +1,184 @@
+﻿@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.App.Areas.Reach.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Reach
+@using Branch.Core.Game.HaloReach.Enums
+@model FileShareViewModel
+
+@{
+	ViewBag.Title = string.Format("{0}'s Halo: Reach File Share", Model.PublicGamertag);
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_file_share";
+	ViewBag.CurrentReachPage = CurrentPage.FileShare;
+	ViewBag.CurrentFileSharePage = CurrentFileSharePage.Index;
+}
+
+<div class="bs-branch-section file-share">
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header">
+		<h1>@Model.PublicGamertag's File Share</h1>
+	</div>
+
+	<div class="row file-share-container">
+		@foreach (var file in Model.FileShare.Files)
+		{
+			<div class="col-md-6 file-share-entry">
+				<div class="details">
+					<a class="plain" href="@Url.Action("File", "FileShare", new { fileId = file.FileId, gamertag = file.Author.Contains("343 Industries") ? Model.PublicGamertag : file.Author })">
+						<h3>@file.Title</h3>
+
+						@if (file.FileCategory == FileType.GameClip)
+						{
+							<div class="image-frame"
+							     style="background-image: url('@AssetUrlHelpers.GetMapImageUrl((int) file.MapId)');">
+								<div class="icon-overlay">
+									<div class="stats">
+										<div class="stats-container">
+											<div class="info-block likes">
+												@if (file.LikesCount == 0)
+												{
+													@:no <span>likes</span>
+												}
+												else if (file.LikesCount == 1)
+												{
+													@:1 <span>like</span>
+												}
+												else
+												{
+													@BranchHelpers.NumberWithDelimiter((int)file.LikesCount) <span>likes</span>
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+						else if (file.FileCategory == FileType.GameMap)
+						{
+							<div class="image-frame"
+							     style="background-image: url('@AssetUrlHelpers.GetMapImageUrl((int) file.MapId)');">
+								<div class="icon-overlay">
+									<div class="stats">
+										<div class="stats-container">
+											<div class="info-block likes">
+												@if (file.LikesCount == 0)
+												{
+													@:no <span>likes</span>
+												}
+												else if (file.LikesCount == 1)
+												{
+													@:1 <span>like</span>
+												}
+												else
+												{
+													@BranchHelpers.NumberWithDelimiter((int)file.LikesCount) <span>likes</span>
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+						else if (file.FileCategory == FileType.GameSettings)
+						{
+							<div class="image-frame">
+								<div class="icon-overlay"
+								     style="background-image: url('@AssetUrlHelpers.GetIconImageUrl(GameVariantIcon.Defense, AssetSize.Large)');">
+									<div class="stats">
+										<div class="stats-container">
+											<div class="info-block likes">
+												@if (file.LikesCount == 0)
+												{
+													@:no <span>likes</span>
+												}
+												else if (file.LikesCount == 1)
+												{
+													@:1 <span>like</span>
+												}
+												else
+												{
+													@BranchHelpers.NumberWithDelimiter((int)file.LikesCount) <span>likes</span>
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+						else if (file.FileCategory == FileType.Image)
+						{
+							<div class="image-frame"
+							     style="background-image: url('https://companion.halo.xbox.com/Screenshot.ashx?fid=@(file.FileId)&size=Full')">
+								<div class="icon-overlay">
+									<div class="stats">
+										<div class="stats-container">
+											<div class="info-block likes">
+												@if (file.LikesCount == 0)
+												{
+													@:no <span>likes</span>
+												}
+												else if (file.LikesCount == 1)
+												{
+													@:1 <span>like</span>
+												}
+												else
+												{
+													@BranchHelpers.NumberWithDelimiter((int)file.LikesCount) <span>likes</span>
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+					</a>
+
+					<hr />
+
+					<p>
+						@file.Description
+					</p>
+					<p>
+						<b>Author:</b> @Html.RouteLink(file.Author, "Reach_ServiceRecord", new { gamertag = file.Author })
+
+						@if (!String.IsNullOrWhiteSpace(file.OriginalAuthor))
+						{
+							<br />
+							@:<b>Original Author:</b>
+							@Html.RouteLink(file.OriginalAuthor, "Reach_ServiceRecord", new { gamertag = file.OriginalAuthor })
+						}
+						
+						<br />
+						<b>Type:</b>
+						@switch (file.FileCategory)
+						{
+							case FileType.GameClip:
+								@:Theater Clip
+								break;
+							case FileType.GameMap:
+								@:Forge Map
+								break;
+							case FileType.GameSettings:
+								@:GameType
+								break;
+							case FileType.Image:
+								@:Screenshot
+								break;
+						}
+						
+						<br />
+						<b>Created At:</b>
+						@BranchHelpers.MakeDateTimeFriendly(file.CreateDate)
+
+						<br />
+						<b>Modified At:</b>
+						@BranchHelpers.MakeDateTimeFriendly(file.ModifiedDate)
+					</p>
+				</div>
+
+				<hr />
+			</div>
+		}
+	</div>
+</div>
