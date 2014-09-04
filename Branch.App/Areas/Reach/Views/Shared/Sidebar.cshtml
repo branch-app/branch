@@ -60,13 +60,13 @@
 					{
 						<ul class="nav">
 							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.Index, "active")">
-								@Html.RouteLink("File Share", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+								@Html.RouteLink("File Share", "Reach_FileShare", new { gamertag = Model.PublicGamertag })
 							</li>
 							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.File, "active", "hide")">
-								@Html.RouteLink("File", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+								@Html.RouteLink("File", "Reach_File", new { gamertag = Model.PublicGamertag })
 							</li>
 							<li class="@BranchHelpers.CompareEnum(currentFileSharePage, CurrentFileSharePage.RecentScreenshots, "active")">
-								@Html.RouteLink("Recent Screenshots", "Reach_Commendations", new { gamertag = Model.PublicGamertag })
+								@Html.RouteLink("Recent Screenshots", "Reach_RecentScreenshots", new { gamertag = Model.PublicGamertag })
 							</li>
 						</ul>
 					}

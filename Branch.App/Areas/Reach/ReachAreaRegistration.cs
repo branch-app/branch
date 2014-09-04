@@ -33,6 +33,9 @@ namespace Branch.App.Areas.Reach
 			context.MapRoute("Reach_File", "360/{gamertag}/Reach/FileShare/File/{fileId}",
 				new { controller = "FileShare", action = "File" },
 				namespaces);
+			context.MapRoute("Reach_RecentScreenshots", "360/{gamertag}/Reach/FileShare/RecentScreenshots",
+				new { controller = "FileShare", action = "RecentScreenshots" },
+				namespaces);
 		}
 	}
 }
