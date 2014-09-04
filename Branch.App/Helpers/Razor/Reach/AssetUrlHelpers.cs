@@ -74,5 +74,11 @@ namespace Branch.App.Helpers.Razor.Reach
 				assetSize.ToString().ToLowerInvariant(), id, variantClass.ToString().ToLowerInvariant());
 			return String.Format(Manager.ApiAssetUrl, path);
 		}
+
+		public static string GetPrivateAuthorImageUrl(string author)
+		{
+			var path = String.Format("PrivateAuthors/{0}_author.png", author);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
 	}
 }

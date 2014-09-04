@@ -265,6 +265,7 @@
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\thepackage.jpg" />
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\tipofthespear.jpg" />
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\wintercontingency.jpg" />
+    <Content Include="Content\Images\Area\Reach\Assets\PrivateAuthors\bungie_author.png" />
     <Content Include="Content\Images\Home\Covers\MCC\cover1.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover2.jpg" />
     <Content Include="Content\Images\Home\Covers\MCC\cover3.jpg" />

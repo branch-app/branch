@@ -1,9 +1,13 @@
 ﻿@using Branch.App.Areas.Reach.Models.Enums
 @using Branch.App.Areas.Reach.Models
+@using Branch.App.Helpers.Razor
+@using Branch.App.Helpers.Razor.Reach
+@using Branch.Core.Game.HaloReach.Enums
+@using Branch.Extenders
 @model FileShareFileViewModel
 
 @{
-	ViewBag.Title = string.Format("{0} by {1}", Model.File.Title, Model.File.Author);
+	ViewBag.Title = string.Format("{0} by {1}", Model.File.Title, Model.File.Author.MadeByBungie() ? "Bungie" : Model.File.Author);
 	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "reach_file_share_file";
 	ViewBag.CurrentReachPage = CurrentPage.FileShare;
@@ -14,10 +18,163 @@
 	@Html.Partial("FlashMessage", false)
 
 	<div class="page-header">
-		<h1>@Model.File.Title by @Model.File.Author</h1>
+		<h1>@Model.File.Title</h1>
+		<h4>
+			@if (Model.File.Author.MadeByBungie())
+			{
+				@:By: <img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />
+			}
+			else
+			{
+				@:By @Html.RouteLink(Model.File.Author, "Reach_ServiceRecord", new { gamertag = Model.File.Author })
+			}
+
+			@if (Model.File.Author != Model.File.OriginalAuthor && !String.IsNullOrWhiteSpace(Model.File.OriginalAuthor))
+			{
+				if (Model.File.OriginalAuthor.MadeByBungie())
+				{
+					@:(<img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />)
+				}
+				else
+				{
+					@:(@Html.RouteLink(Model.File.OriginalAuthor, "Reach_ServiceRecord", new { gamertag = Model.File.OriginalAuthor }))
+				}
+			}
+		</h4>
 	</div>
 
-	<div class="row">
-		
+	<div class="row file-details">
+		@{
+			var backgroundImageUrl = "";
+			var iconImageUrl = "";
+
+			switch (Model.File.FileCategory)
+			{
+				case FileType.Image:
+					backgroundImageUrl = String.Format("https://companion.halo.xbox.com/Screenshot.ashx?fid={0}&size=Full", Model.File.FileId);
+					break;
+				case FileType.GameClip:
+				case FileType.GameMap:
+					backgroundImageUrl = AssetUrlHelpers.GetMapImageUrl((int)Model.File.MapId);
+					break;
+				case FileType.GameSettings:
+					iconImageUrl = AssetUrlHelpers.GetIconImageUrl(GameVariantIcon.Defense, AssetSize.Large);
+					break;
+			}
+		}
+
+		<div class="col-md-12 preview-image"
+			 style="background-image: url('@backgroundImageUrl')">
+			<div class="icon-overlay"
+				 style="background-image: url('@iconImageUrl')"></div>
+		</div>
+		<div class="col-md-12">
+			<hr />
+		</div>
+		<div class="col-md-12 social-shit">
+			<ul>
+				@if (Model.File.FileCategory == FileType.Image)
+				{
+					<li>
+						<a role="button" href="https://companion.halo.xbox.com/Screenshot.ashx?fid=@(Model.File.FileId)&size=Full" target="_blank" class="btn btn-default" style="color: #a31097;">
+							<span class="glyphicon glyphicon-new-window" style="padding-right: 8px;"></span>
+							View full resolution
+						</a>
+					</li>
+				}
+
+				<li>
+					<a role="button" href="http://www.halowaypoint.com/en-us/games/haloreach/filebrowser/details/@(Model.File.FileId)" target="_blank" class="btn btn-default" style="color: #127e11;">
+						<span class="glyphicon glyphicon-download" style="padding-right: 8px;"></span>
+						Download to Xbox 360
+					</a>
+				</li>
+
+				<li>
+					<a role="button" href="@SocialHelpers.GenerateTwitterShareLink(String.Format("Check out {0} by {1}! {2}", Model.File.Title, Model.File.Author.MadeByBungie() ? "Bungie" : Model.File.Author, HttpContext.Current.Request.Url.AbsoluteUri), HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #4099FF;">
+						<span class="glyphicon glyphicon-retweet" style="padding-right: 8px;"></span>
+						Tweet
+					</a>
+				</li>
+
+				<li>
+					<a role="button" href="@SocialHelpers.GenerateFacebookShareLink(HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #3B5998;">
+						<span class="glyphicon glyphicon-thumbs-up" style="padding-right: 8px;"></span>
+						Like
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-12">
+			<hr />
+		</div>
+		<div class="col-md-12 metadata">
+			<p>
+				<b>Description:</b> <br />
+				@if (String.IsNullOrWhiteSpace(Model.File.Description))
+				{
+					<span class="fuck">
+						This content doesn't have a description.
+					</span>
+				}
+				else
+				{
+					@Model.File.Description
+				}
+
+				<br />
+				<br />
+
+				<b>Author:</b>
+				@if (Model.File.Author.MadeByBungie())
+				{
+					@:<img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />
+				}
+				else
+				{
+					@Html.RouteLink(Model.File.Author, "Reach_ServiceRecord", new { gamertag = Model.File.Author })
+				}
+
+				@if (Model.File.Author != Model.File.OriginalAuthor && !String.IsNullOrWhiteSpace(Model.File.OriginalAuthor))
+				{
+					<br />
+					<b>Original Author:</b>
+					if (Model.File.OriginalAuthor.MadeByBungie())
+					{
+						@:<img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />
+					}
+					else
+					{
+						@:@Html.RouteLink(Model.File.OriginalAuthor, "Reach_ServiceRecord", new { gamertag = Model.File.OriginalAuthor })
+					}
+				}
+
+				<br />
+				<b>Type:</b>
+				@switch (Model.File.FileCategory)
+				{
+					case FileType.GameClip:
+						@:Theater Clip
+									break;
+					case FileType.GameMap:
+					@:Forge Map
+									break;
+					case FileType.GameSettings:
+					@:GameType
+									break;
+					case FileType.Image:
+					@:Screenshot
+									break;
+				}
+
+				<br />
+				<b>Created At:</b>
+				@BranchHelpers.MakeDateTimeFriendly(Model.File.CreateDate)
+
+				<br />
+				<b>Modified At:</b>
+				@BranchHelpers.MakeDateTimeFriendly(Model.File.ModifiedDate)
+			</p>
+		</div>
 	</div>
 </div>

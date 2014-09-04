@@ -3,6 +3,7 @@
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Reach
 @using Branch.Core.Game.HaloReach.Enums
+@using Branch.Extenders
 @model FileShareViewModel
 
 @{
@@ -25,7 +26,7 @@
 		{
 			<div class="col-md-6 file-share-entry">
 				<div class="details">
-					<a class="plain" href="@Url.Action("File", "FileShare", new { fileId = file.FileId, gamertag = file.Author.Contains("343 Industries") ? Model.PublicGamertag : file.Author })">
+					<a class="plain" href="@Url.Action("File", "FileShare", new { fileId = file.FileId, gamertag = Model.PublicGamertag })">
 						<h3>@file.Title</h3>
 
 						@if (file.FileCategory == FileType.GameClip)
@@ -140,13 +141,28 @@
 						@file.Description
 					</p>
 					<p>
-						<b>Author:</b> @Html.RouteLink(file.Author, "Reach_ServiceRecord", new { gamertag = file.Author })
+						<b>Author:</b> 
+						@if (file.Author.MadeByBungie())
+						{
+							@:<img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />
+						}
+						else
+						{
+							@Html.RouteLink(file.Author, "Reach_ServiceRecord", new { gamertag = file.Author })
+						}
 
-						@if (!String.IsNullOrWhiteSpace(file.OriginalAuthor))
+						@if (file.OriginalAuthor != file.Author && !String.IsNullOrWhiteSpace(file.OriginalAuthor))
 						{
 							<br />
 							@:<b>Original Author:</b>
-							@Html.RouteLink(file.OriginalAuthor, "Reach_ServiceRecord", new { gamertag = file.OriginalAuthor })
+							if (file.OriginalAuthor.MadeByBungie())
+							{
+								@:<img alt="This file was made by Bungie" src="@AssetUrlHelpers.GetPrivateAuthorImageUrl("bungie")" />
+							}
+							else
+							{
+								@Html.RouteLink(file.OriginalAuthor, "Reach_ServiceRecord", new { gamertag = file.OriginalAuthor })
+							}
 						}
 						
 						<br />

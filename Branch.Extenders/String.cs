@@ -44,5 +44,15 @@ namespace Branch.Extenders
 		{
 			return Regex.Replace(value, @"(\B[A-Z]+?(?=[A-Z][^A-Z])|\B[A-Z]+?(?=[^A-Z]))", " $1");
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="value"></param>
+		/// <remarks>This is only valid in Halo: Reach.</remarks>
+		public static bool MadeByBungie(this string value)
+		{
+			return (value == "??" || value == "¦");
+		}
 	}
 }
