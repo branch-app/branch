@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.NetworkInformation;
 using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
@@ -12,14 +11,16 @@ namespace Branch.App.Areas.Halo4.Controllers
 	public class CommendationsController : Controller
 	{
 		//
-		// GET: /Halo4/{gamertag}/Commendations/
+		// GET: /360/{gamertag}/Halo4/Commendations/
 		[ValidateH4ServiceRecordFilter]
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, string slug, ServiceRecord serviceRecord)
 		{
 			var commendations = GlobalStorage.H4Manager.GetPlayerCommendations(serviceRecord.Gamertag);
 			if (commendations == null)
-				throw new NetworkInformationException();
+				return FlashMessage.RedirectAndFlash(Response, RedirectToAction("Index", "ServiceRecord", new { gamertag }),
+					FlashMessage.FlashMessageType.Failure, "No cached player commendation",
+					"Branch hasn't cached the commendations for this player, and can't load any new data right now.");
 
 			CommendationCategory commendationCategory;
 			if (!Enum.TryParse(slug, out commendationCategory))

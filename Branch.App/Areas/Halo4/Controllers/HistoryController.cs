@@ -31,6 +31,11 @@ namespace Branch.App.Areas.Halo4.Controllers
 					gameHistory =
 						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
+					if (gameHistory == null)
+						return FlashMessage.RedirectAndFlash(Response,
+							RedirectToAction("Index", "ServiceRecord", new {area = "Halo4", gamertag}), FlashMessage.FlashMessageType.Failure,
+							"No cached game history",
+							"Branch hasn't cached the game history for this player, and can't load any new data right now.");
 					return View("WarGames", new HistoryViewModel<GameHistoryModel.WarGames>(
 						serviceRecord, gameHistory, gameMode, page));
 
@@ -38,6 +43,11 @@ namespace Branch.App.Areas.Halo4.Controllers
 					gameHistory =
 						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.Campaign>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
+					if (gameHistory == null)
+						return FlashMessage.RedirectAndFlash(Response,
+							RedirectToAction("Index", "ServiceRecord", new {area = "Halo4", gamertag}), FlashMessage.FlashMessageType.Failure,
+							"No cached game history",
+							"Branch hasn't cached the game history for this player, and can't load any new data right now.");
 					return View("Campaign", new HistoryViewModel<GameHistoryModel.Campaign>(
 						serviceRecord, gameHistory, gameMode, page));
 
@@ -45,6 +55,11 @@ namespace Branch.App.Areas.Halo4.Controllers
 					gameHistory =
 						GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.SpartanOps>(
 							serviceRecord.Gamertag, (page * count), count, gameMode);
+					if (gameHistory == null)
+						return FlashMessage.RedirectAndFlash(Response,
+							RedirectToAction("Index", "ServiceRecord", new {area = "Halo4", gamertag}), FlashMessage.FlashMessageType.Failure,
+							"No cached game history",
+							"Branch hasn't cached the game history for this player, and can't load any new data right now.");
 					return View("SpartanOps", new HistoryViewModel<GameHistoryModel.SpartanOps>(
 						serviceRecord, gameHistory, gameMode, page));
 

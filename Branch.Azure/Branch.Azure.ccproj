@@ -13,6 +13,7 @@
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>Branch.Azure</Name>
     <UseEmulatorExpressByDefault>False</UseEmulatorExpressByDefault>
+    <UseWebProjectPorts>False</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
