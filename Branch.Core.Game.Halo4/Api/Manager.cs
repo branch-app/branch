@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -12,6 +13,7 @@ using Branch.Core.Game.Halo4.Models._343;
 using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 using Branch.Core.Storage;
+using Branch.Extenders;
 using Branch.Models.Authentication;
 using Branch.Models.Services.Branch;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -172,7 +174,7 @@ namespace Branch.Core.Game.Halo4.Api
 
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
-			AddPlayerToStorage(gamertag);
+			AddPlayerToStorage(serviceRecord.Gamertag);
 
 			return serviceRecord;
 		}
@@ -218,8 +220,6 @@ namespace Branch.Core.Game.Halo4.Api
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameHistoryRaw);
 
-			AddPlayerToStorage(gamertag);
-
 			return gameHistory;
 		}
 
@@ -249,8 +249,6 @@ namespace Branch.Core.Game.Halo4.Api
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, gameHistoryNameFormat), gameRaw);
 
-			AddPlayerToStorage(gamertag);
-
 			return game;
 		}
 
@@ -278,8 +276,6 @@ namespace Branch.Core.Game.Halo4.Api
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), commendationRaw);
-
-			AddPlayerToStorage(gamertag);
 
 			return commendation;
 		}
@@ -533,9 +529,11 @@ namespace Branch.Core.Game.Halo4.Api
 			{
 				return JsonConvert.DeserializeObject<TModelType>(response.Content.ReadAsStringAsync().Result);
 			}
-			catch (JsonReaderException jsonReaderException)
+			catch (JsonReaderException)
 			{
-				Trace.TraceError(jsonReaderException.ToString());
+#if DEBUG
+				throw;
+#endif
 			}
 
 			return null;
@@ -573,10 +571,19 @@ namespace Branch.Core.Game.Halo4.Api
 
 		public enum BlobType
 		{
+			[Description("other")]
 			Other,
+
+			[Description("player-service-record")]
 			PlayerServiceRecord,
+
+			[Description("player-game-history")]
 			PlayerGameHistory,
+
+			[Description("player-game")]
 			PlayerGame,
+
+			[Description("player-commendation")]
 			PlayerCommendation
 		}
 
@@ -631,35 +638,7 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <returns></returns>
 		public string GenerateBlobContainerPath(BlobType blobType, string fileName)
 		{
-			string path;
-
-			switch (blobType)
-			{
-				case BlobType.Other:
-					path = "other";
-					break;
-
-				case BlobType.PlayerCommendation:
-					path = "player-commendation";
-					break;
-
-				case BlobType.PlayerGame:
-					path = "player-game";
-					break;
-
-				case BlobType.PlayerGameHistory:
-					path = "player-game-history";
-					break;
-
-				case BlobType.PlayerServiceRecord:
-					path = "player-service-record";
-					break;
-
-				default:
-					throw new ArgumentException("Invalid/Unknown Blob Type");
-			}
-
-			return string.Format("{0}/{1}.json", path, fileName);
+			return string.Format("{0}/{1}.json", blobType.GetDescription(), fileName);
 		}
 
 		/// <summary>

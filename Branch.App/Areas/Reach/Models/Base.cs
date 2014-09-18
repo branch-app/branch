@@ -9,7 +9,7 @@ namespace Branch.App.Areas.Reach.Models
 		public Base(ServiceRecord serviceRecord)
 		{
 			ServiceRecord = serviceRecord;
-			RecentGamesHistory = GlobalStorage.HReachManager.GetPlayerGameHistory(ServiceRecord.Player.Gamertag, VariantClass.Unknown);
+			RecentGamesHistory = GlobalStorage.HReachManager.GetPlayerGameHistory(ServiceRecord.Player.Gamertag, VariantClass.All);
 			PublicGamertag = GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Player.Gamertag,
 				GlobalStorage.AzureStorage);
 		}

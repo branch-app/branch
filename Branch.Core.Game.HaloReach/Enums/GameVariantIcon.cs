@@ -1,5 +1,11 @@
 ﻿namespace Branch.Core.Game.HaloReach.Enums
 {
+	/// <summary>
+	/// Game Variant Icon Index's
+	/// </summary>
+	/// <remarks>
+	/// Only some of these are still hosted. I haven't checked which ones in particular 
+	/// </remarks>
 	public enum GameVariantIcon
 	{
 		CaptureTheFlag = 0x00,

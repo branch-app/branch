@@ -17,7 +17,7 @@ namespace Branch.Models.Services.Branch
 			Id = gamerId;
 			Type = gamerIdType;
 
-			SetKeys(PartitionKeyString, string.Format(Id.ToSlug(), gamerId));
+			SetKeys(PartitionKeyString, string.Format(RowKeyString, Id.ToSlug().ToLowerInvariant()));
 		}
 
 		public string Id { get; set; }

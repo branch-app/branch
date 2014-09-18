@@ -196,5 +196,10 @@
 				<hr />
 			</div>
 		}
+		
+		@if (!Model.FileShare.Files.Any())
+		{
+			<h4>@Model.PublicGamertag hasn't posted anything to their FileShare</h4>
+		}
 	</div>
 </div>

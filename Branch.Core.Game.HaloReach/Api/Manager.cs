@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
@@ -9,6 +10,7 @@ using Branch.Core.Game.HaloReach.Enums;
 using Branch.Core.Game.HaloReach.Models.Branch;
 using Branch.Core.Game.HaloReach.Models._343;
 using Branch.Core.Storage;
+using Branch.Extenders;
 using Branch.Models.Services.Branch;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
@@ -88,7 +90,7 @@ namespace Branch.Core.Game.HaloReach.Api
 
 			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
-			AddPlayerToStorage(gamertag);
+			AddPlayerToStorage(serviceRecord.Player.Gamertag);
 
 			return serviceRecord;
 		}
@@ -120,8 +122,6 @@ namespace Branch.Core.Game.HaloReach.Api
 
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer, blobContainerPath, gameHistoryRaw);
 
-			AddPlayerToStorage(gamertag);
-
 			return gameHistory;
 		}
 
@@ -143,24 +143,21 @@ namespace Branch.Core.Game.HaloReach.Api
 
 			// Try and get new blob
 			var endpoint = String.Format("file/share/{0}/{1}", ApiKey, gamertag);
-			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
-			var serviceRecord = ParseJsonResponse<FileShare>(serviceRecordRaw);
-			if (serviceRecord == null) return blobValidity.Item2;
+			var fileShareRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var fileShare = ParseJsonResponse<FileShare>(fileShareRaw);
+			if (fileShare == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
-				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
+				GenerateBlobContainerPath(blobType, escapedGamertag), fileShareRaw);
 
-			AddPlayerToStorage(gamertag);
-
-			return serviceRecord;
+			return fileShare;
 		}
 
 		/// <summary>
 		/// Gets a Players Halo: Reach File Share
 		/// </summary>
-		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
 		/// <param name="fileId">The if of the file.</param>
-		/// <returns>Retuens a <see cref="FileShare"/> model.</returns>
+		/// <returns>Returns a <see cref="FileShare"/> model.</returns>
 		public FileShare GetPlayerFile(long fileId)
 		{
 			const BlobType blobType = BlobType.PlayerFile;
@@ -173,14 +170,42 @@ namespace Branch.Core.Game.HaloReach.Api
 
 			// Try and get new blob
 			var endpoint = String.Format("file/details/{0}/{1}", ApiKey, fileId);
-			var serviceRecordRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
-			var serviceRecord = ParseJsonResponse<FileShare>(serviceRecordRaw);
-			if (serviceRecord == null) return blobValidity.Item2;
+			var playerFileDetailsRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var playerFileDetails = ParseJsonResponse<FileShare>(playerFileDetailsRaw);
+			if (playerFileDetails == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
-				GenerateBlobContainerPath(blobType, fileId.ToString(CultureInfo.InvariantCulture)), serviceRecordRaw);
+				GenerateBlobContainerPath(blobType, fileId.ToString(CultureInfo.InvariantCulture)), playerFileDetailsRaw);
 			
-			return serviceRecord;
+			return playerFileDetails;
+		}
+
+		/// <summary>
+		/// Gets a Players Halo: Reach Recent Screenshots
+		/// </summary>
+		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <returns>Returns a <see cref="FileShare"/> model.</returns>
+		public FileShare GetPlayersRecentScreenshots(string gamertag)
+		{
+			const BlobType blobType = BlobType.PlayerRecentScreenshots;
+			var escapedGamertag = EscapeGamertag(gamertag);
+			var blobContainerPath = GenerateBlobContainerPath(blobType, escapedGamertag);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<FileShare>(blob, new TimeSpan(0, 8, 0));
+
+			// Check if blob exists & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("file/screenshots/{0}/{1}", ApiKey, gamertag);
+			var recentScreenshotsRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var recentScreenshots = ParseJsonResponse<FileShare>(recentScreenshotsRaw);
+			if (recentScreenshots == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
+				GenerateBlobContainerPath(blobType, escapedGamertag), recentScreenshotsRaw);
+
+			return recentScreenshots;
 		}
 
 		#endregion
@@ -344,11 +369,23 @@ namespace Branch.Core.Game.HaloReach.Api
 
 		public enum BlobType
 		{
+			[Description("other")]
 			Other,
+
+			[Description("player-service-record")]
 			PlayerServiceRecord,
+
+			[Description("player-game-history")]
 			PlayerGameHistory,
+
+			[Description("player-file-share")]
 			PlayerFileShare,
-			PlayerFile
+
+			[Description("player-file")]
+			PlayerFile,
+
+			[Description("player-recent-screenshot")]
+			PlayerRecentScreenshots
 		}
 
 		#endregion
@@ -366,18 +403,18 @@ namespace Branch.Core.Game.HaloReach.Api
 		{
 			if (jsonData == null) return null;
 
-#if DEBUG
-			return JsonConvert.DeserializeObject<TBlam>(jsonData);
-#else
 			try
 			{
 				return JsonConvert.DeserializeObject<TBlam>(jsonData);
 			}
-			catch (JsonReaderException jsonReaderException)
+			catch (JsonReaderException)
 			{
+#if DEBUG
+				throw;
+#else
 				return null;
-			}
 #endif
+			}
 		}
 
 		/// <summary>
@@ -388,35 +425,7 @@ namespace Branch.Core.Game.HaloReach.Api
 		/// <returns></returns>
 		public string GenerateBlobContainerPath(BlobType blobType, string fileName)
 		{
-			string path;
-
-			switch (blobType)
-			{
-				case BlobType.Other:
-					path = "other";
-					break;
-
-				case BlobType.PlayerServiceRecord:
-					path = "player-service-record";
-					break;
-
-				case BlobType.PlayerGameHistory:
-					path = "player-game-history";
-					break;
-
-				case BlobType.PlayerFileShare:
-					path = "player-file-share";
-					break;
-
-				case BlobType.PlayerFile:
-					path = "player-file";
-					break;
-
-				default:
-					throw new ArgumentException("Invalid/Unknown Blob Type");
-			}
-
-			return string.Format("{0}/{1}.json", path, fileName);
+			return string.Format("{0}/{1}.json", blobType.GetDescription(), fileName);
 		}
 
 		/// <summary>

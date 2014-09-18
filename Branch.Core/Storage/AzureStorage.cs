@@ -14,7 +14,7 @@ namespace Branch.Core.Storage
 // ReSharper disable once RedundantAssignment
 			var connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
 
-#if DEBUG
+#if DEBUG || LOCALRELEASE
 			connectionString = "UseDevelopmentStorage=true";
 #endif
 

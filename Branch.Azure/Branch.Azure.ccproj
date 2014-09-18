@@ -89,5 +89,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'RemoteDebug' ">
     <OutputPath>bin\RemoteDebug\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'LocalRelease' ">
+    <OutputPath>bin\LocalRelease\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

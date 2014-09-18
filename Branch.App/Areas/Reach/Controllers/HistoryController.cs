@@ -17,7 +17,7 @@ namespace Branch.App.Areas.Reach.Controllers
 		{
 			VariantClass variantClass;
 			Enum.TryParse(slug, out variantClass);
-			if (variantClass == VariantClass.Unknown)
+			if (variantClass == VariantClass.All)
 				return RedirectToAction("Index", "History", new
 				{
 					area = "Reach", gamertag, slug = VariantClass.Competitive

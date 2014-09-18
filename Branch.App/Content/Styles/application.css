@@ -32,6 +32,9 @@ footer > .container > .row > .col-md-2 > .made-in {
   font-size: 12px;
   color: #aaa; }
 
+.navbar-right {
+  margin-right: 0 !important; }
+
 a {
   color: #3d3d7c; }
 
@@ -1633,6 +1636,24 @@ body.reach_file_share_file .file-details > .social-shit > ul {
 body.reach_file_share_file .file-details > .metadata {
   font-size: 15px; }
   body.reach_file_share_file .file-details > .metadata span.fuck {
+    color: #989898;
+    font-size: 16px; }
+
+body.reach_file_share_recent_screenshots .file-details > a > .preview-image {
+  height: 600px;
+  background-color: #565656;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; }
+body.reach_file_share_recent_screenshots .file-details > .social-shit > ul {
+  padding: 0;
+  list-style: none; }
+  body.reach_file_share_recent_screenshots .file-details > .social-shit > ul > li {
+    display: inline;
+    margin-right: 30px; }
+body.reach_file_share_recent_screenshots .file-details > .metadata {
+  font-size: 15px; }
+  body.reach_file_share_recent_screenshots .file-details > .metadata span.fuck {
     color: #989898;
     font-size: 16px; }
 

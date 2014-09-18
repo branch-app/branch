@@ -1,0 +1,21 @@
+﻿@using Branch.App.Models
+@{
+	Layout = null;
+}
+@model ErrorViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>{error-type} - Branch</title>
+</head>
+<body>
+	<div>
+		Error Code: @Model.HttpStatusCode
+		<br />
+		Exception Refrence: @Model.LoggedExceptionGuid
+	</div>
+</body>
+</html>

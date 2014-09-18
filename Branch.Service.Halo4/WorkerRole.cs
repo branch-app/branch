@@ -35,7 +35,7 @@ namespace Branch.Service.Halo4
 		{
 			Trace.TraceInformation("Branch.Service.Halo4 entry point called");
 
-#if !DEBUG
+#if RELEASE
 			try
 			{
 #endif
@@ -142,7 +142,7 @@ namespace Branch.Service.Halo4
 				}
 
 				#endregion
-#if !DEBUG
+#if RELEASE
 			}
 			catch (Exception ex)
 			{

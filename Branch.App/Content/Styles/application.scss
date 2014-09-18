@@ -14,8 +14,6 @@
 }
 
 .text-right {
-
-
 	text-align: right;
 }
 
@@ -59,6 +57,14 @@ footer > .container > .row > .col-md-2 > .made-in {
 	color: #aaa;
 }
 
+
+// ---- Fuck yo navbars ----
+// --------------------------------------------
+.navbar-right {
+	margin-right: 0 !important;
+}
+
+
 // ---- Custom Anchors ----
 // --------------------------------------------
 a {
@@ -85,7 +91,7 @@ a.plain {
 @import "Blog/index";
 @import "Search/index";
 
-@import "Shared/_game_switcher.scss";
+@import "Shared/game_switcher";
 
 @import "Areas/Halo4/home";
 @import "Areas/Reach/home";

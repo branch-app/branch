@@ -30,7 +30,8 @@ namespace Branch.App.Areas.Reach.Controllers
 		[ValidateReachServiceRecordFilter]
 		public ActionResult RecentScreenshots(string gamertag, ServiceRecord serviceRecord)
 		{
-			return View();
+			var fileShare = GlobalStorage.HReachManager.GetPlayersRecentScreenshots(gamertag);
+			return View(new FileShareViewModel(serviceRecord, fileShare));
 		}
 	}
 }
