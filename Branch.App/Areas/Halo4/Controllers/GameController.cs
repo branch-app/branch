@@ -9,7 +9,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 	public class GameController : Controller
 	{
 		//
-		// GET: /Halo4/Game/
+		// GET: /360/{gamertag}/Halo4/Game/{id}
 		[ValidateH4ServiceRecordFilter]
 		[ValidateH4ApiStatus]
 		public ActionResult Index(string gamertag, ServiceRecord serviceRecord, string id)

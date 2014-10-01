@@ -21,7 +21,7 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 
 		public string ImageName { get; set; }
 
-		public KeyValue[] Metadata { get; set; }
+		public KeyValue<int>[] Metadata { get; set; }
 
 		public string Name { get; set; }
 

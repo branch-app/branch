@@ -5,9 +5,7 @@
 
 <tr>
 	<td>
-		<a href="#">
-			@Model.MapName
-		</a>
+		@Html.ActionLink(Model.MapName, "Index", "Game", new { id = Model.GameId }, new { })
 	</td>
 
 	<td>

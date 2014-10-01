@@ -24,10 +24,10 @@
 				<li class="@BranchHelpers.CompareEnum(currentPage, CurrentPage.GameHistory, "active")">
 					@Html.RouteLink("Game History", "Reach_History", new { gamertag = Model.PublicGamertag })
 
-					@if (currentPage == CurrentPage.GameHistory)
+					@if (currentPage == CurrentPage.GameHistory || currentPage == CurrentPage.Game)
 					{
 						<ul class="nav">
-							@foreach (var variantClass in ((VariantClass[])Enum.GetValues(typeof(VariantClass))).Where(gameMode => gameMode != VariantClass.Unknown))
+							@foreach (var variantClass in ((VariantClass[])Enum.GetValues(typeof(VariantClass))).Where(gameMode => gameMode != VariantClass.All))
 							{
 								<li class="@BranchHelpers.CompareEnum(currentHistoryClass, variantClass, "active")">
 									@Html.RouteLink(variantClass.ToString().MakeCamelCaseFriendly(), "Reach_History", new { slug = variantClass.ToString(), gamertag = Model.PublicGamertag })

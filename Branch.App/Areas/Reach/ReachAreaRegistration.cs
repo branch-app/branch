@@ -21,6 +21,10 @@ namespace Branch.App.Areas.Reach
 				new { controller = "History", action = "Index", slug = VariantClass.Competitive.ToString() },
 				namespaces);
 
+			// Game
+			context.MapRoute("Reach_Game", "360/{gamertag}/Reach/Game/{id}",
+				new { controller = "Game", action = "Index" }, namespaces);
+
 			// Commendations
 			context.MapRoute("Reach_Commendations", "360/{gamertag}/Reach/Commendations/{slug}",
 				new { controller = "Commendations", action = "Index", slug = CommendationVariantClass.Multiplayer.ToString() },

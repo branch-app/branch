@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Branch.Core.Game.HaloReach.Helpers
 {
 	public static class AssetHelpers
 	{
-		public readonly static Dictionary<string, string> MapNameToNameId = new Dictionary<string, string>
+		public readonly static Dictionary<string, string> MapIdDictionary = new Dictionary<string, string>
 		{
 			// Campaign
 			{ "Winter Contingency", "wintercontingency" },
@@ -104,6 +105,19 @@ namespace Branch.Core.Game.HaloReach.Helpers
 			{ "forerunner", 13000000 },
 			{ "reclaimer", 16500000 },
 			{ "inheritor", 20000000 }
+		};
+
+		public static readonly Dictionary<int, Tuple<string, string>> TeamColourDictionary = new Dictionary<int, Tuple<string, string>>
+		{
+			{ -1, new Tuple<string, string>("#3d3d7c", "Players") },
+			{ 0, new Tuple<string, string>("#D96551", "Red Team") },
+			{ 1, new Tuple<string, string>("#6384B0", "Blue Team") },
+			{ 2, new Tuple<string, string>("#00A400", "Green Team") },
+			{ 3, new Tuple<string, string>("#FCB15E", "Orange Team") },
+			{ 4, new Tuple<string, string>("#B579E4", "Purple Team") },
+			{ 5, new Tuple<string, string>("#FCE000", "Gold Team") },
+			{ 6, new Tuple<string, string>("#9F7757", "Brown Team") },
+			{ 7, new Tuple<string, string>("#FFBAE2", "Pink Team") }
 		};
 	}
 }

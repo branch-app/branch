@@ -44,6 +44,7 @@
 						margin: 0 auto;
 
 						background-repeat: no-repeat;
+						background-position: center;
 					}
 
 					> .map {
@@ -206,11 +207,11 @@
 									margin-top: 10px;
 								}
 
-								> .csr-indicator {
+								> .rank-indicator {
 									background-position: center;
 									background-repeat: no-repeat;
 									height: 60px;
-									background-size: contain;
+									//background-size: contain;
 								}
 							}
 
@@ -356,9 +357,8 @@
 
 									> .enemy-image {
 										background-repeat: no-repeat;
-										height: 100px;
-										width: 80px;
-										background-size: 80px 80px;
+										height: 51px;
+										background-size: 147px 51px;
 										background-position: center center;
 									}
 									> .enemy-content {
@@ -419,7 +419,7 @@
 								margin: 10px 0 0 5px;
 								float: left;
 							}
-							.player-csr {
+							.player-rank {
 								height: 60px;
 								width: 40px;
 								background-size: contain;

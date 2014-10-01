@@ -152,7 +152,7 @@
 				var result = GeneralHelpers.GetGameVictoryStatus(game.RequestedPlayerStanding);
 
 				<div id="history-entry-@game.GameId" class="col-lg-6 col-sm-12 game-history-entry">
-					<a href="#">
+					<a href="@Url.Action("Index", "Game", new { id = game.GameId })">
 						<div class="game-history-container" style="background-image: url('@AssetUrlHelpers.GetMapImageUrl(game.MapName)')">
 							<div class="mask @result.Item1"></div>
 							<div class="gametype-icon" style="background-image: url('@AssetUrlHelpers.GetIconImageUrl(game.GameVariantIconIndex, AssetSize.Large)')"></div>

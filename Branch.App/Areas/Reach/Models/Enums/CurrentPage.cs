@@ -5,6 +5,7 @@
 		ServiceRecord,
 		GameHistory,
 		Commendations,
-		FileShare
+		FileShare,
+		Game
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Branch.App.Models;
 
 namespace Branch.App.Controllers
 {
@@ -13,7 +14,7 @@ namespace Branch.App.Controllers
 			if (loggedExceptionGuid == null || statusCode == null)
 				return RedirectToAction("Index", "Home");
 			
-			return View();
+			return View(new ErrorViewModel(exception, (Guid) loggedExceptionGuid, (int) statusCode));
 		}
 	}
 }

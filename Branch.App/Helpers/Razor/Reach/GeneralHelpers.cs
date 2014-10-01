@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Branch.Core.Game.HaloReach.Helpers;
 
 namespace Branch.App.Helpers.Razor.Reach
@@ -20,6 +21,11 @@ namespace Branch.App.Helpers.Razor.Reach
 				default:
 					return new Tuple<string, string>("los", "Lost");
 			}
+		}
+
+		public static string RemoveGuestIdentifier(string gamertag)
+		{
+			return Regex.Replace(gamertag, @"\((\d)\)", "", RegexOptions.None);
 		}
 	}
 }

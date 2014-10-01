@@ -52,7 +52,7 @@
 					</div>
 					@if (player.IsGuest)
 					{
-						<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('http://emblems.svc.halowaypoint.com/h4/emblems/violet_117-on-recruit?size=48');"></div>
+						<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('https://emblems.svc.halowaypoint.com/Stats/emblem.ashx?s=48&0=0&1=21&2=2&3=2&amp;fi=48&amp;bi=0&amp;fl=1&amp;m=3');"></div>
 					}
 					else
 					{
@@ -103,7 +103,7 @@
 							<div class="player-indicator">
 								@if (player.IsGuest)
 								{
-									<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('http://emblems.svc.halowaypoint.com/h4/emblems/violet_117-on-recruit?size=48');">
+									<div class="col-md-1 visual-flair" style="background-color: @team.PrimaryRgb; background-image: url('https://emblems.svc.halowaypoint.com/Stats/emblem.ashx?s=48&0=0&1=21&2=2&3=2&amp;fi=48&amp;bi=0&amp;fl=1&amp;m=3');">
 										@player.Gamertag
 										<br />
 										<strong>GEST</strong>
@@ -425,7 +425,7 @@
 									var allMedals = new Dictionary<MetadataModels.MedalClass, Dictionary<CommonModels.MedalStat, MetadataModels.Medal>>();
 
 									// woah, alot of medal calculation
-									foreach (var medalClass in GlobalStorage.H4WaypointManager.Metadata.MedalsMetadata.MedalClasses)
+									foreach (var medalClass in GlobalStorage.H4Manager.Metadata.MedalsMetadata.MedalClasses)
 									{
 										if (medalClass == null)
 										{

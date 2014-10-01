@@ -1,16 +1,19 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Branch.App.App_Start;
-using Branch.App.Controllers;
 using Branch.App_Start;
 using Branch.Core.Storage;
 
 using H4Api = Branch.Core.Game.Halo4.Api;
 using HReachApi = Branch.Core.Game.HaloReach.Api;
+
+#if RELEASE
+using System;
+using Branch.App.Controllers;
+#endif
 
 namespace Branch.App
 {

@@ -203,9 +203,36 @@ namespace Branch.Core.Game.HaloReach.Api
 			if (recentScreenshots == null) return blobValidity.Item2;
 
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
-				GenerateBlobContainerPath(blobType, escapedGamertag), recentScreenshotsRaw);
+				blobContainerPath, recentScreenshotsRaw);
 
 			return recentScreenshots;
+		}
+
+		/// <summary>
+		/// Gets details of an elapsed Halo: Reach Game
+		/// </summary>
+		/// <param name="id">The Id of the elapsed game</param>
+		/// <returns>Returns a <see cref="Models._343.Responces.Game"/> model.</returns>
+		public Models._343.Responces.Game GetGameDetails(string id)
+		{
+			const BlobType blobType = BlobType.PlayerGameDetails;
+			var blobContainerPath = GenerateBlobContainerPath(blobType, id);
+			var blob = _storage.Blob.GetBlob(_storage.Blob.HReachBlobContainer, blobContainerPath);
+			var blobValidity = CheckBlobValidity<Models._343.Responces.Game>(blob, new TimeSpan(1337, 69, 69));
+
+			// Check if blob existes & expire date
+			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Try and get new blob
+			var endpoint = String.Format("game/details/{0}/{1}", ApiKey, id);
+			var gameDetailsRaw = ValidateResponseAndGetRawText(UnauthorizedRequest(endpoint));
+			var gameDetails = ParseJsonResponse<Models._343.Responces.Game>(gameDetailsRaw);
+			if (gameDetails == null) return blobValidity.Item2;
+
+			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
+				blobContainerPath, gameDetailsRaw);
+
+			return gameDetails;
 		}
 
 		#endregion
@@ -385,7 +412,10 @@ namespace Branch.Core.Game.HaloReach.Api
 			PlayerFile,
 
 			[Description("player-recent-screenshot")]
-			PlayerRecentScreenshots
+			PlayerRecentScreenshots,
+
+			[Description("player-game-details")]
+			PlayerGameDetails
 		}
 
 		#endregion

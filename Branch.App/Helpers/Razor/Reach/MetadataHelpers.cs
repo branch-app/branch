@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Branch.Core.Game.HaloReach.Helpers;
 using Branch.Core.Game.HaloReach.Models._343.DataModels;
 
 namespace Branch.App.Helpers.Razor.Reach
@@ -9,6 +10,21 @@ namespace Branch.App.Helpers.Razor.Reach
 		public static Commendation GetCommendationById(int id)
 		{
 			return GlobalStorage.HReachManager.Metadata.Data.Commendations.FirstOrDefault(c => c.Id == id);
+		}
+
+		public static WeaponDetails GetWeaponDetailsById(int weaponId)
+		{
+			return (GlobalStorage.HReachManager.Metadata.Data.Weapons.FirstOrDefault(w => w.Id == weaponId) ?? new Weapon()).WeaponDetails;
+		}
+
+		public static MedalDetails GetMedalDetailsById(int medalId)
+		{
+			return (GlobalStorage.HReachManager.Metadata.Data.Medals.FirstOrDefault(m => m.Id == medalId) ?? new Medal()).MedalDetails;
+		}
+
+		public static EnemyDetails GetEnemyDetailsById(int enemyId)
+		{
+			return (GlobalStorage.HReachManager.Metadata.Data.Enemies.FirstOrDefault(e => e.Id == enemyId) ?? new Enemy()).EnemyDetails;
 		}
 
 		public static Tuple<string, int, string, int> GetNextAndCurrentCommendationLevel(int value,
@@ -52,6 +68,16 @@ namespace Branch.App.Helpers.Razor.Reach
 				default:
 					return -1;
 			}
+		}
+
+		public static string GetTeamColour(int teamId)
+		{
+			return AssetHelpers.TeamColourDictionary[teamId].Item1;
+		}
+
+		public static string GetTeamName(int teamId)
+		{
+			return AssetHelpers.TeamColourDictionary[teamId].Item2;
 		}
 	}
 }

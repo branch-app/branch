@@ -5,6 +5,6 @@
 		Easy,
 		Normal,
 		Heroic,
-		Hard
+		Legendary
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Branch.Core.Game.HaloReach.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Branch.Core.Game.HaloReach.Models._343.DataModels

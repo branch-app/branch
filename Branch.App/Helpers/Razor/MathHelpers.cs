@@ -18,5 +18,10 @@ namespace Branch.App.Helpers.Razor
 		{
 			return (kills - (deaths + otherDeathTypes.Sum()));
 		}
+
+		public static double RoundTo(double number, int roundTo)
+		{
+			return Math.Round(number, roundTo);
+		}
 	}
 }

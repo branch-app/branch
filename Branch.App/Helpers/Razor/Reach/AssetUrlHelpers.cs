@@ -41,6 +41,24 @@ namespace Branch.App.Helpers.Razor.Reach
 			return String.Format(Manager.ApiEmblemAssetUrl, path);
 		}
 
+		public static string GetWeaponUrl(string weaponImageName)
+		{
+			var path = String.Format("weapons/{0}.png", weaponImageName);
+			return String.Format(Manager.ApiAssetUrl, path);
+		}
+
+		public static string GetMedalUrl(string medalImageName)
+		{
+			var path = String.Format("Medals/{0}.png", medalImageName);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
+
+		public static string GetEnemyUrl(string enemyImageName)
+		{
+			var path = String.Format("Enemies/{0}.png", enemyImageName);
+			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
+
 		public static string GetPlayerModelUrl(string gamertag, AssetSize assetSize)
 		{
 			return String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, assetSize);
@@ -48,7 +66,7 @@ namespace Branch.App.Helpers.Razor.Reach
 
 		public static string GetMapImageUrl(string mapName, AssetSize assetSize = AssetSize.Large)
 		{
-			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, AssetHelpers.MapNameToNameId[mapName]);
+			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, AssetHelpers.MapIdDictionary[mapName]);
 			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
 		}
 
@@ -79,6 +97,12 @@ namespace Branch.App.Helpers.Razor.Reach
 		{
 			var path = String.Format("PrivateAuthors/{0}_author.png", author);
 			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+		}
+
+		public static string GetDifficultyImageUrl(Difficulty difficulty, AssetSize assetSize)
+		{
+			var path = String.Format("campaign_progress/{0}_{1}.png", difficulty.ToString().ToLowerInvariant(), assetSize.ToString().ToLowerInvariant());
+			return String.Format(Manager.ApiAssetUrl, path);
 		}
 	}
 }

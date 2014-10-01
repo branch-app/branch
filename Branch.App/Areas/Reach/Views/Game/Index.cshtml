@@ -1,0 +1,160 @@
+﻿@using Branch.App.Areas.Reach.Models
+@using Branch.App.Areas.Reach.Models.Enums
+@using Branch.App.Helpers.Razor
+@using Branch.Core.Game.HaloReach.Enums
+@model GameViewModel
+@{
+	var title = "{0} on {1} - {2}";
+	var game = Model.Game.GameDetails;
+
+	switch (Model.Game.GameDetails.GameVariantClass)
+	{
+		case VariantClass.Arena:
+		case VariantClass.Custom:
+		case VariantClass.Competitive:
+		case VariantClass.Invasion:
+			title = String.Format(title, game.GameVariantName, game.MapName, Model.PublicGamertag);
+			break;
+
+		case VariantClass.Campaign:
+		case VariantClass.Firefight:
+			title = String.Format(title, game.MapName, game.CampaignDifficulty, Model.PublicGamertag);
+			break;
+	}
+
+	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach_game_history";
+	ViewBag.Title = title;
+	ViewBag.CurrentReachPage = CurrentPage.Game;
+	ViewBag.CurrentHistoryMode = game.GameVariantClass;
+}
+
+<div class="bs-branch-section game-details">
+	@Html.Partial("FlashMessage", false)
+
+	<div class="page-header row">
+		<div class="col-md-12">
+			<h1> @title </h1>
+		</div>
+	</div>
+
+	@switch (game.GameVariantClass)
+	{
+
+		case VariantClass.Arena:
+		case VariantClass.Custom:
+		case VariantClass.Competitive:
+		case VariantClass.Invasion:
+			Html.RenderPartial("Covers/Multiplayer", Model);
+			break;
+
+		case VariantClass.Campaign:
+		case VariantClass.Firefight:
+			Html.RenderPartial("Covers/Campaign", Model);
+			break;
+	}
+
+	<div class="social-shit">
+		<ul>
+			<li>
+				<a role="button" href="@SocialHelpers.GenerateTwitterShareLink(title, HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #4099FF;">
+					<span class="glyphicon glyphicon-retweet" style="padding-right: 8px;"></span>
+					Tweet
+				</a>
+			</li>
+
+			<li>
+				<a role="button" href="@SocialHelpers.GenerateFacebookShareLink(HttpContext.Current.Request.Url.AbsoluteUri)" target="_blank" class="btn btn-default" style="color: #3B5998;">
+					<span class="glyphicon glyphicon-thumbs-up" style="padding-right: 8px;"></span>
+					Like
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<hr style="margin: 10px 0 30px 0;" />
+
+	<div class="details">
+		<h2>Players</h2>
+		<hr />
+		<div id="player-listing">
+			<div class="tab-pane fade active in" id="overview">
+				<!-- TODO: Player Ordering -->
+				@if (game.Teams != null && game.Teams.Any())
+				{
+					foreach (var team in game.Teams)
+					{
+						Html.RenderPartial("PlayerList",
+							new GameDetailsTeamViewModel(Model,
+								game.Players.Where(p => p.Team == team.Index).ToArray(), team));
+					}
+				}
+				else
+				{
+					Html.RenderPartial("PlayerList",
+						new GameDetailsTeamViewModel(Model,
+							game.Players.OrderBy(p => p.Standing).ToArray(), null));
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts
+{
+	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.2/morris.min.js"></script>
+	<script>
+		function generateGraphHoverView(index, options, content, unit) {
+			var row = options.data[index];
+			var ykeys = options.ykeys;
+			var xkey = options.xkey;
+			var labels = options.labels;
+
+			var output = '<div class="graph-hover-legend"><span class="time">' + row[xkey] + ' Seconds</span><br /><div class="key">';
+			for (var i = 0; i < ykeys.length; i++) {
+				var label = labels[i];
+				var ykey = ykeys[i];
+				var colour = options.lineColors[i];
+
+				output += '<span class="row" style="color: ' + colour + ';">' + label + ': ' + row[ykey] + ' ' + unit + '</span><br />';
+			}
+			output += '</div></div>';
+			return output;
+		}
+
+		$('.player-details-expander').click(function (e) {
+			e.preventDefault();
+
+			var identifier = $(this).attr('data-ref');
+			var entry = $('#' + identifier);
+			var expander = $('#' + identifier + ' > div > .expander-indicator > div > .player-details-expander');
+			var detailsView = $('#' + identifier + ' > .player-data');
+
+			if (detailsView.hasClass('collapsed')) {
+				detailsView.removeClass('collapsed');
+				detailsView.addClass('expanded');
+
+				entry.removeClass('collapsed');
+				entry.addClass('expanded');
+
+				detailsView.show(400, function () { });
+
+				expander.removeClass('glyphicon-chevron-down');
+				expander.addClass('glyphicon-chevron-up');
+			} else {
+				detailsView.removeClass('expanded');
+				detailsView.addClass('collapsed');
+
+				entry.removeClass('expanded');
+				entry.addClass('collapsed');
+
+				detailsView.hide(400, function () { });
+
+				expander.removeClass('glyphicon-chevron-up');
+				expander.addClass('glyphicon-chevron-down');
+			}
+		});
+	</script>
+}

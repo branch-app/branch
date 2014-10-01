@@ -13,7 +13,7 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 
 		public int GameDuration { get; set; }
 
-		public long GameId { get; set; }
+		public string GameId { get; set; }
 
 		public DateTime GameTimestamp { get; set; }
 

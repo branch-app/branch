@@ -7,7 +7,7 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 
 	public class PlaylistStatistics
 	{
-		public KeyValue[] DeathsByDamageType { get; set; }
+		public KeyValue<int>[] DeathsByDamageType { get; set; }
 
 		public string HeatmapPlayerDeathsUrl { get; set; }
 
@@ -17,13 +17,13 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 
 		public int? HopperId { get; set; }
 
-		public KeyValue[] KillsByDamageType { get; set; }
+		public KeyValue<int>[] KillsByDamageType { get; set; }
 
 		public int? MapId { get; set; }
 
 		public double MedalChestCompletionPercentage { get; set; }
 
-		public KeyValue[] MedalCountsByType { get; set; }
+		public KeyValue<int>[] MedalCountsByType { get; set; }
 
 		public int TotalMedals { get; set; }
 
@@ -74,13 +74,13 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 		: PlaylistStatistics
 	{
 
-		public KeyValue[] DeathsByEnemyTypeClass { get; set; }
+		public KeyValue<int>[] DeathsByEnemyTypeClass { get; set; }
 
-		public KeyValue[] KillsByEnemyTypeClass { get; set; }
+		public KeyValue<int>[] KillsByEnemyTypeClass { get; set; }
 
-		public KeyValue[] PointsByDamageType { get; set; }
+		public KeyValue<int>[] PointsByDamageType { get; set; }
 
-		public KeyValue[] PointsByEnemyTypeClass { get; set; }
+		public KeyValue<int>[] PointsByEnemyTypeClass { get; set; }
 
 		[JsonProperty("biggest_kill_points")]
 		public int BiggestKillPoints { get; set; }

@@ -1292,7 +1292,8 @@ body.reach_game_history .game-details > .cover {
         width: 128px;
         height: 128px;
         margin: 0 auto;
-        background-repeat: no-repeat; }
+        background-repeat: no-repeat;
+        background-position: center; }
       body.reach_game_history .game-details > .cover > .mask > .inner > .map {
         font-size: 16px;
         text-align: center; }
@@ -1390,11 +1391,10 @@ body.reach_game_history .game-details .details > #player-listing {
           background-repeat: no-repeat; }
         body.reach_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .alphabetical-flair {
           margin-top: 10px; }
-        body.reach_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .csr-indicator {
+        body.reach_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .desktop-view > .rank-indicator {
           background-position: center;
           background-repeat: no-repeat;
-          height: 60px;
-          background-size: contain; }
+          height: 60px; }
         body.reach_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view {
           margin: -8px 0 0 -25px; }
           body.reach_game_history .game-details .details > #player-listing > div > .team > .team-players > div > .mobile-view > .expander-indicator .player-details-expander > .player-indicator {
@@ -1475,9 +1475,8 @@ body.reach_game_history .game-details .details > #player-listing {
       margin: 20px auto; }
       body.reach_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-image {
         background-repeat: no-repeat;
-        height: 100px;
-        width: 80px;
-        background-size: 80px 80px;
+        height: 51px;
+        background-size: 147px 51px;
         background-position: center center; }
       body.reach_game_history .game-details .details > #player-listing > div > .team .player-stats > .enemies > div .enemy-entry > .enemy-content > .name {
         font-size: 16px;
@@ -1508,7 +1507,7 @@ body.reach_game_history .game-details .details .team-table > tbody > tr > td .pl
 body.reach_game_history .game-details .details .team-table > tbody > tr > td .player-gamertag {
   margin: 10px 0 0 5px;
   float: left; }
-body.reach_game_history .game-details .details .team-table > tbody > tr > td .player-csr {
+body.reach_game_history .game-details .details .team-table > tbody > tr > td .player-rank {
   height: 60px;
   width: 40px;
   background-size: contain;
