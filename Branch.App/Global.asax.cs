@@ -48,7 +48,7 @@ namespace Branch.App
 					? ((HttpException)exception).GetHttpCode() 
 					: 500);
 
-			// TODO: Add fail-safe exception logging here
+			// TODO: Add fail-safe exception logging here - maybe
 
 			IController errorController = new ErrorController();
 			errorController.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
