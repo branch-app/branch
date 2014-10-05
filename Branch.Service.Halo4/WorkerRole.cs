@@ -6,10 +6,7 @@ using System.Net;
 using System.Threading;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Game.Halo4.Api;
-using Branch.Core.Game.Halo4.Enums;
-using Branch.Core.Game.Halo4.Models.Branch;
 using Branch.Core.Storage;
-using Branch.Models.Services.Branch;
 using Branch.Models.Services.Halo4;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
@@ -24,7 +21,6 @@ namespace Branch.Service.Halo4
 			{ TaskEntity.TaskType.Playlist, new TimeSpan(0, 15, 0) },
 			{ TaskEntity.TaskType.Auth, new TimeSpan(0, 45, 0) },
 			{ TaskEntity.TaskType.Metadata, new TimeSpan(0, 30, 0) },
-			//{ TaskEntity.TaskType.StatUpdate, new TimeSpan(1, 0, 0, 0) },
 			{ TaskEntity.TaskType.Challenge, new TimeSpan(0, 1, 0, 0) },
 		};
 
@@ -67,72 +63,6 @@ namespace Branch.Service.Halo4
 
 						case TaskEntity.TaskType.Challenge:
 							_h4WaypointManager.UpdateChallenges();
-							break;
-
-						case TaskEntity.TaskType.StatUpdate:
-							break;
-							// TODO: re-code this, make it actually work.
-							#region Shink me pls
-
-							var players = _storage.Table.RetrieveMultipleEntities<ServiceRecordEntity>("ServiceRecord",
-								_storage.Table.Halo4CloudTable).ToArray();
-
-							// Update Service Records
-							var playerServiceRecords = players.Select(player => _h4WaypointManager.GetPlayerServiceRecord(player.Gamertag)).ToList();
-
-							var allTimeStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-								string.Format(Halo4StatsEntity.RowKeyString, Halo4StatType.AllTime), _storage.Table.BranchCloudTable) ??
-												new Halo4StatsEntity(Halo4StatType.AllTime);
-
-							var weeklyStats = _storage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-								string.Format(Halo4StatsEntity.RowKeyString, Halo4StatType.Weekly), _storage.Table.BranchCloudTable) ??
-												new Halo4StatsEntity(Halo4StatType.Weekly);
-
-							var kills = 0;
-							var deaths = 0;
-							var medals = 0;
-							var games = 0;
-							var duration = new TimeSpan(0);
-
-							foreach (
-								var warGamesStats in
-									playerServiceRecords.Select(
-										player => player.GameModes.First(m => m.Id == GameMode.WarGames)))
-							{
-								kills += warGamesStats.TotalKills;
-								deaths += warGamesStats.TotalDeaths;
-								medals += warGamesStats.TotalMedals ?? 0;
-								games += warGamesStats.TotalGamesStarted;
-								duration += TimeSpan.Parse(warGamesStats.TotalDuration ?? TimeSpan.FromTicks(0).ToString());
-							}
-							
-							#region Weekly
-
-							weeklyStats.Players = players.Count();
-							weeklyStats.WarGamesKills = kills - allTimeStats.WarGamesKills;
-							weeklyStats.WarGamesDeaths = deaths - allTimeStats.WarGamesKills;
-							weeklyStats.WarGamesMedals = medals - allTimeStats.WarGamesKills;
-							weeklyStats.WarGamesGames = games - allTimeStats.WarGamesKills;
-							weeklyStats.WarGamesDuration =
-								(duration - TimeSpan.Parse(allTimeStats.WarGamesDuration ?? 
-									TimeSpan.FromTicks(0).ToString())).ToString();
-
-							#endregion
-							#region All Time
-
-							allTimeStats.Players = players.Count();
-							allTimeStats.WarGamesKills += kills;
-							allTimeStats.WarGamesDeaths += deaths;
-							allTimeStats.WarGamesMedals += medals;
-							allTimeStats.WarGamesGames += games;
-							allTimeStats.WarGamesDuration = duration.ToString();
-
-							#endregion
-
-							_storage.Table.InsertOrReplaceSingleEntity(weeklyStats, _storage.Table.BranchCloudTable);
-							_storage.Table.InsertOrReplaceSingleEntity(allTimeStats, _storage.Table.BranchCloudTable);
-							
-							#endregion
 							break;
 					}
 

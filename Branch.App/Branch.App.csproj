@@ -506,6 +506,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Areas\Halo4\Filters\ValidateH4ApiStatus.cs" />
     <Compile Include="Areas\Halo4\Filters\ValidateH4ServiceRecordFilter.cs" />
+    <Compile Include="Extentions\BundleExtentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -513,6 +514,7 @@
     <Compile Include="Helpers\MarkdownHelper.cs" />
     <Compile Include="Helpers\Mvc\FlashMessage.cs" />
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
+    <Compile Include="Helpers\Razor\CdnHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\MathHelpers.cs" />
@@ -534,6 +536,7 @@
     <Content Include="Content\Styles\jbclock.min.css">
       <DependentUpon>jbclock.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\bootstrap-3.0.0.js" />
     <Content Include="Scripts\flash-cookie.js" />
     <Content Include="Scripts\jbclock.js" />
     <Content Include="Views\Shared\Header.cshtml" />
@@ -556,6 +559,7 @@
     <Content Include="Content\Styles\Areas\Reach\_file_share.scss" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Content\Styles\Areas\Reach\_home.scss" />
+    <Content Include="UploadAssetsToCdn.ps1" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -567,7 +571,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\forerunner.png" />
     <Content Include="Content\Images\Home\Covers\Halo4\cover1.jpg" />
     <Content Include="Content\Images\Home\Covers\Halo4\cover2.jpg" />
@@ -648,11 +651,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Shared\Sidebar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Halo4\Views\Specializations\Index.cshtml" />

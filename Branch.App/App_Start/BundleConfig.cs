@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using Branch.App.Extentions;
 
 namespace Branch.App.App_Start
 {
@@ -9,25 +10,27 @@ namespace Branch.App.App_Start
 		{
 			// Use the development version of Modernizr to develop with and learn from. Then, when you're
 			// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-				"http://cdn.branchapp.co/cdn/Scripts/modernizr-*"));
+			bundles.Add(new AzureScriptBundle("~/bundles/modernizr", "cdn", "http://cdn.branchapp.co/cdn/").Include(
+				"~/Scripts/modernizr-*"));
 
-			bundles.Add(new ScriptBundle("~/bundles/flash").Include(
+			bundles.Add(new AzureScriptBundle("~/bundles/flash", "cdn", "http://cdn.branchapp.co/cdn/").Include(
 				"~/Scripts/flash-cookie.js"));
 
-			bundles.Add(new ScriptBundle("~/bundles/jbclock").Include(
+			bundles.Add(new AzureScriptBundle("~/bundles/jbclock", "cdn", "http://cdn.branchapp.co/cdn/").Include(
 				"~/Scripts/jbclock.js"));
-			bundles.Add(new StyleBundle("~/bundles/jbclock-styles").Include(
+			bundles.Add(new AzureStyleBundle("~/bundles/jbclock-styles", "cdn", "http://cdn.branchapp.co/cdn/").Include(
 				"~/Content/Styles/jbclock.css"));
 
-			// le bootstrap
-			bundles.Add(new StyleBundle("~/bundles/bootstrap-custom").Include(new [] {
+			// Bootstrap Stuff
+			bundles.Add(new AzureStyleBundle("~/bundles/bootstrap-custom", "cdn", "http://cdn.branchapp.co/cdn/").Include(new[] {
 				"~/Content/Styles/bootstrap-custom.min.css",
 				"~/Content/Styles/bootstrap-branch.css"
 			}));
+			bundles.Add(new AzureScriptBundle("~/bundles/bootstrap-scripts", "cdn", "http://cdn.branchapp.co/cdn/").Include(
+				"~/Scripts/bootstrap-3.0.0.js"));
 
 			// branch specific styles
-			bundles.Add(new StyleBundle("~/bundles/branch-specific").Include(
+			bundles.Add(new AzureStyleBundle("~/bundles/branch-specific", "cdn", "http://cdn.branchapp.co/cdn/").Include(
 				"~/Content/Styles/application.css"
 			));
 		}

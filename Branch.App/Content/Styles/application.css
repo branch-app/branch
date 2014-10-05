@@ -99,11 +99,11 @@ body.home .games .game {
     height: 100%;
     position: relative; }
     body.home .games .game .game-backup-cover.Halo4 {
-      background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
+      background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
     body.home .games .game .game-backup-cover.Reach {
-      background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
+      background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
     body.home .games .game .game-backup-cover.MCC {
-      background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
+      background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
     body.home .games .game .game-backup-cover .game-cover {
       background: #ffffff no-repeat center 0 fixed;
       -webkit-background-size: cover;
@@ -113,11 +113,11 @@ body.home .games .game {
       width: 100%;
       height: 100%; }
       body.home .games .game .game-backup-cover .game-cover.Halo4 {
-        background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
+        background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
       body.home .games .game .game-backup-cover .game-cover.Reach {
-        background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
+        background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
       body.home .games .game .game-backup-cover .game-cover.MCC {
-        background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
+        background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
   body.home .games .game .mask {
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
@@ -379,11 +379,10 @@ body.halo4_homepage .stats-marketing {
       padding-left: 0;
       padding-right: 0; } }
   body.halo4_homepage .stats-marketing.spacing {
-    margin: 100px 0;
     margin-bottom: -100px;
     padding: 40px 0; }
     body.halo4_homepage .stats-marketing.spacing > .auntie-dot {
-      background: url('/Content/Images/Area/Halo4/auntiediag.png') center no-repeat;
+      background: url('../Images/Area/Halo4/auntiediag.png') center no-repeat;
       background-size: 100px;
       height: 250px; }
   body.halo4_homepage .stats-marketing .central {

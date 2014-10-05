@@ -1,5 +1,6 @@
 ﻿@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
+@using Branch.Core.Game.Halo4.Enums
 @using Branch.Extenders
 @model Branch.App.Areas.Halo4.Models.PlaylistsViewModel
 
@@ -61,7 +62,7 @@
 						<div class="tab-content" id="playlist-info-tab">
 							<div class="tab-pane fade in active" id="meta-@(playlist.Id)">
 								<ul class="no-style">
-									@if (playlist.Mode == Enums.GameMode.WarGames)
+									@if (playlist.Mode == GameMode.WarGames)
 									{
 										<li>
 											<strong>
@@ -155,7 +156,7 @@
 		<div class="col-md-3">
 			<div class="bs-sidebar" data-spy="affix" data-offset-top="205">
 				<ul class="nav bs-sidenav">
-					@foreach (var playlistMode in (Enums.GameMode[])Enum.GetValues(typeof(Enums.GameMode)))
+					@foreach (var playlistMode in (GameMode[])Enum.GetValues(typeof(GameMode)))
 					{
 						var isActive = (playlistMode == Model.SelectedMode);
 						if (Model.Playlists.Playlists.All(p => p.Mode != playlistMode))

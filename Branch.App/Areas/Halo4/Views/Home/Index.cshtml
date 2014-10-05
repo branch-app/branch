@@ -56,65 +56,12 @@
 	</div>
 </div>
 
-<div class="leaferboards highlight-sector" style="background-image: url('/Content/Images/Area/Halo4/leaderboard-overview.png');">
+<div class="leaferboards highlight-sector" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Halo4/leaderboard-overview.png');">
 	<div class="container">
 		<h1>CSR Leaderboards</h1>
 		<p>
 			Check how you compare to your friends in CSR leaderboards over on
 			<a href="http://leafapp.co/h4/csr_leaderboards" target="_blank">Leaf</a>!
-		</p>
-	</div>
-</div>
-
-<div class="stats-marketing">
-	<div class="container">
-		<div class="row central">
-			<div class="col-md-3">
-				<canvas id="alltime-player-kills-deaths" width="140" height="140"></canvas>
-
-				<h2>Kills/Deaths</h2>
-				<p>
-					Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesDeaths))
-					deaths in @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames)) games in all time.
-				</p>
-			</div>
-			<div class="col-md-3">
-				<canvas id="alltime-player-wins-losses" width="140" height="140"></canvas>
-
-				<h2>Games Played</h2>
-				<p>
-					Players have played @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week and have played @(BranchHelpers.NumberWithDelimiter(Model.AllTimeStats.WarGamesGames))
-					games in total.
-				</p>
-			</div>
-			<div class="col-md-3">
-				<canvas id="weekly-player-kills-deaths" width="140" height="140"></canvas>
-
-				<h2>Kills/Deaths</h2>
-				<p>
-					Players have obtained @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesKills)) kills and @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesDeaths))
-					deaths in @(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames)) games this week.
-				</p>
-			</div>
-			<div class="col-md-3">
-				<canvas id="alltime-wargames-time" width="140" height="140"></canvas>
-
-				<h2>Time Played</h2>
-				<p>
-					Players have played @BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 this week, and
-					@BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)) of Halo 4 since launch.
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="top-ten highlight-sector" style="background-image: url('/Content/Images/Area/Halo4/top-ten-overview.png');">
-	<div class="container">
-		<h1>Top Ten Leaderboards</h1>
-		<p>
-			Check the top ten players in the world in a variety of achievements over on
-			<a href="http://leafapp.co/h4/top_ten" target="_blank">Leaf</a>!
 		</p>
 	</div>
 </div>
@@ -168,17 +115,12 @@
 	</div>
 </div>
 
-<div class="highlight-sector" style="margin-bottom: -100px;">
+<div class="top-ten highlight-sector" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Halo4/top-ten-overview.png');">
 	<div class="container">
-		<h1>Player Stats</h1>
-
+		<h1>Top Ten Leaderboards</h1>
 		<p>
-			This week <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.Players))</strong> players have
-			executed <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesKills))</strong> kills,
-			suffered <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesDeaths))</strong> deaths,
-			earned <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesMedals))</strong> medals
-			and played <strong>@(BranchHelpers.NumberWithDelimiter(Model.WeeklyStats.WarGamesGames))</strong> games
-			during <strong>@(BranchHelpers.MakeTimeSpanFriendly(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration)))</strong> of game time.
+			Check the top ten players in the world in a variety of achievements over on
+			<a href="http://leafapp.co/h4/top_ten" target="_blank">Leaf</a>!
 		</p>
 	</div>
 </div>
@@ -222,58 +164,6 @@
 			{
 				value: @(totalTeamPopulation),
 				color: '#4D5360'
-			}
-		]);
-</script>
-
-<!-- War Games Stats -->
-<script>
-	var ctx = document.getElementById("alltime-player-kills-deaths").getContext("2d");
-	new Chart(ctx).Doughnut(
-		[
-			{
-				value: @(Model.AllTimeStats.WarGamesKills),
-				color: '#949FB1'
-			},
-			{
-				value: @(Model.AllTimeStats.WarGamesDeaths),
-				color: '#F7464A'
-			}
-		]);
-	ctx = document.getElementById("alltime-player-wins-losses").getContext("2d");
-	new Chart(ctx).Doughnut(
-		[
-			{
-				value: @(Model.WeeklyStats.WarGamesGames),
-				color: '#949FB1'
-			},
-			{
-				value: @(Model.AllTimeStats.WarGamesGames),
-				color: '#F7464A'
-			}
-		]);
-	ctx = document.getElementById("weekly-player-kills-deaths").getContext("2d");
-	new Chart(ctx).Doughnut(
-		[
-			{
-				value: @(Model.WeeklyStats.WarGamesKills),
-				color: '#949FB1'
-			},
-			{
-				value: @(Model.WeeklyStats.WarGamesDeaths),
-				color: '#F7464A'
-			}
-		]);
-	ctx = document.getElementById("alltime-wargames-time").getContext("2d");
-	new Chart(ctx).Doughnut(
-		[
-			{
-				value: @(TimeSpan.Parse(Model.WeeklyStats.WarGamesDuration).Minutes),
-				color: '#949FB1'
-			},
-			{
-				value: @(TimeSpan.Parse(Model.AllTimeStats.WarGamesDuration).Minutes),
-				color: '#F7464A'
 			}
 		]);
 </script>
@@ -359,7 +249,7 @@
 				for (var j = 1; j < imagesCount + 1; j++) {
 					var index = (i * j) - 1;
 					images[index] = new Image();
-					images[index].src = '/Content/Images/Home/Covers/Halo4/cover' + j + '.jpg';
+					images[index].src = '@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Halo4/cover' + j + '.jpg';
 				}
 			}
 		}
@@ -372,9 +262,9 @@
 			currentIndex++;
 			if (currentIndex > imagesCount) currentIndex = 1;
 
-			pageBgCoverBackupDom.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + oldIndex + '.jpg)');
+			pageBgCoverBackupDom.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Halo4/cover' + oldIndex + '.jpg)');
 			$(pageBgCover).fadeOut(800, function () {
-				pageBgCover.css('background-image', 'url(/Content/Images/Home/Covers/Halo4/cover' + currentIndex + '.jpg)');
+				pageBgCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Halo4/cover' + currentIndex + '.jpg)');
 				$(pageBgCover).fadeIn(800, function () {
 					$(pageBgCoverBackupDom).attr('count-data-ref', currentIndex);
 				});

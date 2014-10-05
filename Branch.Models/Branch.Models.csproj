@@ -95,7 +95,6 @@
     <Compile Include="Services\Branch\Enums.cs" />
     <Compile Include="Services\Branch\GamerIdEntity.cs" />
     <Compile Include="Services\Branch\GamerIdReplacementEntity.cs" />
-    <Compile Include="Services\Branch\Halo4StatsEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

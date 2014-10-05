@@ -8,7 +8,6 @@ using System.Net;
 using System.Net.Http;
 using Branch.Core.Api.Authentication;
 using Branch.Core.Game.Halo4.Enums;
-using Branch.Core.Game.Halo4.Models.Branch;
 using Branch.Core.Game.Halo4.Models._343;
 using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
@@ -157,22 +156,6 @@ namespace Branch.Core.Game.Halo4.Api
 
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
-
-			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
-			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
-
-			var warGamesMode = serviceRecord.GameModes.FirstOrDefault(m => m.Id == GameMode.WarGames);
-			if (warGamesMode != null)
-			{
-				serviceRecordEntity.WarGamesKills = warGamesMode.TotalKills;
-				serviceRecordEntity.WarGamesDeaths = warGamesMode.TotalDeaths;
-				serviceRecordEntity.WarGamesGames = warGamesMode.TotalGamesStarted;
-				serviceRecordEntity.WarGamesMedals = warGamesMode.TotalMedals ?? 0;
-				serviceRecordEntity.WarGamesDuration = warGamesMode.TotalDuration ?? 
-					TimeSpan.FromTicks(0).ToString();
-			}
-
-			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
 
 			AddPlayerToStorage(serviceRecord.Gamertag);
 
@@ -623,7 +606,7 @@ namespace Branch.Core.Game.Halo4.Api
 			{
 				return JsonConvert.DeserializeObject<TBlam>(jsonData);
 			}
-			catch (JsonReaderException jsonReaderException)
+			catch (JsonReaderException)
 			{
 				return null;
 			}

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Branch.App.Helpers.Razor
+@{
 	ViewBag.Title = "Welcome";
 	ViewBag.Template = "home";
 }
@@ -50,7 +51,7 @@
 <div class="container marketing">
 	<div class="row central">
 		<div class="col-md-4">
-			<img src="@Url.Content("~/Content/Images/Home/preview-responsive.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<img src="@Url.Content(CdnHelpers.GetAssetLocale() + "Content/Images/Home/preview-responsive.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
 			<h2>Simple</h2>
 			<p>
 				Branch is designed from top to bottom to show your stats in a clean, and simple mannor. And it is entirely responsive to work on every device you own.
@@ -58,7 +59,7 @@
 		</div>
 
 		<div class="col-md-4">
-			<img src="@Url.Content("~/Content/Images/Home/preview-speed.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<img src="@Url.Content(CdnHelpers.GetAssetLocale() + "Content/Images/Home/preview-speed.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
 			<h2>Fast</h2>
 			<p>
 				Branch is built without fancy background videos, 'edgy' animated buttons, and 2.2mb of clutter. So you can spend less time waiting, and more time viewing.
@@ -66,7 +67,7 @@
 		</div>
 
 		<div class="col-md-4">
-			<img src="@Url.Content("~/Content/Images/Home/preview-social.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
+			<img src="@Url.Content(CdnHelpers.GetAssetLocale() + "Content/Images/Home/preview-social.png")" class="img-circle" alt="" style="width: 140px; height: 140px;" />
 			<h2>Social</h2>
 			<p>
 				What fun is getting a K/D of 6.9, or camping in lighting flag to get 1,000's of kills if you can't even brag about it on your favourite social network?
@@ -116,7 +117,7 @@
 			<div class="mask soon">
 				<div class="container">
 					<h1>
-						Master Chief Collection Stats
+						MCC Stats
 					</h1>
 					<p>
 						Coming, November 2014.
@@ -130,39 +131,39 @@
 @section scripts
 {
 	<script>
-		var games = ["Halo4", "Reach", "MCC"];
-		var imagesCount = 4;
+	var games = ["Halo4", "Reach", "MCC"];
+	var imagesCount = 4;
 
-		$(document).ready(function() {
+	$(document).ready(function () {
 
-			var images = new Array();
+		var images = new Array();
 
-			function preload() {
-				for (var i = 1; i < games.length + 1; i++) {
-					for (var j = 1; j < imagesCount + 1; j++) {
-						var index = (i * j) - 1;
-						var game = games[i - 1];
-						images[index] = new Image();
-						images[index].src = '/Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
-					}
+		function preload() {
+			for (var i = 1; i < games.length + 1; i++) {
+				for (var j = 1; j < imagesCount + 1; j++) {
+					var index = (i * j) - 1;
+					var game = games[i - 1];
+					images[index] = new Image();
+					images[index].src = '@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
 				}
 			}
-			function updateGameImage(index) {
-				var game = games[index];
-				var gameDom = $(".game#" + game);
-				var currentIndex = gameDom.attr('count-data-ref');
-				var gameBackupCover = $(".game#" + game + " > .game-backup-cover");
-				var gameCover = $(".game#" + game + " > .game-backup-cover > .game-cover");
+		}
+		function updateGameImage(index) {
+			var game = games[index];
+			var gameDom = $(".game#" + game);
+			var currentIndex = gameDom.attr('count-data-ref');
+			var gameBackupCover = $(".game#" + game + " > .game-backup-cover");
+			var gameCover = $(".game#" + game + " > .game-backup-cover > .game-cover");
 
-				var oldIndex = currentIndex;
-				currentIndex++;
-				if (currentIndex > imagesCount) {
-					currentIndex = 1;
-				}
+			var oldIndex = currentIndex;
+			currentIndex++;
+			if (currentIndex > imagesCount) {
+				currentIndex = 1;
+			}
 
-				gameBackupCover.css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + oldIndex + '.jpg)');
+			gameBackupCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + oldIndex + '.jpg)');
 				$(gameCover).fadeOut(800, function () {
-					gameCover.css('background-image', 'url(/Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
+					gameCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
 					$(gameCover).fadeIn(800, function () {
 						$(gameDom).attr('count-data-ref', currentIndex);
 					});

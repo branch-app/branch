@@ -64,5 +64,7 @@ namespace Branch.App
 		public static H4Api.Manager H4Manager { get; set; }
 
 		public static HReachApi.Manager HReachManager { get; set; }
+
+		public static string AzureCdnEndpoint = "http://cdn.branchapp.co/cdn/";
 	}
 }

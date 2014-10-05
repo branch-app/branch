@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Branch.App.Extentions
+@{
 	var altFooter = (bool) (ViewBag.AlternativeFooter ?? false);
 }
 <!DOCTYPE html>
@@ -9,59 +10,81 @@
 		</title>
 
 		<!-- Style Sheets and Scripts -->
-		@Styles.Render("~/bundles/bootstrap-custom")
-		@Styles.Render("~/bundles/branch-specific")
-		@Scripts.Render("~/bundles/modernizr")
+		@AzureCdn.StylesRender("~/bundles/bootstrap-custom")
+		@AzureCdn.StylesRender("~/bundles/branch-specific")
+		@AzureCdn.ScriptsRender("~/bundles/modernizr")
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="description" content="todo" />
+		
+		<meta name="application-name" content="@(ViewBag.IeAppName ?? "Branch")" />
+		<meta name="msapplication-TileColor" content="#3d3d7c" />
+		<meta name="msapplication-square70x70logo" content="@(ViewBag.IeSmallTile ?? "images/swag.png")" />
+		<meta name="msapplication-square150x150logo" content="@(ViewBag.IeMediumTile ?? "images/swag.png")" />
+		<meta name="msapplication-wide310x150logo" content="@(ViewBag.IeWideTile ?? "images/swag.png")" />
 	</head>
 
-	<body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
-		<div class="page-bg-cover"></div>
-		<div id="page-bg-mask" class="mask">
-			@Html.Partial("Header")
+<body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
+	<div class="page-bg-cover"></div>
+	<div id="page-bg-mask" class="mask">
+		@Html.Partial("Header")
 
-			<article>
-				@RenderBody()
-			</article>
-			
-			<!-- How Kawaii;~~; -->
-			@Html.Partial("Footer", altFooter)
-		</div>
+		<article>
+			@RenderBody()
+		</article>
 
-		<div id="scripts">
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
-			<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-			@Scripts.Render("~/bundles/flash")
+		<!-- How Kawaii ;~~; -->
+		@Html.Partial("Footer", altFooter)
+	</div>
 
-			<script>
-				$(function () { $("#flash-message-box").flashMessage(); });
-				$(document).ready(function () {
-					$('*[role="tooltip"]').tooltip();
-				});
-			</script>
+	<div id="scripts">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+		@AzureCdn.ScriptsRender("~/bundles/flash")
+		@AzureCdn.ScriptsRender("~/bundles/bootstrap-scripts")
 
-			@RenderSection("scripts", false)
+		<script>
+			$(function () { $("#flash-message-box").flashMessage(); });
+			$(document).ready(function () {
+				$('*[role="tooltip"]').tooltip();
+			});
+		</script>
 
-			<!-- ;_; Social Media Button Scripts -->
-			<div id="fb-root"></div>
-			<script>
-				(function (d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id)) return;
-						js = d.createElement(s); js.id = id;
-						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk')
-				);
-			</script>
-			<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-		</div>
-	</body>
+		@RenderSection("scripts", false)
+
+		<!-- ;_; Social Media Button Scripts -->
+		<div id="fb-root"></div>
+		<script>
+			(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk')
+			);
+		</script>
+		<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+		
+		<!-- GoSquared yo -->
+		<script>
+			!function (g, s, q, r, d) {
+				r = g[r] = g[r] || function () {
+					(r.q = r.q || []).push(
+					arguments)
+				}; d = s.createElement(q); q = s.getElementsByTagName(q)[0];
+				d.src = '//d1l6p2sc9645hc.cloudfront.net/tracker.js'; q.parentNode.
+				insertBefore(d, q)
+			}(window, document, 'script', '_gs');
+
+			_gs('GSN-152925-H');
+		</script>
+	</div>
+</body>
+
 </html>

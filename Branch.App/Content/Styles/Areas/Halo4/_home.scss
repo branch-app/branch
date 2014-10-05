@@ -120,12 +120,11 @@ body.halo4_homepage {
 		}
 
 		&.spacing {
-			margin: 100px 0;
 			margin-bottom: -100px;
 			padding: 40px 0;
 
 			> .auntie-dot {
-				background: url('/Content/Images/Area/Halo4/auntiediag.png') center no-repeat;
+				background: url('../Images/Area/Halo4/auntiediag.png') center no-repeat;
 				background-size: 100px;
 				height: 250px;
 			}

@@ -75,9 +75,9 @@
 				height: 100%;
 				position: relative;
 
-				&.Halo4 { background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
-				&.Reach { background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
-				&.MCC { background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
+				&.Halo4 { background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
+				&.Reach { background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
+				&.MCC { background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
 
 				.game-cover {
 					background: #ffffff no-repeat center 0 fixed;
@@ -88,9 +88,9 @@
 					width: 100%;
 					height: 100%;
 
-					&.Halo4 { background-image: url('/Content/Images/Home/Covers/Halo4/cover1.jpg'); }
-					&.Reach { background-image: url('/Content/Images/Home/Covers/Reach/cover1.jpg'); }
-					&.MCC { background-image: url('/Content/Images/Home/Covers/MCC/cover1.jpg'); }
+					&.Halo4 { background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
+					&.Reach { background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
+					&.MCC { background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
 				}
 			}
 

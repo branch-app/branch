@@ -1,4 +1,5 @@
-﻿@model bool
+﻿@using Branch.App.Helpers.Razor
+@model bool
 @{
 	var customStyle = "";
 	var linkType = "";
@@ -26,8 +27,6 @@
 					<li>·</li>
 					<li><a class="@linkType" href="http://unscwarfare.com/" target="_blank">UNSC Warfare</a></li>
 					<li>·</li>
-					<li><a class="@linkType" href="http://onyx.io/" target="_blank">Onyx</a></li>
-					<li>·</li>
 					<li>
 						@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = linkType })
 					</li>
@@ -44,7 +43,7 @@
 			</div>
 
 			<div class="col-md-2 hidden-xs hidden-sm">
-				<img src="@Url.Content("~/Content/Images/uk-map.png")" class="img-circle" alt="" style="width: 60px; height: 77px;" />
+				<img src="@Url.Content(CdnHelpers.GetAssetLocale() + "Content/Images/uk-map.png")" class="img-circle" alt="" style="width: 60px; height: 77px;" />
 			</div>
 		</div>
 	</div>

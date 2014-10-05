@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
-using Branch.Models.Services.Branch;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
@@ -15,17 +14,7 @@ namespace Branch.App.Areas.Halo4.Controllers
 			var challenges = GlobalStorage.H4Manager.Challenges;
 			var playlists = GlobalStorage.H4Manager.Playlists;
 
-			var weeklyStats =
-				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-					Halo4StatsEntity.FormatRowKey(Halo4StatType.Weekly.ToString()),
-					GlobalStorage.AzureStorage.Table.BranchCloudTable);
-
-			var allTimeStats =
-				GlobalStorage.AzureStorage.Table.RetrieveSingleEntity<Halo4StatsEntity>(Halo4StatsEntity.PartitionKeyString,
-					Halo4StatsEntity.FormatRowKey(Halo4StatType.AllTime.ToString()),
-					GlobalStorage.AzureStorage.Table.BranchCloudTable);
-
-			return View(new HomeViewModel(challenges, playlists, weeklyStats, allTimeStats));
+			return View(new HomeViewModel(challenges, playlists));
 		}
 	}
 }

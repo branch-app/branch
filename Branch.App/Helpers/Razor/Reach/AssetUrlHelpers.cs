@@ -50,37 +50,38 @@ namespace Branch.App.Helpers.Razor.Reach
 		public static string GetMedalUrl(string medalImageName)
 		{
 			var path = String.Format("Medals/{0}.png", medalImageName);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
 		}
 
 		public static string GetEnemyUrl(string enemyImageName)
 		{
 			var path = String.Format("Enemies/{0}.png", enemyImageName);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
-		}
-
-		public static string GetPlayerModelUrl(string gamertag, AssetSize assetSize)
-		{
-			return String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, assetSize);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
 		}
 
 		public static string GetMapImageUrl(string mapName, AssetSize assetSize = AssetSize.Large)
 		{
 			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, AssetHelpers.MapIdDictionary[mapName]);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
 		}
 
 		public static string GetMapImageUrl(int mapId, AssetSize assetSize = AssetSize.Large)
 		{
-			var map = GlobalStorage.HReachManager.Metadata.Data.Maps.FirstOrDefault(m => m.Id == mapId);
+			var map = GlobalStorage.HReachManager.Metadata.Data.Maps.First(m => m.Id == mapId);
 			var path = String.Format("Maps/{0}/{1}.jpg", assetSize, map.MapDetails.ImageName);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
 		}
 
 		public static string GetIconImageUrl(GameVariantIcon icon, AssetSize assetSize)
 		{
-			var path = String.Format("Gametypes/{0}/{1}.png", assetSize, (int) icon);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
+			var path = String.Format("Gametypes/{0}/{1}.png", assetSize, (int)icon);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
+		}
+
+		public static string GetPrivateAuthorImageUrl(string author)
+		{
+			var path = String.Format("PrivateAuthors/{0}_author.png", author);
+			return String.Format("{0}Content/Images/Area/Reach/Assets/{1}", GlobalStorage.AzureCdnEndpoint, path);
 		}
 
 		public static string GetCommendationImageUrl(int id, string tier, CommendationVariantClass variantClass, AssetSize assetSize)
@@ -93,16 +94,15 @@ namespace Branch.App.Helpers.Razor.Reach
 			return String.Format(Manager.ApiAssetUrl, path);
 		}
 
-		public static string GetPrivateAuthorImageUrl(string author)
-		{
-			var path = String.Format("PrivateAuthors/{0}_author.png", author);
-			return String.Format("/Content/Images/Area/Reach/Assets/{0}", path);
-		}
-
 		public static string GetDifficultyImageUrl(Difficulty difficulty, AssetSize assetSize)
 		{
 			var path = String.Format("campaign_progress/{0}_{1}.png", difficulty.ToString().ToLowerInvariant(), assetSize.ToString().ToLowerInvariant());
 			return String.Format(Manager.ApiAssetUrl, path);
+		}
+
+		public static string GetPlayerModelUrl(string gamertag, AssetSize assetSize)
+		{
+			return String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, assetSize);
 		}
 	}
 }

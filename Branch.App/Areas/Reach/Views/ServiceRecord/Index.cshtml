@@ -4,6 +4,7 @@
 @using Branch.Core.Game.HaloReach.Enums
 @model Branch.App.Areas.Reach.Models.ServiceRecordViewModel
 @{
+	ViewBag.IeAppName = String.Format("{0}'s Halo: Reach Service Record", Model.PublicGamertag);
 	ViewBag.Title = string.Format("{0}'s Halo: Reach Service Record", Model.PublicGamertag);
 	Layout = "~/Areas/Reach/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "reach_service_record";

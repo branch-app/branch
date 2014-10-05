@@ -4,6 +4,7 @@
 @using Branch.App.Helpers.Razor.Halo4
 @model ServiceRecordViewModel
 @{
+	ViewBag.IeAppName = String.Format("{0}'s Halo 4 Service Record", Model.PublicGamertag);
 	ViewBag.Title = string.Format("{0}'s Halo 4 Service Record", Model.PublicGamertag);
 	Layout = "~/Areas/Halo4/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4_service_record";
