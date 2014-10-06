@@ -4,6 +4,9 @@ using System.Text;
 using System.Web;
 using System.Web.Optimization;
 using Microsoft.WindowsAzure.Storage;
+#if !DEBUG && !LOCALRELEASE
+using Microsoft.WindowsAzure;
+#endif
 
 namespace Branch.App.Extentions
 {
@@ -69,7 +72,7 @@ namespace Branch.App.Extentions
 #if DEBUG || LOCALRELEASE
 			const string connectionString = "UseDevelopmentStorage=true";
 #else
-			const string connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
+			var connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
 #endif
 
 			var conn = CloudStorageAccount.Parse(connectionString);
