@@ -162,6 +162,19 @@ namespace Branch.Core.Storage
 			return result.Any() ? result.First() : null;
 		}
 
+		/// <summary>
+		/// </summary>
+		/// <typeparam name="TEntityType"></typeparam>
+		/// <param name="query"></param>
+		/// <param name="cloudTable"></param>
+		/// <returns></returns>
+		public int QueryAndRetrieveCount<TEntityType>(string query, CloudTable cloudTable)
+			where TEntityType : BaseEntity, new()
+		{
+			var rangeQuery = new TableQuery<TEntityType>().Where(query);
+			return cloudTable.ExecuteQuery(rangeQuery).Count();
+		}
+
 
 		/// <summary>
 		/// </summary>
@@ -175,6 +188,21 @@ namespace Branch.Core.Storage
 			where TEntityType : BaseEntity, new()
 		{
 			return QueryAndRetrieveSingleEntity<TEntityType>(
+				TableQuery.CombineFilters(queryA, op, queryB), cloudTable);
+		}
+
+		/// <summary>
+		/// </summary>
+		/// <typeparam name="TEntityType"></typeparam>
+		/// <param name="queryA"></param>
+		/// <param name="op"></param>
+		/// <param name="queryB"></param>
+		/// <param name="cloudTable"></param>
+		/// <returns></returns>
+		public int QueryAndRetrieveCount<TEntityType>(string queryA, string op, string queryB, CloudTable cloudTable)
+			where TEntityType : BaseEntity, new()
+		{
+			return QueryAndRetrieveCount<TEntityType>(
 				TableQuery.CombineFilters(queryA, op, queryB), cloudTable);
 		}
 		

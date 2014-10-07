@@ -11,6 +11,9 @@ namespace Branch.App.Areas.Reach
 		{
 			var namespaces = new[] { "Branch.App.Areas.Reach.Controllers" };
 
+			context.MapRoute("Reach_Default", "Game/Reach/",
+				new { controller = "Home", action = "Index" }, namespaces);
+
 			// Service Record
 			context.MapRoute("Reach_ServiceRecord", "360/{gamertag}/Reach/",
 				new { controller = "ServiceRecord", action = "Index" }, 

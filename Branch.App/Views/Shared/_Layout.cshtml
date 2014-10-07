@@ -20,11 +20,17 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="description" content="todo" />
 		
+		<!-- Setup Modern Favicon -->
+		<link rel="icon" type="image/png" href="@Url.Content("~/Content/Icons/logo-255x255.ico")" />
+		<!--[if IE]>
+			<link rel="shortcut icon" href="@Url.Content("~/Content/Icons/logo-255x255.ico")" type="image/vnd.microsoft.icon" />
+		<![endif]-->
+
 		<meta name="application-name" content="@(ViewBag.IeAppName ?? "Branch")" />
 		<meta name="msapplication-TileColor" content="#3d3d7c" />
-		<meta name="msapplication-square70x70logo" content="@(ViewBag.IeSmallTile ?? "images/swag.png")" />
+		@*<meta name="msapplication-square70x70logo" content="@(ViewBag.IeSmallTile ?? "images/swag.png")" />
 		<meta name="msapplication-square150x150logo" content="@(ViewBag.IeMediumTile ?? "images/swag.png")" />
-		<meta name="msapplication-wide310x150logo" content="@(ViewBag.IeWideTile ?? "images/swag.png")" />
+		<meta name="msapplication-wide310x150logo" content="@(ViewBag.IeWideTile ?? "images/swag.png")" />*@
 	</head>
 
 <body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
@@ -44,7 +50,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		@AzureCdn.ScriptsRender("~/bundles/flash")
 		@AzureCdn.ScriptsRender("~/bundles/bootstrap-scripts")
 

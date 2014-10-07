@@ -23,7 +23,7 @@
 		<ul class="social-media-shit">
 			<li>
 				<!-- NeckbeardHub -->
-				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=watch"
+				<iframe src="@(CdnHelpers.GetAssetLocale(false))Content/Frames/github-button.html?user=the%20tree&repo=branch&type=watch"
 						allowtransparency="true"
 						frameborder="0"
 						scrolling="0"
@@ -33,7 +33,7 @@
 
 			<li>
 				<!-- NeckbeardHub 2 -->
-				<iframe src="http://ghbtns.com/github-btn.html?user=xerax&repo=branch&type=fork"
+				<iframe src="@(CdnHelpers.GetAssetLocale(false))Content/Frames/github-button.html?user=the%20tree&repo=branch&type=fork"
 						allowtransparency="true"
 						frameborder="0"
 						scrolling="0"
@@ -144,7 +144,7 @@
 					var index = (i * j) - 1;
 					var game = games[i - 1];
 					images[index] = new Image();
-					images[index].src = '@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
+					images[index].src = '@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/' + game + '/cover' + j + '.jpg';
 				}
 			}
 		}
@@ -161,9 +161,9 @@
 				currentIndex = 1;
 			}
 
-			gameBackupCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + oldIndex + '.jpg)');
+			gameBackupCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/' + game + '/cover' + oldIndex + '.jpg)');
 				$(gameCover).fadeOut(800, function () {
-					gameCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale()Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
+					gameCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/' + game + '/cover' + currentIndex + '.jpg)');
 					$(gameCover).fadeIn(800, function () {
 						$(gameDom).attr('count-data-ref', currentIndex);
 					});

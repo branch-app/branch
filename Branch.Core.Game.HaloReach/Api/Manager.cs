@@ -88,7 +88,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
 			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
 
-			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.Halo4CloudTable);
+			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.HReachCloudTable);
 
 			AddPlayerToStorage(serviceRecord.Player.Gamertag);
 

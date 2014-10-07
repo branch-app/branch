@@ -2,12 +2,17 @@
 @using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Reach
 @using Branch.Core.Game.HaloReach.Enums
+@using Branch.Core.Game.HaloReach.Models._343.DataModels
 @model GameViewModel
 @{
 	var game = Model.Game.GameDetails;
 	var orderedPlayers = game.Players.OrderBy(p => p.Standing).ThenByDescending(p => p.Score);
 	var topPlayer = orderedPlayers.First();
-	var orderedTeams = game.Teams.OrderByDescending(t => t.Standing);
+	IList<Team> orderedTeams = null;
+	if (game.Teams != null)
+	{
+		orderedTeams = game.Teams.OrderByDescending(t => t.Standing).Reverse().ToList();
+	}
 }
 
 <div class="cover" style="background-image: url('@AssetUrlHelpers.GetMapImageUrl(game.BaseMapName)');">
@@ -33,9 +38,9 @@
 			<div class="seperator"></div>
 
 			<div class="victor">
-				@if (game.Teams.Any())
+				@if (orderedTeams != null && orderedTeams.Any())
 				{
-					var modifier = (orderedTeams.Reverse().ToList()[orderedTeams.Count() - 1].Score / 75f);
+					var modifier = (orderedTeams[orderedTeams.Count() - 1].Score / 75f);
 					if (Math.Abs(modifier) < 0.01)
 					{
 						modifier = 1;
@@ -43,7 +48,7 @@
 					var width = (50 + (5 * 2)) * game.Teams.Count();
 
 					<div class="team-score-bollards" style="width: @(width)px;">
-						@foreach (var team in orderedTeams.Reverse().ToList())
+						@foreach (var team in orderedTeams.Reverse())
 						{
 							<div class="score-bollard">
 								<div class="height-mask" style="height: @(team.Score / modifier)px; margin-top: @(75 - (team.Score / modifier))px; background-color: @MetadataHelpers.GetTeamColour(team.Index);"></div>

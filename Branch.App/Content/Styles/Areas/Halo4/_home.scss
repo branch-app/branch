@@ -161,10 +161,7 @@ body.halo4_homepage {
 	}
 
 	&.page-bg-backup-cover {
-		background: url('/Content/Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 0 fixed;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
+		background: url('../Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 0 fixed;
 		background-size: cover;
 		width: 100%;
 		height: 100%;
@@ -172,10 +169,7 @@ body.halo4_homepage {
 		left: 0;
 
 		.page-bg-cover {
-			background: url('/Content/Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 0 fixed;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
+			background: url('../Images/Home/Covers/Halo4/cover1.jpg') no-repeat center 0 fixed;
 			background-size: cover;
 			width: 100%;
 			min-height: 100%;

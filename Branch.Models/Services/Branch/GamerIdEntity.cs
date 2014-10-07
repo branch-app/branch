@@ -20,6 +20,8 @@ namespace Branch.Models.Services.Branch
 			SetKeys(PartitionKeyString, string.Format(RowKeyString, Id.ToSlug().ToLowerInvariant()));
 		}
 
+		public GamerIdEntity() { }
+
 		public string Id { get; set; }
 
 		public int TypeInt { get; set; }

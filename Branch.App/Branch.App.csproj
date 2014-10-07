@@ -182,6 +182,17 @@
     <Content Include="Areas\Halo4\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\Covers\SpartanOps.cshtml" />
     <Content Include="Areas\Halo4\Views\Game\PlayerList.cshtml" />
+    <Content Include="Content\Frames\github-button.html" />
+    <Content Include="Content\Icons\logo-1000x1000.png" />
+    <Content Include="Content\Icons\logo-100x100.png" />
+    <Content Include="Content\Icons\logo-1200x1200.png" />
+    <Content Include="Content\Icons\logo-125x125.png" />
+    <Content Include="Content\Icons\logo-150x150.png" />
+    <Content Include="Content\Icons\logo-250x250.png" />
+    <Content Include="Content\Icons\logo-255x255.ico" />
+    <Content Include="Content\Icons\logo-255x255.png" />
+    <Content Include="Content\Icons\logo-500x500.png" />
+    <Content Include="Content\Icons\logo-800x800.png" />
     <Content Include="Content\Images\Area\Halo4\auntiediag.png" />
     <Content Include="Content\Images\Area\Halo4\leaderboard-overview.png" />
     <Content Include="Content\Images\Area\Halo4\top-ten-overview.png" />
@@ -274,6 +285,7 @@
     <Content Include="Content\Images\Area\Reach\Assets\Gametypes\Large\7.png" />
     <Content Include="Content\Images\Area\Reach\Assets\Gametypes\Large\8.png" />
     <Content Include="Content\Images\Area\Reach\Assets\Gametypes\Large\9.png" />
+    <Content Include="Content\Images\Area\Reach\leaderboard-overview.png" />
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\beachhead.jpg" />
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\cp_spoiler.jpg" />
     <Content Include="Content\Images\Area\Reach\Assets\Maps\Large\exodus.jpg" />
@@ -479,11 +491,13 @@
     <Content Include="Areas\Reach\Views\Game\Covers\Multiplayer.cshtml" />
     <Content Include="Areas\Reach\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Reach\Views\Game\PlayerList.cshtml" />
+    <Content Include="Areas\Reach\Views\Home\Index.cshtml" />
     <None Include="Content\Styles\Areas\Halo4\_game_history.scss" />
     <Compile Include="Areas\Reach\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Reach\Controllers\FileShareController.cs" />
     <Compile Include="Areas\Reach\Controllers\GameController.cs" />
     <Compile Include="Areas\Reach\Controllers\HistoryController.cs" />
+    <Compile Include="Areas\Reach\Controllers\HomeController.cs" />
     <Compile Include="Areas\Reach\Controllers\ServiceRecordController.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachApiStatus.cs" />
     <Compile Include="Areas\Reach\Filters\ValidateReachServiceRecordFilter.cs" />
@@ -497,6 +511,7 @@
     <Compile Include="Areas\Reach\Models\GameDetailsTeamViewModel.cs" />
     <Compile Include="Areas\Reach\Models\GameViewModel.cs" />
     <Compile Include="Areas\Reach\Models\HistoryViewModel.cs" />
+    <Compile Include="Areas\Reach\Models\HomeViewModel.cs" />
     <Compile Include="Areas\Reach\Models\ServiceRecordViewModel.cs" />
     <Compile Include="Areas\Reach\ReachAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

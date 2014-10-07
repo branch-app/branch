@@ -3,6 +3,12 @@
 	ViewBag.Template = "about about_home";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 
+	var graphicalAssets = new Dictionary<string, string>
+	{
+		{ "The Tree (logo) was designed by David Chapman", "http://www.thenounproject.com/david.chapman" },
+		{ "All Game Assets are owned by Microsoft", "" }
+	};
+	
 	var jsFrameworks = new Dictionary<string, string>
 	{
 		{ "Bootstrap", "http://twitter.github.com/bootstrap/" },
@@ -75,9 +81,28 @@
 			</div>
 			<h4>What made Branch?</h4>
 			<div class="well well-large">
-				<strong>
-					<p>Javascript Frameworks</p>
-				</strong>
+				<p>
+					<strong>
+						Graphical Assets
+					</strong>
+				</p>
+				
+				<ul class="unstyled">
+					@foreach (var graphicalAsset in graphicalAssets)
+					{
+						<li>
+							<a href="@graphicalAsset.Value" target="_blank">
+								@graphicalAsset.Key
+							</a>
+						</li>
+					}
+				</ul>
+
+				<p>
+					<strong>
+						Javascript Frameworks
+					</strong>
+				</p>
 				
 				<ul class="unstyled">
 					@foreach (var jsFramework in jsFrameworks)
@@ -90,10 +115,12 @@
 					}
 				</ul>
 				
-				<strong>
-					<p>NuGet Libaries (C#)</p>
-				</strong>
-				
+				<p>
+					<strong>
+						NuGet Libaries (C#)
+					</strong>
+				</p>
+
 				<ul class="unstyled">
 					@foreach (var csLibrary in cSharpLibraries)
 					{

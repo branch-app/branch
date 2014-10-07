@@ -30,12 +30,6 @@ namespace Branch.Core.Game.HaloReach.Models._343.DataModels
 		[JsonProperty("campaign_kills")]
 		public int CampaignKills { get; set; }
 
-		[JsonProperty("campaign_level_progress_coop")]
-		public long CampaignLevelProgressCoop { get; set; }
-
-		[JsonProperty("campaign_level_progress_sp")]
-		public long CampaignLevelProgressSp { get; set; }
-
 		[JsonProperty("current_rank_image")]
 		public string CurrentRankImage { get; set; }
 

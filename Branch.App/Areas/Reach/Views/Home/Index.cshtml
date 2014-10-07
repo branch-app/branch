@@ -1,0 +1,128 @@
+﻿@using Branch.App.Helpers.Razor
+@using Branch.App.Areas.Reach.Models
+@model HomeViewModel
+@{
+	ViewBag.Title = "Halo: Reach";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "reach reach_homepage";
+	ViewBag.AlternativeFooter = true;
+}
+
+<div id="content" class="bs-header" style="text-align: center;">
+	<div class="container">
+		<h1>
+			Halo: Reach
+		</h1>
+		<p>
+			From the beginning, you know the end.
+		</p>
+	</div>
+</div>
+
+<div class="stats-marketing">
+	<div class="container">
+		<div class="row central">
+			<div class="col-md-offset-1 col-md-4">
+				<canvas id="all-branch-players" width="140" height="140"></canvas>
+
+				<h2>Branch Players</h2>
+				<p>
+					@(BranchHelpers.NumberWithDelimiter(Model.TotalPlayers)) players have assosiated their gamertags with Branch
+				</p>
+			</div>
+			<div class="col-md-offset-2 col-md-4">
+				<canvas id="all-reach-players" width="140" height="140"></canvas>
+
+				<h2>Halo: Reach Players</h2>
+				<p>
+					@(BranchHelpers.NumberWithDelimiter(Model.TotalReachPlayers)) of those players have played Halo: Reach
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="highlight-sector leaderboards" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Reach/leaderboard-overview.png');">
+	<div class="container">
+		<h1>Leaderboards</h1>
+		<p>
+			Check how you compare to your friends in leaderboards <br />
+			over on <a href="http://www.halotracker.com/Reach/Leaderboards.aspx" target="_blank">Halo Tracker</a>!
+		</p>
+	</div>
+</div>
+
+<div class="stats-marketing spacing">
+	<div class="container auntie-dot">
+
+	</div>
+</div>
+
+@section scripts {
+	<!-- Playlist Stats -->
+	<script>
+		ctx = document.getElementById("all-branch-players").getContext("2d");
+		new Chart(ctx).Doughnut(
+			[
+				{
+					value: 69,
+					color: '#F7464A'
+				}
+			]);
+		ctx = document.getElementById("all-reach-players").getContext("2d");
+		new Chart(ctx).Doughnut(
+			[
+				{
+					value: @(Model.TotalReachPlayers),
+					color: '#F7464A'
+				},
+				{
+					value: @(Model.TotalPlayers),
+					color: '#4D5360'
+				}
+			]);
+	</script>
+
+	<!-- Background Images -->
+	<script>
+		var imagesCount = 4;
+
+		$(document).ready(function () {
+
+			var images = new Array();
+
+			function preload() {
+				for (var i = 1; i < 2; i++) {
+					for (var j = 1; j < imagesCount + 1; j++) {
+						var index = (i * j) - 1;
+						images[index] = new Image();
+						images[index].src = '@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Reach/cover' + j + '.jpg';
+					}
+				}
+			}
+			function updateGameImage() {
+				var pageBgCoverBackupDom = $(".page-bg-backup-cover");
+				var currentIndex = pageBgCoverBackupDom.attr('count-data-ref');
+				var pageBgCover = $(".page-bg-backup-cover > .page-bg-cover");
+
+				var oldIndex = currentIndex;
+				currentIndex++;
+				if (currentIndex > imagesCount) currentIndex = 1;
+
+				pageBgCoverBackupDom.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Reach/cover' + oldIndex + '.jpg)');
+				$(pageBgCover).fadeOut(800, function () {
+					pageBgCover.css('background-image', 'url(@CdnHelpers.GetAssetLocale(false)Content/Images/Home/Covers/Reach/cover' + currentIndex + '.jpg)');
+					$(pageBgCover).fadeIn(800, function () {
+						$(pageBgCoverBackupDom).attr('count-data-ref', currentIndex);
+					});
+				});
+			}
+
+			preload();
+
+			setInterval(function () {
+				updateGameImage();
+			}, 4500);
+		});
+	</script>
+}
