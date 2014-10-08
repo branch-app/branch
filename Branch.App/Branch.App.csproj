@@ -511,7 +511,6 @@
     <Compile Include="Areas\Reach\Models\GameDetailsTeamViewModel.cs" />
     <Compile Include="Areas\Reach\Models\GameViewModel.cs" />
     <Compile Include="Areas\Reach\Models\HistoryViewModel.cs" />
-    <Compile Include="Areas\Reach\Models\HomeViewModel.cs" />
     <Compile Include="Areas\Reach\Models\ServiceRecordViewModel.cs" />
     <Compile Include="Areas\Reach\ReachAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

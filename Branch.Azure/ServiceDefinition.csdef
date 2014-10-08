@@ -12,10 +12,9 @@
       <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
     <LocalResources>
-      <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
     </LocalResources>
   </WorkerRole>
-  <WebRole name="Branch.App" vmsize="Medium">
+  <WebRole name="Branch.App" vmsize="Small">
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -36,5 +35,7 @@
       <Setting name="StorageConnectionString" />
       <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
+    <LocalResources>
+    </LocalResources>
   </WebRole>
 </ServiceDefinition>

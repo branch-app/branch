@@ -11,12 +11,7 @@ namespace Branch.Core.Storage
 
 		public AzureStorage()
 		{
-// ReSharper disable once RedundantAssignment
 			var connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
-
-#if DEBUG || LOCALRELEASE
-			connectionString = "UseDevelopmentStorage=true";
-#endif
 
 			StorageAccount = CloudStorageAccount.Parse(connectionString);
 

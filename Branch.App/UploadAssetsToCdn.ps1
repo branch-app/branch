@@ -68,6 +68,7 @@ if ($files -ne $null -and $files.Count -gt 0)
 				[System.IO.Path]::GetExtension($file) -ne ".jpg" -and
 				[System.IO.Path]::GetExtension($file) -ne ".jpeg" -and
 				[System.IO.Path]::GetExtension($file) -ne ".js" -and
+				[System.IO.Path]::GetExtension($file) -ne ".html" -and
 				[System.IO.Path]::GetExtension($file) -ne ".map") {
 					continue;
 				}
@@ -79,6 +80,7 @@ if ($files -ne $null -and $files.Count -gt 0)
 				".map" {"text/css"}
 				".png" {"image/png"}
 				".jpg" {"image/jpeg"}
+				".html" {"text/html"}
 				".jpeg" {"image/jpeg"}
 				".js" {"text/javascript"}
 				default {"application/octet-stream"}

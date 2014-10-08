@@ -1,6 +1,4 @@
 ﻿@using Branch.App.Helpers.Razor
-@using Branch.App.Areas.Reach.Models
-@model HomeViewModel
 @{
 	ViewBag.Title = "Halo: Reach";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,26 +17,9 @@
 	</div>
 </div>
 
-<div class="stats-marketing">
+<div class="stats-marketing" style="height: 350px;">
 	<div class="container">
-		<div class="row central">
-			<div class="col-md-offset-1 col-md-4">
-				<canvas id="all-branch-players" width="140" height="140"></canvas>
 
-				<h2>Branch Players</h2>
-				<p>
-					@(BranchHelpers.NumberWithDelimiter(Model.TotalPlayers)) players have assosiated their gamertags with Branch
-				</p>
-			</div>
-			<div class="col-md-offset-2 col-md-4">
-				<canvas id="all-reach-players" width="140" height="140"></canvas>
-
-				<h2>Halo: Reach Players</h2>
-				<p>
-					@(BranchHelpers.NumberWithDelimiter(Model.TotalReachPlayers)) of those players have played Halo: Reach
-				</p>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -53,36 +34,12 @@
 </div>
 
 <div class="stats-marketing spacing">
-	<div class="container auntie-dot">
+	<div class="container auntie-dot" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Halo4/auntiediag.png');">
 
 	</div>
 </div>
 
 @section scripts {
-	<!-- Playlist Stats -->
-	<script>
-		ctx = document.getElementById("all-branch-players").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: 69,
-					color: '#F7464A'
-				}
-			]);
-		ctx = document.getElementById("all-reach-players").getContext("2d");
-		new Chart(ctx).Doughnut(
-			[
-				{
-					value: @(Model.TotalReachPlayers),
-					color: '#F7464A'
-				},
-				{
-					value: @(Model.TotalPlayers),
-					color: '#4D5360'
-				}
-			]);
-	</script>
-
 	<!-- Background Images -->
 	<script>
 		var imagesCount = 4;

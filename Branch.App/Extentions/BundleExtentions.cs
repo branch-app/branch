@@ -3,10 +3,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Optimization;
-using Microsoft.WindowsAzure.Storage;
-#if !DEBUG && !LOCALRELEASE
 using Microsoft.WindowsAzure;
-#endif
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Branch.App.Extentions
 {
@@ -54,6 +53,7 @@ namespace Branch.App.Extentions
 	public class AzureBlobUpload : IBundleTransform
 	{
 		public string ContainerName { get; set; }
+
 		public string CdnHost { get; set; }
 
 		public virtual void Process(BundleContext context, BundleResponse response)
@@ -69,21 +69,17 @@ namespace Branch.App.Extentions
 				throw new Exception("ContainerName Not Set");
 			}
 
-#if DEBUG || LOCALRELEASE
-			const string connectionString = "UseDevelopmentStorage=true";
-#else
 			var connectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
-#endif
 
 			var conn = CloudStorageAccount.Parse(connectionString);
-			var blob = conn.CreateCloudBlobClient()
-				.GetContainerReference(ContainerName)
-				.GetBlockBlobReference(file);
+			var cont = conn.CreateCloudBlobClient().GetContainerReference(ContainerName);
+			cont.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
+			var blob = cont.GetBlockBlobReference(file);
 
 			blob.Properties.ContentType = response.ContentType;
 			blob.UploadText(response.Content);
 
-			var uri = string.IsNullOrWhiteSpace(CdnHost) ? blob.Uri.AbsoluteUri.Replace("http:", "").Replace("https:", "") : string.Format("//{0}/{1}/{2}", CdnHost, ContainerName, file);
+			var uri = string.IsNullOrWhiteSpace(CdnHost) ? blob.Uri.AbsoluteUri.Replace("http:", "").Replace("https:", "") : string.Format("{0}/{1}/{2}", CdnHost, ContainerName, file);
 
 			using (var hashAlgorithm = CreateHashAlgorithm())
 			{
