@@ -77,3 +77,4 @@ packages/
 *.testsettings
 Branch.Azure/csx/
 Branch.Azure/rcf/
+App.Release.config
