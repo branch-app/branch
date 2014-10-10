@@ -13,8 +13,8 @@ using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 using Branch.Core.Storage;
 using Branch.Extenders;
-using Branch.Models.Authentication;
 using Branch.Models.Services.Branch;
+using Branch.Models.Sql;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using RestSharp.Contrib;
@@ -366,32 +366,34 @@ namespace Branch.Core.Game.Halo4.Api
 
 		#region Authorized Request
 
-		private HttpResponseMessage AuthorizedRequest(String url, AuthType authType)
+		private static HttpResponseMessage AuthorizedRequest(String url, AuthType authType)
 		{
 // ReSharper disable once IntroduceOptionalParameters.Local
 			return AuthorizedRequest(url, authType, HttpMethod.Get);
 		}
 
-		private HttpResponseMessage AuthorizedRequest(String url, AuthType authType, HttpMethod requestType)
+		private static HttpResponseMessage AuthorizedRequest(String url, AuthType authType, HttpMethod requestType)
 		{
 			return AuthorizedRequest(url, authType, requestType, new Dictionary<string, string>());
 		}
 
-		private HttpResponseMessage AuthorizedRequest(String url, AuthType authType, HttpMethod requestType,
+		private static HttpResponseMessage AuthorizedRequest(String url, AuthType authType, HttpMethod requestType,
 			Dictionary<String, String> headers)
 		{
 			if (headers == null)
 				headers = new Dictionary<string, string>();
 
-			// get auth
-			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
-				WaypointTokenEntity.FormatRowKey(),
-				_storage.Table.AuthenticationCloudTable);
+			Authentication authentication;
+
+			using (var sqlStorage = new SqlStorage())
+			{
+				authentication = sqlStorage.Authentications.FirstOrDefault(a => a.Type == AuthenticationType.Halo4);
+			}
 
 			switch (authType)
 			{
 				case AuthType.Spartan:
-					headers.Add("X-343-Authorization-Spartan", auth == null ? "" : auth.SpartanToken); // error catch
+					headers.Add("X-343-Authorization-Spartan", authentication != null && authentication.IsValid ? authentication.Key : "fuck"); // error catch
 					break;
 
 				default:
@@ -532,14 +534,16 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <returns></returns>
 		public bool CheckApiValidity()
 		{
-			var auth = _storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
-				WaypointTokenEntity.FormatRowKey(),
-				_storage.Table.AuthenticationCloudTable);
+			using (var sqlStorage = new SqlStorage())
+			{
 
-			if (auth == null)
-				return false;
+				var authentication = sqlStorage.Authentications.FirstOrDefault(a => a.Type == AuthenticationType.Halo4);
 
-			return (auth.SpartanToken != null);
+				if (authentication == null || !authentication.IsValid)
+					return false;
+
+				return (authentication.Key != null);
+			}
 		}
 
 		#endregion

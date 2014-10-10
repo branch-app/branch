@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using Branch.Core.Storage;
-using Branch.Models.Authentication;
+using Branch.Models.Services._343;
+using Branch.Models.Sql;
 using EasyHttp.Http;
 using Microsoft.WindowsAzure;
 using Newtonsoft.Json;
@@ -22,69 +24,75 @@ namespace Branch.Core.Api.Authentication
 		/// <returns>A boolean saying if everything was</returns>
 		public static bool UpdateAuthentication(AzureStorage storage)
 		{
-			var everythingWentGucci = false;
-			var strResponse = "";
-			var httpClient = new HttpClient();
-
-			// Try up to 10 times
-			for (var i = 0; i < 10; i++)
+			using (var sqlStorage = new SqlStorage())
 			{
-				var response = httpClient.Get(CloudConfigurationManager.GetSetting("SpartanTokenApi"));
+				var everythingWentGucci = false;
+				var strResponse = "";
+				var httpClient = new HttpClient();
 
-				if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText.Trim()))
+				// Try up to 10 times
+				for (var i = 0; i < 10; i++)
 				{
-					try
+					var response = httpClient.Get(CloudConfigurationManager.GetSetting("SpartanTokenApi"));
+
+					if (response.StatusCode == HttpStatusCode.OK && !String.IsNullOrEmpty(response.RawText.Trim()))
 					{
-						strResponse = response.RawText;
-						var currentWaypointTokenEntity = storage.Table.RetrieveSingleEntity<WaypointTokenEntity>("Authentication",
-							WaypointTokenEntity.FormatRowKey(), storage.Table.AuthenticationCloudTable);
+						try
+						{
+							strResponse = response.RawText;
 
-						var waypointToken = JsonConvert.DeserializeObject<WaypointTokenEntity>(response.RawText);
+							var waypointToken = JsonConvert.DeserializeObject<Halo4Waypoint>(response.RawText);
 
-						if (waypointToken != null)
-							if (currentWaypointTokenEntity != null)
+							if (waypointToken != null && !String.IsNullOrWhiteSpace(waypointToken.SpartanToken))
 							{
+								var authentication = sqlStorage.Authentications.FirstOrDefault(a => a.Type == AuthenticationType.Halo4);
+								if (authentication == null) authentication = new Models.Sql.Authentication { Type = AuthenticationType.Halo4 };
+								authentication.Key = waypointToken.SpartanToken;
+								authentication.IsValid = true;
+								sqlStorage.SaveChanges();
+
 								everythingWentGucci = true;
-								currentWaypointTokenEntity.SpartanToken = waypointToken.SpartanToken;
-								storage.Table.ReplaceSingleEntity(currentWaypointTokenEntity, storage.Table.AuthenticationCloudTable);
 							}
-							else
-								everythingWentGucci = storage.Table.InsertSingleEntity(waypointToken, storage.Table.AuthenticationCloudTable);
+						}
+						catch (Exception ex)
+						{
+							Trace.TraceError(ex.ToString());
+							everythingWentGucci = false;
+						}
 					}
-					catch (JsonReaderException jsonReaderException)
-					{
-						Trace.TraceError(jsonReaderException.ToString());
-						everythingWentGucci = false;
-					}
+
+					if (everythingWentGucci)
+						break;
 				}
+				
 
 				if (everythingWentGucci)
-					break;
+					return true;
+
+				// make sure halo 4 auth row has been deleted
+				var invalidAuthentication = sqlStorage.Authentications.FirstOrDefault(a => a.Type == AuthenticationType.Halo4);
+				if (invalidAuthentication != null)
+				{
+					invalidAuthentication.Key = null;
+					invalidAuthentication.IsValid = false;
+				}
+
+				// send glorious email!
+				var text =
+					String.Format(
+						"Dear Self, {0}Halo 4's authenication failed to update. Might want to look into it. Below is the response the server recieved from the auth service: {0}{0}{1}{0}{0}Best Regards,{0}Branch",
+						Environment.NewLine, strResponse);
+
+				new Web(new NetworkCredential(CloudConfigurationManager.GetSetting("SendGridUser"),
+					CloudConfigurationManager.GetSetting("SendGridPass"))).Deliver(
+						new SendGridMessage(new MailAddress("info@branchapp.co"),
+							new[] { new MailAddress(CloudConfigurationManager.GetSetting("SendGridTo")) }, "[Halo 4] Authentication Failed",
+							null, text));
+
+				sqlStorage.SaveChanges();
+
+				return false;
 			}
-
-			if (everythingWentGucci)
-				return true;
-
-			// Add custom model
-			var customWaypointResponse = new WaypointTokenEntity
-			{
-				SpartanToken = null
-			};
-			storage.Table.InsertOrReplaceSingleEntity(customWaypointResponse, storage.Table.AuthenticationCloudTable);
-
-			// send glorious email!
-			var text =
-				String.Format(
-					"Dear Self, {0}Halo 4's authenication failed to update. Might want to look into it. Below is the response the server recieved from the auth service: {0}{0}{1}{0}{0}Best Regards,{0}Branch",
-					Environment.NewLine, strResponse);
-
-			new Web(new NetworkCredential(CloudConfigurationManager.GetSetting("SendGridUser"),
-				CloudConfigurationManager.GetSetting("SendGridPass"))).Deliver(
-					new SendGridMessage(new MailAddress("info@branchapp.co"),
-						new[] {new MailAddress(CloudConfigurationManager.GetSetting("SendGridTo"))}, "[Halo 4] Authentication Failed",
-						null, text));
-
-			return false;
 		}
 	}
 }

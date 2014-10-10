@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Data.Entity.Migrations;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -6,7 +7,8 @@ using System.Web.Routing;
 using Branch.App.App_Start;
 using Branch.App_Start;
 using Branch.Core.Storage;
-
+using Branch.Models.Migrations;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using H4Api = Branch.Core.Game.Halo4.Api;
 using HReachApi = Branch.Core.Game.HaloReach.Api;
 
@@ -21,6 +23,14 @@ namespace Branch.App
 	{
 		protected void Application_Start()
 		{
+			// Migrations
+			if (RoleEnvironment.IsAvailable)
+			{
+				var configuration = new Configuration();
+				var migrator = new DbMigrator(configuration);
+				migrator.Update();
+			}
+
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
