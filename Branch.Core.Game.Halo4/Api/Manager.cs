@@ -135,8 +135,9 @@ namespace Branch.Core.Game.Halo4.Api
 		/// Gets a Players Halo 4 Service Record
 		/// </summary>
 		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <param name="takeCachedVersion">Tries to take the cached version. If no cached version is avaiable, gets from server.</param>
 		/// <returns>The raw JSON of their Service Record</returns>
-		public ServiceRecord GetPlayerServiceRecord(string gamertag)
+		public ServiceRecord GetPlayerServiceRecord(string gamertag, bool takeCachedVersion = false)
 		{
 			const BlobType blobType = BlobType.PlayerServiceRecord;
 			var escapedGamertag = EscapeGamertag(gamertag);
@@ -146,6 +147,10 @@ namespace Branch.Core.Game.Halo4.Api
 
 			// Check if blob exists & expire date
 			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Do we take the cached version?
+			if (takeCachedVersion && blobValidity.Item2 != null)
+				return blobValidity.Item2;
 
 			// Try and get new blob
 			var url = PopulateUrl(UrlFromIds(EndpointType.ServiceList, "GetServiceRecord"),

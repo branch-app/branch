@@ -64,8 +64,9 @@ namespace Branch.Core.Game.HaloReach.Api
 		/// Gets a Players Halo: Reach Service Record
 		/// </summary>
 		/// <param name="gamertag">The players Xbox 360 Gamertag.</param>
+		/// <param name="takeCachedVersion">Tries to take the cached version. If no cached version is avaiable, gets from server.</param>
 		/// <returns>Retuens a <see cref="ServiceRecord"/> model.</returns>
-		public ServiceRecord GetPlayerServiceRecord(string gamertag)
+		public ServiceRecord GetPlayerServiceRecord(string gamertag, bool takeCachedVersion = false)
 		{
 			const BlobType blobType = BlobType.PlayerServiceRecord;
 			var escapedGamertag = EscapeGamertag(gamertag);
@@ -75,6 +76,10 @@ namespace Branch.Core.Game.HaloReach.Api
 
 			// Check if blob exists & expire date
 			if (blobValidity.Item1) return blobValidity.Item2;
+
+			// Do we take the cached version?
+			if (takeCachedVersion && blobValidity.Item2 != null)
+				return blobValidity.Item2;
 
 			// Try and get new blob
 			var endpoint = String.Format("player/details/byplaylist/{0}/{1}", ApiKey, gamertag);

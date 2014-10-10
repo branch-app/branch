@@ -9,12 +9,13 @@
       <Setting name="SendGridPass" />
       <Setting name="SendGridTo" />
       <Setting name="StorageConnectionString" />
+      <Setting name="SqlServerConnectionString" />
       <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
     <LocalResources>
     </LocalResources>
   </WorkerRole>
-  <WebRole name="Branch.App" vmsize="Small">
+  <WebRole name="Branch.App" vmsize="Medium">
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -33,6 +34,7 @@
       <Setting name="SendGridPass" />
       <Setting name="SendGridTo" />
       <Setting name="StorageConnectionString" />
+      <Setting name="SqlServerConnectionString" />
       <Setting name="SpartanTokenApi" />
     </ConfigurationSettings>
     <LocalResources>
