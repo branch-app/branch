@@ -78,3 +78,5 @@ packages/
 Branch.Azure/csx/
 Branch.Azure/rcf/
 App.Release.config
+*.ldf
+*.mdf
