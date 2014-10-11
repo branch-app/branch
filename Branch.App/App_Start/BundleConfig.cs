@@ -25,14 +25,6 @@ namespace Branch.App.App_Start
 			bundles.Add(new AzureStyleBundle("~/bundles/jbclock-styles", "cdn", "http://cdn.branchapp.co").Include(
 				"~/Content/Styles/jbclock.css"));
 
-			// jquery
-			bundles.Add(new AzureScriptBundle("~/bundles/jqueryui-scripts", "cdn", "http://cdn.branchapp.co").Include(
-				"~/Scripts/jquery-ui.min.js"
-			));
-			bundles.Add(new AzureStyleBundle("~/bundles/jqueryui-styles", "cdn", "http://cdn.branchapp.co").Include(
-				"~/Content/Styles/jquery-ui.min.css",
-				"~/Content/Styles/jquery-ui.structure.min.css"
-			));
 
 			// Bootstrap Stuff
 			bundles.Add(new AzureStyleBundle("~/bundles/bootstrap-custom", "cdn", "http://cdn.branchapp.co").Include(new[] {
@@ -40,7 +32,11 @@ namespace Branch.App.App_Start
 				"~/Content/Styles/bootstrap-branch.css"
 			}));
 			bundles.Add(new AzureScriptBundle("~/bundles/bootstrap-scripts", "cdn", "http://cdn.branchapp.co").Include(
-				"~/Scripts/bootstrap-3.0.0.js"));
+				"~/Scripts/bootstrap-3.0.0.js"
+			));
+			bundles.Add(new AzureScriptBundle("~/bundles/branch-js", "cdn", "http://cdn.branchapp.co").Include(
+				"~/Scripts/search-auto-complete.js"
+			));
 
 			// branch specific styles
 			bundles.Add(new AzureStyleBundle("~/bundles/branch-specific", "cdn", "http://cdn.branchapp.co").Include(

@@ -35,6 +35,36 @@ footer > .container > .row > .col-md-2 > .made-in {
 .navbar-right {
   margin-right: 0 !important; }
 
+.auto-complete-container {
+  position: absolute;
+  top: 55px;
+  right: 31px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background: #ffffff;
+  width: 280px;
+  min-height: 100px;
+  padding: 18px;
+  box-shadow: 0 0 15px #555;
+  opacity: 0; }
+  .auto-complete-container .search-divider {
+    margin-bottom: 3px; }
+  .auto-complete-container .search-header {
+    color: #bbb;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 13px; }
+  .auto-complete-container .search-list {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+    padding-left: 0; }
+    .auto-complete-container .search-list .search-sub-ident {
+      color: #bbb;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 11px;
+      margin-bottom: 3px; }
+
 a {
   color: #3d3d7c; }
 

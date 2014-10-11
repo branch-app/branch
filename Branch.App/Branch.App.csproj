@@ -557,12 +557,10 @@
     <Content Include="Content\Styles\jbclock.min.css">
       <DependentUpon>jbclock.css</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\jquery-ui.min.css" />
-    <Content Include="Content\Styles\jquery-ui.structure.min.css" />
     <Content Include="Scripts\bootstrap-3.0.0.js" />
     <Content Include="Scripts\flash-cookie.js" />
     <Content Include="Scripts\jbclock.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\search-auto-complete.js" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Web.config" />

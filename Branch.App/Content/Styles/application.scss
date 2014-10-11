@@ -64,6 +64,47 @@ footer > .container > .row > .col-md-2 > .made-in {
 	margin-right: 0 !important;
 }
 
+// ---- Search Stuff ----
+// --------------------------------------------
+.auto-complete-container {
+	position: absolute;
+	top: 55px;
+	right: 31px;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	background: #ffffff;
+	width: 280px;
+	min-height: 100px;
+	padding: 18px;
+	box-shadow: 0 0 15px #555;
+
+	opacity: 0;
+
+	.search-divider {
+		margin-bottom: 3px;
+	}
+
+	.search-header {
+		color: #bbb;
+		text-transform: uppercase;
+		font-weight: 800;
+		font-size: 13px;
+	}
+	.search-list {
+		list-style-type: none;
+		-webkit-padding-start: 0;
+		padding-left: 0;
+
+		.search-sub-ident {
+			color: #bbb;
+			text-decoration: none;
+			font-weight: 800;
+			font-size: 11px;
+			margin-bottom: 3px;
+		}
+	}
+}
+
 
 // ---- Custom Anchors ----
 // --------------------------------------------
