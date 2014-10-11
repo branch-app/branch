@@ -1,7 +1,6 @@
 ﻿@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Halo4
 @using Branch.Core.Game.Halo4.Enums
-@using Branch.Models.Services.Branch
 @model Branch.Core.Game.Halo4.Models._343.Responses.ServiceRecord
 @{
 	var gameMode = Model.GameModes.FirstOrDefault(m => m.Id == GameMode.WarGames);
@@ -14,13 +13,13 @@
 
 <div class="col-md-6 entry">
 	<a class="nope" 
-	   href="@Url.RouteUrl("Halo4_ServiceRecord", new { gamertag = BranchHelpers.CheckGamerIdPrivacy(Model.Gamertag, GamerId.X360XblGamertag) })">
+	   href="@Url.RouteUrl("Halo4_ServiceRecord", new { gamertag = Model.Gamertag })">
 		<div class="spartan-image" 
 			 style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(Model.Gamertag, "large", "posed")')"></div>
 		<div class="mask"></div>
 		<div class="text-container">
 			<h2>
-				@BranchHelpers.CheckGamerIdPrivacy(Model.Gamertag, GamerId.X360XblGamertag)
+				@Model.Gamertag
 			</h2>
 			<h3>
 				@Model.ServiceTag

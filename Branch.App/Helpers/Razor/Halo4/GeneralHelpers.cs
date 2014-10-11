@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.Net.Http;
 using System.Text.RegularExpressions;
-using Branch.Core.BranchStuff;
 using Branch.Core.Game.Halo4.Enums;
 using Branch.Core.Game.Halo4.Models._343.DataModels;
 
@@ -37,11 +35,7 @@ namespace Branch.App.Helpers.Razor.Halo4
 
 		public static string GetPlayerModelUrl(string gamertag, string size = "large", string pose = "fullbody")
 		{
-			var url = GlobalStorage.H4Manager.GetPlayerModelUrl(gamertag, size, pose);
-
-			return GamerIdReplacementManager.GetReplacementGamerId(gamertag, GlobalStorage.AzureStorage) == gamertag
-				? url
-				: String.Format("data:image/png;base64,{0}", Convert.ToBase64String(new HttpClient().GetByteArrayAsync(url).Result));
+			return GlobalStorage.H4Manager.GetPlayerModelUrl(gamertag, size, pose);
 		}
 
 		public static string RemoveGuestIdentifier(string gamertag)

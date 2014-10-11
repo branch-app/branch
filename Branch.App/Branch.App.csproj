@@ -157,6 +157,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\SearchController.cs" />
     <Compile Include="Areas\Halo4\Controllers\ChallengesController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CsrController.cs" />
@@ -555,9 +557,12 @@
     <Content Include="Content\Styles\jbclock.min.css">
       <DependentUpon>jbclock.css</DependentUpon>
     </Content>
+    <Content Include="Content\Styles\jquery-ui.min.css" />
+    <Content Include="Content\Styles\jquery-ui.structure.min.css" />
     <Content Include="Scripts\bootstrap-3.0.0.js" />
     <Content Include="Scripts\flash-cookie.js" />
     <Content Include="Scripts\jbclock.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Web.config" />
@@ -615,6 +620,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

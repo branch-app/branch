@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using Branch.Core.BranchStuff;
-using Branch.Models.Services.Branch;
 
 namespace Branch.App.Helpers.Razor
 {
 	public class BranchHelpers
 	{
-		public static string CheckGamerIdPrivacy(string gamerId, GamerId gamerIdType)
-		{
-			return GamerIdReplacementManager.GetReplacementGamerId(gamerId, GlobalStorage.AzureStorage, gamerIdType);
-		}
-
 		public static string GamertagToLeaf(string gamertag, bool alsoValidate = true)
 		{
 			return gamertag.Replace(" ", "_");

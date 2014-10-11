@@ -1,5 +1,4 @@
-﻿using Branch.Core.BranchStuff;
-using Branch.Core.Game.Halo4.Models._343.DataModels;
+﻿using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Models
@@ -11,8 +10,7 @@ namespace Branch.App.Areas.Halo4.Models
 			ServiceRecord = serviceRecord;
 			RecentWarGamesHistory =
 				GlobalStorage.H4Manager.GetPlayerGameHistory<GameHistoryModel.WarGames>(serviceRecord.Gamertag, 0, 20);
-			PublicGamertag = 
-				GamerIdReplacementManager.GetReplacementGamerId(ServiceRecord.Gamertag, GlobalStorage.AzureStorage);
+			PublicGamertag = ServiceRecord.Gamertag;
 		}
 
 		public GameHistory<GameHistoryModel.WarGames> RecentWarGamesHistory { get; set; }

@@ -61,8 +61,155 @@
 			@using (Html.BeginForm("Index", "Search", new { area = "" }, FormMethod.Get, new { @role = "search", @class = "navbar-form navbar-right" }))
 			{
 				<div class="form-group">
-					<input type="text" name="q" placeholder="Search Gamertag" class="form-control" value="">
+					<input id="search-input" type="text" name="q" placeholder="Search Gamertag" autocomplete="off" class="form-control" value="">
 				</div>
+
+				<style>
+					.auto-complete-container {
+						position: absolute;
+						top: 55px;
+						right: 31px;
+						border: 1px solid #eee;
+						border-radius: 5px;
+						background: #ffffff;
+						width: 280px;
+						min-height: 100px;
+						padding: 18px;
+						box-shadow: 0 0 15px #555;
+
+						opacity: 0;
+					}
+
+					.search-divider {
+						margin-bottom: 3px;
+					}
+
+					.search-header {
+						color: #bbb;
+						text-transform: uppercase;
+						font-weight: 800;
+						font-size: 13px;
+					}
+
+					.search-list {
+						list-style-type: none;
+						-webkit-padding-start: 0;
+						padding-left: 0;
+					}
+					.search-sub-ident {
+						color: #bbb;
+						text-decoration: none;
+						font-weight: 800;
+						font-size: 11px;
+						margin-bottom: 3px;
+					}
+					.search-sub-ident :hover {
+						text-decoration: none;
+					}
+				</style>
+				
+				<div class="auto-complete-container">
+
+					@*<ul class="search-list">
+						<li>
+							<a href="">x</a>
+						</li>
+					</ul>
+					<hr class="search-divider" />
+					<h4 class="search-header">Halo 4</h4>
+					<ul class="search-list">
+						<li>
+							<a href="">x</a>
+						</li>
+						<li>
+							<a href="">xo</a>
+						</li>
+					</ul>
+
+					<hr class="search-divider" />
+					<h4 class="search-header">Halo: Reach</h4>
+					<ul class="search-list">
+						<li>
+							<a href="">x</a>
+						</li>
+						<li>
+							<a href="">xo</a>
+						</li>
+					</ul>*@
+				</div>
+
+				<script>
+					window.onload = function (event) {
+						var timer = null;
+						var lastSearchTerm = null;
+						document.getElementById("search-input").onkeydown = function () {
+							clearInterval(timer);
+							timer = null;
+							timer = setInterval(doStuff, 300);
+						}
+
+						function doStuff() {
+							clearInterval(timer);
+							timer = null;
+							console.log("doing ajax");
+
+							var searchTerm = $.trim(document.getElementById("search-input").value);
+							if (searchTerm == lastSearchTerm) return;
+							lastSearchTerm = searchTerm;
+
+							if (searchTerm == "") {
+								// hide UI
+								return;
+							}
+
+							console.log("[Search Term] :: " + searchTerm);
+
+							$.ajax({
+								url: "/Api/Search/Users?id=" + searchTerm,
+								accepts: "application/json"
+							}).done(function (data) {
+								console.log(JSON.stringify(data));
+
+								var games = [];
+
+								for (var i = 0; i < data.length; i++) {
+									if ($.inArray(data[i]["Ident"], games) == -1)
+										games.push(data[i]["Ident"]);
+								}
+
+								var innerHtml = "";
+								for (i = 0; i < games.length; i++) {
+									var players = [];
+
+									for (var j = 0; j < data.length; j++) {
+										if (data[j]["Ident"] == games[i]) {
+											players.push(data[j]);
+										}
+									}
+
+									innerHtml +=
+										"<hr class='search-divider' />" +
+										"<h4 class='search-header'>" + games[i] + "</h4>" +
+										"<ul class='search-list'>";
+
+									for (var k = 0; k < players.length; k++) {
+										innerHtml +=
+											"<li>" +
+												"<a href=''>" +
+													players[k]["GamerId"] +
+													"<div class='search-sub-ident'>" + players[k]["ServiceTag"] + "</span>" +
+												"</a>" +
+											"</li>";
+									}
+
+									innerHtml += "</ul>";
+								}
+								$('.auto-complete-container').html(innerHtml);
+								$('.auto-complete-container').fadeTo(250, 1);
+							});
+						}
+					}
+				</script>
 			}
 		</div>
 	</div>

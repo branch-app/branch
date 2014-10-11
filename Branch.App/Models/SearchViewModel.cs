@@ -1,6 +1,4 @@
-﻿using Branch.App.Helpers.Razor;
-using Branch.Models.Services.Branch;
-using Halo4 = Branch.Core.Game.Halo4.Models._343.Responses;
+﻿using Halo4 = Branch.Core.Game.Halo4.Models._343.Responses;
 using HaloReach = Branch.Core.Game.HaloReach.Models._343.Responces;
 
 namespace Branch.App.Models
@@ -15,9 +13,9 @@ namespace Branch.App.Models
 			HaloReachServiceRecord = haloReachServiceRecord;
 
 			if (Halo4ServiceRecord != null)
-				Query = BranchHelpers.CheckGamerIdPrivacy(Halo4ServiceRecord.Gamertag, GamerId.X360XblGamertag);
+				Query = Halo4ServiceRecord.Gamertag;
 			else if (HaloReachServiceRecord != null)
-				Query = BranchHelpers.CheckGamerIdPrivacy(HaloReachServiceRecord.Player.Gamertag, GamerId.X360XblGamertag);
+				Query = HaloReachServiceRecord.Player.Gamertag;
 		}
 
 		public string Query { get; set; }

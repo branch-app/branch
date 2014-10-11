@@ -126,7 +126,6 @@
     <Compile Include="Models\343\Responces\Metadata.cs" />
     <Compile Include="Models\343\Responces\ServiceRecord.cs" />
     <Compile Include="Models\343\Response.cs" />
-    <Compile Include="Models\Branch\ServiceRecordEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

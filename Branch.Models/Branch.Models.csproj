@@ -105,15 +105,28 @@
     <Compile Include="Migrations\201410101438025_Added IsValid to Authentication Model.Designer.cs">
       <DependentUpon>201410101438025_Added IsValid to Authentication Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410101917314_Added Identities.cs" />
+    <Compile Include="Migrations\201410101917314_Added Identities.Designer.cs">
+      <DependentUpon>201410101917314_Added Identities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410101918073_Relationships. How cute..cs" />
+    <Compile Include="Migrations\201410101918073_Relationships. How cute..Designer.cs">
+      <DependentUpon>201410101918073_Relationships. How cute..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410110042273_Added ServiceTags to Indents.cs" />
+    <Compile Include="Migrations\201410110042273_Added ServiceTags to Indents.Designer.cs">
+      <DependentUpon>201410110042273_Added ServiceTags to Indents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\343\Halo4Waypoint.cs" />
     <Compile Include="Services\Branch\BlogPostEntity.cs" />
     <Compile Include="Services\Branch\Enums.cs" />
-    <Compile Include="Services\Branch\GamerIdEntity.cs" />
-    <Compile Include="Services\Branch\GamerIdReplacementEntity.cs" />
     <Compile Include="Sql\Authentication.cs" />
     <Compile Include="Sql\DatabaseContext.cs" />
+    <Compile Include="Sql\ReachIdentity.cs" />
+    <Compile Include="Sql\Halo4Identity.cs" />
+    <Compile Include="Sql\GamerIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -136,6 +149,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410101438025_Added IsValid to Authentication Model.resx">
       <DependentUpon>201410101438025_Added IsValid to Authentication Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410101917314_Added Identities.resx">
+      <DependentUpon>201410101917314_Added Identities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410101918073_Relationships. How cute..resx">
+      <DependentUpon>201410101918073_Relationships. How cute..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410110042273_Added ServiceTags to Indents.resx">
+      <DependentUpon>201410110042273_Added ServiceTags to Indents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

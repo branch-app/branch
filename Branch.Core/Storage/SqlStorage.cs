@@ -2,8 +2,5 @@
 
 namespace Branch.Core.Storage
 {
-	public class SqlStorage : DatabaseContext
-	{
-
-	}
+	public class SqlStorage : DatabaseContext { }
 }

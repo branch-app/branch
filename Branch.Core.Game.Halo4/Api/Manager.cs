@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +14,6 @@ using Branch.Core.Game.Halo4.Models._343.DataModels;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 using Branch.Core.Storage;
 using Branch.Extenders;
-using Branch.Models.Services.Branch;
 using Branch.Models.Sql;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
@@ -162,7 +162,7 @@ namespace Branch.Core.Game.Halo4.Api
 			_storage.Blob.UploadBlob(_storage.Blob.H4BlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
 
-			AddPlayerToStorage(serviceRecord.Gamertag);
+			AddPlayerToIdentities(serviceRecord);
 
 			return serviceRecord;
 		}
@@ -674,11 +674,41 @@ namespace Branch.Core.Game.Halo4.Api
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gamertag"></param>
-		private void AddPlayerToStorage(string gamertag)
+		/// <param name="serviceRecord"></param>
+		private void AddPlayerToIdentities(ServiceRecord serviceRecord)
 		{
-			_storage.Table.InsertOrReplaceSingleEntity(
-				new GamerIdEntity(gamertag, GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
+			using (var sqlStorage = new SqlStorage())
+			{
+				var gamertag = serviceRecord.Gamertag;
+				var gamertagSafe = GamerIdentity.EscapeGamerId(gamertag);
+
+				var gamerIdentity = sqlStorage.GamerIdentities.FirstOrDefault(g => g.GamerIdSafe == gamertagSafe);
+				if (gamerIdentity == null)
+				{
+					gamerIdentity = new GamerIdentity
+					{
+						GamerId = gamertag,
+						GamerIdSafe = gamertagSafe,
+						Type = IdentityType.X360XblGamertag
+					};
+					sqlStorage.GamerIdentities.Add(gamerIdentity);
+					sqlStorage.SaveChanges();
+				}
+
+				var halo4Identity = sqlStorage.Halo4Identities.FirstOrDefault(h => h.GamerIdentity.Id == gamerIdentity.Id) ??
+				                    new Halo4Identity();
+
+				halo4Identity.GamerIdentity = gamerIdentity;
+				halo4Identity.ServiceTag = serviceRecord.ServiceTag;
+				halo4Identity.FavouriteWeapon = serviceRecord.FavoriteWeaponName;
+				halo4Identity.KillDeathRatio = serviceRecord.GameModes.First(m => m.Id == GameMode.WarGames).KdRatio ?? 1.0;
+				halo4Identity.PlayerModelUrl = GetPlayerModelUrl(gamertag, pose: "posed");
+				halo4Identity.TopCsr = serviceRecord.TopSkillRank != null ? serviceRecord.TopSkillRank.CompetitiveSkillRank ?? 0 : 0;
+				halo4Identity.TotalKills = serviceRecord.GameModes.Sum(m => m.TotalKills);
+
+				sqlStorage.Halo4Identities.AddOrUpdate(halo4Identity);
+				sqlStorage.SaveChanges();
+			}
 		}
 
 		/// <summary>

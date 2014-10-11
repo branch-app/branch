@@ -1,18 +1,17 @@
 ﻿@using Branch.App.Helpers.Razor
 @using Branch.App.Helpers.Razor.Reach
 @using Branch.Core.Game.HaloReach.Enums
-@using Branch.Models.Services.Branch
 @model Branch.Core.Game.HaloReach.Models._343.Responces.ServiceRecord
 
 <div class="col-md-6 entry">
 	<a class="nope" 
-	   href="@Url.RouteUrl("Reach_ServiceRecord", new { gamertag = BranchHelpers.CheckGamerIdPrivacy(Model.Player.Gamertag, GamerId.X360XblGamertag) })">
+	   href="@Url.RouteUrl("Reach_ServiceRecord", new { gamertag = Model.Player.Gamertag })">
 		<div class="spartan-image" 
 			 style="background-image: url('@AssetUrlHelpers.GetPlayerModelUrl(Model.Player.Gamertag, AssetSize.Large)')"></div>
 		<div class="mask"></div>
 		<div class="text-container">
 			<h2>
-				@BranchHelpers.CheckGamerIdPrivacy(Model.Player.Gamertag, GamerId.X360XblGamertag)
+				@Model.Player.Gamertag
 			</h2>
 			<h3>
 				@Model.Player.ServiceTag

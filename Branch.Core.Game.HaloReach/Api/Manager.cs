@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
 using Branch.Core.Game.HaloReach.Enums;
-using Branch.Core.Game.HaloReach.Models.Branch;
 using Branch.Core.Game.HaloReach.Models._343;
 using Branch.Core.Storage;
 using Branch.Extenders;
-using Branch.Models.Services.Branch;
+using Branch.Models.Sql;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using HttpMethod = Branch.Core.Enums.HttpMethod;
@@ -90,12 +91,7 @@ namespace Branch.Core.Game.HaloReach.Api
 			_storage.Blob.UploadBlob(_storage.Blob.HReachBlobContainer,
 				GenerateBlobContainerPath(blobType, escapedGamertag), serviceRecordRaw);
 
-			var serviceRecordEntity = JsonConvert.DeserializeObject<ServiceRecordEntity>(serviceRecordRaw);
-			if (serviceRecordEntity.PartitionKey == null || serviceRecordEntity.RowKey == null) serviceRecordEntity.SetKeys(null, gamertag);
-
-			_storage.Table.InsertOrReplaceSingleEntity(serviceRecordEntity, _storage.Table.HReachCloudTable);
-
-			AddPlayerToStorage(serviceRecord.Player.Gamertag);
+			AddPlayerToIdentities(serviceRecord);
 
 			return serviceRecord;
 		}
@@ -504,11 +500,48 @@ namespace Branch.Core.Game.HaloReach.Api
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gamertag"></param>
-		private void AddPlayerToStorage(string gamertag)
+		/// <param name="serviceRecord"></param>
+		private static void AddPlayerToIdentities(ServiceRecord serviceRecord)
 		{
-			_storage.Table.InsertOrReplaceSingleEntity(
-				new GamerIdEntity(gamertag, GamerId.X360XblGamertag), _storage.Table.BranchCloudTable);
+			using (var sqlStorage = new SqlStorage())
+			{
+				var gamertag = serviceRecord.Player.Gamertag;
+				var gamertagSafe = GamerIdentity.EscapeGamerId(gamertag);
+
+				var gamerIdentity = sqlStorage.GamerIdentities.FirstOrDefault(g => g.GamerIdSafe == gamertagSafe);
+				if (gamerIdentity == null)
+				{
+					gamerIdentity = new GamerIdentity
+					{
+						GamerId = gamertag,
+						GamerIdSafe = gamertagSafe,
+						Type = IdentityType.X360XblGamertag
+					};
+					sqlStorage.GamerIdentities.Add(gamerIdentity);
+					sqlStorage.SaveChanges();
+				}
+
+				var reachIdentity = sqlStorage.ReachIdentities.FirstOrDefault(h => h.GamerIdentity.Id == gamerIdentity.Id) ??
+									new ReachIdentity();
+
+				reachIdentity.GamerIdentity = gamerIdentity;
+				reachIdentity.ServiceTag = serviceRecord.Player.ServiceTag;
+				reachIdentity.PlayerModelUrl = String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, "fullbody");
+				reachIdentity.CompetitiveKills = serviceRecord.Player.MultiplayerKills;
+				reachIdentity.Rank = serviceRecord.Player.CurrentRankName;
+				reachIdentity.TotalGames = serviceRecord.Player.GamesTotal;
+
+				if (serviceRecord.Player.MultiplayerDeaths > 0)
+				{
+					var ratio = (float) serviceRecord.Player.MultiplayerKills/serviceRecord.Player.MultiplayerDeaths;
+					reachIdentity.KillDeathRatio = Math.Round(Convert.ToDouble(ratio), 2, MidpointRounding.AwayFromZero);
+				}
+				else
+					reachIdentity.KillDeathRatio = serviceRecord.Player.MultiplayerKills;
+
+				sqlStorage.ReachIdentities.AddOrUpdate(reachIdentity);
+				sqlStorage.SaveChanges();
+			}
 		}
 
 		#endregion

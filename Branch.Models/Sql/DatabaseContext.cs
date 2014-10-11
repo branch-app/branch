@@ -8,5 +8,11 @@ namespace Branch.Models.Sql
 			: base("DefaultConnection") { }
 
 		public DbSet<Authentication> Authentications { get; set; }
+
+		public DbSet<GamerIdentity> GamerIdentities { get; set; }
+
+		public DbSet<Halo4Identity> Halo4Identities { get; set; }
+
+		public DbSet<ReachIdentity> ReachIdentities { get; set; }
 	}
 }

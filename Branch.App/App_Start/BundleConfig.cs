@@ -25,6 +25,15 @@ namespace Branch.App.App_Start
 			bundles.Add(new AzureStyleBundle("~/bundles/jbclock-styles", "cdn", "http://cdn.branchapp.co").Include(
 				"~/Content/Styles/jbclock.css"));
 
+			// jquery
+			bundles.Add(new AzureScriptBundle("~/bundles/jqueryui-scripts", "cdn", "http://cdn.branchapp.co").Include(
+				"~/Scripts/jquery-ui.min.js"
+			));
+			bundles.Add(new AzureStyleBundle("~/bundles/jqueryui-styles", "cdn", "http://cdn.branchapp.co").Include(
+				"~/Content/Styles/jquery-ui.min.css",
+				"~/Content/Styles/jquery-ui.structure.min.css"
+			));
+
 			// Bootstrap Stuff
 			bundles.Add(new AzureStyleBundle("~/bundles/bootstrap-custom", "cdn", "http://cdn.branchapp.co").Include(new[] {
 				"~/Content/Styles/bootstrap-custom.min.css",

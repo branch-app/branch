@@ -6,13 +6,14 @@ namespace Branch.App.App_Start
 	{
 		public static void Register(HttpConfiguration config)
 		{
-			// Web API configuration and services
-
 			// Web API routes
 			config.MapHttpAttributeRoutes();
 
-			config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
-				);
+			config.Routes.MapHttpRoute(
+				"DefaultApi", 
+				"Api/{controller}/{id}", 
+				new {id = RouteParameter.Optional}
+			);
 		}
 	}
 }

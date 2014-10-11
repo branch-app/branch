@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Branch.App.Helpers.Mvc;
-using Branch.Core.BranchStuff;
 
 namespace Branch.App.Areas.Halo4.Filters
 {
@@ -9,7 +8,7 @@ namespace Branch.App.Areas.Halo4.Filters
 	{
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			var gamertag = GamerIdReplacementManager.GetOriginalGamerId(filterContext.ActionParameters["gamertag"].ToString(), GlobalStorage.AzureStorage);
+			var gamertag = filterContext.ActionParameters["gamertag"].ToString();
 
 			var serviceRecord = GlobalStorage.H4Manager.GetPlayerServiceRecord(gamertag);
 			if (serviceRecord != null)
