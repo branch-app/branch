@@ -52,9 +52,7 @@ namespace Branch.Service.Halo4
 							break;
 
 						case TaskEntity.TaskType.Auth:
-							var auth = I343.UpdateAuthentication(_storage);
-							if (!auth)
-								task.Interval = (int) new TimeSpan(0, 15, 0).TotalSeconds;
+							I343.UpdateAuthentication(_storage);
 							break;
 
 						case TaskEntity.TaskType.Metadata:

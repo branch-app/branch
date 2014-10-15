@@ -1,25 +1,14 @@
-﻿@using Branch.App.Helpers.Razor
-@using Branch.App.Helpers.Razor.Halo4
-@using Branch.Core.Game.Halo4.Enums
-@model Branch.Core.Game.Halo4.Models._343.Responses.ServiceRecord
-@{
-	var gameMode = Model.GameModes.FirstOrDefault(m => m.Id == GameMode.WarGames);
-	var highestSkillRank = 0;
-	if (Model.TopSkillRank != null)
-	{
-		highestSkillRank = Model.TopSkillRank.CompetitiveSkillRank ?? 0;
-	}
-}
+﻿@model Branch.Models.Sql.Halo4Identity
 
 <div class="col-md-6 entry">
 	<a class="nope" 
-	   href="@Url.RouteUrl("Halo4_ServiceRecord", new { gamertag = Model.Gamertag })">
+	   href="@Url.RouteUrl("Halo4_ServiceRecord", new { gamertag = Model.GamerIdentity.GamerId })">
 		<div class="spartan-image" 
-			 style="background-image: url('@GeneralHelpers.GetPlayerModelUrl(Model.Gamertag, "large", "posed")')"></div>
+			 style="background-image: url('@Model.PlayerModelUrl')"></div>
 		<div class="mask"></div>
 		<div class="text-container">
 			<h2>
-				@Model.Gamertag
+				@Model.GamerIdentity.GamerId
 			</h2>
 			<h3>
 				@Model.ServiceTag
@@ -29,16 +18,16 @@
 				Halo 4 | Xbox 360
 
 				<br /><strong>Total Kills: </strong>
-				@BranchHelpers.NumberWithDelimiter(gameMode == null ? 0 : gameMode.TotalKills)
+				@Model.TotalKills
 
 				<br /><strong>KD Ratio: </strong>
-				@(gameMode == null ? 1.0 : gameMode.KdRatio)
+				@Model.KillDeathRatio
 
 				<br /><strong>Top CSR: </strong>
-				@(highestSkillRank)
+				@Model.TopCsr
 
 				<br /><strong>Favorite Weapon: </strong>
-				@Model.FavoriteWeaponName
+				@Model.FavouriteWeapon
 			</div>
 		</div>
 	</a>

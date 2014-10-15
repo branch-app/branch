@@ -4,7 +4,7 @@
 	document.getElementById("search-input").onkeydown = function () {
 		clearInterval(timer);
 		timer = null;
-		timer = setInterval(doStuff, 100);
+		timer = setInterval(querySearchTerm, 100);
 	}
 
 	document.onkeydown = function (event) {
@@ -32,7 +32,7 @@
 		}
 	});
 
-	function doStuff() {
+	function querySearchTerm() {
 		clearInterval(timer);
 		timer = null;
 		console.log("doing ajax");
@@ -51,8 +51,10 @@
 
 		console.log("[Search Term] :: " + searchTerm);
 
+		//if (screen.width < 1200) return;
+
 		$.ajax({
-			url: "/Api/Search/Ideneities?id=" + searchTerm,
+			url: "/Api/Search/Identities?id=" + searchTerm,
 			accepts: "application/json"
 		}).done(function (data) {
 			console.info(JSON.stringify(data));
@@ -66,7 +68,7 @@
 			var innerHtml =
 				"<ul class='search-list'>" +
 					"<li>" +
-						"<a href='/Search/q=" + searchTerm + "'>" + searchTerm + "</a>" +
+						"<a href='/Search/?q=" + searchTerm + "'>" + searchTerm + "</a>" +
 					"</li>" +
 				"</ul>";
 			for (i = 0; i < games.length; i++) {

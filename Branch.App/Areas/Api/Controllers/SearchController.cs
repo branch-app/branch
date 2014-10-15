@@ -7,7 +7,7 @@ namespace Branch.App.Areas.Api.Controllers
 {
 	public class SearchController : ApiController
 	{
-		public IEnumerable<object> GetIdeneities(string id)
+		public IEnumerable<object> GetIdentities(string id)
 		{
 			using (var sqlStorage = new SqlStorage())
 			{

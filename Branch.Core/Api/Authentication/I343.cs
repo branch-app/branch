@@ -80,14 +80,18 @@ namespace Branch.Core.Api.Authentication
 				// send glorious email!
 				var text =
 					String.Format(
-						"Dear Self, {0}Halo 4's authenication failed to update. Might want to look into it. Below is the response the server recieved from the auth service: {0}{0}{1}{0}{0}Best Regards,{0}Branch",
+						"Sup guys, {0}Halo 4's authenication failed to update. Might want to look into it. Below is the response the server recieved from the auth service: {0}{0}{1}{0}{0}Best Regards,{0}Branch",
 						Environment.NewLine, strResponse);
 
 				new Web(new NetworkCredential(CloudConfigurationManager.GetSetting("SendGridUser"),
 					CloudConfigurationManager.GetSetting("SendGridPass"))).Deliver(
 						new SendGridMessage(new MailAddress("info@branchapp.co"),
-							new[] { new MailAddress(CloudConfigurationManager.GetSetting("SendGridTo")) }, "[Halo 4] Authentication Failed",
-							null, text));
+							new[]
+							{
+								new MailAddress(CloudConfigurationManager.GetSetting("SendGridTo")), 
+								new MailAddress("connor.tumbleson@gmail.com"),
+							},
+							"[Halo 4] Authentication Failed", null, text));
 
 				sqlStorage.SaveChanges();
 

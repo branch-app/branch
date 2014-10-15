@@ -526,7 +526,7 @@ namespace Branch.Core.Game.HaloReach.Api
 
 				reachIdentity.GamerIdentity = gamerIdentity;
 				reachIdentity.ServiceTag = serviceRecord.Player.ServiceTag;
-				reachIdentity.PlayerModelUrl = String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody?target={1}", gamertag, "fullbody");
+				reachIdentity.PlayerModelUrl = String.Format("https://spartans.svc.halowaypoint.com/players/{0}/Reach/spartans/fullbody", gamertag);
 				reachIdentity.CompetitiveKills = serviceRecord.Player.MultiplayerKills;
 				reachIdentity.Rank = serviceRecord.Player.CurrentRankName;
 				reachIdentity.TotalGames = serviceRecord.Player.GamesTotal;
@@ -540,7 +540,14 @@ namespace Branch.Core.Game.HaloReach.Api
 					reachIdentity.KillDeathRatio = serviceRecord.Player.MultiplayerKills;
 
 				sqlStorage.ReachIdentities.AddOrUpdate(reachIdentity);
-				sqlStorage.SaveChanges();
+				try
+				{
+					sqlStorage.SaveChanges();
+				}
+				catch (Exception e)
+				{
+
+				}
 			}
 		}
 

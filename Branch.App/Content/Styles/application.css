@@ -35,7 +35,10 @@ footer > .container > .row > .col-md-2 > .made-in {
 .navbar-right {
   margin-right: 0 !important; }
 
-.auto-complete-container {
+@media (max-width: 1199px) {
+  .auto-complete-container-parent {
+    display: none !important; } }
+.auto-complete-container-parent .auto-complete-container {
   position: absolute;
   top: 55px;
   right: 31px;
@@ -43,22 +46,21 @@ footer > .container > .row > .col-md-2 > .made-in {
   border-radius: 5px;
   background: #ffffff;
   width: 280px;
-  min-height: 100px;
-  padding: 18px;
+  padding: 18px 18px 10px 18px;
   box-shadow: 0 0 15px #555;
   opacity: 0; }
-  .auto-complete-container .search-divider {
+  .auto-complete-container-parent .auto-complete-container .search-divider {
     margin-bottom: 3px; }
-  .auto-complete-container .search-header {
+  .auto-complete-container-parent .auto-complete-container .search-header {
     color: #bbb;
     text-transform: uppercase;
     font-weight: 800;
     font-size: 13px; }
-  .auto-complete-container .search-list {
+  .auto-complete-container-parent .auto-complete-container .search-list {
     list-style-type: none;
     -webkit-padding-start: 0;
     padding-left: 0; }
-    .auto-complete-container .search-list .search-sub-ident {
+    .auto-complete-container-parent .auto-complete-container .search-list .search-sub-ident {
       color: #bbb;
       text-decoration: none;
       font-weight: 800;
@@ -231,49 +233,53 @@ body.blog_view .blog-post {
 body.search .bs-header h1 {
   font-size: 30px;
   text-align: center; }
-body.search .row {
+body.search .ident-section .more-entries-button {
+  padding-top: 19px; }
+body.search .ident-section hr {
+  margin-top: 10px; }
+body.search .ident-section .ident-row {
   list-style-type: none;
   padding: 0; }
-  body.search .row .no-results {
+  body.search .ident-section .ident-row .no-results {
     font-size: 20px;
     margin-left: 45px;
     margin-top: 20px;
     color: #666; }
-  body.search .row .entry {
+  body.search .ident-section .ident-row .entry {
     height: 220px;
     margin-bottom: 50px; }
-    body.search .row .entry a.nope {
+    body.search .ident-section .ident-row .entry a.nope {
       color: inherit;
       text-decoration: none; }
-      body.search .row .entry a.nope:hover {
+      body.search .ident-section .ident-row .entry a.nope:hover {
         color: inherit;
         text-decoration: none; }
-    body.search .row .entry .spartan-image {
+    body.search .ident-section .ident-row .entry .spartan-image {
       height: 100%;
       background-repeat: no-repeat;
       background-position-x: right; }
-    body.search .row .entry .mask {
+    body.search .ident-section .ident-row .entry .mask {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
-      background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, #ffffff));
-      background-image: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-      background-image: -moz-linear-gradient(right, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-      background-image: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-      background-image: -ms-linear-gradient(right, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #ffffff 100%); }
-    body.search .row .entry .text-container {
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, #ffffff));
+      background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+      background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+      background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+      background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%); }
+    body.search .ident-section .ident-row .entry .text-container {
       position: absolute;
       top: 5px;
       left: 15px;
       height: 100%;
       width: 100%; }
-      body.search .row .entry .text-container > h2 {
+      body.search .ident-section .ident-row .entry .text-container > h2 {
         margin-bottom: 0px;
         color: #d4860c; }
-      body.search .row .entry .text-container > h3 {
+      body.search .ident-section .ident-row .entry .text-container > h3 {
         margin-top: 0px;
         font-size: 18px; }
 body.search .focus-col {

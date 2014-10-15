@@ -1,36 +1,33 @@
-﻿@using Branch.App.Helpers.Razor
-@using Branch.App.Helpers.Razor.Reach
-@using Branch.Core.Game.HaloReach.Enums
-@model Branch.Core.Game.HaloReach.Models._343.Responces.ServiceRecord
+﻿@model Branch.Models.Sql.ReachIdentity
 
 <div class="col-md-6 entry">
 	<a class="nope" 
-	   href="@Url.RouteUrl("Reach_ServiceRecord", new { gamertag = Model.Player.Gamertag })">
+	   href="@Url.RouteUrl("Reach_ServiceRecord", new { gamertag = Model.GamerIdentity.GamerId })">
 		<div class="spartan-image" 
-			 style="background-image: url('@AssetUrlHelpers.GetPlayerModelUrl(Model.Player.Gamertag, AssetSize.Large)')"></div>
+			 style="background-image: url('@Model.PlayerModelUrl')"></div>
 		<div class="mask"></div>
 		<div class="text-container">
 			<h2>
-				@Model.Player.Gamertag
+				@Model.GamerIdentity.GamerId
 			</h2>
 			<h3>
-				@Model.Player.ServiceTag
+				@Model.ServiceTag
 			</h3>
 			<div class="info">
 				<strong>Game: </strong>
 				Halo: Reach | Xbox 360
 
 				<br /><strong>Competitive Kills: </strong>
-				@BranchHelpers.NumberWithDelimiter(Model.Player.MultiplayerKills)
+				@Model.CompetitiveKills
 
 				<br /><strong>KD Ratio: </strong>
-				@MathHelpers.CalculateKd(Model.Player.MultiplayerKills, Model.Player.MultiplayerDeaths)
+				@Model.KillDeathRatio
 
 				<br /><strong>Rank: </strong>
-				@Model.Player.CurrentRankName
+				@Model.Rank
 
 				<br /><strong>Total Games: </strong>
-				@Model.Player.GamesTotal
+				@Model.TotalGames
 			</div>
 		</div>
 	</a>

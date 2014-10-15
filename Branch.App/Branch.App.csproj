@@ -544,6 +544,7 @@
     <Compile Include="Helpers\Razor\Reach\MetadataHelpers.cs" />
     <Compile Include="Helpers\Razor\SocialHelpers.cs" />
     <Compile Include="Models\Enums\Game.cs" />
+    <Compile Include="Models\Enums\SearchIdent.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\GameSwitcherViewModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
@@ -582,6 +583,10 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Content\Styles\Areas\Reach\_home.scss" />
     <Content Include="UploadAssetsToCdn.ps1" />
+    <Content Include="Content\Styles\bootstrap-branch.css.map">
+      <DependentUpon>bootstrap-branch.css</DependentUpon>
+    </Content>
+    <Content Include="Views\Search\Identity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

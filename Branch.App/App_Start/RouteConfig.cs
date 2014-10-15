@@ -12,14 +12,21 @@ namespace Branch.App_Start
 
 			AreaRegistration.RegisterAllAreas();
 
-			routes.MapRoute("Default", "{controller}/{action}/{id}",
-				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, namespaces);
-
+			// Blog
 			routes.MapRoute("Blog", "Blog/View/{slug}",
 				new { controller = "Blog", action = "View", slug = "welcome" }, namespaces);
 
+			// Search
+			routes.MapRoute("SearchIdentity", "Search/Identity/{ident}",
+				new { controller = "Search", action = "Identity", ident = UrlParameter.Optional }, namespaces);
+
 			routes.MapRoute("Search", "Search/",
-				new {controller = "Search", action = "Index"});
+				new { controller = "Search", action = "Index" }, namespaces);
+
+			// Catch All
+			routes.MapRoute("Default", "{controller}/{action}/{id}",
+				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, namespaces);
+
 		}
 	}
 }

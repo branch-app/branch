@@ -17,26 +17,44 @@
 
 	@Html.Partial("FlashMessage", true)
 
-	<div>
+	<div class="ident-section">
 		<div class="row">
-			@if (Model.HaloReachServiceRecord != null)
+			<div class="col-md-4">
+				<h2>Halo 4</h2>
+			</div>
+			<div class="col-md-7"></div>
+			<div class="col-md-1 more-entries-button">
+				<a href="@Url.RouteUrl("SearchIdentity", new { ident = "Halo4", q = Model.Query, page = 0 })" class="btn btn-primary">
+					more &raquo;
+				</a>
+			</div>
+		</div>
+		<hr />
+		<div class="ident-row">
+			@foreach (var identity in Model.Halo4Identities)
 			{
-				@Html.Partial("Partials/HaloReachServiceRecord", Model.HaloReachServiceRecord)
+				@Html.Partial("Partials/Halo4ServiceRecord", identity)
 			}
+		</div>
+	</div>
 
-			@if (Model.Halo4ServiceRecord != null)
+	<div class="ident-section">
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Halo: Reach</h2>
+			</div>
+			<div class="col-md-7"></div>
+			<div class="col-md-1 more-entries-button">
+				<a href="@Url.RouteUrl("SearchIdentity", new { ident = "Reach", q = Model.Query, page = 0})" class="btn btn-primary">
+					more &raquo;
+				</a>
+			</div>
+		</div>
+		<hr />
+		<div class="ident-row">
+			@foreach (var identity in Model.ReachIdentities)
 			{
-				@Html.Partial("Partials/Halo4ServiceRecord", Model.Halo4ServiceRecord)
-			}
-
-			@if (Model.Halo4ServiceRecord == null &&
-				 Model.HaloReachServiceRecord == null)
-			{
-				<div class="no-results">
-					<p>
-						No results found for @Model.Query, sorry
-					</p>
-				</div>
+				@Html.Partial("Partials/HaloReachServiceRecord", identity)
 			}
 		</div>
 	</div>
