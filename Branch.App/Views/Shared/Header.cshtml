@@ -58,6 +58,36 @@
 					@Html.ActionLink("About", "Index", "About", new { area = "" }, null)
 				</li>
 			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				@if (new Random().Next(0, 2) == 1)
+				{
+					// Signed In
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">0xdeafcafe <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Account</a></li>
+							<li><a href="#">Settings</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Halo 4 Service Record</a></li>
+							<li><a href="#">Halo: Reach Service Record</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Sign Out</a></li>
+						</ul>
+					</li>
+				}
+				else
+				{
+					// Anon
+					<li>
+						<a href="#">Sign In</a>
+					</li>
+					<li>
+						<a href="#">Sign Up</a>
+					</li>
+				}
+			</ul>
+
 			@using (Html.BeginForm("Index", "Search", new { area = "" }, FormMethod.Get, new { @role = "search", @class = "navbar-form navbar-right" }))
 			{
 				<div class="form-group">
