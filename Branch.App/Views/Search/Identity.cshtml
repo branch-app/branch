@@ -1,0 +1,74 @@
+﻿@using Branch.App.Models
+@using Branch.App.Models.Enums
+@using Branch.Extenders
+@model SearchIdentityViewModel
+@{
+	ViewBag.Title = string.Format("Searching for {0} in {1} players", Model.Query, Model.SearchIdent.GetDescription());
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Template = "search";
+}
+
+<div class="bs-header">
+	<div class="container">
+		<h1>
+			<strong>
+				@Model.Query
+			</strong>
+			in
+			<strong>
+				@Model.SearchIdent.GetDescription()
+			</strong>
+		</h1>
+		<h2>
+			<strong>
+				Search results
+			</strong>
+		</h2>
+	</div>
+</div>
+
+<div class="container">
+	@Html.Partial("FlashMessage", true)
+
+	<div class="ident-section">
+		<div class="row">
+			<div class="col-md-4">
+				<h2>@Model.SearchIdent.GetDescription()</h2>
+			</div>
+			<div class="col-md-7"></div>
+			<div class="col-md-1 more-entries-button">
+				<a href="@Url.Action("Index", "Search", new { q = Model.Query })" class="btn btn-primary">
+					less &laquo;
+				</a>
+			</div>
+		</div>
+		<hr />
+		<div class="ident-row row">
+			@switch (Model.SearchIdent)
+			{
+				case SearchIdent.Halo4:
+					foreach (var identity in Model.Halo4Identities)
+					{
+						@Html.Partial("Partials/Halo4ServiceRecord", identity)
+					}
+					break;
+				case SearchIdent.Reach:
+					foreach (var identity in Model.ReachIdentities)
+					{
+						@Html.Partial("Partials/HaloReachServiceRecord", identity)
+					}
+					break;
+			}
+		</div>
+		<hr />
+		<ul class="pager">
+			<li class="previous @(Model.Page == 0 ? "disabled" : "")">
+				@Html.RouteLink("← Previous", "SearchIdentity", new { q = Model.Query, page = Model.Page - 1 })
+			</li>
+			<li class="next @(Model.HasMorePages ? "" : "disabled")">
+				@Html.RouteLink("Next →", "SearchIdentity", new { q = Model.Query, page = Model.Page + 1 })
+			</li>
+		</ul>
+	</div>
+</div>
+

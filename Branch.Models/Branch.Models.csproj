@@ -117,12 +117,19 @@
     <Compile Include="Migrations\201410110042273_Added ServiceTags to Indents.Designer.cs">
       <DependentUpon>201410110042273_Added ServiceTags to Indents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410160036412_Added Branch Identity Stuff.cs" />
+    <Compile Include="Migrations\201410160036412_Added Branch Identity Stuff.Designer.cs">
+      <DependentUpon>201410160036412_Added Branch Identity Stuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\343\Halo4Waypoint.cs" />
     <Compile Include="Services\Branch\BlogPostEntity.cs" />
     <Compile Include="Services\Branch\Enums.cs" />
     <Compile Include="Sql\Authentication.cs" />
+    <Compile Include="Sql\BranchIdentity.cs" />
+    <Compile Include="Sql\BranchRole.cs" />
+    <Compile Include="Sql\BranchSession.cs" />
     <Compile Include="Sql\DatabaseContext.cs" />
     <Compile Include="Sql\ReachIdentity.cs" />
     <Compile Include="Sql\Halo4Identity.cs" />
@@ -158,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410110042273_Added ServiceTags to Indents.resx">
       <DependentUpon>201410110042273_Added ServiceTags to Indents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410160036412_Added Branch Identity Stuff.resx">
+      <DependentUpon>201410160036412_Added Branch Identity Stuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -9,6 +9,12 @@ namespace Branch.Models.Sql
 
 		public DbSet<Authentication> Authentications { get; set; }
 
+		public DbSet<BranchRole> BranchRoles { get; set; }
+
+		public DbSet<BranchSession> BranchSessions { get; set; }
+
+		public DbSet<BranchIdentity> BranchIdentities { get; set; }
+
 		public DbSet<GamerIdentity> GamerIdentities { get; set; }
 
 		public DbSet<Halo4Identity> Halo4Identities { get; set; }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Branch.Models.Sql;
 
 namespace Branch.Models.Migrations
@@ -15,16 +16,13 @@ namespace Branch.Models.Migrations
 		{
 			//  This method will be called after migrating to the latest version.
 
-			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-			//  to avoid creating duplicate seed data. E.g.
-			//
-			//    context.People.AddOrUpdate(
-			//      p => p.FullName,
-			//      new Person { FullName = "Andrew Peters" },
-			//      new Person { FullName = "Brice Lambson" },
-			//      new Person { FullName = "Rowan Miller" }
-			//    );
-			//
+			if (!context.BranchRoles.Any())
+				context.BranchRoles.AddOrUpdate(r => r.Name,
+					new BranchRole { Name = "Spartan", Type = RoleType.User },
+					new BranchRole { Name = "Monitor", Type = RoleType.Moderator },
+					new BranchRole { Name = "Domain", Type = RoleType.Administrator },
+					new BranchRole { Name = "The Flood", Type = RoleType.Banned }
+				);
 		}
 	}
 }

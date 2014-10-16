@@ -21,6 +21,8 @@ namespace Branch.Models.Sql
 
 		public virtual ICollection<ReachIdentity> ReachIdentities { get; set; }
 
+		public virtual ICollection<BranchIdentity> BranchIdentities { get; set; } 
+
 		public static string EscapeGamerId(string gamerId)
 		{
 			// To Lower
