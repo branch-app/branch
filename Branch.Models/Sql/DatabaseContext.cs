@@ -5,7 +5,12 @@ namespace Branch.Models.Sql
 	public class DatabaseContext : DbContext
 	{
 		public DatabaseContext()
-			: base("DefaultConnection") { }
+			: base(@"Data Source=(localdb)\ProjectsV12;Initial Catalog=BranchDevelopment;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False") { }
+
+		static DatabaseContext()
+		{
+			Database.SetInitializer<DbContext>(null);
+		}
 
 		public DbSet<Authentication> Authentications { get; set; }
 

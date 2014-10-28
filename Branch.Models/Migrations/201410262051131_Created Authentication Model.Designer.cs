@@ -7,13 +7,13 @@ namespace Branch.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class AddedIdentities : IMigrationMetadata
+    public sealed partial class CreatedAuthenticationModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedIdentities));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatedAuthenticationModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410101917314_Added Identities"; }
+            get { return "201410262051131_Created Authentication Model"; }
         }
         
         string IMigrationMetadata.Source

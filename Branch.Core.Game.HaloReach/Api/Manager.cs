@@ -345,9 +345,29 @@ namespace Branch.Core.Game.HaloReach.Api
 		{
 			if (response == null || response.StatusCode != HttpStatusCode.OK || String.IsNullOrEmpty(response.Content.ReadAsStringAsync().Result))
 				return false;
+			try
+			{
 
-			var parsedResponse = JsonConvert.DeserializeObject<Response>(response.Content.ReadAsStringAsync().Result);
-			return (parsedResponse != null && (parsedResponse.Status == ResponseStatus.Okay || parsedResponse.Status == ResponseStatus.BungieOkay));
+				var parsedResponse = JsonConvert.DeserializeObject<Response>(response.Content.ReadAsStringAsync().Result);
+				return (parsedResponse != null &&
+				        (parsedResponse.Status == ResponseStatus.Okay || parsedResponse.Status == ResponseStatus.BungieOkay));
+			}
+			catch (OverflowException)
+			{
+				return false;
+			}
+			catch (JsonReaderException e)
+			{
+				return false;
+			}
+			catch (Exception)
+			{
+#if DEBUG
+				throw;
+#endif
+
+				return false;
+			}
 		}
 
 		/// <summary>
@@ -515,7 +535,7 @@ namespace Branch.Core.Game.HaloReach.Api
 					{
 						GamerId = gamertag,
 						GamerIdSafe = gamertagSafe,
-						Type = IdentityType.X360XblGamertag
+						Type = IdentityType.XblGamertag
 					};
 					sqlStorage.GamerIdentities.Add(gamerIdentity);
 					sqlStorage.SaveChanges();

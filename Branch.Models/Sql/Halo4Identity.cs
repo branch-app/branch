@@ -10,7 +10,6 @@ namespace Branch.Models.Sql
 		[Required]
 		public string PlayerModelUrl { get; set; }
 
-		[Required]
 		public string ServiceTag { get; set; }
 
 		[Required]
@@ -22,8 +21,8 @@ namespace Branch.Models.Sql
 		[Required]
 		public int TopCsr { get; set; }
 
-		[Required]
 		public string FavouriteWeapon { get; set; }
+
 
 		public virtual GamerIdentity GamerIdentity { get; set; }
 	}

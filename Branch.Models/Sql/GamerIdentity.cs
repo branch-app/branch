@@ -32,10 +32,8 @@ namespace Branch.Models.Sql
 
 	public enum IdentityType
 	{
-		X360XblGamertag = 0x00,
-		XOneXblGamertag = 0x10,
-		Ps3PsnTag = 0x20,
-		Ps4PsnTag = 0x30,
+		XblGamertag = 0x00,
+		PsnTag = 0x20,
 		PcOriginTag = 0x40,
 		PcSteamTag = 0x50
 	}

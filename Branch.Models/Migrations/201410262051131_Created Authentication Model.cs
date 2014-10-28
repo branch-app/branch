@@ -2,18 +2,18 @@ namespace Branch.Models.Migrations
 {
 	using System.Data.Entity.Migrations;
 
-	public partial class AddedIdentities : DbMigration
+	public partial class CreatedAuthenticationModel : DbMigration
 	{
 		public override void Up()
 		{
 			CreateTable(
-				"dbo.GamerIdentities",
+				"dbo.Authentications",
 				c => new
 					{
 						Id = c.Int(nullable: false, identity: true),
-						GamerId = c.String(nullable: false),
-						GamerIdSafe = c.String(nullable: false),
 						Type = c.Int(nullable: false),
+						Key = c.String(nullable: false),
+						IsValid = c.Boolean(nullable: false),
 					})
 				.PrimaryKey(t => t.Id);
 
@@ -21,7 +21,7 @@ namespace Branch.Models.Migrations
 
 		public override void Down()
 		{
-			DropTable("dbo.GamerIdentities");
+			DropTable("dbo.Authentications");
 		}
 	}
 }

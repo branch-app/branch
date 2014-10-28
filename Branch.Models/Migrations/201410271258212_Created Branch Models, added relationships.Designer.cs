@@ -7,13 +7,13 @@ namespace Branch.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class AddedServiceTagstoIndents : IMigrationMetadata
+    public sealed partial class CreatedBranchModelsaddedrelationships : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedServiceTagstoIndents));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatedBranchModelsaddedrelationships));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410110042273_Added ServiceTags to Indents"; }
+            get { return "201410271258212_Created Branch Models, added relationships"; }
         }
         
         string IMigrationMetadata.Source

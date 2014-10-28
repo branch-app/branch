@@ -689,7 +689,7 @@ namespace Branch.Core.Game.Halo4.Api
 					{
 						GamerId = gamertag,
 						GamerIdSafe = gamertagSafe,
-						Type = IdentityType.X360XblGamertag
+						Type = IdentityType.XblGamertag
 					};
 					sqlStorage.GamerIdentities.Add(gamerIdentity);
 					sqlStorage.SaveChanges();

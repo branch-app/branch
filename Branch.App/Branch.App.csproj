@@ -159,6 +159,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\SearchController.cs" />
+    <Compile Include="Areas\Domain\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Domain\DomainAreaRegistration.cs" />
     <Compile Include="Areas\Halo4\Controllers\ChallengesController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Halo4\Controllers\CsrController.cs" />
@@ -499,7 +501,20 @@
     <Content Include="Areas\Reach\Views\Game\Covers\Campaign.cshtml" />
     <Content Include="Areas\Reach\Views\Game\PlayerList.cshtml" />
     <Content Include="Areas\Reach\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\web.config" />
+    <Content Include="Areas\Identity\Views\Create\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\Shared\IdentityHeader.cshtml" />
+    <Content Include="Views\Session\Create.cshtml" />
+    <Content Include="Areas\Domain\Views\web.config" />
     <None Include="Content\Styles\Areas\Halo4\_game_history.scss" />
+    <Compile Include="Areas\Identity\Controllers\CreateController.cs" />
+    <Compile Include="Areas\Identity\Controllers\ViewController.cs" />
+    <Compile Include="Areas\Identity\Filters\ValidateBranchIdentity.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Areas\Identity\IdentityAreaRegistration.cs" />
+    <Compile Include="Areas\Identity\Models\CreateSessionViewModel.cs" />
+    <Compile Include="Areas\Identity\Models\CreateIdentityViewModel.cs" />
+    <Compile Include="Areas\Identity\Models\HeaderMetadata.cs" />
     <Compile Include="Areas\Reach\Controllers\CommendationsController.cs" />
     <Compile Include="Areas\Reach\Controllers\FileShareController.cs" />
     <Compile Include="Areas\Reach\Controllers\GameController.cs" />
@@ -528,12 +543,16 @@
     <Compile Include="Areas\Halo4\Filters\ValidateH4ApiStatus.cs" />
     <Compile Include="Areas\Halo4\Filters\ValidateH4ServiceRecordFilter.cs" />
     <Compile Include="Extentions\BundleExtentions.cs" />
+    <Compile Include="Helpers\Attributes\RequiresNoAuthentication.cs" />
+    <Compile Include="Helpers\Attributes\RequiresAuthentication.cs" />
+    <Compile Include="Helpers\Authentication.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Cryptography\Sha1Crypto.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
     <Compile Include="Helpers\Mvc\FlashMessage.cs" />
+    <Compile Include="Helpers\Mvc\SafeJsonContent.cs" />
     <Compile Include="Helpers\Razor\BranchHelpers.cs" />
     <Compile Include="Helpers\Razor\CdnHelpers.cs" />
     <Compile Include="Helpers\Razor\Halo4\GeneralHelpers.cs" />
@@ -551,6 +570,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\Styles\bootstrap-branch.min.css">
       <DependentUpon>bootstrap-branch.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\bootstrap-extras.css">
+      <DependentUpon>bootstrap-extras.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\bootstrap-extras.min.css">
+      <DependentUpon>bootstrap-extras.css</DependentUpon>
     </Content>
     <Content Include="Content\Styles\jbclock.css">
       <DependentUpon>jbclock.scss</DependentUpon>
@@ -587,6 +612,11 @@
       <DependentUpon>bootstrap-branch.css</DependentUpon>
     </Content>
     <Content Include="Views\Search\Identity.cshtml" />
+    <Content Include="Content\Styles\Areas\Identity\_identity.scss" />
+    <Content Include="Content\Styles\bootstrap-extras.scss" />
+    <Content Include="Content\Styles\bootstrap-extras.css.map">
+      <DependentUpon>bootstrap-extras.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -625,6 +655,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\Search\" />
+    <Folder Include="Areas\Domain\Models\" />
+    <Folder Include="Areas\Domain\Views\Home\" />
+    <Folder Include="Areas\Domain\Views\Shared\" />
+    <Folder Include="Areas\Identity\Views\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

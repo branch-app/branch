@@ -7,13 +7,13 @@ namespace Branch.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class AddedbasicAuthenticationModel : IMigrationMetadata
+    public sealed partial class FixedemptyServiceTags : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedbasicAuthenticationModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixedemptyServiceTags));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410101415569_Added basic Authentication Model"; }
+            get { return "201410262140311_Fixed empty ServiceTags"; }
         }
         
         string IMigrationMetadata.Source

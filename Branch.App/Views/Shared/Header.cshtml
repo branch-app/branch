@@ -1,4 +1,5 @@
 ﻿@using Branch.App.Helpers.Razor
+@using Branch.Models.Sql
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -59,35 +60,6 @@
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right">
-				@if (new Random().Next(0, 2) == 1)
-				{
-					// Signed In
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">0xdeafcafe <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Account</a></li>
-							<li><a href="#">Settings</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Halo 4 Service Record</a></li>
-							<li><a href="#">Halo: Reach Service Record</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Sign Out</a></li>
-						</ul>
-					</li>
-				}
-				else
-				{
-					// Anon
-					<li>
-						<a href="#">Sign In</a>
-					</li>
-					<li>
-						<a href="#">Sign Up</a>
-					</li>
-				}
-			</ul>
-
 			@using (Html.BeginForm("Index", "Search", new { area = "" }, FormMethod.Get, new { @role = "search", @class = "navbar-form navbar-right" }))
 			{
 				<div class="form-group">
@@ -98,6 +70,63 @@
 					<div class="auto-complete-container"></div>
 				</div>
 			}
+
+			<ul class="nav navbar-nav navbar-right">
+				@if (ViewBag.IsAuthenticated)
+				{
+					var identity = (BranchIdentity) ViewBag.AuthenticatedIdentity;
+					var hasHalo4 = identity.GamerIdentity.Halo4Identities.Any();
+					var hasReach = identity.GamerIdentity.ReachIdentities.Any();
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">@(identity.Username) <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								@Html.RouteLink("Account", "BranchIdentityView", new { slug = identity.Username })
+							</li>
+							<li>
+								<a href="#">Settings</a>
+							</li>
+							@if (identity.BranchRole.Type == RoleType.Administrator)
+							{
+								<li>
+									@Html.RouteLink("Domain", "DomainDefault", new { })
+								</li>
+							}
+							@if (hasHalo4 || hasReach)
+							{
+								<li class="divider"></li>
+								
+								if (hasHalo4)
+								{
+									<li>
+										@Html.ActionLink("Halo 4 Service Record", "Index", "ServiceRecord", new { area = "Halo4", gamertag = identity.GamerIdentity.GamerId }, null)
+									</li>
+								}
+								if (hasReach)
+								{
+									<li>
+										@Html.ActionLink("Halo: Reach Service Record", "Index", "ServiceRecord", new {area = "Reach", gamertag = identity.GamerIdentity.GamerId}, null)
+									</li>
+								}
+							}
+							<li class="divider"></li>
+							<li>
+								@Html.ActionLink("Sign Out", "Destroy", "Session", new { area = "" }, null)
+							</li>
+						</ul>
+					</li>
+				}
+				else
+				{
+					<li>
+						@Html.ActionLink("Sign In", "Create", "Session", new { area = "" }, null)
+					</li>
+					<li>
+						@Html.ActionLink("Sign Up", "Index", "Create", new { area = "" }, null)
+					</li>
+				}
+			</ul>
 		</div>
 	</div>
 </nav>

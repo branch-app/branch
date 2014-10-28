@@ -23,13 +23,14 @@ namespace Branch.App.App_Start
 			bundles.Add(new AzureScriptBundle("~/bundles/jbclock", "cdn", "http://cdn.branchapp.co").Include(
 				"~/Scripts/jbclock.js"));
 			bundles.Add(new AzureStyleBundle("~/bundles/jbclock-styles", "cdn", "http://cdn.branchapp.co").Include(
-				"~/Content/Styles/jbclock.css"));
+				"~/Content/Styles/jbclock.min.css"));
 
 
 			// Bootstrap Stuff
 			bundles.Add(new AzureStyleBundle("~/bundles/bootstrap-custom", "cdn", "http://cdn.branchapp.co").Include(new[] {
 				"~/Content/Styles/bootstrap-custom.min.css",
-				"~/Content/Styles/bootstrap-branch.css"
+				"~/Content/Styles/bootstrap-branch.min.css",
+				"~/Content/Styles/bootstrap-extras.min.css"
 			}));
 			bundles.Add(new AzureScriptBundle("~/bundles/bootstrap-scripts", "cdn", "http://cdn.branchapp.co").Include(
 				"~/Scripts/bootstrap-3.0.0.js"
@@ -40,7 +41,7 @@ namespace Branch.App.App_Start
 
 			// branch specific styles
 			bundles.Add(new AzureStyleBundle("~/bundles/branch-specific", "cdn", "http://cdn.branchapp.co").Include(
-				"~/Content/Styles/application.css"
+				"~/Content/Styles/application.min.css"
 			));
 		}
 	}

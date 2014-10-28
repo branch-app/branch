@@ -1,6 +1,9 @@
 ﻿@using Branch.App.Extentions
+@using Branch.App.Helpers
 @{
 	var altFooter = (bool) (ViewBag.AlternativeFooter ?? false);
+	ViewBag.AuthenticatedIdentity = Authentication.GetAuthenticatedIdentity();
+	ViewBag.IsAuthenticated = ViewBag.AuthenticatedIdentity != null;
 }
 <!DOCTYPE html>
 <html>

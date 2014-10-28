@@ -24,12 +24,12 @@ namespace Branch.App
 		protected void Application_Start()
 		{
 			// Migrations
-			if (RoleEnvironment.IsAvailable)
-			{
-				var configuration = new Configuration();
-				var migrator = new DbMigrator(configuration);
-				migrator.Update();
-			}
+			//if (RoleEnvironment.IsAvailable)
+			//{
+			//	var configuration = new Configuration();
+			//	var migrator = new DbMigrator(configuration);
+			//	migrator.Update();
+			//}
 
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

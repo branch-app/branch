@@ -95,6 +95,7 @@ namespace Branch.Core.Game.HaloReach.Helpers
 			{ "general grade 1", 2200000 },
 			{ "general grade 2", 2350000 },
 			{ "general grade 3", 2500000 },
+			{ "general grade 4", 2650000 },
 			{ "field marshall", 3000000 },
 			{ "hero", 3700000 },
 			{ "legend", 4600000 },

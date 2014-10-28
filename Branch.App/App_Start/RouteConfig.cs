@@ -12,6 +12,10 @@ namespace Branch.App_Start
 
 			AreaRegistration.RegisterAllAreas();
 
+			// Welcome
+			routes.MapRoute("Welcome", "Home/",
+				new { controller = "Home", action = "Index" }, namespaces);
+
 			// Blog
 			routes.MapRoute("Blog", "Blog/View/{slug}",
 				new { controller = "Blog", action = "View", slug = "welcome" }, namespaces);

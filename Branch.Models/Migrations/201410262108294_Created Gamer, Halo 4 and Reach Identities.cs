@@ -2,16 +2,28 @@ namespace Branch.Models.Migrations
 {
 	using System.Data.Entity.Migrations;
 
-	public partial class RelationshipsHowcute : DbMigration
+	public partial class CreatedGamerHalo4andReachIdentities : DbMigration
 	{
 		public override void Up()
 		{
+			CreateTable(
+				"dbo.GamerIdentities",
+				c => new
+					{
+						Id = c.Int(nullable: false, identity: true),
+						GamerId = c.String(nullable: false),
+						GamerIdSafe = c.String(nullable: false),
+						Type = c.Int(nullable: false),
+					})
+				.PrimaryKey(t => t.Id);
+
 			CreateTable(
 				"dbo.Halo4Identity",
 				c => new
 					{
 						Id = c.Int(nullable: false, identity: true),
 						PlayerModelUrl = c.String(nullable: false),
+						ServiceTag = c.String(nullable: false),
 						TotalKills = c.Int(nullable: false),
 						KillDeathRatio = c.Double(nullable: false),
 						TopCsr = c.Int(nullable: false),
@@ -28,6 +40,7 @@ namespace Branch.Models.Migrations
 					{
 						Id = c.Int(nullable: false, identity: true),
 						PlayerModelUrl = c.String(nullable: false),
+						ServiceTag = c.String(nullable: false),
 						CompetitiveKills = c.Int(nullable: false),
 						KillDeathRatio = c.Double(nullable: false),
 						Rank = c.String(nullable: false),
@@ -48,6 +61,7 @@ namespace Branch.Models.Migrations
 			DropIndex("dbo.Halo4Identity", new[] { "GamerIdentity_Id" });
 			DropTable("dbo.ReachIdentities");
 			DropTable("dbo.Halo4Identity");
+			DropTable("dbo.GamerIdentities");
 		}
 	}
 }

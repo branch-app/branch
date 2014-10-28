@@ -7,13 +7,13 @@ namespace Branch.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class AddedBranchIdentityStuff : IMigrationMetadata
+    public sealed partial class CreatedGamerHalo4andReachIdentities : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedBranchIdentityStuff));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatedGamerHalo4andReachIdentities));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410160036412_Added Branch Identity Stuff"; }
+            get { return "201410262108294_Created Gamer, Halo 4 and Reach Identities"; }
         }
         
         string IMigrationMetadata.Source
