@@ -7,7 +7,7 @@
 #if DEBUG
 			return preCompiled ? "~/" : "/";
 #else
-			return "//az673231.vo.msecnd.net/";
+			return "//az673231.vo.msecnd.net/cdn/";
 #endif
 		}
 	}
