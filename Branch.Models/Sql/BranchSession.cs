@@ -6,6 +6,7 @@ using Branch.Models.Helpers;
 namespace Branch.Models.Sql
 {
 	public class BranchSession
+		: Audit
 	{
 		[Key]
 		public int Id { get; set; }
@@ -39,7 +40,10 @@ namespace Branch.Models.Sql
 
 		public bool IsValid()
 		{
-			return (Revoked) || ExpiresAt < DateTime.UtcNow;
+			if (Revoked)
+				return false;
+
+			return ExpiresAt > DateTime.UtcNow;
 		}
 
 		public static BranchSession Create(string ipAddress, string userAgent, BranchIdentity branchIdentity, bool rememberMe)

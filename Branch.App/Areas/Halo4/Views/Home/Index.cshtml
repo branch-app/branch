@@ -6,6 +6,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	ViewBag.Template = "halo4 halo4_homepage";
 	ViewBag.AlternativeFooter = true;
+	ViewBag.PageBackgroundCover = CdnHelpers.GetAssetLocale(false) + "Content/Images/Home/Covers/Halo4/cover1.jpg";
 }
 
 <div id="content" class="bs-header" style="text-align: center;">
@@ -22,42 +23,58 @@
 <div class="stats-marketing">
 	<div class="container">
 		@{
-			var totalPopulation = Model.Playlists.Playlists.Sum(p => p.PopulationCount);
-			var totalTeamPopulation = Model.Playlists.Playlists.Where(p => !p.IsFreeForAll).Sum(p => p.PopulationCount);
-			var totalFfaPopulation = Model.Playlists.Playlists.Where(p => p.IsFreeForAll).Sum(p => p.PopulationCount);
+			var totalPopulation = 0;
+			var totalTeamPopulation = 0;
+			var totalFfaPopulation = 0;
+
+			if (Model.Playlists == null)
+			{
+				<div class="blurb central">
+					<h1>Population Blip...</h1>
+					<p>
+						Playlist stats are currently broken. They should be amended upon next playlist refresh.
+					</p>
+				</div>
+			}
+			else
+			{
+				totalPopulation = Model.Playlists.Playlists.Sum(p => p.PopulationCount);
+				totalTeamPopulation = Model.Playlists.Playlists.Where(p => !p.IsFreeForAll).Sum(p => p.PopulationCount);
+				totalFfaPopulation = Model.Playlists.Playlists.Where(p => p.IsFreeForAll).Sum(p => p.PopulationCount);
+
+				<div class="row central">
+					<div class="col-md-4">
+						<canvas id="total-playlist-population" width="140" height="140"></canvas>
+
+						<h2>All Playlists</h2>
+						<p>
+							There are currently @(BranchHelpers.NumberWithDelimiter(totalPopulation)) people playing Halo 4 Online.
+						</p>
+					</div>
+					<div class="col-md-4">
+						<canvas id="team-playlist-population" width="140" height="140"></canvas>
+
+						<h2>Team Playlists</h2>
+						<p>
+							There are currently @(BranchHelpers.NumberWithDelimiter(totalTeamPopulation)) people playing Team based CSR Playlists.
+						</p>
+					</div>
+					<div class="col-md-4">
+						<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
+
+						<h2>Indvidual Playlists</h2>
+						<p>
+							There are currently @(BranchHelpers.NumberWithDelimiter(totalFfaPopulation)) people playing Indvidual based CSR Playlists.
+						</p>
+					</div>
+				</div>
+			}
 		}
-
-		<div class="row central">
-			<div class="col-md-4">
-				<canvas id="total-playlist-population" width="140" height="140"></canvas>
-
-				<h2>All Playlists</h2>
-				<p>
-					There are currently @(BranchHelpers.NumberWithDelimiter(totalPopulation)) people playing Halo 4 Online.
-				</p>
-			</div>
-			<div class="col-md-4">
-				<canvas id="team-playlist-population" width="140" height="140"></canvas>
-
-				<h2>Team Playlists</h2>
-				<p>
-					There are currently @(BranchHelpers.NumberWithDelimiter(totalTeamPopulation)) people playing Team based CSR Playlists.
-				</p>
-			</div>
-			<div class="col-md-4">
-				<canvas id="indvidual-playlist-population" width="140" height="140"></canvas>
-
-				<h2>Indvidual Playlists</h2>
-				<p>
-					There are currently @(BranchHelpers.NumberWithDelimiter(totalFfaPopulation)) people playing Indvidual based CSR Playlists.
-				</p>
-			</div>
-		</div>
 	</div>
 </div>
 
 <div class="leaferboards highlight-sector" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Halo4/leaderboard-overview.png');">
-	<div class="container">
+	<div class="container blurb">
 		<h1>CSR Leaderboards</h1>
 		<p>
 			Check how you compare to your friends in CSR leaderboards over on
@@ -69,54 +86,71 @@
 <div class="stats-marketing">
 	<div class="container">
 		@{
-			var totalCredits = Model.Challenges.Challenges.Sum(c => c.XpReward);
-			var campaignCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.Campaign).Sum(c => c.XpReward);
-			var matchmakingCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.WarGames).Sum(c => c.XpReward);
-			var spOpsCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.SpartanOps).Sum(c => c.XpReward);
-		}
+			var totalCredits = 0;
+			var campaignCredits = 0;
+			var matchmakingCredits = 0;
+			var spOpsCredits = 0;
 
-		<div class="row central">
-			<div class="col-md-3">
-				<canvas id="challenges-total-credits" width="140" height="140"></canvas>
+			if (Model.Challenges == null)
+			{
+				<div class="blurb central">
+					<h1>Channeling Exception...</h1>
+					<p>
+						Challenge stats are currently broken. They should be amended upon next challenge refresh.
+					</p>
+				</div>
+			}
+			else
+			{
+				totalCredits = Model.Challenges.Challenges.Sum(c => c.XpReward);
+				campaignCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.Campaign).Sum(c => c.XpReward);
+				matchmakingCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.WarGames).Sum(c => c.XpReward);
+				spOpsCredits = Model.Challenges.Challenges.Where(c => c.Category == ChallengeCategory.SpartanOps).Sum(c => c.XpReward);
 
-				<h2>All Halo 4 Challenges</h2>
-				<p>
-					There is currently @(BranchHelpers.NumberWithDelimiter(totalCredits))Xp avaiable though all challenges.
-				</p>
-			</div>
+				<div class="row central">
+					<div class="col-md-3">
+						<canvas id="challenges-total-credits" width="140" height="140"></canvas>
 
-			<div class="col-md-3">
-				<canvas id="challenges-campaign-credits" width="140" height="140"></canvas>
+						<h2>All Halo 4 Challenges</h2>
+						<p>
+							There is currently @(BranchHelpers.NumberWithDelimiter(totalCredits))Xp avaiable though all challenges.
+						</p>
+					</div>
 
-				<h2>Campaign Challenges</h2>
-				<p>
-					There is currently @(BranchHelpers.NumberWithDelimiter(campaignCredits))Xp avaiable though all Campaign challenges.
-				</p>
-			</div>
+					<div class="col-md-3">
+						<canvas id="challenges-campaign-credits" width="140" height="140"></canvas>
 
-			<div class="col-md-3">
-				<canvas id="challenges-matchmaking-credits" width="140" height="140"></canvas>
+						<h2>Campaign Challenges</h2>
+						<p>
+							There is currently @(BranchHelpers.NumberWithDelimiter(campaignCredits))Xp avaiable though all Campaign challenges.
+						</p>
+					</div>
 
-				<h2>War Games Challenges</h2>
-				<p>
-					There is currently @(BranchHelpers.NumberWithDelimiter(matchmakingCredits))Xp avaiable though all War Games challenges.
-				</p>
-			</div>
+					<div class="col-md-3">
+						<canvas id="challenges-matchmaking-credits" width="140" height="140"></canvas>
 
-			<div class="col-md-3">
-				<canvas id="challenges-spops-credits" width="140" height="140"></canvas>
+						<h2>War Games Challenges</h2>
+						<p>
+							There is currently @(BranchHelpers.NumberWithDelimiter(matchmakingCredits))Xp avaiable though all War Games challenges.
+						</p>
+					</div>
 
-				<h2>Spartan Ops Challenges</h2>
-				<p>
-					There is currently @(BranchHelpers.NumberWithDelimiter(spOpsCredits))Xp avaiable though all Spartan Ops challenges.
-				</p>
-			</div>
-		</div>
+					<div class="col-md-3">
+						<canvas id="challenges-spops-credits" width="140" height="140"></canvas>
+
+						<h2>Spartan Ops Challenges</h2>
+						<p>
+							There is currently @(BranchHelpers.NumberWithDelimiter(spOpsCredits))Xp avaiable though all Spartan Ops challenges.
+						</p>
+					</div>
+				</div>
+			}
+}
 	</div>
 </div>
 
 <div class="top-ten highlight-sector" style="background-image: url('@CdnHelpers.GetAssetLocale(false)Content/Images/Area/Halo4/top-ten-overview.png');">
-	<div class="container">
+	<div class="container blurb">
 		<h1>Top Ten Leaderboards</h1>
 		<p>
 			Check the top ten players in the world in a variety of achievements over on

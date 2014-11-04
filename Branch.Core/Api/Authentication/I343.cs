@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -42,13 +43,15 @@ namespace Branch.Core.Api.Authentication
 							strResponse = response.RawText;
 
 							var waypointToken = JsonConvert.DeserializeObject<Halo4Waypoint>(response.RawText);
-
 							if (waypointToken != null && !String.IsNullOrWhiteSpace(waypointToken.SpartanToken))
 							{
-								var authentication = sqlStorage.Authentications.FirstOrDefault(a => a.Type == AuthenticationType.Halo4);
-								if (authentication == null) authentication = new Models.Sql.Authentication { Type = AuthenticationType.Halo4 };
-								authentication.Key = waypointToken.SpartanToken;
-								authentication.IsValid = true;
+								var authentication = new Models.Sql.Authentication
+								{
+									Type = AuthenticationType.Halo4,
+									IsValid = true,
+									Key = waypointToken.SpartanToken
+								};
+								sqlStorage.Authentications.AddOrUpdate(a => a.Type, authentication);
 								sqlStorage.SaveChanges();
 
 								everythingWentGucci = true;

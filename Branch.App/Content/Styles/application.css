@@ -84,12 +84,11 @@ a.plain {
     text-decoration: none; }
 
 body.home .welcome-header {
-  padding-bottom: 0;
   text-align: center;
   padding-bottom: 50px; }
 @media screen and (min-width: 992px) {
   body.home .bs-header h1, body.home .bs-header p {
-    margin-right: 0px;
+    margin-right: 0;
     text-align: center; } }
 body.home .project-stats {
   margin: 0;
@@ -103,7 +102,7 @@ body.home .project-stats li {
   font-size: 12px; }
 body.home .project-stats li:first-child {
   display: inline;
-  margin-left: 0px; }
+  margin-left: 0; }
 body.home .social-media-shit {
   margin: 0;
   padding: 0;
@@ -114,7 +113,7 @@ body.home .social-media-shit li {
   margin-left: 20px; }
 body.home .social-media-shit li:first-child {
   display: inline;
-  margin-left: 0px; }
+  margin-left: 0; }
 body.home .marketing {
   margin-top: 100px;
   margin-bottom: 50px; }
@@ -126,33 +125,15 @@ body.home .games .game {
   height: 450px; }
   body.home .games .game .game-backup-cover {
     background: #ffffff no-repeat center 0 fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     width: 100%;
     height: 100%;
     position: relative; }
-    body.home .games .game .game-backup-cover.Halo4 {
-      background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
-    body.home .games .game .game-backup-cover.Reach {
-      background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
-    body.home .games .game .game-backup-cover.MCC {
-      background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
     body.home .games .game .game-backup-cover .game-cover {
       background: #ffffff no-repeat center 0 fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
       background-size: cover;
       width: 100%;
       height: 100%; }
-      body.home .games .game .game-backup-cover .game-cover.Halo4 {
-        background-image: url('../Images/Home/Covers/Halo4/cover1.jpg'); }
-      body.home .games .game .game-backup-cover .game-cover.Reach {
-        background-image: url('../Images/Home/Covers/Reach/cover1.jpg'); }
-      body.home .games .game .game-backup-cover .game-cover.MCC {
-        background-image: url('../Images/Home/Covers/MCC/cover1.jpg'); }
   body.home .games .game .mask {
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
@@ -330,9 +311,6 @@ body.halo4 .halo4-header {
   padding: 0;
   margin: 0;
   background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover; }
   @media (max-width: 767px) {
     body.halo4 .halo4-header {
@@ -380,11 +358,12 @@ body.halo4 .halo4-header {
       width: 300px;
       background-repeat: no-repeat;
       -moz-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
       -o-transform: scaleX(-1);
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
-      filter: FlipH;
       -ms-filter: "FlipH";
+      filter: FlipH;
       position: absolute;
       top: -21px;
       right: 0;
@@ -398,6 +377,12 @@ body.halo4 .halo4-header {
       top: 10px;
       right: 190px; }
 
+body.halo4_homepage .blurb.central {
+  text-align: center; }
+body.halo4_homepage .blurb > h1 {
+  font-size: 55px; }
+body.halo4_homepage .blurb > p {
+  font-size: 20px; }
 body.halo4_homepage .stats-marketing {
   color: white;
   padding-top: 100px;
@@ -436,11 +421,8 @@ body.halo4_homepage .highlight-sector {
   background: #eee;
   height: 350px;
   background-repeat: no-repeat; }
-  body.halo4_homepage .highlight-sector > .container > h1 {
-    margin-top: 70px;
-    font-size: 55px; }
-  body.halo4_homepage .highlight-sector > .container > p {
-    font-size: 20px; }
+  body.halo4_homepage .highlight-sector .blurb > h1 {
+    margin-top: 70px; }
 body.halo4_homepage .leaferboards {
   text-align: left;
   background-position: right center; }
@@ -460,7 +442,6 @@ body.halo4_homepage.page-bg-backup-cover {
     background-repeat: no-repeat;
     background-position: center 0;
     background-attachment: fixed;
-    background-size: cover;
     background-size: cover;
     width: 100%;
     min-height: 100%;
@@ -1124,7 +1105,7 @@ body.reach .reach-header {
         margin-bottom: 5px; }
         @media (max-width: 767px) {
           body.reach .reach-header .mask .container .rank-flairs > .col-md-8 > img {
-            margin: 15px auto 0px auto; } }
+            margin: 15px auto 0 auto; } }
       body.reach .reach-header .mask .container .rank-flairs > .col-md-8 > .progress {
         margin-bottom: 0; }
       body.reach .reach-header .mask .container .rank-flairs > .col-md-8 > .xp {
@@ -1133,9 +1114,13 @@ body.reach .reach-header {
       height: 321px;
       width: 300px;
       background-repeat: no-repeat;
+      -moz-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
-      filter: FlipH;
       -ms-filter: "FlipH";
+      filter: FlipH;
       position: absolute;
       top: -21px;
       right: 0;
@@ -1810,7 +1795,7 @@ body.identity .user-auth-header {
           -ms-filter: "FlipH";
           filter: FlipH; }
 body.identity .details .input-section {
-  margin: 40px auto; }
+  padding: 40px 0; }
   body.identity .details .input-section .col-md-6 > .title {
     font-size: 16px;
     font-weight: 600; }
@@ -1820,5 +1805,60 @@ body.identity .details .input-section {
     margin-right: 6px; }
   body.identity .details .input-section .col-md-6 > .input-group {
     margin-top: 10px; }
+body.identity .identity-header {
+  height: 350px; }
+  @media (max-width: 768px) {
+    body.identity .identity-header {
+      height: 240px; } }
+  body.identity .identity-header > .container > h1 {
+    margin-top: 0; }
+    @media (max-width: 768px) {
+      body.identity .identity-header > .container > h1 {
+        margin-top: auto; } }
+  body.identity .identity-header > .container > ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 15px; }
+    body.identity .identity-header > .container > ul > li {
+      margin-right: 5px;
+      display: inline; }
+  body.identity .identity-header > .container > .actions {
+    margin-top: 20px; }
+  body.identity .identity-header > .container > .holy-shit-people {
+    position: absolute;
+    top: 21px;
+    right: 80px;
+    width: 460px;
+    height: 360px; }
+    body.identity .identity-header > .container > .holy-shit-people > .player {
+      background-repeat: no-repeat;
+      position: absolute;
+      background-size: cover; }
+      body.identity .identity-header > .container > .holy-shit-people > .player.a {
+        top: 33px;
+        right: 91px;
+        z-index: 100;
+        height: 327px;
+        width: 182px; }
+      body.identity .identity-header > .container > .holy-shit-people > .player.b {
+        top: 144px;
+        right: 4px;
+        z-index: 99;
+        width: 121px;
+        height: 216px; }
+      body.identity .identity-header > .container > .holy-shit-people > .player.c {
+        top: 161px;
+        right: 217px;
+        z-index: 98;
+        width: 111px;
+        height: 199px;
+        -moz-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        -ms-filter: "FlipH";
+        filter: FlipH; }
 
 /*# sourceMappingURL=application.css.map */

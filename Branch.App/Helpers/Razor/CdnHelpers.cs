@@ -7,7 +7,7 @@
 #if DEBUG
 			return preCompiled ? "~/" : "/";
 #else
-			return "http://cdn.branchapp.co/cdn/";
+			return "//az673231.vo.msecnd.net/";
 #endif
 		}
 	}

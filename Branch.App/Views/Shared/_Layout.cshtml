@@ -16,7 +16,7 @@
 		@AzureCdn.StylesRender("~/bundles/bootstrap-custom")
 		@AzureCdn.StylesRender("~/bundles/branch-specific")
 		@AzureCdn.ScriptsRender("~/bundles/modernizr")
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=0, initial-scale=1.0">
@@ -37,8 +37,8 @@
 	</head>
 
 <body class="@ViewBag.Template page-bg-backup-cover" count-data-ref="1">
-	<div class="page-bg-cover"></div>
-	<div id="page-bg-mask" class="mask">
+	<div class="page-bg-cover" style="background-image: url('@ViewBag.PageBackgroundCover')"></div>
+	<div id="page-bg-mask" class="mask" style="background-image: url('@ViewBag.PageBackgroundCover')">
 		@Html.Partial("Header")
 
 		<article>
@@ -73,7 +73,7 @@
 				var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) return;
 				js = d.createElement(s); js.id = id;
-				js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk')
 			);

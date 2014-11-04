@@ -20,6 +20,10 @@ namespace Branch.Models.Migrations
 				new BranchRole {Name = "Monitor", Type = RoleType.Administrator},
 				new BranchRole {Name = "The Flood", Type = RoleType.Banned}
 			);
+
+			context.BranchIdentityInvitations.AddOrUpdate(
+				i => i.InvitationCode,
+				new BranchIdentityInvitation("fuck yo politics man"));
 		}
 	}
 }

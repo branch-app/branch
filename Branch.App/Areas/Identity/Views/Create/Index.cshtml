@@ -37,7 +37,8 @@
 									<span class="input-group-addon">@@</span>
 									@Html.TextBoxFor(v => v.FullName, new { @class = "form-control" })
 								</div>
-
+							</div>
+							<div class="col-md-6">
 								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "FullName"))
 								{
 									if (ViewContext.ViewData.ModelState.First(x => x.Key == "FullName").Value.Errors.Any())
@@ -66,7 +67,8 @@
 									<span class="input-group-addon">@@</span>
 									@Html.TextBoxFor(v => v.Username, new { @class = "form-control" })
 								</div>
-								
+							</div>
+							<div class="col-md-6">
 								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "Username"))
 								{
 									if (ViewContext.ViewData.ModelState.First(x => x.Key == "Username").Value.Errors.Any())
@@ -75,35 +77,6 @@
 											<h4>Invalid Username</h4>
 											<p class="reason">
 												@Html.ValidationMessageFor(v => v.Username)
-											</p>
-										</div>
-									}
-								}
-							</div>
-						</section>
-
-						<section class="input-section gamertag-section row">
-							<div class="col-md-6">
-								<span class="title">Gamertag</span>
-								<p>
-									<span class="tier">
-										Optional
-									</span>
-									Your Xbox Live Gamertag, you can change this as often as you want.
-								</p>
-								<div class="input-group">
-									<span class="input-group-addon">@@</span>
-									@Html.TextBoxFor(v => v.Gamertag, new { @class = "form-control" })
-								</div>
-
-								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "Gamertag"))
-								{
-									if (ViewContext.ViewData.ModelState.First(x => x.Key == "Gamertag").Value.Errors.Any())
-									{
-										<div class="bs-callout bs-callout-danger" style="">
-											<h4>Invalid Gamertag</h4>
-											<p class="reason">
-												@Html.ValidationMessageFor(v => v.Gamertag)
 											</p>
 										</div>
 									}
@@ -124,7 +97,8 @@
 									<span class="input-group-addon">@@</span>
 									@Html.TextBoxFor(v => v.Email, new { @class = "form-control" })
 								</div>
-
+							</div>
+							<div class="col-md-6">
 								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "Email"))
 								{
 									if (ViewContext.ViewData.ModelState.First(x => x.Key == "Email").Value.Errors.Any())
@@ -133,6 +107,68 @@
 											<h4>Invalid Email</h4>
 											<p class="reason">
 												@Html.ValidationMessageFor(v => v.Email)
+											</p>
+										</div>
+									}
+								}
+							</div>
+						</section>
+
+						<section class="input-section gamertag-section row">
+							<div class="col-md-6">
+								<span class="title">Gamertag</span>
+								<p>
+									<span class="tier">
+										Optional
+									</span>
+									Your Xbox Live Gamertag, you can change this as often as you want.
+								</p>
+								<div class="input-group">
+									<span class="input-group-addon">@@</span>
+									@Html.TextBoxFor(v => v.Gamertag, new { @class = "form-control" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "Gamertag"))
+								{
+									if (ViewContext.ViewData.ModelState.First(x => x.Key == "Gamertag").Value.Errors.Any())
+									{
+										<div class="bs-callout bs-callout-danger" style="">
+											<h4>Invalid Gamertag</h4>
+											<p class="reason">
+												@Html.ValidationMessageFor(v => v.Gamertag)
+											</p>
+										</div>
+									}
+								}
+							</div>
+						</section>
+
+						<section class="input-section invite-code-section row">
+							<div class="col-md-6">
+								<span class="title">Invitation Code</span>
+								<p>
+									<span class="tier">
+										Required
+									</span>
+									While Branch Identities are being tested, you need an invitation code. Tweet me
+									<a href="https://twitter.com/0xdeafcafe">0xdeafcafe</a>
+									if you want a code.
+								</p>
+								<div class="input-group">
+									<span class="input-group-addon">@@</span>
+									@Html.TextBoxFor(v => v.InvitationCode, new { @class = "form-control" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "InvitationCode"))
+								{
+									if (ViewContext.ViewData.ModelState.First(x => x.Key == "InvitationCode").Value.Errors.Any())
+									{
+										<div class="bs-callout bs-callout-danger" style="">
+											<h4>Invalid Invitation Code</h4>
+											<p class="reason">
+												@Html.ValidationMessageFor(v => v.InvitationCode)
 											</p>
 										</div>
 									}
@@ -156,22 +192,7 @@
 									@Html.PasswordFor(v => v.Password, new { @class = "form-control" })
 								</div>
 							</div>
-						</section>
-
-						<section class="input-section password-conf-section row">
 							<div class="col-md-6">
-								<span class="title">Password Confirmation</span>
-								<p>
-									<span class="tier">
-										Required
-									</span>
-									Keep it the same as above
-								</p>
-								<div class="input-group">
-									<span class="input-group-addon">*</span>
-									@Html.PasswordFor(v => v.PasswordConfirm, new { @class = "form-control" })
-								</div>
-
 								@if (ViewContext.ViewData.ModelState.Any(x => x.Key == "Password"))
 								{
 									if (ViewContext.ViewData.ModelState.First(x => x.Key == "Password").Value.Errors.Any())
@@ -184,6 +205,22 @@
 										</div>
 									}
 								}
+							</div>
+						</section>
+						
+						<section class="input-section password-confirmation-section row">
+							<div class="col-md-6">
+								<span class="title">Password Confirmation</span>
+								<p>
+									<span class="tier">
+										Required
+									</span>
+									Keep it the same as above
+								</p>
+								<div class="input-group">
+									<span class="input-group-addon">*</span>
+									@Html.PasswordFor(v => v.PasswordConfirm, new { @class = "form-control" })
+								</div>
 							</div>
 						</section>
 

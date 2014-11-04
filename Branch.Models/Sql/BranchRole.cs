@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Branch.Models.Sql
 {
 	public class BranchRole
+		: Audit
 	{
 		[Key]
 		public int Id { get; set; }

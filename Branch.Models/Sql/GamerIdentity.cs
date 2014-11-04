@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Branch.Models.Sql
 {
 	public class GamerIdentity
+		: Audit
 	{
 		[Key]
 		public int Id { get; set; }
@@ -27,6 +29,18 @@ namespace Branch.Models.Sql
 		{
 			// To Lower
 			return gamerId.ToLowerInvariant();
+		}
+
+		public IEnumerable<IGameSpecificIdentity> GetGameIdentities()
+		{
+			var halo4Identity = Halo4Identities.FirstOrDefault();
+			var reachIdentity = ReachIdentities.FirstOrDefault();
+
+			var identities = new List<IGameSpecificIdentity>();
+			if (halo4Identity != null) identities.Add(halo4Identity);
+			if (reachIdentity != null) identities.Add(reachIdentity);
+
+			return identities.AsEnumerable();
 		}
 	}
 

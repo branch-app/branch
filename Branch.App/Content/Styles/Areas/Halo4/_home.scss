@@ -5,9 +5,6 @@ body.halo4 {
 		padding: 0;
 		margin: 0;
 		background-attachment: fixed;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
 		background-size: cover;
 
 		@media (max-width: 767px) {
@@ -25,7 +22,7 @@ body.halo4 {
 			background: radial-gradient(ellipse at center, rgba(61,61,124,0.5) 0%,rgba(61,61,124,1) 100%); /* W3C */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#803d3d7c', endColorstr='#3d3d7c',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
 			height: 100%;
-			
+
 			.container {
 				.name-flairs {
 					.col-md-12 {
@@ -74,11 +71,12 @@ body.halo4 {
 					width: 300px;
 					background-repeat: no-repeat;
 					-moz-transform: scaleX(-1);
+					-ms-transform: scaleX(-1);
 					-o-transform: scaleX(-1);
 					-webkit-transform: scaleX(-1);
 					transform: scaleX(-1);
-					filter: FlipH;
 					-ms-filter: "FlipH";
+					filter: FlipH;
 					position: absolute;
 					top: -21px;
 					right: 0;
@@ -100,6 +98,19 @@ body.halo4 {
 }
 
 body.halo4_homepage {
+	.blurb {
+		&.central {
+			text-align: center;
+		}
+
+		> h1 {
+			font-size: 55px;
+		}
+		> p {
+			font-size: 20px;
+		}
+	}
+
 	.stats-marketing {
 		color: white;
 		padding-top: 100px;
@@ -142,14 +153,8 @@ body.halo4_homepage {
 		height: 350px;
 		background-repeat: no-repeat;
 
-		> .container {
-			> h1 {
-				margin-top: 70px;
-				font-size: 55px;
-			}
-			> p {
-				font-size: 20px;
-			}
+		.blurb > h1 {
+			margin-top: 70px;
 		}
 	}
 	.leaferboards {
@@ -175,7 +180,6 @@ body.halo4_homepage {
 			background-repeat: no-repeat;
 			background-position: center 0;
 			background-attachment: fixed;
-			background-size: cover;
 			background-size: cover;
 			width: 100%;
 			min-height: 100%;

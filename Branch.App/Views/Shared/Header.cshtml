@@ -3,7 +3,9 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<img alt="Logo" width="30" height="30" src="@(CdnHelpers.GetAssetLocale(false))Content/Icons/logo-100x100.png" style="float: left; margin-top: 10px; margin-right: 20px;" />
+			<a href="@Url.Action("Index", "Home", new { area = "" })">
+				<img alt="Logo" width="30" height="30" src="@(CdnHelpers.GetAssetLocale(false))Content/Icons/logo-100x100.png" style="float: left; margin-top: 10px; margin-right: 20px;" />
+			</a>
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
@@ -123,7 +125,7 @@
 						@Html.ActionLink("Sign In", "Create", "Session", new { area = "" }, null)
 					</li>
 					<li>
-						@Html.ActionLink("Sign Up", "Index", "Create", new { area = "" }, null)
+						@Html.ActionLink("Sign Up", "Index", "Create", new { area = "Identity" }, null)
 					</li>
 				}
 			</ul>

@@ -17,7 +17,7 @@ namespace Branch.App.Controllers
 		[RequiresNoAuthentication]
 		public ActionResult Create()
 		{
-			return View(new CreateSessionViewModel());
+			return View(new CreateSessionViewModel { RememberMe = true });
 		}
 
 		// POST: Session/Create
@@ -61,8 +61,7 @@ namespace Branch.App.Controllers
 				Response.SetCookie(cookie);
 				sqlStorage.SaveChanges();
 
-				// TODO: Redirect to account page
-				return RedirectToRoute("Welcome");
+				return RedirectToRoute("BranchIdentityView", new { controller = "Home", action = "Index", slug = branchIdentity.Username });
 			}
 		}
 

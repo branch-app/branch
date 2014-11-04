@@ -35,27 +35,29 @@ namespace Branch.App.Areas.Identity.Controllers
 				viewModel.FullName = viewModel.FullName.Trim();
 				viewModel.Gamertag = viewModel.Gamertag.Trim();
 				viewModel.Username = viewModel.Username.Trim();
+				viewModel.InvitationCode = viewModel.InvitationCode.Trim();
 
-				// Validate uniqueness or email and username
-				var user = sqlStorage.BranchIdentities.FirstOrDefault(i => i.Username.ToLower() == viewModel.Username.ToLower());
+				// Validate uniqueness of Username and Email
+				var user = sqlStorage.BranchIdentities
+					.FirstOrDefault(i => 
+						i.Username.ToLower() == viewModel.Username.ToLower() ||
+						i.Email.ToLower() == viewModel.Email.ToLower());
 				if (user != null)
 				{
-					ModelState.AddModelError("Username", "The specified username has already been taken.");
-					return View(viewModel);
+					ModelState.AddModelError("Username", "Either this username has already been taken, or that email has already been used.");
+					ModelState.AddModelError("Email", "Either this username has already been taken, or that email has already been used.");
 				}
-				user = sqlStorage.BranchIdentities.FirstOrDefault(i => i.Email.ToLower() == viewModel.Email.ToLower());
-				if (user != null)
-				{
-					ModelState.AddModelError("Email", "The specified email has already been taken.");
-					return View(viewModel);
-				}
+
+				// Validate Invite Code
+				var invite =
+					sqlStorage.BranchIdentityInvitations.FirstOrDefault(
+						i => i.InvitationCode.ToLower() == viewModel.InvitationCode.ToLower() && !i.Used);
+				if (invite == null)
+					ModelState.AddModelError("InvitationCode", "This invite code has either been used or isn't valid. Sorry bae.");
 
 				// Check Password is identical
 				if (viewModel.Password != viewModel.PasswordConfirm)
-				{
 					ModelState.AddModelError("Password", "Your password and confirmation do not match.");
-					return View(viewModel);
-				}
 
 				// Check Password Complexity
 				var complexity = 0;
@@ -69,13 +71,16 @@ namespace Branch.App.Areas.Identity.Controllers
 					complexity++;
 
 				if (complexity < 2)
-				{
 					ModelState.AddModelError("Password", "Your password is not complex enough.");
+
+				if (!ModelState.IsValid)
+				{
+					viewModel.Password = viewModel.PasswordConfirm = "";
 					return View(viewModel);
 				}
 
 				// All gucci, create Branch Identity
-				var password = Pbkdf2Crypto.ComputeHash(viewModel.Password, new Random().Next(1000, 2000));
+				var password = Pbkdf2Crypto.ComputeHash(viewModel.Password, new Random().Next(1000, 1200));
 				var branchIdentity = new BranchIdentity
 				{
 					BranchRole = sqlStorage.BranchRoles.First(r => r.Type == RoleType.User),
@@ -84,8 +89,13 @@ namespace Branch.App.Areas.Identity.Controllers
 					Username = viewModel.Username,
 					PasswordHash = password.Hash,
 					PasswordIterations = password.Iterations,
-					PasswordSalt = password.Salt
+					PasswordSalt = password.Salt,
+					BranchIdentityInvitation = invite
 				};
+
+				// Set invite as used
+// ReSharper disable once PossibleNullReferenceException
+				invite.Used = true;
 
 				// Check gamer ids
 				GlobalStorage.H4Manager.GetPlayerServiceRecord(viewModel.Gamertag, true);
@@ -107,8 +117,7 @@ namespace Branch.App.Areas.Identity.Controllers
 				Response.SetCookie(cookie);
 				sqlStorage.SaveChanges();
 
-				// TODO: Redirect to account page
-				return RedirectToRoute("Welcome");
+				return RedirectToRoute("BranchIdentityView", new { controller = "Home", action = "Index", slug = branchIdentity.Username });
 			}
 
 		}

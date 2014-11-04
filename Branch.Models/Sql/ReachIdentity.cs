@@ -3,6 +3,7 @@
 namespace Branch.Models.Sql
 {
 	public class ReachIdentity
+		: Audit, IGameSpecificIdentity
 	{
 		[Key]
 		public int Id { get; set; }

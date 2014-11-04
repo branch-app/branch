@@ -6,7 +6,7 @@
     <AzureDeploymentLabel>Branch.Azure</AzureDeploymentLabel>
     <AzureDeploymentReplacementMethod>AutomaticUpgrade</AzureDeploymentReplacementMethod>
     <AzureSlot>Production</AzureSlot>
-    <AzureEnableRemoteDesktop>False</AzureEnableRemoteDesktop>
+    <AzureEnableRemoteDesktop>True</AzureEnableRemoteDesktop>
     <AzureEnableWebDeploy>False</AzureEnableWebDeploy>
     <AzureFallbackToDeleteAndRecreateIfUpgradeFails>False</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
     <AzureHostedServiceLabel>branch</AzureHostedServiceLabel>
@@ -14,11 +14,9 @@
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
-    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
+    <AzureSolutionConfiguration>RemoteRelease</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>branchapp</AzureStorageAccountLabel>
     <AzureStorageAccountName>branchapp</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
-    <EnableRemoteDebugger>True</EnableRemoteDebugger>
-    <RemoteDebuggerConnectorCertificateThumbprint>8C4E6E4EBCAA48C1C6610BCA6330039236F0F09C</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>

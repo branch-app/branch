@@ -5,22 +5,26 @@ using Branch.Core.Storage;
 using Branch.Models.Sql;
 using System.Data.Entity;
 
-namespace Branch.App.Extentions.Helpers
+namespace Branch.App.Helpers
 {
 	public static class Authentication
 	{
 		public static BranchIdentity GetAuthenticatedIdentity()
 		{
+			var sessionIdentifier = HttpContext.Current.Request.Cookies["SessionIdentifier"];
+			if (sessionIdentifier == null)
+				return null;
+
 			using (var sqlStorage = new SqlStorage())
 			{
-				var sessionIdentifier = HttpContext.Current.Request.Cookies["SessionIdentifier"];
-				if (sessionIdentifier == null)
-					return null;
+				sqlStorage.Configuration.LazyLoadingEnabled = false;
 
 				// Validate Session
 				var sessionGuid = Guid.Parse(sessionIdentifier.Value);
 				var session = sqlStorage.BranchSessions
-					.Include(s => s.BranchIdentity).Include(s => s.BranchIdentity.GamerIdentity)
+					.Include(s => s.BranchIdentity)
+					.Include(s => s.BranchIdentity.BranchRole)
+					.Include(s => s.BranchIdentity.GamerIdentity)
 					.Include(s => s.BranchIdentity.GamerIdentity.ReachIdentities)
 					.Include(s => s.BranchIdentity.GamerIdentity.Halo4Identities)
 					.FirstOrDefault(s => s.Identifier == sessionGuid);
@@ -28,7 +32,8 @@ namespace Branch.App.Extentions.Helpers
 					return null;
 
 				// Return Branch Identity
-				return session.IsValid() ? null : session.BranchIdentity;
+				var valid = session.IsValid();
+				return valid ? session.BranchIdentity : null;
 			}
 		}
 	}

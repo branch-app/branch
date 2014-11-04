@@ -10,19 +10,17 @@ namespace Branch.App.Areas.Identity
 		{
 			var namespaces = new[] { "Branch.App.Areas.Identity.Controllers" };
 
-			// View Profile
-			context.MapRoute(
-				"BranchIdentityView",
-				"Identity/{slug}/{controller}/{action}",
-				new { controller = "View", action = "Index" }, namespaces);
-
 			// Wildcard
 			context.MapRoute(
 				"Identity_default",
 				"Identity/{controller}/{action}/{id}",
-				new { action = "Index", id = UrlParameter.Optional }
-			);
+				new { action = "Index", id = UrlParameter.Optional }, new { controller = "Create" }, namespaces);
 
+			// View Profile
+			context.MapRoute(
+				"BranchIdentityView",
+				"Identity/{slug}/{controller}/{action}/{id}",
+				new { controller = "Home", action = "Index", id = UrlParameter.Optional }, namespaces);
 		}
 	}
 }

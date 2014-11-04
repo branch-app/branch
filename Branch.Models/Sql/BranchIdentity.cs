@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Branch.Models.Sql
 {
 	public class BranchIdentity
+		: Audit
 	{
 		[Key]
 		public int Id { get; set; }
@@ -25,6 +26,8 @@ namespace Branch.Models.Sql
 
 		[Required]
 		public string FullName { get; set; }
+
+		public virtual BranchIdentityInvitation BranchIdentityInvitation { get; set; }
 
 		public virtual ICollection<BranchSession> BranchIdentitySessions { get; set; } 
 
