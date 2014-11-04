@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-
 #if REMOTE
 using System.Data.Entity.Migrations;
 #endif
+using Branch.Models.Migrations;
 
 namespace Branch.Models.Sql
 {
@@ -31,7 +31,7 @@ namespace Branch.Models.Sql
 
 		static DatabaseContext()
 		{
-			Database.SetInitializer<DbContext>(null);
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext, Configuration>());
 		}
 
 		#region Overrides & Audit
