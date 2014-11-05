@@ -17,7 +17,7 @@
 
 	@Html.Partial("FlashMessage", true)
 
-	<div class="ident-section">
+	<div class="row ident-section">
 		<div class="row">
 			<div class="col-md-4">
 				<h2>Halo 4</h2>
@@ -35,10 +35,16 @@
 			{
 				@Html.Partial("Partials/Halo4ServiceRecord", identity)
 			}
+			@if (!Model.Halo4Identities.Any())
+			{
+				<h3>No matching Halo 4 players</h3>
+			}
 		</div>
 	</div>
+	
+	<div class="row ident-seperator"></div>
 
-	<div class="ident-section">
+	<div class="row ident-section">
 		<div class="row">
 			<div class="col-md-4">
 				<h2>Halo: Reach</h2>
@@ -55,6 +61,10 @@
 			@foreach (var identity in Model.ReachIdentities)
 			{
 				@Html.Partial("Partials/HaloReachServiceRecord", identity)
+			}
+			@if (!Model.ReachIdentities.Any())
+			{
+				<h3>No matching Halo: Reach players</h3>
 			}
 		</div>
 	</div>
