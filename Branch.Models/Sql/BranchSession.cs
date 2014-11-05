@@ -58,7 +58,7 @@ namespace Branch.Models.Sql
 				Browser = modernAgent.Browser(),
 				Platform = modernAgent.OperatingSystem(),
 				UserAgent = userAgent,
-				//BranchIdentity = branchIdentity,
+				BranchIdentity = branchIdentity,
 				ExpiresAt = rememberMe ? DateTime.UtcNow.AddYears(1) : DateTime.UtcNow.AddDays(1)
 			};
 
