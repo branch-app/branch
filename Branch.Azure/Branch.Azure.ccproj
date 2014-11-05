@@ -70,7 +70,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PublishProfile Include="Profiles\branchProduction.azurePubxml" />
+    <PublishProfile Include="Profiles\branch-production-testing.azurePubxml" />
+    <PublishProfile Include="Profiles\branch-production-debugging.azurePubxml" />
+    <PublishProfile Include="Profiles\branch-production.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

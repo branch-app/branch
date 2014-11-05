@@ -56,7 +56,7 @@
 		@AzureCdn.ScriptsRender("~/bundles/flash")
 		@AzureCdn.ScriptsRender("~/bundles/bootstrap-scripts")
 		@AzureCdn.ScriptsRender("~/bundles/branch-js")
-
+		
 		<script>
 			$(function () { $("#flash-message-box").flashMessage(); });
 			$(document).ready(function () {
@@ -70,12 +70,12 @@
 		<div id="fb-root"></div>
 		<script>
 			(function (d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk')
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=189234734457151";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk')
 			);
 		</script>
 		<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
@@ -85,10 +85,10 @@
 			!function (g, s, q, r, d) {
 				r = g[r] = g[r] || function () {
 					(r.q = r.q || []).push(
-					arguments)
+						arguments)
 				}; d = s.createElement(q); q = s.getElementsByTagName(q)[0];
 				d.src = '//d1l6p2sc9645hc.cloudfront.net/tracker.js'; q.parentNode.
-				insertBefore(d, q)
+					insertBefore(d, q)
 			}(window, document, 'script', '_gs');
 
 			_gs('GSN-152925-H');

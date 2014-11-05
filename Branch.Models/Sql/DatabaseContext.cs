@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+
 #if REMOTE
-using System.Data.Entity.Migrations;
-#endif
 using Branch.Models.Migrations;
+#endif
 
 namespace Branch.Models.Sql
 {
@@ -15,24 +15,19 @@ namespace Branch.Models.Sql
 #if REMOTE	// Running on Azure
 
 		public DatabaseContext()
-			: base(@"Server=tcp:kvfrzkb5dd.database.windows.net,1433;Database=branch-db;User ID=branch-prod-login@kvfrzkb5dd;Password=GW6GeG8jkVMBAMUu7Yd5qA4S;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;")
+			: base(@"Server=tcp:kvfrzkb5dd.database.windows.net,1433;Database=branch-db;User ID=branch-prod-login@kvfrzkb5dd;Password=GW6GeG8jkVMBAMUu7Yd5qA4S;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;") { }
+
+		static DatabaseContext()
 		{
-			// Migrations
-			var migrator = new DbMigrator(new DbMigrationsConfiguration());
-			if (migrator.GetPendingMigrations().Any())
-				migrator.Update();
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext, Configuration>(@"Server=tcp:kvfrzkb5dd.database.windows.net,1433;Database=branch-db;User ID=branch-prod-login@kvfrzkb5dd;Password=GW6GeG8jkVMBAMUu7Yd5qA4S;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"));
 		}
+
 #elif LOCAL	// Running Locally
 		public DatabaseContext()
 			: base(@"Data Source=(localdb)\ProjectsV12;Initial Catalog=BranchDevelopment;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False") { }
 #else		// wtf?
 		throw new InvalidOperationException();
 #endif
-
-		static DatabaseContext()
-		{
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext, Configuration>());
-		}
 
 		#region Overrides & Audit
 

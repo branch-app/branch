@@ -9,7 +9,7 @@ using Branch.Core.Storage;
 using H4Api = Branch.Core.Game.Halo4.Api;
 using HReachApi = Branch.Core.Game.HaloReach.Api;
 
-#if RELEASE
+#if !RELEASE
 using System;
 using Branch.App.Controllers;
 #endif
@@ -31,7 +31,7 @@ namespace Branch.App
 			GlobalStorage.HReachManager = new HReachApi.Manager(GlobalStorage.AzureStorage);
 		}
 
-#if RELEASE
+#if !RELEASE
 		protected void Application_Error()
 		{
 			var exception = Server.GetLastError();
@@ -64,6 +64,6 @@ namespace Branch.App
 
 		public static HReachApi.Manager HReachManager { get; set; }
 
-		public static string AzureCdnEndpoint = "http://cdn.branchapp.co/cdn/";
+		public static readonly string AzureCdnEndpoint = "//az673231.vo.msecnd.net/cdn/";
 	}
 }

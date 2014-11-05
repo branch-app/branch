@@ -11,12 +11,14 @@
     <AzureFallbackToDeleteAndRecreateIfUpgradeFails>False</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
     <AzureHostedServiceLabel>branch</AzureHostedServiceLabel>
     <AzureHostedServiceName>branch</AzureHostedServiceName>
-    <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
+    <AzureEnableIntelliTrace>True</AzureEnableIntelliTrace>
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
-    <AzureSolutionConfiguration>RemoteRelease</AzureSolutionConfiguration>
+    <AzureSolutionConfiguration>RemoteDebug</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>branchapp</AzureStorageAccountLabel>
     <AzureStorageAccountName>branchapp</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableRemoteDebugger>True</EnableRemoteDebugger>
+    <RemoteDebuggerConnectorCertificateThumbprint>7AC024BB1F28CF407DCCDF1B81984B589206BF62</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>

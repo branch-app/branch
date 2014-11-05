@@ -37,8 +37,11 @@ namespace Branch.App.App_Start
 			bundles.Add(new AzureScriptBundle("~/bundles/bootstrap-scripts", "cdn", "https://az673231.vo.msecnd.net").Include(
 				"~/Scripts/bootstrap-3.0.0.js"
 			));
+
+			// Branch Typescript
 			bundles.Add(new AzureScriptBundle("~/bundles/branch-js", "cdn", "https://az673231.vo.msecnd.net").Include(
-				"~/Scripts/search-auto-complete.js"
+				"~/Scripts/NotFuckingLibraries/search-autocomplete.js",
+				"~/Scripts/NotFuckingLibraries/app.js"
 			));
 
 			// branch specific styles
