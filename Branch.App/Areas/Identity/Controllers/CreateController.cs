@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Branch.App.Areas.Identity.Models;
+using Branch.App.Helpers;
 using Branch.App.Helpers.Attributes;
 using Branch.Core.Cryptography;
 using Branch.Core.Storage;
@@ -11,7 +12,7 @@ using Branch.Models.Sql;
 
 namespace Branch.App.Areas.Identity.Controllers
 {
-	public class CreateController : Controller
+	public class CreateController : BaseController
 	{
 		// GET: Identity/Create
 		[RequiresNoAuthentication]

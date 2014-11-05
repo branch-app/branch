@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Branch.App.Helpers;
 using Branch.Models.Services.Branch;
 
 namespace Branch.App.Controllers
 {
-	public class BlogController : Controller
+	public class BlogController : BaseController
 	{
 		// GET: /Blog/
 		public ActionResult Index()

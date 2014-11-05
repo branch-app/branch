@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
+using Branch.App.Helpers;
 using Branch.App.Models;
 
 namespace Branch.App.Controllers
 {
-	public class ErrorController : Controller
+	public class ErrorController : BaseController
 	{
 		//
 		// GET: /Error/

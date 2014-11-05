@@ -506,6 +506,12 @@
     <Content Include="Areas\Identity\Views\web.config" />
     <Content Include="Areas\Identity\Views\Create\Index.cshtml" />
     <Content Include="Areas\Identity\Views\Shared\IdentityHeader.cshtml" />
+    <Content Include="Content\Styles\bootstrap-custom.css">
+      <DependentUpon>bootstrap-custom.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\bootstrap-custom.min.css">
+      <DependentUpon>bootstrap-custom.css</DependentUpon>
+    </Content>
     <Content Include="Views\Session\Create.cshtml" />
     <Content Include="Areas\Domain\Views\web.config" />
     <Content Include="Areas\Identity\Views\Home\Index.cshtml" />
@@ -554,6 +560,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BaseController.cs" />
     <Compile Include="Helpers\Cryptography\Sha1Crypto.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
     <Compile Include="Helpers\Mvc\FlashMessage.cs" />
@@ -621,6 +628,9 @@
     <Content Include="Content\Styles\bootstrap-extras.css.map">
       <DependentUpon>bootstrap-extras.css</DependentUpon>
     </Content>
+    <Content Include="Content\Styles\bootstrap-custom.css.map">
+      <DependentUpon>bootstrap-custom.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -645,7 +655,7 @@
       <DependentUpon>application.scss</DependentUpon>
     </Content>
     <None Include="Content\Styles\bootstrap-branch.scss" />
-    <Content Include="Content\Styles\bootstrap-custom.min.css" />
+    <None Include="Content\Styles\bootstrap-custom.scss" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -662,6 +672,7 @@
     <Folder Include="Areas\Domain\Models\" />
     <Folder Include="Areas\Domain\Views\Home\" />
     <Folder Include="Areas\Domain\Views\Shared\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -67,6 +67,10 @@
 </div>
 
 <div class="container">
+	@Html.Partial("FlashMessage", false)
+</div>
+
+<div class="container">
 	<div class="row">
 		<div class="col-md-3">
 			<div class="bs-sidebar" data-spy="affix" data-offset-top="350">
@@ -85,7 +89,6 @@
 
 		<div class="col-md-9">
 			<div class="bs-branch-section overview">
-				@Html.Partial("FlashMessage", false)
 				<div class="page-header">
 					<h1>Overview</h1>
 				</div>

@@ -1,11 +1,12 @@
 ﻿using System.Web.Mvc;
+using Branch.App.Helpers;
 using Branch.App.Helpers.Attributes;
 using Branch.App.Helpers.Mvc;
 using Branch.Models.Sql;
 
 namespace Branch.App.Areas.Domain.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		// GET: Domain/Home
 		[RequiresAuthentication(RoleType.Administrator)]

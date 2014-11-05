@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Branch.App.Helpers;
 using Branch.App.Helpers.Mvc;
 using Branch.App.Models;
 using Branch.App.Models.Enums;
@@ -11,7 +12,7 @@ using Branch.Models.Sql;
 
 namespace Branch.App.Controllers
 {
-	public class SearchController : Controller
+	public class SearchController : BaseController
 	{
 		//
 		// GET: /Search/?q=
@@ -51,7 +52,7 @@ namespace Branch.App.Controllers
 
 			if (String.IsNullOrEmpty(q))
 				return FlashMessage.RedirectAndFlash(
-					Response, RedirectToAction("Index", "Home"), FlashMessage.FlashMessageType.Info,
+					Response, RedirectToAction("Index", "Home", new { area = "" }), FlashMessage.FlashMessageType.Info,
 					"Missing Search Term", "Ey man, there was no search term there.");
 
 			if (String.IsNullOrWhiteSpace(ident))

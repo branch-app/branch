@@ -1,11 +1,12 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Reach.Filters;
 using Branch.App.Areas.Reach.Models;
+using Branch.App.Helpers;
 using Branch.Core.Game.HaloReach.Models._343.Responces;
 
 namespace Branch.App.Areas.Reach.Controllers
 {
-	public class ServiceRecordController : Controller
+	public class ServiceRecordController : BaseController
 	{
 		//
 		// GET: /360/{gamertag}/Halo4/

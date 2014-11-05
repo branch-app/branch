@@ -1,10 +1,11 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
+using Branch.App.Helpers;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		//
 		// GET: /Halo4/

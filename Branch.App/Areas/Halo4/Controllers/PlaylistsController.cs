@@ -2,11 +2,12 @@
 using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
+using Branch.App.Helpers;
 using Branch.Core.Game.Halo4.Enums;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
-	public class PlaylistsController : Controller
+	public class PlaylistsController : BaseController
 	{
 		//
 		// GET: /Halo4/Playlists/

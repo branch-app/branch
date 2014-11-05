@@ -28,7 +28,7 @@ namespace Branch.App.Helpers.Attributes
 			{
 				HttpContext.Current.Response.RedirectToRoute("Welcome");
 				FlashMessage.AddFlashMessage(filterContext.HttpContext.Response, 
-					FlashMessage.FlashMessageType.Info,
+					FlashMessage.FlashMessageType.Failure,
 					"Authentication Required", 
 					"That section of Branch requires authentication.");
 				return;
@@ -41,7 +41,7 @@ namespace Branch.App.Helpers.Attributes
 
 			HttpContext.Current.Response.RedirectToRoute("Welcome");
 			FlashMessage.AddFlashMessage(filterContext.HttpContext.Response,
-				FlashMessage.FlashMessageType.Info,
+				FlashMessage.FlashMessageType.Failure,
 				"Invalid Authorization",
 				"You do not have authorization to access that. Naughty.");
 		}

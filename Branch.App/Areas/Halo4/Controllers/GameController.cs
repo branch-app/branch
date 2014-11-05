@@ -1,12 +1,13 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
+using Branch.App.Helpers;
 using Branch.App.Helpers.Mvc;
 using Branch.Core.Game.Halo4.Models._343.Responses;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
-	public class GameController : Controller
+	public class GameController : BaseController
 	{
 		//
 		// GET: /360/{gamertag}/Halo4/Game/{id}

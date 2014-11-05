@@ -1,12 +1,13 @@
 ﻿using System.Web.Mvc;
 using Branch.App.Areas.Reach.Filters;
 using Branch.App.Areas.Reach.Models;
+using Branch.App.Helpers;
 using Branch.Core.Game.HaloReach.Models._343.Responces;
 using Branch.App.Helpers.Mvc;
 
 namespace Branch.App.Areas.Reach.Controllers
 {
-	public class GameController : Controller
+	public class GameController : BaseController
 	{
 		// GET: 360/{gamertag}/Reach/Game/{id}
 		[ValidateReachServiceRecordFilter]

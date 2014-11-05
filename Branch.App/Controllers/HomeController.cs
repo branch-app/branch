@@ -1,8 +1,9 @@
 ﻿using System.Web.Mvc;
+using Branch.App.Helpers;
 
 namespace Branch.App.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		public ActionResult Index()
 		{

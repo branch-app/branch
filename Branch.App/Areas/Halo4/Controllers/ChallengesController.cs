@@ -3,12 +3,13 @@ using System.Linq;
 using System.Web.Mvc;
 using Branch.App.Areas.Halo4.Filters;
 using Branch.App.Areas.Halo4.Models;
+using Branch.App.Helpers;
 using Branch.App.Helpers.Razor.Halo4;
 using Branch.Core.Game.Halo4.Models._343.DataModels;
 
 namespace Branch.App.Areas.Halo4.Controllers
 {
-	public class ChallengesController : Controller
+	public class ChallengesController : BaseController
 	{
 		//
 		// GET: /Halo4/Challenges/{slug}
