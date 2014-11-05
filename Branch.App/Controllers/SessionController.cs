@@ -49,7 +49,8 @@ namespace Branch.App.Controllers
 				}
 
 				// Create Session
-				var branchSession = BranchSession.Create(Request.UserHostAddress, Request.UserAgent, branchIdentity, viewModel.RememberMe);
+				var ipAddress = Request.ServerVariables.Get("HTTP_CF_CONNECTING_IP") ?? Request.UserHostAddress;
+				var branchSession = BranchSession.Create(ipAddress, Request.UserAgent, branchIdentity, viewModel.RememberMe);
 				sqlStorage.BranchSessions.Add(branchSession);
 				branchIdentity.BranchIdentitySessions.Add(branchSession);
 

@@ -107,7 +107,8 @@ namespace Branch.App.Areas.Identity.Controllers
 				sqlStorage.BranchIdentities.Add(branchIdentity);
 				sqlStorage.SaveChanges();
 
-				var branchSession = BranchSession.Create(Request.UserHostAddress, Request.UserAgent, branchIdentity, false);
+				var ipAddress = Request.ServerVariables.Get("HTTP_CF_CONNECTING_IP") ?? Request.UserHostAddress;
+				var branchSession = BranchSession.Create(ipAddress, Request.UserAgent, branchIdentity, false);
 				sqlStorage.BranchSessions.Add(branchSession);
 
 				var cookie = new HttpCookie("SessionIdentifier", branchSession.Identifier.ToString())
