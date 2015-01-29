@@ -25,6 +25,7 @@
 *.opensdf
 *.unsuccessfulbuild
 ipch/
+[Bb]ackup/
 [Oo]bj/
 [Bb]in
 [Dd]ebug*/
@@ -80,3 +81,5 @@ Branch.Azure/rcf/
 App.Release.config
 *.ldf
 *.mdf
+Branch.sln.ide/
+UpgradeLog.htm
