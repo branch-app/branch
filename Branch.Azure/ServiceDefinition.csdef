@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="Branch.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
   <WorkerRole name="Branch.Service.Halo4" vmsize="ExtraSmall">
-    <Imports>
-      <Import moduleName="Diagnostics" />
-    </Imports>
     <ConfigurationSettings>
       <Setting name="SendGridUser" />
       <Setting name="SendGridPass" />
@@ -26,9 +23,6 @@
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
     </Endpoints>
-    <Imports>
-      <Import moduleName="Diagnostics" />
-    </Imports>
     <ConfigurationSettings>
       <Setting name="SendGridUser" />
       <Setting name="SendGridPass" />

@@ -1,4 +1,4 @@
-﻿///<reference path="../typings/jquery/jquery.d.ts" />
+///<reference path="../typings/jquery/jquery.d.ts" />
 ///<reference path="search-autocomplete.ts"/>
 var Application = (function () {
     function Application() {
@@ -7,7 +7,6 @@ var Application = (function () {
     }
     return Application;
 })();
-
 // Load this shit
 window.onload = function () {
     var app = new Application();

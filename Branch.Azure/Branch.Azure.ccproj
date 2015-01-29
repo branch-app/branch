@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>2.4</ProductVersion>
+    <ProductVersion>2.5</ProductVersion>
     <ProjectGuid>3944f1ad-fe9b-4c7a-8b66-921f5217f215</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -44,14 +44,6 @@
     <Folder Include="Profiles" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Branch.AppContent\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Branch.Service.Halo4Content\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Branch.App\Branch.App.csproj">
       <Name>Branch.App</Name>
       <Project>{8001355a-05d3-4c3a-a232-e1720d9bf546}</Project>
@@ -74,10 +66,14 @@
     <PublishProfile Include="Profiles\branch-production-debugging.azurePubxml" />
     <PublishProfile Include="Profiles\branch-production.azurePubxml" />
   </ItemGroup>
+  <ItemGroup>
+    <DiagnosticsConfiguration Include="Branch.AppContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="Branch.Service.Halo4Content\diagnostics.wadcfgx" />
+  </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
-    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.4\</CloudExtensionsDir>
+    <CloudExtensionsDir Condition=" '$(CloudExtensionsDir)' == '' ">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Windows Azure Tools\2.5\</CloudExtensionsDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'RemoteDebug' ">
     <OutputPath>bin\RemoteDebug\</OutputPath>
