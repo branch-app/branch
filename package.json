@@ -1,5 +1,19 @@
 {
+	"name": "cuvva-log",
+	"version": "0.0.1",
+	"description": "Super simple standardised logs.",
+	"homepage": "https://github.com/cuvva/log",
+	"bugs": "https://github.com/cuvva/log/issues",
+
+	"license": "MIT",
+	"author": "Will Evans (http://will3942.com)",
+
 	"main": "lib/index.js",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cuvva/disco-client-node.git"
+	},
 
 	"scripts": {
 		"debug": "nodemon --exec babel-node -- --stage 1 lib/index.js",
