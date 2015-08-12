@@ -7,7 +7,9 @@ Super simple logging system used by all Cuvva systems
 [![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-node)
 
 ```js
-// super brief code sample here
+log.info("Hello, world!");
+log.warn("some-problem", [innererror], { location: someLocation, occurance: occuranceCount });
+throw log.error("something-serious");
 ```
 
 ## Current Status
