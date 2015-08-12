@@ -20,10 +20,7 @@
 		"test-travis": "istanbul cover test/index.js --report lcovonly"
 	},
 
-	"dependencies": {
-		"babel": "^5.4.3",
-		"q": "^1.4.0"
-	},
+	"dependencies": {},
 
 	"devDependencies": {
 		"coveralls": "^2.11.2",
