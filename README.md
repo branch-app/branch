@@ -8,7 +8,8 @@ Super simple logging system used by all Cuvva systems
 
 ```js
 log.info("Hello, world!");
-log.warn("some-problem", [innererror], { location: someLocation, occurance: occuranceCount });
+log.warn("some-problem", [innererror], { location:
+    someLocation, occurance: occuranceCount });
 throw log.error("something-serious");
 ```
 
