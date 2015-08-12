@@ -1,9 +1,9 @@
 {
 	"name": "cuvva-log",
-	"version": "1.2.6",
-	"description": "Super simple standardised logs. If you're not with Cuvva, you're probably in the wrong place.",
-	"homepage": "https://github.com/cuvva/log",
-	"bugs": "https://github.com/cuvva/log/issues",
+	"version": "0.1.0",
+	"description": "Super simple standardized logging used by all Cuvva systems",
+	"homepage": "https://github.com/cuvva/cuvva-log-node",
+	"bugs": "https://github.com/cuvva/cuvva-log-node/issues",
 
 	"license": "MIT",
 	"author": "Jack Fransham (http://jackfransham.com)",
@@ -12,21 +12,18 @@
 
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cuvva/log.git"
+		"url": "https://github.com/cuvva/cuvva-log-node.git"
 	},
 
 	"scripts": {
-		"debug": "nodemon lib/index.js",
-		"start": "node lib/index.js",
-		"test" : "tape \"test/index.js\""
+		"test": "tape \"test/index.js\""
 	},
 
 	"dependencies": {
-		"babel": 		"^5.4.3",
-		"q": 			"^1.4.0",
-		"handlebars": 	"^3.0.3"
+		"babel": "^5.4.3",
+		"q": "^1.4.0"
 	},
-	
+
 	"devDependencies": {
 		"istanbul": "^0.3.16",
 		"nodemon": "^1.3.6",

@@ -1,10 +1,22 @@
-# Cuvva logs
+# cuvva-log
 
-Simple logging system for generic, widely-understood logs.
+Super simple logging system used by all Cuvva systems
 
-Currently needs a way to integrate matching error codes to HTTP statuses but otherwise mostly fully-featured.
+[![NPM Version](https://img.shields.io/npm/v/cuvva-log.svg?style=flat)](//www.npmjs.org/package/cuvva-log)
+[![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-node.svg?style=flat)](//travis-ci.org/billinghamj/cuvva-log-node)
+[![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/billinghamj/cuvva-log-node)
 
-Also, maybe needs a way to allow easier info logging without having to create a new error code every time.
+```js
+// super brief code sample here
+```
+
+## Current Status
+
+Needs a way to integrate matching error codes to HTTP statuses but otherwise
+mostly fully-featured.
+
+Maybe needs a way to allow easier info logging without having to create a new
+error code every time.
 
 ## Installation
 
@@ -12,8 +24,34 @@ Also, maybe needs a way to allow easier info logging without having to create a 
 $ npm install
 ```
 
-## Running
+## Usage
+
+```js
+// extensive set of usage examples
+```
+
+## Testing
+
+Install the development dependencies first:
 
 ```bash
-$ npm start
+$ npm install
 ```
+
+Then the tests:
+
+```bash
+$ npm test
+```
+
+## Support
+
+Please open an issue on this repository.
+
+## Authors
+
+- Jack Fransham
+
+## License
+
+MIT licensed - see [LICENSE](LICENSE) file
