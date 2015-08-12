@@ -25,7 +25,7 @@ test('log.info() prints correctly', function (t) {
 });
 
 test('log.warn() prints correctly', function (t) {
-	var err = tc.stdout.inspectSync(function () {
+	var err = tc.stderr.inspectSync(function () {
 		log.warn('test-error');
 	});
 
@@ -34,7 +34,7 @@ test('log.warn() prints correctly', function (t) {
 });
 
 test('log.error() prints correctly', function (t) {
-	var err = tc.stdout.inspectSync(function () {
+	var err = tc.stderr.inspectSync(function () {
 		log.error('test-error');
 	});
 
@@ -43,7 +43,7 @@ test('log.error() prints correctly', function (t) {
 });
 
 test('log.fatal() prints correctly', function (t) {
-	var err = tc.stdout.inspectSync(function () {
+	var err = tc.stderr.inspectSync(function () {
 		log.fatal('test-error');
 	});
 
@@ -52,7 +52,7 @@ test('log.fatal() prints correctly', function (t) {
 });
 
 test('log prints JSON correctly', function (t) {
-	var err = tc.stdout.inspectSync(function () {
+	var err = tc.stderr.inspectSync(function () {
 		log.error('test-error', { a: 'b', c: 'd' });
 	});
 
