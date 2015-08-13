@@ -20,9 +20,7 @@
 		"test-travis": "istanbul cover test/index.js --report lcovonly"
 	},
 
-	"dependencies": {
-		"cuvva-log": "cuvva/cuvva-log",
-	},
+	"dependencies": { },
 
 	"devDependencies": {
 		"coveralls": "^2.11.2",
