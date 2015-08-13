@@ -22,7 +22,6 @@
 
 	"dependencies": {
 		"cuvva-log": "cuvva/cuvva-log",
-		"raven": "^0.8.1"
 	},
 
 	"devDependencies": {

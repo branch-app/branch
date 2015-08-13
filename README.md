@@ -1,8 +1,8 @@
-# cuvva-log
+# cuvva-log-sentry
 
-Super simple logging system used by all Cuvva systems
+Sentry integration for cuvva-log.
 
-[![NPM Version](https://img.shields.io/npm/v/cuvva-log.svg?style=flat)](//www.npmjs.org/package/cuvva-log)
+[![NPM Version](https://img.shields.io/npm/v/cuvva-log.svg?style=flat)](//www.npmjs.org/package/cuvva-log-sentry)
 [![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-node.svg?style=flat)](//travis-ci.org/cuvva/cuvva-log-node)
 [![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-node)
 
@@ -15,11 +15,7 @@ throw log.error('something-serious');
 
 ## Current Status
 
-Needs a way to integrate matching error codes to HTTP statuses but otherwise
-mostly fully-featured.
-
-Maybe needs a way to allow easier info logging without having to create a new
-error code every time.
+Probably working but currently untested.
 
 ## Installation
 
