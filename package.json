@@ -1,0 +1,38 @@
+{
+	"name": "sentry-handler",
+	"version": "0.2.3",
+	"description": "Sentry handler for cuvva-log.",
+	"homepage": "https://github.com/cuvva/sentry-handler-node",
+	"bugs": "https://github.com/cuvva/sentry-handler-node/issues",
+
+	"license": "MIT",
+	"author": "Jack Fransham (http://jackfransham.com)",
+
+	"main": "lib/index.js",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cuvva/sentry-handler-node.git"
+	},
+
+	"scripts": {
+		"test": "tape test/index.js",
+		"test-travis": "istanbul cover test/index.js --report lcovonly"
+	},
+
+	"dependencies": {
+		"cuvva-log": "cuvva/cuvva-log",
+		"raven": "^0.8.1"
+	},
+
+	"devDependencies": {
+		"coveralls": "^2.11.2",
+		"istanbul": "^0.3.16",
+		"tape": "^4.0.0",
+		"test-console": "^1.0.0"
+	},
+
+	"engines": {
+		"node": "0.12.x"
+	}
+}
