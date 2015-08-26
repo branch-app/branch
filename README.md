@@ -13,14 +13,6 @@ log.warn('some-problem', [innererror], { location:
 throw log.error('something-serious');
 ```
 
-## Current Status
-
-Needs a way to integrate matching error codes to HTTP statuses but otherwise
-mostly fully-featured.
-
-Maybe needs a way to allow easier info logging without having to create a new
-error code every time.
-
 ## Installation
 
 ```bash

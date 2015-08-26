@@ -6,7 +6,7 @@
 	"bugs": "https://github.com/cuvva/cuvva-log-node/issues",
 
 	"license": "MIT",
-	"author": "Jack Fransham (http://jackfransham.com)",
+	"author": "Cuvva (https://cuvva.co)",
 
 	"main": "lib/index.js",
 
