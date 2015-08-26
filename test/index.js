@@ -6,57 +6,58 @@ const log = projRequire('lib');
 const tc = require('test-console');
 const test = require('tape');
 
+log.setMinLogLevel('debug');
+
 test('log.debug() prints correctly', function (t) {
 	var err = tc.stdout.inspectSync(function () {
-		log.debug('test-error');
+		log.debug('test_error');
 	});
 
-	t.assert(err[0].match(/^debug *: test-error/));
+	t.equals(err[0], 'debug:{"code":"test_error","httpStatus":500}\n');
 	t.end();
 });
 
 test('log.info() prints correctly', function (t) {
 	var err = tc.stdout.inspectSync(function () {
-		log.info('test-error');
+		log.info('test_error');
 	});
 
-	t.assert(err[0].match(/^info *: test-error/));
+	t.equals(err[0], 'info:{"code":"test_error","httpStatus":500}\n');
 	t.end();
 });
 
 test('log.warn() prints correctly', function (t) {
 	var err = tc.stderr.inspectSync(function () {
-		log.warn('test-error');
+		log.warn('test_error');
 	});
 
-	t.assert(err[0].match(/^warn *: test-error/));
+	t.equals(err[0], 'warn:{"code":"test_error","httpStatus":500}\n');
 	t.end();
 });
 
 test('log.error() prints correctly', function (t) {
 	var err = tc.stderr.inspectSync(function () {
-		log.error('test-error');
+		log.error('test_error');
 	});
 
-	t.assert(err[0].match(/^error *: test-error/));
+	t.equals(err[0], 'error:{"code":"test_error","httpStatus":500}\n');
 	t.end();
 });
 
 test('log.fatal() prints correctly', function (t) {
 	var err = tc.stderr.inspectSync(function () {
-		log.fatal('test-error');
+		log.fatal('test_error');
 	});
 
-	t.assert(err[0].match(/^fatal *: test-error/));
+	t.equals(err[0], 'fatal:{"code":"test_error","httpStatus":500}\n');
 	t.end();
 });
 
 test('log prints JSON correctly', function (t) {
 	var err = tc.stderr.inspectSync(function () {
-		log.error('test-error', { a: 'b', c: 'd' });
+		log.error('test_error', { a: 'b', c: 'd' });
 	});
 
-	var matchreg = /^error *: test-error\s*{((\s*\"a\"\s*:\s*\"b\"\s*|\s*\"c\"\s*:\s*"d"\s*),?){2}}/;
-	t.assert(err[0].match(matchreg));
+	t.equals(err[0], 'error:{"code":"test_error","httpStatus":500,"meta":{"a":"b","c":"d"}}\n');
 	t.end();
 });
