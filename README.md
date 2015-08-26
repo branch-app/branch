@@ -2,9 +2,9 @@
 
 Sentry integration for cuvva-log.
 
-[![NPM Version](https://img.shields.io/npm/v/cuvva-log.svg?style=flat)](//www.npmjs.org/package/cuvva-log-sentry)
-[![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-node.svg?style=flat)](//travis-ci.org/cuvva/cuvva-log-node)
-[![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-node)
+[![NPM Version](https://img.shields.io/npm/v/cuvva-log-sentry.svg?style=flat)](//www.npmjs.org/package/cuvva-log-sentry)
+[![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-sentry-node.svg?style=flat)](//travis-ci.org/cuvva/cuvva-log-sentry-node)
+[![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-sentry-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-sentry-node)
 
 ```js
 log.info('Hello, world!');
