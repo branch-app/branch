@@ -7,6 +7,8 @@ Super simple logging system used by all Cuvva systems
 [![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-node)
 
 ```js
+var log = require('cuvva-log');
+
 log.debug('hello_world');
 
 var reason1 = log.info('bad_email');
