@@ -1,6 +1,6 @@
 {
 	"name": "cuvva-log-sentry",
-	"version": "0.2.3",
+	"version": "0.5.0",
 	"description": "Sentry handler for cuvva-log",
 	"homepage": "https://github.com/cuvva/cuvva-log-sentry-node",
 	"bugs": "https://github.com/cuvva/cuvva-log-sentry-node/issues",
