@@ -26,9 +26,16 @@ $ npm install
 
 ## Usage
 
+If you have a traditional `Error` object, it can be coerced into a `CuvvaError`:
+
 ```js
-// extensive set of usage examples
+var error; // existing traditional Error
+
+var coerced = log.coerceError(error);
+log.warn(coerced);
 ```
+
+<!-- add more extensive examples -->
 
 ## Testing
 
