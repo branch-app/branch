@@ -7,15 +7,14 @@ Sentry integration for cuvva-log.
 [![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-sentry-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-sentry-node)
 
 ```js
-log.info('Hello, world!');
-log.warn('some-problem', [innererror], { location:
-    someLocation, occurence: occurenceCount });
-throw log.error('something-serious');
+var log = require('cuvva-log');
+var logSentry = require('cuvva-log-sentry');
+
+var ravenClient; // existing Raven client
+
+var sentryHandler = logSentry(ravenClient);
+log.addHandler(sentryHandler);
 ```
-
-## Current Status
-
-Probably working but currently untested.
 
 ## Installation
 
@@ -25,8 +24,15 @@ $ npm install
 
 ## Usage
 
+Also supports taking a callback. This allows you to ensure logs have reached
+Sentry before exiting:
+
 ```js
-// extensive set of usage examples
+var fatalHandler = logSentry(ravenClient, function () {
+	process.exit(1);
+});
+
+log.addHandler('fatal', fatalHandler);
 ```
 
 ## Testing
