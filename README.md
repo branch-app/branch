@@ -13,7 +13,7 @@ var logSentry = require('cuvva-log-sentry');
 var ravenClient; // existing Raven client
 
 var sentryHandler = logSentry(ravenClient);
-log.addHandler(sentryHandler);
+log.setHandler(sentryHandler);
 ```
 
 ## Installation
@@ -32,7 +32,7 @@ var fatalHandler = logSentry(ravenClient, function () {
 	process.exit(1);
 });
 
-log.addHandler('fatal', fatalHandler);
+log.setHandler('fatal', fatalHandler);
 ```
 
 ## Testing
