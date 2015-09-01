@@ -31,8 +31,16 @@ If you have a traditional `Error` object, it can be coerced into a `CuvvaError`:
 ```js
 var error; // existing traditional Error
 
-var coerced = log.coerceError(error);
+var coerced = log.CuvvaError.coerce(error);
 log.warn(coerced);
+```
+
+When traditional `Error` objects are provided as reasons, they're coerced automatically:
+
+```js
+var error; // existing traditional Error
+
+log.warn('some_problem', [error]);
 ```
 
 <!-- add more extensive examples -->
