@@ -13,7 +13,7 @@ test('log.debug() prints correctly', function (t) {
 		log.debug('test_error');
 	});
 
-	t.equals(err[0], 'debug:{"code":"test_error","httpStatus":500}\n');
+	t.equals(err[0], 'debug:{"code":"test_error"}\n');
 	t.end();
 });
 
@@ -22,7 +22,7 @@ test('log.info() prints correctly', function (t) {
 		log.info('test_error');
 	});
 
-	t.equals(err[0], 'info:{"code":"test_error","httpStatus":500}\n');
+	t.equals(err[0], 'info:{"code":"test_error"}\n');
 	t.end();
 });
 
@@ -31,7 +31,7 @@ test('log.warn() prints correctly', function (t) {
 		log.warn('test_error');
 	});
 
-	t.equals(err[0], 'warn:{"code":"test_error","httpStatus":500}\n');
+	t.equals(err[0], 'warn:{"code":"test_error"}\n');
 	t.end();
 });
 
@@ -40,7 +40,7 @@ test('log.error() prints correctly', function (t) {
 		log.error('test_error');
 	});
 
-	t.equals(err[0], 'error:{"code":"test_error","httpStatus":500}\n');
+	t.equals(err[0], 'error:{"code":"test_error"}\n');
 	t.end();
 });
 
@@ -49,7 +49,7 @@ test('log.fatal() prints correctly', function (t) {
 		log.fatal('test_error');
 	});
 
-	t.equals(err[0], 'fatal:{"code":"test_error","httpStatus":500}\n');
+	t.equals(err[0], 'fatal:{"code":"test_error"}\n');
 	t.end();
 });
 
@@ -58,6 +58,6 @@ test('log prints JSON correctly', function (t) {
 		log.error('test_error', { a: 'b', c: 'd' });
 	});
 
-	t.equals(err[0], 'error:{"code":"test_error","httpStatus":500,"meta":{"a":"b","c":"d"}}\n');
+	t.equals(err[0], 'error:{"code":"test_error","meta":{"a":"b","c":"d"}}\n');
 	t.end();
 });
