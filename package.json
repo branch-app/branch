@@ -1,6 +1,6 @@
 {
 	"name": "cuvva-log",
-	"version": "0.6.4",
+	"version": "0.6.5",
 	"description": "Super simple standardized logging used by all Cuvva systems",
 	"homepage": "https://github.com/cuvva/cuvva-log-node",
 	"bugs": "https://github.com/cuvva/cuvva-log-node/issues",
