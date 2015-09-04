@@ -44,15 +44,6 @@ test('log.error() prints correctly', function (t) {
 	t.end();
 });
 
-test('log.fatal() prints correctly', function (t) {
-	var err = tc.stderr.inspectSync(function () {
-		log.fatal('test_error');
-	});
-
-	t.equals(err[0], 'fatal:{"code":"test_error"}\n');
-	t.end();
-});
-
 test('log prints JSON correctly', function (t) {
 	var err = tc.stderr.inspectSync(function () {
 		log.error('test_error', { a: 'b', c: 'd' });
