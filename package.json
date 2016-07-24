@@ -20,16 +20,10 @@
 		"test-travis": "istanbul cover test/index.js --report lcovonly"
 	},
 
-	"dependencies": {},
-
 	"devDependencies": {
 		"coveralls": "^2.11.2",
 		"istanbul": "^0.3.16",
 		"tape": "^4.0.0",
 		"test-console": "^1.0.0"
-	},
-
-	"engines": {
-		"node": "0.12.x"
 	}
 }
