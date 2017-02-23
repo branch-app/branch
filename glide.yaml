@@ -1,0 +1,5 @@
+package: github.com/TheTree/service-xboxlive
+import:
+- package: gopkg.in/gin-gonic/gin.v1
+- package: github.com/metal3d/go-slugify
+- package: github.com/patrickmn/go-cache
