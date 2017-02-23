@@ -1,6 +1,6 @@
 package: github.com/TheTree/service-auth
 import:
-- package: github.com/TheTree/helpers-go
+- package: github.com/TheTree/shared-go
   subpackages:
   - contexts
 - package: gopkg.in/gin-gonic/gin.v1
