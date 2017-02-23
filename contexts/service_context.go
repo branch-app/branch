@@ -1,8 +1,8 @@
 package contexts
 
 import (
-	"github.com/TheTree/helpers-go/contexts"
 	"github.com/TheTree/service-xboxlive/helpers"
+	"github.com/TheTree/shared-go/contexts"
 )
 
 // ServiceContext contains the service's context
