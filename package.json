@@ -1,0 +1,51 @@
+{
+  "name": "service-auth",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thetree/service-auth.git"
+  },
+  "scripts": {
+    "debug": "nodemon --exec babel-node -- src/boot/debug.js",
+    "repl": "nodemon --exec babel-node -- src/boot/repl.js",
+    "start": "node build/boot/start.js",
+    "build": "rm -rf ./build && babel src --out-dir=build --source-maps --copy-files --quiet",
+    "test": "echo \"no tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "body-parser": "^1.16.1",
+    "cuvva-log": "^0.9.1",
+    "cuvva-log-sentry": "^0.5.2",
+    "express": "^4.14.0",
+    "express-promise-router": "^1.1.1",
+    "json-inflector": "^1.1.0",
+    "querystring": "0.2.0",
+    "raven": "^1.1.2",
+    "type-is": "^1.6.14"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
+    "babel-plugin-typecheck": "^3.9.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "nodemon": "^1.11.0",
+    "zombie": "5.0.5"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "typecheck",
+      "syntax-flow",
+      "transform-flow-strip-types",
+      "transform-class-properties"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"sentryDSN": "",
+	"xboxLive": {
+		"account": "your_account@outlook.com",
+		"password": "your_password"
+	}
+}
