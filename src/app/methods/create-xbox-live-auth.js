@@ -16,12 +16,11 @@ export default async function createXboxLiveAuth(account, password) {
 		.pressButton("Sign in");
 
 	const url = browser.url;
-
-	var index = url.indexOf('access_token');
+	const index = url.indexOf('access_token');
 	if (index < 0) {
 		throw log.error('unable_to_authentication_with_xbox_live')
 	}
 
-	var data = url.substring(index);
+	const data = url.substring(index);
 	return querystring.parse(data);
 }
