@@ -8,7 +8,6 @@
   },
   "scripts": {
     "debug": "nodemon --exec babel-node -- src/boot/debug.js",
-    "repl": "nodemon --exec babel-node -- src/boot/repl.js",
     "start": "node build/boot/start.js",
     "build": "rm -rf ./build && babel src --out-dir=build --source-maps --copy-files --quiet",
     "test": "echo \"no tests yet\" && exit 0"
