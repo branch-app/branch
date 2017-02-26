@@ -1,4 +1,4 @@
-# log-node
+# branch-log-node
 
 Super simple logging system used by all of Branch's node services.
 
