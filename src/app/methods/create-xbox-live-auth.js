@@ -18,7 +18,7 @@ export default async function createXboxLiveAuth(account, password) {
 	const url = browser.url;
 	const index = url.indexOf('access_token');
 	if (index < 0) {
-		throw log.error('unable_to_authentication_with_xbox_live')
+		throw log.error('unable_to_authenticate_with_xbox_live')
 	}
 
 	const data = url.substring(index);
