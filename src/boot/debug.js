@@ -3,8 +3,7 @@
 import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
-import log from 'cuvva-log';
-import logSentry from 'cuvva-log-sentry';
+import log from 'branch-log';
 import raven from 'raven';
 import fs from 'fs';
 
@@ -18,12 +17,7 @@ if (fs.existsSync("./config.json")) {
 }
 
 const defaultPort = 3000;
-const port = process.env.PORT || defaultPort;
-const sentry = new raven.Client(config.sentryDSN);
-
-log.setHandler(logSentry(sentry));
-log.setHandler('fatal', logSentry(sentry, () => process.exit(1)));
-sentry.install(() => process.exit(1));
+const port = config.port || defaultPort;
 
 const run = async () => {
 	const app = new App(config);

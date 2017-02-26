@@ -1,6 +1,6 @@
 import Browser from 'zombie';
 import querystring from 'querystring';
-import log from 'cuvva-log';
+import log from 'branch-log';
 
 const TokenName = 'access_token';
 

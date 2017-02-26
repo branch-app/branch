@@ -1,7 +1,7 @@
 import { Router as expRouter } from 'express';
 import { hasBody } from 'type-is';
 import inflector from 'json-inflector';
-import log from 'cuvva-log';
+import log from 'branch-log';
 import { json, urlencoded } from 'body-parser';
 
 const router = expRouter();
@@ -13,7 +13,7 @@ router.use(urlencoded({ extended: true }));
 router.use(checkBody);
 router.use(inflector({ request: 'camelizeLower', response: 'underscore' }));
 
-function checkBody(req, res, next): void {
+function checkBody(req, res, next) {
 	// has body, but wasn't parsed
 	if (hasBody(req) && !req.body)
 		next(log.info('unacceptable_content_type'));

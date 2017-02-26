@@ -1,6 +1,6 @@
 import App from '../app';
 import express from 'express';
-import log from 'cuvva-log';
+import log from 'branch-log';
 import Handlers from './handlers';
 import * as Middleware from './middleware';
 

@@ -1,5 +1,5 @@
 import errors from './error.json';
-import log from 'cuvva-log';
+import log from 'branch-log';
 
 const defaultHttpStatus = 500;
 
@@ -8,7 +8,7 @@ export default function (origError, req, res, next) {
 	let error = origError;
 
 	if (typeof error.code !== 'string') {
-		error = log.CuvvaError.coerce(error);
+		error = log.BranchError.coerce(error);
 
 		log.warn('traditional_error', [error]);
 	}
