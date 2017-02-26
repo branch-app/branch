@@ -1,4 +1,5 @@
 import Router from 'express-promise-router';
+import * as halo4 from './halo-4';
 import * as xboxLive from './xbox-live';
 
 const httpStatusOK = 200;
@@ -15,6 +16,7 @@ export default class Handlers {
 
 	setup() {
 		// prefix /v1/
+		this.router.get('/halo-4', this._wrap(this._handler, halo4.index, this));
 		this.router.get('/xbox-live', this._wrap(this._handler, xboxLive.index, this));
 	}
 

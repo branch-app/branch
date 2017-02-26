@@ -1,5 +1,9 @@
 {
 	"sentryDSN": "",
+	"halo4": {
+		"account": "your_account@outlook.com",
+		"password": "your_password"
+	},
 	"xboxLive": {
 		"account": "your_account@outlook.com",
 		"password": "your_password"
