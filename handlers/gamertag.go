@@ -17,9 +17,10 @@ func (hdl GamertagHandler) Get(c *gin.Context) {
 
 	if identity != nil {
 		c.JSON(http.StatusOK, identity)
-	} else {
-		c.Status(http.StatusNotFound)
+		return
 	}
+
+	// Request from xbox live
 }
 
 func NewGamertagHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *GamertagHandler {
