@@ -1,5 +1,5 @@
 import Router from 'express-promise-router';
-import * as xboxLive from './xboxlive';
+import * as xboxLive from './xbox-live';
 
 const httpStatusOK = 200;
 const httpStatusNoContent = 204;
@@ -15,7 +15,7 @@ export default class Handlers {
 
 	setup() {
 		// prefix /v1/
-		this.router.get('/xboxlive', this._wrap(this._handler, xboxLive.index, this));
+		this.router.get('/xbox-live', this._wrap(this._handler, xboxLive.index, this));
 	}
 
 	async _handler(req, res, method) {
