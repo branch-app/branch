@@ -1,12 +1,12 @@
 {
 	"name": "branch-log",
 	"version": "0.9.1",
-	"description": "Super simple standardized logging used by all Cuvva systems",
+	"description": "Super simple standardized logging used by all of Branch's node services.",
 	"homepage": "https://github.com/branch-app/log-node",
 	"bugs": "https://github.com/branch-app/log-node/issues",
 
 	"license": "MIT",
-	"author": "Cuvva (https://cuvva.co)",
+	"author": "Branch App (https://github.com/branch-app)",
 
 	"main": "lib/index.js",
 

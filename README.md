@@ -1,6 +1,6 @@
 # log-node
 
-Super simple logging system used by all node services.
+Super simple logging system used by all of Branch's node services.
 
 [![NPM Version](https://img.shields.io/npm/v/branch-log.svg?style=flat)](//www.npmjs.org/package/branch-log)
 [![Build Status](https://img.shields.io/travis/branch-app/log-node.svg?style=flat)](//travis-ci.org/branch-app/log-node)
