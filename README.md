@@ -1,4 +1,4 @@
-# log-sentry
+# branch-log-sentry
 
 Sentry integration for branch-log.
 
