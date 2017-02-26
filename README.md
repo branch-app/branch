@@ -1,13 +1,13 @@
-# cuvva-log
+# log-node
 
-Super simple logging system used by all Cuvva systems
+Super simple logging system used by all node services.
 
-[![NPM Version](https://img.shields.io/npm/v/cuvva-log.svg?style=flat)](//www.npmjs.org/package/cuvva-log)
-[![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-node.svg?style=flat)](//travis-ci.org/cuvva/cuvva-log-node)
-[![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-node)
+[![NPM Version](https://img.shields.io/npm/v/branch-log.svg?style=flat)](//www.npmjs.org/package/branch-log)
+[![Build Status](https://img.shields.io/travis/branch-app/log-node.svg?style=flat)](//travis-ci.org/branch-app/log-node)
+[![Coverage Status](https://img.shields.io/coveralls/branch-app/log-node.svg?style=flat)](//coveralls.io/r/branch-app/log-node)
 
 ```js
-var log = require('cuvva-log');
+var log = require('branch-log');
 
 log.debug('hello_world');
 
@@ -26,12 +26,12 @@ $ npm install
 
 ## Usage
 
-If you have a traditional `Error` object, it can be coerced into a `CuvvaError`:
+If you have a traditional `Error` object, it can be coerced into a `BranchError`:
 
 ```js
 var error; // existing traditional Error
 
-var coerced = log.CuvvaError.coerce(error);
+var coerced = log.BranchError.coerce(error);
 log.warn(coerced);
 ```
 
@@ -42,8 +42,6 @@ var error; // existing traditional Error
 
 log.warn('some_problem', [error]);
 ```
-
-<!-- add more extensive examples -->
 
 ## Testing
 
@@ -66,6 +64,7 @@ Please open an issue on this repository.
 ## Authors
 
 - Jack Fransham
+- Alex Forbes-Reed (adapted from Cuvva)
 
 ## License
 

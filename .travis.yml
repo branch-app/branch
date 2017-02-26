@@ -1,11 +1,3 @@
 language: node_js
 script: npm run-script test-travis
 after_script: cat ./coverage/lcov.info | coveralls
-
-notifications:
-  email: false
-  slack:
-    rooms:
-      - secure: gVo/2b4TunNkEpaFefPwKeeYiUigbQWHBmEoAWUoOMHe/OL8hY6tWBDSHMBHfp2hJuGs1QqYJ5fJ1UihJw/0rQ4PxcmJK2dcTxmBdrNNji7k/8V8lPBYMRXBEPBm9te669IPyC2cPXeJ5RWkR7OCPoRNXp5Pbrwiucg4K/n38BSFSypuXb77boINZm9aNLa76wnVkXYU+tX0P1tq3HC7ozWSbCNI/EoLO/EySOlB5Q/4SRVZ2g3Yk2/DVj8rD+nG1MM2E1NUlC5CaTHZkeWBxuP3lkSslGJF53lVGOnh2IOvurEDl+4InXTxF8+fy1wyJpTov3Imt5o24L8cmXVRYNgHLM31avZ5P/cPsvuO6WwbM2TTEJDJRFZxmCRAU1l3qd/UI7RXvdihlv6S5bOZzpCS1VxXnbjd1GonjOoq2kNwnSGNDzX+VlOUSV/TggAPBNeEetofid0zMOFtoHjhFwl6/h6Awle7FzljlLZr6rAzsD5OVExAj52RYOwEXJMWJ6sXZPRd3gFl9Ogamec0Ttt7D+C5/RlHAzoPuDT32R744YVuUIBGpoVeiWaH7jiI5OJVYiGllBOKuSZfkNTwwMiJeY8onmT5+LuA7enRrzjWE9HqrfR7bAF3bX7tyj31p7sKWpd1g0o/m1KBKgIk8XNMztPz0TXI3NZSjJsqzGM=
-    on_success: always
-    on_failure: always
