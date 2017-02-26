@@ -26,11 +26,11 @@ export default async function createHalo4Auth(account, password) {
 		const body = browser.text();
 		const index = body.indexOf(TokenName);
 		if (index < 0) {
-			throw log.error('unable_to_retrieve_halo4_tokens');
+			throw log.error('unable_to_retrieve_halo_4_tokens');
 		}
 
 		return JSON.parse(body);
-	} catch (e) {
-		throw log.warn('unable_to_authenticate_with_the_halo_4_api', [e]);
+	} catch (error) {
+		throw log.warn('unable_to_authenticate_with_the_halo_4_api', [error]);
 	}
 }
