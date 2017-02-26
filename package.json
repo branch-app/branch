@@ -1,18 +1,18 @@
 {
-	"name": "cuvva-log-sentry",
+	"name": "branch-log-sentry",
 	"version": "0.5.2",
-	"description": "Sentry handler for cuvva-log",
-	"homepage": "https://github.com/cuvva/cuvva-log-sentry-node",
-	"bugs": "https://github.com/cuvva/cuvva-log-sentry-node/issues",
+	"description": "Sentry handler for branch-log",
+	"homepage": "https://github.com/branch-app/log-sentry-node",
+	"bugs": "https://github.com/branch-app/log-sentry-node/issues",
 
 	"license": "MIT",
-	"author": "Cuvva (https://cuvva.co)",
+	"author": "Branch App (https://github.com/branch-app)",
 
 	"main": "lib/index.js",
 
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cuvva/cuvva-log-sentry-node.git"
+		"url": "https://github.com/branch-app/log-sentry-node.git"
 	},
 
 	"scripts": {

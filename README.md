@@ -1,14 +1,14 @@
-# cuvva-log-sentry
+# log-sentry
 
-Sentry integration for cuvva-log.
+Sentry integration for branch-log.
 
-[![NPM Version](https://img.shields.io/npm/v/cuvva-log-sentry.svg?style=flat)](//www.npmjs.org/package/cuvva-log-sentry)
-[![Build Status](https://img.shields.io/travis/cuvva/cuvva-log-sentry-node.svg?style=flat)](//travis-ci.org/cuvva/cuvva-log-sentry-node)
-[![Coverage Status](https://img.shields.io/coveralls/cuvva/cuvva-log-sentry-node.svg?style=flat)](//coveralls.io/r/cuvva/cuvva-log-sentry-node)
+[![NPM Version](https://img.shields.io/npm/v/branch-log-sentry.svg?style=flat)](//www.npmjs.org/package/branch-log-sentry)
+[![Build Status](https://img.shields.io/travis/branch-app/log-sentry-node.svg?style=flat)](//travis-ci.org/branch-app/log-sentry-node)
+[![Coverage Status](https://img.shields.io/coveralls/branch-app/log-sentry-node.svg?style=flat)](//coveralls.io/r/branch-app/log-sentry-node)
 
 ```js
-var log = require('cuvva-log');
-var logSentry = require('cuvva-log-sentry');
+var log = require('branch-log');
+var logSentry = require('branch-log-sentry');
 
 var ravenClient; // existing Raven client
 
@@ -56,6 +56,7 @@ Please open an issue on this repository.
 ## Authors
 
 - Jack Fransham
+- Alex Forbes-Reed (adapted from Cuvva)
 
 ## License
 
