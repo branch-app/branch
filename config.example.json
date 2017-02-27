@@ -1,4 +1,8 @@
 {
 	"sentryDSN": "",
-	"port": ""
+	"port": "",
+	"mongoDb": {
+		"connectionString": "",
+		"databaseName": ""
+	}
 }
