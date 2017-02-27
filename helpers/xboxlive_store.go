@@ -3,8 +3,6 @@ package helpers
 import (
 	"time"
 
-	"fmt"
-
 	"github.com/branch-app/service-xboxlive/models"
 	slug "github.com/metal3d/go-slugify"
 	"github.com/patrickmn/go-cache"
@@ -23,8 +21,6 @@ type XboxLiveStore struct {
 func (store XboxLiveStore) GetByGT(gamertag string) *models.XboxLiveIdentity {
 	gtSlug := slug.Marshal(gamertag, true)
 	value, exists := store.GTStore.Get(gtSlug)
-	fmt.Println(value)
-	fmt.Println(exists)
 	if !exists {
 		return nil
 	}

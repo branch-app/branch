@@ -30,7 +30,7 @@ func main() {
 		//ServiceID:     "service-xboxlive",
 		HTTPClient:     sharedClients.NewHTTPClient(),
 		ServiceClient:  sharedClients.NewServiceClient(),
-		XboxLiveClient: clients.NewXboxLiveClient(),
+		XboxLiveClient: clients.NewXboxLiveClient(config.MongoDB),
 		Configuration:  &config,
 	}
 
@@ -39,6 +39,7 @@ func main() {
 	apiGroup := r.Group("v1/")
 	{
 		handlers.NewIdentityHandler(apiGroup, ctx)
+		handlers.NewProfileHandler(apiGroup, ctx)
 	}
 
 	// Init health check

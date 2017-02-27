@@ -1,19 +1,19 @@
 package xboxlive
 
 type ProfileUsers struct {
-	Response
+	Response `bson:",inline"`
 
-	Users []ProfileUser `json:"profileUsers"`
+	Users []ProfileUser `json:"profileUsers" bson:"profile_users"`
 }
 
 type ProfileUser struct {
-	XUID            string               `json:"id"`
-	HostID          string               `json:"hostId"`
-	Settings        []ProfileUserSetting `json:"settings"`
-	IsSponsoredUser bool                 `json:"isSponsoredUser"`
+	XUID            string               `json:"id" bson:"xuid"`
+	HostID          string               `json:"hostId" bson:"host_id"`
+	Settings        []ProfileUserSetting `json:"settings" bson:"settings"`
+	IsSponsoredUser bool                 `json:"isSponsoredUser" bson:"is_sponsored_user"`
 }
 
 type ProfileUserSetting struct {
-	ID    string `json:"id"`
-	Value string `json:"value"`
+	ID    string `json:"id" bson:"id"`
+	Value string `json:"value" bson:"value"`
 }

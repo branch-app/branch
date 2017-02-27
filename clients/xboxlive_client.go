@@ -20,6 +20,7 @@ type XboxLiveClient struct {
 	httpClient    *clients.HTTPClient
 	serviceClient *clients.ServiceClient
 	xblStore      *helpers.XboxLiveStore
+	mongoClient   *clients.MongoDBClient
 
 	authentication    *models.XboxLiveAuthentication
 	forceTokenRefresh bool
@@ -27,6 +28,7 @@ type XboxLiveClient struct {
 
 const (
 	profileSettingsURL = "https://profile.xboxlive.com/users/%s(%s)/profile/settings?settings=gamertag"
+	profileURL         = "https://profile.xboxlive.com/users/xuid(%s)/profile/settings?settings=GameDisplayPicRaw,Gamerscore,Gamertag,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,TenureLevel,Watermarks,Location,ShowUserAsAvatar"
 
 	authorizationHeaderFormat = "XBL3.0 x=%s;%s"
 )
@@ -64,13 +66,22 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCa
 	return identity
 }
 
-func (client *XboxLiveClient) GetAuthentication() *models.XboxLiveAuthentication {
-	if (client.authentication != nil && client.authentication.ExpiresAt.After(time.Now().UTC())) && !client.forceTokenRefresh {
-		fmt.Println("we doin stuff")
-		return client.authentication
+func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdentity) *xboxlive.ProfileUsers {
+	// Retrieve info
+	url := fmt.Sprintf(profileURL, identity.XUID)
+	var response xboxlive.ProfileUsers
+	_, _, err := client.ExecuteRequest("GET", url, true, 3, nil, &response)
+	if err != nil {
+		panic(err)
 	}
 
-	fmt.Println("we doin repeating stuff")
+	return &response
+}
+
+func (client *XboxLiveClient) GetAuthentication() *models.XboxLiveAuthentication {
+	if (client.authentication != nil && client.authentication.ExpiresAt.After(time.Now().UTC())) && !client.forceTokenRefresh {
+		return client.authentication
+	}
 
 	var accountResp models.XboxLiveAuthResponse
 	_, bErr, err := client.serviceClient.Get("service-auth", "/xbox-live", &accountResp)
@@ -128,6 +139,7 @@ func (client *XboxLiveClient) GetAuthentication() *models.XboxLiveAuthentication
 
 	client.forceTokenRefresh = false
 	client.authentication = authentication
+	fmt.Println(client.authentication)
 	return client.authentication
 }
 
@@ -159,10 +171,11 @@ func (client *XboxLiveClient) ExecuteRequest(method, endpoint string, auth bool,
 	return resp, nil, err
 }
 
-func NewXboxLiveClient() *XboxLiveClient {
+func NewXboxLiveClient(mongoConfig *models.MongoDBConfig) *XboxLiveClient {
 	return &XboxLiveClient{
 		httpClient:    clients.NewHTTPClient(),
 		serviceClient: clients.NewServiceClient(),
 		xblStore:      helpers.NewXboxLiveStore(),
+		mongoClient:   clients.NewMongoDBClient(mongoConfig.ConnectionString, mongoConfig.DatabaseName),
 	}
 }
