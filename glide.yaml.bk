@@ -1,0 +1,8 @@
+package: github.com/branch-app/service-xboxlive
+import:
+- package: github.com/branch-app/log-go
+- package: github.com/branch-app/shared-go
+- package: gopkg.in/gin-gonic/gin.v1
+- package: github.com/metal3d/go-slugify
+- package: github.com/patrickmn/go-cache
+- package: github.com/jinzhu/configor

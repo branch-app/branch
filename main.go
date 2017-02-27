@@ -3,9 +3,16 @@ package main
 import (
 	"net/http"
 
-	"github.com/TheTree/service-xboxlive/contexts"
-	"github.com/TheTree/service-xboxlive/handlers"
-	"github.com/TheTree/service-xboxlive/helpers"
+	"github.com/branch-app/log-go"
+	"github.com/branch-app/service-xboxlive/clients"
+	"github.com/branch-app/service-xboxlive/contexts"
+	"github.com/branch-app/service-xboxlive/handlers"
+	"github.com/branch-app/service-xboxlive/models"
+	sharedClients "github.com/branch-app/shared-go/clients"
+
+	"fmt"
+
+	"github.com/jinzhu/configor"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -14,18 +21,24 @@ func init() {
 }
 
 func main() {
+	// Load Config
+	var config models.Configuration
+	configor.Load(&config, "config.json")
+
 	// Create service context
 	ctx := &contexts.ServiceContext{
-		ServiceID:     "service-xboxlive",
-		XboxLiveStore: helpers.NewXboxLiveStore(),
+		//ServiceID:     "service-xboxlive",
+		HTTPClient:     sharedClients.NewHTTPClient(),
+		ServiceClient:  sharedClients.NewServiceClient(),
+		XboxLiveClient: clients.NewXboxLiveClient(),
+		Configuration:  &config,
 	}
 
 	// Create Gin
 	r := gin.Default()
 	apiGroup := r.Group("v1/")
 	{
-		handlers.NewXUIDHandler(apiGroup, ctx)
-		handlers.NewGamertagHandler(apiGroup, ctx)
+		handlers.NewIdentityHandler(apiGroup, ctx)
 	}
 
 	// Init health check
@@ -34,5 +47,8 @@ func main() {
 			"status": "healthy",
 		})
 	})
-	r.Run(":3000")
+
+	// Start Service
+	branchlog.Info("service_listening", nil, &map[string]interface{}{"port": config.Port})
+	r.Run(fmt.Sprintf(":%s", config.Port))
 }
