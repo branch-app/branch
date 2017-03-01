@@ -1,7 +1,6 @@
 package xboxlive
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/branch-app/log-go"
@@ -41,7 +40,6 @@ func CacheRecordFindOne(mongo *sharedClients.MongoDBClient, query bson.M) (*Cach
 	var cacheRecord *CacheRecord
 	err := mongo.Collection(cacheRecordCollectionName).FindOne(query, &cacheRecord)
 	if err != nil {
-		fmt.Println(err)
 		if _, ok := err.(*bongo.DocumentNotFoundError); ok {
 			return nil, nil
 		}
