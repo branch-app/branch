@@ -38,6 +38,7 @@ func main() {
 	r := gin.Default()
 	apiGroup := r.Group("v1/")
 	{
+		handlers.NewAssetsHandler(apiGroup, ctx)
 		handlers.NewIdentityHandler(apiGroup, ctx)
 		handlers.NewProfileHandler(apiGroup, ctx)
 	}

@@ -3,7 +3,6 @@ package xboxlive
 import (
 	"time"
 
-	"github.com/branch-app/log-go"
 	sharedClients "github.com/branch-app/shared-go/clients"
 	sharedHelpers "github.com/branch-app/shared-go/helpers"
 	"github.com/maxwellhealth/bongo"
@@ -12,7 +11,6 @@ import (
 
 type CacheRecord struct {
 	bongo.DocumentBase `bson:",inline" json:"-"`
-	XUID               string        `bson:"xuid"`
 	DocURLHash         string        `bson:"doc_url_hash"`
 	DocumentID         bson.ObjectId `bson:"document_id"`
 	CachedAt           time.Time     `bson:"cached_at"`
@@ -44,20 +42,15 @@ func CacheRecordFindOne(mongo *sharedClients.MongoDBClient, query bson.M) (*Cach
 			return nil, nil
 		}
 
-		branchlog.Error("mongo_find_one_error", &map[string]interface{}{
-			"error": err,
-		}, nil)
-
 		return nil, err
 	}
 
 	return cacheRecord, nil
 }
 
-func NewCacheRecord(xuid, url string, docID bson.ObjectId, validDuration time.Duration) *CacheRecord {
+func NewCacheRecord(url string, docID bson.ObjectId, validDuration time.Duration) *CacheRecord {
 	now := time.Now().UTC()
 	return &CacheRecord{
-		XUID:          xuid,
 		DocURLHash:    sharedHelpers.CreateSHA512Hash(url),
 		DocumentID:    docID,
 		CachedAt:      now,

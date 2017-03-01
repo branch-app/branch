@@ -13,10 +13,22 @@ type ProfileHandler struct {
 }
 
 func (hdl ProfileHandler) Settings(c *gin.Context) {
-	identityCall, _ := helpers.ParseIdentity(c.Param("identity"))
+	identityCall := helpers.ParseIdentity(c.Param("identity"))
+	if identityCall == nil {
+		// pass into handler
+		panic("identity_not_found")
+	}
 
-	identity, _ := hdl.ctx.XboxLiveClient.GetProfileIdentity(identityCall)
-	profileSettings, _ := hdl.ctx.XboxLiveClient.GetProfileSettings(identity)
+	xmlc := hdl.ctx.XboxLiveClient
+	identity, err := xmlc.GetProfileIdentity(identityCall)
+	if err != nil {
+		panic(err)
+	}
+
+	profileSettings, err := xmlc.GetProfileSettings(identity)
+	if err != nil {
+		panic(err)
+	}
 	c.JSON(http.StatusOK, &profileSettings)
 }
 

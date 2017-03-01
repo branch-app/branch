@@ -10,13 +10,10 @@ import (
 
 	"fmt"
 
-	"github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/helpers"
 	"github.com/branch-app/service-xboxlive/models"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	sharedClients "github.com/branch-app/shared-go/clients"
-	sharedHelpers "github.com/branch-app/shared-go/helpers"
-	"gopkg.in/mgo.v2/bson"
 )
 
 type XboxLiveClient struct {
@@ -30,86 +27,8 @@ type XboxLiveClient struct {
 }
 
 const (
-	profileSettingsURL = "https://profile.xboxlive.com/users/%s(%s)/profile/settings?settings=gamertag"
-	profileURL         = "https://profile.xboxlive.com/users/xuid(%s)/profile/settings?settings=GameDisplayPicRaw,Gamerscore,Gamertag,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,TenureLevel,Watermarks,Location,ShowUserAsAvatar"
-
 	authorizationHeaderFormat = "XBL3.0 x=%s;%s"
 )
-
-func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCall) (*models.XboxLiveIdentity, error) {
-	// Check mem cache
-	var identity *models.XboxLiveIdentity
-	if identityCall.Type == "xuid" {
-		identity = client.xblStore.GetByXUID(identityCall.Identity)
-	} else if identityCall.Type == "gamertag" {
-		identity = client.xblStore.GetByGT(identityCall.Identity)
-	}
-
-	// We still have a fresh identity, return it
-	if identity != nil && identity.Fresh() {
-		return identity, nil
-	}
-
-	// Retrieve info
-	url := fmt.Sprintf(profileSettingsURL, identityCall.Type, identityCall.Identity)
-	var response xboxlive.ProfileUsers
-	_, err := client.ExecuteRequest("GET", url, true, 2, nil, &response)
-	if err != nil {
-		return nil, client.handleError(&response.Response, err)
-	}
-
-	// Pull data about profile
-	settings := response.Users[0].Settings
-	gamertag := settings[0].Value
-	xuid := response.Users[0].XUID
-	identity = models.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC())
-
-	// Add to mem cache and return
-	client.xblStore.Set(identity)
-	return identity, nil
-}
-
-func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdentity) (*xboxlive.ProfileUsers, error) {
-	url := fmt.Sprintf(profileURL, identity.XUID)
-	urlHash := sharedHelpers.CreateSHA512Hash(url)
-
-	// Check if we have a cached document
-	cacheRecord, err := xboxlive.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
-	if err != nil {
-		return nil, err
-	}
-	if cacheRecord != nil && cacheRecord.IsValid() {
-		response, err := xboxlive.ProfileUsersFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
-		if err != nil {
-			return nil, err
-		}
-		return response, nil
-	}
-
-	// Retrieve data from Xbox Live
-	var profileUsers *xboxlive.ProfileUsers
-	_, err = client.ExecuteRequest("GET", url, true, 3, nil, &profileUsers)
-	if err != nil {
-		return nil, client.handleError(&profileUsers.Response, err)
-	}
-
-	// Deal with caching
-	if cacheRecord != nil {
-		// Already have a cache record - so just update
-		profileUsers.Id = cacheRecord.DocumentID
-		profileUsers.Save(client.mongoClient)
-
-		// Update Cache Record
-		cacheRecord.Update(client.mongoClient)
-	} else {
-		// Need to add to database
-		profileUsers.Save(client.mongoClient)
-		cacheRecord = xboxlive.NewCacheRecord(identity.XUID, url, profileUsers.Id, 5*time.Minute)
-		cacheRecord.Save(client.mongoClient)
-	}
-
-	return profileUsers, nil
-}
 
 func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthentication, error) {
 	if (client.authentication != nil && client.authentication.ExpiresAt.After(time.Now().UTC())) && !client.forceTokenRefresh {
@@ -210,28 +129,22 @@ func (client *XboxLiveClient) ErrorToHTTPStatus(err error) int {
 	return http.StatusInternalServerError
 }
 
-func (client *XboxLiveClient) handleError(response *xboxlive.Response, err error) error {
+func (client *XboxLiveClient) handleError(response interface{}, err error) error {
+	var resp *xboxlive.Response
 	if response == nil {
-		branchlog.Error("unknown_error", nil, &map[string]interface{}{
-			"error": err,
-		})
-		return errors.New("unknown_error")
+		return err
+	}
+	resp, ok := response.(*xboxlive.Response)
+	if !ok {
+		return err
 	}
 
-	fmt.Println(response)
-	switch response.Code {
+	switch resp.Code {
 	case xboxlive.ResponseUserDoesntExist:
-		branchlog.Error("identity_doesnt_exist", nil, &map[string]interface{}{
-			"error": err,
-		})
 		return errors.New("identity_doesnt_exist")
 
 	default:
-		branchlog.Error("unknown_xbl_error_code", nil, &map[string]interface{}{
-			"error":    err,
-			"response": response,
-		})
-		return errors.New("unknown_xbl_error_code")
+		return err
 	}
 }
 

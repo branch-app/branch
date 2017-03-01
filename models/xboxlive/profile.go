@@ -3,7 +3,6 @@ package xboxlive
 import (
 	"fmt"
 
-	"github.com/branch-app/log-go"
 	sharedClients "github.com/branch-app/shared-go/clients"
 	"github.com/maxwellhealth/bongo"
 	"gopkg.in/mgo.v2/bson"
@@ -36,10 +35,6 @@ func ProfileUsersFindOne(mongo *sharedClients.MongoDBClient, query bson.M) (*Pro
 		if _, ok := err.(*bongo.DocumentNotFoundError); ok {
 			return nil, nil
 		}
-
-		branchlog.Error("mongo_find_one_error", &map[string]interface{}{
-			"error": err,
-		}, nil)
 
 		return nil, err
 	}
