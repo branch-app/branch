@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/branch-app/service-xboxlive/contexts"
-	"github.com/branch-app/service-xboxlive/models"
+	"github.com/branch-app/service-xboxlive/helpers"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -13,11 +13,11 @@ type ProfileHandler struct {
 }
 
 func (hdl ProfileHandler) Settings(c *gin.Context) {
-	xuid := c.Param("xuid")
+	identityCall, _ := helpers.ParseIdentity(c.Param("identity"))
 
-	identity := hdl.ctx.XboxLiveClient.GetProfileIdentity(&models.IdentityCall{Identity: xuid, Type: "xuid"})
-	profileSettings := hdl.ctx.XboxLiveClient.GetProfileSettings(identity)
-	c.JSON(http.StatusOK, profileSettings)
+	identity, _ := hdl.ctx.XboxLiveClient.GetProfileIdentity(identityCall)
+	profileSettings, _ := hdl.ctx.XboxLiveClient.GetProfileSettings(identity)
+	c.JSON(http.StatusOK, &profileSettings)
 }
 
 func NewProfileHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *ProfileHandler {
@@ -25,7 +25,7 @@ func NewProfileHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *Profi
 	hdl.ctx = ctx
 
 	rg = rg.Group("profile")
-	rg.GET("/:xuid/settings", hdl.Settings)
+	rg.GET("/:identity/settings", hdl.Settings)
 
 	return hdl
 }

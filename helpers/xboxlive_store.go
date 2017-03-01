@@ -27,7 +27,7 @@ func (store XboxLiveStore) GetByGT(gamertag string) *models.XboxLiveIdentity {
 
 	// Retrieve XboxLiveIdentity from cache
 	memIdent := value.(*models.XboxLiveIdentity)
-	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.Age)
+	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
 
 	// Update Cache
 	store.Set(identity)
@@ -47,7 +47,7 @@ func (store XboxLiveStore) GetByXUID(xuid string) *models.XboxLiveIdentity {
 
 	// Retrieve XboxLiveIdentity from cache, and return
 	memIdent := value.(*models.XboxLiveIdentity)
-	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.Age)
+	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
 
 	// Update Opposite Cache
 	store.Set(identity)

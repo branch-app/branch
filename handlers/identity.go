@@ -3,11 +3,10 @@ package handlers
 import (
 	"net/http"
 
-	"strings"
-
 	"github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
-	"github.com/branch-app/service-xboxlive/models"
+	"github.com/branch-app/service-xboxlive/helpers"
+	"github.com/branch-app/service-xboxlive/models/branch"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -16,20 +15,23 @@ type IdentityHandler struct {
 }
 
 func (hdl IdentityHandler) Get(c *gin.Context) {
-	identityType := strings.ToLower(c.Param("type"))
-	identityValue := strings.ToLower(c.Param("value"))
-	identityCall := &models.IdentityCall{
-		Identity: identityValue,
-		Type:     identityType,
-	}
-
-	if identityCall.Type != "xuid" && identityCall.Type != "gamertag" {
-		c.JSON(http.StatusNotAcceptable, branchlog.NewBranchError("invalid_identity_type", nil, nil))
+	identityCall, err := helpers.ParseIdentity(c.Param("identity"))
+	if err != nil {
+		c.JSON(http.StatusNotAcceptable, branchlog.NewBranchErrorFromError(err, nil, nil))
 		return
 	}
 
-	identity := hdl.ctx.XboxLiveClient.GetProfileIdentity(identityCall)
-	c.JSON(http.StatusOK, identity)
+	identity, err := hdl.ctx.XboxLiveClient.GetProfileIdentity(identityCall)
+	if err != nil {
+		c.JSON(hdl.ctx.XboxLiveClient.ErrorToHTTPStatus(err), branchlog.NewBranchErrorFromError(err, nil, nil))
+		return
+	}
+
+	resp := &branch.Response{
+		CacheDate: identity.CachedAt,
+		Data:      identity,
+	}
+	c.JSON(http.StatusOK, resp)
 }
 
 func NewIdentityHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *IdentityHandler {
@@ -37,7 +39,7 @@ func NewIdentityHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *Iden
 	hdl.ctx = ctx
 
 	rg = rg.Group("identity")
-	rg.GET("/:type/:value", hdl.Get)
+	rg.GET("/:identity", hdl.Get)
 
 	return hdl
 }

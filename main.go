@@ -53,3 +53,10 @@ func main() {
 	branchlog.Info("service_listening", nil, &map[string]interface{}{"port": config.Port})
 	r.Run(fmt.Sprintf(":%s", config.Port))
 }
+
+type m struct {
+	data *branchlog.BranchError
+}
+type n struct {
+	data branchlog.BranchError
+}

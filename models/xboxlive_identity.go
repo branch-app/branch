@@ -4,8 +4,8 @@ import "time"
 
 // XboxLiveIdentity holds a user's Gamertag and XUID.
 type XboxLiveIdentity struct {
-	// Age is when the information was retrieved from the Xbox Live servers.
-	Age time.Time `json:"age"`
+	// CachedAt is when the information was retrieved from the Xbox Live servers.
+	CachedAt time.Time `json:"cached_at"`
 
 	// ExpiresAt is the UTC time that the Identity expires.
 	ExpiresAt time.Time `json:"expires_at"`
@@ -23,10 +23,10 @@ func (identity *XboxLiveIdentity) Fresh() bool {
 }
 
 // NewXboxLiveIdentity creates a new XboxLiveIdentity based on a Gamertag and XUID.
-func NewXboxLiveIdentity(gamertag, xuid string, age time.Time) *XboxLiveIdentity {
+func NewXboxLiveIdentity(gamertag, xuid string, cachedAt time.Time) *XboxLiveIdentity {
 	return &XboxLiveIdentity{
-		Age:       age,
-		ExpiresAt: age.Add(25 * time.Minute),
+		CachedAt:  cachedAt,
+		ExpiresAt: cachedAt.Add(25 * time.Minute),
 		Gamertag:  gamertag,
 		XUID:      xuid,
 	}
