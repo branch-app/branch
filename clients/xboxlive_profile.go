@@ -40,6 +40,9 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCa
 	var response xboxlive.ProfileUsers
 	_, err := client.ExecuteRequest("GET", url, auth, 2, nil, &response)
 	if err != nil {
+		if identity != nil {
+			return identity, nil
+		}
 		return nil, client.handleError(&response.Response, err)
 	}
 
@@ -79,6 +82,10 @@ func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdenti
 	var profileUsers *xboxlive.ProfileUsers
 	_, err = client.ExecuteRequest("GET", url, auth, 3, nil, &profileUsers)
 	if err != nil {
+		profileUsers, _ = xboxlive.ProfileUsersFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
+		if profileUsers != nil {
+			return branch.NewResponse(cacheRecord.CachedAt, &profileUsers), nil
+		}
 		return nil, client.handleError(&profileUsers.Response, err)
 	}
 

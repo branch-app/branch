@@ -37,7 +37,13 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response
 	var colourAsset *xboxlive.ColourAsset
 	_, err = client.ExecuteRequest("GET", url, nil, 3, nil, &colourAsset)
 	if err != nil {
-		return nil, client.handleError(&colourAsset, err)
+		if err != nil {
+			colourAsset, _ = xboxlive.ColourAssetFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
+			if colourAsset != nil {
+				return branch.NewResponse(cacheRecord.CachedAt, &colourAsset), nil
+			}
+			return nil, client.handleError(&colourAsset.Response, err)
+		}
 	}
 
 	// Deal with caching
