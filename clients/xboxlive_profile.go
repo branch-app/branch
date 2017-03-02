@@ -27,14 +27,18 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCa
 	}
 
 	// We still have a fresh identity, return it
-	if identity != nil && identity.Fresh() {
+	auth, authErr := client.GetAuthentication()
+	if identity != nil && (authErr != nil || identity.Fresh()) {
 		return identity, nil
+	}
+	if authErr != nil {
+		return nil, client.handleError(nil, authErr)
 	}
 
 	// Retrieve info
 	url := fmt.Sprintf(profileSettingsURL, identityCall.Type, identityCall.Identity)
 	var response xboxlive.ProfileUsers
-	_, err := client.ExecuteRequest("GET", url, true, 2, nil, &response)
+	_, err := client.ExecuteRequest("GET", url, auth, 2, nil, &response)
 	if err != nil {
 		return nil, client.handleError(&response.Response, err)
 	}
@@ -53,23 +57,27 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCa
 func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdentity) (*branch.Response, error) {
 	url := fmt.Sprintf(profileURL, identity.XUID)
 	urlHash := sharedHelpers.CreateSHA512Hash(url)
+	auth, authErr := client.GetAuthentication()
 
 	// Check if we have a cached document
 	cacheRecord, err := xboxlive.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
 	if err != nil {
 		return nil, err
 	}
-	if cacheRecord != nil && cacheRecord.IsValid() {
+	if cacheRecord != nil && (authErr != nil || cacheRecord.IsValid()) {
 		response, err := xboxlive.ProfileUsersFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
 		if err != nil {
 			return nil, err
 		}
 		return branch.NewResponse(cacheRecord.CachedAt, &response), nil
 	}
+	if authErr != nil {
+		return nil, client.handleError(nil, authErr)
+	}
 
 	// Retrieve data from Xbox Live
 	var profileUsers *xboxlive.ProfileUsers
-	_, err = client.ExecuteRequest("GET", url, true, 3, nil, &profileUsers)
+	_, err = client.ExecuteRequest("GET", url, auth, 3, nil, &profileUsers)
 	if err != nil {
 		return nil, client.handleError(&profileUsers.Response, err)
 	}

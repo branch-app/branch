@@ -10,6 +10,7 @@ import (
 
 	"fmt"
 
+	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/helpers"
 	"github.com/branch-app/service-xboxlive/models"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
@@ -27,6 +28,11 @@ type XboxLiveClient struct {
 }
 
 const (
+	ErrorUnableToAuthenticateWithXbl = "unable_to_authenticate_with_xboxlive"
+	ErrorIdentityDoesntExist         = "identity_doesnt_exist"
+	ErrorInternalAuthDown            = "internal_auth_down"
+	ErrorUnknown                     = "unknown_error"
+
 	authorizationHeaderFormat = "XBL3.0 x=%s;%s"
 )
 
@@ -35,6 +41,14 @@ func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthenticatio
 		return client.authentication, nil
 	}
 
+	auth, err := client.UpdateAuthentication()
+	if err != nil {
+		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
+	}
+	return auth, nil
+}
+
+func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentication, error) {
 	var accountResp models.XboxLiveAuthResponse
 	_, err := client.serviceClient.Get("service-auth", "/xbox-live", &accountResp)
 	if err != nil {
@@ -51,7 +65,7 @@ func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthenticatio
 		TokenType:    "JWT",
 	}
 	var xblAuthenticationResponse models.XboxLiveAuthenticationResponse
-	_, err = client.ExecuteRequest("POST", "https://user.auth.xboxlive.com/user/authenticate", false, 0, xblAuthenticationRequest, &xblAuthenticationResponse)
+	_, err = client.ExecuteRequest("POST", "https://user.auth.xboxlive.com/user/authenticate", nil, 0, xblAuthenticationRequest, &xblAuthenticationResponse)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +79,7 @@ func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthenticatio
 		TokenType:    "JWT",
 	}
 	var xblAuthorizationResponse models.XboxLiveAuthorizationResponse
-	_, err = client.ExecuteRequest("POST", "https://xsts.auth.xboxlive.com/xsts/authorize", false, 0, xblAuthorizationRequest, &xblAuthorizationResponse)
+	_, err = client.ExecuteRequest("POST", "https://xsts.auth.xboxlive.com/xsts/authorize", nil, 0, xblAuthorizationRequest, &xblAuthorizationResponse)
 	if err != nil {
 		return nil, err
 	}
@@ -86,17 +100,13 @@ func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthenticatio
 	return client.authentication, nil
 }
 
-func (client *XboxLiveClient) ExecuteRequest(method, endpoint string, auth bool, contractVersion int, body, respBody interface{}) (*http.Response, error) {
+func (client *XboxLiveClient) ExecuteRequest(method, endpoint string, auth *models.XboxLiveAuthentication, contractVersion int, body, respBody interface{}) (*http.Response, error) {
 	headers := map[string]string{
 		"x-xbl-contract-version": strconv.Itoa(contractVersion),
 	}
 
-	if auth {
-		authentication, err := client.GetAuthentication()
-		if err != nil {
-			return nil, err
-		}
-		headers["Authorization"] = fmt.Sprintf(authorizationHeaderFormat, authentication.UserHash, authentication.Token)
+	if auth != nil {
+		headers["Authorization"] = fmt.Sprintf(authorizationHeaderFormat, auth.UserHash, auth.Token)
 	}
 
 	resp, err := client.httpClient.ExecuteRequest(method, endpoint, &headers, nil, body)
@@ -117,11 +127,10 @@ func (client *XboxLiveClient) ExecuteRequest(method, endpoint string, auth bool,
 
 func (client *XboxLiveClient) ErrorToHTTPStatus(err error) int {
 	switch err.Error() {
-	case "identity_doesnt_exist":
+	case ErrorIdentityDoesntExist:
 		return http.StatusNotFound
 
-	case "unknown_error":
-	case "unknown_xbl_error_code":
+	case ErrorUnknown:
 	default:
 		return http.StatusInternalServerError
 	}
@@ -130,22 +139,23 @@ func (client *XboxLiveClient) ErrorToHTTPStatus(err error) int {
 }
 
 func (client *XboxLiveClient) handleError(response interface{}, err error) error {
-	var resp *xboxlive.Response
-	if response == nil {
-		return err
-	}
-	resp, ok := response.(*xboxlive.Response)
-	if !ok {
-		return err
+	if response != nil {
+		var resp *xboxlive.Response
+		resp, ok := response.(*xboxlive.Response)
+		if ok {
+			switch resp.Code {
+			case xboxlive.ResponseUserDoesntExist:
+				return errors.New(ErrorIdentityDoesntExist)
+			}
+		}
 	}
 
-	switch resp.Code {
-	case xboxlive.ResponseUserDoesntExist:
-		return errors.New("identity_doesnt_exist")
-
-	default:
-		return err
+	if err.Error() == ErrorUnableToAuthenticateWithXbl {
+		return errors.New(ErrorInternalAuthDown)
 	}
+
+	// unknown_error
+	return errors.New(ErrorUnknown)
 }
 
 func NewXboxLiveClient(mongoConfig *models.MongoDBConfig) *XboxLiveClient {

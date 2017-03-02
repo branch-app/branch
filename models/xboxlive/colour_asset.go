@@ -14,7 +14,7 @@ type ColourAsset struct {
 	TertiaryColour  string `json:"tertiaryColor" bson:"tertiary_colour"`
 }
 
-const colourAssetCollectionName = "colour_asset"
+const colourAssetCollectionName = "colour_assets"
 
 func (record *ColourAsset) Save(mongo *sharedClients.MongoDBClient) error {
 	return mongo.Collection(colourAssetCollectionName).Save(record)

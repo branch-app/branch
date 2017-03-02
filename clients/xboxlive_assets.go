@@ -35,7 +35,7 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response
 
 	// Retrieve data from Xbox Live
 	var colourAsset *xboxlive.ColourAsset
-	_, err = client.ExecuteRequest("GET", url, false, 3, nil, &colourAsset)
+	_, err = client.ExecuteRequest("GET", url, nil, 3, nil, &colourAsset)
 	if err != nil {
 		return nil, client.handleError(&colourAsset, err)
 	}

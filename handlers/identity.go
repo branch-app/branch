@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
 	"github.com/branch-app/service-xboxlive/helpers"
 	"github.com/branch-app/service-xboxlive/models/branch"
@@ -16,13 +17,15 @@ type IdentityHandler struct {
 func (hdl IdentityHandler) Get(c *gin.Context) {
 	identityCall := helpers.ParseIdentity(c.Param("identity"))
 	if identityCall == nil {
-		panic("identity_not_found")
+		c.JSON(http.StatusBadRequest, log.Error("invalid_identity", nil, nil))
+		return
 	}
 
 	xblc := hdl.ctx.XboxLiveClient
 	identity, err := xblc.GetProfileIdentity(identityCall)
 	if err != nil {
-		panic(err)
+		c.JSON(xblc.ErrorToHTTPStatus(err), log.Error(err.Error(), nil, nil))
+		return
 	}
 
 	resp := branch.NewResponse(identity.CachedAt, identity)

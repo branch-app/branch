@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
 	"gopkg.in/gin-gonic/gin.v1"
 )
@@ -15,7 +16,9 @@ func (hdl AssetsHandler) Get(c *gin.Context) {
 	xblc := hdl.ctx.XboxLiveClient
 	asset, err := xblc.GetColourAssets(c.Param("colourID"))
 	if err != nil {
-		panic(err)
+		bErr := log.Error(err.Error(), nil, nil)
+		c.JSON(xblc.ErrorToHTTPStatus(err), &bErr)
+		return
 	}
 
 	c.JSON(http.StatusOK, &asset)

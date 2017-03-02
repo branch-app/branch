@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/branch-app/log-go"
+	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/clients"
 	"github.com/branch-app/service-xboxlive/contexts"
 	"github.com/branch-app/service-xboxlive/handlers"
@@ -51,13 +51,6 @@ func main() {
 	})
 
 	// Start Service
-	branchlog.Info("service_listening", nil, &map[string]interface{}{"port": config.Port})
+	log.Info("service_listening", nil, &log.M{"port": config.Port})
 	r.Run(fmt.Sprintf(":%s", config.Port))
-}
-
-type m struct {
-	data *branchlog.BranchError
-}
-type n struct {
-	data branchlog.BranchError
 }

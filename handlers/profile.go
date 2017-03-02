@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
 	"github.com/branch-app/service-xboxlive/helpers"
 	"gopkg.in/gin-gonic/gin.v1"
@@ -15,19 +16,21 @@ type ProfileHandler struct {
 func (hdl ProfileHandler) Settings(c *gin.Context) {
 	identityCall := helpers.ParseIdentity(c.Param("identity"))
 	if identityCall == nil {
-		// pass into handler
-		panic("identity_not_found")
+		c.JSON(http.StatusBadRequest, log.Error("invalid_identity", nil, nil))
+		return
 	}
 
-	xmlc := hdl.ctx.XboxLiveClient
-	identity, err := xmlc.GetProfileIdentity(identityCall)
+	xblc := hdl.ctx.XboxLiveClient
+	identity, err := xblc.GetProfileIdentity(identityCall)
 	if err != nil {
-		panic(err)
+		c.JSON(xblc.ErrorToHTTPStatus(err), log.Error(err.Error(), nil, nil))
+		return
 	}
 
-	profileSettings, err := xmlc.GetProfileSettings(identity)
+	profileSettings, err := xblc.GetProfileSettings(identity)
 	if err != nil {
-		panic(err)
+		c.JSON(xblc.ErrorToHTTPStatus(err), log.Error(err.Error(), nil, nil))
+		return
 	}
 	c.JSON(http.StatusOK, &profileSettings)
 }
