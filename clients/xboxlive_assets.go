@@ -5,9 +5,10 @@ import (
 
 	"fmt"
 
-	"github.com/branch-app/service-xboxlive/models/branch"
+	"github.com/branch-app/shared-go/models/branch"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
-	sharedHelpers "github.com/branch-app/shared-go/helpers"
+	"github.com/branch-app/shared-go/crypto"
+	sharedModels "github.com/branch-app/shared-go/models"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -17,10 +18,10 @@ const (
 
 func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response, error) {
 	url := fmt.Sprintf(colourAssetURL, colourID)
-	urlHash := sharedHelpers.CreateSHA512Hash(url)
+	urlHash := crypto.CreateSHA512Hash(url)
 
 	// Check if we have a cached document
-	cacheRecord, err := xboxlive.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
+	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
 	fmt.Println(cacheRecord)
 	if err != nil {
 		return nil, err
@@ -57,7 +58,7 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response
 	} else {
 		// Need to add to database
 		colourAsset.Save(client.mongoClient)
-		cacheRecord = xboxlive.NewCacheRecord(url, colourAsset.Id, 1460*time.Hour) // 2 months
+		cacheRecord = sharedModels.NewCacheRecord(url, colourAsset.Id, 1460*time.Hour) // 2 months
 		cacheRecord.Save(client.mongoClient)
 	}
 

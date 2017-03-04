@@ -5,7 +5,7 @@ import (
 
 	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
-	"github.com/branch-app/service-xboxlive/helpers"
+	sharedHelpers "github.com/branch-app/shared-go/helpers"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -14,7 +14,7 @@ type ProfileHandler struct {
 }
 
 func (hdl ProfileHandler) Settings(c *gin.Context) {
-	identityCall := helpers.ParseIdentity(c.Param("identity"))
+	identityCall := sharedHelpers.ParseIdentity(c.Param("identity"))
 	if identityCall == nil {
 		c.JSON(http.StatusBadRequest, log.Error("invalid_identity", nil, nil))
 		return

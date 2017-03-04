@@ -6,9 +6,10 @@ import (
 	"fmt"
 
 	"github.com/branch-app/service-xboxlive/models"
-	"github.com/branch-app/service-xboxlive/models/branch"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
-	sharedHelpers "github.com/branch-app/shared-go/helpers"
+	"github.com/branch-app/shared-go/models/branch"
+	"github.com/branch-app/shared-go/crypto"
+	sharedModels "github.com/branch-app/shared-go/models"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -17,7 +18,7 @@ const (
 	profileURL         = "https://profile.xboxlive.com/users/xuid(%s)/profile/settings?settings=GameDisplayPicRaw,Gamerscore,Gamertag,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,TenureLevel,Watermarks,Location,ShowUserAsAvatar"
 )
 
-func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCall) (*models.XboxLiveIdentity, error) {
+func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.IdentityCall) (*models.XboxLiveIdentity, error) {
 	// Check mem cache
 	var identity *models.XboxLiveIdentity
 	if identityCall.Type == "xuid" {
@@ -59,11 +60,11 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *models.IdentityCa
 
 func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdentity) (*branch.Response, error) {
 	url := fmt.Sprintf(profileURL, identity.XUID)
-	urlHash := sharedHelpers.CreateSHA512Hash(url)
+	urlHash := crypto.CreateSHA512Hash(url)
 	auth, authErr := client.GetAuthentication()
 
 	// Check if we have a cached document
-	cacheRecord, err := xboxlive.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
+	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +101,7 @@ func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdenti
 	} else {
 		// Need to add to database
 		profileUsers.Save(client.mongoClient)
-		cacheRecord = xboxlive.NewCacheRecord(url, profileUsers.Id, 5*time.Minute)
+		cacheRecord = sharedModels.NewCacheRecord(url, profileUsers.Id, 5*time.Minute)
 		cacheRecord.Save(client.mongoClient)
 	}
 

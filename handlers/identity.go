@@ -3,10 +3,10 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/branch-app/shared-go/models/branch"
 	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
-	"github.com/branch-app/service-xboxlive/helpers"
-	"github.com/branch-app/service-xboxlive/models/branch"
+	sharedHelpers "github.com/branch-app/shared-go/helpers"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -15,7 +15,7 @@ type IdentityHandler struct {
 }
 
 func (hdl IdentityHandler) Get(c *gin.Context) {
-	identityCall := helpers.ParseIdentity(c.Param("identity"))
+	identityCall := sharedHelpers.ParseIdentity(c.Param("identity"))
 	if identityCall == nil {
 		c.JSON(http.StatusBadRequest, log.Error("invalid_identity", nil, nil))
 		return
