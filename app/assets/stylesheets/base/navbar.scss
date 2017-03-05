@@ -29,14 +29,24 @@ nav.navbar {
 			> a {
 				color: white;
 
-				&:hover {
-					color: #ccc;
+				&, &:hover {
+					color: white;
+					opacity: 0.7;
+				}
+				&:active, &:focus {
+					color: #eee;
 				}
 			}
 
 			&.open > a {
-				&, &:hover, &:focus {
+				&, &:hover {
 					background-color: transparent;
+					color: white;
+					opacity: 0.7;
+				}
+				&:active, &:focus {
+					background-color: transparent;
+					color: #eee;;
 				}
 			}
 		}
@@ -56,5 +66,40 @@ nav.navbar {
 		.navbar-header {
 			background-image: image-url("logo/logo-150x150.png");
 		}
+
+		.navbar-nav {
+			> li {
+				> a {
+					color: $brand-primary;
+
+					&, &:hover {
+						color: $brand-primary;
+						opacity: 0.7;
+					}
+					&:active, &:focus {
+						color: $brand-primary;
+						opacity: 0.5;
+					}
+				}
+
+				&.open > a {
+					&, &:hover {
+						background-color: transparent;
+						color: $brand-primary;
+						opacity: 0.7;
+					}
+					&:active, &:focus {
+						background-color: transparent;
+						color: $brand-primary;
+						opacity: 0.5;
+					}
+				}
+			}
+		}
+	}
+
+	.dropdown-menu {
+		margin-top: 9px;
+		border-color: $brand-primary;
 	}
 }
