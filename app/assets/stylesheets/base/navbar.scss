@@ -1,7 +1,60 @@
 nav.navbar {
-	height: 70px;
-	background: white;
+	height: 80px;
+	padding-top: 20px;
+	padding-left: 80px;
+	padding-right: 80px;
 
-	border-bottom: 2px solid $brand-primary;
+	background: transparent;
+	border: 0;
 	border-radius: 0;
+
+	transition: 0.5s;
+
+	.navbar-brand {
+		color: white;
+		font-size: 20px;
+		font-weight: 200;
+	}
+
+	.navbar-header {
+		background-image: image-url("logo/logo-150x150-w.png");
+		background-position: left center;
+		background-repeat: no-repeat;
+		background-size: 35px;
+		padding-left: 45px;
+	}
+
+	.navbar-nav {
+		> li {
+			> a {
+				color: white;
+
+				&:hover {
+					color: #ccc;
+				}
+			}
+
+			&.open > a {
+				&, &:hover, &:focus {
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	&.navbar-secondary {
+		padding-top: 10px;
+		height: 70px;
+
+		background: white;
+		border-bottom: 1px solid $brand-primary;
+
+		.navbar-brand {
+			color: $brand-primary;
+		}
+
+		.navbar-header {
+			background-image: image-url("logo/logo-150x150.png");
+		}
+	}
 }

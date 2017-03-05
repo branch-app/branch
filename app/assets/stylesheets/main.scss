@@ -7,8 +7,25 @@ $small-devices-width: 768px;
 $medium-devices-width: 992px;
 $large-devices-width: 1200px;
 
+@import 'base/footer.scss';
 @import 'base/navbar.scss';
+
+@import 'mixins/masks.scss';
+
+@import 'styles/home.scss';
+
+* {
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	font-size: 48px;
+}
 
 html {
 	background: $brand-primary;
+}
+
+body {
+	padding-top: 0px;
 }

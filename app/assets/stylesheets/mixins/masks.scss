@@ -1,0 +1,10 @@
+.generic-branch-mask {
+	background: -moz-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.8) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(61,61,124,0.75)), color-stop(39%, rgba(61,61,124,0)), color-stop(100%, rgba(42,45,83,0.75)));
+	background: -webkit-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.75) 100%);
+	background: -o-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.75) 100%);
+	background: -ms-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.75) 100%);
+	background: linear-gradient(to bottom, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.75) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d3d7c', endColorstr='#2A2D53', GradientType=0 );
+	height: 100%;
+}
