@@ -1,12 +1,16 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	sharedModels "github.com/branch-app/shared-go/models"
+)
 
 type XboxLiveAuthentication struct {
 	Token     string
 	UserHash  string
 	ExpiresAt time.Time
-	Identity  *XboxLiveIdentity
+	Identity  *sharedModels.XboxLiveIdentity
 }
 
 type XboxLiveAuthResponse struct {

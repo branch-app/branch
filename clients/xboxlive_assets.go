@@ -5,10 +5,10 @@ import (
 
 	"fmt"
 
-	"github.com/branch-app/shared-go/models/branch"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	"github.com/branch-app/shared-go/crypto"
 	sharedModels "github.com/branch-app/shared-go/models"
+	"github.com/branch-app/shared-go/models/branch"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -16,7 +16,7 @@ const (
 	colourAssetURL = "http://dlassets.xboxlive.com/public/content/ppl/colors/%s.json"
 )
 
-func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response, error) {
+func (client *XboxLiveClient) GetColourAssets(colourID string) (*xboxlive.ColourAsset, error) {
 	url := fmt.Sprintf(colourAssetURL, colourID)
 	urlHash := crypto.CreateSHA512Hash(url)
 
@@ -31,20 +31,22 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response
 		if err != nil {
 			return nil, err
 		}
-		return branch.NewResponse(cacheRecord.CachedAt, response), nil
+		response.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+		return response, nil
 	}
 
 	// Retrieve data from Xbox Live
 	var colourAsset *xboxlive.ColourAsset
 	_, err = client.ExecuteRequest("GET", url, nil, 3, nil, &colourAsset)
 	if err != nil {
-		if err != nil {
+		if cacheRecord != nil {
 			colourAsset, _ = xboxlive.ColourAssetFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
 			if colourAsset != nil {
-				return branch.NewResponse(cacheRecord.CachedAt, &colourAsset), nil
+				colourAsset.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+				return colourAsset, nil
 			}
-			return nil, client.handleError(&colourAsset.Response, err)
 		}
+		return nil, client.handleError(&colourAsset.Response, err)
 	}
 
 	// Deal with caching
@@ -62,5 +64,6 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*branch.Response
 		cacheRecord.Save(client.mongoClient)
 	}
 
-	return branch.NewResponse(cacheRecord.CachedAt, colourAsset), nil
+	colourAsset.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+	return colourAsset, nil
 }

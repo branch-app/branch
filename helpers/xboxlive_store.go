@@ -3,7 +3,8 @@ package helpers
 import (
 	"time"
 
-	"github.com/branch-app/service-xboxlive/models"
+	sharedModels "github.com/branch-app/shared-go/models"
+
 	slug "github.com/metal3d/go-slugify"
 	"github.com/patrickmn/go-cache"
 )
@@ -18,7 +19,7 @@ type XboxLiveStore struct {
 }
 
 // GetByGT retrieves an XboxLiveIdentity by it's Gamertag
-func (store XboxLiveStore) GetByGT(gamertag string) *models.XboxLiveIdentity {
+func (store XboxLiveStore) GetByGT(gamertag string) *sharedModels.XboxLiveIdentity {
 	gtSlug := slug.Marshal(gamertag, true)
 	value, exists := store.GTStore.Get(gtSlug)
 	if !exists {
@@ -26,8 +27,8 @@ func (store XboxLiveStore) GetByGT(gamertag string) *models.XboxLiveIdentity {
 	}
 
 	// Retrieve XboxLiveIdentity from cache
-	memIdent := value.(*models.XboxLiveIdentity)
-	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
+	memIdent := value.(*sharedModels.XboxLiveIdentity)
+	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
 
 	// Update Cache
 	store.Set(identity)
@@ -37,7 +38,7 @@ func (store XboxLiveStore) GetByGT(gamertag string) *models.XboxLiveIdentity {
 }
 
 // GetByXUID retrives an XboxLiveIdentity by it's XUID.
-func (store XboxLiveStore) GetByXUID(xuid string) *models.XboxLiveIdentity {
+func (store XboxLiveStore) GetByXUID(xuid string) *sharedModels.XboxLiveIdentity {
 	xuidCache := slug.Marshal(xuid, true)
 	value, exists := store.XUIDStore.Get(xuidCache)
 
@@ -46,8 +47,8 @@ func (store XboxLiveStore) GetByXUID(xuid string) *models.XboxLiveIdentity {
 	}
 
 	// Retrieve XboxLiveIdentity from cache, and return
-	memIdent := value.(*models.XboxLiveIdentity)
-	identity := models.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
+	memIdent := value.(*sharedModels.XboxLiveIdentity)
+	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
 
 	// Update Opposite Cache
 	store.Set(identity)
@@ -57,7 +58,7 @@ func (store XboxLiveStore) GetByXUID(xuid string) *models.XboxLiveIdentity {
 }
 
 // Set sets a Gamertag key to an Identity value in the GTStore.
-func (store XboxLiveStore) Set(identity *models.XboxLiveIdentity) {
+func (store XboxLiveStore) Set(identity *sharedModels.XboxLiveIdentity) {
 	gamertagSlug := slug.Marshal(identity.Gamertag, true)
 	xuidSlug := slug.Marshal(identity.XUID, true)
 	untilExpires := time.Now().UTC().Sub(identity.ExpiresAt)

@@ -3,7 +3,6 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/branch-app/shared-go/models/branch"
 	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/contexts"
 	sharedHelpers "github.com/branch-app/shared-go/helpers"
@@ -28,8 +27,7 @@ func (hdl IdentityHandler) Get(c *gin.Context) {
 		return
 	}
 
-	resp := branch.NewResponse(identity.CachedAt, identity)
-	c.JSON(http.StatusOK, resp)
+	c.JSON(http.StatusOK, identity)
 }
 
 func NewIdentityHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *IdentityHandler {

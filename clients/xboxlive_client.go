@@ -15,6 +15,7 @@ import (
 	"github.com/branch-app/service-xboxlive/models"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	sharedClients "github.com/branch-app/shared-go/clients"
+	sharedModels "github.com/branch-app/shared-go/models"
 )
 
 type XboxLiveClient struct {
@@ -89,7 +90,7 @@ func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentica
 	xuid := xblAuthorizationResponse.DisplayClaims["xui"][0]["xid"]
 	authentication := &models.XboxLiveAuthentication{
 		ExpiresAt: time.Now().UTC().Add(55 * time.Minute),
-		Identity:  models.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC()),
+		Identity:  sharedModels.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC()),
 		Token:     xblAuthorizationResponse.Token,
 		UserHash:  userHash,
 	}

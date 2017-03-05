@@ -5,11 +5,10 @@ import (
 
 	"fmt"
 
-	"github.com/branch-app/service-xboxlive/models"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
-	"github.com/branch-app/shared-go/models/branch"
 	"github.com/branch-app/shared-go/crypto"
 	sharedModels "github.com/branch-app/shared-go/models"
+	"github.com/branch-app/shared-go/models/branch"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -18,9 +17,9 @@ const (
 	profileURL         = "https://profile.xboxlive.com/users/xuid(%s)/profile/settings?settings=GameDisplayPicRaw,Gamerscore,Gamertag,AccountTier,XboxOneRep,PreferredColor,RealName,Bio,TenureLevel,Watermarks,Location,ShowUserAsAvatar"
 )
 
-func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.IdentityCall) (*models.XboxLiveIdentity, error) {
+func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.IdentityCall) (*sharedModels.XboxLiveIdentity, error) {
 	// Check mem cache
-	var identity *models.XboxLiveIdentity
+	var identity *sharedModels.XboxLiveIdentity
 	if identityCall.Type == "xuid" {
 		identity = client.xblStore.GetByXUID(identityCall.Identity)
 	} else if identityCall.Type == "gamertag" {
@@ -30,6 +29,7 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.Iden
 	// We still have a fresh identity, return it
 	auth, authErr := client.GetAuthentication()
 	if identity != nil && (authErr != nil || identity.Fresh()) {
+		identity.BranchInfo = branch.NewInfo(identity.CachedAt)
 		return identity, nil
 	}
 	if authErr != nil {
@@ -42,6 +42,7 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.Iden
 	_, err := client.ExecuteRequest("GET", url, auth, 2, nil, &response)
 	if err != nil {
 		if identity != nil {
+			identity.BranchInfo = branch.NewInfo(identity.CachedAt)
 			return identity, nil
 		}
 		return nil, client.handleError(&response.Response, err)
@@ -51,14 +52,15 @@ func (client *XboxLiveClient) GetProfileIdentity(identityCall *sharedModels.Iden
 	settings := response.Users[0].Settings
 	gamertag := settings[0].Value
 	xuid := response.Users[0].XUID
-	identity = models.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC())
+	identity = sharedModels.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC())
+	identity.BranchInfo = branch.NewInfo(identity.CachedAt)
 
 	// Add to mem cache and return
 	client.xblStore.Set(identity)
 	return identity, nil
 }
 
-func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdentity) (*branch.Response, error) {
+func (client *XboxLiveClient) GetProfileSettings(identity *sharedModels.XboxLiveIdentity) (*xboxlive.ProfileUsers, error) {
 	url := fmt.Sprintf(profileURL, identity.XUID)
 	urlHash := crypto.CreateSHA512Hash(url)
 	auth, authErr := client.GetAuthentication()
@@ -73,7 +75,8 @@ func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdenti
 		if err != nil {
 			return nil, err
 		}
-		return branch.NewResponse(cacheRecord.CachedAt, &response), nil
+		response.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+		return response, nil
 	}
 	if authErr != nil {
 		return nil, client.handleError(nil, authErr)
@@ -83,9 +86,12 @@ func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdenti
 	var profileUsers *xboxlive.ProfileUsers
 	_, err = client.ExecuteRequest("GET", url, auth, 3, nil, &profileUsers)
 	if err != nil {
-		profileUsers, _ = xboxlive.ProfileUsersFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
-		if profileUsers != nil {
-			return branch.NewResponse(cacheRecord.CachedAt, &profileUsers), nil
+		if cacheRecord != nil {
+			profileUsers, _ = xboxlive.ProfileUsersFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
+			if profileUsers != nil {
+				profileUsers.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+				return profileUsers, nil
+			}
 		}
 		return nil, client.handleError(&profileUsers.Response, err)
 	}
@@ -105,5 +111,6 @@ func (client *XboxLiveClient) GetProfileSettings(identity *models.XboxLiveIdenti
 		cacheRecord.Save(client.mongoClient)
 	}
 
-	return branch.NewResponse(cacheRecord.CachedAt, profileUsers), nil
+	profileUsers.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
+	return profileUsers, nil
 }
