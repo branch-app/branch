@@ -18,9 +18,9 @@ const profileUsersCollectionName = "profile_users"
 
 type ProfileUser struct {
 	XUID            string               `json:"id" bson:"xuid"`
-	HostID          string               `json:"hostId" bson:"host_id"`
+	HostID          string               `json:"hostId" bson:"hostId"`
 	Settings        []ProfileUserSetting `json:"settings" bson:"settings"`
-	IsSponsoredUser bool                 `json:"isSponsoredUser" bson:"is_sponsored_user"`
+	IsSponsoredUser bool                 `json:"isSponsoredUser" bson:"isSponsoredUser"`
 }
 
 func (profileUsers *ProfileUsers) Save(mongo *sharedClients.MongoDBClient) error {

@@ -9,9 +9,9 @@ import (
 type ColourAsset struct {
 	Response `bson:",inline"`
 
-	PrimaryColour   string `json:"primaryColor" bson:"primary_colour"`
-	SecondaryColour string `json:"secondaryColor" bson:"secondary_colour"`
-	TertiaryColour  string `json:"tertiaryColor" bson:"tertiary_colour"`
+	PrimaryColour   string `json:"primaryColor" bson:"primaryColour"`
+	SecondaryColour string `json:"secondaryColor" bson:"secondaryColour"`
+	TertiaryColour  string `json:"tertiaryColor" bson:"tertiaryColour"`
 }
 
 const colourAssetCollectionName = "colour_assets"
