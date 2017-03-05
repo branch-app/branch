@@ -1,4 +1,6 @@
 .generic-branch-mask {
+	background: rgba(61,61,124,1);
+	background: -moz-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.8) 100%);
 	background: -moz-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.8) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(61,61,124,0.75)), color-stop(39%, rgba(61,61,124,0)), color-stop(100%, rgba(42,45,83,0.75)));
 	background: -webkit-linear-gradient(top, rgba(61,61,124,0.75) 0%, rgba(61,61,124,0) 39%, rgba(42,45,83,0.75) 100%);
