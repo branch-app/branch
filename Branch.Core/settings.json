@@ -1,9 +1,0 @@
-{
-	"WlidAuthEmail" : "",
-	"WlidAuthPassword" : "",
-
-	"TwilioSid" : "",
-	"TwilioAuthToken" : "",
-	"TwilioFromNumber" : "",
-	"TwilioToNumber" : ""
-}
