@@ -2,6 +2,11 @@ $brand-primary: #3d3d7c;
 $brand-secondary: #343477;
 $brand-tertiary: #5252FF;
 
+$anchor-primary: #3d3d7c;
+$anchor-primary-active: #3d3d7c;
+$anchor-secondary: #ffa210;
+$anchor-secondary-active: #c77d07;
+
 $extra-small-devices-width: 480px;
 $small-devices-width: 768px;
 $medium-devices-width: 992px;
@@ -22,6 +27,35 @@ $large-devices-width: 1200px;
 
 h1 {
 	font-size: 48px;
+}
+
+a {
+	transition: 0.3s;
+	color: $anchor-primary;
+
+	&.alt {
+		color: $anchor-secondary;
+
+		&:hover {
+			color: $anchor-secondary-active;
+			text-decoration: none;
+		}
+		&:active,
+		&:focus {
+			color: $anchor-secondary-active;
+			opacity: 0.7;
+		}
+	}
+
+	&:hover {
+		color: $anchor-primary-active;
+		text-decoration: none;
+	}
+	&:active,
+	&:focus {
+		color: $anchor-primary-active;
+		opacity: 0.7;
+	}
 }
 
 html {
