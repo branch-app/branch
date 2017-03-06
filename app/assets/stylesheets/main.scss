@@ -7,10 +7,12 @@ $small-devices-width: 768px;
 $medium-devices-width: 992px;
 $large-devices-width: 1200px;
 
+@import 'mixins/clearfix.scss';
+@import 'mixins/float.scss';
+@import 'mixins/masks.scss';
+
 @import 'base/footer.scss';
 @import 'base/navbar.scss';
-
-@import 'mixins/masks.scss';
 
 @import 'styles/home.scss';
 
