@@ -1,0 +1,27 @@
+$(jQuery).ready(function () {
+	// Home Page slideshow
+	var interval = 10000; // 10 seconds
+	var element = $('.header');
+	var imageIndex = 1;
+	var images = [
+		'<%= asset_path "home/halo-5.jpg" %>',
+		'<%= asset_path "home/destiny.jpg" %>',
+		'<%= asset_path "home/halo-4.jpg" %>',
+		'<%= asset_path "home/halo-reach.jpg" %>',
+		'<%= asset_path "home/halo-3.jpg" %>',
+		'<%= asset_path "home/halo-3-odst.jpg" %>',
+	];
+
+	// Cache images
+	images.forEach(function (img) {
+		new Image().src = img;
+	});
+
+	// Slide through images in background
+	setInterval(function () {
+		if (imageIndex >= images.length) imageIndex = 0;
+		const image = images[imageIndex];
+		element.css("background-image", "url("+image+")");
+		imageIndex++;
+	}, interval);
+});

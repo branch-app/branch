@@ -5,7 +5,8 @@
 		text-align: center;
 		color: white;
 
-		background-image: url('http://i1-news.softpedia-static.com/images/news2/Halo-5-Guardians-Multiplayer-Beta-Gets-Updated-with-New-Maps-Modes-Weapons-468743-6.jpg');
+		transition: background-image 4s;
+		background-image: image-url('home/halo-5.jpg');
 		background-position: 0% 25%;
 		background-repeat: no-repeat;
 		background-size: cover;
