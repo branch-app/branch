@@ -66,7 +66,7 @@ func (client *XboxLiveClient) GetProfileSettings(identity *sharedModels.XboxLive
 	auth, authErr := client.GetAuthentication()
 
 	// Check if we have a cached document
-	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"doc_url_hash": urlHash})
+	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"docHashUrl": urlHash})
 	if err != nil {
 		return nil, err
 	}
