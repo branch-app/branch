@@ -1,9 +1,9 @@
 $(jQuery).ready(function () {
 	// Home Page slideshow
-	var interval = 8000; // 10 seconds
-	var element = $('.header');
-	var imageIndex = 1;
-	var images = [
+	const interval = 8000; // 10 seconds
+	const element = $('.header');
+	let imageIndex = 1;
+	const images = [
 		'<%= asset_path "home/halo-5.jpg" %>',
 		'<%= asset_path "home/destiny.jpg" %>',
 		'<%= asset_path "home/halo-4.jpg" %>',
@@ -24,4 +24,23 @@ $(jQuery).ready(function () {
 		element.css("background-image", "url("+image+")");
 		imageIndex++;
 	}, interval);
+
+	// Typed placeholder thang
+	$(document).ready(function () {
+		$('#gamertag-search').typed({
+			strings: [
+				'Major Nelson',
+				'xyoatcakes',
+				'Bravo',
+				'P3',
+				'iBot',
+				'Program (rip)',
+			],
+			attr: 'placeholder',
+			typeSpeed: 30,
+			loop: true,
+			startDelay: 0,
+			backDelay: 1200,
+		});
+	});
 });

@@ -1,16 +1,16 @@
 <div id="home-index">
 	<div class="header">
 		<div class="generic-branch-mask">
-			<div class="container">
+			<div class="fluid-container">
 				<h1>Branch</h1>
 				<p>Xbox Live, Halo, and Destiny stats - made easy <span class="emoji-love">💃</span></p>
 
-				<form class="player-lookup col-md-offset-3 col-md-6 col-sm-12">
+				<form class="player-lookup col-md-offset-4 col-md-4 col-sm-12" method="post" action="/search/">
 					<p>
 						Looking for someone? <span class="emoji-love">🕵🏻</span>
 					</p>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
+						<input id="gamertag-search" name="gamertag" type="text" class="form-control" placeholder="Search for...">
 						<span class="input-group-btn">
 							<button class="btn btn-primary" type="submit">Search</button>
 						</span>
@@ -35,8 +35,12 @@
 				<i class="fa fa-github-alt" aria-hidden="true"></i>
 				<span>Open Source</span>
 				<p>
-					Completly open sourced - missing a feature? Submit an issue requesting
-					it, or a pull-request implementing it.
+					Completly open sourced - missing a feature? Submit an
+					<a class="alt" target="_blank" href="https://github.com/branch-app/app-home/issues">issue</a>
+					requesting
+					it, or a
+					<a class="alt" target="_blank" href="https://github.com/branch-app/app-home">pull-request</a>
+					implementing it.
 				</p>
 			</div>
 			<div class="col-md-4 marketing-row">
@@ -50,3 +54,7 @@
 		</div>
 	</div>
 </div>
+
+<% content_for :scripts do %>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
+<% end %>
