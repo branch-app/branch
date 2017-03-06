@@ -1,5 +1,5 @@
 #home-index {
-	height: 1400px;
+	min-height: 1400px;
 	> .header {
 		height: 550px;
 		text-align: center;
@@ -21,6 +21,35 @@
 				> .emoji-love {
 					font-size: 30px;
 				}
+			}
+		}
+	}
+
+	> .marketing-stats {
+		margin-top: 30px;
+		.marketing-row {
+			text-align: center;
+			border-right: 1px solid #eee;
+
+			&:last-of-type{
+				border: none;
+			}
+
+			> i {
+				font-size: 55px;
+				margin-bottom: 10px;
+				display: block;
+			}
+			> span {
+				font-size: 22px;
+				margin-bottom: 10px;
+				display: block;
+			}
+			> p {
+				display: block;
+				font-size: 14px;
+				margin-left: 20px;
+				margin-right: 20px;
 			}
 		}
 	}
