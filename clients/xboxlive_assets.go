@@ -21,7 +21,7 @@ func (client *XboxLiveClient) GetColourAssets(colourID string) (*xboxlive.Colour
 	urlHash := crypto.CreateSHA512Hash(url)
 
 	// Check if we have a cached document
-	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"docHashUrl": urlHash})
+	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"docUrlHash": urlHash})
 	fmt.Println(cacheRecord)
 	if err != nil {
 		return nil, err
