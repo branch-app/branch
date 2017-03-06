@@ -1,4 +1,4 @@
 class Halo4::HomeController < ApplicationController
-  def index
-  end
+	def index
+	end
 end
