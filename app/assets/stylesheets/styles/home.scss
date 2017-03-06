@@ -19,10 +19,12 @@
 			> .fluid-container {
 				> h1 {
 					font-size: 45px;
-					margin-bottom: -5px;
+					margin-bottom: 5px;
 				}
-				> p {
+				> h3 {
 					font-size: 20px;
+					margin: 0;
+					padding: 0;
 					> .emoji-love { font-size: 30px; }
 				}
 
