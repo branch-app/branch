@@ -1,10 +1,46 @@
 footer {
 	background: white;
-	padding-top: 30px;
-	padding-bottom: 10px;
-	padding-left: 80px;
-	padding-right: 80px;
-
 	border-top: 2px solid $brand-primary;
-	border-bottom: 25px solid $brand-primary;
+
+	> .container {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 80px;
+		padding-right: 80px;
+		width: 100%;
+
+		> .info {
+			@include float-left;
+			margin-top: 30px;
+
+			> ul {
+				list-style-type: none;
+			}
+		}
+
+		> .map {
+			background-image: image-url('map-of-uk.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: left center;
+
+			height: 120px;
+			padding: 0;
+			margin-top: -5px;
+			margin-right: 10px;
+			width: 86px;
+			@include float-right;
+		}
+	}
+
+	> .brand {
+		background-color: $brand-primary;
+		background-image: image-url('logo/logo-150x150-w.png');
+		background-position: center;
+		background-size: 20px;
+		background-repeat: no-repeat;
+
+		height: 40px;
+		width: 100%;
+	}
 }
