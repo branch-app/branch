@@ -1,4 +1,4 @@
 app-home
 ===
 
-Advanced Xbox Live, and Halo statistics :)
+Friendly Xbox Live, Halo, and Destiny statistics :)
