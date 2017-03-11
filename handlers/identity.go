@@ -34,8 +34,7 @@ func NewIdentityHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *Iden
 	hdl := &IdentityHandler{}
 	hdl.ctx = ctx
 
-	rg = rg.Group("identity")
-	rg.GET("/:identity", hdl.Get)
+	rg.GET("/identity/:identity/", hdl.Get)
 
 	return hdl
 }

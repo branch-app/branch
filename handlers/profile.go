@@ -39,8 +39,7 @@ func NewProfileHandler(rg *gin.RouterGroup, ctx *contexts.ServiceContext) *Profi
 	hdl := &ProfileHandler{}
 	hdl.ctx = ctx
 
-	rg = rg.Group("profile")
-	rg.GET("/:identity/settings", hdl.Settings)
+	rg.GET("identity/:identity/settings", hdl.Settings)
 
 	return hdl
 }
