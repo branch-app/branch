@@ -4,7 +4,6 @@ import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
 import log from 'branch-log';
-import raven from 'raven';
 import fs from 'fs';
 
 // Import config
