@@ -7,12 +7,12 @@ $(jQuery).ready(function () {
 	const element = $('.header');
 	let imageIndex = 1;
 	const images = [
-		'<%= asset_path "home/halo-5.jpg" %>',
-		'<%= asset_path "home/destiny.jpg" %>',
-		'<%= asset_path "home/halo-4.jpg" %>',
-		'<%= asset_path "home/halo-reach.jpg" %>',
-		'<%= asset_path "home/halo-3.jpg" %>',
-		'<%= asset_path "home/halo-3-odst.jpg" %>',
+		'/images/home/halo-5.jpg',
+		'/images/home/destiny.jpg',
+		'/images/home/halo-4.jpg',
+		'/images/home/halo-reach.jpg',
+		'/images/home/halo-3.jpg',
+		'/images/home/halo-3-odst.jpg',
 	];
 
 	// Cache images

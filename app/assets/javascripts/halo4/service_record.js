@@ -9,30 +9,28 @@ $(jQuery).ready(function () {
 	let lastIndex = 0;
 	let canUpdate = true;
 	let intervalId = -1;
-	const recentMatchImages = recentMatches.map(m => m.mapImageUrl.assetUrl);
 
 	// Cache images
-	recentMatchImages.forEach(function (img) {
-		new Image().src = 'https://assets.halowaypoint.com/games/h4/maps/v1/' + img.replace('{size}/', 'large/');
+	recentMatchImages.forEach(function (image) {
+		new Image().src = image;
 	});
 	
 	// Slide through matches
-	function updateRecentMatch () {
+	function updateRecentMatch() {
+		// Prevent animation collision
 		canUpdate = false;
-		const recentMatch = recentMatches[matchIndex];
-		let matchImage = recentMatch.mapImageUrl.assetUrl;
-		matchImage = matchImage.replace('{size}/', 'large/');
 
-		// Inc match index
+		// Inc match index, validate, and get match info
 		matchIndex++;
 		if (matchIndex >= recentMatches.length) matchIndex = 0;
+		const recentMatch = recentMatches[matchIndex];
 
 		// Remove active from last match indicator
 		$('.item-container[data-index="' + lastIndex + '"] > div').removeClass('active');
 
 		// Add active to this match indicator, and update background
 		$('.item-container[data-index="' + matchIndex + '"] > div').addClass('active');
-		element.css('background-image', "url('https://assets.halowaypoint.com/games/h4/maps/v1/" + matchImage + "')");
+		element.css('background-image', "url('" + recentMatchImages[matchIndex] + "')");
 
 		// Update text
 		$('.match-mode').text(recentMatch.variantName);

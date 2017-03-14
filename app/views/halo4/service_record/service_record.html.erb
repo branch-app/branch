@@ -1,9 +1,9 @@
 <div id="halo4-service-record">
-	<div class="header" style="background-image: url('http://www.onpause.org/wp-content/uploads/2012/10/halo-4-ragnarok-4.jpeg');">
+	<div class="header" style="background-image: url('<%= resolve_asset_url(@recent_matches['games'][0]['mapImageUrl']) %>');">
 		<div class="fading-branch-mask">
 			<div class="fluid-container">
 				<div class="col-md-12 recent-match-index">
-					<% @recent_matches.each_with_index do |match, index|%>
+					<% @recent_matches['games'].each_with_index do |match, index|%>
 						<% active =  index == 0 ? 'active' : '' %>
 						<div data-index="<%= index %>" class="item-container"><div class="item-indicator <%= active %>"></div></div>
 					<% end %>
@@ -146,5 +146,10 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
 	<script>
 		const recentMatches = <%== generate_recent_match_json() %>;
+		<% match_images = Array.new(@recent_matches.length) %>
+		<% @recent_matches['games'].each_with_index do |match, index| %>
+			<% match_images[index] = resolve_asset_url(match['mapImageUrl'], 'large') %>
+		<% end %>
+		const recentMatchImages = <%== match_images.to_json %>
 	</script>
 <% end %>
