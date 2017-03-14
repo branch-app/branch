@@ -287,10 +287,81 @@
 			}
 		}
 
-		&.experience-bar {
+		&.affix {
 			top: 70px;
 			left: 0;
 			right: 0;
+
+			z-index: 1029;
+		}
+	}
+
+	.experience-bar.affix + .page-content {
+		padding-top: 99px
+	}
+
+	.experience-sidebar {
+		margin-top: 40px;
+
+		.nav {
+			font-size: 14px;
+			color: $text-grey;
+			transition: 0.5s;
+
+			> li {
+				padding-left: 20px;
+
+				&:hover, &:focus, &.active {
+					border-left: 2px solid $brand-primary;
+					color: $brand-primary;
+					padding-left: 18px;
+
+					> a, a:hover, a:focus {
+						color: $brand-primary;
+					}
+				}
+
+				> a {
+					padding: 5px 0;
+					margin: 0;
+					color: $text-grey;
+
+					&:hover {
+						background: none;
+						color: $brand-primary;
+					}
+				}
+
+				> ul > li {
+					padding-left: 10px;
+
+					&:hover, &:focus, .active {
+						padding-left: 8px;
+						border-left: none; // We already have a border from the parent
+					}
+
+					> a {
+						padding: 2px 0;
+					}
+				}
+
+				&.nav-header {
+					color: $brand-primary;
+					font-size: 18px;
+					font-weight: 600;
+					border-left: 2px solid $brand-primary;
+					padding-left: 18px;
+
+					display: block;
+					background-repeat: no-repeat;
+					background-size: 35px;
+					background-position: left center;
+				}
+			}
+		}
+
+		#slide-into-waypoint {
+
 		}
 	}
 
