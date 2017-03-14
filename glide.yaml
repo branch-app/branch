@@ -1,0 +1,23 @@
+package: github.com/branch-app/service-xboxlive
+import:
+- package: github.com/branch-app/log-go
+- package: github.com/branch-app/shared-go
+  subpackages:
+  - clients
+  - contexts
+  - crypto
+  - helpers
+  - models
+  - models/branch
+  - types
+- package: github.com/jinzhu/configor
+- package: github.com/maxwellhealth/bongo
+  version: ^0.10.4
+- package: github.com/metal3d/go-slugify
+- package: github.com/patrickmn/go-cache
+  version: ^2.0.0
+- package: gopkg.in/gin-gonic/gin.v1
+  version: ^1.1.4
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
