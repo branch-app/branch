@@ -22,6 +22,7 @@ class Halo4::HomeController < ApplicationController
 		rescue BranchError => e
 			case e.code
 			when 'invalid_identity'
+			when 'identity_doesnt_exist'
 				flash[:warning] = 'The provided Gamertag doesn\'t exist.'
 				redirect_to(controller: 'home', action: 'index')
 				return
@@ -33,7 +34,7 @@ class Halo4::HomeController < ApplicationController
 
 			when 'waypoint_no_data'
 				flash[:warning] = "Sorry, #{@identity['gamertag']} has never played Halo 4."
-				redirect_to(controller: 'xbox-live/profile', action: 'profile')
+				redirect_to(controller: 'xbox-live/profile', action: 'profile', gamertag: @identity['gamertag'])
 				return
 
 			else
