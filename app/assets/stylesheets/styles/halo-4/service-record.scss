@@ -204,6 +204,7 @@
 					&.xbox-live { background-image: image-url('profiles/xbox-live.png'); }
 					&.halo { background-image: image-url('profiles/halo.png'); }
 					&.destiny { background-image: image-url('profiles/destiny.png'); }
+					&.titanfall { background-image: image-url('profiles/titanfall.png'); }
 					&:hover { color: $brand-tertiary; }
 					&.active {
 						color: $text-light-grey;
@@ -249,6 +250,9 @@
 								&.halo-reach { background-image: image-url('profiles/halo-reach.png'); }
 								&.halo-4 { background-image: image-url('profiles/halo-4.png'); }
 								&.halo-5 { background-image: image-url('profiles/halo-5.png'); }
+								
+								&.titanfall { background-image: image-url('profiles/titanfall.png'); }
+								&.titanfall-2 { background-image: image-url('profiles/titanfall.png'); }
 							}
 						}
 					}
