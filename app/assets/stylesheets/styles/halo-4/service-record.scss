@@ -77,6 +77,13 @@
 				padding: 0;
 			}
 
+			.match-overview {
+				.match-mode, .match-map {
+					font-weight: 600;
+					font-size: 22px;
+				}
+			}
+
 			.view-match {
 				font-weight: 600;
 				font-size: 15px;

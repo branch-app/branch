@@ -33,8 +33,8 @@ $(jQuery).ready(function () {
 		element.css('background-image', "url('" + recentMatchImages[matchIndex] + "')");
 
 		// Update text
-		$('.match-mode').text(recentMatch.variantName);
-		$('.match-map').text(recentMatch.mapVariantName);
+		$('.match-overview > .match-mode').text(recentMatch.variantName);
+		$('.match-overview > .match-map').text(recentMatch.mapVariantName);
 		$('.personal-score > .value').text(recentMatch.personalScore);
 		$('.medals > .value').text(recentMatch.totalMedals);
 		$('.featured-stat > .value').text(recentMatch.featuredStatValue);
