@@ -1,3 +1,5 @@
+require('addressable/uri')
+
 class XboxLive::HomeController < ApplicationController
 	before_action :require_gamertag, except: :index
 
@@ -8,11 +10,11 @@ class XboxLive::HomeController < ApplicationController
 	private
 
 	def require_gamertag
-		gamertag = CGI.escape(params[:gamertag])
+		@gamertag = Addressable::URI.escape(params[:gamertag])
 
 		begin
-			identity = ServiceClient.instance.get('service-xboxlive', "/identity/gamertag(#{gamertag})/")
-			puts identity.inspect
+			@identity = ServiceClient.instance.get('service-xboxlive', "/identity/gamertag(#{@gamertag})/")
+			puts @identity.inspect
 
 		rescue BranchError => e
 			if e.code == "invalid_identity"
