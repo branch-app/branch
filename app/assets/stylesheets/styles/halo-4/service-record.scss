@@ -113,6 +113,9 @@ $fifth-restructure-point: 991px;
 			}
 
 			.match-details {
+				margin-top: 5px;
+				padding-top: 5px;
+				border-top: 1px solid $seperator-light;
 				height: 57px;
 				overflow: hidden;
 
@@ -185,13 +188,13 @@ $fifth-restructure-point: 991px;
 			> .emblem-flair {
 				background-repeat: no-repeat;
 				height: 120px;
-				margin-top: -308px;
+				margin-top: -300px;
 				transform: scaleX(-1);
 			}
 			> .spartan-flair {
 				background-repeat: no-repeat;
 				background-position-x: left;
-				height: 350px;
+				height: 358px;
 				margin-top: -120px;
 				transform: scaleX(-1);
 			}
