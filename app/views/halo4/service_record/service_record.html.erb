@@ -1,5 +1,5 @@
 <div id="halo4-service-record">
-	<div class="header" style="background-image: url('<%= resolve_asset_url(@recent_matches['games'][0]['mapImageUrl']) %>');">
+	<div class="header" style="background-image: url('<%= most_recent_match_image() %>');">
 		<div class="fading-branch-mask">
 			<div class="fluid-container">
 				<div class="col-md-12 recent-match-index">
@@ -10,7 +10,7 @@
 				</div>
 
 				<div class="col-md-10 player-information">
-					<h1><%= @service_record['gamertag'] %></h1>
+					<h1><%= @identity['gamertag'] %></h1>
 					<ul>
 						<li><%= number_with_delimiter(total_kills()) %> Kills</li>
 						<li><%= number_with_delimiter(total_deaths()) %> Deaths</li>
@@ -19,42 +19,44 @@
 				</div>
 
 				<div class="col-md-offset-0 col-md-4 recent-match-information">
-					<div class="match-details col-md-9 no-col-padding">
-						<span class="match-mode"><%= @recent_matches['games'][0]['variantName'] %></span>
-						on
-						<span class="match-map"><%= @recent_matches['games'][0]['mapVariantName'] %></span>
-					</div>
-					<div class="view-match col-md-3 no-col-padding">
-						<a class="alt" href="#">View Details</a>
-					</div>
-					<div class="details-seperator col-md-12 no-col-padding">
-						<hr />
-					</div>
-					<div class="match-details col-md-12 no-col-padding">
-						<div class="match-statistic personal-score">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['personalScore']) %></span>
-							<div class="key">
-								<span class="header-key">Personal Score</span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
-							</div>
+					<% if has_recent_matches() %>
+						<div class="match-details col-md-9 no-col-padding">
+							<span class="match-mode"><%= @recent_matches['games'][0]['variantName'] %></span>
+							on
+							<span class="match-map"><%= @recent_matches['games'][0]['mapVariantName'] %></span>
 						</div>
+						<div class="view-match col-md-3 no-col-padding">
+							<a class="alt" href="#">View Details</a>
+						</div>
+						<div class="details-seperator col-md-12 no-col-padding">
+							<hr />
+						</div>
+						<div class="match-details col-md-12 no-col-padding">
+							<div class="match-statistic personal-score">
+								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['personalScore']) %></span>
+								<div class="key">
+									<span class="header-key">Personal Score</span>
+									<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
+								</div>
+							</div>
 
-						<div class="match-statistic medals">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['totalMedals']) %></span>
-							<div class="key">
-								<span class="header-key">Medals</span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
+							<div class="match-statistic medals">
+								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['totalMedals']) %></span>
+								<div class="key">
+									<span class="header-key">Medals</span>
+									<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
+								</div>
 							</div>
-						</div>
 
-						<div class="match-statistic featured-stat">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['featuredStatValue']) %></span>
-							<div class="key">
-								<span class="header-key"><%= @recent_matches['games'][0]['featuredStatName'] %></span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['variantName'] %></span>
+							<div class="match-statistic featured-stat">
+								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['featuredStatValue']) %></span>
+								<div class="key">
+									<span class="header-key"><%= @recent_matches['games'][0]['featuredStatName'] %></span>
+									<span class="sub-key"><%= @recent_matches['games'][0]['variantName'] %></span>
+								</div>
 							</div>
 						</div>
-					</div>
+					<% end %>
 				</div>
 
 				<div class="col-md-3 col-md-offset-9 player-visual-flairs">
@@ -72,7 +74,7 @@
 					<a href="#xbox-live">
 						<div class="flair">
 							<h4>Xbox Live</h4>
-							<span><%= @service_record['gamertag'] %></span>
+							<span><%= @identity['gamertag'] %></span>
 						</div>
 					</a>
 				</div>
@@ -80,7 +82,7 @@
 					<a data-popover-content="#halo-explorer" data-toggle="popover" data-trigger="focus" tabindex="0">
 						<div class="col-md-10 flair">
 							<h4>Halo</h4>
-							<span>PhoenixBanTrain</span>
+							<span><%= @identity['gamertag'] %></span>
 						</div>
 						<div class="col-md-2 dropdown-selector">
 							<i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -121,7 +123,7 @@
 					<a href="#destint">
 						<div class="flair">
 							<h4>Destiny</h4>
-							<span><%= @service_record['gamertag'] %></span>
+							<span><%= @identity['gamertag'] %></span>
 						</div>
 					</a>
 				</div>

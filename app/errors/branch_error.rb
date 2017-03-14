@@ -10,6 +10,6 @@ class BranchError < StandardError
 	end
 
 	def self.coerce(json)
-		self.new(json.code, json.reasons, json.metadata)
+		self.new(json['code'], json['reasons'], json['metadata'])
 	end
 end

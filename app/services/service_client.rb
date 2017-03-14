@@ -29,7 +29,7 @@ class ServiceClient
 			if response.success?
 				return JSON.parse(response.body)
 			elsif response.headers['content-type'].include? 'application/json'
-				raise BranchError.coerce(response.body)
+				raise BranchError.coerce(JSON.parse(response.body))
 			else
 				raise BranchError.new('unknown_error', response.code)
 			end
