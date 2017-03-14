@@ -48,45 +48,50 @@
 		</div>
 	</nav>
 
+	<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %>"><%= value %></div>
+	<% end %>
+
 	<%= yield %>
 
 	<footer>
-		<div class="fluid-container">
-			<div class="info">
-				<p>
-					Branch was built in
-					<a class="alt" target="_blank" href="https://golang.org/">Golang</a>,
-					<a class="alt" target="_blank" href="https://nodejs.org/">Node JS</a>, and
-					<a class="alt" target="_blank" href="http://rubyonrails.org/">Ruby on Rails</a>.
-				</p>
-				<p>
-					Code licensed under the 
-					<a class="alt" target="_blank" href="http://www.dbad-license.org/">DBAD Public License</a>.
-				</p>
-				<p>
-					&copy; Branch App, <span class="copyright-year"></span>
-				</p>
+		<div class="content">
+			<div class="fluid-container">
+				<div class="info">
+					<p>
+						Branch was built in
+						<a class="alt" target="_blank" href="https://golang.org/">Golang</a>,
+						<a class="alt" target="_blank" href="https://nodejs.org/">Node JS</a>, and
+						<a class="alt" target="_blank" href="http://rubyonrails.org/">Ruby on Rails</a>.
+					</p>
+					<p>
+						Code licensed under the 
+						<a class="alt" target="_blank" href="http://www.dbad-license.org/">DBAD Public License</a>.
+					</p>
+					<p>
+						&copy; Branch App, <span class="copyright-year"></span>
+					</p>
 
-				<ul>
-					<li>
-						<a class="alt" target="_blank" href="https://github.com/branch-app">
-							Github
-						</a>
-					</li>
-					<li>
-						<a class="alt" target="_blank" href="https://hub.docker.com/branch-app">
-							Docker Hub
-						</a>
-					</li>
-					<li>
-						<a class="alt" href="/about">
-							About
-						</a>
-					</li>
-				</ul>
+					<ul>
+						<li>
+							<a class="alt" target="_blank" href="https://github.com/branch-app">
+								Github
+							</a>
+						</li>
+						<li>
+							<a class="alt" target="_blank" href="https://hub.docker.com/branch-app">
+								Docker Hub
+							</a>
+						</li>
+						<li>
+							<a class="alt" href="/about">
+								About
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<div class="brand"></div>
 	</footer>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
