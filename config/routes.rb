@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  namespace :halo4 do
-    get '/halo-4/', to: 'home#index'
-  end
+	namespace :xbox_live, :path => 'xbox-live' do
+		get '/', to: 'home#index'
+		get '/:gamertag', to: 'profile#profile'
+	end
 
-  get '/', to: 'home#index'
+	namespace :halo4, :path => "halo-4" do
+		get '/', to: 'home#index'
+		get '/:gamertag', to: 'service_record#service_record'
+	end
+
+	get '/', to: 'home#index'
+	get '/search', to: 'search#index'
 end

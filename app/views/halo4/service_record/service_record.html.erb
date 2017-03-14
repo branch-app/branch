@@ -1,0 +1,150 @@
+<div id="halo4-service-record">
+	<div class="header" style="background-image: url('http://www.onpause.org/wp-content/uploads/2012/10/halo-4-ragnarok-4.jpeg');">
+		<div class="fading-branch-mask">
+			<div class="fluid-container">
+				<div class="col-md-12 recent-match-index">
+					<% @recent_matches.each_with_index do |match, index|%>
+						<% active =  index == 0 ? 'active' : '' %>
+						<div data-index="<%= index %>" class="item-container"><div class="item-indicator <%= active %>"></div></div>
+					<% end %>
+				</div>
+
+				<div class="col-md-10 player-information">
+					<h1><%= @service_record['gamertag'] %></h1>
+					<ul>
+						<li><%= number_with_delimiter(total_kills()) %> Kills</li>
+						<li><%= number_with_delimiter(total_deaths()) %> Deaths</li>
+						<li><%= number_with_delimiter(total_games_started()) %> Games Started</li>
+					</ul>
+				</div>
+
+				<div class="col-md-offset-0 col-md-4 recent-match-information">
+					<div class="match-details col-md-9 no-col-padding">
+						<span class="match-mode">Team Slayer</span>
+						on
+						<span class="match-map">Ragnarok</span>
+					</div>
+					<div class="view-match col-md-3 no-col-padding">
+						<a class="alt" href="#">View Details</a>
+					</div>
+					<div class="details-seperator col-md-12 no-col-padding">
+						<hr />
+					</div>
+					<div class="match-details col-md-12 no-col-padding">
+						<div class="match-statistic personal-score">
+							<span class="value">15</span>
+							<div class="key">
+								<span class="header-key">Personal Score</span>
+								<span class="sub-key">War Games</span>
+							</div>
+						</div>
+
+						<div class="match-statistic medals">
+							<span class="value">2</span>
+							<div class="key">
+								<span class="header-key">Medals</span>
+								<span class="sub-key">War Games</span>
+							</div>
+						</div>
+
+						<div class="match-statistic featured-stat">
+							<span class="value">3</span>
+							<div class="key">
+								<span class="header-key">Goals</span>
+								<span class="sub-key">Ricochet</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-md-offset-9 player-visual-flairs">
+					<div class="emblem-flair" style="background-image: url('https://emblems.svc.halowaypoint.com/h4/emblems/white_cobalt_grid-on-silver_4diamonds?size=120');"></div>
+					<div class="spartan-flair" style="background-image: url('https://spartans.svc.halowaypoint.com/players/PhoenixBanTrain/h4/spartans/fullbody?target=large');"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="experience-bar">
+		<div class="fluid-container">
+			<div class="col-md-9">
+				<div class="profile xbox-live">
+					<a href="#xbox-live">
+						<div class="flair">
+							<h4>Xbox Live</h4>
+							<span><%= @service_record['gamertag'] %></span>
+						</div>
+					</a>
+				</div>
+				<div class="profile halo active">
+					<a data-popover-content="#halo-explorer" data-toggle="popover" data-trigger="focus" tabindex="0">
+						<div class="col-md-10 flair">
+							<h4>Halo</h4>
+							<span>PhoenixBanTrain</span>
+						</div>
+						<div class="col-md-2 dropdown-selector">
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</div>
+						<div class="clearfix"></div>
+						<div class="hidden" id="halo-explorer">
+							<div class="popover-body">
+								<div class="profile halo-3">
+									<a href="#halo-3">
+										<h4>Halo 3</h4>
+									</a>
+								</div>
+								<div class="profile halo-3-odst">
+									<a href="#halo-3-odst">
+										<h4>Halo 3: ODST</h4>
+									</a>
+								</div>
+								<div class="profile halo-reach">
+									<a href="#halo-reach">
+										<h4>Halo: Reach</h4>
+									</a>
+								</div>
+								<div class="profile halo-4">
+									<a href="#halo-4">
+										<h4>Halo 4</h4>
+									</a>
+								</div>
+								<div class="profile  halo-5">
+									<a href="#halo-5">
+										<h4>Halo 5: Guardians</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="profile destiny">
+					<a href="#destint">
+						<div class="flair">
+							<h4>Destiny</h4>
+							<span><%= @service_record['gamertag'] %></span>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-3 social">
+				<ul>
+					<li><i class="fa fa-reddit-alien" aria-hidden="true"></i></li>
+					<li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+					<li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+					<li><i class="fa fa-google-plus" aria-hidden="true"></i></li>
+					<li><i class="fa fa-pinterest" aria-hidden="true"></i></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="placeholder">
+	</div>
+</div>
+
+<% content_for :scripts do %>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
+	<script>
+		const recentMatches = <%== generate_recent_match_json() %>;
+	</script>
+<% end %>

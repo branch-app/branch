@@ -1,6 +1,9 @@
 $(jQuery).ready(function () {
+	if (!$("#home-index").length)
+		return;
+
 	// Home Page slideshow
-	const interval = 8000; // 10 seconds
+	const interval = 8000; // 8 seconds
 	const element = $('.header');
 	let imageIndex = 1;
 	const images = [
@@ -27,7 +30,7 @@ $(jQuery).ready(function () {
 
 	// Typed placeholder thang
 	$(document).ready(function () {
-		$('#gamertag-search').typed({
+		$('#player-ident').typed({
 			strings: [
 				'Major Nelson',
 				'xyoatcakes',
@@ -42,5 +45,13 @@ $(jQuery).ready(function () {
 			startDelay: 0,
 			backDelay: 1200,
 		});
+	});
+
+	$('#player-search').submit(function (event) {
+		// If the user doesn't have Javascript, it'll do a POST to /search/ and we can
+		// handle it that way.
+		event.preventDefault();
+		var gamertag = $('#player-ident').val();
+		window.location = '/xbox-live/' + gamertag + '/';
 	});
 });

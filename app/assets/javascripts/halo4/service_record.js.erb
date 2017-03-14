@@ -1,0 +1,78 @@
+$(jQuery).ready(function () {
+	if (!$("#halo4-service-record").length)
+		return;
+
+	// Recent Match Slideshow
+	const interval = 6000; // 6 seconds
+	const element = $('.header');
+	let matchIndex = 0;
+	let lastIndex = 0;
+	let canUpdate = true;
+	let intervalId = -1;
+	const recentMatchImages = recentMatches.map(m => m.mapImageUrl.assetUrl);
+
+	// Cache images
+	recentMatchImages.forEach(function (img) {
+		new Image().src = 'https://assets.halowaypoint.com/games/h4/maps/v1/' + img.replace('{size}/', 'large/');
+	});
+	
+	// Slide through matches
+	function updateRecentMatch () {
+		canUpdate = false;
+		const recentMatch = recentMatches[matchIndex];
+		let matchImage = recentMatch.mapImageUrl.assetUrl;
+		matchImage = matchImage.replace('{size}/', 'large/');
+
+		// Inc match index
+		matchIndex++;
+		if (matchIndex >= recentMatches.length) matchIndex = 0;
+
+		// Remove active from last match indicator
+		$('.item-container[data-index="' + lastIndex + '"] > div').removeClass('active');
+
+		// Add active to this match indicator, and update background
+		$('.item-container[data-index="' + matchIndex + '"] > div').addClass('active');
+		element.css('background-image', "url('https://assets.halowaypoint.com/games/h4/maps/v1/" + matchImage + "')");
+
+		// Update text
+		$('.match-mode').text(recentMatch.variantName);
+		$('.match-map').text(recentMatch.mapVariantName);
+		$('.personal-score > .value').text(recentMatch.personalScore);
+		$('.medals > .value').text(recentMatch.totalMedals);
+		$('.featured-stat > .value').text(recentMatch.featuredStatValue);
+		$('.featured-stat > .key > .header-key').text(recentMatch.featuredStatName);
+		$('.featured-stat > .key > .sub-key').text(recentMatch.variantName);
+
+		// Set last match index
+		lastIndex = matchIndex;
+
+		// Prevent animation collision
+		setTimeout(function () {
+			canUpdate = true;
+		}, 600);
+	}
+	intervalId = setInterval(updateRecentMatch, interval);
+
+	// Enable clicking on recent matches
+	$('.item-container').click(function () {
+		const item = $(this);
+		const index = item.data('index');
+		lastIndex = matchIndex;
+		matchIndex = index - 1;
+		if (matchIndex < 0) matchIndex = recentMatches.length;
+
+		// Clear the set interval, update the match, and restart the interval
+		window.clearInterval(intervalId);
+		updateRecentMatch();
+		intervalId = setInterval(updateRecentMatch, interval);
+	})
+	
+	// Enable popover
+	$('[data-toggle=popover]').popover({
+		html: true,
+		content: function() {
+			var content = $(this).attr('data-popover-content');
+			return $(content).children('.popover-body').html();
+		},
+	});
+});

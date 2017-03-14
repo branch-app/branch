@@ -1,11 +1,18 @@
 $brand-primary: #3d3d7c;
-$brand-secondary: #343477;
-$brand-tertiary: #5252FF;
+$brand-secondary: #353575;
+$brand-tertiary: #5d5da0;
+$brand-quaternary: #aaa4b6;
+
+$brand-accent-primary: #e25092;
+$brand-accent-secondary: #b42c69;
+$brand-accent-tertiary: #d3508b;
 
 $anchor-primary: #3d3d7c;
 $anchor-primary-active: #3d3d7c;
-$anchor-secondary: #ffa210;
-$anchor-secondary-active: #c77d07;
+$anchor-secondary: $brand-accent-primary;
+$anchor-secondary-active: $brand-accent-secondary;
+
+$text-light-grey: #d0d0d0;
 
 $extra-small-devices-width: 480px;
 $small-devices-width: 768px;
@@ -17,6 +24,7 @@ $large-devices-width: 1200px;
 @import 'mixins/masks.scss';
 
 @import 'partials/buttons.scss';
+@import 'partials/fluid-container.scss';
 
 @import 'base/footer.scss';
 @import 'base/navbar.scss';

@@ -8,7 +8,7 @@
 // compiled file. JavaScript code in this file should be added after the last require_* statement.
 //
 //= require turbolinks
-//= require_tree .
+//= require_tree
 
 $(jQuery).ready(function () {
 	// Set copyright year
@@ -17,7 +17,7 @@ $(jQuery).ready(function () {
 	// Listen for navbar scroll changes and update navbar class
 	$(window).scroll(function () {
 		const y = $(this).scrollTop();
-		if (y < 100)
+		if (y < 80)
 			$('nav.navbar').removeClass('navbar-secondary');
 		else
 			$('nav.navbar').addClass('navbar-secondary');

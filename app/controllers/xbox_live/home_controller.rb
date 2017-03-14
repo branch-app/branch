@@ -1,4 +1,4 @@
-class Halo4::HomeController < ApplicationController
+class XboxLive::HomeController < ApplicationController
 	before_action :require_gamertag, except: :index
 
 	def index
@@ -19,7 +19,7 @@ class Halo4::HomeController < ApplicationController
 				flash[:warning] = "The provided Gamertag doesn't exist."
 			end
 
-			redirect_to(controller: 'halo4/home', action: 'index')
+			redirect_to(controller: 'xbox_live/home', action: 'index')
 		end
 	end
 end
