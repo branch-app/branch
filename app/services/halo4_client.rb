@@ -13,4 +13,11 @@ class Halo4Client
 			raise
 		end
 	end
+
+	def metadata
+		return @metadata
+	end
+	def metadata_options
+		return @metadata_options
+	end
 end
