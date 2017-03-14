@@ -35,7 +35,7 @@ func main() {
 		//ServiceID:     "service-xboxlive",
 		HTTPClient:     sharedClients.NewHTTPClient(),
 		ServiceClient:  sharedClients.NewServiceClient(env),
-		XboxLiveClient: clients.NewXboxLiveClient(env, config.MongoDB),
+		XboxLiveClient: clients.NewXboxLiveClient(env, &config),
 		Configuration:  &config,
 	}
 

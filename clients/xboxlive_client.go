@@ -160,11 +160,11 @@ func (client *XboxLiveClient) handleError(response interface{}, err error) error
 	return errors.New(ErrorUnknown)
 }
 
-func NewXboxLiveClient(env types.Environment, mongoConfig *models.MongoDBConfig) *XboxLiveClient {
+func NewXboxLiveClient(env types.Environment, config *models.Configuration) *XboxLiveClient {
 	return &XboxLiveClient{
 		httpClient:    sharedClients.NewHTTPClient(),
 		serviceClient: sharedClients.NewServiceClient(env),
 		xblStore:      helpers.NewXboxLiveStore(),
-		mongoClient:   sharedClients.NewMongoDBClient(mongoConfig.ConnectionString, mongoConfig.DatabaseName),
+		mongoClient:   sharedClients.NewMongoDBClient(config.MongoConnectionString, config.MongoDatabaseName),
 	}
 }
