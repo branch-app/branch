@@ -58,14 +58,14 @@
 				</div>
 
 				<div class="col-md-3 col-md-offset-9 player-visual-flairs">
-					<div class="emblem-flair" style="background-image: url('https://emblems.svc.halowaypoint.com/h4/emblems/white_cobalt_grid-on-silver_4diamonds?size=120');"></div>
-					<div class="spartan-flair" style="background-image: url('https://spartans.svc.halowaypoint.com/players/PhoenixBanTrain/h4/spartans/fullbody?target=large');"></div>
+					<div class="emblem-flair" style="background-image: url('<%= resolve_asset_url(@service_record['emblemImageUrl'], 120) %>');"></div>
+					<div class="spartan-flair" style="background-image: url('<%= resolve_spartan_image(@gamertag) %>');"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="experience-bar">
+	<div class="experience-bar" data-spy="affix" data-offset-top="540">
 		<div class="fluid-container">
 			<div class="col-md-9">
 				<div class="profile xbox-live">

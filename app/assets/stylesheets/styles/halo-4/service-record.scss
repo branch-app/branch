@@ -274,9 +274,15 @@
 				}
 			}
 		}
+
+		&.experience-bar {
+			top: 70px;
+			left: 0;
+			right: 0;
+		}
 	}
 
 	.placeholder {
-		height: 150px;
+		height: 1000px;
 	}
 }
