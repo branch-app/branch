@@ -16,6 +16,7 @@ import (
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	sharedClients "github.com/branch-app/shared-go/clients"
 	sharedModels "github.com/branch-app/shared-go/models"
+	"github.com/branch-app/shared-go/types"
 )
 
 type XboxLiveClient struct {
@@ -159,10 +160,10 @@ func (client *XboxLiveClient) handleError(response interface{}, err error) error
 	return errors.New(ErrorUnknown)
 }
 
-func NewXboxLiveClient(mongoConfig *models.MongoDBConfig) *XboxLiveClient {
+func NewXboxLiveClient(env types.Environment, mongoConfig *models.MongoDBConfig) *XboxLiveClient {
 	return &XboxLiveClient{
 		httpClient:    sharedClients.NewHTTPClient(),
-		serviceClient: sharedClients.NewServiceClient(),
+		serviceClient: sharedClients.NewServiceClient(env),
 		xblStore:      helpers.NewXboxLiveStore(),
 		mongoClient:   sharedClients.NewMongoDBClient(mongoConfig.ConnectionString, mongoConfig.DatabaseName),
 	}

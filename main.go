@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	log "github.com/branch-app/log-go"
 	"github.com/branch-app/service-xboxlive/clients"
@@ -9,6 +10,7 @@ import (
 	"github.com/branch-app/service-xboxlive/handlers"
 	"github.com/branch-app/service-xboxlive/models"
 	sharedClients "github.com/branch-app/shared-go/clients"
+	"github.com/branch-app/shared-go/types"
 
 	"fmt"
 
@@ -25,12 +27,15 @@ func main() {
 	var config models.Configuration
 	configor.Load(&config, "config.json")
 
+	// Load Environment
+	env := types.StrToEnvironment(os.Getenv("BRANCH_ENVIRONMENT"))
+
 	// Create service context
 	ctx := &contexts.ServiceContext{
 		//ServiceID:     "service-xboxlive",
 		HTTPClient:     sharedClients.NewHTTPClient(),
-		ServiceClient:  sharedClients.NewServiceClient(),
-		XboxLiveClient: clients.NewXboxLiveClient(config.MongoDB),
+		ServiceClient:  sharedClients.NewServiceClient(env),
+		XboxLiveClient: clients.NewXboxLiveClient(env, config.MongoDB),
 		Configuration:  &config,
 	}
 
