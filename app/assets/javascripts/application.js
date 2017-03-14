@@ -17,7 +17,7 @@ $(jQuery).ready(function () {
 	// Listen for navbar scroll changes and update navbar class
 	$(window).scroll(function () {
 		const y = $(this).scrollTop();
-		if (y < 80)
+		if (y < 55)
 			$('nav.navbar').removeClass('navbar-secondary');
 		else
 			$('nav.navbar').addClass('navbar-secondary');
