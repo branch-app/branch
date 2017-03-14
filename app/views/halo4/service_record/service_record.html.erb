@@ -20,9 +20,9 @@
 
 				<div class="col-md-offset-0 col-md-4 recent-match-information">
 					<div class="match-details col-md-9 no-col-padding">
-						<span class="match-mode">Team Slayer</span>
+						<span class="match-mode"><%= @recent_matches['games'][0]['variantName'] %></span>
 						on
-						<span class="match-map">Ragnarok</span>
+						<span class="match-map"><%= @recent_matches['games'][0]['mapVariantName'] %></span>
 					</div>
 					<div class="view-match col-md-3 no-col-padding">
 						<a class="alt" href="#">View Details</a>
@@ -32,26 +32,26 @@
 					</div>
 					<div class="match-details col-md-12 no-col-padding">
 						<div class="match-statistic personal-score">
-							<span class="value">15</span>
+							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['personalScore']) %></span>
 							<div class="key">
 								<span class="header-key">Personal Score</span>
-								<span class="sub-key">War Games</span>
+								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
 							</div>
 						</div>
 
 						<div class="match-statistic medals">
-							<span class="value">2</span>
+							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['totalMedals']) %></span>
 							<div class="key">
 								<span class="header-key">Medals</span>
-								<span class="sub-key">War Games</span>
+								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
 							</div>
 						</div>
 
 						<div class="match-statistic featured-stat">
-							<span class="value">3</span>
+							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['featuredStatValue']) %></span>
 							<div class="key">
-								<span class="header-key">Goals</span>
-								<span class="sub-key">Ricochet</span>
+								<span class="header-key"><%= @recent_matches['games'][0]['featuredStatName'] %></span>
+								<span class="sub-key"><%= @recent_matches['games'][0]['variantName'] %></span>
 							</div>
 						</div>
 					</div>

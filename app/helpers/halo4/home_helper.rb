@@ -1,10 +1,18 @@
 module Halo4::HomeHelper
 	def resolve_asset_url(asset, size = 'large')
-		asset_url = asset['assetUrl'].sub!('{size}', size.to_s)
+		asset_url = asset['assetUrl'].gsub('{size}', size.to_s)
 		base_url = asset['baseUrl']
 
 		public_path = "games/halo4/#{base_url}/#{asset_url}"
+
+		case base_url
+		when 'H4MapAssets'
+			public_path = public_path.gsub('.png', '.jpg')
+		end
+
 		if public_asset_exists?(public_path)
+			puts public_path
+			puts asset
 			return image_url(public_path)
 		end
 

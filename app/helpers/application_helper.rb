@@ -8,7 +8,6 @@ module ApplicationHelper
 	end
 
 	def public_asset_exists?(path)
-		path = "#{Rails.public_path}/images/#{path}"
-		return FileTest.exist?(path)
+		return FileTest.exist?("#{Rails.public_path}/images/#{path}")
 	end
 end
