@@ -11,10 +11,10 @@ import (
 	"github.com/branch-app/service-xboxlive/models"
 	sharedClients "github.com/branch-app/shared-go/clients"
 	"github.com/branch-app/shared-go/types"
+	"github.com/jinzhu/configor"
 
 	"fmt"
 
-	"github.com/jinzhu/configor"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -23,12 +23,12 @@ func init() {
 }
 
 func main() {
+	// Load Environment - defaults to `development`
+	env := types.StrToEnvironment(os.Getenv("BRANCH_ENVIRONMENT"))
+
 	// Load Config
 	var config models.Configuration
-	configor.Load(&config, "config.json")
-
-	// Load Environment
-	env := types.StrToEnvironment(os.Getenv("BRANCH_ENVIRONMENT"))
+	configor.New(&configor.Config{Environment: string(env)}).Load(&config, "config.json")
 
 	// Create service context
 	ctx := &contexts.ServiceContext{

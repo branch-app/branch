@@ -1,7 +1,7 @@
 FROM golang:1.7.5-wheezy
 
 WORKDIR /go/src/github.com/branch-app/service-xboxlive
-Add . /go/src/github.com/branch-app/service-xboxlive/
+ADD . /go/src/github.com/branch-app/service-xboxlive/
 
 RUN go get github.com/tools/godep
 

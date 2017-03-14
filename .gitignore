@@ -1,4 +1,3 @@
 vendor
-glide.lock
-config.json
 debug
+config.*.json
