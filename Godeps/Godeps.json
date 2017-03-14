@@ -1,0 +1,143 @@
+{
+	"ImportPath": "github.com/branch-app/service-xboxlive",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/BurntSushi/toml",
+			"Comment": "v0.2.0-21-g9906417",
+			"Rev": "99064174e013895bbd9b025c31100bd1d9b590ca"
+		},
+		{
+			"ImportPath": "github.com/branch-app/log-go",
+			"Rev": "c0eebbfd8ffd0208e0670d395e8409ec2a762447"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/clients",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/contexts",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/crypto",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/helpers",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/models",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/models/branch",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/branch-app/shared-go/types",
+			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/binding",
+			"Comment": "v1.1.4",
+			"Rev": "e2212d40c62a98b388a5eb48ecbdcf88534688ba"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/render",
+			"Comment": "v1.1.4",
+			"Rev": "e2212d40c62a98b388a5eb48ecbdcf88534688ba"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "8ee79997227bf9b34611aee7946ae64735e6fd93"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/configor",
+			"Rev": "2cd2d17f5cfd358f728a582bfd46b2157d8d9716"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Rev": "30a891c33c7cde7b02a981314b4228ec99380cca"
+		},
+		{
+			"ImportPath": "github.com/maxwellhealth/bongo",
+			"Comment": "v0.10.4-8-gc2a7770",
+			"Rev": "c2a77704cea226262fbd909a9595e97e30dad1db"
+		},
+		{
+			"ImportPath": "github.com/maxwellhealth/go-dotaccess",
+			"Rev": "ae070a2d2a38fd7233e255ded21fb26fe36b4796"
+		},
+		{
+			"ImportPath": "github.com/metal3d/go-slugify",
+			"Rev": "7ac2014b2f23e254684c08d597496681d12c6a8a"
+		},
+		{
+			"ImportPath": "github.com/oleiade/reflections",
+			"Comment": "0.1.2-12-g0e86b3c",
+			"Rev": "0e86b3c98b2ff33e30c85cfe97d9a63d439fe7eb"
+		},
+		{
+			"ImportPath": "github.com/patrickmn/go-cache",
+			"Comment": "v2.0.0-4-ge7a9def",
+			"Rev": "e7a9def80f35fe1b170b7b8b68871d59dea117e1"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "41bba8d80bbfab43231ffdf4c210037baae5f6a3"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "e4594059fe4cde2daf423055a596c2cd1e6c9adf"
+		},
+		{
+			"ImportPath": "gopkg.in/gin-gonic/gin.v1",
+			"Comment": "v1.1.4",
+			"Rev": "e2212d40c62a98b388a5eb48ecbdcf88534688ba"
+		},
+		{
+			"ImportPath": "gopkg.in/go-playground/validator.v8",
+			"Comment": "v8.18.1",
+			"Rev": "5f57d2222ad794d0dffb07e664ea05e2ee07d60c"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/json",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "a5b47d31c556af34a302ce5d659e6fea44d90de0"
+		}
+	]
+}
