@@ -1,204 +1,37 @@
-<div id="halo4-service-record">
-	<div class="header" style="background-image: url('<%= most_recent_match_image() %>');">
-		<div class="fading-branch-mask">
-			<div class="fluid-container">
-				<div class="col-md-12 recent-match-index">
-					<% @recent_matches['games'].each_with_index do |match, index|%>
-						<% active =  index == 0 ? 'active' : '' %>
-						<div data-index="<%= index %>" class="item-container"><div class="item-indicator <%= active %>"></div></div>
-					<% end %>
-				</div>
-
-				<div class="col-md-10 player-information">
-					<h1><%= @identity['gamertag'] %></h1>
-					<ul>
-						<li><%= number_with_delimiter(total_kills()) %> Kills</li>
-						<li><%= number_with_delimiter(total_deaths()) %> Deaths</li>
-						<li><%= number_with_delimiter(total_games_started()) %> Games Started</li>
-					</ul>
-				</div>
-
-				<div class="col-md-offset-0 col-md-4 recent-match-information">
-					<% if has_recent_matches() %>
-						<div class="match-overview col-xs-9 no-col-padding">
-							<span class="match-mode"><%= @recent_matches['games'][0]['variantName'] %></span>
-							on
-							<span class="match-map"><%= @recent_matches['games'][0]['mapVariantName'] %></span>
-						</div>
-						<div class="view-match col-md-3 no-col-padding">
-							<a class="alt" href="#">View Details</a>
-						</div>
-						<div class="match-details col-xs-12 no-col-padding">
-							<div class="match-statistic personal-score">
-								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['personalScore']) %></span>
-								<div class="key">
-									<span class="header-key">Personal Score</span>
-									<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
-								</div>
-							</div>
-
-							<div class="match-statistic featured-stat">
-								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['featuredStatValue']) %></span>
-								<div class="key">
-									<span class="header-key"><%= @recent_matches['games'][0]['featuredStatName'] %></span>
-									<span class="sub-key"><%= @recent_matches['games'][0]['variantName'] %></span>
-								</div>
-							</div>
-
-							<div class="match-statistic medals">
-								<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['totalMedals']) %></span>
-								<div class="key">
-									<span class="header-key">Medals</span>
-									<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
-								</div>
-							</div>
-						</div>
-					<% end %>
-				</div>
-
-				<div class="col-md-4 col-md-offset-8 player-visual-flairs">
-					<div class="emblem-flair" style="background-image: url('<%= resolve_asset_url(@service_record['emblemImageUrl'], 120) %>');"></div>
-					<div class="spartan-flair" style="background-image: url('<%= resolve_spartan_image(@gamertag) %>');"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+<article id="halo4-service-record" class="halo-4">
+	<%= render 'halo4/partials/service_record_header' %>
 
 	<div class="experience-bar" data-spy="affix" data-offset-top="540">
-		<div class="fluid-container">
-			<div class="profiles col-md-10 col-xs-12">
-				<div class="profile xbox-live">
-					<a href="#xbox-live">
-						<div class="flair">
-							<h4>Xbox Live</h4>
-							<span><%= @identity['gamertag'] %></span>
-						</div>
-					</a>
-				</div>
-				<div class="profile halo active">
-					<a data-popover-content="#halo-explorer" data-toggle="popover" data-trigger="focus" tabindex="0">
-						<div class="col-xs-10 flair">
-							<h4>Halo</h4>
-							<span><%= @identity['gamertag'] %></span>
-						</div>
-						<div class="col-xs-2 dropdown-selector">
-							<i class="fa fa-chevron-down" aria-hidden="true"></i>
-						</div>
-						<div class="clearfix"></div>
-						<div class="hidden" id="halo-explorer">
-							<div class="popover-body">
-								<div class="profile halo-3">
-									<a href="#halo-3">
-										<h4>Halo 3</h4>
-									</a>
-								</div>
-								<div class="profile halo-3-odst">
-									<a href="#halo-3-odst">
-										<h4>Halo 3: ODST</h4>
-									</a>
-								</div>
-								<div class="profile halo-reach">
-									<a href="#halo-reach">
-										<h4>Halo: Reach</h4>
-									</a>
-								</div>
-								<div class="profile halo-4">
-									<a href="#halo-4">
-										<h4>Halo 4</h4>
-									</a>
-								</div>
-								<div class="profile  halo-5">
-									<a href="#halo-5">
-										<h4>Halo 5: Guardians</h4>
-									</a>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="profile destiny">
-					<a href="#destint">
-						<div class="flair">
-							<h4>Destiny</h4>
-							<span><%= @identity['gamertag'] %></span>
-						</div>
-					</a>
-				</div>
-				<div class="profile titanfall">
-					<a data-popover-content="#titanfall-explorer" data-toggle="popover" data-trigger="focus" tabindex="1">
-						<div class="col-xs-10 flair">
-							<h4>Titanfall</h4>
-							<span><%= @identity['gamertag'] %></span>
-						</div>
-						<div class="col-xs-2 dropdown-selector">
-							<i class="fa fa-chevron-down" aria-hidden="true"></i>
-						</div>
-						<div class="clearfix"></div>
-						<div class="hidden" id="titanfall-explorer">
-							<div class="popover-body">
-								<div class="profile titanfall">
-									<a href="#titanfall">
-										<h4>Titanfall</h4>
-									</a>
-								</div>
-								<div class="profile titanfall-2">
-									<a href="#titanfall-2">
-										<h4>Titanfall 2</h4>
-									</a>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-2 hidden-xs hidden-sm socials">
-				<ul>
-					<li><i class="fa fa-reddit-alien" aria-hidden="true"></i></li>
-					<li><i class="fa fa-facebook" aria-hidden="true"></i></li>
-					<li><i class="fa fa-twitter" aria-hidden="true"></i></li>
-					<li><i class="fa fa-google-plus" aria-hidden="true"></i></li>
-				</ul>
-			</div>
-		</div>
+		<%= render 'partials/experience_bar' %>
 	</div>
 
 	<div class="page-content fluid-container">
+		<div class="col-md-12">
+			<%= render 'partials/flash_messages' %>
+		</div>
+
 		<div class="col-md-10">
-			H4_PLAYER_SERVICE_RECORD
+			<section id="service-record-stats">
+				<div class="section-header">
+					<%= @identity['gamertag'] %>'s Service Record
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						
+					</div>
+				</div>
+			</section>
+
+			<section id="war-games-stats">
+				<div class="section-header">
+					War Games Stats
+				</div>
+			</section>
 		</div>
 
 		<div class="col-md-2">
 			<nav class="experience-sidebar" <%#data-spy="affix" data-offset-top="100"%>>
-				<ul class="nav">
-					<li class="nav-header">
-						Branch
-					</li>
-					<li class="active">
-						<a href="#">Service Record</a>
-					</li>
-					<li>
-						<a href="#">Match History</a>
-						<ul class="nav">
-							<li><a href="#">War Games</a></li>
-							<li><a href="#">Campaign</a></li>
-							<li><a href="#">Spartan Ops</a></li>
-							<li><a href="#">Custom Games</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="#">Specializations</a>
-					</li>
-					<li>
-						<a href="#">Competitive Skill Ranks</a>
-					</li>
-				</ul>
-
-				<hr />
-
-				<a id="slide-into-waypoint" class="alt" target="_blank" href="https://app.halowaypoint.com/en-US/Halo4/<%= @identity['gamertag'] %>/wargames/">
-					<i class="fa fa-share" aria-hidden="true"></i>
-					Go To Waypoint
-				</a>
+				<%= render 'halo4/partials/experience_sidebar' %>
 			</nav>
 		</div>
 	</div>

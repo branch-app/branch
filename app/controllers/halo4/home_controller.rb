@@ -2,12 +2,22 @@ require('addressable/uri')
 
 class Halo4::HomeController < ApplicationController
 	before_action :require_gamertag, except: :index
+	before_action :setup_area
 
 	def index
 		
 	end
 
 	private
+
+	def setup_area
+		@area = {
+			name: 'Halo 4',
+			name_slug: 'halo-4',
+			exp: 'Halo',
+			exp_slug: 'halo',
+		}
+	end
 
 	def require_gamertag
 		@gamertag = Addressable::URI.escape(params[:gamertag])

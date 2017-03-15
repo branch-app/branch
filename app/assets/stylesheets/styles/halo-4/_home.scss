@@ -1,0 +1,20 @@
+// #halo4-home {
+	
+// }
+
+#halo4-service-record {
+	@import 'header.scss';
+}
+
+article.halo-4 {
+	@import 'experience_sidebar.scss';
+
+	.page-content {
+		margin-top: 40px;
+	}
+}
+
+#halo4-service-record {
+	@import 'service-record.scss';
+}
+
