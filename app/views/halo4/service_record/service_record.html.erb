@@ -48,7 +48,7 @@
 								<% @service_record['topMedals'].each do |medal| %>
 									<div class="top-medal" style="background-image: url('<%= resolve_asset_url(medal['imageUrl'], 'large') %>');"
 											data-toggle="tooltip" data-placement="bottom" data-html="true"
-											title="<%= medal['name'] %> - <%= number_with_delimiter(medal['totalMedals']) %> times <br /> <%= medal['description'] %>">
+											title="<%= medal['name'] %> - <%= number_with_delimiter(medal['totalMedals']) %> times <hr /> <%= medal['description'] %>">
 									</div>
 								<% end %>
 							</div>
