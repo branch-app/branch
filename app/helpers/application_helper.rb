@@ -14,4 +14,12 @@ module ApplicationHelper
 	def is_active_exp_area(exp)
 		return 'active' if @area[:exp_slug] == exp
 	end
+
+	def generate_percentage(a, b, places = 2)
+		return ((a.to_f / b.to_f) * 100).round(places)
+	end
+
+	def str_to_date_str(str, format = '%A, %B %e %Y')
+		str.to_time.strftime(format)
+	end
 end
