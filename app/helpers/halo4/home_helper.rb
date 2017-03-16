@@ -22,6 +22,26 @@ module Halo4::HomeHelper
 		return "https://spartans.svc.halowaypoint.com/players/#{gamertag}/h4/spartans/#{pose}?target=#{size}"
 	end
 
+	def parse_duration(str)
+		regex_str = /(?:(?<days>\d{1,3}?)\.)?(?<hours>\d{1,2}):(?<minutes>\d{1,2}):(?<seconds>\d{1,2})/i
+
+		days, hours, minutes, seconds = str.match(regex_str).captures
+		days = days.to_i * 1.day.to_i
+		hours = hours.to_i * 1.hour.to_i
+		minutes = minutes.to_i * 1.minute.to_i
+		seconds = seconds.to_i
+
+		duration = Duration.new(days + hours + minutes + seconds)
+		output = ''
+		output += "#{pluralize(duration.weeks, 'week')}, " if duration.weeks > 0
+		output += "#{pluralize(duration.days, 'day')}, " if duration.days > 0
+		output += "#{pluralize(duration.hours, 'hour')}, " if duration.hours > 0
+		output += "#{output.length > 0 ? ' and' : ''} #{pluralize(duration.minutes, 'minute')}, " if duration.minutes > 0
+		# output += "#{pluralize(duration.minutes, 'second')}" if duration.seconds > 0
+
+		return output.chomp(', ')
+	end
+
 	# These are used on the service-record header on all pages
 	def total_kills
 		kills = 0
