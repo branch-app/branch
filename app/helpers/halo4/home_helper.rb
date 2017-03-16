@@ -15,6 +15,7 @@ module Halo4::HomeHelper
 		end
 
 		url = Halo4Client.instance.metadata_options['settings'][base_url]
+		return '' if url == nil
 		return url + asset_url
 	end
 
