@@ -1,46 +1,11 @@
-$exp-bar-first-restructure-point: 1425px;
-$exp-bar-second-restructure-point: 1195px;
+$first-restructure-point: 1425px;
+$second-restructure-point: 1195px;
 
 .experience-bar {
 	background: #f9f9fb;
 	border-bottom: 1px solid #ebebeb;
 	height: 75px;
 	padding: 0;
-
-	@media (max-width: $exp-bar-first-restructure-point) {
-		.fluid-container {
-			> .profiles > .profile {
-				background-size: 0px;
-				padding-left: 20px;
-				margin-right: 0;
-			}
-
-			> .socials ul > li {
-				margin-right: 5px;
-				margin-left: 5px;
-			}
-		}
-	}
-
-	@media (max-width: $exp-bar-second-restructure-point) {
-
-		.fluid-container {
-			> .profiles {
-				display: flex;
-				justify-content: center;
-
-				width: 100%;
-
-				.profile.active {
-					margin-top: 2px !important;
-				}
-			}
-
-			> .socials {
-				display: none !important;
-			}
-		}
-	}
 
 	> .fluid-container {
 		padding-top: 0;
@@ -199,5 +164,39 @@ $exp-bar-second-restructure-point: 1195px;
 
 	&.experience-bar.affix + .page-content {
 		padding-top: 99px
+	}
+}
+
+@media (max-width: $first-restructure-point) {
+	.experience-bar > .fluid-container {
+		> .profiles > .profile {
+			background-size: 0px;
+			padding-left: 20px;
+			margin-right: 0;
+		}
+
+		> .socials > ul > li {
+			margin-right: 5px;
+			margin-left: 5px;
+		}
+	}
+}
+
+@media (max-width: $second-restructure-point) {
+	.experience-bar > .fluid-container {
+		> .profiles {
+			display: flex;
+			justify-content: center;
+
+			width: 100%;
+
+			.profile.active {
+				margin-top: 2px !important;
+			}
+		}
+
+		> .socials {
+			display: none !important;
+		}
 	}
 }
