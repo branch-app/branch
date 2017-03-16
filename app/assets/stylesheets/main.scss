@@ -27,17 +27,18 @@ $large-devices-width: 1200px;
 @import 'mixins/float.scss';
 @import 'mixins/masks.scss';
 @import 'mixins/no.scss';
+@import 'mixins/tooltips.scss';
 
 @import 'partials/buttons.scss';
-@import 'partials/fluid-container.scss';
+@import 'partials/fluid_container.scss';
 @import 'partials/progress_bar.scss';
 
-@import 'base/footer.scss';
 @import 'base/experience_bar.scss';
+@import 'base/footer.scss';
 @import 'base/navbar.scss';
 
 @import 'styles/home.scss';
-@import 'styles/halo-4/home.scss';
+@import 'styles/halo_4/home.scss';
 
 * {
 	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
