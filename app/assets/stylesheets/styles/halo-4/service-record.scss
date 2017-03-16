@@ -4,7 +4,8 @@
 
 .page-content {
 	section {
-		margin-bottom: 30px;
+		margin-bottom: 70px;
+
 		&:last-of-type {
 			margin-bottom: 0;
 		}
@@ -14,16 +15,97 @@
 			font-size: 30px;
 			// color: $text-dark;
 			color: $brand-primary;
+			margin-bottom: 25px;
 
 			width: 100%;
 			border-bottom-width: 1px;
 			border-bottom-style: solid;
-			// border-bottom-color: $brand-accent-primary;
-			border-image: linear-gradient(to right, $brand-primary 0%, $brand-tertiary 100%), linear-gradient(to right, $brand-primary 0%, $brand-tertiary 100%);
+			border-bottom-color: $brand-tertiary;
 		}
 
-		&.service-record-stats {
+		&#service-record-stats {
+			.player-rank {
+				margin-bottom: 15px;
 
+				> .current-rank,
+				  .next-rank {
+					font-size: 18px;
+					font-weight: 600;
+					color: $text-grey;
+
+					> .xp {
+						font-size: 12px;
+						font-weight: 300;
+						color: $text-grey;
+					}
+				}
+
+				.progress-bar {
+					min-width: 165px;
+				}
+			}
+
+			.player-flair {
+				height: 60px;
+				background-size: 45px;
+				background-repeat: no-repeat;
+				background-position: left center;
+
+				display: inline-block;
+
+				color: $text-dark;
+				padding-left: 60px;
+				padding-top: 9px;
+
+				> span {
+					display: block;
+
+					&.gamertag {
+						font-size: 18px;
+					}
+					&.service-tag {
+						margin-top: -5px;
+						font-size: 16px;
+						font-weight: 600;
+					}
+				}
+			}
+
+			.top-medals {
+				> span {
+					display: block;
+					margin-bottom: 20px;
+					margin-top: 10px;
+
+					color: $brand-accent-primary;
+					font-size: 25px;
+					font-weight: 300;
+					text-align: center;
+				}
+
+				> .medals {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					justify-content: center;
+
+					> .top-medal {
+						background-position: center top;
+						background-repeat: no-repeat;
+						background-size: cover;
+
+						width: 90px;
+						height: 90px;
+						margin: 10px 20px;
+					}
+				}
+			}
+
+			.general-player-details {
+				.badge {
+					background-color: $brand-accent-primary;
+				}
+			}
 		}
 	}
 }

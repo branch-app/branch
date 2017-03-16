@@ -13,11 +13,97 @@
 		<div class="col-md-10">
 			<section id="service-record-stats">
 				<div class="section-header">
-					<%= @identity['gamertag'] %>'s Service Record
+					Service Record
 				</div>
 				<div class="row">
-					<div class="col-md-3">
-						
+					<div class="col-lg-5">
+						<div class="player-rank col-md-12 no-p">
+							<% progression_percent = rank_progression_percentage() %>
+							<div class="current-rank pull-left">
+								SR <%= @service_record['rankName'] %>
+								<span class="xp">
+									<%= @service_record['rankStartXp'] %> xp
+								</span>
+							</div>
+							<div class="next-rank pull-right">
+								<% if @service_record['nextRankName'] != '' %>
+									<span class="xp">
+										<%= @service_record['nextRankStartXp'] %> xp
+									</span>
+									SR <%= @service_record['nextRankName'] %>
+								<% end %>
+							</div>
+							<div class="clearfix">
+							</div>
+							<div class="progress-bar-container">
+								<div class="progress-bar" role="progressbar" aria-valuenow="<%= progression_percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progression_percent %>%;">
+									<%= progression_percent %>%<%= rank_progression_comparison() %>
+								</div>
+							</div>
+						</div>
+						<div class="top-medals col-md-12 no-p">
+							<hr />
+							<span>Top Medals</span>
+							<div class="medals">
+								<% @service_record['topMedals'].each do |medal| %>
+									<div class="top-medal" style="background-image: url('<%= resolve_asset_url(medal['imageUrl'], 'large') %>');"
+											data-toggle="tooltip" data-placement="bottom" data-html="true"
+											title="<%= medal['name'] %> - <%= number_with_delimiter(medal['totalMedals']) %> times <br /> <%= medal['description'] %>">
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+						<canvas id="played-games-spread" width="400" height="400"></canvas>
+					</div>
+					<div class="col-lg-4">
+						<ul class="list-group general-player-details">
+							<li class="list-group-item">
+								<span class="badge"><%= str_to_date_str(@service_record['firstPlayedUtc']) %></span>
+								First Played
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= str_to_date_str(@service_record['lastPlayedUtc']) %></span>
+								Last Played
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= parse_duration(@service_record['totalGameplay']) %></span>
+								Playtime
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['spartanPoints']) %></span>
+								Spartan Points
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= @service_record['totalCommendationProgress'] %>%</span>
+								Commendation Progression
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['totalMedalsEarned']) %></span>
+								Medals Earned
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['totalGamesStarted']) %></span>
+								Games Started
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['totalChallengesCompleted']) %></span>
+								Challenges Completed
+							</li>
+
+							<li class="list-group-item">
+								<span class="badge"><%= number_with_delimiter(@service_record['totalLoadoutItemsPurchased']) %></span>
+								Purchased Loadout Items
+							</li>
+						</ul>
 					</div>
 				</div>
 			</section>
@@ -27,11 +113,29 @@
 					War Games Stats
 				</div>
 			</section>
+
+			<section id="campaign-stats">
+				<div class="section-header">
+					Campaign Stats
+				</div>
+			</section>
+
+			<section id="campaign-stats">
+				<div class="section-header">
+					Spartan Ops Stats
+				</div>
+			</section>
+
+			<section id="custom-games-stats">
+				<div class="section-header">
+					Customs Games Stats
+				</div>
+			</section>
 		</div>
 
 		<div class="col-md-2">
-			<nav class="experience-sidebar" <%#data-spy="affix" data-offset-top="100"%>>
-				<%= render 'halo4/partials/experience_sidebar' %>
+			<nav class="sidebar" <%#data-spy="affix" data-offset-top="100"%>>
+				<%= render 'halo4/partials/sidebar' %>
 			</nav>
 		</div>
 	</div>
@@ -41,13 +145,46 @@
 </div>
 
 <% content_for :scripts do %>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<script>
+		// Setup Recent Matches data
 		const recentMatches = <%== generate_recent_match_json() %>;
 		<% match_images = Array.new(@recent_matches.length) %>
 		<% @recent_matches['games'].each_with_index do |match, index| %>
 			<% match_images[index] = resolve_asset_url(match['mapImageUrl'], 'large') %>
 		<% end %>
-		const recentMatchImages = <%== match_images.to_json %>
+		const recentMatchImages = <%== match_images.to_json %>;
+
+		// Setup played game spread chart
+		new Chart(document.getElementById('played-games-spread'), {
+			type: 'doughnut',
+			data: {
+				labels: <%== played_games_spread_legend_json() %>,
+				datasets: [
+					{
+						data: <%== played_games_spread_json() %>,
+						backgroundColor: [
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+						],
+						borderColor: [
+							'rgba(255,99,132,1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+						],
+						borderWidth: 1,
+					},
+				],
+			},
+			options: {
+				legend: {
+					display: true,
+					position: 'bottom',
+				},
+			},
+		});
 	</script>
 <% end %>
