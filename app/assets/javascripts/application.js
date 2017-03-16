@@ -33,4 +33,7 @@ $(jQuery).ready(function () {
 			return $(content).children('.popover-body').html();
 		},
 	});
+
+	// Enable tooltips	
+	$('[data-toggle="tooltip"]').tooltip();
 });
