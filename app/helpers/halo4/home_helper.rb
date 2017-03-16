@@ -11,8 +11,6 @@ module Halo4::HomeHelper
 		end
 
 		if public_asset_exists?(public_path)
-			puts public_path
-			puts asset
 			return image_url(public_path)
 		end
 
