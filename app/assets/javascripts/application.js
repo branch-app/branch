@@ -15,13 +15,15 @@ $(jQuery).ready(function () {
 	$('span.copyright-year').text(new Date().getUTCFullYear());
 
 	// Listen for navbar scroll changes and update navbar class
-	$(window).scroll(function () {
-		const y = $(this).scrollTop();
-		if (y < 55)
+	$(window).scroll(updateNavState);
+	updateNavState(); // Also run this on page load
+
+	function updateNavState() {
+		if ($(this).scrollTop() < 55)
 			$('nav.navbar').removeClass('navbar-secondary');
 		else
 			$('nav.navbar').addClass('navbar-secondary');
-	});
+	}
 
 	// Enable popover
 	$('[data-toggle=popover]').popover({
