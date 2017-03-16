@@ -2,10 +2,6 @@
 	
 // }
 
-#halo4-service-record {
-	@import 'header.scss';
-}
-
 article.halo-4 {
 	@import 'sidebar.scss';
 
@@ -14,7 +10,6 @@ article.halo-4 {
 	}
 }
 
-#halo4-service-record {
-	@import 'service-record.scss';
-}
+@import 'header.scss';
+@import 'service_record.scss';
 
