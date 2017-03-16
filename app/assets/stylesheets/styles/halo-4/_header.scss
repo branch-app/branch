@@ -55,7 +55,6 @@ $h4-third-restructure-point: 991px;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position-y: bottom;
 
 	.recent-match-index {
 		margin-top: 120px;
@@ -124,11 +123,6 @@ $h4-third-restructure-point: 991px;
 		color: white;
 		font-weight: 100;
 		font-size: 20px;
-
-
-		.no-col-padding {
-			padding: 0;
-		}
 
 		.match-overview {
 			.match-mode, .match-map {
