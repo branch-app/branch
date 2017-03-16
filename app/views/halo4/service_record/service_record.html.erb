@@ -5,7 +5,7 @@
 		<%= render 'partials/experience_bar' %>
 	</div>
 
-	<div class="page-content fluid-container">
+	<div class="page-content fluid-container row">
 		<div class="col-md-12">
 			<%= render 'partials/flash_messages' %>
 		</div>
@@ -109,8 +109,76 @@
 			</section>
 
 			<section id="war-games-stats">
+				<% war_games_stats = @service_record['gameModes'].detect { |m| m['id'] == 3 } %>
 				<div class="section-header">
 					War Games Stats
+				</div>
+				<div class="row">
+					<div class="mode-stats col-md-9">
+						<div class="stat col-md-4">
+							<div class="value"><%= war_games_stats['kdRatio'] %></div>
+							<div class="key">Kill/Death Ratio</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['averagePersonalScore']) %></div>
+							<div class="key">Average Personal Score</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalKills']) %></div>
+							<div class="key">Total Kills</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalDeaths']) %></div>
+							<div class="key">Total Deaths</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalGamesStarted']) %></div>
+							<div class="key">Total Games Started</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalGamesWon']) %></div>
+							<div class="key">Total Games Won</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalGamesCompleted']) %></div>
+							<div class="key">Total Games Completed</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(war_games_stats['totalGameBaseVariantMedals']) %></div>
+							<div class="key">Mode Base Medals</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= war_games_stats['totalDuration'] %></div>
+							<div class="key">Playtime</div>
+						</div>
+					</div>
+					<div class="favourite-variant col-md-3 no-p">
+						<div class="title">Favourite Variant</div>
+						<div class="variant-icon" style="background-image: url('<%= resolve_asset_url(war_games_stats['favoriteVariant']['imageUrl'], 'large') %>');"></div>
+						<hr />
+
+						<div class="col-md-12 row no-mp">
+							<div class="col-md-12"><%= war_games_stats['favoriteVariant']['name'] %></div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(war_games_stats['totalKills']) %></div>
+								<div class="key">Total Kills</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(war_games_stats['totalDeaths']) %></div>
+								<div class="key">Total Deaths</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(war_games_stats['totalGamesStarted']) %></div>
+								<div class="key">Games Staretd</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= war_games_stats['totalDuration'] %></div>
+								<div class="key">Playtime</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -127,8 +195,76 @@
 			</section>
 
 			<section id="custom-games-stats">
+				<% custom_games_stats = @service_record['gameModes'].detect { |m| m['id'] == 6 } %>
 				<div class="section-header">
 					Customs Games Stats
+				</div>
+				<div class="row">
+					<div class="favourite-variant col-md-3 no-p">
+						<div class="title">Favourite Variant</div>
+						<div class="variant-icon" style="background-image: url('<%= resolve_asset_url(custom_games_stats['favoriteVariant']['imageUrl'], 'large') %>');"></div>
+						<hr />
+
+						<div class="col-md-12 row no-mp">
+							<div class="col-md-12"><%= custom_games_stats['favoriteVariant']['name'] %></div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(custom_games_stats['totalKills']) %></div>
+								<div class="key">Total Kills</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(custom_games_stats['totalDeaths']) %></div>
+								<div class="key">Total Deaths</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= number_with_delimiter(custom_games_stats['totalGamesStarted']) %></div>
+								<div class="key">Games Staretd</div>
+							</div>
+							<div class="stat col-md-6">
+								<div class="value"><%= custom_games_stats['totalDuration'] %></div>
+								<div class="key">Playtime</div>
+							</div>
+						</div>
+					</div>
+					<div class="mode-stats col-md-9">
+						<div class="stat col-md-4">
+							<div class="value"><%= custom_games_stats['kdRatio'] %></div>
+							<div class="key">Kill/Death Ratio</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['averagePersonalScore']) %></div>
+							<div class="key">Average Personal Score</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalKills']) %></div>
+							<div class="key">Total Kills</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalDeaths']) %></div>
+							<div class="key">Total Deaths</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalGamesStarted']) %></div>
+							<div class="key">Total Games Started</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalGamesWon']) %></div>
+							<div class="key">Total Games Won</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalGamesCompleted']) %></div>
+							<div class="key">Total Games Completed</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(custom_games_stats['totalGameBaseVariantMedals']) %></div>
+							<div class="key">Mode Base Medals</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= custom_games_stats['totalDuration'] %></div>
+							<div class="key">Playtime</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>

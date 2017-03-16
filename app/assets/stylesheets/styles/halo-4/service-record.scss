@@ -1,7 +1,3 @@
-.placeholder {
-	height: 1000px;
-}
-
 .page-content {
 	section {
 		margin-bottom: 70px;
@@ -104,6 +100,84 @@
 			.general-player-details {
 				.badge {
 					background-color: $brand-accent-primary;
+				}
+			}
+		}
+
+		&#war-games-stats,
+		&#custom-games-stats {
+			> .row {
+				> .mode-stats > .stat {
+					text-align: center;
+					padding-left: 25px;
+					padding-right: 25px;
+					margin-bottom: 56px;
+
+					> div {
+						padding: 10px;
+					}
+
+					> .value {
+						font-size: 35px;
+						font-weight: 300;
+						color: $brand-accent-primary;
+					}
+					> .key {
+						font-size: 15px;
+						font-weight: 600;
+						background-color: rgba($brand-accent-primary, 0.1);
+					}
+				}
+
+				> .favourite-variant {
+					> .title {
+						color: $brand-accent-primary;
+						font-weight: 300;
+						font-size: 25px;
+						text-align: center;
+					}
+
+					> .variant-icon {
+						background-color: rgba($seperator-light, 0.9);
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: 100px;
+						height: 120px;
+						margin-top: 20px;
+						margin-bottom: 10px;
+					}
+
+					.row {
+						text-align: center;
+
+						> .col-md-12 {
+							font-size: 25px;
+							font-weight: 300;
+							color: $brand-accent-tertiary;
+
+							margin-bottom: 15px;
+						}
+
+						> .stat {
+							padding-left: 10px;
+							padding-right: 10px;
+
+							> div {
+								padding: 10px;
+							}
+
+							> .value {
+								font-size: 22px;
+								font-weight: 300;
+								color: $brand-accent-primary;
+							}
+							> .key {
+								font-size: 13px;
+								font-weight: 600;
+								background-color: rgba($brand-accent-primary, 0.1);
+							}
+						}
+					}
 				}
 			}
 		}
