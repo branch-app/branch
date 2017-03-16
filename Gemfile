@@ -20,6 +20,8 @@ gem 'turbolinks', '~> 5'
 gem 'typhoeus'
 # Addressable is used for escaping URLs correctly
 gem 'addressable'
+# Ruby Duration is used for parsing duration strings
+gem 'ruby-duration'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
