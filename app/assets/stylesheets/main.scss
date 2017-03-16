@@ -26,9 +26,11 @@ $large-devices-width: 1200px;
 @import 'mixins/clearfix.scss';
 @import 'mixins/float.scss';
 @import 'mixins/masks.scss';
+@import 'mixins/no.scss';
 
 @import 'partials/buttons.scss';
 @import 'partials/fluid-container.scss';
+@import 'partials/progress_bar.scss';
 
 @import 'base/footer.scss';
 @import 'base/experience_bar.scss';

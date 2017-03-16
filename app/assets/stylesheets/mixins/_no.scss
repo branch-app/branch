@@ -1,0 +1,10 @@
+.no-m {
+	margin: 0;
+}
+.no-p {
+	padding: 0;
+}
+.no-mp {
+	@extend .no-m;
+	@extend .no-p;
+}
