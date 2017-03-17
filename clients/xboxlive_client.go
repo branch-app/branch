@@ -17,6 +17,7 @@ import (
 	sharedClients "github.com/branch-app/shared-go/clients"
 	sharedModels "github.com/branch-app/shared-go/models"
 	"github.com/branch-app/shared-go/types"
+	"gopkg.in/robfig/cron.v2"
 )
 
 type XboxLiveClient struct {
@@ -25,8 +26,8 @@ type XboxLiveClient struct {
 	xblStore      *helpers.XboxLiveStore
 	mongoClient   *sharedClients.MongoDBClient
 
-	authentication    *models.XboxLiveAuthentication
-	forceTokenRefresh bool
+	authentication *models.XboxLiveAuthentication
+	cron           *cron.Cron
 }
 
 const (
@@ -39,7 +40,7 @@ const (
 )
 
 func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthentication, error) {
-	if (client.authentication != nil && client.authentication.ExpiresAt.After(time.Now().UTC())) && !client.forceTokenRefresh {
+	if client.authentication != nil && client.authentication.ExpiresAt.After(time.Now().UTC()) {
 		return client.authentication, nil
 	}
 
@@ -54,7 +55,7 @@ func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentica
 	var accountResp models.XboxLiveAuthResponse
 	_, err := client.serviceClient.Get("service-auth", "/xbox-live", &accountResp)
 	if err != nil {
-		return nil, err
+		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
 	}
 
 	xblAuthenticationRequest := &models.XboxLiveAuthenticationRequest{
@@ -69,7 +70,7 @@ func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentica
 	var xblAuthenticationResponse models.XboxLiveAuthenticationResponse
 	_, err = client.ExecuteRequest("POST", "https://user.auth.xboxlive.com/user/authenticate", nil, 0, xblAuthenticationRequest, &xblAuthenticationResponse)
 	if err != nil {
-		return nil, err
+		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
 	}
 
 	xblAuthorizationRequest := &models.XboxLiveAuthorizationRequest{
@@ -83,7 +84,7 @@ func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentica
 	var xblAuthorizationResponse models.XboxLiveAuthorizationResponse
 	_, err = client.ExecuteRequest("POST", "https://xsts.auth.xboxlive.com/xsts/authorize", nil, 0, xblAuthorizationRequest, &xblAuthorizationResponse)
 	if err != nil {
-		return nil, err
+		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
 	}
 
 	gamertag := xblAuthorizationResponse.DisplayClaims["xui"][0]["gtg"]
@@ -96,7 +97,6 @@ func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentica
 		UserHash:  userHash,
 	}
 
-	client.forceTokenRefresh = false
 	client.authentication = authentication
 	fmt.Println(client.authentication)
 	return client.authentication, nil
@@ -161,10 +161,19 @@ func (client *XboxLiveClient) handleError(response interface{}, err error) error
 }
 
 func NewXboxLiveClient(env types.Environment, config *models.Configuration) *XboxLiveClient {
-	return &XboxLiveClient{
+	client := &XboxLiveClient{
 		httpClient:    sharedClients.NewHTTPClient(),
 		serviceClient: sharedClients.NewServiceClient(env),
 		xblStore:      helpers.NewXboxLiveStore(),
 		mongoClient:   sharedClients.NewMongoDBClient(config.MongoConnectionString, config.MongoDatabaseName),
+		cron:          cron.New(),
 	}
+
+	// Setup cron jobs
+	client.cron.AddFunc("@every 45m", func() { client.UpdateAuthentication() })
+
+	// Update authentication in the background
+	go client.UpdateAuthentication()
+
+	return client
 }
