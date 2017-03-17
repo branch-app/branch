@@ -182,6 +182,63 @@
 					}
 				}
 			}
+
+			&#spartan-ops-stats {
+				> .row {
+					> .mode-stats > .stat {
+						text-align: center;
+						padding-left: 25px;
+						padding-right: 25px;
+						margin-bottom: 56px;
+
+						> div {
+							padding: 10px;
+						}
+
+						> .value {
+							font-size: 35px;
+							font-weight: 300;
+							color: $brand-accent-primary;
+						}
+						> .key {
+							font-size: 15px;
+							font-weight: 600;
+							background-color: rgba($brand-accent-primary, 0.1);
+						}
+					}
+
+					> .mission-progression {
+						> .title {
+							color: $brand-accent-primary;
+							font-weight: 300;
+							font-size: 25px;
+							text-align: center;
+						}
+
+						> .progressions {
+							> .progression {
+								margin-bottom: 50px;
+								&:last-of-type { margin-bottom: auto; }
+
+								> span {
+									overflow: none;
+									text-overflow: ellipsis;
+									font-weight: 300;
+									font-size: 18px;
+									color: $brand-accent-primary;
+								}
+								> .progress-bar-container {
+									margin-top: 10px;
+
+									> .progress-bar {
+										min-width: 85px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

@@ -188,9 +188,63 @@
 				</div>
 			</section>
 
-			<section id="campaign-stats">
+			<section id="spartan-ops-stats">
+				<% spartan_ops_stats = @service_record['gameModes'].detect { |m| m['id'] == 5 } %>
 				<div class="section-header">
 					Spartan Ops Stats
+				</div>
+				<div class="row">
+					<div class="mode-stats col-md-9">
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(calculate_kd_ratio(spartan_ops_stats['totalKills'], spartan_ops_stats['totalDeaths'])) %></div>
+							<div class="key">Kill/Death Ratio</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(spartan_ops_stats['totalKills']) %></div>
+							<div class="key">Total Kills</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(spartan_ops_stats['totalDeaths']) %></div>
+							<div class="key">Total Deaths</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(spartan_ops_stats['totalMedals']) %></div>
+							<div class="key">Total Medals</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(spartan_ops_stats['totalGamesStarted']) %></div>
+							<div class="key">Total Games Started</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= spartan_ops_stats['totalDuration'] %></div>
+							<div class="key">Playtime</div>
+						</div>
+					</div>
+					<div class="mission-progression col-md-3 no-p">
+						<div class="title">Mission Progression</div>
+						<hr />
+						<div class="progressions col-md-12 row no-mp">
+							<div class="progression col-md-12">
+								<% sp_completion = generate_percentage(spartan_ops_stats['totalSinglePlayerMissionsCompleted'], spartan_ops_stats['totalMissionsPossible']) %>
+								<span>Single Player Mission Progression</span>
+								<div class="progress-bar-container">
+									<div class="progress-bar" role="progressbar" aria-valuenow="<%= sp_completion %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= sp_completion %>%;">
+										<%= sp_completion %>% (<%= spartan_ops_stats['totalSinglePlayerMissionsCompleted'] %>/<%= spartan_ops_stats['totalMissionsPossible'] %>)
+									</div>
+								</div>
+							</div>
+							<div class="progression col-md-12">
+								<% coop_completion = generate_percentage(spartan_ops_stats['totalCoopMissionsCompleted'], spartan_ops_stats['totalMissionsPossible']) %>
+								<span>Coop Mission Progression</span>
+								<div class="progress-bar-container">
+									<div class="progress-bar" role="progressbar" aria-valuenow="<%= coop_completion %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= coop_completion %>%;">
+										<%= coop_completion %>% (<%= spartan_ops_stats['totalCoopMissionsCompleted'] %>/<%= spartan_ops_stats['totalMissionsPossible'] %>)
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 
