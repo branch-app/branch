@@ -5,7 +5,7 @@ class Halo4::HomeController < ApplicationController
 	before_action :setup_area
 
 	def index
-		
+		@title = "Branch - Halo 4 Statistics"
 	end
 
 	private
