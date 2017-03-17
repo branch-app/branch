@@ -171,6 +171,7 @@ func NewXboxLiveClient(env types.Environment, config *models.Configuration) *Xbo
 
 	// Setup cron jobs
 	client.cron.AddFunc("@every 45m", func() { client.UpdateAuthentication() })
+	client.cron.Start()
 
 	// Update authentication in the background
 	go client.UpdateAuthentication()
