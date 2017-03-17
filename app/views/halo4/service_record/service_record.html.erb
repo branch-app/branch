@@ -183,8 +183,73 @@
 			</section>
 
 			<section id="campaign-stats">
+				<% campaign_stats = @service_record['gameModes'].detect { |m| m['id'] == 4 } %>
 				<div class="section-header">
 					Campaign Stats
+				</div>
+				<div class="row">
+					<div class="mission-progression col-md-3">
+						<div class="title">Mission Progression</div>
+						<hr />
+
+						<div class="progressions col-md-12 row no-mp">
+							<div class="progression col-md-6">
+								<% asset, opacity, status = completion_difficulty_info(campaign_stats['singlePlayerDifficulty']) %>
+								<div class="value" data-toggle="tooltip" data-placement="top" title="<%= status %>">
+									<div class="value-image" style="background-image: url('<%= asset %>'); opacity: <%= opacity %>;"></div>
+								</div>
+								<div class="key">Single Player</div>
+							</div>
+							<div class="progression col-md-6">
+								<% asset, opacity, status = completion_difficulty_info(campaign_stats['coopDifficulty']) %>
+								<div class="value" data-toggle="tooltip" data-placement="top" title="<%= status %>">
+									<div class="value-image" style="background-image: url('<%= asset %>'); opacity: <%= opacity %>;"></div>
+								</div>
+								<div class="key">Coop</div>
+							</div>
+							<div class="progression col-md-6">
+								<% asset, opacity, status = completion_difficulty_info(campaign_stats['singlePlayerDASO']) %>
+								<div class="value" data-toggle="tooltip" data-placement="top" title="<%= status %>">
+									<div class="value-image" style="background-image: url('<%= asset %>'); opacity: <%= opacity %>;"></div>
+								</div>
+								<div class="key">Single Player (LASO)</div>
+							</div>
+							<div class="progression col-md-6">
+								<% asset, opacity, status = completion_difficulty_info(campaign_stats['coopDASO']) %>
+								<div class="value" data-toggle="tooltip" data-placement="top" title="<%= status %>">
+									<div class="value-image" style="background-image: url('<%= asset %>'); opacity: <%= opacity %>;"></div>
+								</div>
+								<div class="key">Coop (LASO)</div>
+							</div>
+						</div>
+					</div>
+					<div class="mode-stats col-md-9">
+						<div class="stat col-md-4">
+							<div class="value"><%= calculate_kd_ratio(campaign_stats['totalKills'], campaign_stats['totalDeaths']) %></div>
+							<div class="key">Kill/Death Ratio</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(campaign_stats['totalKills']) %></div>
+							<div class="key">Total Kills</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(campaign_stats['totalDeaths']) %></div>
+							<div class="key">Total Deaths</div>
+						</div>
+
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(campaign_stats['totalGamesStarted']) %></div>
+							<div class="key">Total Games Started</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= number_with_delimiter(campaign_stats['totalTerminalsVisited']) %></div>
+							<div class="key">Terminals Visited</div>
+						</div>
+						<div class="stat col-md-4">
+							<div class="value"><%= campaign_stats['totalDuration'] %></div>
+							<div class="key">Playtime</div>
+						</div>
+					</div>
 				</div>
 			</section>
 

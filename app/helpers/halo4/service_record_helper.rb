@@ -35,4 +35,12 @@ module Halo4::ServiceRecordHelper
 		end
 		return played_games_legend.to_json
 	end
+
+	def completion_difficulty_info(level)
+		return resolve_asset_url({ 'baseUrl' => 'H4DifficultyAssets', 'assetUrl' => '{size}/in-progress.png' }, 'large'), 0.6, 'In Progress' if level == nil
+
+		metadata = Halo4Client.instance.metadata
+		level = metadata['difficultiesMetadata']['difficulties'][level]
+		return resolve_asset_url(level['imageUrl'], 'large'), 1, level['name']
+	end
 end
