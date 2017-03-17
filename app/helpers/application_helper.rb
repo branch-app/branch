@@ -22,4 +22,9 @@ module ApplicationHelper
 	def str_to_date_str(str, format = '%A, %B %e %Y')
 		str.to_time.strftime(format)
 	end
+
+	def calculate_kd_ratio(kills, deaths, round = 2)
+		return kills if deaths == 0
+		return (kills.to_f / deaths.to_f).round(round) 
+	end
 end
