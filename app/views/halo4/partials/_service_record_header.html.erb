@@ -2,7 +2,7 @@
 	<div class="fading-branch-mask">
 		<div class="fluid-container">
 			<div class="col-md-12 recent-match-index">
-				<% @recent_matches['games'].each_with_index do |match, index|%>
+				<% @header_matches['games'].each_with_index do |match, index|%>
 					<% active =  index == 0 ? 'active' : '' %>
 					<div data-index="<%= index %>" class="item-container"><div class="item-indicator <%= active %>"></div></div>
 				<% end %>
@@ -20,35 +20,35 @@
 			<div class="col-md-offset-0 col-md-4 recent-match-information">
 				<% if has_recent_matches() %>
 					<div class="match-overview col-xs-9 no-p">
-						<span class="match-mode"><%= @recent_matches['games'][0]['variantName'] %></span>
+						<span class="match-mode"><%= @header_matches['games'][0]['variantName'] %></span>
 						on
-						<span class="match-map"><%= @recent_matches['games'][0]['mapVariantName'] %></span>
+						<span class="match-map"><%= @header_matches['games'][0]['mapVariantName'] %></span>
 					</div>
 					<div class="view-match col-md-3 no-p">
 						<a class="alt" href="#">View Details</a>
 					</div>
 					<div class="match-details col-xs-12 no-p">
 						<div class="match-statistic personal-score">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['personalScore']) %></span>
+							<span class="value"><%= number_with_delimiter(@header_matches['games'][0]['personalScore']) %></span>
 							<div class="key">
 								<span class="header-key">Personal Score</span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
+								<span class="sub-key"><%= @header_matches['games'][0]['modeName'] %></span>
 							</div>
 						</div>
 
 						<div class="match-statistic featured-stat">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['featuredStatValue']) %></span>
+							<span class="value"><%= number_with_delimiter(@header_matches['games'][0]['featuredStatValue']) %></span>
 							<div class="key">
-								<span class="header-key"><%= @recent_matches['games'][0]['featuredStatName'] %></span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['variantName'] %></span>
+								<span class="header-key"><%= @header_matches['games'][0]['featuredStatName'] %></span>
+								<span class="sub-key"><%= @header_matches['games'][0]['variantName'] %></span>
 							</div>
 						</div>
 
 						<div class="match-statistic medals">
-							<span class="value"><%= number_with_delimiter(@recent_matches['games'][0]['totalMedals']) %></span>
+							<span class="value"><%= number_with_delimiter(@header_matches['games'][0]['totalMedals']) %></span>
 							<div class="key">
 								<span class="header-key">Medals</span>
-								<span class="sub-key"><%= @recent_matches['games'][0]['modeName'] %></span>
+								<span class="sub-key"><%= @header_matches['games'][0]['modeName'] %></span>
 							</div>
 						</div>
 					</div>

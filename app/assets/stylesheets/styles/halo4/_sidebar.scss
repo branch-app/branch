@@ -31,8 +31,8 @@
 			> ul > li {
 				padding-left: 10px;
 
-				&:hover, &:focus, .active {
-					padding-left: 8px;
+				&:hover, &:focus, &.active {
+					padding-left: 10px;
 					border-left: none; // We already have a border from the parent
 				}
 
@@ -59,4 +59,14 @@
 	#slide-into-waypoint {
 		margin-left: 23px;
 	}
+
+	&.affix {
+		top: 185px;
+		right: 8.5%;
+		z-index: 1028;
+	}
+
+	// &.experience-bar.affix + .page-content {
+	// 	padding-top: 99px
+	// }
 }

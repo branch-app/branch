@@ -2,23 +2,32 @@
 	<li class="nav-header">
 		Branch
 	</li>
-	<li class="active">
-		<a href="#">Service Record</a>
+	<li><hr /></li>
+	<li class="<%= @sidebar[:service_record] %>">
+		<a href="/halo-4/<%= @identity['gamertag'] %>">Service Record</a>
 	</li>
-	<li>
-		<a href="#">Match History</a>
+	<li class="<%= @sidebar[:recent_matches] %>">
+		<a href="/halo-4/<%= @identity['gamertag'] %>/matches/war-games">Match History</a>
 		<ul class="nav">
-			<li><a href="#">War Games</a></li>
-			<li><a href="#">Campaign</a></li>
-			<li><a href="#">Spartan Ops</a></li>
-			<li><a href="#">Custom Games</a></li>
+			<li class="<%= @sidebar[:war_games_mode] %>">
+				<a href="/halo-4/<%= @identity['gamertag'] %>/matches/war-games">War Games</a>
+			</li>
+			<li class="<%= @sidebar[:campaign_mode] %>">
+				<a href="/halo-4/<%= @identity['gamertag'] %>/matches/campaign">Campaign</a>
+			</li>
+			<li class="<%= @sidebar[:spartan_ops_mode] %>">
+				<a href="/halo-4/<%= @identity['gamertag'] %>/matches/spartan-ops">Spartan Ops</a>
+			</li>
+			<li class="<%= @sidebar[:custom_games_mode] %>">
+				<a href="/halo-4/<%= @identity['gamertag'] %>/matches/custom-games">Custom Games</a>
+			</li>
 		</ul>
 	</li>
-	<li>
-		<a href="#">Specializations</a>
+	<li class="<%= @sidebar[:specializations] %>">
+		<a href="/halo-4/<%= @identity['gamertag'] %>/specializations">Specializations</a>
 	</li>
-	<li>
-		<a href="#">Competitive Skill Ranks</a>
+	<li class="<%= @sidebar[:csr] %>">
+		<a href="/halo-4/<%= @identity['gamertag'] %>/competitive-skill-ranks">Competitive Skill Ranks</a>
 	</li>
 </ul>
 

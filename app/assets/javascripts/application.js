@@ -10,20 +10,21 @@
 //= require turbolinks
 //= require_tree
 
-$(jQuery).ready(function () {
+jQuery(function ($) {
 	// Set copyright year
 	$('span.copyright-year').text(new Date().getUTCFullYear());
 
 	// Listen for navbar scroll changes and update navbar class
+	let above = void 0;
 	$(window).scroll(updateNavState);
-	updateNavState(); // Also run this on page load
-
 	function updateNavState() {
-		if ($(this).scrollTop() < 55)
-			$('nav.navbar').removeClass('navbar-secondary');
-		else
-			$('nav.navbar').addClass('navbar-secondary');
-	}
+		const prevValue = above;
+		above = $(window).scrollTop() < 55;
+		if (prevValue === above) return;
+		$('nav.navbar')[`${above ? 'remove' : 'add'}Class`]('navbar-secondary');
+	};
+	updateNavState();
+	
 
 	// Enable popover
 	$('[data-toggle=popover]').popover({

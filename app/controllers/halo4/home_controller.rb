@@ -1,7 +1,7 @@
 require('addressable/uri')
 
 class Halo4::HomeController < ApplicationController
-	before_action :require_gamertag, except: :index
+	before_action :require_gamertag, except: 'halo4#index'
 	before_action :setup_area
 
 	def index
@@ -27,28 +27,28 @@ class Halo4::HomeController < ApplicationController
 
 			# TODO: Run these concurrently
 			@service_record = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/service-record")
-			@recent_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/recent-matches?modeId=3&count=5")
+			@header_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/recent-matches?modeId=3&count=5")
 
 		rescue BranchError => e
 			case e.code
-			when 'invalid_identity'
-			when 'identity_doesnt_exist'
-				flash[:warning] = 'The provided Gamertag doesn\'t exist.'
-				redirect_to(controller: 'home', action: 'index')
-				return
+				when 'invalid_identity'
+				when 'identity_doesnt_exist'
+					flash[:warning] = 'The provided Gamertag doesn\'t exist.'
+					redirect_to(controller: 'home', action: 'index')
+					return
 
-			when 'waypoint_content_not_found'
-				# TODO
-				flash[:warning] = 'REPLACE_ME'
-				return
+				when 'waypoint_content_not_found'
+					# TODO
+					flash[:warning] = 'REPLACE_ME'
+					return
 
-			when 'waypoint_no_data'
-				flash[:warning] = "Sorry, #{@identity['gamertag']} has never played Halo 4."
-				redirect_to(controller: 'xbox-live/profile', action: 'profile', gamertag: @identity['gamertag'])
-				return
+				when 'waypoint_no_data'
+					flash[:warning] = "Sorry, #{@identity['gamertag']} has never played Halo 4."
+					redirect_to(controller: 'xbox-live/profile', action: 'profile', gamertag: @identity['gamertag'])
+					return
 
-			else
-				flash[:danger] = "An unknown error occured."
+				else
+					raise
 			end
 
 			redirect_to(controller: 'home', action: 'index')

@@ -27,4 +27,27 @@ module ApplicationHelper
 		return kills if deaths == 0
 		return (kills.to_f / deaths.to_f).round(round) 
 	end
+
+	def to_slug(str)
+		#strip the string
+		ret = str.strip
+
+		#blow away apostrophes
+		ret.gsub!(/['`]/, '')
+
+		# @ --> at, and & --> and
+		ret.gsub!(/\s*@\s*/, ' at ')
+		ret.gsub!(/\s*&\s*/, ' and ')
+
+		#replace all non alphanumeric, underscore or periods with hyphen
+		ret.gsub!(/\s*[^A-Za-z0-9\.\-]\s*/, '-')
+
+		#convert double hyphens to single
+		ret.gsub!(/-+/, '-')
+
+		#strip off leading/trailing hyphen
+		ret.gsub!(/\A[-\.]+|[-\.]+\z/, '')
+
+		return ret
+	end
 end

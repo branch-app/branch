@@ -1,0 +1,33 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Info</th>
+			<th>Score</th>
+			<th>Medals Earned</th>
+			<th>Playlist</th>
+			<th>Result</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @recent_matches['games'].each do |recent_match| %>
+			<% result, result_class = friendly_result(recent_match) %>
+			<tr>
+				<td>
+					<a class="alt" href="/halo-4/<%= @identity['gamertag'] %>/matches/<%= recent_match['id'] %>">
+						<%= recent_match['variantName'] %> on <%= recent_match['mapVariantName'] %>
+					</a>
+				</td>
+				<td><strong><%= number_with_delimiter(recent_match['personalScore']) %></strong> (<strong><%= number_with_delimiter(recent_match['featuredStatValue']) %></strong> <%= recent_match['featuredStatName'] %>)</td>
+				<td><strong><%= recent_match['totalMedals'] %></strong></td>
+				<td>
+					<a class="alt" href="/halo-4/<%= @identity['gamertag'] %>/csr/<%= recent_match['playlistId'] %>-<%= recent_match['playlistName'].parameterize %>">
+						<%= recent_match['playlistName'] %>
+					</a>
+				</td>
+				<td class="result <%= result_class %>"><%= result %></td>
+				<td><%= str_to_date_str(recent_match['endDateUtc'], '%-d/%-m/%Y') %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

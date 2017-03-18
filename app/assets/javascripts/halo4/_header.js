@@ -1,5 +1,6 @@
 $(jQuery).ready(function () {
-	if (!$("#halo4-service-record").length)
+	if (!$("#halo4-service-record").length ||
+		!$("#halo4-matches-recent-matches").length)
 		return;
 
 	// Recent Match Slideshow

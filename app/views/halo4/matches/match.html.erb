@@ -1,0 +1,65 @@
+<article id="halo4-matches-match" class="halo-4 service-record-header">
+	<%= render 'halo4/partials/service_record_header' %>
+
+	<div class="experience-bar" data-spy="affix" data-offset-top="540">
+		<%= render 'partials/experience_bar' %>
+	</div>
+
+	<div class="page-content fluid-container row">
+		<div class="col-md-12">
+			<%= render 'partials/flash_messages' %>
+		</div>
+
+		<div id="sections" class="col-md-10">
+			<section id="header" style="background-image: url('<%= header_background_url(@mode) %>');">
+				<div class="fading-branch-mask">
+					<%= humanize_mode(@mode) %>
+				</div>
+			</section>
+
+			<section id="match-list">
+				<div class="table-responsive">
+					<% if @mode == 3 || @mode == 6 %>
+						<%= render 'halo4/matches/partials/war_games_recent_matches' %>
+					<% elsif @mode == 4 %>
+						<%= render 'halo4/matches/partials/campaign_recent_matches' %>
+					<% elsif @mode == 5 %>
+						<%= render 'halo4/matches/partials/spartan_ops_recent_matches' %>
+					<% end %>
+				</div>
+			</section>
+
+			<section id="pagnination">
+				<nav aria-label="...">
+					<ul class="pager">
+						<% older_url = "/halo-4/#{@identity['gamertag']}/matches/#{@slug}?page=#{@page - 1}" %>
+						<% if @page == 1 %>
+							<li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+						<% else %>
+							<li class="previous"><a href="<%= older_url %>"><span aria-hidden="true">&larr;</span> Older</a></li>
+						<% end %>
+						<li class="next"><a href="<%= "/halo-4/#{@identity['gamertag']}/matches/#{@slug}?page=#{@page + 1}" %>">Newer <span aria-hidden="true">&rarr;</span></a></li>
+					</ul>
+				</nav>
+			</section>
+		</div>
+
+		<div class="col-md-2">
+			<nav class="sidebar hidden-sm hidden-xs" data-spy="affix" data-offset-top="567">
+				<%= render 'halo4/partials/sidebar' %>
+			</nav>
+		</div>
+	</div>
+</div>
+
+<% content_for :scripts do %>
+	<script>
+		// Setup Recent Matches data
+		const recentMatches = <%== generate_recent_match_json() %>;
+		<% match_images = Array.new(@header_matches.length) %>
+		<% @header_matches['games'].each_with_index do |match, index| %>
+			<% match_images[index] = resolve_asset_url(match['mapImageUrl'], 'large') %>
+		<% end %>
+		const recentMatchImages = <%== match_images.to_json %>;
+	</script>
+<% end %>

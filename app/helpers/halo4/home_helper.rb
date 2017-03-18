@@ -43,6 +43,34 @@ module Halo4::HomeHelper
 		return output.chomp(', ')
 	end
 
+	def friendly_result(data)
+		return 'Did Not Finish', 'dnf' if !data['completed']
+
+		case data['result']
+			when 0
+				return 'Lost', 'lost'
+			when 1
+				return 'Draw', 'draw'
+			when 2
+				return 'Won', 'won'
+		end
+
+		return 'Unknown', 'unk'
+	end
+
+	def humanize_difficulty(difficulty)
+		case difficulty
+			when 0
+				return 'Easy'
+			when 1
+				return 'Normal'
+			when 2
+				return 'Heroic'
+			when 3
+				return 'Legendary'
+		end
+	end
+
 	# These are used on the service-record header on all pages
 	def total_kills
 		kills = 0
@@ -75,14 +103,14 @@ module Halo4::HomeHelper
 	end
 
 	def generate_recent_match_json
-		@recent_matches['games'].to_json
+		@header_matches['games'].to_json
 	end
 
 	def most_recent_match_image
-		resolve_asset_url(@recent_matches['games'][0]['mapImageUrl']) if !@recent_matches['games'][0].nil?
+		resolve_asset_url(@header_matches['games'][0]['mapImageUrl']) if !@header_matches['games'][0].nil?
 	end
 
 	def has_recent_matches
-		!@recent_matches['games'][0].nil?
+		!@header_matches['games'][0].nil?
 	end
 end

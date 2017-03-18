@@ -1,0 +1,31 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Info</th>
+			<th>Score</th>
+			<th>Difficulty</th>
+			<th>Type</th>
+			<th>Result</th>
+			<th>Duration</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @recent_matches['games'].each do |recent_match| %>
+			<% result, result_class = friendly_result(recent_match) %>
+			<tr>
+				<td>
+					<a class="alt" href="/halo-4/<%= @identity['gamertag'] %>/matches/<%= recent_match['id'] %>">
+						<strong><%= recent_match['chapterName'] %>:</strong> <%= recent_match['episodeName'] %>
+					</a>
+				</td>
+				<td><strong><%= number_with_delimiter(recent_match['personalScore']) %></strong></td>
+				<td><strong><%= humanize_difficulty(recent_match['difficulty']) %></strong></td>
+				<td><strong><%= recent_match['singlePlayer'] ? 'Single Player' : 'Cooperative Play' %></strong></td>
+				<td class="result <%= result_class %>"><%= result %></td>
+				<td><%= recent_match['duration'] %></td>
+				<td><%= str_to_date_str(recent_match['endDateUtc'], '%-d/%-m/%Y') %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
