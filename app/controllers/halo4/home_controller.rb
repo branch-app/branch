@@ -27,7 +27,7 @@ class Halo4::HomeController < ApplicationController
 
 			# TODO: Run these concurrently
 			@service_record = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/service-record")
-			@header_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/recent-matches?modeId=3&count=5")
+			@header_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/matches?modeId=3&count=5")
 
 		rescue BranchError => e
 			case e.code

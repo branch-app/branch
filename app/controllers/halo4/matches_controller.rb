@@ -32,7 +32,7 @@ class Halo4::MatchesController < Halo4::HomeController
 		end
 
 		begin
-			@recent_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/recent-matches?modeId=#{@mode}&count=#{count}&startAt=#{(@page - 1) * count}")
+			@recent_matches = ServiceClient.instance.get('service-halo4', "/identity/xuid(#{@identity['xuid']})/matches/#{}?modeId=#{@mode}&count=#{count}&startAt=#{(@page - 1) * count}")
 		rescue BranchError => e
 			case e.code
 				when 'waypoint_no_data'
@@ -47,5 +47,6 @@ class Halo4::MatchesController < Halo4::HomeController
 	end
 
 	def match
+
 	end
 end
