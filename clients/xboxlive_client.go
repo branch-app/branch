@@ -165,7 +165,7 @@ func NewXboxLiveClient(env types.Environment, config *models.Configuration) *Xbo
 		httpClient:    sharedClients.NewHTTPClient(),
 		serviceClient: sharedClients.NewServiceClient(env),
 		xblStore:      helpers.NewXboxLiveStore(),
-		mongoClient:   sharedClients.NewMongoDBClient(config.MongoConnectionString, config.MongoDatabaseName),
+		mongoClient:   sharedClients.NewMongoDBClient(config.Mongo.Host, config.Mongo.Database, config.Mongo.Username, config.Mongo.Password),
 		cron:          cron.New(),
 	}
 
