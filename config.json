@@ -1,5 +1,9 @@
 {
 	"port": "",
-	"mongoConnectionString": "",
-	"mongoDatabaseName": ""
+	"mongo": {
+		"host": "",
+		"database": "",
+		"username": "",
+		"password": ""
+	}
 }
