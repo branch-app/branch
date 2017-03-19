@@ -33,10 +33,6 @@
 			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
 		},
 		{
-			"ImportPath": "github.com/branch-app/shared-go/models/branch",
-			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
-		},
-		{
 			"ImportPath": "github.com/branch-app/shared-go/types",
 			"Rev": "9f73b26f62aaf58e2a22c48e6958cc313aa48e58"
 		},
@@ -67,22 +63,8 @@
 			"Rev": "30a891c33c7cde7b02a981314b4228ec99380cca"
 		},
 		{
-			"ImportPath": "github.com/maxwellhealth/bongo",
-			"Comment": "v0.10.4-8-gc2a7770",
-			"Rev": "c2a77704cea226262fbd909a9595e97e30dad1db"
-		},
-		{
-			"ImportPath": "github.com/maxwellhealth/go-dotaccess",
-			"Rev": "ae070a2d2a38fd7233e255ded21fb26fe36b4796"
-		},
-		{
 			"ImportPath": "github.com/metal3d/go-slugify",
 			"Rev": "7ac2014b2f23e254684c08d597496681d12c6a8a"
-		},
-		{
-			"ImportPath": "github.com/oleiade/reflections",
-			"Comment": "0.1.2-12-g0e86b3c",
-			"Rev": "0e86b3c98b2ff33e30c85cfe97d9a63d439fe7eb"
 		},
 		{
 			"ImportPath": "github.com/patrickmn/go-cache",

@@ -1,9 +1,12 @@
 package xboxlive
 
 import (
-	sharedClients "github.com/branch-app/shared-go/clients"
-	"github.com/maxwellhealth/bongo"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
+	"time"
+
+	sharedModels "github.com/branch-app/shared-go/models"
 )
 
 type ColourAsset struct {
@@ -14,22 +17,32 @@ type ColourAsset struct {
 	TertiaryColour  string `json:"tertiaryColor" bson:"tertiaryColour"`
 }
 
-const colourAssetCollectionName = "colour_assets"
+const ColourAssetsCollectionName = "colour_assets"
 
-func (record *ColourAsset) Save(mongo *sharedClients.MongoDBClient) error {
-	return mongo.Collection(colourAssetCollectionName).Save(record)
-}
+func (colourAsset *ColourAsset) Upsert(db *mgo.Database, url string, validFor time.Duration) error {
+	now := time.Now().UTC()
 
-func ColourAssetFindOne(mongo *sharedClients.MongoDBClient, query bson.M) (*ColourAsset, error) {
-	var colourAsset *ColourAsset
-	err := mongo.Collection(colourAssetCollectionName).FindOne(query, &colourAsset)
-	if err != nil {
-		if _, ok := err.(*bongo.DocumentNotFoundError); ok {
-			return nil, nil
-		}
-
-		return nil, err
+	// Check if we need to set CreatedAt and ID
+	if !colourAsset.BranchResponse.ID.Valid() {
+		colourAsset.BranchResponse.ID = bson.NewObjectId()
+		colourAsset.BranchResponse.CreatedAt = now
 	}
 
-	return colourAsset, nil
+	colourAsset.BranchResponse.UpdatedAt = now
+	colourAsset.BranchResponse.CacheInformation = sharedModels.NewCacheInformation(url, now, validFor)
+	_, err := db.C(ColourAssetsCollectionName).UpsertId(colourAsset.BranchResponse.ID, colourAsset)
+	return err
+}
+
+func ColourAssetFindOne(db *mgo.Database, id bson.ObjectId) *ColourAsset {
+	var document *ColourAsset
+	err := db.C(ColourAssetsCollectionName).FindId(id).One(&document)
+	switch {
+	case err == nil:
+		return document
+	case err.Error() == "not found":
+		return nil
+	default:
+		panic(err)
+	}
 }

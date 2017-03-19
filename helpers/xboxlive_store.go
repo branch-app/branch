@@ -28,7 +28,7 @@ func (store XboxLiveStore) GetByGT(gamertag string) *sharedModels.XboxLiveIdenti
 
 	// Retrieve XboxLiveIdentity from cache
 	memIdent := value.(*sharedModels.XboxLiveIdentity)
-	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
+	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CacheInformation.CachedAt)
 
 	// Update Cache
 	store.Set(identity)
@@ -48,7 +48,7 @@ func (store XboxLiveStore) GetByXUID(xuid string) *sharedModels.XboxLiveIdentity
 
 	// Retrieve XboxLiveIdentity from cache, and return
 	memIdent := value.(*sharedModels.XboxLiveIdentity)
-	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CachedAt)
+	identity := sharedModels.NewXboxLiveIdentity(memIdent.Gamertag, memIdent.XUID, memIdent.CacheInformation.CachedAt)
 
 	// Update Opposite Cache
 	store.Set(identity)
@@ -61,7 +61,7 @@ func (store XboxLiveStore) GetByXUID(xuid string) *sharedModels.XboxLiveIdentity
 func (store XboxLiveStore) Set(identity *sharedModels.XboxLiveIdentity) {
 	gamertagSlug := slug.Marshal(identity.Gamertag, true)
 	xuidSlug := slug.Marshal(identity.XUID, true)
-	untilExpires := time.Now().UTC().Sub(identity.ExpiresAt)
+	untilExpires := time.Now().UTC().Sub(identity.CacheInformation.CachedAt)
 	store.GTStore.Set(gamertagSlug, identity, untilExpires)
 	store.XUIDStore.Set(xuidSlug, identity, untilExpires)
 }

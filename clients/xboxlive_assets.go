@@ -1,15 +1,11 @@
 package clients
 
 import (
-	"time"
-
 	"fmt"
+	"time"
 
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	"github.com/branch-app/shared-go/crypto"
-	sharedModels "github.com/branch-app/shared-go/models"
-	"github.com/branch-app/shared-go/models/branch"
-	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -19,51 +15,34 @@ const (
 func (client *XboxLiveClient) GetColourAssets(colourID string) (*xboxlive.ColourAsset, error) {
 	url := fmt.Sprintf(colourAssetURL, colourID)
 	urlHash := crypto.CreateSHA512Hash(url)
+	auth, authErr := client.GetAuthentication()
 
-	// Check if we have a cached document
-	cacheRecord, err := sharedModels.CacheRecordFindOne(client.mongoClient, bson.M{"docUrlHash": urlHash})
-	fmt.Println(cacheRecord)
-	if err != nil {
-		return nil, err
+	cacheInfo := xboxlive.GetCacheInfo(client.mongoClient.DB(), xboxlive.ColourAssetsCollectionName, urlHash)
+	if cacheInfo != nil && (authErr != nil || cacheInfo.CacheInformation.IsValid()) {
+		return xboxlive.ColourAssetFindOne(client.mongoClient.DB(), cacheInfo.ID), nil
 	}
-	if cacheRecord != nil && cacheRecord.IsValid() {
-		response, err := xboxlive.ColourAssetFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
-		if err != nil {
-			return nil, err
-		}
-		response.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
-		return response, nil
+	if authErr != nil {
+		return nil, client.handleError(nil, authErr)
 	}
 
 	// Retrieve data from Xbox Live
-	var colourAsset *xboxlive.ColourAsset
-	_, err = client.ExecuteRequest("GET", url, nil, 3, nil, &colourAsset)
+	var colourAssets *xboxlive.ColourAsset
+	_, err := client.ExecuteRequest("GET", url, auth, 3, nil, &colourAssets)
 	if err != nil {
-		if cacheRecord != nil {
-			colourAsset, _ = xboxlive.ColourAssetFindOne(client.mongoClient, bson.M{"_id": cacheRecord.DocumentID})
-			if colourAsset != nil {
-				colourAsset.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
-				return colourAsset, nil
-			}
+		if cacheInfo != nil {
+			return xboxlive.ColourAssetFindOne(client.mongoClient.DB(), cacheInfo.ID), nil
 		}
-		return nil, client.handleError(&colourAsset.Response, err)
+		return nil, client.handleError(&colourAssets.Response, err)
 	}
 
-	// Deal with caching
-	if cacheRecord != nil {
-		// Already have a cache record - so just update
-		colourAsset.Id = cacheRecord.DocumentID
-		colourAsset.Save(client.mongoClient)
-
-		// Update Cache Record
-		cacheRecord.Update(client.mongoClient)
-	} else {
-		// Need to add to database
-		colourAsset.Save(client.mongoClient)
-		cacheRecord = sharedModels.NewCacheRecord(url, colourAsset.Id, 1460*time.Hour) // 2 months
-		cacheRecord.Save(client.mongoClient)
+	// Preserve ID and CreatedAt if we only updating
+	if cacheInfo != nil {
+		colourAssets.BranchResponse.ID = cacheInfo.ID
+		colourAssets.BranchResponse.CreatedAt = cacheInfo.CreatedAt
 	}
 
-	colourAsset.BranchInfo = branch.NewInfo(cacheRecord.CachedAt)
-	return colourAsset, nil
+	if err := colourAssets.Upsert(client.mongoClient.DB(), url, 5*time.Minute); err != nil {
+		panic(err)
+	}
+	return colourAssets, nil
 }

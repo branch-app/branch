@@ -36,6 +36,8 @@ const (
 	ErrorInternalAuthDown            = "internal_auth_down"
 	ErrorUnknown                     = "unknown_error"
 
+	docURLHashKey = "cacheInformation.docUrlHash"
+
 	authorizationHeaderFormat = "XBL3.0 x=%s;%s"
 )
 
