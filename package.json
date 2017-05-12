@@ -11,8 +11,6 @@
 	"dependencies": {
 		"babel-polyfill": "^6.23.0",
 		"body-parser": "^1.17.1",
-		"cookie-parser": "^1.4.3",
-		"csurf": "^1.9.0",
 		"cuvva-log-sentry": "^0.5.2",
 		"cuvva-log": "^0.9.1",
 		"express-handlebars": "^3.0.0",
@@ -22,9 +20,7 @@
 		"json-client": "^0.8.4",
 		"moment-timezone": "^0.5.13",
 		"query-string": "^4.3.4",
-		"raven": "^2.0.0",
-		"type-is": "^1.6.15",
-		"unix-timestamp": "^0.2.0"
+		"raven": "^2.0.0"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.24.1",
@@ -48,7 +44,8 @@
 			"typecheck",
 			"syntax-flow",
 			"transform-flow-strip-types",
-			"transform-class-properties"
+			"transform-class-properties",
+			"eslint-plugin-import"
 		]
 	}
 }
