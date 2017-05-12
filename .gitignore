@@ -1,6 +1,7 @@
-/node_modules/
-/built/
-/public/css/
-/public/javascript/
+node_modules/
+built/
+public/css/
+public/javascript/
 
 config.*.json
+bower_components

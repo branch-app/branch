@@ -1,25 +1,69 @@
-/* eslint-disable no-process-env, no-process-exit, func-style */
+import $ from 'jquery';
+import Home from './home';
+import 'bootstrap'; // eslint-disable-line sort-imports
 
-import App from './app';
-import log from 'cuvva-log';
-import raven from 'raven';
+const navbarStateChangeIndex = 55;
 
-// TODO: update cuvva-log-sentry to support client side sentry.
-// const sentry = new raven.Client('https://7525a243339948ce84984112d5036cd7@sentry.io/167751');
+type Options = {
 
-log.setMinLogLevel('debug');
-log.setHandler('fatal', () => process.exit(1));
-// sentry.patchGlobal(() => process.exit(1));
-
-const run = () => {
-	const options = { };
-	const app = new App(options);
-
-	app.setup();
 };
 
-try {
-	run();
-} catch (error) {
-	log.fatal('start_failed', [error], { stack: error.stack });
+export default class App {
+	options: Options;
+	above: ?boolean = void 0;
+
+	constructor(options: Options) {
+		this.options = options;
+
+		this._updateNavStyle();
+	}
+
+	setup() {
+		this._setupView();
+		this._setupEvents();
+		this._setupSubApps();
+	}
+
+	_setupView() {
+		// Set copyright year
+		$('span.copyright-year').text(new Date().getUTCFullYear());
+
+		// Enable popover
+		$('[data-toggle=popover]').popover({
+			html: true,
+			content: () => {
+				const content = $(this).attr('data-popover-content');
+
+				return $(content)
+					.children('.popover-body')
+					.html();
+			},
+		});
+
+		// Enable tool-tips
+		$('[data-toggle="tooltip"]').tooltip();
+	}
+
+	_setupEvents() {
+		$(window).scroll(this._updateNavStyle);
+	}
+
+	_setupSubApps() {
+		const home = new Home();
+
+		home.setup();
+	}
+
+	_updateNavStyle() {
+		const prevValue = this.above;
+
+		this.above = $(window).scrollTop() < navbarStateChangeIndex;
+		if (prevValue === this.above) return;
+		$('nav.navbar')[`${this.above ? 'remove' : 'add'}Class`]('navbar-secondary');
+	}
 }
+
+const options = { };
+const app = new App(options);
+
+app.setup();

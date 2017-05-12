@@ -1,5 +1,5 @@
-import babelify from 'babelify';
 import browserify from 'browserify';
+import browserifyShim from 'browserify-shim';
 import buffer from 'vinyl-buffer';
 import glob from 'glob';
 import gulp from 'gulp';
@@ -14,7 +14,7 @@ const paths = {
 	javascript: {
 		src: './assets/javascript/**/*.js',
 		dest: './public/javascript/',
-		maps: './public/maps/',
+		maps: './',
 	},
 	sass: {
 		src: ['./assets/sass/main.scss', './assets/sass/**/*.scss'],
@@ -27,14 +27,15 @@ gulp.task('javascript', () => {
 
 	return merge(files.map(f => {
 		return browserify({ entries: f, debug: true })
-				.transform('babelify', { presets: ['es2015', 'stage-2'] })
-					.bundle()
-					.pipe(source(path.basename(f)))
-					.pipe(buffer())
-					.pipe(sourcemaps.init())
-					.pipe(uglify())
-					.pipe(sourcemaps.write(paths.javascript.maps))
-					.pipe(gulp.dest(paths.javascript.dest));
+			.transform('babelify', { presets: ['es2015', 'stage-2'] })
+			.transform(browserifyShim)
+				.bundle()
+				.pipe(source(path.basename(f)))
+				.pipe(buffer())
+				.pipe(sourcemaps.init())
+				.pipe(uglify())
+				.pipe(sourcemaps.write('./maps'))
+				.pipe(gulp.dest(paths.javascript.dest));
 	}));
 });
 

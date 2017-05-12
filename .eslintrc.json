@@ -58,7 +58,7 @@
 		"no-multi-spaces": 1,
 		"no-multi-str": 1,
 		"no-native-reassign": 1,
-		"no-new": 1,
+		"no-new": 0,
 		"no-new-func": 1,
 		"no-new-wrappers": 1,
 		"no-octal-escape": 1,
@@ -184,8 +184,6 @@
 		"object-shorthand": 1,
 		"arrow-parens": [1, "as-needed"],
 		"no-await-in-loop": 1,
-		"flow-object-type": [1, "semicolon"],
-		"import/require-extension": 1,
 		"flowtype/define-flow-type": 1,
 		"flowtype/use-flow-type": 1
 	}
