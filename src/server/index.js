@@ -41,6 +41,7 @@ export default class Server {
 		}));
 		e.set('view engine', '.hbs');
 
+		e.use(middleware.timer);
 		e.use(middleware.body);
 		e.use('/public', express.static('public'));
 		e.get('/system/health', this._healthCheck);

@@ -1,16 +1,13 @@
 import * as Methods from './methods';
-// import * as Services from '../services';
+import * as Services from '../services';
 
 export default class App {
-	// auth: Services.Auth;
-	// data: Services.Data;
-	// document: Services.Document;
-	// profile: Services.Profile;
-	// underwriters: Services.Underwriters;
-	// upload: Services.Upload;
+	halo4Client: Services.Halo4Client;
+	xblClient: Services.XboxLiveClient;
 
-	constructor() {
-
+	constructor(h4Client: Services.Halo4Client, xblClient: Services.XboxLiveClient) {
+		this.halo4Client = h4Client;
+		this.xblClient = xblClient;
 	}
 }
 
