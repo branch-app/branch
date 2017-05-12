@@ -22,4 +22,13 @@ module Halo4::MatchesHelper
 				return '/images/games/halo4/H4MapAssets/large/reclaimer.jpg'
 		end
 	end
+
+	def header_map_background
+		case @game['modeId']
+			when 3, 4, 6
+				return resolve_asset_url(@game['mapImageUrl'], 'large')
+			when 5
+				return ''
+		end
+	end
 end
