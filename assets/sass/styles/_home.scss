@@ -1,0 +1,73 @@
+#home-index {
+	min-height: 1400px;
+	> .header {
+		height: 75vh;
+		text-align: center;
+		color: white;
+
+		transition: background-image 4s;
+		background-image: url('/public/images/home/halo-5.jpg');
+		background-position: 0% 25%;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		> div {
+			display: flex;
+			align-items: center;
+
+			> .fluid-container {
+				> h1 {
+					font-size: 45px;
+					margin-bottom: 5px;
+				}
+				> h3 {
+					font-size: 20px;
+					margin: 0;
+					padding: 0;
+					> .emoji-love { font-size: 30px; }
+				}
+
+				> .player-lookup {
+					margin-top: 5vh;
+
+					> p {
+						font-size: 18px;
+						> .emoji-love { font-size: 30px; }
+					}
+				}
+			}
+		}
+	}
+
+	> .marketing-stats {
+		margin-top: 60px;
+		.marketing-row {
+			text-align: center;
+			border-right: 1px solid #eee;
+
+			&:last-of-type{
+				border: none;
+			}
+
+			> i {
+				font-size: 55px;
+				margin-bottom: 10px;
+				height: 70px;
+				display: block;
+			}
+			> span {
+				font-size: 22px;
+				margin-bottom: 10px;
+				display: block;
+			}
+			> p {
+				display: block;
+				font-size: 14px;
+				margin-left: 20px;
+				margin-right: 20px;
+				> .emoji-love { font-size: 25px; }
+			}
+		}
+	}
+}

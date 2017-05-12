@@ -1,0 +1,60 @@
+<div id="home-index">
+	<div class="header">
+		<div class="generic-branch-mask">
+			<div class="fluid-container">
+				<h1>Branch</h1>
+				<h3>Xbox Live, Halo, and Destiny stats - made easy <span class="emoji-love">💃</span></h3>
+
+				<div class="player-lookup col-md-offset-4 col-md-4 col-sm-12">
+					<p>
+						Looking for someone? <span class="emoji-love">🕵🏻</span>
+					</p>
+					<form id="player-search" class="input-group" action="/search" method="get">
+						<input id="player-ident" name="playerIdent" type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="submit">Search</button>
+						</span>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="marketing-stats">
+		<div class="container-fluid">
+			<div class="col-md-4 marketing-row">
+				<i class="fa fa-refresh" aria-hidden="true"></i>
+				<span>Cached</span>
+				<p>
+					Stats are cached at various intervals - so viewing is always quick.
+					Also even if third party data-sources are down, cached stats are still
+					avaiable here. <span class="emoji-love">🔥</span>
+				</p>
+			</div>
+			<div class="col-md-4 marketing-row">
+				<i class="fa fa-github-alt" aria-hidden="true"></i>
+				<span>Open Source</span>
+				<p>
+					Completly open sourced - missing a feature? Submit an
+					<a class="alt" target="_blank" href="https://github.com/branch-app/app-home/issues">issue</a>
+					requesting
+					it, or a
+					<a class="alt" target="_blank" href="https://github.com/branch-app/app-home">pull-request</a>
+					implementing it.
+				</p>
+			</div>
+			<div class="col-md-4 marketing-row">
+				<i class="fa fa-tasks" aria-hidden="true"></i>
+				<span>Leaderboards</span>
+				<p>
+					See how you're doing against your friends, boss, or the worlds best
+					players. Share it etc etc. <span class="emoji-love">💪🏻</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{#contentFor "scripts"}}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
+{{/contentFor}}

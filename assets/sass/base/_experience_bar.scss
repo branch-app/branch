@@ -1,0 +1,202 @@
+$first-restructure-point: 1425px;
+$second-restructure-point: 1195px;
+
+.experience-bar {
+	background: #f9f9fb;
+	border-bottom: 1px solid #ebebeb;
+	height: 75px;
+	padding: 0;
+
+	> .fluid-container {
+		padding-top: 0;
+
+		> .profiles {
+			padding: 0;
+			margin-top: -3px;
+
+
+			> .profile {
+				display: inline-block;
+				padding-left: 75px;
+				padding-top: 3px;
+				padding-right: 20px;
+				margin-right: 5px;
+				height: 75px;
+
+				transition: 0.5s;
+				cursor: pointer;
+
+				background-size: 35px;
+				background-repeat: no-repeat;
+				background-position: 20px center;
+
+
+				> a {
+					display: inline-flex;
+					align-items: center;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
+					height: 100%;
+					text-decoration: none !important;
+
+					> .col-md-10 { padding: 0; }
+
+					> .flair {
+						color: $brand-quaternary;
+
+						> h4 {
+							margin: 0;
+							padding: 0;
+							margin-bottom: 4px;
+							font-weight: 600;
+							color: $brand-secondary;
+						}
+					}
+				}
+
+				&.xbox-live,
+				&.destiny {
+					max-width: 192px;
+				}
+				&.halo,
+				&.titanfall {
+					max-width: 267px;
+				}
+
+				&.xbox-live { background-image: image-url('profiles/xbox-live.png'); }
+				&.halo { background-image: image-url('profiles/halo.png'); }
+				&.destiny { background-image: image-url('profiles/destiny.png'); }
+				&.titanfall { background-image: image-url('profiles/titanfall.png'); }
+				&:hover { color: $brand-tertiary; }
+				&.active {
+					color: $text-light-grey;
+					border-bottom: 4px solid $brand-tertiary;
+					margin-top: -4px;
+				}
+
+				> .popover {
+					border-color: $brand-quaternary;
+					box-shadow: 0 5px 10px rgba($brand-quaternary, .9);
+
+					> .popover-content {
+						> .profile {
+							border-bottom: 1px solid #eee;
+							padding-top: 10px;
+							padding-bottom: 10px;
+							height: 40px;
+							padding-left: 55px;
+
+							background-size: 25px;
+							background-repeat: no-repeat;
+							background-position: 10px center;
+
+							&:last-of-type {
+								border: 0;
+							}
+
+							> a {
+								text-decoration: none !important;
+
+								> h4 {
+									color: $brand-quaternary;
+									margin: 0;
+									padding: 0;
+									margin-bottom: 4px;
+									font-weight: 600;
+									color: $brand-secondary;
+								}
+							}
+
+							&.halo-3 { background-image: image-url('profiles/halo-3.png'); }
+							&.halo-3-odst { background-image: image-url('profiles/halo-3-odst.png'); }
+							&.halo-reach { background-image: image-url('profiles/halo-reach.png'); }
+							&.halo-4 { background-image: image-url('profiles/halo-4.png'); }
+							&.halo-5 { background-image: image-url('profiles/halo-5.png'); }
+							
+							&.titanfall { background-image: image-url('profiles/titanfall.png'); }
+							&.titanfall-2 { background-image: image-url('profiles/titanfall.png'); }
+						}
+					}
+				}
+			}
+		}
+
+		> .socials {
+			text-align: right;
+			padding: 0;
+
+			ul {
+				margin: 0;
+				padding: 0;
+
+				> li {
+					color: #c4c0cd;
+					font-size: 22px;
+					text-align: center;
+					line-height: 3.5;
+
+					display: inline-block;
+					margin: 0;
+					padding: 0;
+					margin-left: 14px;
+					margin-right: 14px;
+					width: 22px;
+
+					transition: 0.5s;
+					cursor: pointer;
+
+					&:hover {
+						color: $brand-primary;
+					}
+				}
+			}
+		}
+	}
+
+	&.affix {
+		top: 70px;
+		left: 0;
+		right: 0;
+
+		z-index: 1029;
+	}
+
+	&.experience-bar.affix + .page-content {
+		padding-top: 99px
+	}
+}
+
+@media (max-width: $first-restructure-point) {
+	.experience-bar > .fluid-container {
+		> .profiles > .profile {
+			background-size: 0px;
+			padding-left: 20px;
+			margin-right: 0;
+		}
+
+		> .socials > ul > li {
+			margin-right: 5px;
+			margin-left: 5px;
+		}
+	}
+}
+
+@media (max-width: $second-restructure-point) {
+	.experience-bar > .fluid-container {
+		> .profiles {
+			display: flex;
+			justify-content: center;
+
+			width: 100%;
+
+			.profile.active {
+				margin-top: 2px !important;
+			}
+		}
+
+		> .socials {
+			display: none !important;
+		}
+	}
+}

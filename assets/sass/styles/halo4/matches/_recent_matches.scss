@@ -1,0 +1,54 @@
+#halo4-matches-recent-matches {
+	> .page-content {
+		> #sections {
+			> #header {
+				width: 100%;
+				height: 160px;
+
+				background-position: center center;
+				background-size: cover;
+				background-attachment: fixed;
+
+				> div {
+					line-height: 4;
+					font-size: 40px;
+					font-weight: 300;
+					color: white;
+
+					padding-left: 40px;
+				}
+			}
+
+			> #match-list {
+				margin: 60px 40px;
+
+				thead > tr > th {
+					font-size: 16px;
+					padding: 12px;
+				}
+
+				tbody {
+					tr {
+						> td {
+							padding: 12px;
+
+							&.result {
+								font-weight: 600;
+
+								&.dnf { color: #f0ad4e; }
+								&.lost { color: #d9534f; }
+								&.draw { color: #337ab7; }
+								&.won { color: #5cb85c; }
+							}
+						}
+					}
+				}
+			}
+
+			> #pagnination {
+				border-top: 1px solid $seperator-medium;
+				padding-top: 40px;
+			}
+		}
+	}
+}

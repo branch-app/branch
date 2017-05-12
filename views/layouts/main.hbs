@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{{title}}</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+
+	<!-- Redic Favicon Mess -->
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/public/favicons/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/favicons/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/public/favicons/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/favicons/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/public/favicons/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/public/favicons/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/public/favicons/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/public/favicons/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="/public/favicons/favicon-196x196.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="/public/favicons/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/png" href="/public/favicons/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="/public/favicons/favicon-16x16.png" sizes="16x16" />
+	<link rel="icon" type="image/png" href="/public/favicons/favicon-128.png" sizes="128x128" />
+	<meta name="application-name" content="Branch App"/>
+	<meta name="msapplication-TileColor" content="#3D3D7C" />
+	<meta name="msapplication-TileImage" content="/public/favicons/mstile-144x144.png" />
+	<meta name="msapplication-square70x70logo" content="/public/favicons/mstile-70x70.png" />
+	<meta name="msapplication-square150x150logo" content="/public/favicons/mstile-150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="/public/favicons/mstile-310x150.png" />
+	<meta name="msapplication-square310x310logo" content="/public/favicons/mstile-310x310.png" />
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				    aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Branch</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Blog</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stats <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Halo 3</a></li>
+							<li><a href="#">Halo 3: ODST</a></li>
+							<li><a href="#">Halo: Reach</a></li>
+							<li><a href="#">Halo 4</a></li>
+							<li><a href="#">Halo 5: Guardians</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Destiny</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Xbox Live</a></li>
+						</ul>
+					</li>
+					<li><a href="#">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{{{body}}}
+
+	<footer>
+		<div class="content">
+			<div class="fluid-container">
+				<div class="info">
+					<p>
+						Branch was built in
+						<a class="alt" target="_blank" href="https://golang.org/">Golang</a>, and
+						<a class="alt" target="_blank" href="https://nodejs.org/">Node JS</a>.
+					</p>
+					<p>
+						Code licensed under the
+						<a class="alt" target="_blank" href="http://www.dbad-license.org/">DBAD Public License</a>.
+					</p>
+					<p>
+						&copy; Branch App, <span class="copyright-year"></span>
+					</p>
+
+					<ul>
+						<li>
+							<a class="alt" target="_blank" href="https://github.com/branch-app">
+								Github
+							</a>
+						</li>
+						<li>
+							<a class="alt" target="_blank" href="https://hub.docker.com/branch-app">
+								Docker Hub
+							</a>
+						</li>
+						<li>
+							<a class="alt" href="/about">
+								About
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js" integrity="sha256-2nu8qdFj9AM9XRd75EAp3XRGEKiRprWL4hPMhYkj150=" crossorigin="anonymous"></script>
+	<script src="/public/javascript/index.js"></script>
+
+	{{{block "scripts"}}}
+
+	<!-- Track em' -->
+	<script>
+		!function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
+		arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
+		d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
+		insertBefore(d,q)}(window,document,'script','_gs');
+
+		_gs('GSN-152925-H');
+	</script>
+</body>
+
+</html>
