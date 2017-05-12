@@ -1,6 +1,3 @@
 /node_modules/
 /built/
-/public/css/
 /public/javascript/
-
-config.*.json
