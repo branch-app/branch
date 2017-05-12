@@ -1,4 +1,5 @@
 /node_modules/
 /built/
-/public/assets/css/
+/public/css/
+/public/javascript/
 config.*.json
