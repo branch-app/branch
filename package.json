@@ -19,6 +19,7 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.0",
     "express-promise-router": "^1.1.1",
+    "json-client": "^0.8.4",
     "json-inflector": "^1.1.0",
     "querystring": "0.2.0",
     "raven": "^1.1.2",
