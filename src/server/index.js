@@ -3,8 +3,7 @@ import express from 'express';
 import handlebars from 'express-handlebars';
 import handlers from './handlers';
 import helpers from './helpers';
-import log from 'cuvva-log';
-import path from 'path';
+import log from '@branch-app/log';
 import * as middleware from './middleware';
 
 const httpNoContent = 204;

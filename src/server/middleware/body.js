@@ -1,5 +1,5 @@
 import { hasBody } from 'type-is';
-import log from 'cuvva-log';
+import log from '@branch-app/log';
 import { Router as router } from 'express';
 import { urlencoded } from 'body-parser';
 

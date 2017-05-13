@@ -3,7 +3,7 @@
 import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
-import log from 'cuvva-log';
+import log from '@branch-app/log';
 import { readFileSync } from 'fs';
 import * as Services from '../services';
 

@@ -19,11 +19,11 @@
     "transpile": "gulp"
   },
   "dependencies": {
+    "@branch-app/log": "^0.9.1",
+    "@branch-app/log-sentry": "^0.5.2",
     "babel-polyfill": "^6.23.0",
     "body-parser": "^1.17.1",
     "bootstrap": "3.3.7",
-    "cuvva-log": "^0.9.1",
-    "cuvva-log-sentry": "^0.5.2",
     "express": "^4.15.2",
     "express-hbs": "^1.0.4",
     "express-promise-router": "^1.1.1",
