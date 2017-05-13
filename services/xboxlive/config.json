@@ -1,0 +1,9 @@
+{
+	"port": "",
+	"mongo": {
+		"host": "",
+		"database": "",
+		"username": "",
+		"password": ""
+	}
+}
