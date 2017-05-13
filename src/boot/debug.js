@@ -15,7 +15,7 @@ const run = async () => {
 		port: config.port || defaultPort,
 	};
 	const app = new App(config);
-	const server = new Server(app, { options });
+	const server = new Server(app, options);
 
 	await server.setup();
 	server.run();
