@@ -30,3 +30,4 @@ export default async function createXboxLiveAuth(account, password) {
 		throw log.warn('unable_to_authenticate_with_the_xbox_live_api', [error]);
 	}
 }
+
