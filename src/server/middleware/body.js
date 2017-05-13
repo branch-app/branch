@@ -11,7 +11,7 @@ export default router;
 router.use(json());
 router.use(urlencoded({ extended: true }));
 router.use(checkBody);
-router.use(inflector({ request: 'camelizeLower', response: 'underscore' }));
+router.use(inflector({ request: 'camelizeLower', response: 'camelizeLower' }));
 
 function checkBody(req, res, next) {
 	// has body, but wasn't parsed
