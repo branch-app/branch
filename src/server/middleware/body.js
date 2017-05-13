@@ -1,7 +1,7 @@
 import { Router as expRouter } from 'express';
 import { hasBody } from 'type-is';
 import inflector from 'json-inflector';
-import log from 'branch-log';
+import log from '@branch-app/log';
 import { json, urlencoded } from 'body-parser';
 
 const router = expRouter();

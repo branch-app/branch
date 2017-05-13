@@ -3,8 +3,8 @@
 import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
-import log from 'branch-log';
-import logSentry from 'branch-log-sentry';
+import log from '@branch-app/log';
+import logSentry from '@branch-app/log-sentry';
 import raven from 'raven';
 
 const defaultPort = 3000;

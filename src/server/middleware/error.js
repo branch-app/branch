@@ -1,5 +1,5 @@
 import errors from './error.json';
-import log from 'branch-log';
+import log from '@branch-app/log';
 
 const defaultHttpStatus = 500;
 

@@ -13,10 +13,10 @@
     "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
+    "@branch-app/log": "^0.9.1",
+    "@branch-app/log-sentry": "^0.5.2",
     "babel-polyfill": "^6.16.0",
     "body-parser": "^1.16.1",
-    "branch-log": "^0.9.1",
-    "branch-log-sentry": "^0.5.2",
     "express": "^4.14.0",
     "express-promise-router": "^1.1.1",
     "json-inflector": "^1.1.0",

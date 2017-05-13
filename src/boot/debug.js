@@ -3,24 +3,19 @@
 import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
-import log from 'branch-log';
-import fs from 'fs';
+import log from '@branch-app/log';
+import { readFileSync } from 'fs';
 
 // Import config
-let config = {};
-if (fs.existsSync("./config.json")) {
-	var data = fs.readFileSync("./config.json");
-	config = JSON.parse(data);
-} else {
-	config = JSON.parse(process.env.CONFIG);
-}
-
 const defaultPort = 3000;
-const port = config.port || defaultPort;
+const config = JSON.parse(readFileSync('./config.development.json'));
 
 const run = async () => {
+	const options = {
+		port: config.port || defaultPort,
+	};
 	const app = new App(config);
-	const server = new Server(app, { port });
+	const server = new Server(app, { options });
 
 	await server.setup();
 	server.run();

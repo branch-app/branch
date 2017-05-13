@@ -1,6 +1,6 @@
 import App from '../app';
 import express from 'express';
-import log from 'branch-log';
+import log from '@branch-app/log';
 import Handlers from './handlers';
 import * as Middleware from './middleware';
 
