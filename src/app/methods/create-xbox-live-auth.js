@@ -1,6 +1,7 @@
 import Browser from 'zombie';
 import querystring from 'querystring';
 import log from '@branch-app/log';
+import jsonClient from 'json-client';
 
 const TokenName = 'access_token';
 
@@ -24,8 +25,32 @@ export default async function createXboxLiveAuth(account, password) {
 			throw log.error('unable_to_retrieve_tokens', [], { url });
 		}
 
-		const data = url.substring(index);
-		return querystring.parse(data);
+		const data = querystring.parse(url.substring(index));
+		const usrAuthClient = jsonClient('https://user.auth.xboxlive.com');
+		const xstsClient = jsonClient('https://xsts.auth.xboxlive.com');
+		const usrAuth = await usrAuthClient('post', 'user/authenticate', null, {
+			Properties: {
+				AuthMethod: 'RPS',
+				RpsTicket: `t=${data.access_token}`,
+				SiteName: 'user.auth.xboxlive.com',
+			},
+			RelyingParty: 'http://auth.xboxlive.com',
+			TokenType: 'JWT',
+		});
+		const xstsAuth = await xstsClient('post', 'xsts/authorize', null, {
+			Properties: {
+				SandboxId: 'RETAIL',
+				UserTokens: [usrAuth.Token],
+			},
+			RelyingParty: 'http://xboxlive.com',
+			TokenType: 'JWT',
+		});
+
+		return {
+			token: xstsAuth.Token,
+			expiresAt: xstsAuth.NotAfter,
+			...xstsAuth.DisplayClaims.xui[0],
+		};
 	} catch (error) {
 		throw log.warn('unable_to_authenticate', [error]);
 	}
