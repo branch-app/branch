@@ -1,6 +1,7 @@
 import Browser from 'zombie';
 import querystring from 'querystring';
 import log from '@branch-app/log';
+import moment from 'moment';
 
 const TokenName = 'SpartanToken';
 
@@ -29,7 +30,11 @@ export default async function createHalo4Auth(account, password) {
 			throw log.error('unable_to_retrieve_halo_4_tokens');
 		}
 
-		return JSON.parse(body);
+		const data = JSON.parse(body);
+
+		data.expiresAt = moment.utc().add(55, 'm').format();
+
+		return data;
 	} catch (error) {
 		throw log.warn('unable_to_authenticate', [error]);
 	}

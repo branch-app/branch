@@ -16,8 +16,8 @@ export default class Handlers {
 
 	setup() {
 		// prefix /v1
-		this.router.get('/halo-4', this._wrap(this._handler, halo4.index, this));
-		this.router.get('/xbox-live', this._wrap(this._handler, xboxLive.index, this));
+		this.router.post('/get_halo4_token', this._wrap(this._handler, halo4.index, this));
+		this.router.post('/get_xboxlive_token', this._wrap(this._handler, xboxLive.index, this));
 	}
 
 	async _handler(req, res, method) {

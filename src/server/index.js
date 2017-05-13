@@ -35,7 +35,7 @@ export default class Server {
 		e.use(Middleware.types);
 		e.use(Middleware.body);
 		e.get('/system/health', wrap(this._healthCheck, this));
-		e.use('/v1/', this.handlers.router);
+		e.use('/1/:version/', this.handlers.router);
 		e.use(Middleware.notFound);
 		e.use(Middleware.error);
 	}
