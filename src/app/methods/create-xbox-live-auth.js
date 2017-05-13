@@ -21,13 +21,13 @@ export default async function createXboxLiveAuth(account, password) {
 		const url = browser.url;
 		const index = url.indexOf(TokenName);
 		if (index < 0) {
-			throw log.error('unable_to_retrieve_xbox_live_tokens')
+			throw log.error('unable_to_retrieve_tokens', [], { url });
 		}
 
 		const data = url.substring(index);
 		return querystring.parse(data);
 	} catch (error) {
-		throw log.warn('unable_to_authenticate_with_the_xbox_live_api', [error]);
+		throw log.warn('unable_to_authenticate', [error]);
 	}
 }
 

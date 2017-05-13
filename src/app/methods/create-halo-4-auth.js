@@ -31,6 +31,6 @@ export default async function createHalo4Auth(account, password) {
 
 		return JSON.parse(body);
 	} catch (error) {
-		throw log.warn('unable_to_authenticate_with_the_halo_4_api', [error]);
+		throw log.warn('unable_to_authenticate', [error]);
 	}
 }
