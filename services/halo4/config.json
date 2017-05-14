@@ -1,11 +1,8 @@
 {
 	"addr": "",
-	"mongo": {
-		"host": "",
-		"database": "",
-		"username": "",
-		"password": ""
-	},
+	"mongo": "",
 	"authUrl": "",
-	"authKey": ""
+	"xboxliveUrl": "",
+	"authKey": "",
+	"xboxliveKey": ""
 }
