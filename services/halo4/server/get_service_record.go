@@ -3,10 +3,10 @@ package server
 import (
 	"net/http"
 
+	"github.com/branch-app/branch-mono-go/domain/xboxlive"
 	"github.com/branch-app/branch-mono-go/libraries/log"
 	"github.com/branch-app/branch-mono-go/libraries/routing"
 	"github.com/branch-app/branch-mono-go/services/halo4/app"
-	"github.com/branch-app/branch-mono-go/services/halo4/models/request"
 )
 
 func init() {
@@ -17,15 +17,15 @@ func init() {
 
 func GetServiceRecord(c *routing.Context, v int64) *log.E {
 	app := c.App.(app.App)
-	var identityLookup request.Identity
+	var identityLookup xboxlive.IdentityLookup
 	if err := routing.ParseInput(c, &identityLookup, "get-service-record"); err != nil {
 		return err
 	}
 
-	identity, err := app.GetServiceRecord(identityLookup.Value)
+	serviceRecord, err := app.GetServiceRecord(identityLookup)
 	if err != nil {
 		return err
 	}
 
-	return routing.ParseOutput(c, http.StatusOK, &identity)
+	return routing.ParseOutput(c, http.StatusOK, &serviceRecord)
 }

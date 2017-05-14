@@ -5,6 +5,9 @@ type Config struct {
 	Addr  string `json:"addr"`
 	Mongo string `json:"mongo"`
 
-	AuthURL string `json:"authUrl"`
-	AuthKey string `json:"authKey"`
+	AuthURL     string `json:"authUrl"`
+	XboxLiveURL string `json:"xboxliveUrl"`
+
+	AuthKey     string `json:"authKey"`
+	XboxLiveKey string `json:"xboxliveKey"`
 }

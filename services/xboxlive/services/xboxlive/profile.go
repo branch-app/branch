@@ -43,8 +43,13 @@ func (client *Client) GetIdentity(value, valType string) (*xboxlive.Identity, *l
 
 	// Setup Identity
 	settings := profileUsers.Users[0].Settings
-	gamertag := settings[0].Value
 	xuid := profileUsers.Users[0].XUID
+	var gamertag string
+	for _, s := range settings {
+		if s.ID == "Gamertag" {
+			gamertag = s.Value
+		}
+	}
 
 	// Set cache data inside profileUsers, if required
 	if !cached {

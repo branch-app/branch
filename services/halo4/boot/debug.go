@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/branch-app/branch-mono-go/clients/auth"
+	"github.com/branch-app/branch-mono-go/clients/xboxlive"
 	"github.com/branch-app/branch-mono-go/libraries/configloader"
 	"github.com/branch-app/branch-mono-go/services/halo4/app"
 	"github.com/branch-app/branch-mono-go/services/halo4/models"
@@ -27,10 +28,11 @@ func RunDebug() {
 		addr = "localhost:3000"
 	}
 
-	auth := auth.NewClient(config.AuthURL, config.AuthURL)
-	waypointService := waypoint.NewClient(auth, config.Mongo, "branch_service-halo4")
+	authClient := auth.NewClient(config.AuthURL, config.AuthURL)
+	xboxliveClient := xboxlive.NewClient(config.XboxLiveURL, config.XboxLiveKey)
+	waypointService := waypoint.NewClient(authClient, config.Mongo, "branch_service-halo4")
 
-	app := app.NewApp(auth, waypointService)
+	app := app.NewApp(authClient, xboxliveClient, waypointService)
 	server := server.NewServer(app)
 	server.Run(addr)
 }

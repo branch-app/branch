@@ -6,7 +6,11 @@ import (
 	"github.com/branch-app/branch-mono-go/services/halo4/models/response"
 )
 
-func (a *app) GetServiceRecord(gamertag string) (*response.ServiceRecord, *log.E) {
-	x := xboxlive.Identity{Gamertag: gamertag}
-	return a.waypointService.GetServiceRecord(x)
+func (a *app) GetServiceRecord(identityLookup xboxlive.IdentityLookup) (*response.ServiceRecord, *log.E) {
+	identity, err := a.xboxliveClient.GetIdentity(identityLookup)
+	if err != nil {
+		return nil, err
+	}
+
+	return a.waypointService.GetServiceRecord(*identity)
 }

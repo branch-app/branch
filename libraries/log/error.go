@@ -71,7 +71,7 @@ func Coerce(v interface{}) E {
 		// Check if interface is a go error
 		if _, ok := reflect.Zero(rt).Interface().(error); ok {
 			e, _ := rv.Interface().(error)
-			return E{Code: helpers.StrToSnakeTrimmed(e.Error(), 20)}
+			return E{Code: helpers.StrToSnakeTrimmed(e.Error(), 35)}
 		}
 
 		// Check if interface is a string
@@ -86,7 +86,7 @@ func Coerce(v interface{}) E {
 				cErr := E{}
 
 				if code, ok := d["code"].(string); ok {
-					cErr.Code = helpers.StrToSnakeTrimmed(code, 20)
+					cErr.Code = helpers.StrToSnakeTrimmed(code, 35)
 				} else {
 					cErr.Code = "unknown"
 				}
