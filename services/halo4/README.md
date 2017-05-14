@@ -4,7 +4,7 @@ service-halo4
 This service handles dealing with Halo4's Waypoint API.
 
 
-#### Configuration
+### Configuration
 
 To configure this service, you can either populate the config.{boot}.json file (ie;
 config.debug.json) in the working directory of the service. Or you can set an environment
@@ -34,6 +34,6 @@ defining the options of the configuration, as well as an example json blob.
 
 
 
-#### API Documentation
+### API Documentation
 
 soon. just gotta finish the service first fam
