@@ -7,6 +7,8 @@ This monorepo contains all of Branch App's Golang code.
 
 - [Auth](/clients/auth) - This client contains functions for interacting with the auth
 service.
+- [XboxLive](/clients/xboxlive) - This client contains functions for interacting with the
+xbox live service. Mainly for identity management.
 
 #### Services
 Please visit each service's own README to view api specifics.
