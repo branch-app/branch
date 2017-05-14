@@ -21,25 +21,25 @@ const (
 )
 
 func Debug(code string, meta M, reasons ...interface{}) *E {
-	err := newCuvvaError(code, meta, reasons)
+	err := newBranchError(code, meta, reasons)
 	go handleError(LevelDebug, *err)
 	return err
 }
 
 func Info(code string, meta M, reasons ...interface{}) *E {
-	err := newCuvvaError(code, meta, reasons)
+	err := newBranchError(code, meta, reasons)
 	go handleError(LevelInfo, *err)
 	return err
 }
 
 func Warn(code string, meta M, reasons ...interface{}) *E {
-	err := newCuvvaError(code, meta, reasons)
+	err := newBranchError(code, meta, reasons)
 	go handleError(LevelWarn, *err)
 	return err
 }
 
 func Error(code string, meta M, reasons ...interface{}) *E {
-	err := newCuvvaError(code, meta, reasons)
+	err := newBranchError(code, meta, reasons)
 	go handleError(LevelError, *err)
 	return err
 }

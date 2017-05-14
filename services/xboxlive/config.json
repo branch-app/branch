@@ -1,9 +1,11 @@
 {
-	"port": "",
+	"addr": "",
 	"mongo": {
 		"host": "",
 		"database": "",
 		"username": "",
 		"password": ""
-	}
+	},
+	"authUrl": "",
+	"authKey": ""
 }

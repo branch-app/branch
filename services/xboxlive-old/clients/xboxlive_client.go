@@ -15,7 +15,6 @@ import (
 	"github.com/branch-app/service-xboxlive/models"
 	"github.com/branch-app/service-xboxlive/models/xboxlive"
 	sharedClients "github.com/branch-app/shared-go/clients"
-	sharedModels "github.com/branch-app/shared-go/models"
 	"github.com/branch-app/shared-go/types"
 	"gopkg.in/robfig/cron.v2"
 )
@@ -51,57 +50,6 @@ func (client *XboxLiveClient) GetAuthentication() (*models.XboxLiveAuthenticatio
 		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
 	}
 	return auth, nil
-}
-
-func (client *XboxLiveClient) UpdateAuthentication() (*models.XboxLiveAuthentication, error) {
-	var accountResp models.XboxLiveAuthResponse
-	_, err := client.serviceClient.Get("service-auth", "/xbox-live", &accountResp)
-	if err != nil {
-		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
-	}
-
-	xblAuthenticationRequest := &models.XboxLiveAuthenticationRequest{
-		Properties: &models.XboxLiveAuthenticationPropertiesRequest{
-			AuthMethod: "RPS",
-			RpsTicket:  fmt.Sprintf("t=%s", accountResp.AccessToken),
-			SiteName:   "user.auth.xboxlive.com",
-		},
-		RelyingParty: "http://auth.xboxlive.com",
-		TokenType:    "JWT",
-	}
-	var xblAuthenticationResponse models.XboxLiveAuthenticationResponse
-	_, err = client.ExecuteRequest("POST", "https://user.auth.xboxlive.com/user/authenticate", nil, 0, xblAuthenticationRequest, &xblAuthenticationResponse)
-	if err != nil {
-		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
-	}
-
-	xblAuthorizationRequest := &models.XboxLiveAuthorizationRequest{
-		Properties: &models.XboxLiveAuthorizationPropertiesRequest{
-			SandboxID:  "RETAIL",
-			UserTokens: []string{xblAuthenticationResponse.Token},
-		},
-		RelyingParty: "http://xboxlive.com",
-		TokenType:    "JWT",
-	}
-	var xblAuthorizationResponse models.XboxLiveAuthorizationResponse
-	_, err = client.ExecuteRequest("POST", "https://xsts.auth.xboxlive.com/xsts/authorize", nil, 0, xblAuthorizationRequest, &xblAuthorizationResponse)
-	if err != nil {
-		return nil, log.Error(ErrorUnableToAuthenticateWithXbl, &log.M{"error": err}, nil).ToError()
-	}
-
-	gamertag := xblAuthorizationResponse.DisplayClaims["xui"][0]["gtg"]
-	userHash := xblAuthorizationResponse.DisplayClaims["xui"][0]["uhs"]
-	xuid := xblAuthorizationResponse.DisplayClaims["xui"][0]["xid"]
-	authentication := &models.XboxLiveAuthentication{
-		ExpiresAt: time.Now().UTC().Add(55 * time.Minute),
-		Identity:  sharedModels.NewXboxLiveIdentity(gamertag, xuid, time.Now().UTC()),
-		Token:     xblAuthorizationResponse.Token,
-		UserHash:  userHash,
-	}
-
-	client.authentication = authentication
-	fmt.Println(client.authentication)
-	return client.authentication, nil
 }
 
 func (client *XboxLiveClient) ExecuteRequest(method, endpoint string, auth *models.XboxLiveAuthentication, contractVersion int, body, respBody interface{}) (*http.Response, error) {

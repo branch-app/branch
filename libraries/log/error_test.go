@@ -18,7 +18,7 @@ func TestCoercedReasons(t *testing.T) {
 	reasons[0] = E{Code: "reason_error"}
 	reasons[1] = "testing"
 
-	err := newCuvvaError("testing", nil, reasons)
+	err := newBranchError("testing", nil, reasons)
 	assert.Equal(t, "testing", err.Code)
 	assert.Equal(t, 2, len(err.Reasons))
 	assert.Equal(t, "reason_error", err.Reasons[0].Code)
@@ -26,7 +26,7 @@ func TestCoercedReasons(t *testing.T) {
 	assert.Equal(t, "testing", err.Reasons[1].Meta["data"])
 }
 
-func TestCoerceCuvvaError(t *testing.T) {
+func TestCoerceBranchError(t *testing.T) {
 	validErr := Coerce(E{
 		Code: "test_error",
 		Meta: M{"meta": true},

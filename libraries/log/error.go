@@ -9,7 +9,7 @@ import (
 	"github.com/imdario/mergo"
 )
 
-// E implements the official Cuvva Error structure
+// E implements the official Branch Error structure
 type E struct {
 	Code    string `json:"code"`
 	Meta    M      `json:"meta,omitempty"`
@@ -19,12 +19,12 @@ type E struct {
 // M is an alias type for map[string]interface{}
 type M map[string]interface{}
 
-// Error returns the code of the Cuvva Error.
+// Error returns the code of the Branch Error.
 func (e E) Error() string {
 	return e.Code
 }
 
-func newCuvvaError(code string, meta M, reasons []interface{}) *E {
+func newBranchError(code string, meta M, reasons []interface{}) *E {
 	err := &E{
 		Code:    code,
 		Meta:    meta,
@@ -38,7 +38,7 @@ func newCuvvaError(code string, meta M, reasons []interface{}) *E {
 	return err
 }
 
-// Coerce attempts to coerce a Cuvva Error out of any object.
+// Coerce attempts to coerce a Branch Error out of any object.
 // - `E` types are just returned as-is
 // - strings are json unmarshalled into a map[string]interface{} and recursive
 // - bytes are parsed into a string and recursive
@@ -69,8 +69,9 @@ func Coerce(v interface{}) E {
 		}
 
 		// Check if interface is a go error
-		if err, ok := reflect.Zero(rt).Interface().(error); ok {
-			return E{Code: helpers.StrToSnakeTrimmed(err.Error(), 20)}
+		if _, ok := reflect.Zero(rt).Interface().(error); ok {
+			e, _ := rv.Interface().(error)
+			return E{Code: helpers.StrToSnakeTrimmed(e.Error(), 20)}
 		}
 
 		// Check if interface is a string
@@ -108,17 +109,32 @@ func Coerce(v interface{}) E {
 				return cErr
 			}
 
-			// The body isn't a valid json object
+			// The body isn't a valid json object - take the first 150 bytes and log
+			if len(bytes) > 150 {
+				bytes = bytes[0:150]
+			}
 			return E{
 				Code: "unknown",
 				Meta: M{"data": string(bytes)},
 			}
 		}
+
+		// this should never happen
+		return E{
+			Code: "unable_to_coerce_error",
+			Meta: M{
+				"type":  rt,
+				"value": rv,
+			},
+		}
 	}
 
-	// TODO: Catch all - if this happens, we can add a rule for that type
+	// this should never happen
 	return E{
-		Code: "unable_to_coerce_error",
+		Code: "error_was_nil",
+		Meta: M{
+			"info": "🤔",
+		},
 	}
 }
 
