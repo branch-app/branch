@@ -10,22 +10,22 @@ import (
 )
 
 func init() {
-	routing.RegisterMethod("get_metadata", GetMetadata, "", []string{
+	routing.RegisterMethod("get_match_details", GetMatchDetails, "", []string{
 		"2017-05-21",
 	})
 }
 
-func GetMetadata(c *routing.Context, v int64) *log.E {
+func GetMatchDetails(c *routing.Context, v int64) *log.E {
 	app := c.App.(app.App)
-	var request request.GetMetadata
-	if err := routing.ParseInput(c, &request, "get-metadata"); err != nil {
+	var matchID request.GetMatchDetails
+	if err := routing.ParseInput(c, &matchID, "get-match-details"); err != nil {
 		return err
 	}
 
-	metadata, err := app.GetMetadata(request)
+	matchDetails, err := app.GetMatchDetails(matchID)
 	if err != nil {
 		return err
 	}
 
-	return routing.ParseOutput(c, http.StatusOK, &metadata)
+	return routing.ParseOutput(c, http.StatusOK, &matchDetails)
 }

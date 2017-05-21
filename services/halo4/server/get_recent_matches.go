@@ -17,7 +17,7 @@ func init() {
 
 func GetRecentMatches(c *routing.Context, v int64) *log.E {
 	app := c.App.(app.App)
-	var request request.RecentMatches
+	var request request.GetRecentMatches
 	if err := routing.ParseInput(c, &request, "get-recent-matches"); err != nil {
 		return err
 	}

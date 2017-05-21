@@ -1,0 +1,15 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+
+	"required": [
+		"matchId"
+	],
+
+	"properties": {
+		"matchId": {
+			"type": "string",
+			"minLength": 1
+		}
+	}
+}

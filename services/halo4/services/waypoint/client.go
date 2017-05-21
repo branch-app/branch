@@ -94,7 +94,6 @@ func (client *Client) constructURL(jsonClient *jsonclient.Client, endpoint strin
 
 	resolved := base.ResolveReference(endpnt)
 	resolvedStr := resolved.String()
-	fmt.Println(resolvedStr)
 	return resolvedStr, crypto.CreateSHA512Hash(resolvedStr)
 }
 

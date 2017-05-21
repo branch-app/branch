@@ -5,7 +5,7 @@ import (
 	"github.com/branch-app/branch-mono-go/services/halo4/models/response"
 )
 
-type RecentMatches struct {
+type GetRecentMatches struct {
 	Identity xboxlive.IdentityLookup `json:"identity" bson:"identity"`
 
 	GameModeID response.GameMode `json:"gameModeId" bson:"gameModeId"`
