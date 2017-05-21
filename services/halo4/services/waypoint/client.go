@@ -7,9 +7,11 @@ import (
 
 	authClient "github.com/branch-app/branch-mono-go/clients/auth"
 	"github.com/branch-app/branch-mono-go/domain/auth"
+	"github.com/branch-app/branch-mono-go/domain/branch"
 	"github.com/branch-app/branch-mono-go/libraries/jsonclient"
 	"github.com/branch-app/branch-mono-go/libraries/log"
 	"github.com/branch-app/branch-mono-go/libraries/mongo"
+	"github.com/branch-app/branch-mono-go/services/halo4/models/response"
 	"github.com/branch-app/shared-go/crypto"
 )
 
@@ -23,6 +25,17 @@ type Client struct {
 	authentication auth.Halo4Token
 	// cron           *cron.Cron
 }
+
+const (
+	optionsCollection  = "options"
+	metadataCollection = "metadata"
+	optionsURL         = "RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752"
+)
+
+const (
+// metadataURL         = "https://stats.svc.halowaypoint.com/en-US/h4/metadata"
+// metadataURLWithType = "https://stats.svc.halowaypoint.com/en-US/h4/metadata?type=%s"
+)
 
 func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collection string, query jsonclient.M, body, response interface{}) (bool, *log.E) {
 	// Construct URL and hash
@@ -80,6 +93,28 @@ func (client *Client) constructURL(jsonClient *jsonclient.Client, endpoint strin
 	resolved := base.ResolveReference(endpnt)
 	resolvedStr := resolved.String()
 	return resolvedStr, crypto.CreateSHA512Hash(resolvedStr)
+}
+
+func (client *Client) GetOptions() (*response.Options, *log.E) {
+	// Get from xbox live
+	jsonClient := client.settingsClient
+	url, hash := client.constructURL(jsonClient, optionsURL)
+	var options *response.Options
+	cached, err := client.Do(jsonClient, "GET", optionsURL, metadataCollection, nil, nil, &options)
+	if err != nil {
+		return nil, err
+	}
+
+	// Set cache data inside profileUsers, if required
+	if !cached {
+		options.CacheInformation = branch.NewCacheInformation(url, time.Now().UTC(), 5*time.Minute)
+	}
+
+	// Create identity, then upsert into cache in background
+	go client.mongoDb.UpsertByCacheInfoHash(hash, options, metadataCollection)
+
+	// Return identity
+	return options, nil
 }
 
 // NewClient creates a new Halo 4 Client and initiates authentication.

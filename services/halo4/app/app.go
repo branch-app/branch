@@ -14,6 +14,7 @@ import (
 type App interface {
 	GetServiceRecord(request xblDomain.IdentityLookup) (*response.ServiceRecord, *log.E)
 	GetRecentMatches(request request.RecentMatches) (*response.RecentMatches, *log.E)
+	GetOptions() (*response.Options, *log.E)
 }
 
 type app struct {
