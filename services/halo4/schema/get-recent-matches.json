@@ -1,0 +1,46 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+
+	"required": [
+		"identity",
+		"gameModeId",
+		"startAt",
+		"count"
+	],
+
+	"properties": {
+		"identity": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"type": "string",
+					"minLength": 1
+				},
+
+				"type": {
+					"type": "string",
+					"enum": ["gamertag", "xuid"],
+					"minLength": 1
+				}
+			}
+		},
+
+		"gameModeId": {
+			"type": "integer",
+			"enum": [3, 4, 5, 6],
+			"minLength": 1
+		},
+
+		"startAt": {
+			"type": "integer",
+			"minimum": 0
+		},
+
+		"count": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 50
+		}
+	}
+}

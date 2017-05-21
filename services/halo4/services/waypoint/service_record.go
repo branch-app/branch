@@ -13,16 +13,17 @@ import (
 
 const (
 	profileCollection = "profile_users"
-	serviceRecordURL  = "en-US/players/%s/h4/servicerecord"
+	serviceRecordURL  = "players/%s/h4/servicerecord"
 )
 
 // GetServiceRecord gets the service record of a specified player.
 func (client *Client) GetServiceRecord(identity xboxlive.Identity) (*response.ServiceRecord, *log.E) {
 	// Get from xbox live
+	jsonClient := client.statsClient
 	endpoint := fmt.Sprintf(serviceRecordURL, identity.Gamertag)
-	url, hash := client.constructURL(endpoint)
+	url, hash := client.constructURL(jsonClient, endpoint)
 	var serviceRecord *response.ServiceRecord
-	cached, err := client.Do("GET", endpoint, profileCollection, nil, nil, &serviceRecord, 2)
+	cached, err := client.Do(jsonClient, "GET", endpoint, profileCollection, nil, nil, &serviceRecord)
 	if err != nil {
 		return nil, err
 	}

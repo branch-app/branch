@@ -14,8 +14,9 @@ import (
 )
 
 type Client struct {
-	jsonClient *jsonclient.Client
-	authClient *authClient.Client
+	statsClient    *jsonclient.Client
+	settingsClient *jsonclient.Client
+	authClient     *authClient.Client
 
 	mongoDb *mongo.Client
 
@@ -23,9 +24,9 @@ type Client struct {
 	// cron           *cron.Cron
 }
 
-func (client *Client) Do(method, endpoint, collection string, query jsonclient.M, body, response interface{}, contractVer int) (bool, *log.E) {
+func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collection string, query jsonclient.M, body, response interface{}) (bool, *log.E) {
 	// Construct URL and hash
-	_, hash := client.constructURL(endpoint)
+	_, hash := client.constructURL(jsonClient, endpoint)
 
 	// Check for cache copy
 	cacheResp, err := client.mongoDb.GetDocumentCacheInformation(collection, hash)
@@ -44,7 +45,7 @@ func (client *Client) Do(method, endpoint, collection string, query jsonclient.M
 	if err != nil {
 		return false, err
 	}
-	err = client.jsonClient.Do(method, endpoint, body, &response, &jsonclient.DoOptions{
+	err = jsonClient.Do(method, endpoint, body, &response, &jsonclient.DoOptions{
 		Headers: jsonclient.M{
 			"X-343-Authorization-Spartan": waypointToken.SpartanToken,
 		},
@@ -69,8 +70,8 @@ func (client *Client) getHalo4Token() (auth.Halo4Token, *log.E) {
 	return client.authClient.GetHalo4Token()
 }
 
-func (client *Client) constructURL(endpoint string) (string, string) {
-	base, err := url.Parse(client.jsonClient.BaseURL())
+func (client *Client) constructURL(jsonClient *jsonclient.Client, endpoint string) (string, string) {
+	base, err := url.Parse(jsonClient.BaseURL())
 	endpnt, err := url.Parse(endpoint)
 	if err != nil {
 		panic(err)
@@ -84,8 +85,9 @@ func (client *Client) constructURL(endpoint string) (string, string) {
 // NewClient creates a new Halo 4 Client and initiates authentication.
 func NewClient(authClient *authClient.Client, mongoConnectionStr, mongoDbName string) *Client {
 	client := &Client{
-		jsonClient: jsonclient.NewClient("https://stats.svc.halowaypoint.com/", nil),
-		authClient: authClient,
+		statsClient:    jsonclient.NewClient("https://stats.svc.halowaypoint.com/en-US/", nil),
+		settingsClient: jsonclient.NewClient("https://settings.svc.halowaypoint.com/", nil),
+		authClient:     authClient,
 
 		mongoDb: mongo.NewClient(mongoConnectionStr, mongoDbName, true),
 	}
