@@ -5,6 +5,10 @@ import (
 
 	"time"
 
+	"fmt"
+
+	"strings"
+
 	authClient "github.com/branch-app/branch-mono-go/clients/auth"
 	"github.com/branch-app/branch-mono-go/domain/auth"
 	"github.com/branch-app/branch-mono-go/domain/branch"
@@ -30,12 +34,10 @@ const (
 	optionsCollection  = "options"
 	metadataCollection = "metadata"
 	optionsURL         = "RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752"
+	metadataURL        = "h4/metadata?type=%s"
 )
 
-const (
-// metadataURL         = "https://stats.svc.halowaypoint.com/en-US/h4/metadata"
-// metadataURLWithType = "https://stats.svc.halowaypoint.com/en-US/h4/metadata?type=%s"
-)
+const ()
 
 func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collection string, query jsonclient.M, body, response interface{}) (bool, *log.E) {
 	// Construct URL and hash
@@ -92,6 +94,7 @@ func (client *Client) constructURL(jsonClient *jsonclient.Client, endpoint strin
 
 	resolved := base.ResolveReference(endpnt)
 	resolvedStr := resolved.String()
+	fmt.Println(resolvedStr)
 	return resolvedStr, crypto.CreateSHA512Hash(resolvedStr)
 }
 
@@ -107,7 +110,7 @@ func (client *Client) GetOptions() (*response.Options, *log.E) {
 
 	// Set cache data inside profileUsers, if required
 	if !cached {
-		options.CacheInformation = branch.NewCacheInformation(url, time.Now().UTC(), 5*time.Minute)
+		options.CacheInformation = branch.NewCacheInformation(url, time.Now().UTC(), (24*time.Hour)*5)
 	}
 
 	// Create identity, then upsert into cache in background
@@ -115,6 +118,29 @@ func (client *Client) GetOptions() (*response.Options, *log.E) {
 
 	// Return identity
 	return options, nil
+}
+
+func (client *Client) GetMetadata(types []string) (*response.Metadata, *log.E) {
+	// Get from xbox live
+	jsonClient := client.statsClient
+	endpoint := fmt.Sprintf(metadataURL, strings.Join(types, ","))
+	url, hash := client.constructURL(jsonClient, endpoint)
+	var metadata *response.Metadata
+	cached, err := client.Do(jsonClient, "GET", endpoint, metadataCollection, nil, nil, &metadata)
+	if err != nil {
+		return nil, err
+	}
+
+	// Set cache data inside profileUsers, if required
+	if !cached {
+		metadata.CacheInformation = branch.NewCacheInformation(url, time.Now().UTC(), (24*time.Hour)*5)
+	}
+
+	// Create identity, then upsert into cache in background
+	go client.mongoDb.UpsertByCacheInfoHash(hash, metadata, metadataCollection)
+
+	// Return identity
+	return metadata, nil
 }
 
 // NewClient creates a new Halo 4 Client and initiates authentication.

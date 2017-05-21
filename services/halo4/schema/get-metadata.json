@@ -1,0 +1,43 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+
+	"required": [
+		"types"
+	],
+
+	"properties": {
+		"types": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"achievements",
+					"armor",
+					"challenges",
+					"commendations",
+					"damage-types",
+					"difficulty",
+					"enemies",
+					"emblems",
+					"factions",
+					"game-modes",
+					"game-base-variants",
+					"maps",
+					"medals",
+					"narrative-flags",
+					"player-upgrades",
+					"playlists",
+					"poses",
+					"promotion-types",
+					"ranks",
+					"rank-awards",
+					"skulls",
+					"spartanops",
+					"specializations"
+				]
+			},
+			"minLength": 0
+		}
+	}
+}

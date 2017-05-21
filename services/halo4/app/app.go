@@ -14,6 +14,7 @@ import (
 type App interface {
 	GetServiceRecord(request xblDomain.IdentityLookup) (*response.ServiceRecord, *log.E)
 	GetRecentMatches(request request.RecentMatches) (*response.RecentMatches, *log.E)
+	GetMetadata(request request.GetMetadata) (*response.Metadata, *log.E)
 	GetOptions() (*response.Options, *log.E)
 }
 
