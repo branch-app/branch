@@ -22,7 +22,7 @@ defining the options of the configuration, as well as an example json blob.
 
 ```
 {
-	"addr": "localhost:3000",
+	"addr": "http://service-halo4.dev.branchapp.local:3010",
 	"mongo": "mongodb://localhost:27017/",
 	"authUrl": "http://service-auth.dev.branchapp.local:3000",
 	"xboxliveUrl": "http://service-xboxlive.dev.branchapp.local:3020",
