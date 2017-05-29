@@ -10,6 +10,9 @@ export default class XboxLiveClient {
 	}
 
 	async getIdentity(ident: string, type: string) {
-		return await this._client('get', `/v1/identity/${type}(${ident})`);
+		return await this._client('post', '/1/2017-05-21/get_identity', null, {
+			type,
+			value: ident,
+		});
 	}
 }

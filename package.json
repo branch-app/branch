@@ -27,9 +27,12 @@
     "express": "^4.15.2",
     "express-hbs": "^1.0.4",
     "express-promise-router": "^1.1.1",
+    "humanize-duration": "^3.10.0",
     "jquery": "3.1.1",
     "json-client": "^0.8.4",
     "moment-timezone": "^0.5.13",
+    "number_helpers": "^0.1.1",
+    "pluralize": "^5.0.0",
     "query-string": "^4.3.4",
     "raven": "^2.0.0"
   },
@@ -64,7 +67,7 @@
   },
   "browser": {
     "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
-	"typedjs": "./bower_components/typed.js/dist/typed.min.js"
+    "typedjs": "./bower_components/typed.js/dist/typed.min.js"
   },
   "browserify-shim": {
     "bootstrap": {
@@ -72,7 +75,7 @@
         "jquery:jQuery"
       ]
     },
-	"typedjs": {
+    "typedjs": {
       "depends": [
         "jquery:jQuery"
       ]

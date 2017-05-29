@@ -64,10 +64,10 @@ $second-restructure-point: 1195px;
 					max-width: 267px;
 				}
 
-				&.xbox-live { background-image: image-url('profiles/xbox-live.png'); }
-				&.halo { background-image: image-url('profiles/halo.png'); }
-				&.destiny { background-image: image-url('profiles/destiny.png'); }
-				&.titanfall { background-image: image-url('profiles/titanfall.png'); }
+				&.xbox-live { background-image: url('/public/images/profiles/xbox-live.png'); }
+				&.halo { background-image: url('/public/images/profiles/halo.png'); }
+				&.destiny { background-image: url('/public/images/profiles/destiny.png'); }
+				&.titanfall { background-image: url('/public/images/profiles/titanfall.png'); }
 				&:hover { color: $brand-tertiary; }
 				&.active {
 					color: $text-light-grey;
@@ -108,14 +108,14 @@ $second-restructure-point: 1195px;
 								}
 							}
 
-							&.halo-3 { background-image: image-url('profiles/halo-3.png'); }
-							&.halo-3-odst { background-image: image-url('profiles/halo-3-odst.png'); }
-							&.halo-reach { background-image: image-url('profiles/halo-reach.png'); }
-							&.halo-4 { background-image: image-url('profiles/halo-4.png'); }
-							&.halo-5 { background-image: image-url('profiles/halo-5.png'); }
-							
-							&.titanfall { background-image: image-url('profiles/titanfall.png'); }
-							&.titanfall-2 { background-image: image-url('profiles/titanfall.png'); }
+							&.halo-3 { background-image: url('/public/images/profiles/halo-3.png'); }
+							&.halo-3-odst { background-image: url('/public/images/profiles/halo-3-odst.png'); }
+							&.halo-reach { background-image: url('/public/images/profiles/halo-reach.png'); }
+							&.halo-4 { background-image: url('/public/images/profiles/halo-4.png'); }
+							&.halo-5 { background-image: url('/public/images/profiles/halo-5.png'); }
+
+							&.titanfall { background-image: url('/public/images/profiles/titanfall.png'); }
+							&.titanfall-2 { background-image: url('/public/images/profiles/titanfall.png'); }
 						}
 					}
 				}
