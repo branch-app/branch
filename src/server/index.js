@@ -1,7 +1,7 @@
 import Express from 'express';
 import camelcase from 'camelcase';
+import camelcaseKeys from 'camelcase-keys';
 import log from '@branch-app/log';
-import snakecaseKeys from 'snakeize';
 import * as Methods from './methods';
 import * as Middleware from './middleware';
 
@@ -65,7 +65,7 @@ export default class Server {
 		}
 
 		res.status(200);
-		res.json(snakecaseKeys(output));
+		res.json(camelcaseKeys(output));
 	}
 }
 
