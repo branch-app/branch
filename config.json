@@ -8,6 +8,6 @@
 		"account": "your_account@outlook.com",
 		"password": "your_password"
 	},
-	"mongodb": "mongo_connection_string",
+	"mongodb": "mongodb://localhost:27017/service-auth",
 	"hashingSalt": "secure_hashing_salt"
 }
