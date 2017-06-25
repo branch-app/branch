@@ -29,7 +29,7 @@ an example json blob.
 
 ## API Documentation
 
-#### `1/2015-05-13/get_halo4_token`
+#### `1/2017-06-25/get_halo4_token`
 
 ``` json
 {
@@ -43,7 +43,7 @@ an example json blob.
 }
 ```
 
-#### `1/2015-05-13/get_xboxlive_token`
+#### `1/2017-06-25/get_xboxlive_token`
 
 ``` json
 {
