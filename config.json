@@ -4,8 +4,10 @@
 		"account": "your_account@outlook.com",
 		"password": "your_password"
 	},
-	"xboxLive": {
+	"xboxlive": {
 		"account": "your_account@outlook.com",
 		"password": "your_password"
-	}
+	},
+	"mongodb": "mongo_connection_string",
+	"hashingSalt": "secure_hashing_salt"
 }

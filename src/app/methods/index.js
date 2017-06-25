@@ -1,2 +1,2 @@
-export { default as createHalo4Auth } from './create-halo-4-auth';
-export { default as createXboxLiveAuth } from './create-xbox-live-auth';
+export { default as getHalo4Token } from './get-halo4-token';
+export { default as getXboxLiveToken } from './get-xboxlive-token';

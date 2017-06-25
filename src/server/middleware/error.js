@@ -1,18 +1,18 @@
 import errors from './error.json';
 import log from '@branch-app/log';
+import snakecaseKeys from 'snakeize';
 
-const defaultHttpStatus = 500;
-
-// eslint-disable-next-line no-unused-vars
-export default function (origError, req, res, next) {
-	let error = origError;
+export default function (error, req, res, next) {
+	typeof next; // handles linting issue
 
 	if (typeof error.code !== 'string') {
-		error = log.BranchError.coerce(error);
+		console.warn(error, error.stack);
 
+		error = log.BranchError.coerce(error);
 		log.warn('traditional_error', [error]);
 	}
 
-	res.status(errors[error.code] || defaultHttpStatus);
-	res.json(error);
+	// eslint-disable-next-line no-magic-numbers
+	res.status(errors[error.code] || 500);
+	res.json(snakecaseKeys(error));
 }

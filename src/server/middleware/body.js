@@ -1,17 +1,15 @@
-import { Router as expRouter } from 'express';
 import { hasBody } from 'type-is';
-import inflector from 'json-inflector';
 import log from '@branch-app/log';
+import { Router as router } from 'express';
 import { json, urlencoded } from 'body-parser';
 
-const router = expRouter();
+const expressRouter = router();
 
-export default router;
+export default expressRouter;
 
-router.use(json());
-router.use(urlencoded({ extended: true }));
-router.use(checkBody);
-router.use(inflector({ request: 'camelizeLower', response: 'camelizeLower' }));
+expressRouter.use(json());
+expressRouter.use(urlencoded({ extended: true }));
+expressRouter.use(checkBody);
 
 function checkBody(req, res, next) {
 	// has body, but wasn't parsed

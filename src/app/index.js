@@ -1,10 +1,9 @@
 import * as Methods from './methods';
 
 export default class App {
-	config;
-	
-	constructor(config) {
+	constructor(config, db) {
 		this.config = config;
+		this.db = db;
 	}
 }
 
