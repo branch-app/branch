@@ -24,7 +24,6 @@ type Client struct {
 
 	identityStore  *stores.Identity
 	authentication auth.XboxLiveToken
-	// cron           *cron.Cron
 }
 
 func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collection string, query jsonclient.M, body, response interface{}, contractVer int) (bool, *log.E) {
