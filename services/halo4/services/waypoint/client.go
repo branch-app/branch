@@ -27,7 +27,6 @@ type Client struct {
 	mongoDb *mongo.Client
 
 	authentication auth.Halo4Token
-	// cron           *cron.Cron
 }
 
 const (
