@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	authClient "github.com/branch-app/branch-mono-go/clients/auth"
-	"github.com/branch-app/branch-mono-go/domain/auth"
 	"github.com/branch-app/branch-mono-go/domain/branch"
 	"github.com/branch-app/branch-mono-go/libraries/jsonclient"
 	"github.com/branch-app/branch-mono-go/libraries/log"
@@ -25,8 +24,6 @@ type Client struct {
 	authClient     *authClient.Client
 
 	mongoDb *mongo.Client
-
-	authentication auth.Halo4Token
 }
 
 const (
@@ -35,8 +32,6 @@ const (
 	optionsURL         = "RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752"
 	metadataURL        = "h4/metadata?type=%s"
 )
-
-const ()
 
 func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collection string, query jsonclient.M, body, response interface{}) (bool, *log.E) {
 	// Construct URL and hash
@@ -54,8 +49,8 @@ func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collec
 		return true, e
 	}
 
-	// Get Xbox Live Auth Token, and query data from the Xbox Live API
-	waypointToken, err := client.getHalo4Token()
+	// Get Halo 4 Auth Token, and query data from the Halo 4 API
+	waypointToken, err := client.authClient.GetHalo4Token()
 	if err != nil {
 		return false, err
 	}
@@ -74,14 +69,6 @@ func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collec
 		return true, client.mongoDb.FindByID(cacheResp.ID, collection, response)
 	}
 	return false, err
-}
-
-func (client *Client) getHalo4Token() (auth.Halo4Token, *log.E) {
-	if client.authentication.ExpiresAt.After(time.Now().UTC()) {
-		return client.authentication, nil
-	}
-
-	return client.authClient.GetHalo4Token()
 }
 
 func (client *Client) constructURL(jsonClient *jsonclient.Client, endpoint string) (string, string) {
@@ -143,19 +130,11 @@ func (client *Client) GetMetadata(types []string) (*response.Metadata, *log.E) {
 
 // NewClient creates a new Halo 4 Client and initiates authentication.
 func NewClient(authClient *authClient.Client, mongoConnectionStr, mongoDbName string) *Client {
-	client := &Client{
+	return &Client{
 		statsClient:    jsonclient.NewClient("https://stats.svc.halowaypoint.com/en-US/", nil),
 		settingsClient: jsonclient.NewClient("https://settings.svc.halowaypoint.com/", nil),
 		authClient:     authClient,
 
 		mongoDb: mongo.NewClient(mongoConnectionStr, mongoDbName, true),
 	}
-
-	authentication, err := authClient.GetHalo4Token()
-	if err != nil {
-		panic(err)
-	}
-
-	client.authentication = authentication
-	return client
 }

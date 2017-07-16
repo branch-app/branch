@@ -5,8 +5,6 @@ import (
 	"net/url"
 	"strconv"
 
-	"time"
-
 	authClient "github.com/branch-app/branch-mono-go/clients/auth"
 	"github.com/branch-app/branch-mono-go/domain/auth"
 	"github.com/branch-app/branch-mono-go/libraries/jsonclient"
@@ -43,7 +41,7 @@ func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collec
 	}
 
 	// Get Xbox Live Auth Token, and query data from the Xbox Live API
-	xblToken, err := client.getXboxLiveToken()
+	xblToken, err := client.authClient.GetXboxLiveToken()
 	if err != nil {
 		return false, err
 	}
@@ -65,14 +63,6 @@ func (client *Client) Do(jsonClient *jsonclient.Client, method, endpoint, collec
 	return false, err
 }
 
-func (client *Client) getXboxLiveToken() (auth.XboxLiveToken, *log.E) {
-	if client.authentication.ExpiresAt.After(time.Now().UTC()) {
-		return client.authentication, nil
-	}
-
-	return client.authClient.GetXboxLiveToken()
-}
-
 func constructURL(jsClient *jsonclient.Client, endpoint string) (string, string) {
 	base, err := url.Parse(jsClient.BaseURL())
 	endpnt, err := url.Parse(endpoint)
@@ -87,19 +77,11 @@ func constructURL(jsClient *jsonclient.Client, endpoint string) (string, string)
 
 // NewClient creates a new Xbox Live and initiates authentication.
 func NewClient(authClient *authClient.Client, mongoConnectionStr, mongoDbName string) *Client {
-	client := &Client{
+	return &Client{
 		profileClient: jsonclient.NewClient("https://profile.xboxlive.com/", nil),
 		authClient:    authClient,
 
 		mongoDb:       mongo.NewClient(mongoConnectionStr, mongoDbName, true),
 		identityStore: stores.NewIdentityStore(),
 	}
-
-	authentication, err := authClient.GetXboxLiveToken()
-	if err != nil {
-		panic(err)
-	}
-
-	client.authentication = authentication
-	return client
 }
