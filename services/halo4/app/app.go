@@ -17,6 +17,7 @@ type App interface {
 	GetMatchDetails(request request.GetMatchDetails) (*response.Match, *log.E)
 	GetMetadata(request request.GetMetadata) (*response.Metadata, *log.E)
 	GetOptions() (*response.Options, *log.E)
+	GetPlayerCommendations(request xblDomain.IdentityLookup) (*response.Commendations, *log.E)
 }
 
 type app struct {

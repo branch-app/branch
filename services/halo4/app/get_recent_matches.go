@@ -12,5 +12,5 @@ func (a *app) GetRecentMatches(request request.GetRecentMatches) (*response.Rece
 		return nil, err
 	}
 
-	return a.waypointService.GetRecentMatches(identity, request.GameModeID, request.StartAt, request.Count)
+	return a.waypointService.GetRecentMatches(*identity, request.GameModeID, request.StartAt, request.Count)
 }

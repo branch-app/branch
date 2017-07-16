@@ -19,7 +19,7 @@ const (
 )
 
 // GetRecentMatches gets the recent matches of a player.
-func (client *Client) GetRecentMatches(identity *xboxlive.Identity, gameMode response.GameMode, startAt, count uint) (*response.RecentMatches, *log.E) {
+func (client *Client) GetRecentMatches(identity xboxlive.Identity, gameMode response.GameMode, startAt, count uint) (*response.RecentMatches, *log.E) {
 	// Get from xbox live
 	jsonClient := client.statsClient
 	endpoint := fmt.Sprintf(recentMatchesURL, identity.Gamertag, gameMode, startAt, count)
