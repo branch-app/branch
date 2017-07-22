@@ -19,6 +19,7 @@ type App interface {
 	GetMetadata(request request.GetMetadata) (*response.Metadata, *log.E)
 	GetOptions() (*response.Options, *log.E)
 	GetPlayerCommendations(request xblDomain.IdentityLookup) (*response.Commendations, *log.E)
+	GetPlaylists() (*response.Playlists, *log.E)
 }
 
 type app struct {
