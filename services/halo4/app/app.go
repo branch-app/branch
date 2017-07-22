@@ -12,6 +12,7 @@ import (
 
 // App handles business logic, does not involve HTTP
 type App interface {
+	GetGlobalChallenges() (*response.Challenges, *log.E)
 	GetServiceRecord(request xblDomain.IdentityLookup) (*response.ServiceRecord, *log.E)
 	GetRecentMatches(request request.GetRecentMatches) (*response.RecentMatches, *log.E)
 	GetMatchDetails(request request.GetMatchDetails) (*response.Match, *log.E)
