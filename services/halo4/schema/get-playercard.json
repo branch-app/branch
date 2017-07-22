@@ -1,0 +1,22 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+
+	"required": [
+		"value",
+		"type"
+	],
+
+	"properties": {
+		"value": {
+			"type": "string",
+			"minLength": 1
+		},
+
+		"type": {
+			"type": "string",
+			"enum": ["gamertag", "xuid"],
+			"minLength": 1
+		}
+	}
+}

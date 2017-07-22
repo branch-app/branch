@@ -18,6 +18,7 @@ type App interface {
 	GetMatchDetails(request request.GetMatchDetails) (*response.Match, *log.E)
 	GetMetadata(request request.GetMetadata) (*response.Metadata, *log.E)
 	GetOptions() (*response.Options, *log.E)
+	GetPlayerCard(request xblDomain.IdentityLookup) (*response.PlayerCard, *log.E)
 	GetPlayerCommendations(request xblDomain.IdentityLookup) (*response.Commendations, *log.E)
 	GetPlaylists() (*response.Playlists, *log.E)
 }
