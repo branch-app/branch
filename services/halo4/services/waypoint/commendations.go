@@ -18,7 +18,6 @@ const (
 
 // GetPlayerCommendations gets the commendation information of a player.
 func (client *Client) GetPlayerCommendations(identity xboxlive.Identity) (*response.Commendations, *log.E) {
-	// Get from xbox live
 	jsonClient := client.statsClient
 	endpoint := fmt.Sprintf(playerCommendationsURL, identity.Gamertag)
 	url, hash := client.constructURL(jsonClient, endpoint)

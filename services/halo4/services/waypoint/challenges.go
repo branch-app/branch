@@ -15,7 +15,6 @@ const (
 
 // GetGlobalChallenges gets the global challenge information.
 func (client *Client) GetGlobalChallenges() (*response.Challenges, *log.E) {
-	// Get from xbox live
 	jsonClient := client.statsClient
 	url, hash := client.constructURL(jsonClient, globalChallengesURL)
 	var challenges *response.Challenges
