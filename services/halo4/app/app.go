@@ -12,15 +12,19 @@ import (
 
 // App handles business logic, does not involve HTTP
 type App interface {
+	GetCampaignDetails(request xblDomain.IdentityLookup) (*response.ModeDetailsCampaign, *log.E)
+	GetCustomGamesDetails(request xblDomain.IdentityLookup) (*response.ModeDetailsWarGames, *log.E)
 	GetGlobalChallenges() (*response.Challenges, *log.E)
-	GetServiceRecord(request xblDomain.IdentityLookup) (*response.ServiceRecord, *log.E)
-	GetRecentMatches(request request.GetRecentMatches) (*response.RecentMatches, *log.E)
 	GetMatchDetails(request request.GetMatchDetails) (*response.Match, *log.E)
 	GetMetadata(request request.GetMetadata) (*response.Metadata, *log.E)
 	GetOptions() (*response.Options, *log.E)
 	GetPlayerCard(request xblDomain.IdentityLookup) (*response.PlayerCard, *log.E)
 	GetPlayerCommendations(request xblDomain.IdentityLookup) (*response.Commendations, *log.E)
 	GetPlaylists() (*response.Playlists, *log.E)
+	GetRecentMatches(request request.GetRecentMatches) (*response.RecentMatches, *log.E)
+	GetServiceRecord(request xblDomain.IdentityLookup) (*response.ServiceRecord, *log.E)
+	GetSpartanOpsDetails(request xblDomain.IdentityLookup) (*response.ModeDetailsSpartanOps, *log.E)
+	GetWarGamesDetails(request xblDomain.IdentityLookup) (*response.ModeDetailsWarGames, *log.E)
 }
 
 type app struct {

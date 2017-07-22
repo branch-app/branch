@@ -68,7 +68,7 @@ type WarGamesVariant struct {
 	Name string `json:"name" bson:"name"`
 
 	// ImageURL is the asset of the Game Mode Variant.
-	ImageURL Asset `json:"imageUrl" bson:"imageUrl"`
+	ImageURL *Asset `json:"imageUrl" bson:"imageUrl"`
 }
 
 // GameModeCampaign defines the structure of Campaign leaned GameMode details about a

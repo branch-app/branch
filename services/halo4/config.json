@@ -1,6 +1,7 @@
 {
 	"addr": "",
 	"mongo": "",
+
 	"authUrl": "",
 	"xboxliveUrl": "",
 	"authKey": "",

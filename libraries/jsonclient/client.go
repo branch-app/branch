@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"fmt"
+
 	"github.com/branch-app/branch-mono-go/libraries/log"
 	"github.com/imdario/mergo"
 )
@@ -131,6 +133,7 @@ func (client *Client) Do(method, endpoint string, body, response interface{}, op
 	// Execute Request
 	resp, err := client.HTTPClient.Do(req)
 	if err != nil {
+		fmt.Println(err)
 		return log.Warn("request_execution_failure", nil, err)
 	}
 
@@ -175,6 +178,7 @@ func unmarshalJSON(body io.ReadCloser, v interface{}) *log.E {
 
 	err := json.NewDecoder(body).Decode(&v)
 	if err != nil {
+		fmt.Println(err)
 		return log.Warn("json_unmarshal_failed", nil, err)
 	}
 
