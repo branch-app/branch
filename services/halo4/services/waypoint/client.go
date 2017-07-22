@@ -19,9 +19,11 @@ import (
 )
 
 type Client struct {
+	presenceClient *jsonclient.Client
 	statsClient    *jsonclient.Client
 	settingsClient *jsonclient.Client
-	authClient     *authClient.Client
+
+	authClient *authClient.Client
 
 	mongoDb *mongo.Client
 }
@@ -131,6 +133,7 @@ func (client *Client) GetMetadata(types []string) (*response.Metadata, *log.E) {
 // NewClient creates a new Halo 4 Client and initiates authentication.
 func NewClient(authClient *authClient.Client, mongoConnectionStr, mongoDbName string) *Client {
 	return &Client{
+		presenceClient: jsonclient.NewClient("https://presence.svc.halowaypoint.com/en-US/", nil),
 		statsClient:    jsonclient.NewClient("https://stats.svc.halowaypoint.com/en-US/", nil),
 		settingsClient: jsonclient.NewClient("https://settings.svc.halowaypoint.com/", nil),
 		authClient:     authClient,
