@@ -11,11 +11,11 @@ import (
 
 	authClient "github.com/branch-app/branch-mono-go/clients/auth"
 	"github.com/branch-app/branch-mono-go/domain/branch"
+	"github.com/branch-app/branch-mono-go/libraries/crypto"
 	"github.com/branch-app/branch-mono-go/libraries/jsonclient"
 	"github.com/branch-app/branch-mono-go/libraries/log"
 	"github.com/branch-app/branch-mono-go/libraries/mongo"
 	"github.com/branch-app/branch-mono-go/services/halo4/models/response"
-	"github.com/branch-app/shared-go/crypto"
 )
 
 type Client struct {

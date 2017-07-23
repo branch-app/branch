@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	sharedHelpers "github.com/branch-app/shared-go/helpers"
+	"github.com/branch-app/branch-mono-go/helpers"
 )
 
 // RecentMatches defines the structure of the Recent Matches response.
@@ -208,5 +208,5 @@ func (u *RecentMatchBase) MarshalJSON() ([]byte, error) {
 	// Create custom JSON string with Game Mode ID and Name
 	customJSONFormat := `"modeId":%d,`
 	customJSON := fmt.Sprintf(customJSONFormat, u.ModeID)
-	return sharedHelpers.ByteSliceInsert(data, []byte(customJSON), 1)
+	return helpers.ByteSliceInsert(data, []byte(customJSON), 1)
 }

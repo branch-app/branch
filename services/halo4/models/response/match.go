@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/branch-app/shared-go/helpers"
+	"github.com/branch-app/branch-mono-go/helpers"
 )
 
 // Match defines the structure of the Match response.

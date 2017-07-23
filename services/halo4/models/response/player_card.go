@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/branch-app/shared-go/helpers"
+	"github.com/branch-app/branch-mono-go/helpers"
 )
 
 // PlayerCard defines the structure of the Player Card action.
