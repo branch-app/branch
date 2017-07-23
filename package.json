@@ -16,7 +16,6 @@
     "build": "rm -rf ./build && babel ./src --out-dir=build --source-maps --copy-files --quiet",
     "debug": "npm run transpile && nodemon --exec babel-node -- src/boot/debug.js",
     "start": "node ./build/boot/start.js",
-    "install": "bower install",
     "transpile": "gulp"
   },
   "dependencies": {

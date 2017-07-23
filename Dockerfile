@@ -9,9 +9,12 @@ WORKDIR /usr/local/app
 
 COPY package.json /usr/local/app
 RUN npm install --production=false --silent
+RUN npm install --global bower
+
+USER bower
 
 COPY . /usr/local/app
-RUN npm run install
+RUN bower install
 RUN npm run transpile
 RUN npm run build
 
