@@ -11,10 +11,8 @@ COPY package.json /usr/local/app
 RUN npm install --production=false --silent
 RUN npm install --global bower
 
-USER bower
-
 COPY . /usr/local/app
-RUN bower install
+RUN bower install --allow-root
 RUN npm run transpile
 RUN npm run build
 
