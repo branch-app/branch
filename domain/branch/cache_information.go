@@ -3,7 +3,7 @@ package branch
 import (
 	"time"
 
-	"github.com/branch-app/shared-go/crypto"
+	"github.com/branch-app/branch-mono-go/libraries/crypto"
 )
 
 // CacheInformation defines the structure of a Branch Cache Information struct.
