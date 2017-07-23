@@ -6,12 +6,14 @@ export default class App {
 	_xblClient: Services.XboxLiveClient;
 
 	Halo4: Methods.Halo4;
+	Search: Methods.Search;
 
 	constructor(h4Client: Services.Halo4Client, xblClient: Services.XboxLiveClient) {
 		this._halo4Client = h4Client;
 		this._xblClient = xblClient;
 
 		this.Halo4 = new Methods.Halo4(this);
+		this.Search = new Methods.Search(this);
 	}
 }
 

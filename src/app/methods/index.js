@@ -1,1 +1,1 @@
-export { default as Halo4 } from './halo4';
+export { default as Halo4 } from './halo-4';

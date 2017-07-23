@@ -1,5 +1,5 @@
 import App from '../../app';
-import halo4 from './halo4';
+import halo4 from './halo-4';
 import home from './home';
 import router from 'express-promise-router';
 

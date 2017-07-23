@@ -16,8 +16,18 @@ export default class Halo4Client {
 		});
 	}
 
-	async getServiceRecord(ident: string, type: string) {
-		return await this._client('post', '/1/2017-05-21/get_service_record', null, {
+	async getMetadata(...types: string[]) {
+		return await this._client('post', '/1/2017-05-21/get_metadata', null, {
+			types,
+		});
+	}
+
+	async getMetadataOptions() {
+		return await this._client('post', '/1/2017-05-21/get_options');
+	}
+
+	async getPlayerCard(ident: string, type: string) {
+		return await this._client('post', '/1/2017-07-22/get_playercard', null, {
 			type,
 			value: ident,
 		});
@@ -35,13 +45,10 @@ export default class Halo4Client {
 		});
 	}
 
-	async getMetadata(...types: string[]) {
-		return await this._client('post', '/1/2017-05-21/get_metadata', null, {
-			types,
+	async getServiceRecord(ident: string, type: string) {
+		return await this._client('post', '/1/2017-05-21/get_service_record', null, {
+			type,
+			value: ident,
 		});
-	}
-
-	async getMetadataOptions() {
-		return await this._client('post', '/1/2017-05-21/get_options');
 	}
 }
