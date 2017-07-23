@@ -3,8 +3,9 @@ package boot
 import (
 	"os"
 
+	"encoding/json"
+
 	"github.com/branch-app/branch-mono-go/clients/auth"
-	"github.com/branch-app/branch-mono-go/libraries/configloader"
 	"github.com/branch-app/branch-mono-go/services/xboxlive/app"
 	"github.com/branch-app/branch-mono-go/services/xboxlive/models"
 	"github.com/branch-app/branch-mono-go/services/xboxlive/server"
@@ -14,8 +15,7 @@ import (
 func RunStart() {
 	// Load config
 	var config models.Config
-	err := configloader.Unmarshal("debug", &config)
-	if err != nil {
+	if err := json.Unmarshal([]byte(os.Getenv("CONFIG")), &config); err != nil {
 		panic(err)
 	}
 
