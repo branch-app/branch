@@ -6,6 +6,7 @@ import Server from '../server';
 import log from '@branch-app/log';
 import logSentry from '@branch-app/log-sentry';
 import raven from 'raven';
+import * as Services from '../services';
 
 const defaultPort = 3000;
 const port = process.env.PORT || defaultPort;
@@ -18,8 +19,13 @@ log.setHandler('fatal', logSentry(sentry, () => process.exit(1)));
 sentry.patchGlobal(() => process.exit(1));
 
 const run = async () => {
-	const app = new App(config);
-	const server = new Server(app, { port });
+	const options = {
+		port: config.port || port,
+	};
+
+	const db = await Services.Database.connect({ uri: config.mongodb });
+	const app = new App(config, db);
+	const server = new Server(app, options);
 
 	await server.setup();
 	server.run();
