@@ -1,4 +1,4 @@
-FROM golang:1.8.1
+FROM golang:1.7.0
 MAINTAINER Alex Forbes-Reed <dockerfile@branchapp.co>
 
 ENV ADDR=":80"
