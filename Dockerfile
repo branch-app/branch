@@ -11,6 +11,7 @@ COPY package.json /usr/local/app
 RUN npm install --production=false --silent
 
 COPY . /usr/local/app
+RUN npm run install
 RUN npm run transpile
 RUN npm run build
 
