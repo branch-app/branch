@@ -4,7 +4,21 @@
 	</li>
 	<li><hr /></li>
 	<li class="{{ sidebar 'service-record' }}">
-		<a href="/halo-4/{{identity.gamertag}}">Service Record</a>
+		<a href="/halo-4/{{identity.gamertag}}/">Service Record</a>
+		<ul class="nav">
+			<li class="{{ sidebar '' }}">
+				<a href="/halo-4/{{identity.gamertag}}/service-record/war-games">War Games</a>
+			</li>
+			<li class="{{ sidebar '' }}">
+				<a href="/halo-4/{{identity.gamertag}}/service-record/campaign">Campaign</a>
+			</li>
+			<li class="{{ sidebar '' }}">
+				<a href="/halo-4/{{identity.gamertag}}/service-record/spartan-ops">Spartan Ops</a>
+			</li>
+			<li class="{{ sidebar '' }}">
+				<a href="/halo-4/{{identity.gamertag}}/service-record/custom-games">Custom Games</a>
+			</li>
+		</ul>
 	</li>
 	<li class="{{ sidebar 'match-history' }}">
 		<a href="/halo-4/{{identity.gamertag}}/matches/war-games">Match History</a>
