@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'typedjs'; // eslint-disable-line sort-imports
+import 'typed.js'; // eslint-disable-line sort-imports
 
 const interval = 8000;
 
