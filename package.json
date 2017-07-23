@@ -69,7 +69,7 @@
   },
   "browser": {
     "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.js",
-    "typed.js": "./bower_components/typed.js/dist/typed.min.js"
+    "typed.js": "./bower_components/typed.js/lib/typed.min.js"
   },
   "browserify-shim": {
     "bootstrap": {
