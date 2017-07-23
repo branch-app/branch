@@ -31,6 +31,7 @@
     "humanize-duration": "^3.10.0",
     "jquery": "3.2.1",
     "json-client": "^0.8.4",
+    "typed.js": "^2.0.4",
     "moment-timezone": "^0.5.13",
     "number_helpers": "^0.1.1",
     "pluralize": "^5.0.0",

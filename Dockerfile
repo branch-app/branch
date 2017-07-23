@@ -1,4 +1,4 @@
-FROM node:7
+FROM node:8
 MAINTAINER Alex Forbes-Reed <dockerfile@alx.red>
 
 ENV NODE_ENV="production" \
