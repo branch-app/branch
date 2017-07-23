@@ -9,7 +9,7 @@ import (
 
 var commands = map[string]func(){
 	"debug": boot.RunDebug,
-	// "start": boot.RunStart,
+	"start": boot.RunStart,
 }
 
 func main() {
