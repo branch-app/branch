@@ -1,7 +1,7 @@
 import App from '../../index';
 import { IdentityType } from '../../../services';
 
-export default class Halo4 {
+export default class Search {
 	_app: App;
 
 	constructor(app: App) {

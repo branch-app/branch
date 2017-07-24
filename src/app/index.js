@@ -16,4 +16,3 @@ export default class App {
 		this.Search = new Methods.Search(this);
 	}
 }
-
