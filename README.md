@@ -1,4 +1,3 @@
-app-home
-===
+# branch
 
-Friendly Xbox Live, Halo, and Destiny statistics :)
+This monorepo contains all of Branch's code.
