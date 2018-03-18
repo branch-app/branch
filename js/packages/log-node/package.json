@@ -1,0 +1,30 @@
+{
+	"name": "@branch-app/log",
+	"version": "0.9.1",
+	"private": false,
+	"description": "Super simple standardized logging used by all of Branch's node services.",
+	"homepage": "https://github.com/branch-app/log-node",
+	"bugs": "https://github.com/branch-app/log-node/issues",
+
+	"license": "MIT",
+	"author": "Alex Forbes-Reed <npm@alx.red>",
+
+	"main": "lib/index.js",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/branch-app/log-node.git"
+	},
+
+	"scripts": {
+		"test": "tape test/index.js",
+		"test-travis": "istanbul cover test/index.js --report lcovonly"
+	},
+
+	"devDependencies": {
+		"coveralls": "^2.13.1",
+		"istanbul": "^0.3.22",
+		"tape": "^4.6.3",
+		"test-console": "^1.0.0"
+	}
+}
