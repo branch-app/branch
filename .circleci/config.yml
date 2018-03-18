@@ -26,5 +26,5 @@ jobs:
       - run: |
           sudo apt-get install -y awscli
           `aws ecr get-login --region eu-west-2 | sed -e 's/-e none//g'`
-          docker tag js-services:latest 384149253021.dkr.ecr.eu-west-2.amazonaws.com/branch:$CIRCLE_BRANCH
-          docker push 384149253021.dkr.ecr.eu-west-2.amazonaws.com/branch:$CIRCLE_BRANCH
+          docker tag js-services:latest 384149253021.dkr.ecr.eu-west-2.amazonaws.com/js-services:$CIRCLE_BRANCH
+          docker push 384149253021.dkr.ecr.eu-west-2.amazonaws.com/js-services:$CIRCLE_BRANCH
