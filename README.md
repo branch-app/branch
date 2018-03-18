@@ -1,3 +1,3 @@
 # branch
 
-This monorepo contains all of Branch's code.
+This repository contains all of the Branch code.
