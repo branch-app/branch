@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# branch
-
-This repository contains all of the Branch code.
-=======
 # branch-log-sentry
 
 Sentry integration for branch-log.
@@ -65,5 +60,4 @@ Please open an issue on this repository.
 
 ## License
 
-MIT licensed - see [LICENSE](LICENSE) file
->>>>>>> log-sentry-node/master
+MIT licensed - see [LICENSE](../../../LICENSE) file

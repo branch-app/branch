@@ -68,4 +68,4 @@ Please open an issue on this repository.
 
 ## License
 
-MIT licensed - see [LICENSE](LICENSE) file
+MIT licensed - see [LICENSE](../../../LICENSE) file

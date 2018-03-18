@@ -1,0 +1,30 @@
+{
+	"name": "@branch-app/log-sentry",
+	"version": "0.5.2",
+	"private": false,
+	"description": "Sentry handler for branch-log",
+	"homepage": "https://github.com/branch-app/log-sentry-node",
+	"bugs": "https://github.com/branch-app/log-sentry-node/issues",
+
+	"license": "MIT",
+	"author": "Alex Forbes-Reed <npm@alx.red>",
+
+	"main": "lib/index.js",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/branch-app/log-sentry-node.git"
+	},
+
+	"scripts": {
+		"test": "tape test/index.js",
+		"test-travis": "istanbul cover test/index.js --report lcovonly"
+	},
+
+	"devDependencies": {
+		"coveralls": "^2.13.1",
+		"istanbul": "^0.3.22",
+		"tape": "^4.6.3",
+		"test-console": "^1.0.0"
+	}
+}
