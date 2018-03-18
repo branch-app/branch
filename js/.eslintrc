@@ -14,7 +14,8 @@
 
 	"globals": {
 		"Promise": false,
-		"Set": false
+		"Set": false,
+		"window": false
 	},
 
 	"parserOptions": {

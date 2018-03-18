@@ -1,11 +1,11 @@
-/* eslint-disable no-process-env, no-process-exit, no-magic-numbers, func-style */
+/* eslint-disable no-process-env, no-process-exit, func-style */
 
 import 'babel-polyfill';
 import App from '../app';
 import Server from '../server';
-import * as Services from '../services';
 import log from '@branch-app/log';
 import { readFileSync } from 'fs';
+import * as Services from '../services';
 
 // Import config
 const defaultPort = 3000;
@@ -16,7 +16,7 @@ const run = async () => {
 		port: config.port || defaultPort,
 	};
 
-	const db = await Services.Database.connect({ uri: config.mongodb });
+	const db = await Services.Database.connect({ uri: config.mongodb.uri });
 	const app = new App(config, db);
 	const server = new Server(app, options);
 

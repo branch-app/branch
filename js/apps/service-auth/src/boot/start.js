@@ -23,7 +23,7 @@ const run = async () => {
 		port: config.port || port,
 	};
 
-	const db = await Services.Database.connect({ uri: config.mongodb });
+	const db = await Services.Database.connect({ uri: config.mongodb.uri });
 	const app = new App(config, db);
 	const server = new Server(app, options);
 

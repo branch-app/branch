@@ -1,0 +1,30 @@
+version: 2
+
+workflows:
+  version: 2
+
+  build_all:
+    jobs:
+      - build_js
+
+jobs:
+  build_js:
+    docker:
+      - image: circleci/buildpack-deps:latest
+
+    resource_class: small
+    working_directory: "/home/circleci/repo/js"
+
+    steps:
+      # setup/build
+      - checkout: { path: "/home/circleci/repo" }
+      - setup_remote_docker: { version: 17.09.0-ce, docker_layer_caching: true }
+      - run: |
+          docker build -t js-services --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 .
+
+      # push to aws
+      - run: |
+          sudo apt-get install -y awscli
+          `aws ecr get-login --region eu-west-1 | sed -e 's/-e none//g'`
+          docker tag js-services:latest 384149253021.dkr.ecr.eu-west-2.amazonaws.com/branch:$CIRCLE_BRANCH
+          docker push 384149253021.dkr.ecr.eu-west-2.amazonaws.com/branch:$CIRCLE_BRANCH

@@ -4,7 +4,7 @@ This service handles dealing with the various authentication providers used by t
 
 ## Configuration
 
-To configure this service, you can either populate the config.{environment}.json file (ie; config.development.json) in the working directory of the service. Or you can set an environment variable CONFIG that contains the json content of the configuration. Below is an example json blob.
+To configure this service, you can either populate the `config.{environment}.json` file (ie; `config.development.json`) in the working directory of the service. Or you can set an environment variable `CONFIG` that contains the json content of the configuration. Below is an example json blob.
 
 ``` json
 {
@@ -16,7 +16,9 @@ To configure this service, you can either populate the config.{environment}.json
         "account": "me@outlook.com",
         "password": "wQpk2ZLGPsKxDav1nnkneIfJ9q5Hv79zRgMq74dqYfehOV7H84CBa3dBcec8qt0F"
     },
-    "mongodb": "",
+    "mongodb": {
+        "uri": "mongodb://localhost:27017/service-auth"
+    },
     "hashingSalt": "secure_hashing_salt"
 }
 
