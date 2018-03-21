@@ -1,14 +1,17 @@
-import Express from 'express';
-import camelcase from 'camelcase';
-import camelcaseKeys from 'camelcase-keys';
+import camelize from 'camelize';
+import express from 'express';
 import log from '@branch-app/log';
+import snakeize from 'snakeize';
 import * as Methods from './methods';
 import * as Middleware from './middleware';
+
+const httpOK = 200;
+const httpNoContent = 204;
 
 export default class Server {
 	constructor(app, options = {}) {
 		this.app = app;
-		this.express = Express();
+		this.express = express();
 		this.options = options;
 	}
 
@@ -34,11 +37,14 @@ export default class Server {
 	}
 
 	_healthCheck(req, res) {
-		res.sendStatus(204);
+		res.sendStatus(httpNoContent);
 	}
 
 	async _handler(req, res) {
-		const method = Methods[camelcase(req.params.method)];
+		if (req.method.toLowerCase() !== 'post')
+			throw log.info('method_not_allowed');
+
+		const method = Methods[camelize(req.params.method)];
 		const date = getVersionDate(req.params.version);
 
 		if (!method)
@@ -47,25 +53,22 @@ export default class Server {
 		if (date === null)
 			throw log.info('preview_not_available');
 
-		if (req.method.toLowerCase() !== 'post')
-			throw log.info('method_not_allowed');
-
 		const context = {
 			app: this.app,
-			input: req.body,
+			input: camelize(req.body),
 		};
 
 		const output = await method(context);
 
 		if (output === void 0 || output === null) {
-			res.status(204);
+			res.status(httpNoContent);
 			res.end();
 
 			return;
 		}
 
-		res.status(200);
-		res.json(camelcaseKeys(output));
+		res.status(httpOK);
+		res.json(snakeize(output));
 	}
 }
 

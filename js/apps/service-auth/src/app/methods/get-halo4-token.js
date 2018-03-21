@@ -1,53 +1,45 @@
 import Browser from 'zombie';
-import { calculateHash } from '../helpers/sha512';
-import camelCase from 'camelcase-keys';
 import log from '@branch-app/log';
-import moment from 'moment';
+import snakeize from 'snakeize';
 
-/* eslint-disable max-len, no-param-reassign, no-unused-expressions */
-const AuthUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=000000004C0BD2F1&scope=xbox.basic+xbox.offline_access&response_type=code&redirect_uri=https://haloreachstats.halowaypoint.com/oauth/callback&state=https%253a%252f%252fapp.halowaypoint.com%252foauth%252fspartanToken&display=touch';
-const TokenName = 'SpartanToken';
-const UserAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
+/* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 
-export default async function getHalo4Token(ignoreCache: boolean, account: ?string, password: ?string) {
-	account = account || this.config.halo4.account;
-	password = password || this.config.halo4.password;
+const authExpiry = 55 * 60;
+const authUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=000000004C0BD2F1&scope=xbox.basic+xbox.offline_access&response_type=code&redirect_uri=https://haloreachstats.halowaypoint.com/oauth/callback&state=https%253a%252f%252fapp.halowaypoint.com%252foauth%252fspartanToken&display=touch';
+const tokenName = 'SpartanToken';
+const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
+const redisKey = 'token:halo-4';
 
-	const accountHash = calculateHash(`${account.toLowerCase()}:${password}`, this.config.hashingSalt);
+export default async function getHalo4Token() {
+	try {
+		const cachedToken = await this.redis.get(redisKey);
 
-	if (!ignoreCache) {
-		try {
-			const cachedToken = await this.db.halo4.findMostRecentToken(accountHash);
-
-			if (cachedToken)
-				return cachedToken;
-		} catch (error) {
-			if (error.code !== 'not_found')
-				throw error;
-		}
+		if (cachedToken)
+			return JSON.parse(cachedToken);
+	} catch (error) {
+		throw error;
 	}
 
+	const { microsoftAccount } = this.config.providers;
 	const browser = new Browser();
 
-	browser.userAgent = UserAgent;
-	await browser.visit(AuthUrl);
-	await browser.fill('input[type=email]', account).pressButton('Next');
-	await browser.fill('input[type=password]', password).pressButton('Sign in');
+	browser.userAgent = userAgent;
+	await browser.visit(authUrl);
+	await browser.fill('input[type=email]', microsoftAccount.account).pressButton('Next');
+	await browser.fill('input[type=password]', microsoftAccount.password).pressButton('Sign in');
 
 	const body = browser.text();
-	const index = body.indexOf(TokenName);
+	const index = body.indexOf(tokenName);
 
-	if (index < 0) throw log.error('token_parse_error', { body });
+	if (index < 0)
+		throw log.error('token_parse_error', { body });
 
-	const expiresAt = moment.utc().add(55, 'm');
-	const parsedBody = camelCase(JSON.parse(body));
-
-	const token = await this.db.halo4.createOne({
-		accountHash,
-		createdAt: new Date(),
-		expiresAt: expiresAt.toDate(),
-		...parsedBody,
+	const snakedBody = snakeize({
+		...JSON.parse(body),
+		expiresAt: new Date(Date.now() + (authExpiry * 1000)),
 	});
 
-	return token;
+	this.redis.set(redisKey, JSON.stringify(snakedBody), 'EX', authExpiry);
+
+	return snakedBody;
 }

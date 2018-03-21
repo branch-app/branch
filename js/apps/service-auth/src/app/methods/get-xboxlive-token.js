@@ -1,41 +1,37 @@
 import Browser from 'zombie';
-import { calculateHash } from '../helpers/sha512';
 import jsonClient from 'json-client';
 import log from '@branch-app/log';
 import querystring from 'querystring';
+import snakeize from 'snakeize';
 
-/* eslint-disable max-len, no-param-reassign, no-unused-expressions */
-const AuthUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=0000000048093EE3&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=token&display=touch&scope=service::user.auth.xboxlive.com::MBI_SSL';
-const TokenName = 'access_token';
-const UserAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
+/* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 
-export default async function getXboxLiveToken(ignoreCache: boolean, account: ?string, password: ?string) {
-	account = account || this.config.xboxlive.account;
-	password = password || this.config.xboxlive.password;
+const authExpiry = 55 * 60;
+const authUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=0000000048093EE3&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=token&display=touch&scope=service::user.auth.xboxlive.com::MBI_SSL';
+const tokenName = 'access_token';
+const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
+const redisKey = 'token:xbox-live';
 
-	const accountHash = calculateHash(`${account.toLowerCase()}:${password}`, this.config.hashingSalt);
+export default async function getXboxLiveToken() {
+	try {
+		const cachedToken = await this.redis.get(redisKey);
 
-	if (!ignoreCache) {
-		try {
-			const cachedToken = await this.db.xboxlive.findMostRecentToken(accountHash);
-
-			if (cachedToken)
-				return cachedToken;
-		} catch (error) {
-			if (error.code !== 'not_found')
-				throw error;
-		}
+		if (cachedToken)
+			return JSON.parse(cachedToken);
+	} catch (error) {
+		throw error;
 	}
 
+	const { microsoftAccount } = this.config.providers;
 	const browser = new Browser();
 
-	browser.userAgent = UserAgent;
-	await browser.visit(AuthUrl);
-	await browser.fill('input[type=email]', account).pressButton('Next');
-	await browser.fill('input[type=password]', password).pressButton('Sign in');
+	browser.userAgent = userAgent;
+	await browser.visit(authUrl);
+	await browser.fill('input[type=email]', microsoftAccount.account).pressButton('Next');
+	await browser.fill('input[type=password]', microsoftAccount.password).pressButton('Sign in');
 
 	const url = browser.url;
-	const index = url.indexOf(TokenName);
+	const index = url.indexOf(tokenName);
 
 	if (index < 0) throw log.error('unable_to_retrieve_tokens', [], { url });
 
@@ -61,13 +57,13 @@ export default async function getXboxLiveToken(ignoreCache: boolean, account: ?s
 		TokenType: 'JWT',
 	});
 
-	const token = await this.db.xboxlive.createOne({
-		accountHash,
-		createdAt: new Date(),
-		expiresAt: new Date(xstsAuth.NotAfter),
+	const snakedBody = snakeize({
 		token: xstsAuth.Token,
 		...xstsAuth.DisplayClaims.xui[0],
+		expiresAt: new Date(xstsAuth.NotAfter),
 	});
 
-	return token;
+	this.redis.set(redisKey, JSON.stringify(snakedBody), 'EX', authExpiry);
+
+	return snakedBody;
 }

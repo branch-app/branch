@@ -1,23 +1,22 @@
-/* eslint-disable no-process-env, no-process-exit, func-style */
+/* eslint-disable no-process-env, no-process-exit, func-style, no-console */
 
 import 'babel-polyfill';
 import App from '../app';
+import RedisClient from '@branch-app/redis-client';
 import Server from '../server';
+import camelize from 'camelize';
 import log from '@branch-app/log';
 import { readFileSync } from 'fs';
-import * as Services from '../services';
 
 // Import config
 const defaultPort = 3000;
-const config = JSON.parse(readFileSync('./config.development.json'));
+const config = camelize(JSON.parse(readFileSync('./config.development.json')));
 
 const run = async () => {
-	const options = {
-		port: config.port || defaultPort,
-	};
+	const options = { port: defaultPort };
 
-	const db = await Services.Database.connect({ uri: config.mongodb.uri });
-	const app = new App(config, db);
+	const redis = await RedisClient.connect(config.redis);
+	const app = new App(config, redis);
 	const server = new Server(app, options);
 
 	await server.setup();

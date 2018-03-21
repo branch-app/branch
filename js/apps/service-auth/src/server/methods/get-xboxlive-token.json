@@ -2,16 +2,5 @@
 	"type": "object",
 	"additionalProperties": false,
 
-	"properties": {
-		"ignore_cache": {
-			"type": "boolean"
-		},
-		"account": {
-			"type": "string",
-			"format": "email"
-		},
-		"password": {
-			"type": "string"
-		}
-	}
+	"properties": { }
 }
