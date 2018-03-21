@@ -41,6 +41,11 @@ export default class Server {
 	}
 
 	async _handler(req, res) {
+		const authorization = req.get('Authorization');
+
+		if (!authorization || authorization !== `bearer ${this.app.config.key}`)
+			throw log.info('invalid_authentication');
+
 		if (req.method.toLowerCase() !== 'post')
 			throw log.info('method_not_allowed');
 
