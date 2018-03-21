@@ -10,6 +10,7 @@ To configure this service, you can either populate the `config.{environment}.jso
 
 ``` json
 {
+    "sentryDSN": "<optional sentry DSN>",
     "providers": {
         "microsoft_account": {
             "account": "me@outlook.com",
