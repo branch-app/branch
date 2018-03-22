@@ -1,6 +1,6 @@
 import Browser from 'zombie';
 import jsonClient from 'json-client';
-import log from 'log';
+import log from 'branch-log';
 import querystring from 'querystring';
 import snakeize from 'snakeize';
 

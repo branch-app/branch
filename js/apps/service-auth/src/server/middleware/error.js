@@ -1,5 +1,5 @@
 import errors from './error.json';
-import log from 'log';
+import log from 'branch-log';
 import snakecaseKeys from 'snakeize';
 
 export default function (error, req, res, next) {

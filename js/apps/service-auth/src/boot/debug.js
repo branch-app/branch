@@ -5,7 +5,7 @@ import App from '../app';
 import RedisClient from 'redis-client';
 import Server from '../server';
 import camelize from 'camelize';
-import log from 'log';
+import log from 'branch-log';
 import { readFileSync } from 'fs';
 
 // Import config

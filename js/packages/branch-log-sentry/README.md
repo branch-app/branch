@@ -7,7 +7,7 @@ Sentry integration for branch-log.
 [![Coverage Status](https://img.shields.io/coveralls/branch-app/log-sentry-node.svg?style=flat)](//coveralls.io/r/branch-app/log-sentry-node)
 
 ```js
-var log = require('log');
+var log = require('branch-log');
 var logSentry = require('log-sentry');
 
 var ravenClient; // existing Raven client

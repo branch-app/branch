@@ -9,8 +9,8 @@
     "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
-    "log": "file:../../packages/log-node",
-    "log-sentry": "file:../../packages/log-sentry-node",
+    "branch-log": "file:../../packages/branch-log",
+    "branch-log-sentry": "file:../../packages/branch-log-sentry",
     "redis-client": "file:../../packages/redis-client",
     "version-routing": "file:../../packages/version-routing",
     "babel-polyfill": "^6.26.0",

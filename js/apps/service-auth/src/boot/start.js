@@ -5,8 +5,8 @@ import App from '../app';
 import RedisClient from 'redis-client';
 import Server from '../server';
 import camelize from 'camelize';
-import log from 'log';
-import logSentry from '/log-sentry';
+import log from 'branch-log';
+import logSentry from 'branch-log-sentry';
 import raven from 'raven';
 
 const defaultPort = 3000;

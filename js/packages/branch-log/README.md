@@ -7,7 +7,7 @@ Super simple logging system used by all of Branch's node services.
 [![Coverage Status](https://img.shields.io/coveralls/branch-app/log-node.svg?style=flat)](//coveralls.io/r/branch-app/log-node)
 
 ```js
-var log = require('log');
+var log = require('branch-log');
 
 log.debug('hello_world');
 

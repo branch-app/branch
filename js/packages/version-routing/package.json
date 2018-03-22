@@ -13,6 +13,6 @@
   },
 
   "dependencies": {
-	  "log": "file:../log-node"
+	  "branch-log": "file:../branch-log"
   }
 }

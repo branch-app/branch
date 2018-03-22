@@ -1,5 +1,5 @@
 import Browser from 'zombie';
-import log from 'log';
+import log from 'branch-log';
 import snakeize from 'snakeize';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */

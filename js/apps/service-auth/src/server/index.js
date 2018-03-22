@@ -1,6 +1,6 @@
 import camelize from 'camelize';
 import express from 'express';
-import log from 'log';
+import log from 'branch-log';
 import methodVersionMap from './methods';
 import snakeize from 'snakeize';
 import * as Middleware from './middleware';

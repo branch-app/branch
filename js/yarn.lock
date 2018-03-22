@@ -2,18 +2,6 @@
 # yarn lockfile v1
 
 
-"@branch-app/log-sentry@file:packages/log-sentry-node":
-  version "0.0.0"
-
-"@branch-app/log@file:packages/log-node":
-  version "0.0.0"
-
-"@branch-app/redis-client@file:packages/redis-client":
-  version "1.0.0"
-  dependencies:
-    redis "^2.8.0"
-    snakeize "^0.1.0"
-
 abab@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -907,6 +895,12 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+"branch-log-sentry@file:packages/branch-log-sentry":
+  version "0.0.0"
+
+"branch-log@file:packages/branch-log":
+  version "0.0.0"
+
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
@@ -1446,7 +1440,7 @@ express-promise-router@^3.0.1:
     lodash.flattendeep "^4.0.0"
     methods "^1.0.0"
 
-express@^4.15.3:
+express@^4.16.3:
   version "4.16.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
   dependencies:
@@ -2984,6 +2978,12 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
+"redis-client@file:packages/redis-client":
+  version "0.0.0"
+  dependencies:
+    redis "^2.8.0"
+    snakeize "^0.1.0"
+
 redis-commands@^1.2.0:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.3.5.tgz#4495889414f1e886261180b1442e7295602d83a2"
@@ -3531,7 +3531,7 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-test-console@^1.0.0, test-console@^1.1.0:
+test-console@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/test-console/-/test-console-1.1.0.tgz#34466d421f1b049e1be80d1734bdb5a512889c7f"
 
@@ -3754,6 +3754,11 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+"version-routing@file:packages/version-routing":
+  version "0.0.0"
+  dependencies:
+    branch-log "file:../../Library/Caches/Yarn/v1/branch-log"
 
 webidl-conversions@^2.0.0:
   version "2.0.1"
