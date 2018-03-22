@@ -1,5 +1,5 @@
 import { hasBody } from 'type-is';
-import log from '@branch-app/log';
+import log from 'log';
 import { Router as router } from 'express';
 import { json, urlencoded } from 'body-parser';
 

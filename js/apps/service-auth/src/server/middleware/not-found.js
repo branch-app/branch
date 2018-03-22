@@ -1,4 +1,4 @@
-import log from '@branch-app/log';
+import log from 'log';
 
 export default function () {
 	throw log.info('not_found');

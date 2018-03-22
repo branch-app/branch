@@ -1,5 +1,5 @@
 {
-  "name": "@branch-app/redis-client",
+  "name": "redis-client",
   "version": "0.0.0",
   "private": false,
 

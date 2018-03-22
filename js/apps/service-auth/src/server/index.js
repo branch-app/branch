@@ -1,12 +1,15 @@
 import camelize from 'camelize';
 import express from 'express';
-import log from '@branch-app/log';
+import log from 'log';
+import methodVersionMap from './methods';
 import snakeize from 'snakeize';
-import * as Methods from './methods';
 import * as Middleware from './middleware';
 
 const httpOK = 200;
 const httpNoContent = 204;
+const versionRegex = /^\d{4}-\d{2}-\d{2}$/;
+const versions = Object.keys(methodVersionMap).sort();
+const latestVersion = versions[versions.length - 1];
 
 export default class Server {
 	constructor(app, options = {}) {
@@ -49,14 +52,11 @@ export default class Server {
 		if (req.method.toLowerCase() !== 'post')
 			throw log.info('method_not_allowed');
 
-		const method = Methods[camelize(req.params.method)];
-		const date = getVersionDate(req.params.version);
+		const methods = getMethodSet(req.params.version);
+		const method = methods[req.params.method];
 
 		if (!method)
 			throw log.info('function_not_found');
-
-		if (date === null)
-			throw log.info('preview_not_available');
 
 		const context = {
 			app: this.app,
@@ -92,20 +92,29 @@ function wrap(handler, thisArg) {
 	};
 }
 
-function getVersionDate(version) {
-	switch (version) {
-		case 'latest': return new Date();
-		case 'preview': return null;
+function getMethodSet(version) {
+	if (version === 'preview') {
+		if (methodVersionMap.preview)
+			return methodVersionMap.preview;
 
-		default: {
-			if (!(/^\d{4}-\d{2}-\d{2}$/).test(version))
-				throw log.info('invalid_version');
-
-			try {
-				return new Date(version);
-			} catch (error) {
-				throw log.info('invalid_version');
-			}
-		}
+		throw log.info('preview_not_available');
 	}
+
+	if (version === 'latest')
+		return methodVersionMap[latestVersion];
+
+	if (!versionRegex.test(version))
+		throw log.info('invalid_version');
+
+	try {
+		if (new Date(version) > new Date())
+			throw log.info('version_not_found');
+	} catch (error) {
+		throw log.info('invalid_version');
+	}
+
+	if (methodVersionMap[version])
+		return methodVersionMap[version];
+
+	throw log.info('version_not_found');
 }

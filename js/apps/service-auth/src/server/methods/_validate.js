@@ -1,4 +1,4 @@
-import log from '@branch-app/log';
+import log from 'log';
 import validator from 'is-my-json-valid/require';
 
 export default function createValidator(name) {

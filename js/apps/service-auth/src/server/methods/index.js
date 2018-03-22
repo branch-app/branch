@@ -1,2 +1,3 @@
-export { default as getHalo4Token } from './get-halo4-token';
-export { default as getXboxliveToken } from './get-xboxlive-token';
+import generateMethodMap from 'version-routing';
+
+module.exports = generateMethodMap(__dirname);

@@ -9,13 +9,14 @@
     "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
-    "@branch-app/log": "file:../../packages/log-node",
-    "@branch-app/log-sentry": "file:../../packages/log-sentry-node",
-    "@branch-app/redis-client": "file:../../packages/redis-client",
+    "log": "file:../../packages/log-node",
+    "log-sentry": "file:../../packages/log-sentry-node",
+    "redis-client": "file:../../packages/redis-client",
+    "version-routing": "file:../../packages/version-routing",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "camelize": "^1.0.0",
-    "express": "^4.15.3",
+    "express": "^4.16.3",
     "express-promise-router": "^3.0.1",
     "is-my-json-valid": "^2.17.2",
     "json-client": "^0.8.5",

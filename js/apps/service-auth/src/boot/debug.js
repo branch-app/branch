@@ -2,10 +2,10 @@
 
 import 'babel-polyfill';
 import App from '../app';
-import RedisClient from '@branch-app/redis-client';
+import RedisClient from 'redis-client';
 import Server from '../server';
 import camelize from 'camelize';
-import log from '@branch-app/log';
+import log from 'log';
 import { readFileSync } from 'fs';
 
 // Import config

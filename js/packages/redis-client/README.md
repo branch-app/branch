@@ -24,7 +24,7 @@ The following explains the basic usage of the package. There isn't much to it, s
 Just pass the options into the `RedisClient.connect()` async static function, this will return a class that is connected to your redis database.
 
 ```js
-import RedisClient from '@branch-app/redis-client';
+import RedisClient from 'redis-client';
 
 const client = await RedisClient.connect({
 	host: "redis-server",

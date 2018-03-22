@@ -25,7 +25,6 @@ To configure this service, you can either populate the `config.{environment}.jso
     },
     "key": "01.4b9c2519e74668f4f861145a6a5f54de33dd0ed73102d016214aa6248ae5e884"
 }
-
 ```
 
 ## Authentication

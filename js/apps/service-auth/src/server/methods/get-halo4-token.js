@@ -1,6 +1,13 @@
 import validator from './_validate';
 
-export default async function (ctx) {
+export default {
+	name: 'get_halo4_token',
+	versions: {
+		'2018-03-21': getHalo4Token,
+	},
+};
+
+async function getHalo4Token(ctx) {
 	const { app, input } = ctx;
 
 	validator('get-halo4-token')(input);

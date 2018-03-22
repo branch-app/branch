@@ -2,11 +2,11 @@
 
 import 'babel-polyfill';
 import App from '../app';
-import RedisClient from '@branch-app/redis-client';
+import RedisClient from 'redis-client';
 import Server from '../server';
 import camelize from 'camelize';
-import log from '@branch-app/log';
-import logSentry from '@branch-app/log-sentry';
+import log from 'log';
+import logSentry from '/log-sentry';
 import raven from 'raven';
 
 const defaultPort = 3000;
