@@ -13,7 +13,7 @@ const defaultPort = 3000;
 const port = process.env.PORT || defaultPort;
 const config = camelize(JSON.parse(process.env.CONFIG));
 
-const sentry = new raven.Client(config.sentryDSN);
+const sentry = new raven.Client(config.sentryDsn);
 
 log.setHandler(logSentry(sentry));
 log.setHandler('fatal', logSentry(sentry, () => process.exit(1)));

@@ -1,5 +1,5 @@
 {
-	"name": "branch-log-sentry",
+	"name": "@branch-app/log-sentry",
 	"version": "0.0.0",
 	"private": false,
 
@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"coveralls": "^3.0.0",
 		"istanbul": "^0.4.5",
-		"tape": "^4.9.0",
+		"tape": "^4.9.1",
 		"test-console": "^1.1.0"
 	}
 }

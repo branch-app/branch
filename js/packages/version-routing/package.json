@@ -1,5 +1,5 @@
 {
-  "name": "version-routing",
+  "name": "@branch-app/version-routing",
   "version": "0.0.0",
   "private": false,
 
@@ -10,9 +10,5 @@
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
-  },
-
-  "dependencies": {
-	  "branch-log": "file:../branch-log"
   }
 }

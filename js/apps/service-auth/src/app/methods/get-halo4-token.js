@@ -1,6 +1,5 @@
 import Browser from 'zombie';
 import log from 'branch-log';
-import snakeize from 'snakeize';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 
@@ -34,12 +33,12 @@ export default async function getHalo4Token() {
 	if (index < 0)
 		throw log.error('token_parse_error', { body });
 
-	const snakedBody = snakeize({
+	const response = {
 		...JSON.parse(body),
 		expiresAt: new Date(Date.now() + (authExpiry * 1000)),
-	});
+	};
 
-	this.redis.set(redisKey, JSON.stringify(snakedBody), 'EX', authExpiry);
+	this.redis.set(redisKey, JSON.stringify(response), 'EX', authExpiry);
 
-	return snakedBody;
+	return response;
 }

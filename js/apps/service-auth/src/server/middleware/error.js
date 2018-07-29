@@ -2,17 +2,19 @@ import errors from './error.json';
 import log from 'branch-log';
 import snakecaseKeys from 'snakeize';
 
-export default function (error, req, res, next) {
-	typeof next; // handles linting issue
+const httpInternalServerError = 500;
 
+// eslint-disable-next-line no-unused-vars
+export default function (error, req, res, next) {
 	if (typeof error.code !== 'string') {
+		// eslint-disable-next-line no-console
 		console.warn(error, error.stack);
 
+		// eslint-disable-next-line no-param-reassign
 		error = log.BranchError.coerce(error);
 		log.warn('traditional_error', [error]);
 	}
 
-	// eslint-disable-next-line no-magic-numbers
-	res.status(errors[error.code] || 500);
+	res.status(errors[error.code] || httpInternalServerError);
 	res.json(snakecaseKeys(error));
 }

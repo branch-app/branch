@@ -2,7 +2,6 @@ import Browser from 'zombie';
 import jsonClient from 'json-client';
 import log from 'branch-log';
 import querystring from 'querystring';
-import snakeize from 'snakeize';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 
@@ -57,13 +56,13 @@ export default async function getXboxLiveToken() {
 		TokenType: 'JWT',
 	});
 
-	const snakedBody = snakeize({
+	const response = {
 		token: xstsAuth.Token,
 		...xstsAuth.DisplayClaims.xui[0],
 		expiresAt: new Date(xstsAuth.NotAfter),
-	});
+	};
 
-	this.redis.set(redisKey, JSON.stringify(snakedBody), 'EX', authExpiry);
+	this.redis.set(redisKey, JSON.stringify(response), 'EX', authExpiry);
 
-	return snakedBody;
+	return response;
 }
