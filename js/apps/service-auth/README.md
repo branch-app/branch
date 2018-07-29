@@ -6,24 +6,28 @@ Base URL: `/1`
 
 ## Configuration
 
-To configure this service, you can either populate the `config.{environment}.json` file (ie; `config.development.json`) in the working directory of the service. Or you can set an environment variable `CONFIG` that contains the json content of the configuration. Below is an example json blob.
+Confirmation of this service depends on the type of boot you are doing.
+
+If you're booting via the `debug` entrypoint, you must populate the `config.development.json` file in the working directory of the service.
+
+Otherwise, if you're booing via the `start` entrypoint, you must set an environment variable `CONFIG` that contains the json representation of the configuration. Below is an example json blob.
 
 ``` json
 {
     "sentry_dsn": "<optional sentry DSN>",
     "providers": {
         "microsoft_account": {
-            "account": "me@outlook.com",
-            "password": "wQpk2ZLGPsKxDav1nnkneIfJ9q5Hv79zRgMq74dqYfehOV7H84CBa3dBcec8qt0F"
+            "account": "<email address for your microsoft account>",
+            "password": "<password for your microsoft account>"
         }
     },
     "redis": {
-        "host": "redis-server",
+        "host": "<redis server>",
         "port": 6379,
         "database": 1,
-        "password": "redis-password"
+        "password": "<redis password>"
     },
-    "key": "01.4b9c2519e74668f4f861145a6a5f54de33dd0ed73102d016214aa6248ae5e884"
+    "key": "<secret key used when service is called>"
 }
 ```
 
@@ -41,9 +45,7 @@ All endpoints on this service authentication. Requests must have have the header
 Gets a valid Halo 4 spartan token, used to communicate with the Halo 4 API. It will cache the token, and only retrieve a new one every 50-60 minutes.
 
 #### Request
-``` json
-{ }
-```
+No body required.
 
 #### Response
 ``` json
@@ -60,9 +62,7 @@ Gets a valid Halo 4 spartan token, used to communicate with the Halo 4 API. It w
 Gets a valid Xbox Live authentication token, used to communicate with the Xbox Live API. It will cache the token, and only retrieve a new one every 50-60 minutes.
 
 #### Request
-``` json
-{ }
-```
+No body required.
 
 #### Response
 ``` json
