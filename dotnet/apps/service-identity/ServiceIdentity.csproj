@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<RootNamespace>Branch.Apps.ServiceIdentity</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\packages\Apollo\Apollo.csproj" />
+		<ProjectReference Include="..\..\packages\models\Models.csproj" />
+	</ItemGroup>
+</Project>
