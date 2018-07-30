@@ -14,4 +14,4 @@ module.exports = generateMethodMap(__dirname);
 
 ## License
 
-This code is owned by [Cuvva](https://cuvva.com).
+This code is owned by [Cuvva](https://cuvva.com), and licensed under the [MIT](../../../LICENSE) license.
