@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Branch.Clients.Auth</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Branch\Branch.csproj" />
+    <ProjectReference Include="..\..\Packages\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+</Project>
