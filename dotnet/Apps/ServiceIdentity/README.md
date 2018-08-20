@@ -26,3 +26,27 @@ Example URL: `https://service-identity.branch-app.co/1`
 
 ## Methods
 
+### `get_xbox_live_identity`
+
+Retrieves an identity profile based on the provided `gamertag` or `xuid`. Results are cached for 15 minutes.
+
+#### Request
+```json
+{
+  "type": "xuid|gamertag",
+  "value": "Program"
+}
+```
+
+#### Response
+```json
+{
+  "cache": {
+    "id": "cache_000000BTzg1qjTphUeVmlRWFufWAy",
+    "cached_at": "2018-08-01T19:00:23Z",
+    "expires_at": "2018-08-01T19:15:23Z"
+  },
+  "xuid": "9709775544905632",
+  "gamertag": "Program"
+}
+```
