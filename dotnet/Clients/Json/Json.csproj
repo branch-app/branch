@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>json_client</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Branch.Clients.Json</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Packages\Exceptions\Exceptions.csproj" />
   </ItemGroup>
 
 </Project>
