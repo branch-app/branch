@@ -71,19 +71,29 @@ namespace Branch.Clients.Json
 			Client.Timeout = Options.Timeout;
 		}
 
-		public async Task<TRes> Do<TReq, TRes, TErr>(string verb, string path, Dictionary<string, string> query, TReq body, Options newOpts = null)
+		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query, Options newOpts = null)
+			where TRes : class
+			where TErr : class
+		{
+			return await Do<object, TRes, TErr>(verb, path, query, null, newOpts);
+		}
+
+		public async Task<TRes> Do<TReq, TRes, TErr>(string verb, string path, Dictionary<string, string> @params, TReq body, Options newOpts = null)
 			where TReq : class
 			where TRes : class
 			where TErr : class
 		{
-			var uri = new UriBuilder(new Uri(BaseUrl, path));
+			if (!Uri.TryCreate(BaseUrl, path, out Uri uri))
+				throw new UriFormatException("uri_invalid");
+
+			var query = "";
 
 			// Add query
-			if (query != null && query.Any())
-				uri.Query = "?" + String.Join("&", query.Select(q => $"{q.Key}={q.Value}"));
+			if (@params != null && @params.Any())
+				query = "?" + String.Join("&", @params.Select(q => $"{q.Key}={q.Value}"));
 
 			// Setup values
-			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString());
+			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString() + query);
 			var timeout = getTimeout(newOpts);
 
 			// Add timeout
@@ -115,13 +125,17 @@ namespace Branch.Clients.Json
 
 			if (String.IsNullOrWhiteSpace(str) || response.Content.Headers.ContentType.MediaType == "application/json")
 			{
-				var reqBody = await request.Content.ReadAsStringAsync();
+				string requestBody = null;
+
+				if (body != null)
+					requestBody = await request.Content.ReadAsStringAsync();
+
 				var exception = new Exception(RequestFailedCode);
 
 				exception.Data.Add("url", uri.ToString());
 				exception.Data.Add("verb", verb);
 				exception.Data.Add("status", (int) response.StatusCode);
-				exception.Data.Add("request", reqBody);
+				exception.Data.Add("request", requestBody);
 
 				throw exception;
 			}
@@ -129,7 +143,7 @@ namespace Branch.Clients.Json
 			// We know what this is! 🆒
 			if (typeof(TErr) == typeof(BranchException))
 			{
-				// todo(0xdeafcafe): parse into exception
+				// TODO(0xdeafcafe): parse into exception
 				throw new NotImplementedException();
 			}
 
