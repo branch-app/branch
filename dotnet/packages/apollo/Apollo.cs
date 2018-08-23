@@ -14,10 +14,16 @@ using static Ksuid.Ksuid;
 using Apollo.Middleware;
 using Apollo.Configuration;
 using Apollo.Exceptions;
+using Microsoft.Extensions.Options;
 
 namespace Apollo
 {
-	public class ApolloStartup
+	/// <summary>
+	/// This handles the initial startup logic for a service that implements Apollo.
+	/// </summary>
+	/// <typeparam name="T">The object that contains the configuration</typeparam>
+	public class ApolloStartup<T>
+		where T : class, new()
 	{
 		internal static readonly Regex EndpointRegex = new Regex(@"[a-z]{1}[a-z0-9_]+", RegexOptions.Compiled);
 
@@ -26,20 +32,23 @@ namespace Apollo
 
 		public string ServiceName { get; private set; }
 
-		public IConfiguration Configuration { get; private set; }
+		public T Configuration { get; private set; }
 
 		public IHostingEnvironment HostingEnvironment { get; private set; }
 
 		public ApolloStartup(IHostingEnvironment environment, string serviceName)
 		{
 			ServiceName = serviceName;
-			Configuration = ApolloConfiguration.Add(environment);
 			HostingEnvironment = environment;
+			var builtConfig = ApolloConfiguration.Add(environment);
 
 			if (environment.IsDevelopment())
 				Ksuid.Ksuid.Environment = "dev";
 			else if (!environment.IsProduction())
 				Ksuid.Ksuid.Environment = environment.EnvironmentName;
+
+			Configuration = new T();
+			ConfigurationBinder.Bind(builtConfig, Configuration);
 		}
 
 		public virtual void ConfigureServices(IServiceCollection services)
@@ -62,10 +71,12 @@ namespace Apollo
 			});
 
 			// Custom routing
-			app.Map("/1", RequestMiddleware.Handle);
+			app.Map("/1", RequestMiddleware.Handle<T>);
 		}
 
-		public void RegisterMethod<T, TResponse>(string endpoint, string date, Func<T, Task<TResponse>> method, string jsonSchema)
+		public void RpcRegistration<TRpc>(TRpc rpc) => RequestMiddleware.SetRpc(rpc);
+
+		public void RegisterMethod<TReq, TRes>(string endpoint, string date, Func<TReq, Task<TRes>> method, string jsonSchema)
 		{
 			// Validate date format
 			DateTime.ParseExact(date, "yyyy-MM-dd", null);

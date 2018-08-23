@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Serialization;
 
 namespace Apollo.Middleware
 {
@@ -23,11 +24,21 @@ namespace Apollo.Middleware
 	{
 		private static readonly Regex urlRegex = new Regex(@"/(?<date>\d{4}-\d{2}-\d{2}|latest)/(?<method>[a-z\d_]+)", RegexOptions.Compiled);
 		private static MethodInfo jsonDeserializeMethod;
+		private static JsonSerializerSettings jsonSerializerSettings;
 		private static object jsonSerializerInstance;
+		private static object rpcInstance;
 
 		static RequestMiddleware()
 		{
 			var serializerType = typeof(JsonSerializer);
+
+			jsonSerializerSettings = new JsonSerializerSettings
+			{
+				ContractResolver = new DefaultContractResolver
+				{
+					NamingStrategy = new SnakeCaseNamingStrategy()
+				}
+			};
 
 			jsonSerializerInstance = Activator.CreateInstance(serializerType);
 			jsonDeserializeMethod = serializerType.GetMethods()
@@ -36,9 +47,13 @@ namespace Apollo.Middleware
 				.Single();
 		}
 
-		public static void Handle(IApplicationBuilder app) => app.Run(handleRun);
+		public static void SetRpc<TRpc>(TRpc rpc) => rpcInstance = rpc;
 
-		private static async Task handleRun(HttpContext ctx)
+		public static void Handle<T>(IApplicationBuilder app)
+			where T : class, new() => app.Run(handleRun<T>);
+
+		private static async Task handleRun<T>(HttpContext ctx)
+			where T : class, new()
 		{
 			// Reject any non POST requests
 			if (ctx.Request.Method != "POST")
@@ -57,7 +72,7 @@ namespace Apollo.Middleware
 			var method = match.Groups[2].Value;
 
 			// Check method exists
-			if (!ApolloStartup.Methods.TryGetValue(method, out var versions))
+			if (!ApolloStartup<T>.Methods.TryGetValue(method, out var versions))
 				throw new ApolloException("not_found");
 
 			// Get the method we want
@@ -74,7 +89,7 @@ namespace Apollo.Middleware
 			var request = readRequest(ctx, versionDescriber);
 
 			// Run method logic
-			var response = await (dynamic) versionDescriber.Method.Invoke(null, new object[] { request });
+			var response = await (dynamic) versionDescriber.Method.Invoke(rpcInstance, new object[] { request });
 
 			// Parse response
 			await writeResponse(ctx, response);
@@ -82,8 +97,9 @@ namespace Apollo.Middleware
 
 		private static void checkAccept(HttpContext ctx)
 		{
+			// If there is no accept, just assume application/json
 			if (!ctx.Request.Headers.TryGetValue("Accept", out var accept))
-				throw new ApolloException("unsupported_accept");
+				return;
 
 			var allValues = String.Join(",", accept).ToLower();
 
@@ -93,6 +109,7 @@ namespace Apollo.Middleware
 
 		private static object readRequest(HttpContext ctx, VersionDescriber versionDescriber)
 		{
+			// TODO(0xdeafcafe): Add support for empty body requests
 			if ((ctx.Request.ContentLength ?? 0) == 0)
 				throw new ApolloException("invalid_body");
 
@@ -143,7 +160,7 @@ namespace Apollo.Middleware
 				return;
 			}
 
-			var json = JsonConvert.SerializeObject(response);
+			var json = JsonConvert.SerializeObject(response, jsonSerializerSettings);
 
 			ctx.Response.StatusCode = (int)HttpStatusCode.OK;
 			ctx.Response.ContentType = "application/json";
