@@ -1,5 +1,1 @@
-:; ASPNETCORE_ENVIRONMENT=development ASPNETCORE_URLS=http://localhost:3001 dotnet run
-@ECHO OFF
-SET ASPNETCORE_ENVIRONMENT=development
-SET ASPNETCORE_URLS=http://localhost:3001
-CMD dotnet run
+ASPNETCORE_ENVIRONMENT=development ASPNETCORE_URLS=http://localhost:3030 dotnet run

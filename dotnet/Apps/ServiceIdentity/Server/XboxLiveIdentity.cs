@@ -3,40 +3,37 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Ksuid;
-using Branch.Packages.Models.ServiceIdentity;
+using Branch.Packages.Contracts.ServiceIdentity;
 
 namespace Branch.Apps.ServiceIdentity.Server
 {
-	public static partial class RPC
+	public partial class RPC : IService
 	{
-		public static async Task<XboxLiveIdentityResponse> XboxLiveIdentity(XboxLiveIdentityRequest req)
+		public async Task<ResGetXboxLiveIdentity> GetXboxLiveIdentity(ReqGetXboxLiveIdentity req)
 		{
-			return new XboxLiveIdentityResponse { };
+			return await app.GetXboxLiveIdentity(req.Type, req.Value);
 		}
 
-		public static readonly string XboxLiveIdentitySchema = @"
+		public readonly string GetXboxLiveIdentitySchema = @"
 			{
-				""type"": ""array"",
-				""items"": {
-					""type"": ""object"",
-					""additionalProperties"": false,
+				""type"": ""object"",
+				""additionalProperties"": false,
 
-					""required"": [
-						""type"",
-						""value""
-					],
+				""required"": [
+					""type"",
+					""value""
+				],
 
-					""properties"": {
-						""type"": {
-							""type"": ""string"",
-							""enum"": [""xuid"", ""gamertag""]
-						},
+				""properties"": {
+					""type"": {
+						""type"": ""string"",
+						""enum"": [""xuid"", ""gamertag""]
+					},
 
-						""value"": {
-							""type"": ""string"",
-							""minLength"": 1
-						},
-					}
+					""value"": {
+						""type"": ""string"",
+						""minLength"": 1
+					},
 				}
 			}
 		";

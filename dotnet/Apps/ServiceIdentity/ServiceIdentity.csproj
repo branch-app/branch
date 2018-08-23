@@ -6,9 +6,14 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Folder Include="wwwroot\" />
+		<Content Update="config.json" CopyToOutputDirectory="PreserveNewest" />
+		<Content Update="config.*.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Clients\Auth\Auth.csproj" />
 		<ProjectReference Include="..\..\Packages\Apollo\Apollo.csproj" />
 		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
+		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
+		<ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
 	</ItemGroup>
 </Project>
