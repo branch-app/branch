@@ -1,7 +1,6 @@
 ﻿using System;
 using Branch.Clients.Branch;
-using Branch.Packages.Interfaces.ServiceAuth;
-using Branch.Packages.Models.ServiceAuth;
+using Branch.Packages.Contracts.ServiceAuth;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,14 +11,14 @@ namespace Branch.Clients.Auth
 		public AuthClient(string baseUrl, string key)
 			: base(baseUrl, key) { }
 
-		public async Task<ResGetHalo4Token> GetHalo4Token(ReqGetHalo4Token req)
+		public async Task<ResGetHalo4Token> GetHalo4Token()
 		{
-			return await base.Do<ReqGetHalo4Token, ResGetHalo4Token>("1/2018-03-21/get_halo4_token", req);
+			return await base.Do<ResGetHalo4Token>("1/2018-03-21/get_halo4_token");
 		}
 
-		public async Task<ResGetXboxLiveToken> GetXboxLiveToken(ReqGetXboxLiveToken req)
+		public async Task<ResGetXboxLiveToken> GetXboxLiveToken()
 		{
-			return await base.Do<ReqGetXboxLiveToken, ResGetXboxLiveToken>("1/2018-03-21/get_xboxlive_token", req);
+			return await base.Do<ResGetXboxLiveToken>("1/2018-03-21/get_xboxlive_token");
 		}
 	}
 }

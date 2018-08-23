@@ -13,9 +13,15 @@ namespace Branch.Clients.Branch
 		public BranchClient(string baseUrl, string key, Options options = null)
 		{
 			options = options ?? new Options();
-			options.Headers.Add("Authorization", $"Internal 01.{key}");
+			options.Headers.Add("Authorization", $"bearer 01.{key}");
 
 			Client = new JsonClient(baseUrl, options);
+		}
+
+		public async Task<TRes> Do<TRes>(string path, Options options = null)
+			where TRes : class
+		{
+			return await Do<object, TRes>(path, null, options);
 		}
 
 		public async Task<TRes> Do<TReq, TRes>(string path, TReq body, Options options = null)
