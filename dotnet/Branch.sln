@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo", "Packages\Apollo\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Packages\Enums\Enums.csproj", "{36A2CADB-A372-4647-9444-4B2D115B90A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Packages\Interfaces\Interfaces.csproj", "{8D1043D8-2B08-4F52-AC68-3CEB5556A4EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Packages\Contracts\Contracts.csproj", "{8D1043D8-2B08-4F52-AC68-3CEB5556A4EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Packages\Models\Models.csproj", "{F6C08900-1D8E-4935-B00B-2C38FAE03BF9}"
 EndProject

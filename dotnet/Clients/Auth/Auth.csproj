@@ -7,6 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Branch\Branch.csproj" />
-    <ProjectReference Include="..\..\Packages\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
   </ItemGroup>
 </Project>
