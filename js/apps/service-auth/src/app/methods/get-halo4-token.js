@@ -1,5 +1,5 @@
 import Browser from 'zombie';
-import log from 'branch-log';
+import log from '@branch-app/log';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 

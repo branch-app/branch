@@ -1,3 +1,3 @@
-import generateMethodMap from 'version-routing';
+import generateMethodMap from '@branch-app/version-routing';
 
 module.exports = generateMethodMap(__dirname);

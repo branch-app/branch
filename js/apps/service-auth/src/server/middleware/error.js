@@ -1,5 +1,5 @@
 import errors from './error.json';
-import log from 'branch-log';
+import log from '@branch-app/log';
 import snakecaseKeys from 'snakeize';
 
 const httpInternalServerError = 500;

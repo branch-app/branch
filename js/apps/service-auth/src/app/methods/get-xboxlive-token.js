@@ -1,6 +1,6 @@
 import Browser from 'zombie';
 import jsonClient from 'json-client';
-import log from 'branch-log';
+import log from '@branch-app/log';
 import querystring from 'querystring';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
