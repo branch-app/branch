@@ -1,4 +1,4 @@
-import RedisClient from 'redis-client';
+import RedisClient from '@branch-app/redis-client';
 import * as Methods from './methods';
 
 export default class App {

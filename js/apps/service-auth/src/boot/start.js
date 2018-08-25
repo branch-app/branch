@@ -2,7 +2,7 @@
 
 import 'babel-polyfill';
 import App from '../app';
-import RedisClient from 'redis-client';
+import RedisClient from '@branch-app/redis-client';
 import Server from '../server';
 import camelize from 'camelize';
 import log from 'branch-log';
