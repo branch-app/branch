@@ -14,7 +14,7 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "debug-js": "react-scripts-ts start",
-    "debug": "npm-run-all -p watch-css start-js",
+    "debug": "npm-run-all -p watch-css debug-js",
     "start": "serve ./build",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
