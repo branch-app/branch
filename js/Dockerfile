@@ -9,16 +9,16 @@ COPY ./packages ./packages
 COPY ./apps ./apps
 RUN yarn install --frozen-lockfile --ignore-engines --production=false
 RUN ls ./packages | parallel 'cd ./packages/{}; npm test'
-RUN ls ./apps | grep ^service\- | parallel 'cd ./apps/{}; npm test'
-RUN ls ./apps | grep ^service\- | parallel 'cd ./apps/{}; npm run build'
+RUN ls ./apps | parallel 'cd ./apps/{}; npm test'
+RUN ls ./apps | parallel 'cd ./apps/{}; npm run build'
 RUN yarn install --frozen-lockfile --ignore-engines --production=true
 RUN mkdir ./build
-RUN ls ./apps | grep ^service\- | parallel mkdir -p ./apps/{}/data
-RUN ls ./apps | grep ^service\- | parallel mkdir -p ./build/{}
-RUN ls ./apps | grep ^service\- | parallel cp ./apps/{}/package.json ./build/{}
-RUN ls ./apps | grep ^service\- | parallel cp -R ./apps/{}/node_modules ./build/{}
-RUN ls ./apps | grep ^service\- | parallel cp -R ./apps/{}/build ./build/{}
-RUN ls ./apps | grep ^service\- | parallel cp -R ./apps/{}/data ./build/{}
+RUN ls ./apps | parallel mkdir -p ./apps/{}/data
+RUN ls ./apps | parallel mkdir -p ./build/{}
+RUN ls ./apps | parallel cp ./apps/{}/package.json ./build/{}
+RUN ls ./apps | parallel cp -R ./apps/{}/node_modules ./build/{}
+RUN ls ./apps | parallel cp -R ./apps/{}/build ./build/{}
+RUN ls ./apps | parallel cp -R ./apps/{}/data ./build/{}
 
 FROM node:9.5-alpine
 ENV NODE_ENV="production"
