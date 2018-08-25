@@ -17,6 +17,7 @@
 		width: 100%;
 		height: 100%;
 
+		background-color: #1b1b1b;
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -42,6 +43,11 @@
 			text-align: left;
 			margin-top: -10vh;
 			width: 100%;
+
+			*::selection {
+				cursor: default;
+				background-color: none;
+			}
 
 			> h1 {
 				text-transform: uppercase;
