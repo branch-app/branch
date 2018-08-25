@@ -1,7 +1,8 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "curly": [true, "as-needed"]
+    "curly": [true, "as-needed"],
+    "ordered-imports": true
   },
   "linterOptions": {
     "exclude": [
