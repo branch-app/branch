@@ -1,5 +1,5 @@
 const fs = require('fs');
-const log = require('branch-log');
+const log = require('@branch-app/log');
 
 /*
 	type Version = {
