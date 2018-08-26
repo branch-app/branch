@@ -1,3 +1,45 @@
 .component-branch-navbar {
-	
+	padding: 1.55rem 5rem;
+
+	transition: 0.5s;
+
+	> .navbar-header {
+		background-image: url('/images/logo/logo-150x150-w.png');
+		background-position: left center;
+		background-repeat: no-repeat;
+		background-size: 35px;
+		padding-left: 3.7rem;
+
+		> .navbar-brand {
+			color: white;
+			font-size: 1.25rem;
+			font-weight: 300;
+		}
+	}
+
+	&.primary {
+		.navbar-nav > li > a {
+			color: white;
+			opacity: .7;
+
+			&:hover {
+				opacity: .5;
+			}
+		}
+	}
+
+	&.secondary {
+		padding: .8rem 5rem;
+		background: white;
+		border-bottom: 1px solid #3d3d7c;
+
+		> .navbar-header {
+			background-image: url('/images/logo/logo-150x150.png');
+
+			> .navbar-brand {
+				color: #3d3d7c;
+				font-weight: 400;
+			}
+		}
+	}
 }

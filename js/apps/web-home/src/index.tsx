@@ -1,8 +1,11 @@
+import './Bootstrap/bootstrap-reboot.css';
+import './Bootstrap/bootstrap-grid.css';
+import './Bootstrap/bootstrap.css';
+
 import configureStore from './Store';
 import routes from './Routes';
 import * as ReactDOM from 'react-dom';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'window.requestanimationframe';
 
 configureStore();
 

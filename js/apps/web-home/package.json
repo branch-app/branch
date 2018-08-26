@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/react-router-dom": "^4.3.0",
     "@types/reactstrap": "^6.0.2",
-    "bootstrap": "^4.1.3",
+    "classnames": "^2.2.6",
     "crpc": "^0.2.2",
     "node-sass-chokidar": "^1.3.3",
     "npm-run-all": "^4.1.3",
@@ -18,7 +19,10 @@
     "reactstrap": "^6.4.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "serve": "^10.0.0",
+    "typed.js": "^2.0.9",
+    "window.requestanimationframe": "^1.0.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

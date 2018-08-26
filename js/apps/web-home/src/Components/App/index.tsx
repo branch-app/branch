@@ -1,6 +1,6 @@
+import Footer from '../../Atoms/Footer';
 import Navbar from '../../Atoms/Navbar';
 import * as React from 'react';
-import { Container } from 'reactstrap';
 import './index.css';
 
 export interface IProps {
@@ -8,10 +8,11 @@ export interface IProps {
 };
 
 export default ({ children }: IProps) => (
-	<div>
+	<div className={'component-app'}>
 		<Navbar />
-		<Container>
+		<main>
 			{children}
-		</Container>
+		</main>
+		<Footer />
 	</div>
 );
