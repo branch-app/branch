@@ -17,6 +17,9 @@
 @if $enable-grid-classes {
   .container-fluid {
     @include make-container();
+
+    padding-right: 5rem;
+    padding-left: 5rem;
   }
 }
 
