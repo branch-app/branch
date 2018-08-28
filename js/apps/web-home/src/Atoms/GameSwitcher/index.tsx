@@ -32,7 +32,10 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 		const game = data.games[key];
 
 		return (
-			<div className={'dropdown-selector'}>
+			<div
+				className={'dropdown-selector'}
+				key={key}
+			>
 				<i className={'fas fa-chevron-down'}></i>
 
 				<Popover
@@ -50,6 +53,7 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 							return (
 								<Link
 									className={classnames('title', { active })}
+									key={k}
 									to={this.replaceUrl(title.url, identity)}
 								>
 									<div
@@ -79,6 +83,7 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 			return (
 				<Link
 					className={classnames('game', { active })}
+					key={key}
 					to={this.replaceUrl(game.titles[titleKeys[0]].url, identity)}
 				>
 					<div
@@ -99,6 +104,7 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 			<div
 				className={classnames('game', 'multi', { active })}
 				id={switcherTarget}
+				key={key}
 				onClick={() => this.togglePopover(key)}
 			>
 				<div
@@ -118,7 +124,10 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 		const social = data.socials[key];
 
 		return (
-			<div className={'social'}>
+			<div
+				className={'social'}
+				key={key}
+			>
 				<i className={`fab fa-${social.icon}`} />
 			</div>
 		);
