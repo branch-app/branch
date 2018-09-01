@@ -1,29 +1,18 @@
 .recent-matches-header-component {
-	height: 610px;
+	height: 37rem;
 	position: relative;
 
-	> div {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		height: 100%;
-		
-		&.front-image,
-		&.back-image {
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: cover;
-			background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
 
-			transition: background-image 0.5s;
-		}
-	}
+	transition: background-image 0.6s;
 
 	> .mask {
 		background: linear-gradient(-100deg, rgba(#5d5da0,0.75) 0%, rgba(#353575,0) 39%, rgba(#3d3d7c,1) 100%);
-		padding-top: 8.5rem;
+		padding-top: 10.5rem;
+		height: 100%;
 
 		.indicator-index-container {
 			display: flex;
@@ -52,7 +41,7 @@
 		}
 
 		.player-information {
-			margin-top: 4rem;
+			margin-top: 2rem;
 
 			> h1 {
 				color: white;
@@ -86,8 +75,8 @@
 			font-weight: 100;
 			font-size: 20px;
 
-			> .match-overview {
-				.match-mode, .match-map {
+			> .game-overview {
+				.game-mode, .game-map {
 					font-weight: 600;
 					font-size: 1.5rem;
 				}
@@ -97,11 +86,48 @@
 				text-overflow: ellipsis;
 			}
 
-			> .link-to-match {
+			> .link-to-game {
 				font-weight: 600;
 				font-size: .9rem;
 				text-align: right;
 				line-height: 2.1;
+			}
+
+			hr {
+				margin: 5px 0;
+				border-top: 1px solid #eee;
+			}
+
+			> .game-stats {
+				display: flex;
+				justify-content: space-between;
+
+				> .game-statistic {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+
+					.value {
+						font-weight: 700;
+						font-size: 3rem;
+						line-height: 4rem;
+						color: #e25092;
+					}
+					.key {
+						margin-left: 6px;
+						font-weight: 600;
+
+						span { display: block; }
+						.header-key {
+							color: white;
+							font-size: 16px;
+						}
+						.sub-key {
+							color: #d0d0d0;
+							font-size: 14px;
+						}
+					}
+				}
 			}
 		}
 	}

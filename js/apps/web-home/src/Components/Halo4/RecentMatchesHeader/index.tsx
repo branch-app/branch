@@ -1,4 +1,4 @@
-import Fader from '../../../Atoms/Fader';
+import Fader from '~/Atoms/Fader';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import * as numeral from 'numeral';
@@ -23,7 +23,8 @@ const games = [
 		map: 'Harvest',
 		id: '12',
 		score: 290,
-		scoreTitle: 'Personal score',
+		stat: 18,
+		statTitle: 'Kills',
 		kills: 18,
 		medals: 20,
 	},
@@ -32,8 +33,9 @@ const games = [
 		game: 'CTF',
 		map: 'Ragnarok',
 		id: '34',
-		score: 2,
-		scoreTitle: 'Flag captures',
+		score: 320,
+		stat: 2,
+		statTitle: 'Captures',
 		kills: 25,
 		medals: 15,
 	},
@@ -42,8 +44,9 @@ const games = [
 		game: 'Slayer',
 		map: 'Haven',
 		id: '56',
-		score: '290',
-		scoreTitle: 'Personal score',
+		score: 290,
+		stat: 12,
+		statTitle: 'Kills',
 		kills: 12,
 		medals: 15,
 	},
@@ -52,8 +55,9 @@ const games = [
 		game: 'Slayer',
 		map: 'Ravine',
 		id: '78',
-		score: '290',
-		scoreTitle: 'Personal score',
+		score: 290,
+		stat: 22,
+		statTitle: 'Kills',
 		kills: 22,
 		medals: 54,
 	},
@@ -62,8 +66,9 @@ const games = [
 		game: 'Slayer',
 		map: 'Pitfall',
 		id: '90',
-		score: '290',
-		scoreTitle: 'Personal score',
+		score: 290,
+		stat: 8,
+		statTitle: 'Kills',
 		kills: 8,
 		medals: 16,
 	},
@@ -71,8 +76,7 @@ const games = [
 
 interface IState {
 	interval: number|null;
-	frontIndex: number;
-	backIndex: number;
+	gameIndex: number;
 }
 
 export default class RecentMatchesHeader extends React.PureComponent<{}, IState> {
@@ -81,8 +85,7 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 
 		this.state = {
 			interval: null,
-			frontIndex: 0,
-			backIndex: 0,
+			gameIndex: 0,
 		};
 
 		for (const game of games)
@@ -105,20 +108,35 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 	}
 
 	public renderIndexIndicator() {
-		const { frontIndex: activeIndex } = this.state;
+		const { gameIndex } = this.state;
 
 		return (
 			<Col
 				className={'indicator-index-container'}
 				xs={12}
 			>
-				{games.map((_, i) => (
+				{games.map((game, i) => (
 					<div
-						className={classnames('indicator-item', { active: i === activeIndex })}
+						className={classnames('indicator-item', { active: i === gameIndex })}
+						key={game.id}
 						onClick={() => this.selectGame(i)}
 					/>
 				))}
 			</Col>
+		);
+	}
+
+	public renderGameStatistic(title: string, subTitle: string, value: number) {
+		return (
+			<div className={'game-statistic'}>
+				<span className={'value'}>
+					{numeral(value).format('0,0')}
+				</span>
+				<div className={'key'}>
+					<span className={'header-key'}>{title}</span>
+					<span className={'sub-key'}>{subTitle}</span>
+				</div>
+			</div>
 		);
 	}
 
@@ -139,8 +157,8 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 	}
 
 	public renderRecentGameStats() {
-		const { frontIndex: index } = this.state;
-		const game = games[index];
+		const { gameIndex } = this.state;
+		const game = games[gameIndex];
 
 		return (
 			<Col
@@ -153,27 +171,36 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 					duration={500}
 				>
 					<Col
-						className={'match-overview'}
+						className={'game-overview'}
 						xs={9}
 					>
-						<span className={'match-mode'}>
+						<span className={'game-mode'}>
 							{game.game}
 						</span>
 						{' on '}
-						<span className={'match-map'}>
+						<span className={'game-map'}>
 							{game.map}
 						</span>
 					</Col>
 					<Col
-						className={'link-to-match'}
+						className={'link-to-game'}
 						xs={3}
 					>
 						<Link
 							className={'alt'}
 							to={`#${game.id}`}
 						>
-							{'View match'}
+							{'View game'}
 						</Link>
+					</Col>
+					<Col xs={12}><hr /></Col>
+					<Col
+						className={'game-stats'}
+						xs={12}
+					>
+						{this.renderGameStatistic('Personal score', 'War games', game.score)}
+						{this.renderGameStatistic(game.statTitle, game.game, game.stat)}
+						{this.renderGameStatistic('Medals', 'War games', game.medals)}
 					</Col>
 				</Fader>
 			</Col>
@@ -181,23 +208,15 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 	}
 
 	public render() {
-		const { backIndex, frontIndex } = this.state;
+		const { gameIndex } = this.state;
 
 		return (
-			<section className={'recent-matches-header-component'}>
-				<div
-					className={'back-image'}
-					style={{
-						backgroundImage: `url('${games[backIndex].mapImage}')`
-					}}
-				/>
-				<div
-					className={'front-image'}
-					style={{
-						backgroundImage: `url('${games[frontIndex].mapImage}')`
-					}}
-				/>
-
+			<section
+				className={'recent-matches-header-component'}
+				style={{
+					backgroundImage: `url('${games[gameIndex].mapImage}')`
+				}}
+			>
 				<div className={'mask'}>
 					<Container fluid>
 						<Row>
@@ -212,30 +231,27 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 	}
 
 	private selectGame = (index: number) => {
-		let { frontIndex, interval } = this.state;
+		let { interval } = this.state;
 
 		if (interval)
 			window.clearInterval(interval);
 
-		frontIndex = index;
 		interval = window.setInterval(this.changeGame, 4500);
 
 		this.setState({
-			backIndex: frontIndex,
-			frontIndex,
+			gameIndex: index,
 			interval,
 		});
 	}
 
 	private changeGame = () => {
-		let { backIndex, frontIndex } = this.state;
+		let { gameIndex } = this.state;
 
-		backIndex = frontIndex;
-		frontIndex += 1;
+		gameIndex += 1;
 
-		if (frontIndex > games.length - 1)
-			frontIndex = 0;
+		if (gameIndex > games.length - 1)
+			gameIndex = 0;
 		
-		this.setState({ backIndex, frontIndex });
+		this.setState({ gameIndex });
 	}
 }
