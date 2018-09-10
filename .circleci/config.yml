@@ -35,7 +35,7 @@ jobs:
       - image: circleci/buildpack-deps:latest
 
     resource_class: small
-    working_directory: "/home/circleci/repo/js"
+    working_directory: "/home/circleci/repo/dotnet"
 
     steps:
       # setup/build
