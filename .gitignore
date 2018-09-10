@@ -1,6 +1,12 @@
-/node_modules
+# Ignore env-specific configs
 config.*.json
+
+# Ignore retarded files
+Thumbs.db
 .DS_Store
 
 # All css is transpiled from scss, so let's not see it
 *.css
+
+# Ignore all build files
+build
