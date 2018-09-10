@@ -6,6 +6,7 @@ workflows:
   build_all:
     jobs:
       - build_js
+      - build_dotnet
 
 jobs:
   build_js:
@@ -20,7 +21,7 @@ jobs:
       - checkout: { path: "/home/circleci/repo" }
       - setup_remote_docker: { version: 17.09.0-ce, docker_layer_caching: true }
       - run: |
-          docker build -t js-services --build-arg CIRCLE_SHA1=$CIRCLE_SHA1 .
+          docker build -t js-services .
 
       # push to aws
       - run: |
@@ -28,3 +29,24 @@ jobs:
           `aws ecr get-login --region eu-west-2 | sed -e 's/-e none//g'`
           docker tag js-services:latest 384149253021.dkr.ecr.eu-west-2.amazonaws.com/js-services:$CIRCLE_BRANCH
           docker push 384149253021.dkr.ecr.eu-west-2.amazonaws.com/js-services:$CIRCLE_BRANCH
+
+  build_dotnet:
+    docker:
+      - image: circleci/buildpack-deps:latest
+
+    resource_class: small
+    working_directory: "/home/circleci/repo/js"
+
+    steps:
+      # setup/build
+      - checkout: { path: "/home/circleci/repo" }
+      - setup_remote_docker: { version: 17.09.0-ce, docker_layer_caching: true }
+      - run: |
+          docker build -t dotnet-services .
+
+      # push to aws
+      - run: |
+          sudo apt-get install -y awscli
+          `aws ecr get-login --region eu-west-2 | sed -e 's/-e none//g'`
+          docker tag js-services:latest 384149253021.dkr.ecr.eu-west-2.amazonaws.com/dotnet-services:$CIRCLE_BRANCH
+          docker push 384149253021.dkr.ecr.eu-west-2.amazonaws.com/dotnet-services:$CIRCLE_BRANCH
