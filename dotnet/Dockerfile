@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:sdk as builder
+FROM microsoft/dotnet:2.1-sdk-alpine as builder
 RUN mkdir -p /usr/local/app
 RUN apk add --no-cache parallel
 RUN echo | parallel --will-cite
@@ -24,7 +24,7 @@ RUN ls ./Apps | parallel mkdir -p ./Build
 RUN ls ./Apps | parallel cp ./Apps/{}/Build ./Build/{}
 
 
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
 ENV ASPNETCORE_ENVIRONMENT="production"
 ENV ASPNETCORE_URLS="http://*:80"
 EXPOSE 80
