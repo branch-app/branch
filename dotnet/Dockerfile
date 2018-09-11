@@ -11,8 +11,8 @@ COPY ./Tests ./Tests
 RUN dotnet restore
 RUN dotnet build --no-restore -c Release
 RUN dotnet test ./Tests/Clients/JsonTests --no-build -c Release
-RUN dotnet publish -o Build -c Release --no-build
-RUN ls ./Apps | parallel mkdir -p ./Build
+RUN ls ./Apps | parallel dotnet publish -o Build -c Release --no-build ./Apps/{}
+RUN ls ./Apps | parallel mkdir -p ./Build/{}
 RUN ls ./Apps | parallel cp -R ./Apps/{}/Build ./Build/{}
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine

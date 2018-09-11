@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-		<RootNamespace>Apollo</RootNamespace>
+    <RootNamespace>Apollo</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="cuvva-ksuid" Version="1.1.0" />
