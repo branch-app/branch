@@ -4,13 +4,13 @@ RUN apk add --no-cache parallel
 RUN echo | parallel --will-cite
 WORKDIR /usr/local/app
 COPY ./Branch.sln .
-COPY ./Apps ./Apps
+COPY ./Tests ./Tests
 COPY ./Clients ./Clients
 COPY ./Packages ./Packages
-COPY ./Tests ./Tests
+COPY ./Apps ./Apps
 RUN dotnet restore -r alpine-x64
+RUN dotnet test ./Tests/Clients/JsonTests/JsonTests.csproj -c Release -r alpine-x64 --no-restore
 RUN dotnet build --no-restore -c Release -r alpine-x64
-RUN dotnet test ./Tests/Clients/JsonTests/JsonTests.csproj -c Release --no-build -r alpine-x64
 RUN ls ./Apps | parallel dotnet publish -o Build -c Release -r alpine-x64 --no-build ./Apps/{}
 RUN ls ./Apps | parallel mkdir -p ./Build/{}
 RUN ls ./Apps | parallel cp -R ./Apps/{}/Build ./Build/{}
