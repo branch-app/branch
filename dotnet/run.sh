@@ -1,2 +1,3 @@
 #!/bin/sh
-./Apps/$1/$1
+./Apps
+dotnet run $1
