@@ -8,9 +8,9 @@ COPY ./Apps ./Apps
 COPY ./Clients ./Clients
 COPY ./Packages ./Packages
 COPY ./Tests ./Tests
-RUN dotnet restore
+RUN dotnet restore -r alpine-x64
 RUN dotnet build --no-restore -c Release -r alpine-x64
-RUN dotnet test ./Tests/Clients/JsonTests --no-build -c Release
+RUN dotnet test ./Tests/Clients/JsonTests/JsonTests.csproj -c Release --no-build -r alpine-x64
 RUN ls ./Apps | parallel dotnet publish -o Build -c Release -r alpine-x64 --no-build ./Apps/{}
 RUN ls ./Apps | parallel mkdir -p ./Build/{}
 RUN ls ./Apps | parallel cp -R ./Apps/{}/Build ./Build/{}
