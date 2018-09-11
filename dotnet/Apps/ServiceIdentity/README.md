@@ -9,24 +9,25 @@ Example URL: `https://service-identity.branch-app.co/1`
 
 ``` json
 {
-  "sentry_dsn": "<optional sentry DSN>",
-  "services": {
-    "service-auth": {
-      "url": "http://service-auth",
-      "key": "<auth service key>"
+  "SentryDSN": "<optional sentry DSN>",
+  "Services": {
+    "Auth": {
+      "Url": "http://service-auth",
+      "Key": "<auth service key>",
+      "Options": { "Timeout": 7000 }
     }
   },
-  "key": "<secret key used when service is called>"
+  "InternalKey": "<secret key>"
 }
 ```
 
 ## Versions
 
-- `2018-07-30`: service created
+- `2018-08-19`: service created
 
 ## Methods
 
-### `get_xbox_live_identity`
+### `get_xboxlive_identity`
 
 Retrieves an identity profile based on the provided `gamertag` or `xuid`. Results are cached for 15 minutes.
 
@@ -34,19 +35,18 @@ Retrieves an identity profile based on the provided `gamertag` or `xuid`. Result
 ```json
 {
   "type": "xuid|gamertag",
-  "value": "Program"
+  "value": "xxcollateralx"
 }
 ```
 
 #### Response
 ```json
 {
-  "cache": {
-    "id": "cache_000000BTzg1qjTphUeVmlRWFufWAy",
-    "cached_at": "2018-08-01T19:00:23Z",
-    "expires_at": "2018-08-01T19:15:23Z"
+  "cache_info": {
+    "cached_at": "2018-09-01T13:48:16.67Z",
+    "expires_at": "2018-09-01T14:03:16.67Z"
   },
-  "xuid": "9709775544905632",
-  "gamertag": "Program"
+  "gamertag": "xxCoLLaTeRaLx",
+  "xuid": 2533274824126595
 }
 ```
