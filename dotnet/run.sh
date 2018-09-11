@@ -1,3 +1,3 @@
 #!/bin/sh
-./Apps
-dotnet run $1
+cd ./Apps/$1
+dotnet $1.dll
