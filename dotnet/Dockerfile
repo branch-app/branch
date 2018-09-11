@@ -19,7 +19,7 @@ FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
 ENV ASPNETCORE_ENVIRONMENT="production"
 ENV ASPNETCORE_URLS="http://*:80"
 EXPOSE 80
-RUN mkdir =p /usr/local/app
+RUN mkdir -p /usr/local/app
 WORKDIR /usr/local/app
 ENTRYPOINT [ "sh", "./run.sh" ]
 COPY ./run.sh .
