@@ -14,8 +14,10 @@ namespace Branch.Packages.Contracts.ServiceIdentity
 		public string Value { get; set; }
 	}
 
-	public class ResGetXboxLiveIdentity : BranchResponse
+	public class ResGetXboxLiveIdentity : IBranchResponse
 	{
+		public ICacheInfo CacheInfo { get; set; }
+
 		public string Gamertag { get; set; }
 
 		public long XUID { get; set; }

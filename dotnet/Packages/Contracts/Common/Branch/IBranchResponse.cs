@@ -2,11 +2,11 @@ using System;
 
 namespace Branch.Packages.Contracts.Common.Branch
 {
-	public class BranchResponse
+	public interface IBranchResponse
 	{
 		/// <summary>
 		/// The cache information about this resource.
 		/// </summary>
-		public CacheInfo CacheInfo { get; set; }
+		ICacheInfo CacheInfo { get; set; }
 	}
 }
