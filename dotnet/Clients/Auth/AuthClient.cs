@@ -3,13 +3,15 @@ using Branch.Clients.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using System.Threading;
 using System.Threading.Tasks;
+using Branch.Clients.Json.Models;
 
 namespace Branch.Clients.Auth
 {
 	public class AuthClient : BranchClient, IService
 	{
 		public AuthClient(string baseUrl, string key)
-			: base(baseUrl, key) { }
+			: base(baseUrl, key, new Options { Timeout = TimeSpan.FromSeconds(15) })
+		{ }
 
 		public async Task<ResGetHalo4Token> GetHalo4Token()
 		{
