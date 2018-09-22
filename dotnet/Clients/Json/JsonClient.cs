@@ -71,14 +71,14 @@ namespace Branch.Clients.Json
 			Client.Timeout = Options.Timeout;
 		}
 
-		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query, Options newOpts = null)
+		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query = null, Options newOpts = null)
 			where TRes : class
 			where TErr : class
 		{
 			return await Do<object, TRes, TErr>(verb, path, query, null, newOpts);
 		}
 
-		public async Task<TRes> Do<TReq, TRes, TErr>(string verb, string path, Dictionary<string, string> @params, TReq body, Options newOpts = null)
+		public async Task<TRes> Do<TReq, TRes, TErr>(string verb, string path, Dictionary<string, string> query, TReq body, Options newOpts = null)
 			where TReq : class
 			where TRes : class
 			where TErr : class
@@ -86,14 +86,14 @@ namespace Branch.Clients.Json
 			if (!Uri.TryCreate(BaseUrl, path, out Uri uri))
 				throw new UriFormatException("uri_invalid");
 
-			var query = "";
+			var queryStr = "";
 
 			// Add query
-			if (@params != null && @params.Any())
-				query = "?" + String.Join("&", @params.Select(q => $"{q.Key}={q.Value}"));
+			if (query != null && query.Any())
+				queryStr = "?" + String.Join("&", query.Select(q => $"{q.Key}={q.Value}"));
 
 			// Setup values
-			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString() + query);
+			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString() + queryStr);
 			var timeout = getTimeout(newOpts);
 
 			// Add timeout
