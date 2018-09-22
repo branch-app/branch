@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Apollo.Models;
+using Branch.Packages.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,6 @@ using System.IO;
 using static Ksuid.Ksuid;
 using Apollo.Middleware;
 using Apollo.Configuration;
-using Apollo.Exceptions;
 using Microsoft.Extensions.Options;
 
 namespace Apollo
@@ -83,7 +83,7 @@ namespace Apollo
 
 			// Validate endpoint
 			if (!EndpointRegex.Match(endpoint).Success)
-				throw new ApolloException("endpoint_format_invalid", new Dictionary<string, object> { { "endpoint", endpoint } });
+				throw new BranchException("endpoint_format_invalid", new Dictionary<string, object> { { "endpoint", endpoint } });
 
 			// If the endpoint is fresh, create the dictionary
 			if (!Methods.TryGetValue(endpoint, out var versions))
@@ -91,7 +91,7 @@ namespace Apollo
 
 			// Check if the endpoint already has this date specified
 			if (versions.ContainsKey(date))
-				throw new ApolloException(
+				throw new BranchException(
 					"An endpoint with that date has already been registered.",
 					new Dictionary<string, object> {
 						{ "endpoint", endpoint },
@@ -104,10 +104,10 @@ namespace Apollo
 
 			// Check param counts
 			if (methodInfo.GetParameters().Length != 1)
-				throw new ApolloException("invalid_param_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
+				throw new BranchException("invalid_param_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
 
 			if (methodInfo.ReturnType?.GenericTypeArguments.Length != 1)
-				throw new ApolloException("invalid_return_argument_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
+				throw new BranchException("invalid_return_argument_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
 
 			// Get request and response types
 			var requestType = methodInfo.GetParameters()[0].ParameterType;

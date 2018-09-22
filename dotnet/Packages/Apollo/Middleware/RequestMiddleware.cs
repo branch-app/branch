@@ -7,8 +7,8 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Apollo.Exceptions;
 using Apollo.Models;
+using Branch.Packages.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +57,7 @@ namespace Apollo.Middleware
 		{
 			// Reject any non POST requests
 			if (ctx.Request.Method != "POST")
-				throw new ApolloException("method_not_allowed");
+				throw new BranchException("method_not_allowed");
 
 			// Check accept header
 			checkAccept(ctx);
@@ -65,7 +65,7 @@ namespace Apollo.Middleware
 			// Parse the path
 			var match = urlRegex.Match(ctx.Request.Path.ToUriComponent());
 			if (match.Groups.Count != 3)
-				throw new ApolloException("invalid_url");
+				throw new BranchException("invalid_url");
 
 			// Pull info out of url
 			var date = match.Groups[1].Value;
@@ -73,14 +73,14 @@ namespace Apollo.Middleware
 
 			// Check method exists
 			if (!ApolloStartup<T>.Methods.TryGetValue(method, out var versions))
-				throw new ApolloException("not_found");
+				throw new BranchException("not_found");
 
 			// Get the method we want
 			VersionDescriber versionDescriber;
 			if (date != "latest")
 			{
 				if (!versions.TryGetValue(date, out versionDescriber))
-					throw new ApolloException("invalid_date");
+					throw new BranchException("invalid_date");
 			}
 			else
 				versionDescriber = versions.OrderByDescending(v => DateTime.Parse(v.Key)).First().Value;
@@ -101,30 +101,34 @@ namespace Apollo.Middleware
 			if (!ctx.Request.Headers.TryGetValue("Accept", out var accept))
 				return;
 
-			var allValues = String.Join(",", accept).ToLower();
-
-			if (!allValues.Contains("application/json"))
-				throw new ApolloException("unsupported_accept");
+			// Only allow if asked for json, or any is allowed.
+			if (!accept.Contains("application/json") && !accept.Contains("*/*"))
+				throw new BranchException("unsupported_accept");
 		}
 
 		private static object readRequest(HttpContext ctx, VersionDescriber versionDescriber)
 		{
-			// TODO(0xdeafcafe): Add support for empty body requests
+			if (versionDescriber.JsonSchema == null)
+				return null;
+
 			if ((ctx.Request.ContentLength ?? 0) == 0)
-				throw new ApolloException("invalid_body");
+				throw new BranchException("invalid_body");
 
 			using (var sr = new StreamReader(ctx.Request.Body))
 			using (var jtr = new JsonTextReader(sr))
 			using (var jsv = new JSchemaValidatingReader(jtr))
 			{
-				var validationErrors = new List<ApolloException>();
+				var validationErrors = new List<BranchException>();
 
 				jsv.Schema = versionDescriber.JsonSchema;
 				jsv.ValidationEventHandler += (o, a) =>
 				{
-					validationErrors.Add(new ApolloException("validation_error", new Dictionary<string, object>
+					validationErrors.Add(new BranchException("validation_error", new Dictionary<string, object>
 					{
-						{ "message", a.Message }
+						{ "message", a.ValidationError.Message },
+						{ "value", a.ValidationError.Value },
+						{ "path", a.ValidationError.Path },
+						{ "location", $"line {a.ValidationError.LineNumber}, position {a.ValidationError.LinePosition}" },
 					}));
 				};
 
@@ -146,7 +150,7 @@ namespace Apollo.Middleware
 
 				// Handle errors
 				if (validationErrors.Count() > 0)
-					throw new ApolloException("validation_failed", new AggregateException(validationErrors.ToArray()));
+					throw new BranchException("validation_failed", null, validationErrors.AsEnumerable());
 
 				return deserialized;
 			}
