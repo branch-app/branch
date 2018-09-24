@@ -2,11 +2,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Branch.Packages.Models</RootNamespace>
+    <RootNamespace>Branch.Packages.Converters</RootNamespace>
     <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Enums\Enums.csproj" />
-    <ProjectReference Include="..\Converters\Converters.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extensions\Extensions.csproj" />
   </ItemGroup>
 </Project>

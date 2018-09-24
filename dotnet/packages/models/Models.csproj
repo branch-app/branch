@@ -7,5 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\Converters\Converters.csproj" />
   </ItemGroup>
 </Project>

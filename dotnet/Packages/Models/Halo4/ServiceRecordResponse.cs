@@ -1,5 +1,7 @@
 using System;
 using Branch.Packages.Models.Halo4.Common;
+using Branch.Packages.Models.Halo4.ServiceRecord;
+using Newtonsoft.Json;
 
 namespace Branch.Packages.Models.Halo4
 {
@@ -21,7 +23,7 @@ namespace Branch.Packages.Models.Halo4
 
 		public int TotalChallengesCompleted { get; set; }
 
-		// public Promotion[] Promotions { get; set; }
+		public Promotion[] Promotions { get; set; }
 
 		public int TotalLoadoutItemsPurchased { get; set; }
 
@@ -71,7 +73,6 @@ namespace Branch.Packages.Models.Halo4
 
 		// public Specialization[] Specializations { get; set; }
 
-		// public GameMode[] GameModes { get; set; }
-
+		public GameMode[] GameModes { get; set; }
 	}
 }
