@@ -53,21 +53,18 @@ namespace Branch.Packages.Converters
 
 			var obj = JObject.Load(reader);
 			var key = obj.SelectToken(keyName) ?? obj.SelectToken(keyNameDangerNoodle);
+			var keyVal = key.ToString();
 
-			switch (key.ToString())
-			{
-				case "1":
-					return obj.ToObject<T1>(serializer);
-				case "2":
-					return obj.ToObject<T2>(serializer);
-				case "3":
-					return obj.ToObject<T3>(serializer);
-				case "4":
-					return obj.ToObject<T4>(serializer);
+			if (keyVal == values[0])
+				return obj.ToObject<T1>(serializer);
+			else if (keyVal == values[1])
+				return obj.ToObject<T2>(serializer);
+			else if (keyVal == values[2])
+				return obj.ToObject<T3>(serializer);
+			else if (keyVal == values[3])
+				return obj.ToObject<T4>(serializer);
 
-				default:
-					throw new InvalidOperationException("json id value isn't in value range");
-			}
+			throw new InvalidOperationException("json id value isn't in value range");
 		}
 
 		public override bool CanRead

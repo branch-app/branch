@@ -10,6 +10,7 @@ namespace Branch.Packages.Enums.ServiceIdentity
 	{
 		[EnumMember(Value = "xuid")]
 		Xuid,
+
 		[EnumMember(Value = "gamertag")]
 		Gamertag,
 	}

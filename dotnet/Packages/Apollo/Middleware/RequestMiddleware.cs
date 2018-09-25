@@ -25,7 +25,7 @@ namespace Apollo.Middleware
 		private static readonly Regex urlRegex = new Regex(@"/(?<date>\d{4}-\d{2}-\d{2}|latest)/(?<method>[a-z\d_]+)", RegexOptions.Compiled);
 		private static MethodInfo jsonDeserializeMethod;
 		private static JsonSerializerSettings jsonSerializerSettings;
-		private static object jsonSerializerInstance;
+		private static JsonSerializer jsonSerializer;
 		private static object rpcInstance;
 
 		static RequestMiddleware()
@@ -40,7 +40,7 @@ namespace Apollo.Middleware
 				}
 			};
 
-			jsonSerializerInstance = Activator.CreateInstance(serializerType);
+			jsonSerializer = JsonSerializer.Create(jsonSerializerSettings);
 			jsonDeserializeMethod = serializerType.GetMethods()
 				.Where(i => i.Name == "Deserialize")
 				.Where(i => i.IsGenericMethod)
@@ -137,7 +137,7 @@ namespace Apollo.Middleware
 				{
 					deserialized = jsonDeserializeMethod
 						.MakeGenericMethod(versionDescriber.RequestType)
-						.Invoke(jsonSerializerInstance, new object[] { jsv });
+						.Invoke(jsonSerializer, new object[] { jsv });
 				}
 				catch (TargetInvocationException ex)
 				{

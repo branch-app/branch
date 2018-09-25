@@ -49,6 +49,7 @@ namespace Branch.Apps.ServiceHalo4
 
 			RpcRegistration<RPC>(rpc);
 			RegisterMethod<ReqGetServiceRecord, ResGetServiceRecord>("get_service_record", "2018-09-12", rpc.GetServiceRecord, rpc.GetServiceRecordSchema);
+			RegisterMethod<ReqGetRecentMatches, ResGetRecentMatches>("get_recent_matches", "2018-09-12", rpc.GetRecentMatches, rpc.GetRecentMatchesSchema);
 		}
 
 		public static async Task Main(string[] args) =>

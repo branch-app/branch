@@ -13,6 +13,7 @@ using Branch.Clients.Json.Models;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using Branch.Packages.Crypto;
+using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
 using Branch.Packages.Extensions;
@@ -60,10 +61,26 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var key = $"stats/halo-4/service-record/{identity.XUIDStr}.json";
 			var expire = TimeSpan.FromMinutes(10);
 
-			return await makeWaypointRequest<ServiceRecordResponse>(path, key, expire);
+			return await makeWaypointRequest<ServiceRecordResponse>(path, null, key, expire);
 		}
 
-		private async Task<(T response, ICacheInfo cacheInfo)> makeWaypointRequest<T>(string path, string key, TimeSpan expire)
+		public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, GameMode gameMode, uint startAt, uint count)
+		{
+			var gameModeStr = gameMode.ToString("d");
+			var query = new Dictionary<string, string>
+			{
+				{ "gamemodeid", gameModeStr },
+				{ "startat", startAt.ToString() },
+				{ "count", count.ToString() },
+			};
+			var path = $"players/{identity.Gamertag}/h4/matches";
+			var key = $"stats/halo-4/recent-matches/{identity.XUIDStr}-{gameModeStr}-{startAt}-{count}.json";
+			var expire = TimeSpan.FromMinutes(10);
+
+			return await makeWaypointRequest<RecentMatchesResponse>(path, query, key, expire);
+		}
+
+		private async Task<(T response, ICacheInfo cacheInfo)> makeWaypointRequest<T>(string path, Dictionary<string, string> query, string key, TimeSpan expire)
 			where T : class
 		{
 			var now = DateTime.UtcNow;
@@ -93,7 +110,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 			var auth = await getAuthHeaders();
 			var cacheInfo = new CacheInfo(now, expire);
-			var response = await statsClient.Do<T, Exception>("GET", path, null, new Options(auth));
+			var response = await statsClient.Do<T, Exception>("GET", path, query, new Options(auth));
 
 			// Upload file to S3
 			TaskExt.FireAndForget(() => cacheContent(key, response, cacheInfo));
