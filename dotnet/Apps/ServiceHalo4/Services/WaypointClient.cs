@@ -16,6 +16,7 @@ using Branch.Packages.Crypto;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
 using Branch.Packages.Extensions;
+using Branch.Packages.Models.Common.XboxLive;
 using Branch.Packages.Models.Halo4;
 using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
@@ -53,10 +54,10 @@ namespace Branch.Apps.ServiceHalo4.Services
 			this.optionsClient = new JsonClient(optionsUrl, jsonOptions);
 		}
 
-		public async Task<(ServiceRecordResponse serviceRecord, ICacheInfo cacheInfo)> GetServiceRecord(string gamertag)
+		public async Task<(ServiceRecordResponse serviceRecord, ICacheInfo cacheInfo)> GetServiceRecord(Identity identity)
 		{
-			var path = $"players/{gamertag}/h4/servicerecord";
-			var key = $"stats/halo-4/service-record/{gamertag}.json";
+			var path = $"players/{identity.Gamertag}/h4/servicerecord";
+			var key = $"stats/halo-4/service-record/{identity.XUIDStr}.json";
 			var expire = TimeSpan.FromMinutes(10);
 
 			return await makeWaypointRequest<ServiceRecordResponse>(path, key, expire);

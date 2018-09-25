@@ -6,7 +6,7 @@ namespace Branch.Packages.Models.Halo4.Common
 	{
 		public int MapId { get; set; }
 
-		[JsonProperty("Mission")]
+		[JsonProperty("mission")]
 		public int MissionId { get; set; }
 
 		public int Difficulty { get; set; }

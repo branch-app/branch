@@ -2,6 +2,7 @@ using System;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Contracts.Common.Branch;
 using Newtonsoft.Json;
+using Branch.Packages.Models.Common.XboxLive;
 
 namespace Branch.Packages.Contracts.ServiceIdentity
 {
@@ -21,5 +22,14 @@ namespace Branch.Packages.Contracts.ServiceIdentity
 		public string Gamertag { get; set; }
 
 		public long XUID { get; set; }
+
+		public Identity ToIdentity()
+		{
+			return new Identity
+			{
+				Gamertag = Gamertag,
+				XUID = XUID,
+			};
+		}
 	}
 }

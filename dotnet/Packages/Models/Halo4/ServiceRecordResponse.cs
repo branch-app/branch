@@ -71,7 +71,7 @@ namespace Branch.Packages.Models.Halo4
 
 		public TopMedal[] TopMedals { get; set; }
 
-		// public Specialization[] Specializations { get; set; }
+		public Specialization[] Specializations { get; set; }
 
 		public GameMode[] GameModes { get; set; }
 	}
