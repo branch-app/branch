@@ -13,12 +13,10 @@ RUN ls ./apps | parallel 'cd ./apps/{}; npm test'
 RUN ls ./apps | parallel 'cd ./apps/{}; npm run build'
 RUN yarn install --frozen-lockfile --ignore-engines --production=true
 RUN mkdir ./build
-RUN ls ./apps | parallel mkdir -p ./apps/{}/data
 RUN ls ./apps | parallel mkdir -p ./build/{}
 RUN ls ./apps | parallel cp ./apps/{}/package.json ./build/{}
 RUN ls ./apps | parallel cp -R ./apps/{}/node_modules ./build/{}
 RUN ls ./apps | parallel cp -R ./apps/{}/build ./build/{}
-RUN ls ./apps | parallel cp -R ./apps/{}/data ./build/{}
 
 FROM node:9.5-alpine
 ENV NODE_ENV="production"
