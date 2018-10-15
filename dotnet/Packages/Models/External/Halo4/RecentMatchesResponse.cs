@@ -1,8 +1,8 @@
 using System;
-using Branch.Packages.Models.Halo4.RecentMatches;
+using Branch.Packages.Models.External.Halo4.RecentMatches;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Models.Halo4
+namespace Branch.Packages.Models.External.Halo4
 {
 	public class RecentMatchesResponse : WaypointResponse
 	{

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Branch.Packages.Converters;
-using Branch.Packages.Enums.Halo4;
-using Branch.Packages.Models.Halo4.Common;
+using Branch.Packages.Enums.External.Halo4;
+using Branch.Packages.Models.External.Halo4.Common;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Models.Halo4.RecentMatches
+namespace Branch.Packages.Models.External.Halo4.RecentMatches
 {
 	[JsonConverter(
 		typeof(IdToAbstractConverter<WarGamesRecentMatch, CampaignRecentMatch, SpartanOpsRecentMatch, WarGamesRecentMatch>),

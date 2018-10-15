@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
-namespace Branch.Packages.Enums.Halo4
+namespace Branch.Packages.Enums.External.Halo4
 {
 	public enum ResponseCode
 	{

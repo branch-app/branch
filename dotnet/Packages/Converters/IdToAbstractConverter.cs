@@ -12,7 +12,7 @@ namespace Branch.Packages.Converters
 		where T4 : class, new()
 	{
 		private string keyName { get; }
-		
+
 		private string keyNameDangerNoodle { get; }
 
 		private string[] values { get; }
@@ -67,14 +67,8 @@ namespace Branch.Packages.Converters
 			throw new InvalidOperationException("json id value isn't in value range");
 		}
 
-		public override bool CanRead
-		{
-			get { return true; }
-		}
+		public override bool CanRead => true;
 
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
+		public override bool CanConvert(Type objectType) => true;
 	}
 }

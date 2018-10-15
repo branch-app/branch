@@ -1,8 +1,10 @@
-namespace Branch.Packages.Models.Halo4.ServiceRecord
+using Branch.Packages.Models.External.Halo4.Common;
+
+namespace Branch.Packages.Models.External.Halo4.ServiceRecord
 {
 	public class FavoriteVariant
 	{
-		public string ImageUrl { get; set; }
+		public ImageUrl ImageUrl { get; set; }
 
 		public string TotalDuration { get; set; }
 

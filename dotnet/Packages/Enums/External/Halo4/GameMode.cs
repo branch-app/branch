@@ -3,21 +3,21 @@ using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
-namespace Branch.Packages.Enums.Halo4
+namespace Branch.Packages.Enums.External.Halo4
 {
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum GameMode
 	{
 		[EnumMember(Value = "war-games")]
-		WarGames,
+		WarGames = 3,
 
 		[EnumMember(Value = "campaign")]
-		Campaign,
+		Campaign = 4,
 
 		[EnumMember(Value = "spartan-ops")]
-		SpartanOps,
+		SpartanOps = 5,
 
 		[EnumMember(Value = "custom-games")]
-		CustomGames,
+		CustomGames = 6,
 	}
 }

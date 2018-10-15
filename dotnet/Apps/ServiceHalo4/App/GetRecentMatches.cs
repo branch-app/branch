@@ -7,8 +7,8 @@ using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceIdentity;
 using AutoMapper;
 using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Enums.Halo4;
 using System.Linq;
+using Branch.Packages.Enums.Halo4;
 
 namespace Branch.Apps.ServiceHalo4.App
 {
@@ -22,21 +22,23 @@ namespace Branch.Apps.ServiceHalo4.App
 				Value = identReq.Value,
 			});
 
-			var paginationTestCount = count + 1;
-			var response = await waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, paginationTestCount);
-			var matches = response.recentMatches.Games;
-			var hasMoreMatches = matches.Length == paginationTestCount;
+			return null;
 
-			if (hasMoreMatches)
-				matches = matches.Take((int)count).ToArray();
+			// var paginationTestCount = count + 1;
+			// var response = await waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, paginationTestCount);
+			// var matches = response.recentMatches.Games;
+			// var hasMoreMatches = matches.Length == paginationTestCount;
 
-			return new ResGetRecentMatches
-			{
-				CacheInfo = response.cacheInfo,
-				Matches = matches,
-				DateFidelity = response.recentMatches.DateFidelity,
-				HasMoreMatches = hasMoreMatches,
-		};
+			// if (hasMoreMatches)
+			// 	matches = matches.Take((int) count).ToArray();
+
+			// return new ResGetRecentMatches
+			// {
+			// 	CacheInfo = response.cacheInfo,
+			// 	Matches = matches,
+			// 	DateFidelity = response.recentMatches.DateFidelity,
+			// 	HasMoreMatches = hasMoreMatches,
+			// };
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace Branch.Apps.ServiceHalo4
 			var authClient = new AuthClient(authConfig.Url, authConfig.Key);
 			var identityClient = new IdentityClient(identityConfig.Url, identityConfig.Key);
 			var s3Client = new AmazonS3Client(s3Config.AccessKeyId, s3Config.SecretAccessKey, RegionEndpoint.GetBySystemName(s3Config.Region));
-			var waypointClient = new WaypointClient(authClient, s3Client);
+			var waypointClient = new WaypointClient(authClient, identityClient, s3Client);
 
 			var app = new Application(authClient, identityClient, waypointClient);
 			var rpc = new RPC(app);

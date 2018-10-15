@@ -2,7 +2,6 @@ using System;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Models.Halo4;
-using Branch.Packages.Models.Halo4.RecentMatches;
 using Newtonsoft.Json;
 
 namespace Branch.Packages.Contracts.ServiceHalo4
@@ -22,7 +21,7 @@ namespace Branch.Packages.Contracts.ServiceHalo4
 	{
 		public ICacheInfo CacheInfo { get; set; }
 
-		public RecentMatch[] Matches { get; set; }
+		public object[] Matches { get; set; }
 
 		public bool HasMoreMatches { get; set; }
 

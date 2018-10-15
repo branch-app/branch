@@ -12,7 +12,17 @@ namespace Branch.Apps.ServiceIdentity.Models
 		public long XUID { get; set; }
 
 		public DateTime CachedAt { get; set; }
-		
+
 		public DateTime ExpiresAt { get; set; }
+
+		public bool IsFresh()
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsFresh(DateTime date)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

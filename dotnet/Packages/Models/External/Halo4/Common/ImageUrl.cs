@@ -1,4 +1,4 @@
-namespace Branch.Packages.Models.Halo4.Common
+namespace Branch.Packages.Models.External.Halo4.Common
 {
 	public class ImageUrl
 	{

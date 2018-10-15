@@ -1,8 +1,8 @@
-using Branch.Packages.Models.Halo4.Common;
+using Branch.Packages.Models.External.Halo4.Common;
 
-namespace Branch.Packages.Models.Halo4.ServiceRecord
+namespace Branch.Packages.Models.External.Halo4.ServiceRecord
 {
-	public class CampaignMode : GameModeBase
+	public class CampaignMode : GameMode
 	{
 		public DifficultyLevel[] DifficultyLevels { get; set; }
 
@@ -14,11 +14,11 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 
 		public long NarrativeFlags { get; set; }
 
-		public object SinglePlayerDASO { get; set; }
+		public object SinglePlayerDaso { get; set; }
 
 		public object SinglePlayerDifficulty { get; set; }
 
-		public object CoopDASO { get; set; }
+		public object CoopDaso { get; set; }
 
 		public object CoopDifficulty { get; set; }
 	}

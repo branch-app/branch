@@ -1,6 +1,6 @@
-namespace Branch.Packages.Models.Halo4.Common
+namespace Branch.Packages.Models.External.Halo4.Common
 {
-	public class TopMedal
+	public class DifficultyLevel
 	{
 		public int Id { get; set; }
 
@@ -9,7 +9,5 @@ namespace Branch.Packages.Models.Halo4.Common
 		public string Description { get; set; }
 
 		public ImageUrl ImageUrl { get; set; }
-
-		public int TotalMedals { get; set; }
 	}
 }

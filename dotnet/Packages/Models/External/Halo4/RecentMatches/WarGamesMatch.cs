@@ -1,6 +1,6 @@
-using Branch.Packages.Models.Halo4.Common;
+using Branch.Packages.Models.External.Halo4.Common;
 
-namespace Branch.Packages.Models.Halo4.RecentMatches
+namespace Branch.Packages.Models.External.Halo4.RecentMatches
 {
 	public class WarGamesRecentMatch : RecentMatch
 	{

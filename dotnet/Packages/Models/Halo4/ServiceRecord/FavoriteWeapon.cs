@@ -2,7 +2,7 @@ using Branch.Packages.Models.External.Halo4;
 
 namespace Branch.Packages.Models.Halo4.ServiceRecord
 {
-	public class Specialization
+	public class FavoriteWeapon
 	{
 		public int ID { get; set; }
 
@@ -12,14 +12,6 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 
 		public string ImageUrl { get; set; }
 
-		public int Level { get; set; }
-
-		public string LevelName { get; set; }
-
-		public double Completion { get; set; }
-
-		public bool Current { get; set; }
-
-		public bool Complete { get; set; }
+		public int TotalKills { get; set; }
 	}
 }

@@ -1,6 +1,8 @@
-namespace Branch.Packages.Models.Halo4.ServiceRecord
+using Branch.Packages.Models.External.Halo4.Common;
+
+namespace Branch.Packages.Models.External.Halo4.ServiceRecord
 {
-	public class SpartanOpsMode : GameModeBase
+	public class SpartanOpsMode : GameMode
 	{
 		public int? TotalSinglePlayerMissionsCompleted { get; set; }
 

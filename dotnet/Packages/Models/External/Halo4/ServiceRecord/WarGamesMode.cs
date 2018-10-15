@@ -1,6 +1,8 @@
-namespace Branch.Packages.Models.Halo4.ServiceRecord
+using Branch.Packages.Models.External.Halo4.Common;
+
+namespace Branch.Packages.Models.External.Halo4.ServiceRecord
 {
-	public class WarGamesMode : GameModeBase
+	public class WarGamesMode : GameMode
 	{
 		public int? TotalMedals { get; set; }
 

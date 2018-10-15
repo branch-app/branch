@@ -7,5 +7,9 @@ namespace Branch.Packages.Contracts.Common.Branch
 		DateTime CachedAt { get; set; }
 
 		DateTime ExpiresAt { get; set; }
+
+		bool IsFresh();
+
+		bool IsFresh(DateTime date);
 	}
 }

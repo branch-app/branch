@@ -48,5 +48,22 @@ namespace Branch.Packages.Contracts.Common.Branch
 		/// The time the resource expires.
 		/// </summary>
 		public DateTime ExpiresAt { get; set; }
+
+		/// <summary>
+		/// Checks if the data is still fresh right now.
+		/// </summary>
+		public bool IsFresh()
+		{
+			return IsFresh(DateTime.UtcNow);
+		}
+
+		/// <summary>
+		/// Checks if the data is still fresh and hasn't expired base don a point in time.
+		/// </summary>
+		/// <param name="date">The time to check the content freshness against.</param>
+		public bool IsFresh(DateTime date)
+		{
+			return ExpiresAt < date;
+		}
 	}
 }

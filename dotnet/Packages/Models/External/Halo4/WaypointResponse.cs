@@ -1,6 +1,6 @@
-using Branch.Packages.Enums.Halo4;
+using Branch.Packages.Enums.External.Halo4;
 
-namespace Branch.Packages.Models.Halo4
+namespace Branch.Packages.Models.External.Halo4
 {
 	public class WaypointResponse
 	{
