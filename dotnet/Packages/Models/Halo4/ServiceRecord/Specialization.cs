@@ -14,8 +14,6 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 
 		public int Level { get; set; }
 
-		public string LevelName { get; set; }
-
 		public double Completion { get; set; }
 
 		public bool Current { get; set; }

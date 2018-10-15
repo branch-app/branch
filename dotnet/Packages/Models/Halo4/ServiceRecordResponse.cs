@@ -20,9 +20,9 @@ namespace Branch.Packages.Models.Halo4
 
 		public FavoriteWeapon FavoriteWeapon { get; set; }
 
-		public Promotion[] Promotions { get; set; }
-
 		public Specialization[] Specializations { get; set; }
+
+		public GameModes GameModes { get; set; }
 
 		public Rank CurrentRank { get; set; }
 

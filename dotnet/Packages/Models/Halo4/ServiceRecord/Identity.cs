@@ -8,6 +8,6 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 
 		public string ServiceTag { get; set; }
 
-		public Emblem Emblem { get; set; }
+		public string EmblemUrl { get; set; }
 	}
 }

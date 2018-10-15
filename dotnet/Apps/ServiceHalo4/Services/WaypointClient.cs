@@ -30,12 +30,12 @@ namespace Branch.Apps.ServiceHalo4.Services
 	public partial class WaypointClient
 	{
 		private AuthClient authClient { get; }
-		private IdentityClient identityClient { get; }
 		private AmazonS3Client s3Client { get; }
 		private JsonClient presenceClient { get; }
 		private JsonClient statsClient { get; }
 		private JsonClient settingsClient { get; }
 		private JsonClient optionsClient { get; }
+		private Transpiler transpiler { get; }
 
 		private const string presenceUrl = "https://presence.svc.halowaypoint.com/en-US/";
 		private const string statsUrl = "https://stats.svc.halowaypoint.com/en-US/";
@@ -51,8 +51,8 @@ namespace Branch.Apps.ServiceHalo4.Services
 			});
 
 			this.authClient = authClient;
-			this.identityClient = identityClient;
 			this.s3Client = s3Client;
+			this.transpiler = new Transpiler(identityClient);
 			this.presenceClient = new JsonClient(presenceUrl, jsonOptions);
 			this.statsClient = new JsonClient(statsUrl, jsonOptions);
 			this.settingsClient = new JsonClient(settingsUrl, jsonOptions);
@@ -158,6 +158,30 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var resp = await authClient.GetHalo4Token();
 
 			return new Dictionary<string, string> {{ "X-343-Authorization-Spartan", resp.SpartanToken }};
+		}
+
+		public async Task<(ServiceRecordResponse serviceRecord, ICacheInfo cacheInfo)> GetServiceRecord(Identity identity)
+		{
+			var path = $"players/{identity.Gamertag}/h4/servicerecord";
+			var key = $"halo-4/service-record/{identity.XUIDStr}.json";
+			var expire = TimeSpan.FromMinutes(10);
+			var cacheInfo = await fetchContentCacheInfo(key);
+
+			if (cacheInfo != null && cacheInfo.IsFresh())
+				return (await fetchContent<ServiceRecordResponse>(key), cacheInfo);
+
+			var response = await requestWaypointData<External.ServiceRecordResponse>(path, null, key);
+
+			if (response != null && cacheInfo != null)
+				return (await fetchContent<ServiceRecordResponse>(key), cacheInfo);
+
+			var final = await transpiler.ServiceRecord(response);
+			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);
+
+			// TODO(0xdeafcafe): Don't forget to un-comment!
+			// TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
+
+			return (final, finalCacheInfo);
 		}
 
 		// public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, GameMode gameMode, uint startAt, uint count)
