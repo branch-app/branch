@@ -28,17 +28,19 @@ namespace Apollo.Middleware
 			}
 			catch (Exception ex)
 			{
+				var branchEx = ex as BranchException;
+
 				// TODO(0xdeafcafe): Handle this
 				if (!(ex is BranchException))
 				{
 					Console.WriteLine(ex);
 
-					throw;
+					branchEx = new BranchException("unknown_error");
 				}
 
-				var json = JsonConvert.SerializeObject(ex, jsonSerializerSettings);
+				var json = JsonConvert.SerializeObject(branchEx, jsonSerializerSettings);
 
-				ctx.Response.StatusCode = (int) HttpStatusCode.InternalServerError;;
+				ctx.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 				ctx.Response.ContentType = "application/json";
 				await ctx.Response.WriteAsync(json);
 			}
