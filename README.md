@@ -22,3 +22,8 @@ After cloning the repo, go into `dotnet/` and run `dotnet restore`, there is mor
 - [Yarn 1.9.4+](https://yarnpkg.com/lang/en/)
 
 After cloning the repo, go into `js/` and run `yarn`, there is more information [here](js/README.md).
+
+
+## Progress
+
+This project is going to be awhile, but if you're interested in the progress you can view it on [Trello](https://trello.com/b/es8ojQn7).
