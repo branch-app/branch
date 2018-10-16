@@ -10,6 +10,6 @@ namespace Branch.Packages.Models.Halo4.Common
 
 		public string ImageUrl { get; set; }
 
-		public int TotalMedals { get; set; }
+		public int TotalAwarded { get; set; }
 	}
 }

@@ -126,7 +126,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				Name = src.Name,
 				Description = src.Description,
 				ImageUrl = url(src.ImageUrl),
-				TotalMedals = src.TotalMedals,
+				TotalAwarded = src.TotalMedals,
 			};
 		}
 
