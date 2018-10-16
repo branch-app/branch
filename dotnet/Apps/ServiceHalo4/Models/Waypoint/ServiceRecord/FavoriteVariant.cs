@@ -1,6 +1,6 @@
-using Branch.Packages.Models.External.Halo4.Common;
+using Branch.Apps.ServiceHalo4.Models.Waypoint.Common;
 
-namespace Branch.Packages.Models.External.Halo4.ServiceRecord
+namespace Branch.Apps.ServiceHalo4.Models.Waypoint.ServiceRecord
 {
 	public class FavoriteVariant
 	{

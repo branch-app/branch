@@ -1,9 +1,9 @@
 using System;
-using Branch.Packages.Models.External.Halo4.Common;
-using Branch.Packages.Models.External.Halo4.ServiceRecord;
+using Branch.Apps.ServiceHalo4.Models.Waypoint.Common;
+using Branch.Apps.ServiceHalo4.Models.Waypoint.ServiceRecord;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Models.External.Halo4
+namespace Branch.Apps.ServiceHalo4.Models.Waypoint
 {
 	public class ServiceRecordResponse : WaypointResponse
 	{
@@ -28,7 +28,7 @@ namespace Branch.Packages.Models.External.Halo4
 		public int TotalLoadoutItemsPurchased { get; set; }
 
 		public double TotalCommendationProgress { get; set; }
-		
+
 		public string Gamertag { get; set; }
 
 		public string ServiceTag { get; set; }
@@ -61,7 +61,7 @@ namespace Branch.Packages.Models.External.Halo4
 
 		public SkillRank TopSkillRank { get; set; }
 
-		public SkillRank[] SkillRanks { get; set; } 
+		public SkillRank[] SkillRanks { get; set; }
 
 		public int NextRankId { get; set; }
 

@@ -6,8 +6,8 @@ using Branch.Clients.Identity;
 using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
-using Ext = Branch.Packages.Models.External.Halo4;
-using ExtSR = Branch.Packages.Models.External.Halo4.ServiceRecord;
+using Ext = Branch.Apps.ServiceHalo4.Models.Waypoint;
+using ExtSR = Branch.Apps.ServiceHalo4.Models.Waypoint.ServiceRecord;
 using Int = Branch.Packages.Models.Halo4;
 using IntSR = Branch.Packages.Models.Halo4.ServiceRecord;
 

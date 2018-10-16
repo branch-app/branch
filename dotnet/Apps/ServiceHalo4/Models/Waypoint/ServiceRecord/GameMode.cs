@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Branch.Packages.Converters;
-using Branch.Packages.Models.External.Halo4.Common;
+using Branch.Apps.ServiceHalo4.Models.Waypoint.Common;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Models.External.Halo4.ServiceRecord
+namespace Branch.Apps.ServiceHalo4.Models.Waypoint.ServiceRecord
 {
 	[JsonConverter(
 		typeof(IdToAbstractConverter<CampaignMode, SpartanOpsMode, WarGamesMode, WarGamesMode>),

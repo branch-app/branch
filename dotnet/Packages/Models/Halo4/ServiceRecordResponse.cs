@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Branch.Packages.Converters;
-using Branch.Packages.Models.External.Halo4;
 using Branch.Packages.Models.Halo4.Common;
 using Branch.Packages.Models.Halo4.ServiceRecord;
 using Newtonsoft.Json;

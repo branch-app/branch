@@ -1,5 +1,3 @@
-using Branch.Packages.Models.External.Halo4;
-
 namespace Branch.Packages.Models.Halo4.ServiceRecord
 {
 	public class Specialization

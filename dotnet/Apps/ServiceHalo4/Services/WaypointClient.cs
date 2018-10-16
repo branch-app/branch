@@ -23,7 +23,7 @@ using Branch.Packages.Models.Halo4;
 using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using External = Branch.Packages.Models.External.Halo4;
+using External = Branch.Apps.ServiceHalo4.Models.Waypoint;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {

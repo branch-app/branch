@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Models.External.Halo4.Common
+namespace Branch.Apps.ServiceHalo4.Models.Waypoint.Common
 {
 	public class Mission
 	{
