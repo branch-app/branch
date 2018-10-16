@@ -1,8 +1,11 @@
+using System;
+using Branch.Packages.Converters;
 using Branch.Packages.Models.Halo4.Common;
+using Newtonsoft.Json;
 
 namespace Branch.Packages.Models.Halo4.ServiceRecord
 {
-	public class CampaignMode : GameModeBase
+	public class CampaignMode
 	{
 		public DifficultyLevel[] DifficultyLevels { get; set; }
 
@@ -14,12 +17,21 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 
 		public long NarrativeFlags { get; set; }
 
-		public object SinglePlayerDASO { get; set; }
+		public int? SinglePlayerDASO { get; set; }
 
-		public object SinglePlayerDifficulty { get; set; }
+		public int? SinglePlayerDifficulty { get; set; }
 
-		public object CoopDASO { get; set; }
+		public int? CoopDASO { get; set; }
 
-		public object CoopDifficulty { get; set; }
+		public int? CoopDifficulty { get; set; }
+
+		[JsonConverter(typeof(TimespanConverter))]
+		public TimeSpan TotalDuration { get; set; }
+
+		public int TotalKills { get; set; }
+
+		public int TotalDeaths { get; set; }
+
+		public int TotalGamesStarted { get; set; }
 	}
 }

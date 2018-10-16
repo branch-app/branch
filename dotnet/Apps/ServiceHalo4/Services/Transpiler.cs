@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Branch.Clients.Identity;
-using External = Branch.Packages.Models.External.Halo4;
-using Internal = Branch.Packages.Models.Halo4;
+using ExtCom = Branch.Packages.Models.External.Halo4.Common;
+using IntCom = Branch.Packages.Models.Halo4.Common;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {
@@ -47,11 +48,94 @@ namespace Branch.Apps.ServiceHalo4.Services
 			};
 		}
 
-		public string Url(External.Common.ImageUrl imageUrl)
+		public string url(ExtCom.ImageUrl src)
 		{
-			var urlBase = assetMap[imageUrl.BaseUrl];
+			if (src.BaseUrl == "GameBaseVariant")
+				return null;
 
-			return $"{urlBase}{imageUrl.AssetUrl}";
+			var urlBase = assetMap[src.BaseUrl];
+
+			return $"{urlBase}{src.AssetUrl}";
+		}
+
+		private IntCom.DifficultyLevel difficultyLevel(ExtCom.DifficultyLevel src)
+		{
+			return new IntCom.DifficultyLevel
+			{
+				Id = src.Id,
+				Name = src.Name,
+				Description = src.Description,
+				ImageUrl = url(src.ImageUrl),
+			};
+		}
+
+		private IntCom.DifficultyLevel[] difficultyLevels(ExtCom.DifficultyLevel[] src)
+		{
+			if (src == null || src.Length == 0)
+				return new IntCom.DifficultyLevel[0];
+
+			return src.Select(dl => difficultyLevel(dl)).ToArray();
+		}
+
+		private IntCom.Mission mission(ExtCom.Mission src)
+		{
+			return new IntCom.Mission
+			{
+				MapId = src.MapId,
+				MissionId = src.MissionId,
+				Difficulty = src.Difficulty,
+			};
+		}
+
+		private IntCom.Mission[] missions(ExtCom.Mission[] src)
+		{
+			if (src == null || src.Length == 0)
+				return new IntCom.Mission[0];
+
+			return src.Select(m => mission(m)).ToArray();
+		}
+
+		private IntCom.SkillRank skillRank(ExtCom.SkillRank src)
+		{
+			return new IntCom.SkillRank
+			{
+				CurrentSkillRank = src.CurrentSkillRank,
+				Playlist = new IntCom.SkillRankPlaylist
+				{
+					Id = src.PlaylistId,
+					Name = src.PlaylistName,
+					Description = src.PlaylistDescription,
+					ImageUrl = url(src.PlaylistImageUrl),
+				},
+			};
+		}
+
+		private IntCom.SkillRank[] skillRanks(ExtCom.SkillRank[] src)
+		{
+			if (src == null || src.Length == 0)
+				return new IntCom.SkillRank[0];
+
+			return src.Select(m => skillRank(m)).ToArray();
+		}
+
+		private IntCom.MedalRecord medalRecord(ExtCom.TopMedal src)
+		{
+			return new IntCom.MedalRecord
+			{
+				Id = src.Id,
+				Name = src.Name,
+				Description = src.Description,
+				ImageUrl = url(src.ImageUrl),
+				TotalMedals = src.TotalMedals,
+			};
+		}
+
+		private IntCom.MedalRecord[] medalRecords(ExtCom.TopMedal[] src)
+		{
+			if (src == null || src.Length == 0)
+				return new IntCom.MedalRecord[0];
+
+			return src.Select(m => medalRecord(m)).ToArray();
 		}
 	}
 }

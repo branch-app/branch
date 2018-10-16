@@ -28,6 +28,10 @@ namespace Branch.Packages.Models.Halo4
 
 		public Rank NextRank { get; set; }
 
+		public SkillRank[] SkillRanks { get; set; }
+
+		public MedalRecord[] TopMedals { get; set; }
+
 		public int XP { get; set; }
 
 		public int SpartanPoints { get; set; }

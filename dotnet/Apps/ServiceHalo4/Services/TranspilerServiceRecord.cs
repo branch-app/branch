@@ -7,7 +7,9 @@ using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
 using Ext = Branch.Packages.Models.External.Halo4;
+using ExtSR = Branch.Packages.Models.External.Halo4.ServiceRecord;
 using Int = Branch.Packages.Models.Halo4;
+using IntSR = Branch.Packages.Models.Halo4.ServiceRecord;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {
@@ -21,7 +23,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				Value = src.Gamertag,
 			});
 
-			var output = new Int.ServiceRecordResponse
+			return new Int.ServiceRecordResponse
 			{
 				DateFidelity = 1,
 				FirstPlayed = src.FirstPlayedUtc,
@@ -35,97 +37,154 @@ namespace Branch.Apps.ServiceHalo4.Services
 				TotalLoadoutItemsPurchased = src.TotalLoadoutItemsPurchased,
 				TotalCommendationProgress = src.TotalCommendationProgress,
 
-				Identity = new Int.ServiceRecord.Identity
-				{
-					XUID = identity.XUID,
-					ServiceTag = src.ServiceTag,
-					EmblemUrl = Url(src.EmblemImageUrl),
-				},
-
-				FavoriteWeapon = new Int.ServiceRecord.FavoriteWeapon
-				{
-					ID = src.FavoriteWeaponId,
-					Name = src.FavoriteWeaponName,
-					Description = src.FavoriteWeaponDescription,
-					ImageUrl = src.FavoriteWeaponImageUrl.AssetUrl,
-					TotalKills = src.FavoriteWeaponTotalKills,
-				},
-
-				CurrentRank = new Int.ServiceRecord.Rank
-				{
-					ID = src.RankId,
-					Name = src.RankName,
-					ImageUrl = Url(src.RankImageUrl),
-					StartXP = src.RankStartXP,
-				},
-
-				Specializations = src.Specializations.Select(s => new Int.ServiceRecord.Specialization
-				{
-					ID = s.Id,
-					Name = s.Name,
-					Description = s.Description,
-					ImageUrl = Url(s.ImageUrl),
-					Level = s.Level,
-					Current = s.IsCurrent,
-					Completion = s.PercentComplete,
-					Complete = s.Completed,
-				}).ToArray(),
-
-				GameModes = new Int.ServiceRecord.GameModes(),
+				Identity = serviceRecordIdentity(src, identity),
+				FavoriteWeapon = serviceRecordFavoriteWeapon(src),
+				Specializations = serviceRecordSpecializations(src),
+				GameModes = serviceRecordGameModes(src),
+				CurrentRank = serviceRecordCurrentRank(src),
+				NextRank = serviceRecordNextRank(src),
+				SkillRanks = skillRanks(src.SkillRanks),
+				TopMedals = medalRecords(src.TopMedals),
 			};
+		}
 
-			if (src.NextRankId != 0)
+		private IntSR.Identity serviceRecordIdentity(Ext.ServiceRecordResponse src, ResGetXboxLiveIdentity identity)
+		{
+			return new IntSR.Identity
 			{
-				output.NextRank = new Int.ServiceRecord.Rank
-				{
-					ID = src.NextRankId,
-					Name = src.NextRankName,
-					ImageUrl = Url(src.NextRankImageUrl),
-					StartXP = Convert.ToInt32(src.NextRankStartXP),
-				};
-			}
+				XUID = identity.XUID,
+				ServiceTag = src.ServiceTag,
+				EmblemUrl = url(src.EmblemImageUrl),
+			};
+		}
 
-			foreach(var mode in (src.GameModes ?? new Ext.ServiceRecord.GameMode[0]))
+		private IntSR.FavoriteWeapon serviceRecordFavoriteWeapon(Ext.ServiceRecordResponse src)
+		{
+			return new IntSR.FavoriteWeapon
 			{
-				Int.ServiceRecord.GameModeBase final = null;
+				ID = src.FavoriteWeaponId,
+				Name = src.FavoriteWeaponName,
+				Description = src.FavoriteWeaponDescription,
+				ImageUrl = src.FavoriteWeaponImageUrl.AssetUrl,
+				TotalKills = src.FavoriteWeaponTotalKills,
+			};
+		}
 
+		private IntSR.Rank serviceRecordCurrentRank(Ext.ServiceRecordResponse src)
+		{
+			return new IntSR.Rank
+			{
+				ID = src.RankId,
+				Name = src.RankName,
+				ImageUrl = url(src.RankImageUrl),
+				StartXP = src.RankStartXP,
+			};
+		}
+
+		private IntSR.Rank serviceRecordNextRank(Ext.ServiceRecordResponse src)
+		{
+			if (src.NextRankId == 0)
+				return null;
+
+			return new IntSR.Rank
+			{
+				ID = src.NextRankId,
+				Name = src.NextRankName,
+				ImageUrl = url(src.NextRankImageUrl),
+				StartXP = Convert.ToInt32(src.NextRankStartXP),
+			};
+		}
+
+		private IntSR.Specialization[] serviceRecordSpecializations(Ext.ServiceRecordResponse src)
+		{
+			if (src.Specializations == null)
+				return new IntSR.Specialization[0];
+
+			return src.Specializations.Select(s => new IntSR.Specialization
+			{
+				ID = s.Id,
+				Name = s.Name,
+				Description = s.Description,
+				ImageUrl = url(s.ImageUrl),
+				Level = s.Level,
+				Current = s.IsCurrent,
+				Completion = s.PercentComplete,
+				Complete = s.Completed,
+			}).ToArray();
+		}
+
+		private IntSR.GameModes serviceRecordGameModes(Ext.ServiceRecordResponse src)
+		{
+			var o = new IntSR.GameModes();
+
+			if (src.GameModes == null || src.GameModes.Count() == 0)
+				return o;
+
+			foreach (var mode in src.GameModes)
+			{
 				switch(mode)
 				{
 					case Ext.ServiceRecord.CampaignMode m:
-						final = new Int.ServiceRecord.CampaignMode
+						o.Campaign = new IntSR.CampaignMode
 						{
-							// DifficultyLevels = m.DifficultyLevels,
-							// SinglePlayerMissions = m.SinglePlayerMissions,
-							// CoopMissions = m.CoopMissions,
+							DifficultyLevels = difficultyLevels(m.DifficultyLevels),
+							SinglePlayerMissions = missions(m.SinglePlayerMissions),
+							CoopMissions = missions(m.CoopMissions),
 							TotalTerminalsVisited = m.TotalTerminalsVisited,
 							NarrativeFlags = m.NarrativeFlags,
 							SinglePlayerDASO = m.SinglePlayerDaso,
 							SinglePlayerDifficulty = m.SinglePlayerDifficulty,
 							CoopDASO = m.CoopDaso,
 							CoopDifficulty = m.CoopDifficulty,
+
+							TotalDuration = TimeSpan.Parse(m.TotalDuration),
+							TotalKills = m.TotalKills,
+							TotalDeaths = m.TotalDeaths,
+							TotalGamesStarted = m.TotalGamesStarted,
 						};
 						break;
 					case Ext.ServiceRecord.SpartanOpsMode m:
-						final = new Int.ServiceRecord.SpartanOpsMode
+						o.SpartanOps = new IntSR.SpartanOpsMode
 						{
-							TotalSinglePlayerMissionsCompleted = m.TotalSinglePlayerMissionsCompleted,
-							TotalCoopMissionsCompleted = m.TotalCoopMissionsCompleted,
-							TotalMissionsPossible = m.TotalMissionsPossible,
-							TotalMedals = m.TotalMedals,
-							TotalGamesWon = m.TotalGamesWon,
+							TotalSinglePlayerMissionsCompleted = (int) m.TotalSinglePlayerMissionsCompleted,
+							TotalCoopMissionsCompleted = (int) m.TotalCoopMissionsCompleted,
+							TotalMissionsPossible = (int) m.TotalMissionsPossible,
+							TotalMedals = (int) m.TotalMedals,
+							TotalGamesWon = (int) m.TotalGamesWon,
+
+							TotalDuration = TimeSpan.Parse(m.TotalDuration),
+							TotalKills = m.TotalKills,
+							TotalDeaths = m.TotalDeaths,
+							TotalGamesStarted = m.TotalGamesStarted,
 						};
 						break;
 					case Ext.ServiceRecord.WarGamesMode m:
-						final = new Int.ServiceRecord.WarGamesMode
+						var final = new IntSR.WarGamesMode
 						{
-							TotalMedals = m.TotalMedals,
-							TotalGamesWon = m.TotalGamesWon,
-							TotalGamesCompleted = m.TotalGamesCompleted,
-							AveragePersonalScore = m.AveragePersonalScore,
-							KdRatio = m.KdRatio,
-							TotalGameBaseVariantMedals = m.TotalGameBaseVariantMedals,
-							// FavoriteVariant = m.FavoriteVariant,
+							TotalMedals = (int) m.TotalMedals,
+							TotalGamesWon = (int) m.TotalGamesWon,
+							TotalGamesCompleted = (int) m.TotalGamesCompleted,
+							AveragePersonalScore = (int) m.AveragePersonalScore,
+							KdRatio = (double) m.KdRatio,
+							TotalGameBaseVariantMedals = (int) m.TotalGameBaseVariantMedals,
+							FavoriteVariant = serviceRecordFavoriteVariant(m.FavoriteVariant),
+
+							TotalDuration = TimeSpan.Parse(m.TotalDuration),
+							TotalKills = m.TotalKills,
+							TotalDeaths = m.TotalDeaths,
+							TotalGamesStarted = m.TotalGamesStarted,
 						};
+
+						switch(m.Id)
+						{
+							case 3: o.WarGames = final; break;
+							case 6: o.CustomGames = final; break;
+							default:
+								throw new BranchException(
+									"unknown_game_mode_id",
+									new Dictionary<string, object>{ {"Id", m.Id} }
+								);
+						}
 						break;
 
 					default:
@@ -134,28 +193,31 @@ namespace Branch.Apps.ServiceHalo4.Services
 							new Dictionary<string, object>{ {"ModeType", mode.GetType()} }
 						);
 				}
-
-				final.TotalDuration = TimeSpan.Parse(mode.TotalDuration);
-				final.TotalKills = mode.TotalKills;
-				final.TotalDeaths = mode.TotalDeaths;
-				final.TotalGamesStarted = mode.TotalGamesStarted;
-
-				switch(mode.Id)
-				{
-					case 3: output.GameModes.WarGames = final as Int.ServiceRecord.WarGamesMode; break;
-					case 4: output.GameModes.Campaign = final as Int.ServiceRecord.CampaignMode; break;
-					case 5: output.GameModes.SpartanOps = final as Int.ServiceRecord.SpartanOpsMode; break;
-					case 6: output.GameModes.CustomGames = final as Int.ServiceRecord.WarGamesMode; break;
-
-					default:
-						throw new BranchException(
-							"unknown_game_mode",
-							new Dictionary<string, object>{ {"ModeId", mode.Id} }
-						);
-				}
 			}
 
-			return output;
+			return o;
+		}
+
+		private IntSR.FavoriteVariant serviceRecordFavoriteVariant(ExtSR.FavoriteVariant src)
+		{
+			if (src == null)
+				return new IntSR.FavoriteVariant();
+
+			return new IntSR.FavoriteVariant
+			{
+				ImageUrl = url(src.ImageUrl),
+				TotalDuration = src.TotalDuration,
+				TotalGamesStarted = src.TotalGamesStarted,
+				TotalGamesCompleted = src.TotalGamesCompleted,
+				TotalGamesWon = src.TotalGamesWon,
+				TotalMedals = src.TotalMedals,
+				TotalKills = src.TotalKills,
+				TotalDeaths = src.TotalDeaths,
+				KdRatio = src.KdRatio,
+				AveragePersonalScore = src.AveragePersonalScore,
+				Id = src.Id,
+				Name = src.Name,
+			};
 		}
 	}
 }

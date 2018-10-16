@@ -14,12 +14,12 @@ namespace Branch.Packages.Models.External.Halo4.ServiceRecord
 
 		public long NarrativeFlags { get; set; }
 
-		public object SinglePlayerDaso { get; set; }
+		public int? SinglePlayerDaso { get; set; }
 
-		public object SinglePlayerDifficulty { get; set; }
+		public int? SinglePlayerDifficulty { get; set; }
 
-		public object CoopDaso { get; set; }
+		public int? CoopDaso { get; set; }
 
-		public object CoopDifficulty { get; set; }
+		public int? CoopDifficulty { get; set; }
 	}
 }
