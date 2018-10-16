@@ -179,7 +179,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);
 
 			// TODO(0xdeafcafe): Don't forget to un-comment!
-			// TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
+			TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
 
 			return (final, finalCacheInfo);
 		}
