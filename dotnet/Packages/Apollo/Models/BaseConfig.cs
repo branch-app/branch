@@ -4,8 +4,8 @@ using Newtonsoft.Json.Schema;
 
 namespace Apollo.Models
 {
-	public class ConfigBase
+	public class BaseConfig
 	{
-		public string InternalKey { get; set; }
+		public string[] InternalKeys { get; set; }
 	}
 }

@@ -50,10 +50,10 @@ namespace Apollo.Middleware
 		public static void SetRpc<TRpc>(TRpc rpc) => rpcInstance = rpc;
 
 		public static void Handle<T>(IApplicationBuilder app)
-			where T : class, new() => app.Run(handleRun<T>);
+			where T : BaseConfig, new() => app.Run(handleRun<T>);
 
 		private static async Task handleRun<T>(HttpContext ctx)
-			where T : class, new()
+			where T : BaseConfig, new()
 		{
 			// Reject any non POST requests
 			if (ctx.Request.Method != "POST")

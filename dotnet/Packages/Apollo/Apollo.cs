@@ -23,7 +23,7 @@ namespace Apollo
 	/// </summary>
 	/// <typeparam name="T">The object that contains the configuration</typeparam>
 	public class ApolloStartup<T>
-		where T : class, new()
+		where T : BaseConfig, new()
 	{
 		internal static readonly Regex EndpointRegex = new Regex(@"[a-z]{1}[a-z0-9_]+", RegexOptions.Compiled);
 
@@ -70,6 +70,10 @@ namespace Apollo
 				});
 			});
 
+			// Check authorization header
+			app.Use((HttpContext ctx, Func<Task> next) =>
+				AuthorizationMiddleware.Handle(Configuration.InternalKeys, ctx, next));
+
 			// Custom routing
 			app.Map("/1", RequestMiddleware.Handle<T>);
 		}
@@ -83,7 +87,7 @@ namespace Apollo
 
 			// Validate endpoint
 			if (!EndpointRegex.Match(endpoint).Success)
-				throw new BranchException("endpoint_format_invalid", new Dictionary<string, object> { { "endpoint", endpoint } });
+				throw new BranchException("endpoint_format_invalid", new Dictionary<string, object> { { "Endpoint", endpoint } });
 
 			// If the endpoint is fresh, create the dictionary
 			if (!Methods.TryGetValue(endpoint, out var versions))
@@ -94,8 +98,8 @@ namespace Apollo
 				throw new BranchException(
 					"An endpoint with that date has already been registered.",
 					new Dictionary<string, object> {
-						{ "endpoint", endpoint },
-						{ "date", date },
+						{ "Endpoint", endpoint },
+						{ "Date", date },
 					}
 				);
 
@@ -104,10 +108,10 @@ namespace Apollo
 
 			// Check param counts
 			if (methodInfo.GetParameters().Length != 1)
-				throw new BranchException("invalid_param_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
+				throw new BranchException("invalid_param_length", new Dictionary<string, object> { { "MethodName", methodInfo.Name } });
 
 			if (methodInfo.ReturnType?.GenericTypeArguments.Length != 1)
-				throw new BranchException("invalid_return_argument_length", new Dictionary<string, object> { { "method_name", methodInfo.Name } });
+				throw new BranchException("invalid_return_argument_length", new Dictionary<string, object> { { "MethodName", methodInfo.Name } });
 
 			// Get request and response types
 			var requestType = methodInfo.GetParameters()[0].ParameterType;

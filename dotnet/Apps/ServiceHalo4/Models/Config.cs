@@ -5,7 +5,7 @@ using Branch.Packages.Models.Common.Config;
 
 namespace Branch.Apps.ServiceHalo4.Models
 {
-	public class Config : ConfigBase
+	public class Config : BaseConfig
 	{
 		public Dictionary<string, BranchServiceConfig> Services { get; set; }
 
