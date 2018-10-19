@@ -7,11 +7,13 @@ namespace Branch.Packages.Contracts.ServiceHalo4
 {
 	public class ReqGetServiceRecord
 	{
+		[JsonProperty("identity")]
 		public IdentityRequest Identity { get; set; }
 	}
 
 	public class ResGetServiceRecord : ServiceRecordResponse, IBranchResponse
 	{
+		[JsonProperty("cache_info")]
 		public ICacheInfo CacheInfo { get; set; }
 	}
 }
