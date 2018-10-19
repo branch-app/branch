@@ -13,14 +13,14 @@ namespace Branch.Clients.Auth
 			: base(baseUrl, key, new Options { Timeout = TimeSpan.FromSeconds(15) })
 		{ }
 
-		public async Task<ResGetHalo4Token> GetHalo4Token()
+		public async Task<ResGetHalo4Token> GetHalo4Token(ReqGetHalo4Token req)
 		{
-			return await base.Do<ResGetHalo4Token>("1/2018-03-21/get_halo4_token");
+			return await base.Do<ReqGetHalo4Token, ResGetHalo4Token>("1/2018-03-21/get_halo4_token", req);
 		}
 
-		public async Task<ResGetXboxLiveToken> GetXboxLiveToken()
+		public async Task<ResGetXboxLiveToken> GetXboxLiveToken(ReqGetXboxLiveToken req)
 		{
-			return await base.Do<ResGetXboxLiveToken>("1/2018-03-21/get_xboxlive_token");
+			return await base.Do<ReqGetXboxLiveToken, ResGetXboxLiveToken>("1/2018-03-21/get_xboxlive_token", req);
 		}
 	}
 }

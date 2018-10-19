@@ -12,5 +12,5 @@ async function getXboxLiveToken(ctx) {
 
 	validator('get-xboxlive-token')(input);
 
-	return await app.getXboxLiveToken();
+	return await app.getXboxLiveToken(input.forceRefresh === true);
 }

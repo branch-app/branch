@@ -2,5 +2,9 @@
 	"type": "object",
 	"additionalProperties": false,
 
-	"properties": { }
+	"properties": {
+		"force_refresh": {
+			"type": "boolean"
+		}
+	}
 }

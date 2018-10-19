@@ -40,7 +40,7 @@ namespace Branch.Apps.ServiceIdentity.Services
 
 		private async Task<ResGetXboxLiveToken> getAuth()
 		{
-			return await authClient.GetXboxLiveToken();
+			return await authClient.GetXboxLiveToken(new ReqGetXboxLiveToken());
 		}
 	}
 }

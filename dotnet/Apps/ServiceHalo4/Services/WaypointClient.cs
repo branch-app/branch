@@ -155,7 +155,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 		private async Task<Dictionary<string, string>> getAuthHeaders()
 		{
-			var resp = await authClient.GetHalo4Token();
+			var resp = await authClient.GetHalo4Token(new ReqGetHalo4Token());
 
 			return new Dictionary<string, string> {{ "X-343-Authorization-Spartan", resp.SpartanToken }};
 		}

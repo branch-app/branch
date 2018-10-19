@@ -5,8 +5,8 @@ namespace Branch.Packages.Contracts.ServiceAuth
 {
 	public interface IService
 	{
-		Task<ResGetHalo4Token> GetHalo4Token();
+		Task<ResGetHalo4Token> GetHalo4Token(ReqGetHalo4Token req);
 
-		Task<ResGetXboxLiveToken> GetXboxLiveToken();
+		Task<ResGetXboxLiveToken> GetXboxLiveToken(ReqGetXboxLiveToken req);
 	}
 }

@@ -2,7 +2,7 @@
 
 This service handles dealing with the various authentication providers used by the platform.
 
-Base URL: `/1`  
+Base URL: `/1`
 Example URL: `https://service-auth.branch-app.co/1`
 
 ## Configuration
@@ -46,7 +46,11 @@ All endpoints on this service authentication. Requests must have have the header
 Gets a valid Halo 4 spartan token, used to communicate with the Halo 4 API. It will cache the token, and only retrieve a new one every 50-60 minutes.
 
 #### Request
-No body required.
+```json
+{
+  "force_refresh": false
+}
+```
 
 #### Response
 ``` json
@@ -63,7 +67,11 @@ No body required.
 Gets a valid Xbox Live authentication token, used to communicate with the Xbox Live API. It will cache the token, and only retrieve a new one every 50-60 minutes.
 
 #### Request
-No body required.
+```json
+{
+  "force_refresh": false
+}
+```
 
 #### Response
 ``` json

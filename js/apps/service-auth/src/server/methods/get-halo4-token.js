@@ -12,5 +12,5 @@ async function getHalo4Token(ctx) {
 
 	validator('get-halo4-token')(input);
 
-	return await app.getHalo4Token();
+	return await app.getHalo4Token(input.forceRefresh === true);
 }
