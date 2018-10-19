@@ -6,6 +6,7 @@ WORKDIR /usr/local/app
 COPY ./Branch.sln .
 COPY ./Tests ./Tests
 COPY ./Clients ./Clients
+COPY ./LambdaFunctions ./LambdaFunctions
 COPY ./Packages ./Packages
 COPY ./Apps ./Apps
 RUN dotnet restore
