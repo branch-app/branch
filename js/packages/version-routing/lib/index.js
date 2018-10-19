@@ -39,12 +39,15 @@ function generateMethodMap(dirname) {
 
 		for (const version of Object.keys(method.versions)) {
 			const date = checkDate(version);
-			const func = method.versions[version];
+			const impl = method.versions[version];
 
-			if (!date || typeof func !== 'function')
+			if (!date || typeof impl !== 'object')
 				throw log.warn('invalid_export', { file, method });
 
-			versions.push({ date, func });
+			if (!impl.validator || typeof impl.func !== 'function')
+				throw log.warn('invalid_implementation', { file, method });
+
+			versions.push({ date, impl });
 			allVersions.add(date);
 		}
 
@@ -71,7 +74,7 @@ function generateMethodMap(dirname) {
 			});
 
 			if (implementation)
-				versionMap[versionStr][methodName] = implementation.func;
+				versionMap[versionStr][methodName] = implementation.impl;
 		}
 	}
 
