@@ -202,7 +202,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 		private IntSR.FavoriteVariant serviceRecordFavoriteVariant(ExtSR.FavoriteVariant src)
 		{
 			if (src == null)
-				return new IntSR.FavoriteVariant();
+				return null;
 
 			return new IntSR.FavoriteVariant
 			{
