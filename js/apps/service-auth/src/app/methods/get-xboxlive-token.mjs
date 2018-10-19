@@ -5,7 +5,6 @@ import querystring from 'querystring';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
 
-const browser = new Browser();
 const usrAuthClient = jsonClient('https://user.auth.xboxlive.com');
 const xstsClient = jsonClient('https://xsts.auth.xboxlive.com');
 
@@ -14,8 +13,6 @@ const authUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=00000000
 const tokenName = 'access_token';
 const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
 const redisKey = 'token:xbox-live';
-
-browser.userAgent = userAgent;
 
 export default async function getXboxLiveToken(forceRefresh) {
 	if (!forceRefresh) {
@@ -29,9 +26,11 @@ export default async function getXboxLiveToken(forceRefresh) {
 		}
 	}
 
+	const browser = new Browser();
 	const { microsoftAccount } = this.config.providers;
 
-	await browser.visit(authUrl);
+	browser.userAgent = userAgent;
+	await browser.visit(authUrl, { runScripts: true, loadCSS: false });
 	await browser.fill('input[type=email]', microsoftAccount.account).pressButton('Next');
 	await browser.fill('input[type=password]', microsoftAccount.password).pressButton('Sign in');
 
