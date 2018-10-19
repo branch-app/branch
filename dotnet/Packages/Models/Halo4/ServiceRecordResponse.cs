@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Branch.Packages.Converters;
+using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Models.Halo4.Common;
 using Branch.Packages.Models.Halo4.ServiceRecord;
 using Newtonsoft.Json;
@@ -9,7 +10,7 @@ namespace Branch.Packages.Models.Halo4
 {
 	public class ServiceRecordResponse
 	{
-		public int DateFidelity { get; set; }
+		public DateFidelity DateFidelity { get; set; }
 
 		public DateTime LastPlayed { get; set; }
 

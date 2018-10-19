@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Branch.Clients.Identity;
 using Branch.Packages.Contracts.ServiceIdentity;
+using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
 using Ext = Branch.Apps.ServiceHalo4.Models.Waypoint;
@@ -25,7 +26,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 			return new Int.ServiceRecordResponse
 			{
-				DateFidelity = 1,
+				DateFidelity = (DateFidelity) src.DateFidelity,
 				FirstPlayed = src.FirstPlayedUtc,
 				LastPlayed = src.LastPlayedUtc,
 				XP = src.XP,
