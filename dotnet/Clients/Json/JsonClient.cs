@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Json.Models;
 using Branch.Packages.Exceptions;
@@ -92,13 +93,10 @@ namespace Branch.Clients.Json
 			if (query != null && query.Any())
 				queryStr = "?" + String.Join("&", query.Select(q => $"{q.Key}={q.Value}"));
 
-			// Setup values
+			// Setup values and timeout
 			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString() + queryStr);
-			var timeout = getTimeout(newOpts);
-
-			// Add timeout
-			if (timeout != null)
-				request.Properties.Add("RequestTimeout", timeout);
+			var timeout = getTimeout(Options, newOpts);
+			var cts = new CancellationTokenSource(timeout);
 
 			// Add headers
 			if (newOpts != null && newOpts.Headers != null && newOpts.Headers.Any())
@@ -112,7 +110,7 @@ namespace Branch.Clients.Json
 				request.Content = new StringContent(content, Encoding.UTF8, "application/json");
 			}
 
-			var response = await Client.SendAsync(request);
+			var response = await Client.SendAsync(request, cts.Token);
 			var str = await response.Content.ReadAsStringAsync();
 
 			if (response.IsSuccessStatusCode)
@@ -156,12 +154,16 @@ namespace Branch.Clients.Json
 			throw plannedException;
 		}
 
-		private TimeSpan? getTimeout(Options domOpts)
+		private TimeSpan getTimeout(Options options, Options domOpts)
 		{
-			if (domOpts != null && domOpts.Timeout.Milliseconds != Options.Timeout.Milliseconds)
+			if (domOpts?.Timeout != null)
 				return domOpts.Timeout;
 
-			return null;
+			if (options?.Timeout != null)
+				return options.Timeout;
+
+			// Should never happen
+			return TimeSpan.FromSeconds(2);
 		}
 	}
 }
