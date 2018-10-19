@@ -1,4 +1,4 @@
-FROM node:9.5-alpine as builder
+FROM node:10.12.0-alpine as builder
 RUN mkdir -p /usr/local/app
 RUN apk add --no-cache parallel
 RUN echo | parallel --will-cite
@@ -18,7 +18,7 @@ RUN ls ./apps | parallel cp ./apps/{}/package.json ./build/{}
 RUN ls ./apps | parallel cp -R ./apps/{}/node_modules ./build/{}
 RUN ls ./apps | parallel cp -R ./apps/{}/build ./build/{}
 
-FROM node:9.5-alpine
+FROM node:10.12.0-alpine
 ENV NODE_ENV="production"
 ENV PORT="80"
 EXPOSE 80
