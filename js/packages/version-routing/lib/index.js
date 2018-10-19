@@ -1,4 +1,3 @@
-const fs = require('fs');
 const log = require('@branch-app/log');
 
 /*
@@ -13,39 +12,30 @@ const log = require('@branch-app/log');
 		versions: Version[], // ordered newer-to-older
 	};
 */
-
-const blacklist = new Set(['index.js', '_validate.js']);
 const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
-function generateMethodMap(dirname) {
-	const files = fs.readdirSync(dirname) // eslint-disable-line no-sync
-		.filter(f => (f.match(/\.js$/)) && !blacklist.has(f))
-		.map(f => ({ file: f, method: require(`${dirname}/${f}`).default })); // eslint-disable-line global-require
-
+function generateMethodMap(methodExports) {
 	const methods = {};
 	const versionMap = {};
 	const allVersions = new Set();
 
-	for (const { file, method } of files) {
-		if (!method)
-			throw log.warn('invalid_export', { file });
-
+	for (const method of Object.values(methodExports)) {
 		const removedAt = checkDate(method.removedAt);
 		const preview = method.preview || null;
 		const versions = [];
 
 		if (preview && typeof preview !== 'function')
-			throw log.warn('invalid_export', { file, method });
+			throw log.warn('invalid_export', { method });
 
 		for (const version of Object.keys(method.versions)) {
 			const date = checkDate(version);
 			const impl = method.versions[version];
 
 			if (!date || typeof impl !== 'object')
-				throw log.warn('invalid_export', { file, method });
+				throw log.warn('invalid_export', { method });
 
 			if (!impl.validator || typeof impl.func !== 'function')
-				throw log.warn('invalid_implementation', { file, method });
+				throw log.warn('invalid_implementation', { method });
 
 			versions.push({ date, impl });
 			allVersions.add(date);

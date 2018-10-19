@@ -1,7 +1,7 @@
 import camelize from 'camelize';
 import express from 'express';
 import log from '@branch-app/log';
-import methodVersionMap from './methods';
+import methodVersionMap from './import-methods.mjs';
 import snakeize from 'snakeize';
 import * as Middleware from './middleware';
 

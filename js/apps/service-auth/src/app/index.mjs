@@ -1,11 +1,10 @@
-import RedisClient from '@branch-app/redis-client';
 import * as Methods from './methods';
 
 export default class App {
-	config: {};
-	redis: RedisClient;
+	config;
+	redis;
 
-	constructor(config: {}, redis: RedisClient) {
+	constructor(config, redis) {
 		this.config = config;
 		this.redis = redis;
 	}

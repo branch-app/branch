@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "debug": "nodemon --exec babel-node -- src/boot/debug.js",
-    "start": "node build/boot/start.js",
-    "build": "rm -rf ./build && babel src --out-dir=build --source-maps --copy-files --quiet",
+    "debug": "nodemon -- --experimental-modules --harmony-class-fields src/boot/debug.mjs",
+    "start": "node --experimental-modules --harmony-class-fields build/boot/start.mjs",
+    "build": "rm -rf ./build && mkdir ./build && cp -R ./src/* ./build",
     "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
@@ -25,25 +25,6 @@
     "zombie": "5.0.8"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-syntax-flow": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-typecheck": "^3.9.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
     "nodemon": "^1.18.3"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "stage-2"
-    ],
-    "plugins": [
-      "typecheck",
-      "syntax-flow",
-      "transform-flow-strip-types",
-      "transform-class-properties"
-    ]
   }
 }

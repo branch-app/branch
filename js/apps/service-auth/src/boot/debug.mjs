@@ -1,9 +1,8 @@
 /* eslint-disable no-process-env, no-process-exit, func-style, no-console */
 
-import 'babel-polyfill';
 import App from '../app';
 import RedisClient from '@branch-app/redis-client';
-import Server from '../server';
+import Server from '../server/index';
 import camelize from 'camelize';
 import log from '@branch-app/log';
 import { readFileSync } from 'fs';
