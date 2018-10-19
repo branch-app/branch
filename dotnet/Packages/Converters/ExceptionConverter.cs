@@ -2,19 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Branch.Packages.Apollo.Models;
 using Branch.Packages.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Apollo.Converters
+namespace Branch.Packages.Converters
 {
+	// TODO(0xdeafcafe): Rename to BranchExceptionConverter
 	public class ExceptionConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			// TODO(0xdeafcafe): Handle non-branch
-
 			var exception = value as BranchException;
 			var error = parseException(exception);
 			var token = JToken.FromObject(error, serializer);
@@ -25,22 +23,24 @@ namespace Apollo.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			throw new NotImplementedException("Not needed as we will never serialize this way.");
+			var error = serializer.Deserialize(reader, typeof(ErrorBase)) as ErrorBase;
+
+			return parseError(error);
 		}
 
 		public override bool CanRead
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(Exception) || objectType.IsSubclassOf(typeof(Exception));
+			return objectType == typeof(BranchException);
 		}
 
-		private Error parseException(BranchException ex)
+		private ErrorBase parseException(BranchException ex)
 		{
-			var error = new Error
+			var error = new ErrorBase
 			{
 				Code = ex.Message,
 				Meta = parseExceptionData(ex.Data),
@@ -56,6 +56,13 @@ namespace Apollo.Converters
 			if (!error.Meta.Any()) error.Meta = null;
 
 			return error;
+		}
+
+		private BranchException parseError(ErrorBase err)
+		{
+			var reasons = err.Reasons.Select(r => parseError(r));
+
+			return new BranchException(err.Code, err.Meta, reasons);
 		}
 
 		private Dictionary<string, object> parseExceptionData(IDictionary data)

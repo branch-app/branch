@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Apollo.Models
+namespace Branch.Packages.Exceptions
 {
-	public class Error
+	public class ErrorBase
 	{
 		public string Code { get; set; }
 
@@ -11,6 +11,6 @@ namespace Branch.Packages.Apollo.Models
 		public Dictionary<string, object> Meta { get; set; }
 
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-		public IEnumerable<Error> Reasons { get; set; } = null;
+		public IEnumerable<ErrorBase> Reasons { get; set; } = null;
 	}
 }

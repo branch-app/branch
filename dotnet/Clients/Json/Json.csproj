@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Packages\Exceptions\Exceptions.csproj" />
+    <ProjectReference Include="..\..\Packages\Converters\Converters.csproj" />
   </ItemGroup>
 
 </Project>

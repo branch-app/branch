@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Apollo.Converters;
+using Branch.Packages.Converters;
 using Branch.Packages.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +30,7 @@ namespace Apollo.Middleware
 			{
 				var branchEx = ex as BranchException;
 
-				// TODO(0xdeafcafe): Handle this
+				// TODO(0xdeafcafe): Handle this properly
 				if (!(ex is BranchException))
 				{
 					Console.WriteLine(ex);

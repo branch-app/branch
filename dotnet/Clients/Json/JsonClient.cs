@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Json.Models;
+using Branch.Packages.Converters;
 using Branch.Packages.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -41,6 +42,8 @@ namespace Branch.Clients.Json
 		/// </summary>
 		public readonly string PlannedFailureCode = "change_me";
 
+		private JsonSerializerSettings jss;
+
 		/// <summary>
 		/// Initializes a new JsonClient.
 		/// </summary>
@@ -70,6 +73,12 @@ namespace Branch.Clients.Json
 
 			// Add timeout
 			Client.Timeout = Options.Timeout;
+
+			// Create serializer settings
+			jss = new JsonSerializerSettings
+			{
+				Converters = new List<JsonConverter> { new ExceptionConverter() },
+			};
 		}
 
 		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query = null, Options newOpts = null)
@@ -121,37 +130,18 @@ namespace Branch.Clients.Json
 				return JsonConvert.DeserializeObject<TRes>(str);
 			}
 
-			if (String.IsNullOrWhiteSpace(str) || response.Content.Headers.ContentType.MediaType == "application/json")
+			var isJson = response.Content.Headers.ContentType.MediaType == "application/json";
+			var hasContent = !String.IsNullOrWhiteSpace(str);
+
+			if (isJson && hasContent)
+				throwIfBranchException(str);
+
+			throw new BranchException(RequestFailedCode, new Dictionary<string, object>
 			{
-				string requestBody = null;
-
-				if (body != null)
-					requestBody = await request.Content.ReadAsStringAsync();
-
-				var exception = new Exception(RequestFailedCode);
-
-				exception.Data.Add("url", uri.ToString());
-				exception.Data.Add("verb", verb);
-				exception.Data.Add("status", (int) response.StatusCode);
-				exception.Data.Add("request", requestBody);
-
-				throw exception;
-			}
-
-			// We know what this is! 🆒
-			if (typeof(TErr) == typeof(BranchException))
-			{
-				// TODO(0xdeafcafe): parse into exception
-				throw new NotImplementedException();
-			}
-
-			var plannedException = new Exception(PlannedFailureCode);
-			var errorBody = JsonConvert.DeserializeObject<Dictionary<string, object>>(str);
-
-			foreach (var (key, value) in errorBody.Select(d => (d.Key, d.Value)))
-				plannedException.Data.Add(key, value);
-
-			throw plannedException;
+				{ "url", uri.ToString() },
+				{ "verb", verb },
+				{ "status_code", response.StatusCode },
+			});
 		}
 
 		private TimeSpan getTimeout(Options options, Options domOpts)
@@ -164,6 +154,17 @@ namespace Branch.Clients.Json
 
 			// Should never happen
 			return TimeSpan.FromSeconds(2);
+		}
+
+		private void throwIfBranchException(string str)
+		{
+			try
+			{
+				var err = JsonConvert.DeserializeObject<BranchException>(str, jss);
+
+				if (err.Message != null)
+					throw err;
+			} catch { /* */ }
 		}
 	}
 }
