@@ -61,12 +61,14 @@ export default class Server {
 		if (!method)
 			throw log.info('function_not_found');
 
+		method.validator(req.body);
+
 		const context = {
 			app: this.app,
 			input: camelize(req.body),
 		};
 
-		const output = await method(context);
+		const output = await method.func(context);
 
 		if (output === void 0 || output === null) {
 			res.status(httpNoContent);
