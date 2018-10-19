@@ -13,7 +13,7 @@ namespace Branch.Clients.Branch
 		public BranchClient(string baseUrl, string key, Options options = null)
 		{
 			options = options ?? new Options();
-			options.Headers.Add("Authorization", $"bearer 01.{key}");
+			options.Headers.Add("Authorization", $"bearer {key}");
 
 			Client = new JsonClient(baseUrl, options);
 		}
