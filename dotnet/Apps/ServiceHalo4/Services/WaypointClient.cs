@@ -172,7 +172,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 			var response = await requestWaypointData<External.ServiceRecordResponse>(path, null, key);
 
-			if (response != null && cacheInfo != null)
+			if (response == null && cacheInfo != null)
 				return (await fetchContent<ServiceRecordResponse>(key), cacheInfo);
 
 			var final = await transpiler.ServiceRecord(response);

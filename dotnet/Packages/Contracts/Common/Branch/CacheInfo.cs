@@ -63,7 +63,7 @@ namespace Branch.Packages.Contracts.Common.Branch
 		/// <param name="date">The time to check the content freshness against.</param>
 		public bool IsFresh(DateTime date)
 		{
-			return ExpiresAt < date;
+			return ExpiresAt > date;
 		}
 	}
 }
