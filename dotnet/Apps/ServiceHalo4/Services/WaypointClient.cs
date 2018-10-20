@@ -14,6 +14,7 @@ using Branch.Clients.Json.Models;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using Branch.Packages.Crypto;
+using Branch.Packages.Enums.External.Halo4;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
@@ -83,7 +84,28 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var opts = new Options(auth);
 
 			// TODO(0xdeafcafe): Handle waypoint errors
-			return await statsClient.Do<T, Exception>("GET", path, query, opts);
+			var response = await statsClient.Do<T, Exception>("GET", path, query, opts);
+
+			switch (response.StatusCode)
+			{
+				// Should never happen on player-related requests
+				case ResponseCode.NotFound:
+					throw new BranchException(
+						"content_not_found",
+						new Dictionary<string, object> {
+							{ "Path", path },
+							{ "Query", query },
+						}
+					);
+
+				case ResponseCode.PlayerHasNotPlayedHalo4:
+					throw new BranchException("identity_never_active");
+
+				case ResponseCode.Okay:
+				case ResponseCode.Found:
+				default:
+					return response;
+			}
 		}
 
 		private async Task<T> fetchContent<T>(string bucketKey)
