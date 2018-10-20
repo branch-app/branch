@@ -128,7 +128,6 @@ namespace Branch.Apps.ServiceHalo4.Services
 					case Ext.ServiceRecord.CampaignMode m:
 						o.Campaign = new IntSR.CampaignMode
 						{
-							DifficultyLevels = difficultyLevels(m.DifficultyLevels),
 							SinglePlayerMissions = missions(m.SinglePlayerMissions),
 							CoopMissions = missions(m.CoopMissions),
 							TotalTerminalsVisited = m.TotalTerminalsVisited,

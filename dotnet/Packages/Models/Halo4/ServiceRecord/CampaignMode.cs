@@ -7,7 +7,6 @@ namespace Branch.Packages.Models.Halo4.ServiceRecord
 {
 	public class CampaignMode
 	{
-		public DifficultyLevel[] DifficultyLevels { get; set; }
 
 		public Mission[] SinglePlayerMissions { get; set; }
 
