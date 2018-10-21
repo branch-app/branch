@@ -18,4 +18,4 @@ When you have made the required changes, ensure the config is up to date in AWS,
 $ dotnet lambda deploy-function
 ```
 
-All the settings are set in the `aws-lambda-tools-defaults.json` file. Configuration is set via the `CONFIG` environment variable as a JSON formatted string.
+All the settings are set in the `aws-lambda-tools-defaults.json` file. Configuration is set via the `CONFIG` environment variable as a JSON string in the AWS Lambda dashboard.
