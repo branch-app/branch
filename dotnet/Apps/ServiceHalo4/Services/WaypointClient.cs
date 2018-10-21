@@ -47,17 +47,13 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 		public WaypointClient(AuthClient authClient, IdentityClient identityClient, AmazonS3Client s3Client)
 		{
-			var jsonOptions = new Options(new Dictionary<string, string> {
-				{ "accept", "application/json" },
-			});
-
 			this.authClient = authClient;
 			this.s3Client = s3Client;
 			this.transpiler = new Transpiler(identityClient);
-			this.presenceClient = new JsonClient(presenceUrl, jsonOptions);
-			this.statsClient = new JsonClient(statsUrl, jsonOptions);
-			this.settingsClient = new JsonClient(settingsUrl, jsonOptions);
-			this.optionsClient = new JsonClient(optionsUrl, jsonOptions);
+			this.presenceClient = new JsonClient(presenceUrl);
+			this.statsClient = new JsonClient(statsUrl);
+			this.settingsClient = new JsonClient(settingsUrl);
+			this.optionsClient = new JsonClient(optionsUrl);
 		}
 
 		private async Task<ICacheInfo> fetchContentCacheInfo(string bucketKey)
