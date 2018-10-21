@@ -6,8 +6,9 @@
     "serve": "^10.0.2"
   },
   "scripts": {
-    "build": "mkdir build",
+    "debug": "serve ./data",
+    "build": "rm -rf ./build && mkdir ./build && mkdir ./build/data && cp -R ./data/* ./build/data",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "start": "serve ./data"
+    "start": "serve ./build/data"
   }
 }
