@@ -8,14 +8,10 @@ namespace Branch.Apps.ServiceHalo4.Services
 {
 	public partial class Transpiler
 	{
-		private IdentityClient identityClient { get; }
-
 		private Dictionary<string, string> assetMap { get; set; }
 
-		public Transpiler(IdentityClient identity)
+		public Transpiler()
 		{
-			identityClient = identity;
-
 			assetMap = new Dictionary<string, string>
 			{
 				{ "FUDMetadataAssets", "https://assets.halowaypoint.com/fud/v1/fudvideos.xml" },

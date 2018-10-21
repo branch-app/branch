@@ -37,6 +37,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 		private JsonClient settingsClient { get; }
 		private JsonClient optionsClient { get; }
 		private Transpiler transpiler { get; }
+		private Enricher enricher { get; }
 
 		private const string presenceUrl = "https://presence.svc.halowaypoint.com/en-US/";
 		private const string statsUrl = "https://stats.svc.halowaypoint.com/en-US/";
@@ -49,7 +50,8 @@ namespace Branch.Apps.ServiceHalo4.Services
 		{
 			this.authClient = authClient;
 			this.s3Client = s3Client;
-			this.transpiler = new Transpiler(identityClient);
+			this.transpiler = new Transpiler();
+			this.enricher = new Enricher(identityClient);
 			this.presenceClient = new JsonClient(presenceUrl);
 			this.statsClient = new JsonClient(statsUrl);
 			this.settingsClient = new JsonClient(settingsUrl);
@@ -193,10 +195,12 @@ namespace Branch.Apps.ServiceHalo4.Services
 			if (response == null && cacheInfo != null)
 				return (await fetchContent<ServiceRecordResponse>(key), cacheInfo);
 
-			var final = await transpiler.ServiceRecord(response);
+			// Transpile and enrich content
+			var final = transpiler.ServiceRecord(response);
+			final = await enricher.ServiceRecord(final, response);
+
 			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);
 
-			// TODO(0xdeafcafe): Don't forget to un-comment!
 			TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
 
 			return (final, finalCacheInfo);

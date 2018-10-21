@@ -16,14 +16,8 @@ namespace Branch.Apps.ServiceHalo4.Services
 {
 	public partial class Transpiler
 	{
-		public async Task<Int.ServiceRecordResponse> ServiceRecord(Ext.ServiceRecordResponse src)
+		public Int.ServiceRecordResponse ServiceRecord(Ext.ServiceRecordResponse src)
 		{
-			var identity = await identityClient.GetXboxLiveIdentity(new ReqGetXboxLiveIdentity
-			{
-				Type = XboxLiveIdentityType.Gamertag,
-				Value = src.Gamertag,
-			});
-
 			return new Int.ServiceRecordResponse
 			{
 				DateFidelity = (DateFidelity) src.DateFidelity,
@@ -38,7 +32,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				TotalLoadoutItemsPurchased = src.TotalLoadoutItemsPurchased,
 				TotalCommendationProgress = src.TotalCommendationProgress,
 
-				Identity = serviceRecordIdentity(src, identity),
+				Identity = serviceRecordIdentity(src),
 				FavoriteWeapon = serviceRecordFavoriteWeapon(src),
 				Specializations = serviceRecordSpecializations(src),
 				GameModes = serviceRecordGameModes(src),
@@ -49,11 +43,11 @@ namespace Branch.Apps.ServiceHalo4.Services
 			};
 		}
 
-		private IntSR.Identity serviceRecordIdentity(Ext.ServiceRecordResponse src, ResGetXboxLiveIdentity identity)
+		private IntSR.Identity serviceRecordIdentity(Ext.ServiceRecordResponse src)
 		{
 			return new IntSR.Identity
 			{
-				XUID = identity.XUID,
+				XUID = -1,
 				ServiceTag = src.ServiceTag,
 				EmblemUrl = url(src.EmblemImageUrl),
 			};
