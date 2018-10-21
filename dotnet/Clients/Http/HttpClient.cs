@@ -90,9 +90,29 @@ namespace Branch.Clients.Http
 			if (body != null)
 				request.Content = new StringContent(body, Encoding.UTF8);
 
-			var response = await Client.SendAsync(request, cts.Token);
+			try
+			{
+				var response = await Client.SendAsync(request, cts.Token);
 
-			return (request, response);
+				return (request, response);
+			}
+			catch (OperationCanceledException)
+			{
+				// Handle timeouts well
+				throw new BranchException(
+					"request_timeout",
+					new Dictionary<string, object>
+					{
+						{ "Url", uri.ToString() },
+						{ "Verb", verb },
+					}
+				);
+			}
+			catch
+			{
+				// If any other kind of exception, throw it
+				throw;
+			}
 		}
 
 		private TimeSpan getTimeout(Options options, Options domOpts)

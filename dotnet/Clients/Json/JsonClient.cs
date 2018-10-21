@@ -83,9 +83,9 @@ namespace Branch.Clients.Json
 
 			throw new BranchException(RequestFailedCode, new Dictionary<string, object>
 			{
-				{ "url", output.req.RequestUri.ToString() },
-				{ "verb", verb },
-				{ "status_code", output.resp.StatusCode },
+				{ "Url", output.req.RequestUri.ToString() },
+				{ "Verb", verb },
+				{ "StatusCode", output.resp.StatusCode },
 			});
 		}
 
