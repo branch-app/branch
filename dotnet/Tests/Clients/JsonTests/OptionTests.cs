@@ -15,18 +15,12 @@ namespace Branch.Tests.Clients.JsonTests
 		{
 			var options = new Options
 			{
-				Headers = new Dictionary<string, string>
-				{
-					{"X-Test-Header", "testing"},
-					{"Content-Type", "application/json"},
-				},
 				Timeout = TimeSpan.FromMilliseconds(2500),
 			};
 
 			var client = new JsonClient("https://example.com", options);
 
 			Assert.Equal(client.Client.Options.Timeout, options.Timeout);
-			Assert.Equal(client.Client.Options.Headers, options.Headers);
 		}
 	}
 }
