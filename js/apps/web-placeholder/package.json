@@ -6,7 +6,7 @@
     "serve": "^10.0.2"
   },
   "scripts": {
-    "build": "echo \"Error: no build specified\" && exit 0",
+    "build": "mkdir build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "start": "serve ./data"
   }
