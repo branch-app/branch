@@ -1,1 +1,1 @@
-ASPNETCORE_ENVIRONMENT=development ASPNETCORE_URLS=http://localhost:3030 dotnet watch run
+ASPNETCORE_ENVIRONMENT=development ASPNETCORE_URLS=http://localhost:3000 dotnet watch run
