@@ -39,5 +39,10 @@ namespace Branch.Packages.Exceptions
 			foreach (var pair in data)
 				Data.Add(pair.Key, pair.Value);
 		}
+
+		/// <summary>
+		/// Indicated if the exception has already been reported to Sentry.
+		/// </summary>
+		public bool Reported { get; set; }
 	}
 }

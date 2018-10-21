@@ -2,7 +2,7 @@
 using Branch.Clients.Branch;
 using System.Threading;
 using System.Threading.Tasks;
-using Branch.Clients.Json.Models;
+using Branch.Clients.Json;
 using Branch.Packages.Contracts.ServiceIdentity;
 
 namespace Branch.Clients.Identity

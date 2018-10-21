@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Branch.Clients.Json.Models;
+using Branch.Clients.Http;
+using Branch.Clients.Http.Models;
 using Branch.Packages.Converters;
 using Branch.Packages.Exceptions;
 using Newtonsoft.Json;
@@ -20,17 +18,7 @@ namespace Branch.Clients.Json
 	public class JsonClient
 	{
 		// The internal http client shared for every request.
-		internal HttpClient Client { get; private set; }
-
-		/// <summary>
-		/// Options to be passed into every request.
-		/// </summary>
-		public Options Options { get; private set; }
-
-		/// <summary>
-		/// The base url to be prefixed to every request.
-		/// </summary>
-		public Uri BaseUrl { get; private set; }
+		public HttpClient Client { get; private set; }
 
 		/// <summary>
 		/// The code used when there is a generic http failure.
@@ -38,10 +26,8 @@ namespace Branch.Clients.Json
 		public readonly string RequestFailedCode = "request_failed";
 
 		/// <summary>
-		/// The code used when there is an planned failure.
+		/// Serializer used to handle JSON on the way out.
 		/// </summary>
-		public readonly string PlannedFailureCode = "change_me";
-
 		private JsonSerializerSettings jss;
 
 		/// <summary>
@@ -50,29 +36,13 @@ namespace Branch.Clients.Json
 		/// <param name="baseUrl">The base url to be prefixed to every request.</param>
 		/// <param name="options">Options to be passed into every request.</param>
 		/// <param name="client">Client to pass in - only used for tests really.</param>
-		public JsonClient(string baseUrl, Options options = null, HttpClient client = null)
+		public JsonClient(string baseUrl, Options options = null)
 		{
-			Client = client;
+			options = options ?? new Options();
+			options.Headers.Add("Content-Type", "application/json");
+			options.Headers.Add("Accept", "application/json");
 
-			if (Client == null)
-			{
-				var handler = new HttpClientHandler
-				{
-					AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-				};
-
-				Client = new HttpClient(handler);
-			}
-
-			BaseUrl = new Uri(baseUrl);
-			Options = options ?? new Options();
-
-			// Add headers
-			foreach (var (key, value) in Options.Headers.Select(h => (h.Key, h.Value)))
-				Client.DefaultRequestHeaders.TryAddWithoutValidation(key, value);
-
-			// Add timeout
-			Client.Timeout = Options.Timeout;
+			Client = new HttpClient(baseUrl, options);
 
 			// Create serializer settings
 			jss = new JsonSerializerSettings
@@ -93,36 +63,11 @@ namespace Branch.Clients.Json
 			where TRes : class
 			where TErr : class
 		{
-			if (!Uri.TryCreate(BaseUrl, path, out Uri uri))
-				throw new UriFormatException("uri_invalid");
+			var content = body != null ? JsonConvert.SerializeObject(body) : null;
+			var output = await Client.Do(verb, path, query, content, newOpts);
+			var str = await output.resp.Content.ReadAsStringAsync();
 
-			var queryStr = "";
-
-			// Add query
-			if (query != null && query.Any())
-				queryStr = "?" + String.Join("&", query.Select(q => $"{q.Key}={q.Value}"));
-
-			// Setup values and timeout
-			var request = new HttpRequestMessage(new HttpMethod(verb), uri.ToString() + queryStr);
-			var timeout = getTimeout(Options, newOpts);
-			var cts = new CancellationTokenSource(timeout);
-
-			// Add headers
-			if (newOpts != null && newOpts.Headers != null && newOpts.Headers.Any())
-				foreach (var (key, value) in newOpts.Headers.Select(h => (h.Key, h.Value)))
-					request.Headers.TryAddWithoutValidation(key, value);
-
-			// Set body
-			if (body != null)
-			{
-				var content = JsonConvert.SerializeObject(body);
-				request.Content = new StringContent(content, Encoding.UTF8, "application/json");
-			}
-
-			var response = await Client.SendAsync(request, cts.Token);
-			var str = await response.Content.ReadAsStringAsync();
-
-			if (response.IsSuccessStatusCode)
+			if (output.resp.IsSuccessStatusCode)
 			{
 				if (String.IsNullOrWhiteSpace(str))
 					return null;
@@ -130,7 +75,7 @@ namespace Branch.Clients.Json
 				return JsonConvert.DeserializeObject<TRes>(str);
 			}
 
-			var isJson = response.Content.Headers.ContentType.MediaType == "application/json";
+			var isJson = output.resp.Content.Headers.ContentType.MediaType == "application/json";
 			var hasContent = !String.IsNullOrWhiteSpace(str);
 
 			if (isJson && hasContent)
@@ -138,9 +83,9 @@ namespace Branch.Clients.Json
 
 			throw new BranchException(RequestFailedCode, new Dictionary<string, object>
 			{
-				{ "url", uri.ToString() },
+				{ "url", output.req.RequestUri.ToString() },
 				{ "verb", verb },
-				{ "status_code", response.StatusCode },
+				{ "status_code", output.resp.StatusCode },
 			});
 		}
 

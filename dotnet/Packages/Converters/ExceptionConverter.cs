@@ -61,8 +61,12 @@ namespace Branch.Packages.Converters
 		private BranchException parseError(ErrorBase err)
 		{
 			var reasons = err.Reasons.Select(r => parseError(r));
+			var exception = new BranchException(err.Code, err.Meta, reasons)
+			{
+				Reported = true
+			};
 
-			return new BranchException(err.Code, err.Meta, reasons);
+			return exception;
 		}
 
 		private Dictionary<string, object> parseExceptionData(IDictionary data)

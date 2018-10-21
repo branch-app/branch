@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using Branch.Clients.Json;
 using System.Threading.Tasks;
-using Branch.Clients.Json.Models;
+using Branch.Clients.Http.Models;
 using System.Collections.Generic;
 
 namespace Branch.Tests.Clients.JsonTests
@@ -25,8 +25,8 @@ namespace Branch.Tests.Clients.JsonTests
 
 			var client = new JsonClient("https://example.com", options);
 
-			Assert.Equal(client.Options.Timeout, options.Timeout);
-			Assert.Equal(client.Options.Headers, options.Headers);
+			Assert.Equal(client.Client.Options.Timeout, options.Timeout);
+			Assert.Equal(client.Client.Options.Headers, options.Headers);
 		}
 	}
 }

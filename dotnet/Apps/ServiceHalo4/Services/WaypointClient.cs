@@ -10,7 +10,7 @@ using Amazon.S3.Transfer;
 using Branch.Clients.Auth;
 using Branch.Clients.Identity;
 using Branch.Clients.Json;
-using Branch.Clients.Json.Models;
+using Branch.Clients.Http.Models;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using Branch.Packages.Crypto;

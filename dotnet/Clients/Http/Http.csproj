@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Branch.Clients.Json</RootNamespace>
+    <RootNamespace>Branch.Clients.Http</RootNamespace>
     <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Packages\Exceptions\Exceptions.csproj" />
-    <ProjectReference Include="..\..\Packages\Converters\Converters.csproj" />
-    <ProjectReference Include="..\Http\Http.csproj" />
   </ItemGroup>
 
 </Project>

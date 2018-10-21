@@ -3,7 +3,7 @@ using Branch.Clients.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using System.Threading;
 using System.Threading.Tasks;
-using Branch.Clients.Json.Models;
+using Branch.Clients.Http.Models;
 
 namespace Branch.Clients.Auth
 {

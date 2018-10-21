@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Branch.Clients.Json.Models
+namespace Branch.Clients.Http.Models
 {
 	public class Options
 	{

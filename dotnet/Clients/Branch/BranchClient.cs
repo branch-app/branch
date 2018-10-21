@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Branch.Clients.Http.Models;
 using Branch.Clients.Json;
-using Branch.Clients.Json.Models;
 using Branch.Packages.Exceptions;
 
 namespace Branch.Clients.Branch
