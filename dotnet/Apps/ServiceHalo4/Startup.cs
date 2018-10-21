@@ -45,6 +45,7 @@ namespace Branch.Apps.ServiceHalo4
 			Mapper.Initialize(cfg =>
 			{
 				cfg.CreateMap<ServiceRecordResponse, ResGetServiceRecord>();
+				cfg.CreateMap<RecentMatchesResponse, ResGetRecentMatches>();
 			});
 
 			RpcRegistration<RPC>(rpc);

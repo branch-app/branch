@@ -22,23 +22,11 @@ namespace Branch.Apps.ServiceHalo4.App
 				Value = identReq.Value,
 			});
 
-			return null;
+			var response = await waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, count);
+			var result = Mapper.Map<ResGetRecentMatches>(response.recentMatches);
+			result.CacheInfo = response.cacheInfo;
 
-			// var paginationTestCount = count + 1;
-			// var response = await waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, paginationTestCount);
-			// var matches = response.recentMatches.Games;
-			// var hasMoreMatches = matches.Length == paginationTestCount;
-
-			// if (hasMoreMatches)
-			// 	matches = matches.Take((int) count).ToArray();
-
-			// return new ResGetRecentMatches
-			// {
-			// 	CacheInfo = response.cacheInfo,
-			// 	Matches = matches,
-			// 	DateFidelity = response.recentMatches.DateFidelity,
-			// 	HasMoreMatches = hasMoreMatches,
-			// };
+			return result;
 		}
 	}
 }

@@ -21,18 +21,9 @@ namespace Branch.Packages.Contracts.ServiceHalo4
 		public uint? Count { get; set; }
 	}
 
-	public class ResGetRecentMatches : IBranchResponse
+	public class ResGetRecentMatches : RecentMatchesResponse, IBranchResponse
 	{
 		[JsonProperty("cache_info")]
 		public ICacheInfo CacheInfo { get; set; }
-
-		[JsonProperty("matches")]
-		public object[] Matches { get; set; }
-
-		[JsonProperty("has_more_matches")]
-		public bool HasMoreMatches { get; set; }
-
-		[JsonProperty("date_fidelity")]
-		public int DateFidelity { get; set; }
 	}
 }

@@ -25,6 +25,7 @@ using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using External = Branch.Apps.ServiceHalo4.Models.Waypoint;
+using Enums = Branch.Packages.Enums.Halo4;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {
@@ -206,33 +207,38 @@ namespace Branch.Apps.ServiceHalo4.Services
 			return (final, finalCacheInfo);
 		}
 
-		// public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, GameMode gameMode, uint startAt, uint count)
-		// {
-		// 	var gameModeStr = gameMode.ToString("d");
-		// 	var query = new Dictionary<string, string>
-		// 	{
-		// 		{ "gamemodeid", gameModeStr },
-		// 		{ "startat", startAt.ToString() },
-		// 		{ "count", count.ToString() },
-		// 	};
-		// 	var path = $"players/{identity.Gamertag}/h4/matches";
-		// 	var key = $"halo-4/recent-matches/{identity.XUIDStr}-{gameModeStr}-{startAt}-{count}.json";
-		// 	var expire = TimeSpan.FromMinutes(10);
+		public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, Enums.GameMode gameMode, uint startAt, uint count)
+		{
+			var newCount = count + 1;
+			var gameModeStr = gameMode.ToString("d");
+			var query = new Dictionary<string, string>
+			{
+				{ "gamemodeid", gameModeStr },
+				{ "startat", startAt.ToString() },
+				{ "count", newCount.ToString() },
+			};
+			var path = $"players/{identity.Gamertag}/h4/matches";
+			var key = $"halo-4/recent-matches/{identity.XUIDStr}-{gameModeStr}-{startAt}-{newCount}.json";
+			var expire = TimeSpan.FromMinutes(10);
+			var cacheInfo = await fetchContentCacheInfo(key);
 
-		// 	return await requestWaypointData<RecentMatchesResponse>(path, query, key, expire);
-		// }
+			if (cacheInfo != null && cacheInfo.IsFresh())
+				return (await fetchContent<RecentMatchesResponse>(key), cacheInfo);
 
-		// private async Task<(T response, ICacheInfo cacheInfo)> requestWaypointData<T>(string path, Dictionary<string, string> query, string key, TimeSpan expire)
-		// 	where T : class
-		// {
-		// 	var auth = await getAuthHeaders();
-		// 	var cacheInfo = new CacheInfo(now, expire);
-		// 	var response = await statsClient.Do<T, Exception>("GET", path, query, new Options(auth));
+			var response = await requestWaypointData<External.RecentMatchesResponse>(path, null, key);
 
-		// 	// Upload file to S3
-		// 	TaskExt.FireAndForget(() => cacheContent(key, response, cacheInfo));
+			if (response == null && cacheInfo != null)
+				return (await fetchContent<RecentMatchesResponse>(key), cacheInfo);
 
-		// 	return (response, cacheInfo);
-		// }
+			// Transpile and enrich content
+			var final = transpiler.RecentMatches(response, newCount);
+			// final = await enricher.RecentMatches(final, response); // Nothing to enrich here I think
+
+			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);
+
+			TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
+
+			return (final, finalCacheInfo);
+		}
 	}
 }
