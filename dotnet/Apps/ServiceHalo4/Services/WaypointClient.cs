@@ -95,7 +95,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 					);
 
 				case ResponseCode.PlayerHasNotPlayedHalo4:
-					throw new BranchException("identity_never_active");
+					throw new BranchException("player_never_played");
 
 				case ResponseCode.Okay:
 				case ResponseCode.Found:
