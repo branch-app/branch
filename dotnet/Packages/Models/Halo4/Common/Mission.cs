@@ -1,3 +1,5 @@
+using Branch.Packages.Enums.Halo4;
+
 namespace Branch.Packages.Models.Halo4.Common
 {
 	public class Mission
@@ -6,6 +8,6 @@ namespace Branch.Packages.Models.Halo4.Common
 
 		public int MissionId { get; set; }
 
-		public int Difficulty { get; set; }
+		public Difficulty Difficulty { get; set; }
 	}
 }

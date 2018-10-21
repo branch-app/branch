@@ -1,4 +1,4 @@
-using Branch.Packages.Enums.External.Halo4;
+using Branch.Apps.ServiceHalo4.Enums.Waypoint;
 
 namespace Branch.Apps.ServiceHalo4.Models.Waypoint
 {

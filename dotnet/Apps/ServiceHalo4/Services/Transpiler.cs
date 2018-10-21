@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Branch.Clients.Identity;
+using Branch.Packages.Enums.Halo4;
 using ExtCom = Branch.Apps.ServiceHalo4.Models.Waypoint.Common;
 using IntCom = Branch.Packages.Models.Halo4.Common;
 
@@ -79,7 +80,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				MapId = src.MapId,
 				MissionId = src.MissionId,
-				Difficulty = src.Difficulty,
+				Difficulty = (Difficulty) src.Difficulty,
 			};
 		}
 

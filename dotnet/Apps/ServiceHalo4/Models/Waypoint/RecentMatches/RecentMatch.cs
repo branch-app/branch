@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Branch.Packages.Converters;
-using Branch.Packages.Enums.External.Halo4;
 using Branch.Apps.ServiceHalo4.Models.Waypoint.Common;
 using Newtonsoft.Json;
 
@@ -33,7 +32,7 @@ namespace Branch.Apps.ServiceHalo4.Models.Waypoint.RecentMatches
 
 		public bool Completed { get; set; }
 
-		public Result Result { get; set; }
+		public int Result { get; set; }
 
 		public DateTime EndDateUtc { get; set; }
 	}

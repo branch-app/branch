@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
+using Branch.Apps.ServiceHalo4.Enums.Waypoint;
 using Branch.Clients.Auth;
 using Branch.Clients.Identity;
 using Branch.Clients.Json;
@@ -14,7 +15,6 @@ using Branch.Clients.Http.Models;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceAuth;
 using Branch.Packages.Crypto;
-using Branch.Packages.Enums.External.Halo4;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
@@ -25,7 +25,6 @@ using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using External = Branch.Apps.ServiceHalo4.Models.Waypoint;
-using Enums = Branch.Packages.Enums.Halo4;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {
@@ -207,7 +206,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			return (final, finalCacheInfo);
 		}
 
-		public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, Enums.GameMode gameMode, uint startAt, uint count)
+		public async Task<(RecentMatchesResponse recentMatches, ICacheInfo cacheInfo)> GetRecentMatches(Identity identity, GameMode gameMode, uint startAt, uint count)
 		{
 			var newCount = count + 1;
 			var gameModeStr = gameMode.ToString("d");
@@ -225,7 +224,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			if (cacheInfo != null && cacheInfo.IsFresh())
 				return (await fetchContent<RecentMatchesResponse>(key), cacheInfo);
 
-			var response = await requestWaypointData<External.RecentMatchesResponse>(path, null, key);
+			var response = await requestWaypointData<External.RecentMatchesResponse>(path, query, key);
 
 			if (response == null && cacheInfo != null)
 				return (await fetchContent<RecentMatchesResponse>(key), cacheInfo);
