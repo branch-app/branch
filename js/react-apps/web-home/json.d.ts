@@ -3,3 +3,9 @@ declare module '*.json' {
 
 	export default value;
 }
+
+declare module 'config.json' {
+	const value: any;
+
+	export default value;
+}
