@@ -13,8 +13,7 @@ Example URL: `https://service-halo4.branch-app.co/1`
   "Services": {
     "Auth": {
       "Url": "http://service-auth",
-      "Key": "<auth service key>",
-      "Options": { "Timeout": 7000 }
+      "Key": "<auth service key>"
     },
     "Identity": {
       "Url": "http://service-identity",

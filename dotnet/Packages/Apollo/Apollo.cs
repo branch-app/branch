@@ -61,6 +61,9 @@ namespace Apollo
 			// Exception handling middleware
 			app.Use(ExceptionMiddleware.Handle);
 
+			// Set CORS headers
+			app.Use(CORSMiddleware.Handle);
+
 			// Add health check
 			app.Map("/system/health", innerApp => {
 				innerApp.Run(async context => {
