@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "react-apps/*"
   ]
 }
