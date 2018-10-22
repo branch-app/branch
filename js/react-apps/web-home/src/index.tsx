@@ -7,6 +7,6 @@ import routes from './Routes';
 import * as ReactDOM from 'react-dom';
 import 'window.requestanimationframe';
 
-configureStore();
+const { store, history } = configureStore();
 
-ReactDOM.render(routes(), document.getElementById('root') as HTMLElement);
+ReactDOM.render(routes(store, history), document.getElementById('root') as HTMLElement);

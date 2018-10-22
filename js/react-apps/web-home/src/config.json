@@ -1,0 +1,13 @@
+{
+	"env": "dev",
+	"services": {
+		"identity": {
+			"url": "https://service-identity.branchapp.co",
+			"key": "imNAGKE74LaVtgioydX64GBrEn3x7ZCR2KSw8qA4LZy3UaDc3AltWoxAPQH5QSqe"
+		},
+		"halo4": {
+			"url": "http://localhost:3000",
+			"key": "3kenSBuk7bg62h29RNhgAxfx15hlzC4bxdkQK1pBxoZqrFX2HMw9k8CGQhde1HXV"
+		}
+	}
+}

@@ -10,6 +10,13 @@ import {
 	Row,
 } from 'reactstrap';
 import './index.css';
+import { push } from 'connected-react-router';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
+export interface IProps {
+	dispatch: Dispatch<any>;
+}
 
 interface IState {
 	interval: number|null;
@@ -20,10 +27,10 @@ interface IState {
 	images: string[];
 }
 
-export default class Home extends React.PureComponent<{}, IState> {
+class Home extends React.PureComponent<IProps, IState> {
 	private typed: Typed;
 
-	constructor(props: {}) {
+	constructor(props: IProps) {
 		super(props);
 
 		this.state = {
@@ -106,9 +113,17 @@ export default class Home extends React.PureComponent<{}, IState> {
 								<p>{'Looking for someone? 🕵🏻‍'}</p>
 
 								<InputGroup>
-									<Input className={'search-input'} />
+									<Input
+										className={'search-input'}
+										onChange={this.searchChanged}
+										onKeyDown={this.searchKeyDown}
+										value={this.state.searchContent}
+									/>
 									<InputGroupAddon addonType={'append'}>
-										<Button color={'primary'}>
+										<Button
+											color={'primary'}
+											onClick={this.searchPressed}
+										>
 											{'Search'}
 										</Button>
 									</InputGroupAddon>
@@ -182,7 +197,24 @@ export default class Home extends React.PureComponent<{}, IState> {
 
 		if (frontIndex > images.length - 1)
 			frontIndex = 0;
-		
+
 		this.setState({ backIndex, frontIndex, images });
 	}
+
+	private searchKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key == 'Enter')
+			this.searchPressed();
+	}
+
+	private searchChanged = (event: React.FormEvent<HTMLInputElement>) => {
+		this.setState({ searchContent: event.currentTarget.value });
+	}
+
+	private searchPressed = () => {
+		// TODO(0xdeafcafe): Validate state
+
+		this.props.dispatch(push(`/halo-4/${this.state.searchContent}`));
+	}
 }
+
+export default connect()(Home);

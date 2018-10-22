@@ -44,10 +44,6 @@ export default class CacheClient {
 		if (value && ignoreCacheChecks)
 			return value;
 
-		console.log(new Date(value.cacheInfo.expiresAt));
-		console.log(new Date());
-		console.log(new Date(value.cacheInfo.expiresAt) > new Date());
-
 		if (new Date(value.cacheInfo.expiresAt) > new Date())
 			return value;
 

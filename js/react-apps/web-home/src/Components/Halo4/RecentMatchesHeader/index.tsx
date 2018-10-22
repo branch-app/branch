@@ -251,7 +251,7 @@ export default class RecentMatchesHeader extends React.PureComponent<{}, IState>
 
 		if (gameIndex > games.length - 1)
 			gameIndex = 0;
-		
+
 		this.setState({ gameIndex });
 	}
 }

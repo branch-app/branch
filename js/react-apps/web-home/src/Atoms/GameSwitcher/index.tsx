@@ -36,7 +36,7 @@ export default class GameSwitcher extends React.PureComponent<IProps, IState> {
 				className={'dropdown-selector'}
 				key={key}
 			>
-				<i className={'fas fa-chevron-down'}></i>
+				<i className={'fas fa-chevron-down'} />
 
 				<Popover
 					className={'game-switcher-popover'}
