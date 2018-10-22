@@ -56,8 +56,6 @@ export default class Fader extends React.PureComponent<IProps, IState> {
 		if (prevState.opacity === 1 && this.state.opacity === 0) {
 			const { children, duration, animator } = this.props;
 
-			console.log(children);
-
 			this.setState({
 				animator,
 				timeoutHandle: window.setTimeout(() => this.setNewValue(children), duration / 2),
