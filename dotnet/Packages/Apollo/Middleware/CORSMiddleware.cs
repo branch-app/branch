@@ -17,7 +17,7 @@ namespace Apollo.Middleware
 	{
 		static CORSMiddleware()
 		{
-			AllowedOrigins = new StringValues(new string[] { "https://preview.branchapp.co", "http://localhost:3000/" });
+			AllowedOrigins = new StringValues("*");
 			AllowedHeaders = new StringValues(new string[] { "Authorization", "Content-Type", "Accept" });
 			AllowedMethods = new StringValues("POST");
 		}
@@ -39,15 +39,19 @@ namespace Apollo.Middleware
 
 		public static async Task Handle(HttpContext ctx, Func<Task> next)
 		{
-			// Only return CORS headers on preflight checks
+			ctx.Response.Headers.Add("Access-Control-Allow-Origin", AllowedOrigins);
+			ctx.Response.Headers.Add("Access-Control-Allow-Headers", AllowedHeaders);
+			ctx.Response.Headers.Add("Access-Control-Allow-Methods", AllowedMethods);
+
+			// If a preflight check, return an empty body
 			if (ctx.Request.Method == "OPTIONS")
 			{
-				ctx.Response.Headers.Add("Access-Control-Allow-Origin", AllowedOrigins);
-				ctx.Response.Headers.Add("Access-Control-Allow-Headers", AllowedHeaders);
-				ctx.Response.Headers.Add("Access-Control-Allow-Methods", AllowedMethods);
+				ctx.Response.StatusCode = (int) HttpStatusCode.NoContent;
 			}
-
-			await next.Invoke();
+			else
+			{
+				await next.Invoke();
+			}
 		}
 	}
 }
