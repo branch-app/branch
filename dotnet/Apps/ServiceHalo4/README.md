@@ -89,6 +89,6 @@ The `game_mode` field is an enum of either `war-games`, `campaign`, `spartan-ops
   },
   "matches": [...],
   "has_more_matches": true,
-  "date_fidelity": 1
+  "date_fidelity": "rough"
 }
 ```
