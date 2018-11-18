@@ -18,5 +18,6 @@
 		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
 		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
 		<ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
+		<ProjectReference Include="..\..\Packages\Extensions\Extensions.csproj" />
 	</ItemGroup>
 </Project>

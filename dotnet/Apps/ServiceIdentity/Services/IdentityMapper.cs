@@ -4,28 +4,52 @@ using System.Linq;
 using System.Threading.Tasks;
 using Branch.Apps.ServiceIdentity.Models;
 using Branch.Packages.Enums.ServiceIdentity;
+using Branch.Packages.Extensions;
 
 namespace Branch.Apps.ServiceIdentity.Services
 {
 	public class IdentityMapper
 	{
 		private XboxLiveClient xblClient { get; }
-		private Dictionary<string, XboxLiveIdentity> gamertagMap { get; } = new Dictionary<string, XboxLiveIdentity>();
-		private Dictionary<long, XboxLiveIdentity> xuidMap { get; } = new Dictionary<long, XboxLiveIdentity>();
+		private Dictionary<string, XboxLiveIdentity> gamertagMap { get; }
+		private Dictionary<long, XboxLiveIdentity> xuidMap { get; }
+		private Dictionary<string, Task<XboxLiveIdentity>> inProgressLookups { get; }
 		private TimeSpan cacheExpiry = TimeSpan.FromMinutes(15);
 
 		public IdentityMapper(XboxLiveClient xblClient)
 		{
 			this.xblClient = xblClient;
+
+			this.gamertagMap = new Dictionary<string, XboxLiveIdentity>();
+			this.xuidMap = new Dictionary<long, XboxLiveIdentity>();
+			this.inProgressLookups = new Dictionary<string, Task<XboxLiveIdentity>>();
 		}
 
 		public async Task<XboxLiveIdentity> GetIdentity(XboxLiveIdentityType type, string value)
 		{
+			var key = $"{type.ToString()}-{value.ToSlug()}";
+			Task<XboxLiveIdentity> task = null;
+			lock (inProgressLookups)
+			{
+				inProgressLookups.TryGetValue(key, out task);
+
+				if (task == null) {
+					task = getIdentity(type, value);
+					inProgressLookups.TryAdd(key, task);
+				}
+			}
+
+			return await task;
+		}
+
+		private async Task<XboxLiveIdentity> getIdentity(XboxLiveIdentityType type, string value)
+		{
+			var sanitizedInput = value.ToSlug();
 			var now = DateTime.UtcNow;
 			XboxLiveIdentity identity = null;
 
 			if (type == XboxLiveIdentityType.Gamertag)
-				gamertagMap.TryGetValue(sanitizeGamertag(value), out identity);
+				gamertagMap.TryGetValue(sanitizedInput, out identity);
 			else if (type == XboxLiveIdentityType.Xuid)
 				xuidMap.TryGetValue(long.Parse(value), out identity);
 
@@ -43,15 +67,13 @@ namespace Branch.Apps.ServiceIdentity.Services
 				ExpiresAt = now.Add(cacheExpiry),
 			};
 
-			gamertagMap[sanitizeGamertag(identity.Gamertag)] = identity;
+			gamertagMap[identity.Gamertag.ToSlug()] = identity;
 			xuidMap[identity.XUID] = identity;
 
-			return identity;
-		}
+			// Remove from pending list
+			inProgressLookups.Remove(sanitizedInput);
 
-		private string sanitizeGamertag(string gamertag)
-		{
-			return gamertag.ToLower();
+			return identity;
 		}
 	}
 }
