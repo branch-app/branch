@@ -27,16 +27,16 @@ namespace Branch.Apps.ServiceIdentity.Services
 
 		public async Task<XboxLiveIdentity> GetIdentity(XboxLiveIdentityType type, string value)
 		{
-			var key = $"{type.ToString()}-{value.ToSlug()}";
+			var key = $"{type.ToString().ToLower()}-{value.ToSlug()}";
 			Task<XboxLiveIdentity> task = null;
 			lock (inProgressLookups)
 			{
 				inProgressLookups.TryGetValue(key, out task);
 
-				if (task == null) {
-					task = getIdentity(type, value);
-					inProgressLookups.TryAdd(key, task);
-				}
+				// There should never be a task in it's completed state in the dictionary,
+				// but if there is it won't be good - so we double check.
+				if (task == null || task.IsCompleted)
+					inProgressLookups.TryAdd(key, (task = getIdentity(type, value)));
 			}
 
 			return await task;
