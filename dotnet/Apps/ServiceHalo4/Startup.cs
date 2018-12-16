@@ -6,7 +6,7 @@ using Branch.Apps.ServiceHalo4.App;
 using Branch.Apps.ServiceHalo4.Models;
 using Branch.Apps.ServiceHalo4.Server;
 using Branch.Apps.ServiceHalo4.Services;
-using Branch.Clients.Auth;
+using Branch.Clients.Token;
 using Branch.Clients.Identity;
 using Branch.Packages.Contracts.ServiceHalo4;
 using Branch.Packages.Models.Common.Config;
@@ -29,16 +29,16 @@ namespace Branch.Apps.ServiceHalo4
 		public Startup(IHostingEnvironment environment)
 			: base(environment, "service-halo4")
 		{
-			var authConfig = Configuration.Services["Auth"];
+			var tokenConfig = Configuration.Services["Token"];
 			var identityConfig = Configuration.Services["Identity"];
 			var s3Config = Configuration.S3;
 
-			var authClient = new AuthClient(authConfig.Url, authConfig.Key);
+			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
 			var identityClient = new IdentityClient(identityConfig.Url, identityConfig.Key);
 			var s3Client = new AmazonS3Client(s3Config.AccessKeyId, s3Config.SecretAccessKey, RegionEndpoint.GetBySystemName(s3Config.Region));
-			var waypointClient = new WaypointClient(authClient, identityClient, s3Client);
+			var waypointClient = new WaypointClient(tokenClient, identityClient, s3Client);
 
-			var app = new Application(authClient, identityClient, waypointClient);
+			var app = new Application(tokenClient, identityClient, waypointClient);
 			var rpc = new RPC(app);
 
 			// Setup automapper yaboi

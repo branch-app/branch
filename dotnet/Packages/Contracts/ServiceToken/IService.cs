@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Branch.Packages.Contracts.ServiceAuth;
+using Branch.Packages.Contracts.ServiceToken;
 
-namespace Branch.Packages.Contracts.ServiceAuth
+namespace Branch.Packages.Contracts.ServiceToken
 {
 	public interface IService
 	{

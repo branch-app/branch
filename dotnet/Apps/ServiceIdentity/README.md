@@ -2,7 +2,7 @@
 
 This service handles dealing with the identity providers that branch uses. Currently this is only Xbox Live.
 
-Base URL: `/1`  
+Base URL: `/1`
 Example URL: `https://service-identity.branch-app.co/1`
 
 ## Configuration
@@ -11,9 +11,9 @@ Example URL: `https://service-identity.branch-app.co/1`
 {
   "SentryDSN": "<optional sentry DSN>",
   "Services": {
-    "Auth": {
-      "Url": "http://service-auth",
-      "Key": "<auth service key>",
+    "Token": {
+      "Url": "http://service-token",
+      "Key": "<token service key>",
       "Options": { "Timeout": 7000 }
     }
   },

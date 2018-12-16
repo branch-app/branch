@@ -2,7 +2,7 @@
 
 This service handles communication, transformation, and caching of Halo 4 stats from the Halo Waypoint stats API. All player stats are cached against the XUID of the player, so if they change gamertag, we don't have to re-cache any content 🤷🏻‍.
 
-Base URL: `/1`  
+Base URL: `/1`
 Example URL: `https://service-halo4.branch-app.co/1`
 
 ## Configuration
@@ -11,9 +11,9 @@ Example URL: `https://service-halo4.branch-app.co/1`
 {
   "SentryDSN": "<optional sentry DSN>",
   "Services": {
-    "Auth": {
-      "Url": "http://service-auth",
-      "Key": "<auth service key>"
+    "Token": {
+      "Url": "http://service-token",
+      "Key": "<token service key>"
     },
     "Identity": {
       "Url": "http://service-identity",

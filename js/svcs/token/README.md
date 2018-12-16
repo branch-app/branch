@@ -1,9 +1,9 @@
-# service-auth
+# service-token
 
-This service handles dealing with the various authentication providers used by the platform.
+This service handles the management of retrieving and storing tokens for the various authentication providers used by the platform.
 
 Base URL: `/1`
-Example URL: `https://service-auth.branch-app.co/1`
+Example URL: `https://service-token.branch-app.co/1`
 
 ## Configuration
 

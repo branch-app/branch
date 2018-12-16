@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Branch.Apps.ServiceIdentity.Models;
-using Branch.Clients.Auth;
+using Branch.Clients.Token;
 using Branch.Clients.Http;
 using Branch.Clients.Http.Models;
-using Branch.Packages.Contracts.ServiceAuth;
+using Branch.Packages.Contracts.ServiceToken;
 using Branch.Packages.Enums.External.XboxLive;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Exceptions;
@@ -17,14 +17,14 @@ namespace Branch.Apps.ServiceIdentity.Services
 {
 	public class XboxLiveClient
 	{
-		private AuthClient authClient { get; }
+		private TokenClient tokenClient { get; }
 		private HttpClient httpClient { get; }
 
 		private string baseUrl = "https://profile.xboxlive.com/users/";
 		private string profileSettingsUrl = "{0}({1})/profile/settings";
 		private string authHeader = "XBL3.0 x={0};{1}";
 
-		public XboxLiveClient(AuthClient authClient)
+		public XboxLiveClient(TokenClient tokenClient)
 		{
 			var httpHeaders = new Dictionary<string, string>
 			{
@@ -34,7 +34,7 @@ namespace Branch.Apps.ServiceIdentity.Services
 			};
 			var httpOptions = new Options(httpHeaders, TimeSpan.FromSeconds(2));
 
-			this.authClient = authClient;
+			this.tokenClient = tokenClient;
 			this.httpClient = new HttpClient(baseUrl, httpOptions);
 		}
 
@@ -92,7 +92,7 @@ namespace Branch.Apps.ServiceIdentity.Services
 
 		private async Task<string> getAuth()
 		{
-			var auth = await authClient.GetXboxLiveToken(new ReqGetXboxLiveToken());
+			var auth = await tokenClient.GetXboxLiveToken(new ReqGetXboxLiveToken());
 
 			return string.Format(authHeader, auth.Uhs, auth.Token);
 		}

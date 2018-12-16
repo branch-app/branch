@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Branch.Packages.Models.Common.Config;
 
-namespace Branch.LambdaFunctions.AuthRefresh.Models
+namespace Branch.LambdaFunctions.TokenRefresh.Models
 {
 	public class Config
 	{

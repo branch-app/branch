@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Branch.Packages.Contracts.ServiceAuth
+namespace Branch.Packages.Contracts.ServiceToken
 {
 	public class ReqGetXboxLiveToken
 	{

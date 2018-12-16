@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceIdentity", "Apps\Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{292DC400-9C56-4FB5-81CF-E1DF61A3C056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Clients\Auth\Auth.csproj", "{E7F4EEC8-D12A-4AD3-B728-F21B8E228451}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Token", "Clients\Token\Token.csproj", "{E7F4EEC8-D12A-4AD3-B728-F21B8E228451}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Branch", "Clients\Branch\Branch.csproj", "{4CAB276D-33BC-4472-958C-F6394B84B95F}"
 EndProject
@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converters", "Packages\Conv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LambdaFunctions", "LambdaFunctions", "{00BB77CA-439F-4392-B3BF-47F3DFA34E6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthRefresh", "LambdaFunctions\AuthRefresh\AuthRefresh.csproj", "{CB6B0727-D2C2-402C-9C4C-B65CCBB659CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenRefresh", "LambdaFunctions\TokenRefresh\TokenRefresh.csproj", "{CB6B0727-D2C2-402C-9C4C-B65CCBB659CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http", "Clients\Http\Http.csproj", "{DEC1D184-00EA-4143-983E-6E260A1B84A2}"
 EndProject

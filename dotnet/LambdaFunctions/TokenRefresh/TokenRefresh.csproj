@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>LambdaFunctions_AuthRefresh</RootNamespace>
+    <RootNamespace>LambdaFunctions_TokenRefresh</RootNamespace>
     <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
@@ -14,6 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Packages\Models\Models.csproj" />
-    <ProjectReference Include="..\..\Clients\Auth\Auth.csproj" />
+    <ProjectReference Include="..\..\Clients\Token\Token.csproj" />
   </ItemGroup>
 </Project>

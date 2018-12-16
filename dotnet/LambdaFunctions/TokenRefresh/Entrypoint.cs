@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Branch.LambdaFunctions.AuthRefresh.Models;
+using Branch.LambdaFunctions.TokenRefresh.Models;
 
 using Amazon.Lambda.Core;
-using Branch.Clients.Auth;
-using Branch.Packages.Contracts.ServiceAuth;
+using Branch.Clients.Token;
+using Branch.Packages.Contracts.ServiceToken;
 
-namespace Branch.LambdaFunctions.AuthRefresh
+namespace Branch.LambdaFunctions.TokenRefresh
 {
 	public class Entrypoint
 	{
@@ -21,13 +21,13 @@ namespace Branch.LambdaFunctions.AuthRefresh
 		public void Main(ILambdaContext context)
 		{
 			var config = parseConfig();
-			var authConfig = config.Services["Auth"];
-			var authClient = new AuthClient(authConfig.Url, authConfig.Key);
+			var tokenConfig = config.Services["Token"];
+			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
 
 			var tasks = Task.WhenAll(new List<Task>
 			{
-				authClient.GetHalo4Token(new ReqGetHalo4Token { ForceRefresh = true }),
-				authClient.GetXboxLiveToken(new ReqGetXboxLiveToken { ForceRefresh = true }),
+				tokenClient.GetHalo4Token(new ReqGetHalo4Token { ForceRefresh = true }),
+				tokenClient.GetXboxLiveToken(new ReqGetXboxLiveToken { ForceRefresh = true }),
 			});
 
 			tasks.Wait();

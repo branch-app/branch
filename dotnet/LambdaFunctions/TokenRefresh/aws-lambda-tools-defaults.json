@@ -3,9 +3,9 @@
   "region" : "eu-west-2",
   "configuration" : "Release",
   "framework" : "netcoreapp2.1",
-  "function-name": "auth-refresh",
+  "function-name": "token-refresh",
   "function-runtime":"dotnetcore2.1",
   "function-memory-size" : 128,
   "function-timeout" : 20,
-  "function-handler" : "AuthRefresh::Branch.LambdaFunctions.AuthRefresh.Entrypoint::Main"
+  "function-handler" : "TokenRefresh::Branch.LambdaFunctions.TokenRefresh.Entrypoint::Main"
 }

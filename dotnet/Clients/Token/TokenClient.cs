@@ -1,15 +1,15 @@
 ﻿using System;
 using Branch.Clients.Branch;
-using Branch.Packages.Contracts.ServiceAuth;
+using Branch.Packages.Contracts.ServiceToken;
 using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Http.Models;
 
-namespace Branch.Clients.Auth
+namespace Branch.Clients.Token
 {
-	public class AuthClient : BranchClient, IService
+	public class TokenClient : BranchClient, IService
 	{
-		public AuthClient(string baseUrl, string key)
+		public TokenClient(string baseUrl, string key)
 			: base(baseUrl, key, new Options { Timeout = TimeSpan.FromSeconds(15) })
 		{ }
 

@@ -3,7 +3,7 @@ using Branch.Apps.ServiceIdentity.App;
 using Branch.Apps.ServiceIdentity.Models;
 using Branch.Apps.ServiceIdentity.Server;
 using Branch.Apps.ServiceIdentity.Services;
-using Branch.Clients.Auth;
+using Branch.Clients.Token;
 using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Models.Common.Config;
@@ -25,12 +25,12 @@ namespace Branch.Apps.ServiceIdentity
 		public Startup(IHostingEnvironment environment)
 			: base(environment, "service-identity")
 		{
-			var authConfig = Configuration.Services["Auth"];
-			var authClient = new AuthClient(authConfig.Url, authConfig.Key);
-			var xblClient = new XboxLiveClient(authClient);
+			var tokenConfig = Configuration.Services["Tokem"];
+			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
+			var xblClient = new XboxLiveClient(tokenClient);
 			var identityMapper = new IdentityMapper(xblClient);
 
-			var app = new Application(authClient, identityMapper);
+			var app = new Application(tokenClient, identityMapper);
 			var rpc = new RPC(app);
 
 			RpcRegistration<RPC>(rpc);

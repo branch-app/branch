@@ -8,12 +8,12 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using Branch.Apps.ServiceHalo4.Enums.Waypoint;
-using Branch.Clients.Auth;
+using Branch.Clients.Token;
 using Branch.Clients.Identity;
 using Branch.Clients.Json;
 using Branch.Clients.Http.Models;
 using Branch.Packages.Contracts.Common.Branch;
-using Branch.Packages.Contracts.ServiceAuth;
+using Branch.Packages.Contracts.ServiceToken;
 using Branch.Packages.Crypto;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
@@ -30,7 +30,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 {
 	public partial class WaypointClient
 	{
-		private AuthClient authClient { get; }
+		private TokenClient tokenClient { get; }
 		private AmazonS3Client s3Client { get; }
 		private JsonClient presenceClient { get; }
 		private JsonClient statsClient { get; }
@@ -43,12 +43,12 @@ namespace Branch.Apps.ServiceHalo4.Services
 		private const string statsUrl = "https://stats.svc.halowaypoint.com/en-US/";
 		private const string settingsUrl = "https://settings.svc.halowaypoint.com/";
 		private const string optionsUrl = "https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
-		private const string authHeader = "X-343-Authorization-Spartan";
+		private const string authHeader = "X-343-Tokenorization-Spartan";
 		private const string storageBucket = "branch-app-stats";
 
-		public WaypointClient(AuthClient authClient, IdentityClient identityClient, AmazonS3Client s3Client)
+		public WaypointClient(TokenClient tokenClient, IdentityClient identityClient, AmazonS3Client s3Client)
 		{
-			this.authClient = authClient;
+			this.tokenClient = tokenClient;
 			this.s3Client = s3Client;
 			this.transpiler = new Transpiler();
 			this.enricher = new Enricher(identityClient);
@@ -63,7 +63,6 @@ namespace Branch.Apps.ServiceHalo4.Services
 			try
 			{
 				var resp = await s3Client.GetObjectMetadataAsync(storageBucket, bucketKey);
-				// var cacheHash = resp.Metadata["x-amz-meta-content-hash"];
 				var contentCreation = DateTime.Parse(resp.Metadata["x-amz-meta-content-creation"]);
 				var contentExpiration = DateTime.Parse(resp.Metadata["x-amz-meta-content-expiration"]);
 
@@ -78,7 +77,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 		private async Task<T> requestWaypointData<T>(string path, Dictionary<string, string> query, string bucketKey)
 			where T : External.WaypointResponse
 		{
-			var auth = await getAuthHeaders();
+			var auth = await getTokenHeaders();
 			var opts = new Options(auth);
 
 			// TODO(0xdeafcafe): Handle waypoint errors
@@ -173,11 +172,11 @@ namespace Branch.Apps.ServiceHalo4.Services
 			}
 		}
 
-		private async Task<Dictionary<string, string>> getAuthHeaders()
+		private async Task<Dictionary<string, string>> getTokenHeaders()
 		{
-			var resp = await authClient.GetHalo4Token(new ReqGetHalo4Token());
+			var resp = await tokenClient.GetHalo4Token(new ReqGetHalo4Token());
 
-			return new Dictionary<string, string> {{ "X-343-Authorization-Spartan", resp.SpartanToken }};
+			return new Dictionary<string, string> {{ "X-343-Tokenorization-Spartan", resp.SpartanToken }};
 		}
 
 		public async Task<(ServiceRecordResponse serviceRecord, ICacheInfo cacheInfo)> GetServiceRecord(Identity identity)

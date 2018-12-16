@@ -13,7 +13,7 @@
 		<Content Update="config.*.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Clients\Auth\Auth.csproj" />
+		<ProjectReference Include="..\..\Clients\Token\Token.csproj" />
 		<ProjectReference Include="..\..\Clients\Identity\Identity.csproj" />
 		<ProjectReference Include="..\..\Packages\Apollo\Apollo.csproj" />
 		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
