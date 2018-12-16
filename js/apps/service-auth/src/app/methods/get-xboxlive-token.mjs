@@ -1,6 +1,6 @@
-import Browser from 'zombie';
 import jsonClient from 'json-client';
 import log from '@branch-app/log';
+import puppeteer from 'puppeteer';
 import querystring from 'querystring';
 
 /* eslint-disable max-len, no-param-reassign, no-unused-expressions, no-invalid-this */
@@ -11,7 +11,6 @@ const xstsClient = jsonClient('https://xsts.auth.xboxlive.com');
 const authExpiry = 55 * 60;
 const authUrl = 'https://login.live.com/oauth20_authorize.srf?client_id=0000000048093EE3&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=token&display=touch&scope=service::user.auth.xboxlive.com::MBI_SSL';
 const tokenName = 'access_token';
-const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36';
 const redisKey = 'token:xbox-live';
 
 export default async function getXboxLiveToken(forceRefresh) {
@@ -26,20 +25,42 @@ export default async function getXboxLiveToken(forceRefresh) {
 		}
 	}
 
-	const browser = new Browser();
 	const { microsoftAccount } = this.config.providers;
+	const pi = await puppeteer.launch();
+	const page = await pi.newPage();
 
-	browser.userAgent = userAgent;
-	await browser.visit(authUrl, { runScripts: true, loadCSS: false });
-	await browser.fill('input[type=email]', microsoftAccount.account).pressButton('Next');
-	await browser.fill('input[type=password]', microsoftAccount.password).pressButton('Sign in');
+	await page.goto(authUrl);
 
-	const url = browser.url;
-	const index = url.indexOf(tokenName);
+	// Set email
+	await page.keyboard.type(microsoftAccount.account);
+	await Promise.all([
+		page.waitForNavigation({ waitUntil: 'networkidle2' }),
+		page.click('input[type=submit]'),
+	]);
 
-	if (index < 0) throw log.error('unable_to_retrieve_tokens', { url });
+	// Set password
+	await page.keyboard.type(microsoftAccount.password);
+	await Promise.all([
+		page.waitForNavigation({ waitUntil: 'networkidle2' }),
+		page.click('input[type=submit]'),
+	]);
 
-	const parsedBody = querystring.parse(url.substring(index));
+	const title = await page.evaluate(() => {
+		const t = document.querySelector('#iPageTitle');
+
+		return t ? t.textContent : null;
+	});
+
+	// There has been a terms update
+	if (title && title.includes('terms')) {
+		await Promise.all([
+			page.waitForNavigation({ waitUntil: 'networkidle2' }),
+			page.click('input[type=submit]'),
+		]);
+	}
+
+	const url = await page.evaluate(() => window.location.hash);
+	const parsedBody = querystring.parse(url.substring(1));
 
 	const usrAuth = await usrAuthClient('post', 'user/authenticate', null, {
 		Properties: {
