@@ -1,0 +1,10 @@
+{
+  "name": "service-auth",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "debug": "nodemon -- --experimental-modules --harmony-class-fields src/boot/debug.mjs",
+    "start": "node --experimental-modules --harmony-class-fields src/boot/start.mjs",
+    "test": "echo \"no tests yet\" && exit 0"
+  }
+}

@@ -5,11 +5,11 @@ workflows:
 
   build_all:
     jobs:
-      - build_js
+      - build_js_svcs
       - build_dotnet
 
 jobs:
-  build_js:
+  build_js_svcs:
     docker:
       - image: circleci/buildpack-deps:latest
 
@@ -21,7 +21,7 @@ jobs:
       - checkout: { path: "/home/circleci/repo" }
       - setup_remote_docker: { version: 17.09.0-ce, docker_layer_caching: true }
       - run: |
-          docker build -t js-services .
+          docker build -t js-services -f svcs.Dockerfile .
 
       # push to aws
       - run: |
