@@ -28,9 +28,12 @@ Otherwise, if you're booing via the `start` entrypoint, you must set an environm
     "database": 1,
     "password": "<redis password>"
   },
-  "key": "<secret key used when service is called>"
+  "remote_chrome_host": "<optional url of the remote chrome host>",
+  "internal_keys": ["<secret key used when service is called>"]
 }
 ```
+
+It's important to note that if you're setting the `remote_chrome_host` key, you should omit the protocol, so you'd put `chrome:9222` instead of `http://chrome:9222`.
 
 ## Authentication
 

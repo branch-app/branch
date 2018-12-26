@@ -9,9 +9,10 @@ import * as methodsExports from './methods';
 const httpOK = 200;
 const httpNoContent = 204;
 const versionRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+const methodVersionMap = versionRouting(methodsExports);
 const versions = Object.keys(methodVersionMap).sort();
 const latestVersion = versions[versions.length - 1];
-const methodVersionMap = versionRouting(methodsExports);
 
 export default class Server {
 	constructor(app, options = {}) {
