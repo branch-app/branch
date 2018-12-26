@@ -1,7 +1,7 @@
 {
   "name": "@branch-app/version-routing",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
 
   "license": "MIT",
   "author": "Cuvva (https://cuvva.com/",

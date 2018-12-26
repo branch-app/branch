@@ -1,22 +1,22 @@
 {
-	"name": "@branch-app/log",
-	"version": "0.0.0",
-	"private": false,
+  "name": "@branch-app/log",
+  "version": "0.0.0",
+  "private": true,
 
-	"license": "MIT",
-	"author": "Alex Forbes-Reed <npm@alx.red>",
+  "license": "MIT",
+  "author": "Alex Forbes-Reed <npm@alx.red>",
 
-	"main": "lib/index.js",
+  "main": "lib/index.js",
 
-	"scripts": {
-		"test": "tape test/index.js",
-		"test-travis": "istanbul cover test/index.js --report lcovonly"
-	},
+  "scripts": {
+    "test": "tape test/index.js",
+    "test-travis": "istanbul cover test/index.js --report lcovonly"
+  },
 
-	"devDependencies": {
-		"coveralls": "^3.0.0",
-		"istanbul": "^0.4.5",
-		"tape": "^4.9.0",
-		"test-console": "^1.1.0"
-	}
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "tape": "^4.9.0",
+    "test-console": "^1.1.0"
+  }
 }

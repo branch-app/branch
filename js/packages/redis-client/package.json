@@ -1,7 +1,7 @@
 {
   "name": "@branch-app/redis-client",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
 
   "license": "MIT",
   "author": "Alex Forbes-Reed <npm@alx.red>",
