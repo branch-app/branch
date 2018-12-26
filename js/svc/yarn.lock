@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@branch-app/log-sentry@file:../packages/log-sentry":
+"@branch-app/log-sentry@file:../pkg/log-sentry":
   version "0.0.0"
 
-"@branch-app/log@file:../packages/log":
+"@branch-app/log@file:../pkg/log":
   version "0.0.0"
 
-"@branch-app/redis-client@file:../packages/redis-client":
+"@branch-app/redis-client@file:../pkg/redis-client":
   version "0.0.0"
   dependencies:
     redis "^2.8.0"
     snakeize "^0.1.0"
 
-"@branch-app/version-routing@file:../packages/version-routing":
+"@branch-app/version-routing@file:../pkg/version-routing":
   version "0.0.0"
 
 abbrev@1:

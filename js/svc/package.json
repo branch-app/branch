@@ -4,10 +4,10 @@
 		"*"
 	],
 	"dependencies": {
-		"@branch-app/log": "file:../packages/log",
-		"@branch-app/log-sentry": "file:../packages/log-sentry",
-		"@branch-app/redis-client": "file:../packages/redis-client",
-		"@branch-app/version-routing": "file:../packages/version-routing",
+		"@branch-app/log": "file:../pkg/log",
+		"@branch-app/log-sentry": "file:../pkg/log-sentry",
+		"@branch-app/redis-client": "file:../pkg/redis-client",
+		"@branch-app/version-routing": "file:../pkg/version-routing",
 		"body-parser": "^1.18.3",
 		"camelize": "^1.0.0",
 		"express": "^4.16.4",

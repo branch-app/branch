@@ -21,7 +21,7 @@ jobs:
       - checkout: { path: "/home/circleci/repo" }
       - setup_remote_docker: { version: 17.09.0-ce, docker_layer_caching: true }
       - run: |
-          docker build -t js-services -f svcs.Dockerfile .
+          docker build -t js-services -f svc.Dockerfile .
 
       # push to aws
       - run: |
