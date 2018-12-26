@@ -25,7 +25,7 @@ namespace Branch.Apps.ServiceIdentity
 		public Startup(IHostingEnvironment environment)
 			: base(environment, "service-identity")
 		{
-			var tokenConfig = Configuration.Services["Tokem"];
+			var tokenConfig = Configuration.Services["Token"];
 			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
 			var xblClient = new XboxLiveClient(tokenClient);
 			var identityMapper = new IdentityMapper(xblClient);
