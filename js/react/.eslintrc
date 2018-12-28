@@ -1,0 +1,36 @@
+{
+	"extends": "eslint:recommended",
+	"parser": "babel-eslint",
+
+	"plugins": [
+		"react"
+	],
+
+	"env": {
+		"node": false,
+		"browser": true
+	},
+
+	"globals": {
+		"Promise": false,
+		"Set": false,
+		"window": false
+	},
+
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"impliedStrict": true,
+			"jsx": true
+		}
+	},
+
+	"rules": {
+		"sort-imports": [1, { "memberSyntaxSortOrder": ["single", "all", "multiple", "none"] }],
+		"react/no-multi-comp": 0,
+		"react/prop-types": 0,
+		"react/jsx-uses-vars": 2,
+		"react/jsx-uses-react": 2
+	}
+}
