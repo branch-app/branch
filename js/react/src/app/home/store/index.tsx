@@ -1,10 +1,11 @@
 import { combineReducers, Action, AnyAction, Dispatch } from 'redux';
 import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
-import { all /*, fork */ } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 
 import { IdentityState } from '../../../lib/platform/identity/store';
 import identityReducer from '../../../lib/platform/identity/store/reducers';
+import identitySaga from '../../../lib/platform/identity/store/sagas';
 
 export interface ApplicationState {
 	router?: RouterState,
@@ -20,7 +21,7 @@ export const createRootReducer = (history: History) => combineReducers<Applicati
 
 export function* rootSaga() {
 	yield all([
-		// fork(identitySaga),
+		fork(identitySaga),
 	]);
 }
 

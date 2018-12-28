@@ -1,5 +1,3 @@
-import { IdentityType } from '../types/identity-type';
-
 export interface IdentityState {
 
 }
@@ -10,5 +8,7 @@ export interface IdentityPayload {
 }
 
 export const IdentityActionTypes = {
-
+	FETCH_IDENTITY: '@@platform/identity/FETCH_IDENTITY',
+	FETCHED_IDENTITY_SUCCESS: '@@platform/identity/FETCHED_IDENTITY_SUCCESS',
+	FETCHED_IDENTITY_FAILURE: '@@platform/identity/FETCHED_IDENTITY_FAILURE',
 }

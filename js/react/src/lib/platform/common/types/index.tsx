@@ -1,3 +1,3 @@
 export * from './cache';
-export * from './error';
+export * from './branch-error';
 export * from './response';

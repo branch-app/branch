@@ -4,11 +4,16 @@ import { Dispatch } from 'redux';
 import * as React from 'react';
 
 import Page from '../components/layout/Page';
+import { IdentityPayload, fetchIdentity } from '../../../lib/platform/identity/store';
 
-export interface IProps extends ConnectedReduxProps { }
+export interface IProps extends ConnectedReduxProps {
+	fetchIdentity: typeof fetchIdentity.request,
+}
 
 class Home extends React.PureComponent<IProps> {
 	public render() {
+		this.props.fetchIdentity({ type: 'gamertag', value: 'phoenixbantrain' });
+
 		return (
 			<Page>
 
@@ -17,8 +22,10 @@ class Home extends React.PureComponent<IProps> {
 	}
 }
 
-const mapStateToProps = (state: ApplicationState) => ({});
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapStateToProps = (state: ApplicationState) => ({ });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+	fetchIdentity: (payload: IdentityPayload) => dispatch(fetchIdentity.request(payload)),
+});
 
 export default connect(
 	mapStateToProps,

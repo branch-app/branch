@@ -8,6 +8,7 @@ import { Store, AnyAction } from 'redux';
 
 declare global {
 	interface Window {
+		branch: any;
 		store: Store<ApplicationState, AnyAction>,
 	}
 }

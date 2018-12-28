@@ -1,4 +1,4 @@
-import client from './identity-client';
+import client from './client';
 import * as store from './store';
 import * as types from './types';
 
