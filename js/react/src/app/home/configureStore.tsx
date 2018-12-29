@@ -6,6 +6,7 @@ import { History } from 'history';
 import { ApplicationState, createRootReducer, rootSaga } from './store';
 
 import IdentityClient from '../../lib/platform/identity/client';
+import CacheClient from '../../lib/platform/common/cache-client';
 
 export default function configureStore(history: History) : Store<ApplicationState> {
 	const composeEnhancers = composeWithDevTools({});
@@ -29,10 +30,14 @@ export default function configureStore(history: History) : Store<ApplicationStat
 }
 
 function createClients() {
+	// All clients share the same cache client
+	const cacheClient = new CacheClient();
+
 	return {
 		identityClient: new IdentityClient(
 			'https://service-identity.branchapp.co',
 			'imNAGKE74LaVtgioydX64GBrEn3x7ZCR2KSw8qA4LZy3UaDc3AltWoxAPQH5QSqe',
+			cacheClient,
 		),
 	};
 }

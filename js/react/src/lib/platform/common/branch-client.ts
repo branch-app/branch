@@ -3,10 +3,10 @@ import CacheClient from './cache-client';
 import { Response } from './types';
 
 export default class BranchClient {
-	public readonly client: Client;
-	public readonly cacheClient: CacheClient;
+	readonly client: Client;
+	readonly cacheClient: CacheClient;
 
-	constructor(baseUrl: string, key: string) {
+	constructor(baseUrl: string, key: string, cacheClient: CacheClient) {
 		const options = {
 			headers: {
 				authorization: `bearer ${key}`,
@@ -14,22 +14,22 @@ export default class BranchClient {
 		};
 
 		this.client = crpc(baseUrl, options);
-		this.cacheClient = new CacheClient();
+		this.cacheClient = cacheClient;
 	}
 
-	public async get<TRes>(path: string, body: any): Promise<TRes> {
+	async get<TRes>(path: string, body: any): Promise<TRes> {
 		return await this.client<TRes>(path, body);
 	}
 
-	public async getWithCache<TRes extends Response>(cacheKey: string, path: string, body: any): Promise<TRes> {
-		const cachedContent = this.cacheClient.readValue<TRes>(cacheKey);
+	async getWithCache<TRes extends Response>(cacheKey: string, path: string, body: any): Promise<TRes> {
+		const cachedContent = await this.cacheClient.get<TRes>(cacheKey);
 
 		if (cachedContent)
 			return cachedContent;
 
 		const response = await this.get<TRes>(path, body);
 
-		this.cacheClient.writeValue(cacheKey, response);
+		await this.cacheClient.set(cacheKey, response);
 
 		return response;
 	}

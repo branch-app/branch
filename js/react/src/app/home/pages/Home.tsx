@@ -11,9 +11,11 @@ export interface IProps extends ConnectedReduxProps {
 }
 
 class Home extends React.PureComponent<IProps> {
-	public render() {
+	componentDidMount() {
 		this.props.fetchIdentity({ type: 'gamertag', value: 'phoenixbantrain' });
+	}
 
+	render() {
 		return (
 			<Page>
 
