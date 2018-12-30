@@ -61,6 +61,67 @@ Retrieves the Halo 4 Service Record of the player. *10 minute cache.*
 }
 ```
 
+### `get_player_overview`
+
+Retrieves an overview of the Halo 4 Service Record of the player. *10 minute cache.*
+
+#### Request
+```json
+{
+  "identity": {
+    "type": "gamertag",
+    "value": "PhoenixBanTrain"
+  }
+}
+```
+
+#### Response
+```json
+{
+  "cache_info": {
+    "cached_at": "2018-12-30T18:26:25.024942Z",
+    "expires_at": "2018-12-30T18:36:25.024942Z"
+  },
+  "identity": {
+    "gamertag": "PhoenixBanTrain",
+    "xuid": 2533274956338602,
+    "service_tag": "DOPE",
+    "emblem_url": "https://emblems.svc.halowaypoint.com/h4/emblems/white_cobalt_grid-on-silver_4diamonds?size={size}"
+  },
+  "favorite_weapon": {
+    "id": 16,
+    "name": "Battle Rifle",
+    "description": "DESIGNATION: BR85 Heavy-Barrel Service Rifle. The BR85HB Service Rifle is a gas-operated, magazine-fed, semi-automatic rifle optimized for three-round burst firing, and proven to be an extraordinarily versatile weapon at a wide variety of ranges in the hands of a capable marksman.",
+    "image_url": "https://assets.halowaypoint.com/games/h4/damage-types/v1/{size}/battle-rifle.png",
+    "total_kills": 5686
+  },
+  "current_rank": {
+    "id": 129,
+    "name": "130",
+    "image_url": "https://assets.halowaypoint.com/games/h4/ranks/v1/{size}/sr-130.png",
+    "start_xp": 338400
+  },
+  "top_medals": [
+    {
+      "id": 17,
+      "name": "Unfriggenbelievable",
+      "description": "Kill 40 opponents without dying.",
+      "image_url": "https://assets.halowaypoint.com/games/h4/medals/v1/{size}/spree-unfriggenbelievable.png",
+      "total_awarded": 41
+    }
+  ],
+  "xp": 338400,
+  "spartan_points": 52,
+  "total_games_started": 1668,
+  "total_medals_earned": 50823,
+  "total_gameplay": "P7DT21H24M55S",
+  "total_challenges_completed": 165,
+  "total_loadout_items_purchased": 39,
+  "total_commendation_progress": 0.97
+}
+```
+
+
 ### `get_recent_matches`
 
 Retrieves a list of recent Halo 4 matches for the player. *10 minute cache.*

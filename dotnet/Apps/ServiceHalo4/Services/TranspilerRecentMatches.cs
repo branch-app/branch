@@ -127,7 +127,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				Id = src.MapId,
 				Name = src.MapName,
-				ImageUrl = url(src.MapImageUrl),
+				ImageUrl = Url(src.MapImageUrl),
 			};
 		}
 
@@ -155,7 +155,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			return new IntRM.GameVariant
 			{
 				BaseId = src.BaseVariantId,
-				BaseImageUrl = url(src.BaseVariantImageUrl),
+				BaseImageUrl = Url(src.BaseVariantImageUrl),
 				Name = src.VariantName,
 			};
 		}
@@ -174,7 +174,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			return new IntRM.MultiplayerMap
 			{
 				Id = src.MapId,
-				ImageUrl = url(src.MapImageUrl),
+				ImageUrl = Url(src.MapImageUrl),
 				VariantName = src.MapVariantName,
 			};
 		}

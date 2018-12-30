@@ -28,6 +28,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			});
 
 			sr.Identity.XUID = identity.XUID;
+			sr.Identity.Gamertag = identity.Gamertag;
 
 			return sr;
 		}

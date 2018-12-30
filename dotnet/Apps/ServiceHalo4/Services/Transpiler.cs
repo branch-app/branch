@@ -45,7 +45,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			};
 		}
 
-		public string url(ExtCom.ImageUrl src)
+		public string Url(ExtCom.ImageUrl src)
 		{
 			if (src.BaseUrl == "GameBaseVariant")
 				return null;
@@ -62,7 +62,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				Id = src.Id,
 				Name = src.Name,
 				Description = src.Description,
-				ImageUrl = url(src.ImageUrl),
+				ImageUrl = Url(src.ImageUrl),
 			};
 		}
 
@@ -102,7 +102,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 					Id = src.PlaylistId,
 					Name = src.PlaylistName,
 					Description = src.PlaylistDescription,
-					ImageUrl = url(src.PlaylistImageUrl),
+					ImageUrl = Url(src.PlaylistImageUrl),
 				},
 			};
 		}
@@ -122,7 +122,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				Id = src.Id,
 				Name = src.Name,
 				Description = src.Description,
-				ImageUrl = url(src.ImageUrl),
+				ImageUrl = Url(src.ImageUrl),
 				TotalAwarded = src.TotalMedals,
 			};
 		}

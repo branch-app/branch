@@ -49,7 +49,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				XUID = -1,
 				ServiceTag = src.ServiceTag,
-				EmblemUrl = url(src.EmblemImageUrl),
+				EmblemUrl = Url(src.EmblemImageUrl),
 			};
 		}
 
@@ -60,7 +60,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				ID = src.FavoriteWeaponId,
 				Name = src.FavoriteWeaponName,
 				Description = src.FavoriteWeaponDescription,
-				ImageUrl = src.FavoriteWeaponImageUrl.AssetUrl,
+				ImageUrl = Url(src.FavoriteWeaponImageUrl),
 				TotalKills = src.FavoriteWeaponTotalKills,
 			};
 		}
@@ -71,7 +71,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				ID = src.RankId,
 				Name = src.RankName,
-				ImageUrl = url(src.RankImageUrl),
+				ImageUrl = Url(src.RankImageUrl),
 				StartXP = src.RankStartXP,
 			};
 		}
@@ -85,7 +85,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				ID = src.NextRankId,
 				Name = src.NextRankName,
-				ImageUrl = url(src.NextRankImageUrl),
+				ImageUrl = Url(src.NextRankImageUrl),
 				StartXP = Convert.ToInt32(src.NextRankStartXP),
 			};
 		}
@@ -100,7 +100,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				ID = s.Id,
 				Name = s.Name,
 				Description = s.Description,
-				ImageUrl = url(s.ImageUrl),
+				ImageUrl = Url(s.ImageUrl),
 				Level = s.Level,
 				Current = s.IsCurrent,
 				Completion = s.PercentComplete,
@@ -199,7 +199,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 			return new IntSR.FavoriteVariant
 			{
-				ImageUrl = url(src.ImageUrl),
+				ImageUrl = Url(src.ImageUrl),
 				TotalDuration = src.TotalDuration,
 				TotalGamesStarted = src.TotalGamesStarted,
 				TotalGamesCompleted = src.TotalGamesCompleted,
