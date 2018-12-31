@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Branch.Clients.XboxLive</RootNamespace>
+    <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Http\Http.csproj" />
+    <ProjectReference Include="..\Token\Token.csproj" />
+    <ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
+    <ProjectReference Include="..\..\Packages\Models\Models.csproj" />
+  </ItemGroup>
+
+</Project>

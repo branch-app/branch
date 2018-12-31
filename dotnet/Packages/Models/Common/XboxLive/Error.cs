@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using Microsoft.Extensions.Options;
-using Apollo.Models;
 using Branch.Packages.Models.Common.Config;
 using Branch.Packages.Enums.External.XboxLive;
 
-namespace Branch.Apps.ServiceIdentity.Models
+namespace Branch.Models.Common.XboxLive
 {
-	public class XboxLiveError
+	public class Error
 	{
 		public ResponseCode Code { get; set; }
 

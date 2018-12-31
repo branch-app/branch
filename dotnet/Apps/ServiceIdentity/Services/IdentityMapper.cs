@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Branch.Apps.ServiceIdentity.Models;
+using Branch.Clients.XboxLive;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Extensions;
 

@@ -14,6 +14,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Clients\Token\Token.csproj" />
+		<ProjectReference Include="..\..\Clients\XboxLive\XboxLive.csproj" />
 		<ProjectReference Include="..\..\Packages\Apollo\Apollo.csproj" />
 		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
 		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
