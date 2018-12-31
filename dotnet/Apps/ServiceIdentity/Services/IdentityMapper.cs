@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Branch.Apps.ServiceIdentity.Models;
 using Branch.Clients.XboxLive;
+using Branch.Packages.Enums.External.XboxLive;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Extensions;
 
@@ -57,7 +58,7 @@ namespace Branch.Apps.ServiceIdentity.Services
 			if (identity != null && identity.ExpiresAt > now)
 				return identity;
 
-			var resp = await xblClient.GetProfileSettings(type, value);
+			var resp = await xblClient.GetProfileSettings(type, value, ProfileSetting.Gamertag);
 			var user = resp.ProfileUsers[0];
 
 			identity = new XboxLiveIdentity

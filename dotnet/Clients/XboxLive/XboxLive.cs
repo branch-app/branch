@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using Branch.Clients.Token;
-using Branch.Clients.Http;
+﻿using Branch.Clients.Http;
 using Branch.Clients.Http.Models;
+using Branch.Clients.Token;
+using Branch.Models.Common.XboxLive;
 using Branch.Packages.Contracts.ServiceToken;
 using Branch.Packages.Enums.External.XboxLive;
 using Branch.Packages.Enums.ServiceIdentity;
@@ -12,7 +9,11 @@ using Branch.Packages.Exceptions;
 using Branch.Packages.Models.Common.XboxLive;
 using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
-using Branch.Models.Common.XboxLive;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Branch.Clients.XboxLive
 {
@@ -39,10 +40,18 @@ namespace Branch.Clients.XboxLive
 			this.profileClient = new HttpClient(profileBaseUrl, httpOptions);
 		}
 
-		public async Task<ProfileSettings> GetProfileSettings(XboxLiveIdentityType type, string value)
+		/// <summary>
+		/// Gets the profile settings of a player. If no settings are given, it is assumed
+		/// all are wanted.
+		/// </summary>
+		public async Task<ProfileSettings> GetProfileSettings(XboxLiveIdentityType type, string value, params ProfileSetting[] settings)
 		{
+			string[] strs = settings?.Any() == false
+				? Enum.GetNames(typeof(ProfileSetting))
+				: settings.Select(ps => Enum.GetName(typeof(ProfileSetting), ps)).ToArray();
+
 			var path = string.Format(profileSettingsUrl, type.ToString(), value);
-			var query = new Dictionary<string, string> { { "settings", "gamertag"} };
+			var query = new Dictionary<string, string> { { "settings", string.Join(",", strs) } };
 
 			return await requestXboxLiveData<ProfileSettings>(profileClient, 2, path, query, null);
 		}
