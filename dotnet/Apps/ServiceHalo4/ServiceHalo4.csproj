@@ -13,6 +13,7 @@
 		<Content Update="config.*.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Clients\Cache\Cache.csproj" />
 		<ProjectReference Include="..\..\Clients\Token\Token.csproj" />
 		<ProjectReference Include="..\..\Clients\Identity\Identity.csproj" />
 		<ProjectReference Include="..\..\Packages\Apollo\Apollo.csproj" />
@@ -24,6 +25,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="7.0.1" />
-	  <PackageReference Include="AWSSDK.S3" Version="3.3.24" />
 	</ItemGroup>
 </Project>
