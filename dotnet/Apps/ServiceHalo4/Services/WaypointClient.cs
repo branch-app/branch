@@ -43,7 +43,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 		private const string statsUrl = "https://stats.svc.halowaypoint.com/en-US/";
 		private const string settingsUrl = "https://settings.svc.halowaypoint.com/";
 		private const string optionsUrl = "https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
-		private const string authHeader = "X-343-Tokenorization-Spartan";
+		private const string authHeader = "X-343-Authorization-Spartan";
 		private const string storageBucket = "branch-app-stats";
 
 		public WaypointClient(TokenClient tokenClient, IdentityClient identityClient, AmazonS3Client s3Client)
