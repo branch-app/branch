@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Branch.Clients.Cache</RootNamespace>
+    <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\..\Packages\Crypto\Crypto.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	  <PackageReference Include="AWSSDK.S3" Version="3.3.31" />
+  </ItemGroup>
+</Project>
