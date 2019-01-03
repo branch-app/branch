@@ -1,6 +1,17 @@
-export interface IdentityState {
+import { AsyncState } from '../../../shared/types';
+import { XboxLiveIdentity } from '../types';
 
+export interface IdentityState {
+	gamertagMap: Record<string, string>,
+	xuidMap: Record<string, string>,
+	map: Record<string, AsyncState<XboxLiveIdentity>>,
 }
+
+export const initialIdentityState: IdentityState = {
+	gamertagMap: {},
+	xuidMap: {},
+	map: {},
+};
 
 export interface IdentityPayload {
 	type: 'gamertag'|'xuid';

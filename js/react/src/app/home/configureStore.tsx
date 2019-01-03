@@ -7,6 +7,7 @@ import { ApplicationState, createRootReducer, rootSaga } from './store';
 
 import IdentityClient from '../../lib/platform/identity/client';
 import CacheClient from '../../lib/platform/common/cache-client';
+import { initialIdentityState } from '../../lib/platform/identity/store';
 
 export default function configureStore(history: History) : Store<ApplicationState> {
 	const composeEnhancers = composeWithDevTools({});
@@ -15,7 +16,7 @@ export default function configureStore(history: History) : Store<ApplicationStat
 	});
 
 	const initialState: ApplicationState = {
-		identity: {}
+		identity: initialIdentityState,
 	};
 
 	const store = createStore(
@@ -30,7 +31,7 @@ export default function configureStore(history: History) : Store<ApplicationStat
 }
 
 function createClients() {
-	// All clients share the same cache client
+	// All clients must share the same cache client
 	const cacheClient = new CacheClient();
 
 	return {

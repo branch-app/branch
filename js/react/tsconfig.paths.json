@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@/home/*": ["src/app/home/*"],
-      "@/lib/*": ["src/lib/*"]
-    }
+
+    // Remove commended block below when craco is fixed - https://github.com/sharegate/craco/pull/62
+    // "paths": {
+    //   "@/home/*": ["src/app/home/*"],
+    //   "@/lib/*": ["src/lib/*"]
+    // }
   }
 }

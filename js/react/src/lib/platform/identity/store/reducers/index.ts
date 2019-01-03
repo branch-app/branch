@@ -1,9 +1,17 @@
-import { IdentityState } from '../';
 import { Reducer, AnyAction } from 'redux';
-
-export const initialState: IdentityState = {};
+import {
+	IdentityActionTypes,
+	IdentityState,
+	initialIdentityState as initialState,
+} from '..';
 
 const reducer: Reducer<IdentityState> = (state = initialState, { type, payload }: AnyAction) => {
+	switch (type) {
+		case IdentityActionTypes.FETCH_IDENTITY: {
+
+		}
+	}
+
 	return state;
 }
 
