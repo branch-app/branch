@@ -10,6 +10,7 @@ namespace Branch.Apps.ServiceXboxLive.Services
 		private const string storageBucket = "branch-app-stats";
 
 		public XboxLiveClient(TokenClient tokenClient, AmazonS3Client s3Client)
+			: base(tokenClient, storageBucket, s3Client)
 		{
 
 		}
