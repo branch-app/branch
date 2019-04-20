@@ -4,7 +4,6 @@ using Branch.Apps.ServiceIdentity.Models;
 using Branch.Apps.ServiceIdentity.Server;
 using Branch.Apps.ServiceIdentity.Services;
 using Branch.Clients.Token;
-using Branch.Clients.XboxLive;
 using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.ServiceIdentity;
 using Branch.Packages.Models.Common.Config;

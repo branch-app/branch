@@ -8,5 +8,7 @@ namespace Branch.Apps.ServiceXboxLive.Models
 	public class Config : BaseConfig
 	{
 		public Dictionary<string, BranchServiceConfig> Services { get; set; }
+
+		public S3Credentials S3 { get; set; }
 	}
 }

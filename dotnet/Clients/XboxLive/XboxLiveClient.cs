@@ -1,4 +1,6 @@
-﻿using Branch.Clients.Http;
+﻿using Amazon.S3;
+using Branch.Clients.Cache;
+using Branch.Clients.Http;
 using Branch.Clients.Http.Models;
 using Branch.Clients.Token;
 using Branch.Models.Common.XboxLive;
@@ -17,17 +19,20 @@ using System.Threading.Tasks;
 
 namespace Branch.Clients.XboxLive
 {
-	public class XboxLiveClient
+	public class XboxLiveClient : CacheClient
 	{
 		private TokenClient tokenClient { get; }
 
-		private HttpClient profileClient { get; }
+		protected HttpClient profileClient { get; }
 
-		private string profileBaseUrl = "https://profile.xboxlive.com/users/";
-		private string profileSettingsUrl = "{0}({1})/profile/settings";
+		protected string profileBaseUrl = "https://profile.xboxlive.com/users/";
+		protected string profileSettingsUrl = "{0}({1})/profile/settings";
+
 		private string authHeader = "XBL3.0 x={0};{1}";
 
-		public XboxLiveClient(TokenClient tokenClient)
+		public XboxLiveClient(TokenClient tokenClient, string s3Bucket, AmazonS3Client s3Client)
+			: base(s3Bucket, s3Client)
+
 		{
 			var httpHeaders = new Dictionary<string, string>
 			{
@@ -56,7 +61,7 @@ namespace Branch.Clients.XboxLive
 			return await requestXboxLiveData<ProfileSettings>(profileClient, 2, path, query, null);
 		}
 
-		private async Task<TRes> requestXboxLiveData<TRes>(HttpClient client, uint contractVersion, string path, Dictionary<string, string> query, Options newOpts = null)
+		protected async Task<TRes> requestXboxLiveData<TRes>(HttpClient client, uint contractVersion, string path, Dictionary<string, string> query, Options newOpts = null)
 			where TRes: class, new()
 		{
 			var auth = await getAuth();
