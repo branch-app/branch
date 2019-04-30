@@ -72,7 +72,11 @@ namespace Branch.Packages.Bae
 				case BaeCodes.Unknown:
 					return HttpStatusCode.InternalServerError;
 
+				case BaeCodes.ValidationFailed:
+					return HttpStatusCode.UnprocessableEntity;
+
 				case BaeCodes.BadRequest:
+				case BaeCodes.UnsupportedAccept:
 				default:
 					return HttpStatusCode.BadRequest;
 			}
