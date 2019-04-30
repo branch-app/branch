@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection
 			if (services == null) throw new ArgumentNullException(nameof(services));
 			if (configureOptions == null) throw new ArgumentNullException(nameof(configureOptions));
 
-			services.Configure(configureOptions);
+			services.Configure<CrpcOptions>(configureOptions);
+			services.AddScoped<ExceptionMiddleware>();
 			services.AddSingleton<AuthMiddleware>();
 			services.AddSingleton<CorsMiddleware>();
 			services.AddSingleton<CrpcMiddleware>();

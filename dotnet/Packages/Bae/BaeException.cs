@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace Branch.Packages.Bae
 {
 	using Meta = Dictionary<string, object>;
 
+	[JsonConverter(typeof(BaeExceptionConverter))]
 	public class BaeException : AggregateException
 	{
 		public BaeException() { }

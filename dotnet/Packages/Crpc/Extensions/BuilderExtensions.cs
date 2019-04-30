@@ -18,8 +18,6 @@ namespace Microsoft.AspNetCore.Builder
 			var options = new CrpcRegistrationOptions();
 			opts.Invoke(options);
 
-			setupMiddlewares(app, options);
-
 			app.Map("/system/health", builder => {
 				builder.Run(async context =>
 				{
@@ -27,8 +25,11 @@ namespace Microsoft.AspNetCore.Builder
 				});
 			});
 
+			setupMiddlewares(app, options);
+
 			app.Map(baseUrl, builder =>
 			{
+				builder.UseMiddleware<ExceptionMiddleware>();
 				builder.UseMiddleware<CorsMiddleware>();
 				builder.UseMiddleware<AuthMiddleware>();
 				builder.UseMiddleware<CrpcMiddleware>();
