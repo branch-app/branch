@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Branch.Packages.Bae;
 using Branch.Packages.Crpc.Registration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -54,12 +55,12 @@ namespace Branch.Packages.Crpc.Middleware
 					var hasHeader = context.Request.Headers.TryGetValue("Authorization", out var headers);
 
 					if (!hasHeader)
-						throw new Exception("unauthorized"); // TODO(0xdeafcafe): Write Cher
+						throw new BaeException(BaeCodes.Unauthorized);
 
 					var header = headers[0];
 
 					if (!_internalKeys.Any(k => $"bearer {k}" == header))
-						throw new Exception("unauthorized"); // TODO(0xdeafcafe): Write Cher
+						throw new BaeException(BaeCodes.Unauthorized);
 					break;
 
 				default:
