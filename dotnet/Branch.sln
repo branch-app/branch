@@ -335,6 +335,7 @@ Global
 		{D419DB2B-BB43-4C33-8439-FEFCC5794040}.Release|x64.ActiveCfg = Release|Any CPU
 		{D419DB2B-BB43-4C33-8439-FEFCC5794040}.Release|x64.Build.0 = Release|Any CPU
 		{D419DB2B-BB43-4C33-8439-FEFCC5794040}.Release|x86.ActiveCfg = Release|Any CPU
+		{D419DB2B-BB43-4C33-8439-FEFCC5794040}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{139B6BC5-4BAA-46CD-B0A2-CF1558CDC81C} = {722F2BD8-5A8B-4B52-8251-AAEC0284F6D8}
