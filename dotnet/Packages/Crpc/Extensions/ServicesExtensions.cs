@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 
 using Branch.Packages.Crpc;
-
+using Branch.Packages.Crpc.Middleware;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -15,8 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection
 			if (configureOptions == null) throw new ArgumentNullException(nameof(configureOptions));
 
 			services.Configure(configureOptions);
+			services.AddSingleton<AuthMiddleware>();
+			services.AddSingleton<CorsMiddleware>();
 			services.AddSingleton<CrpcMiddleware>();
-			services.AddMvcCore();
 
 			return services;
 		}

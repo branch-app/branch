@@ -8,6 +8,12 @@ using Newtonsoft.Json.Schema;
 
 namespace Branch.Packages.Crpc.Registration
 {
+	public enum AuthenticationType
+	{
+		UnsafeNoAuthentication,
+		AllowInternalAuthentication,
+	}
+
 	public class CrpcRegistrationOptions
 	{
 		private static readonly Regex _endpointRegex = new Regex(@"[a-z]{1}[a-z0-9_]+[a-z]{1}", RegexOptions.Compiled);
@@ -15,6 +21,8 @@ namespace Branch.Packages.Crpc.Registration
 		internal Type ServerType { get; set; }
 
 		internal Dictionary<string, Dictionary<string, CrpcVersionRegistration>> Registrations { get; set; }
+
+		public AuthenticationType Authentication { get; set; }
 
 		/// <summary>
 		/// Registers the server type with the middleware.

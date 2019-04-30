@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Branch.Packages.Crpc.Registration;
@@ -12,16 +15,20 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace Branch.Packages.Crpc
+namespace Branch.Packages.Crpc.Middleware
 {
-	public sealed class CrpcMiddleware : IMiddleware, IDisposable
+	public sealed class CrpcMiddleware : IMiddleware
 	{
 		private const int _streamBufferSize = 1024;
 
 		private readonly IServiceProvider _services;
 		private readonly IHostingEnvironment _environment;
 		private readonly ILogger _logger;
+		private readonly MethodInfo _jsonDeserializeMethod;
+		private readonly JsonSerializerSettings _jsonSerializerSettings;
+		private readonly JsonSerializer _jsonSerializer;
 
 		private object _server;
 		private CrpcRegistrationOptions _registrationOptions;
@@ -35,6 +42,20 @@ namespace Branch.Packages.Crpc
 			_services = services;
 			_environment = environment;
 			_logger = loggerFactory.CreateLogger(nameof(CrpcMiddleware));
+
+			// Do initial reflection setup
+			_jsonSerializerSettings = new JsonSerializerSettings
+			{
+				ContractResolver = new DefaultContractResolver
+				{
+					NamingStrategy = new SnakeCaseNamingStrategy()
+				}
+			};
+			_jsonSerializer = JsonSerializer.Create(_jsonSerializerSettings);
+			_jsonDeserializeMethod = typeof(JsonSerializer).GetMethods()
+				.Where(i => i.Name == "Deserialize")
+				.Where(i => i.IsGenericMethod)
+				.Single();
 		}
 
 		internal void SetRegistrationOptions(CrpcRegistrationOptions opts)
@@ -42,7 +63,7 @@ namespace Branch.Packages.Crpc
 			if (_registrationOptions != null)
 				throw new InvalidOperationException("registration options already set.");
 
-			var svt = _registrationOptions.ServerType;
+			var svt = opts.ServerType;
 
 			_registrationOptions = opts;
 			_server = _services.GetService(svt) ?? ActivatorUtilities.CreateInstance(_services, svt);
@@ -50,15 +71,12 @@ namespace Branch.Packages.Crpc
 
 		public async Task InvokeAsync(HttpContext context, RequestDelegate next)
 		{
-			_logger.LogCritical("testerman");
+			// _logger.LogCritical("testerman");
 
-			await Task.Delay(1);
-		}
+			// TODO(0xdeafcafe): Handle request!
 
-		public void Dispose()
-		{
-			// TODO(0xdeafcafe): I don't think this will ever be needed?
-			// (_server as IDisposable)?.Dispose();
+			context.Response.StatusCode = (int)HttpStatusCode.OK;
+			await context.Response.WriteAsync("ya boi");
 		}
 	}
 }
