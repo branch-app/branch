@@ -11,3 +11,6 @@ Thumbs.db
 # Ignore all build files
 build
 Build
+
+# Chrome things
+.local-chromium
