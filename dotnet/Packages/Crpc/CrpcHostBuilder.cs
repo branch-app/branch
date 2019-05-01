@@ -19,6 +19,18 @@ namespace Branch.Packages.Crpc
 				{
 					config.AddCrpcConfig(hostingContext.HostingEnvironment);
 				})
+				.ConfigureServices((hostingContext, services) =>
+				{
+					// Setup the KSUID singleton
+					// TODO(0xdeafcafe): Should this be injected? 🤔
+					var hostingEnvironment = hostingContext.HostingEnvironment;
+					var env = hostingEnvironment.EnvironmentName;
+
+					if (hostingEnvironment.IsProduction()) env = "prod";
+					if (hostingEnvironment.IsDevelopment()) env = "dev";
+
+					Ksuid.Ksuid.Environment = env;
+				})
 				.ConfigureLogging((hostingContext, logging) =>
 				{
 					logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
