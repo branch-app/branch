@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Http.Models;
 using System.Net.Http;
-using Branch.Packages.Exceptions;
+using Branch.Packages.Bae;
 
 [assembly: InternalsVisibleTo("Branch.Tests.Clients.HttpTests")]
 namespace Branch.Clients.Http
@@ -99,7 +99,7 @@ namespace Branch.Clients.Http
 			catch (OperationCanceledException)
 			{
 				// Handle timeouts well
-				throw new BranchException(
+				throw new BaeException(
 					"request_timeout",
 					new Dictionary<string, object>
 					{
@@ -124,7 +124,7 @@ namespace Branch.Clients.Http
 				return options.Timeout;
 
 			// Should never happen
-			throw new BranchException("client_has_no_timeout");
+			throw new BaeException("client_has_no_timeout");
 		}
 	}
 }

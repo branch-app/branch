@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Branch.Clients.Http;
 using Branch.Clients.Http.Models;
 using Branch.Packages.Converters;
-using Branch.Packages.Exceptions;
+using Branch.Packages.Bae;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -43,12 +43,6 @@ namespace Branch.Clients.Json
 			options.Headers.Add("Accept", "application/json");
 
 			Client = new HttpClient(baseUrl, options);
-
-			// Create serializer settings
-			jss = new JsonSerializerSettings
-			{
-				Converters = new List<JsonConverter> { new ExceptionConverter() },
-			};
 		}
 
 		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query = null, Options newOpts = null)
@@ -79,9 +73,9 @@ namespace Branch.Clients.Json
 			var hasContent = !String.IsNullOrWhiteSpace(str);
 
 			if (isJson && hasContent)
-				throwIfBranchException(str);
+				throwIfBaeException(str);
 
-			throw new BranchException(RequestFailedCode, new Dictionary<string, object>
+			throw new BaeException(RequestFailedCode, new Dictionary<string, object>
 			{
 				{ "Url", output.req.RequestUri.ToString() },
 				{ "Verb", verb },
@@ -101,11 +95,11 @@ namespace Branch.Clients.Json
 			return TimeSpan.FromSeconds(2);
 		}
 
-		private void throwIfBranchException(string str)
+		private void throwIfBaeException(string str)
 		{
 			try
 			{
-				var err = JsonConvert.DeserializeObject<BranchException>(str, jss);
+				var err = JsonConvert.DeserializeObject<BaeException>(str);
 
 				if (err.Message != null)
 					throw err;

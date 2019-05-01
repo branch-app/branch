@@ -7,7 +7,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Crypto;
-using Branch.Packages.Exceptions;
+using Branch.Packages.Bae;
 using Branch.Packages.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -64,7 +64,7 @@ namespace Branch.Clients.Cache
 					throw;
 
 				throw
-					new BranchException(
+					new BaeException(
 						"cache_not_found",
 						new Dictionary<string, object> { { "key", key } }
 					);
