@@ -45,40 +45,40 @@ namespace Branch.Packages.Bae
 				Data.Add(pair.Key, pair.Value);
 		}
 
-		public HttpStatusCode StatusCode()
+		public int StatusCode()
 		{
 			switch(Message)
 			{
 				case BaeCodes.Unauthorized:
-					return HttpStatusCode.Unauthorized;
+					return (int) HttpStatusCode.Unauthorized;
 
 				case BaeCodes.AccessDenied:
-					return HttpStatusCode.Forbidden;
+					return (int) HttpStatusCode.Forbidden;
 
 				case BaeCodes.RouteNotFound:
 				case BaeCodes.NotFound:
-					return HttpStatusCode.NotFound;
+					return (int) HttpStatusCode.NotFound;
 
 				case BaeCodes.MethodNotAllowed:
-					return HttpStatusCode.MethodNotAllowed;
+					return (int) HttpStatusCode.MethodNotAllowed;
 
 				case BaeCodes.NoLongerSupported:
-					return HttpStatusCode.Gone;
+					return (int) HttpStatusCode.Gone;
+
+				case BaeCodes.ValidationFailed:
+					return 422;
 
 				case BaeCodes.TooManyRequests:
-					return HttpStatusCode.TooManyRequests;
+					return 429;
 
 				case BaeCodes.CoercionError:
 				case BaeCodes.Unknown:
-					return HttpStatusCode.InternalServerError;
-
-				case BaeCodes.ValidationFailed:
-					return HttpStatusCode.UnprocessableEntity;
+					return (int) HttpStatusCode.InternalServerError;
 
 				case BaeCodes.BadRequest:
 				case BaeCodes.UnsupportedAccept:
 				default:
-					return HttpStatusCode.BadRequest;
+					return (int) HttpStatusCode.BadRequest;
 			}
 		}
 	}

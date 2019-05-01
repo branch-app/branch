@@ -43,7 +43,7 @@ namespace Branch.Packages.Crpc.Middleware
 
 				var json = JsonConvert.SerializeObject(bae, _jsonSerializerSettings);
 
-				context.Response.StatusCode = (int)bae.StatusCode();
+				context.Response.StatusCode = bae.StatusCode();
 				context.Response.ContentType = "application/json; charset=utf-8";
 				await context.Response.WriteAsync(json);
 			}
