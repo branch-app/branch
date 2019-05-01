@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Http\Http.csproj" />
     <ProjectReference Include="..\Token\Token.csproj" />
     <ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />

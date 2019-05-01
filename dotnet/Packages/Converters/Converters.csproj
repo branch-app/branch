@@ -6,9 +6,6 @@
     <RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\Bae\Bae.csproj" />
   </ItemGroup>

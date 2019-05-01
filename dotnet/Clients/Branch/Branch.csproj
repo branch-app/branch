@@ -9,6 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Cache\Cache.csproj" />
     <ProjectReference Include="..\Json\Json.csproj" />
-    <ProjectReference Include="..\..\Packages\Exceptions\Exceptions.csproj" />
+    <ProjectReference Include="..\..\Packages\Bae\Bae.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
   </ItemGroup>
 </Project>

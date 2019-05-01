@@ -8,9 +8,8 @@
     <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.5.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Packages\Models\Models.csproj" />

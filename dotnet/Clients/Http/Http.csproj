@@ -8,12 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Packages\Exceptions\Exceptions.csproj" />
+    <ProjectReference Include="..\..\Packages\Bae\Bae.csproj" />
   </ItemGroup>
 
 </Project>
