@@ -14,3 +14,6 @@ Build
 
 # Chrome things
 .local-chromium
+
+# IDE things
+.vscode
