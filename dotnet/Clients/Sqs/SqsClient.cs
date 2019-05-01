@@ -41,11 +41,41 @@ namespace Branch.Clients.Sqs
 		{
 			var request = new SendMessageBatchRequest
 			{
-				Entries = entry.Select(e => new SendMessageBatchRequestEntry { MessageBody = JsonConvert.SerializeObject(e) }).ToList(),
 				QueueUrl = QueueUrl,
+				Entries = entry.Select(e => new SendMessageBatchRequestEntry
+				{
+					Id = e.GetHashCode().ToString(),
+					MessageBody = JsonConvert.SerializeObject(e),
+				}).ToList(),
 			};
 
 			return await Client.SendMessageBatchAsync(request);
+		}
+
+		public async Task<DeleteMessageResponse> DeleteMessageAsync(string receiptHandle)
+		{
+			var request = new DeleteMessageRequest
+			{
+				QueueUrl = QueueUrl,
+				ReceiptHandle = receiptHandle,
+			};
+
+			return await Client.DeleteMessageAsync(request);
+		}
+
+		public async Task<DeleteMessageBatchResponse> DeleteMessageBatchAsync(IEnumerable<Message> messagesToDelete)
+		{
+			var request = new DeleteMessageBatchRequest
+			{
+				QueueUrl = QueueUrl,
+				Entries = messagesToDelete.Select(m => new DeleteMessageBatchRequestEntry
+				{
+					Id = m.MessageId,
+					ReceiptHandle = m.ReceiptHandle,
+				}).ToList(),
+			};
+
+			return await Client.DeleteMessageBatchAsync(request);
 		}
 	}
 }
