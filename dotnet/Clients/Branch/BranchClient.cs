@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Branch.Clients.Http.Models;
 using Branch.Clients.Json;
 using Branch.Packages.Bae;
+using Microsoft.Extensions.Options;
+
+using HttpOptions = Branch.Clients.Http.Models.Options;
 
 namespace Branch.Clients.Branch
 {
@@ -10,21 +12,23 @@ namespace Branch.Clients.Branch
 	{
 		internal JsonClient Client { get; set; }
 
-		public BranchClient(string baseUrl, string key, Options options = null)
+		public BranchClient(IOptionsMonitor<BranchConfig> options, string name)
 		{
-			options = options ?? new Options();
-			options.Headers.Add("Authorization", $"bearer {key}");
+			var opts = options.Get(name);
+			var HttpOptions = new HttpOptions();
 
-			Client = new JsonClient(baseUrl, options);
+			HttpOptions.Headers.Add("Authorization", $"bearer {opts.Key}");
+
+			Client = new JsonClient(opts.Url, HttpOptions);
 		}
 
-		public async Task<TRes> Do<TRes>(string path, Options options = null)
+		public async Task<TRes> Do<TRes>(string path, HttpOptions options = null)
 			where TRes : class
 		{
 			return await Do<object, TRes>(path, null, options);
 		}
 
-		public async Task<TRes> Do<TReq, TRes>(string path, TReq body, Options options = null)
+		public async Task<TRes> Do<TReq, TRes>(string path, TReq body, HttpOptions options = null)
 			where TReq : class
 			where TRes : class
 		{

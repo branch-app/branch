@@ -4,14 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Json;
 using Branch.Packages.Contracts.ServiceIdentity;
+using Microsoft.Extensions.Options;
 
 namespace Branch.Clients.Identity
 {
 	public class IdentityClient : BranchClient, IService
 	{
-		public IdentityClient(string baseUrl, string key)
-			: base(baseUrl, key)
-		{ }
+		public IdentityClient(IOptionsMonitor<BranchConfig> options) : base(options, "Identity") { }
 
 		public async Task<ResGetXboxLiveIdentity> GetXboxLiveIdentity(ReqGetXboxLiveIdentity req)
 		{

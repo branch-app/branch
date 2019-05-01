@@ -4,14 +4,13 @@ using Branch.Packages.Contracts.ServiceToken;
 using System.Threading;
 using System.Threading.Tasks;
 using Branch.Clients.Http.Models;
+using Microsoft.Extensions.Options;
 
 namespace Branch.Clients.Token
 {
 	public class TokenClient : BranchClient, IService
 	{
-		public TokenClient(string baseUrl, string key)
-			: base(baseUrl, key, new Options { Timeout = TimeSpan.FromSeconds(15) })
-		{ }
+		public TokenClient(IOptionsMonitor<BranchConfig> options) : base(options, "Token") { }
 
 		public async Task<ResGetHalo4Token> GetHalo4Token(ReqGetHalo4Token req)
 		{
