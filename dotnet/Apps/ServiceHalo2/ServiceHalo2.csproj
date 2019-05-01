@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<RootNamespace>Branch.Apps.ServiceHalo2</RootNamespace>
+		<RuntimeIdentifiers>osx-x64;alpine-x64;linux-x64;win-x64</RuntimeIdentifiers>
+		<RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+		<Content Update="config.json" CopyToOutputDirectory="PreserveNewest" />
+		<Content Update="config.*.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Clients\Identity\Identity.csproj" />
+		<ProjectReference Include="..\..\Clients\S3\S3.csproj" />
+		<ProjectReference Include="..\..\Clients\Sqs\Sqs.csproj" />
+		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
+		<ProjectReference Include="..\..\Packages\Converters\Converters.csproj" />
+		<ProjectReference Include="..\..\Packages\Crpc\Crpc.csproj" />
+		<ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
+		<ProjectReference Include="..\..\Packages\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+	  <PackageReference Include="PuppeteerSharp" Version="1.14.0" />
+	</ItemGroup>
+</Project>
