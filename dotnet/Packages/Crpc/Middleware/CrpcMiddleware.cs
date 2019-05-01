@@ -122,6 +122,15 @@ namespace Branch.Packages.Crpc.Middleware
 			var request = readRequest(context, version.Value);
 			var response = await (dynamic) version.Value.Method.Invoke(_server, new object[] { request });
 
+			if (response == null && version.Value.ResponseType != null)
+			{
+				var ex = new BaeException("missing_response");
+
+				_logger.LogError(ex, "A response was expected but isn't present");
+
+				throw ex;
+			}
+
 			if (response == null)
 			{
 				context.Response.StatusCode = (int)HttpStatusCode.NoContent;
@@ -145,7 +154,7 @@ namespace Branch.Packages.Crpc.Middleware
 
 		private object readRequest(HttpContext context, CrpcVersionRegistration version)
 		{
-			if (version.Schema == null)
+			if (version.RequestType == null)
 				return null;
 
 			if ((context.Request.ContentLength ?? 0) == 0)

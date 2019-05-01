@@ -37,47 +37,62 @@ namespace Branch.Packages.Crpc.Registration
 			Registrations = new Dictionary<string, Dictionary<string, CrpcVersionRegistration>>();
 		}
 
-		public void RegisterMethod<TReq, TRes>(string endpoint, string methodName, string date)
+		public void RegisterMethod(string method, string internalMethodName, string date)
 		{
 			if (ServerType == null)
 				throw new NullReferenceException("server type must be registered first");
 
 			validateDate(date);
-			validateEndpoint(endpoint);
-			var method = ServerType.GetMethod(methodName);
-			var schema = ServerType.GetField($"{methodName}Schema");
+			validateEndpoint(method);
+			FieldInfo schema;
+			var methodInfo = ServerType.GetMethod(internalMethodName);
+			var responseType = methodInfo.ReturnType;
+			var requestType = methodInfo.GetParameters()[0];
+
+			if (methodInfo.GetParameters().Length != 1)
+				throw new Exception("methods can only have 1 parameter");
 
 			if (method == null)
 				throw new Exception("no method could be found with that name");
 
-			if (schema == null)
-				throw new Exception("no schema could be found");
-
-			if (!schema.IsStatic)
-				throw new Exception("schema must be static");
-
-			if (schema.FieldType != typeof(string))
-				throw new Exception("schema field must be a string");
-
 			Dictionary<string, CrpcVersionRegistration> registration;
-			if (Registrations.ContainsKey(endpoint))
-				registration = Registrations[endpoint];
+			if (Registrations.ContainsKey(method))
+				registration = Registrations[method];
 			else
 				registration = new Dictionary<string, CrpcVersionRegistration>();
 
 			if (registration.ContainsKey(date))
 				throw new Exception("duplicate date version found");
 
-			registration.Add(date, new CrpcVersionRegistration
+			var version = new CrpcVersionRegistration
 			{
-				RequestType = typeof(TReq),
-				ResponseType = typeof(TRes),
-				Method = method,
+				ResponseType = responseType,
+				Method = methodInfo,
 				Date = date,
-				Schema = JSchema.Parse(schema.GetValue(null) as string),
-			});
+			};
 
-			Registrations[endpoint] = registration;
+			// Request types are optional, and we only need to load the schema in if
+			// a request as a payload.
+			if (requestType != null)
+			{
+				schema = ServerType.GetField($"{internalMethodName}Schema");
+
+				if (schema == null)
+					throw new Exception("no schema could be found");
+
+				if (!schema.IsStatic)
+					throw new Exception("schema must be static");
+
+				if (schema.FieldType != typeof(string))
+					throw new Exception("schema field must be a string");
+
+				version.RequestType = requestType.ParameterType;
+				version.Schema = JSchema.Parse(schema.GetValue(null) as string);
+			}
+
+			registration.Add(date, version);
+
+			Registrations[method] = registration;
 		}
 
 		/// <summary>
