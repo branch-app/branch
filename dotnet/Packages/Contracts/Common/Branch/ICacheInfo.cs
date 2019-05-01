@@ -6,7 +6,7 @@ namespace Branch.Packages.Contracts.Common.Branch
 	{
 		DateTime CachedAt { get; set; }
 
-		DateTime ExpiresAt { get; set; }
+		Nullable<DateTime> ExpiresAt { get; set; }
 
 		bool IsFresh();
 

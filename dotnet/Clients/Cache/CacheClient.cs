@@ -96,7 +96,7 @@ namespace Branch.Clients.Cache
 					InputStream = sw.BaseStream,
 				};
 
-				putReq.Metadata["content-expiration"] = cacheInfo.ExpiresAt.ToISOString();
+				putReq.Metadata["content-expiration"] = cacheInfo.ExpiresAt?.ToISOString();
 				putReq.Metadata["content-creation"] = cacheInfo.CachedAt.ToISOString();
 				putReq.Metadata["content-hash"] = Sha256.HashContent(ms).ToHexString();
 

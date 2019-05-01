@@ -11,7 +11,7 @@ namespace Branch.Packages.Contracts.Common.Branch
 		/// </summary>
 		/// <param name="cachedAt">The time the resource was cached.</param>
 		/// <param name="expiresAt">The time the cached resource will expire.</param>
-		public CacheInfo(DateTime cachedAt, DateTime expiresAt)
+		public CacheInfo(DateTime cachedAt, Nullable<DateTime> expiresAt = null)
 		{
 			CachedAt = cachedAt;
 			ExpiresAt = expiresAt;
@@ -47,7 +47,7 @@ namespace Branch.Packages.Contracts.Common.Branch
 		/// <summary>
 		/// The time the resource expires.
 		/// </summary>
-		public DateTime ExpiresAt { get; set; }
+		public Nullable<DateTime> ExpiresAt { get; set; }
 
 		/// <summary>
 		/// Checks if the data is still fresh right now.
@@ -63,6 +63,9 @@ namespace Branch.Packages.Contracts.Common.Branch
 		/// <param name="date">The time to check the content freshness against.</param>
 		public bool IsFresh(DateTime date)
 		{
+			if (ExpiresAt == null)
+				return false;
+
 			return ExpiresAt > date;
 		}
 	}
