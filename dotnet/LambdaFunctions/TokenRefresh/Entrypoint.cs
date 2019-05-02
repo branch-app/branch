@@ -22,7 +22,7 @@ namespace Branch.LambdaFunctions.TokenRefresh
 		{
 			var config = parseConfig();
 			var tokenConfig = config.Services["Token"];
-			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
+			var tokenClient = new TokenClient(tokenConfig);
 
 			var tasks = Task.WhenAll(new List<Task>
 			{
