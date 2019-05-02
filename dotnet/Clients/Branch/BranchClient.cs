@@ -15,11 +15,20 @@ namespace Branch.Clients.Branch
 		public BranchClient(IOptionsMonitor<BranchConfig> options, string name)
 		{
 			var opts = options.Get(name);
-			var HttpOptions = new HttpOptions();
+			var httpOptions = new HttpOptions();
 
-			HttpOptions.Headers.Add("Authorization", $"bearer {opts.Key}");
+			httpOptions.Headers.Add("Authorization", $"bearer {opts.Key}");
 
-			Client = new JsonClient(opts.Url, HttpOptions);
+			Client = new JsonClient(opts.Url, httpOptions);
+		}
+
+		public BranchClient(BranchConfig config)
+		{
+			var httpOptions = new HttpOptions();
+
+			httpOptions.Headers.Add("Authorization", $"bearer {config.Key}");
+
+			Client = new JsonClient(config.Url, httpOptions);
 		}
 
 		public async Task<TRes> Do<TRes>(string path, HttpOptions options = null)

@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Http\Http.csproj" />
-    <ProjectReference Include="..\Token\Token.csproj" />
+    <ProjectReference Include="..\..\Clients\S3\S3.csproj" />
     <ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
     <ProjectReference Include="..\..\Packages\Models\Models.csproj" />
+    <ProjectReference Include="..\Http\Http.csproj" />
+    <ProjectReference Include="..\Token\Token.csproj" />
   </ItemGroup>
 
 </Project>

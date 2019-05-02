@@ -11,6 +11,7 @@ namespace Branch.Clients.Token
 	public class TokenClient : BranchClient, IService
 	{
 		public TokenClient(IOptionsMonitor<BranchConfig> options) : base(options, "Token") { }
+		public TokenClient(BranchConfig options) : base(options) { }
 
 		public async Task<ResGetHalo4Token> GetHalo4Token(ReqGetHalo4Token req)
 		{

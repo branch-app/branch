@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
@@ -11,21 +10,24 @@ using Branch.Packages.Bae;
 using Branch.Packages.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Branch.Clients.S3;
 
 namespace Branch.Clients.Cache
 {
 	public class CacheClient
 	{
-		private string bucket { get; set; }
-		private AmazonS3Client client { get; set; }
+		private S3Client _s3Client { get; set; }
 
-		public CacheClient(string bucket, AmazonS3Client client) { }
+		public CacheClient(S3Client client)
+		{
+			_s3Client = client;
+		}
 
 		protected async Task<ICacheInfo> fetchCacheInfo(string key)
 		{
 			try
 			{
-				var resp = await client.GetObjectMetadataAsync(bucket, key);
+				var resp = await _s3Client.Client.GetObjectMetadataAsync(_s3Client.BucketName, key);
 				var contentCreation = DateTime.Parse(resp.Metadata["x-amz-meta-content-creation"]);
 				var contentExpiration = DateTime.Parse(resp.Metadata["x-amz-meta-content-expiration"]);
 
@@ -41,7 +43,7 @@ namespace Branch.Clients.Cache
 		{
 			try
 			{
-				var response = await client.GetObjectAsync(bucket, key);
+				var response = await _s3Client.Client.GetObjectAsync(_s3Client.BucketName, key);
 
 				using (var ms = new MemoryStream())
 				using (var sr = new StreamReader(ms))
@@ -86,7 +88,7 @@ namespace Branch.Clients.Cache
 
 				var putReq = new PutObjectRequest
 				{
-					BucketName = bucket,
+					BucketName = _s3Client.BucketName,
 					Key = key,
 					ContentType = "application/json",
 
@@ -100,7 +102,7 @@ namespace Branch.Clients.Cache
 				putReq.Metadata["content-creation"] = cacheInfo.CachedAt.ToISOString();
 				putReq.Metadata["content-hash"] = Sha256.HashContent(ms).ToHexString();
 
-				await client.PutObjectAsync(putReq);
+				await _s3Client.Client.PutObjectAsync(putReq);
 			}
 		}
 	}

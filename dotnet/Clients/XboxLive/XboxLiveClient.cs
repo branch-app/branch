@@ -16,23 +16,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Branch.Clients.S3;
 
 namespace Branch.Clients.XboxLive
 {
 	public class XboxLiveClient : CacheClient
 	{
-		private TokenClient tokenClient { get; }
+		private readonly TokenClient _tokenClient;
 
-		protected HttpClient profileClient { get; }
+		protected readonly HttpClient _profileClient;
 
 		protected string profileBaseUrl = "https://profile.xboxlive.com/users/";
 		protected string profileSettingsUrl = "{0}({1})/profile/settings";
 
 		private string authHeader = "XBL3.0 x={0};{1}";
 
-		public XboxLiveClient(TokenClient tokenClient, string s3Bucket, AmazonS3Client s3Client)
-			: base(s3Bucket, s3Client)
-
+		public XboxLiveClient(TokenClient tokenClient, S3Client s3Client) : base(s3Client)
 		{
 			var httpHeaders = new Dictionary<string, string>
 			{
@@ -41,8 +40,8 @@ namespace Branch.Clients.XboxLive
 			};
 			var httpOptions = new Options(httpHeaders, TimeSpan.FromSeconds(2));
 
-			this.tokenClient = tokenClient;
-			this.profileClient = new HttpClient(profileBaseUrl, httpOptions);
+			this._tokenClient = tokenClient;
+			this._profileClient = new HttpClient(profileBaseUrl, httpOptions);
 		}
 
 		/// <summary>
@@ -58,7 +57,7 @@ namespace Branch.Clients.XboxLive
 			var path = string.Format(profileSettingsUrl, type.ToString(), value);
 			var query = new Dictionary<string, string> { { "settings", string.Join(",", strs) } };
 
-			return await requestXboxLiveData<ProfileSettings>(profileClient, 2, path, query, null);
+			return await requestXboxLiveData<ProfileSettings>(_profileClient, 2, path, query, null);
 		}
 
 		protected async Task<TRes> requestXboxLiveData<TRes>(HttpClient client, uint contractVersion, string path, Dictionary<string, string> query, Options newOpts = null)
@@ -108,7 +107,7 @@ namespace Branch.Clients.XboxLive
 
 		private async Task<string> getAuth()
 		{
-			var auth = await tokenClient.GetXboxLiveToken(new ReqGetXboxLiveToken());
+			var auth = await _tokenClient.GetXboxLiveToken(new ReqGetXboxLiveToken());
 
 			return string.Format(authHeader, auth.Uhs, auth.Token);
 		}

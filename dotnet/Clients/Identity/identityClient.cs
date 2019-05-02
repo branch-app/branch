@@ -11,6 +11,7 @@ namespace Branch.Clients.Identity
 	public class IdentityClient : BranchClient, IService
 	{
 		public IdentityClient(IOptionsMonitor<BranchConfig> options) : base(options, "Identity") { }
+		public IdentityClient(BranchConfig options) : base(options) { }
 
 		public async Task<ResGetXboxLiveIdentity> GetXboxLiveIdentity(ReqGetXboxLiveIdentity req)
 		{
