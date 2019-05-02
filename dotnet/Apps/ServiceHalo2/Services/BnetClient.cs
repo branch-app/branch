@@ -8,12 +8,14 @@ using Amazon.SQS;
 using Amazon.SQS.Model;
 using Branch.Apps.ServiceHalo2.Database;
 using Branch.Apps.ServiceHalo2.Models;
+using Branch.Clients.Json;
 using Branch.Clients.S3;
 using Branch.Clients.Sqs;
 using Branch.Packages.Bae;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PuppeteerSharp;
 using Sentry;
@@ -25,13 +27,14 @@ namespace Branch.Apps.ServiceHalo2.Services
 		private Browser _browser;
 		private readonly S3Client _s3Client;
 		private readonly SqsClient _sqsClient;
+		private readonly JsonClient _jsonClient;
 		private readonly ILogger _logger;
 		private readonly IHub _sentry;
 		private readonly DatabaseClient _dbClient;
 		private const string _serviceRecordUrl = "https://halo.bungie.net/Stats/PlayerStatsHalo2.aspx?player={0}";
 		private const string _serviceRecordHeaderRegex = @"Total Games: ([0-9]+)|Last Played: ([0-9\/ :]+(?:AM|PM))|Total Kills: ([0-9]+)|Total Deaths: ([0-9]+)|Total Assists: ([0-9]+)";
 
-		public BnetClient(S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry, DatabaseClient dbClient)
+		public BnetClient(IOptions<Config> config, S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry, DatabaseClient dbClient)
 		{
 			_s3Client = s3Client;
 			_sqsClient = sqsClient;
@@ -39,20 +42,46 @@ namespace Branch.Apps.ServiceHalo2.Services
 			_sentry = sentry;
 			_dbClient = dbClient;
 
-			this.Connect().Wait();
+			var remoteChrome = config.Value.PuppeteerRemoteHost;
+			if (remoteChrome != null)
+			{
+				// This is a workaround so chrome doesn't freak the fuck out??
+				var opts = new Branch.Clients.Http.Models.Options();
+				opts.Headers.Add("Host", "0.0.0.0");
+
+				_jsonClient = new JsonClient($"http://{remoteChrome}", opts);
+			}
+
+			this.ConnectOrLaunch().Wait();
 		}
 
-		public async Task Connect()
+		public async Task ConnectOrLaunch()
 		{
+			if (_jsonClient != null)
+			{
+				_logger.LogInformation($"Fetching  websocket url from {_jsonClient.Client.BaseUrl}");
+
+				var version = await _jsonClient.Do<Dictionary<string, string>>("GET", "/json/version");
+				var url = version["browserWSEndpoint"];
+
+				_logger.LogInformation($"Connecting to browser with websocker url {url}");
+
+				_browser = await Puppeteer.ConnectAsync(new ConnectOptions { BrowserWSEndpoint = url });
+
+				_logger.LogInformation("Connected to browser");
+
+				return;
+			}
+
 			_logger.LogInformation("Downloading to browser");
 
 			await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
 
-			_logger.LogInformation("Connecting to browser");
+			_logger.LogInformation("Launching headless browser");
 
 			_browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
 
-			_logger.LogInformation("Connected to browser");
+			_logger.LogInformation("Launched headless browser");
 		}
 
 		public async Task<bool> CacheServiceRecord(string gamertag)
