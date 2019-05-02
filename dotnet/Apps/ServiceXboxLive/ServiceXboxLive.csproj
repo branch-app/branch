@@ -14,12 +14,13 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Clients\Cache\Cache.csproj" />
+		<ProjectReference Include="..\..\Clients\S3\S3.csproj" />
 		<ProjectReference Include="..\..\Clients\Token\Token.csproj" />
 		<ProjectReference Include="..\..\Clients\XboxLive\XboxLive.csproj" />
-		<ProjectReference Include="..\..\Packages\Apollo\Apollo.csproj" />
-		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
 		<ProjectReference Include="..\..\Packages\Contracts\Contracts.csproj" />
+		<ProjectReference Include="..\..\Packages\Crpc\Crpc.csproj" />
 		<ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
 		<ProjectReference Include="..\..\Packages\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
 	</ItemGroup>
 </Project>

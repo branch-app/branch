@@ -1,46 +1,56 @@
-﻿using Amazon;
-using Amazon.S3;
-using Apollo;
-using Branch.Apps.ServiceXboxLive.App;
-using Branch.Apps.ServiceXboxLive.Models;
+﻿using Branch.Apps.ServiceXboxLive.App;
 using Branch.Apps.ServiceXboxLive.Server;
+using Branch.Clients.Branch;
+using Branch.Clients.S3;
 using Branch.Clients.Token;
-using Branch.Packages.Models.Common.Config;
-using Microsoft.AspNetCore;
+using Branch.Packages.Contracts.ServiceXboxLive;
+using Branch.Packages.Crpc;
+using Branch.Packages.Crpc.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Branch.Apps.ServiceXboxLive
 {
-	public class Startup : ApolloStartup<Config>
+	public class Startup
 	{
-		public Startup(IHostingEnvironment environment)
-			: base(environment, "service-xboxlive")
+		public IConfiguration Configuration { get; }
+
+		public Startup(IConfiguration configuration)
 		{
-			var tokenConfig = Configuration.Services["Token"];
-			var s3Config = Configuration.S3;
+			Configuration = configuration;
+		}
 
-			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
-			var s3Client = new AmazonS3Client(s3Config.AccessKeyId, s3Config.SecretAccessKey, RegionEndpoint.GetBySystemName(s3Config.Region));
-			// var waypointClient = new WaypointClient(tokenClient, identityClient, s3Client);
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.Configure<BranchConfig>("Token", Configuration.GetSection("Services:Token"));
+			services.Configure<S3Config>(Configuration.GetSection("S3"));
 
-			var app = new Application(tokenClient);
-			var rpc = new RPC(app);
+			services.AddSingleton<TokenClient>();
+			services.AddSingleton<S3Client>();
 
-			RpcRegistration<RPC>(rpc);
+			services.AddSingleton<Application>();
+			services.AddSingleton<IService, RPC>();
+
+			services.AddCrpc(opts =>
+			{
+				opts.InternalKeys = Configuration.GetSection("InternalKeys").Get<string[]>();
+			});
+		}
+
+		public void Configure(IApplicationBuilder app)
+		{
+			app.UseCrpc("/1", opts => {
+				opts.Authentication = AuthenticationType.AllowInternalAuthentication;
+
+				opts.RegisterServer<RPC>();
+			});
 		}
 
 		public static async Task Main(string[] args) =>
-			await new WebHostBuilder()
-				.UseKestrel()
-				.UseStartup<Startup>()
+			await CrpcHost.CreateCrpcHost<Startup>()
 				.Build()
 				.RunAsync();
 	}
