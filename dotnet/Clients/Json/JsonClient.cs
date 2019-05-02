@@ -45,17 +45,15 @@ namespace Branch.Clients.Json
 			Client = new HttpClient(baseUrl, options);
 		}
 
-		public async Task<TRes> Do<TRes, TErr>(string verb, string path, Dictionary<string, string> query = null, Options newOpts = null)
+		public async Task<TRes> Do<TRes>(string verb, string path, Dictionary<string, string> query = null, Options newOpts = null)
 			where TRes : class
-			where TErr : class
 		{
-			return await Do<object, TRes, TErr>(verb, path, query, null, newOpts);
+			return await Do<object, TRes>(verb, path, query, null, newOpts);
 		}
 
-		public async Task<TRes> Do<TReq, TRes, TErr>(string verb, string path, Dictionary<string, string> query, TReq body, Options newOpts = null)
+		public async Task<TRes> Do<TReq, TRes>(string verb, string path, Dictionary<string, string> query, TReq body, Options newOpts = null)
 			where TReq : class
 			where TRes : class
-			where TErr : class
 		{
 			var content = body != null ? JsonConvert.SerializeObject(body) : null;
 			var output = await Client.Do(verb, path, query, content, newOpts);

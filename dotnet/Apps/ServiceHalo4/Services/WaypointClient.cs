@@ -65,7 +65,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var opts = new Options(auth);
 
 			// TODO(0xdeafcafe): Handle waypoint errors
-			var response = await _statsClient.Do<T, Exception>("GET", path, query, opts);
+			var response = await _statsClient.Do<T>("GET", path, query, opts);
 
 			switch (response.StatusCode)
 			{

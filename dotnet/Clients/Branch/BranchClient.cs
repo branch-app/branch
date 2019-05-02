@@ -41,7 +41,7 @@ namespace Branch.Clients.Branch
 			where TReq : class
 			where TRes : class
 		{
-			return await Client.Do<TReq, TRes, BaeException>("POST", path, null, body, options);
+			return await Client.Do<TReq, TRes>("POST", path, null, body, options);
 		}
 	}
 }
