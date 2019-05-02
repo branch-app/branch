@@ -12,33 +12,33 @@ namespace Branch.Apps.ServiceIdentity.Services
 {
 	public class IdentityMapper
 	{
-		private XboxLiveClient xblClient { get; }
-		private Dictionary<string, XboxLiveIdentity> gamertagMap { get; }
-		private Dictionary<long, XboxLiveIdentity> xuidMap { get; }
-		private Dictionary<string, Task<XboxLiveIdentity>> inProgressLookups { get; }
-		private TimeSpan cacheExpiry = TimeSpan.FromMinutes(15);
+		private readonly XboxLiveClient _xblClient;
+		private readonly Dictionary<string, XboxLiveIdentity> _gamertagMap;
+		private readonly Dictionary<long, XboxLiveIdentity> _xuidMap;
+		private readonly Dictionary<string, Task<XboxLiveIdentity>> _inProgressLookups;
+		private readonly TimeSpan _cacheExpiry = TimeSpan.FromMinutes(15);
 
 		public IdentityMapper(XboxLiveClient xblClient)
 		{
-			this.xblClient = xblClient;
+			this._xblClient = xblClient;
 
-			this.gamertagMap = new Dictionary<string, XboxLiveIdentity>();
-			this.xuidMap = new Dictionary<long, XboxLiveIdentity>();
-			this.inProgressLookups = new Dictionary<string, Task<XboxLiveIdentity>>();
+			this._gamertagMap = new Dictionary<string, XboxLiveIdentity>();
+			this._xuidMap = new Dictionary<long, XboxLiveIdentity>();
+			this._inProgressLookups = new Dictionary<string, Task<XboxLiveIdentity>>();
 		}
 
 		public async Task<XboxLiveIdentity> GetIdentity(XboxLiveIdentityType type, string value)
 		{
 			var key = $"{type.ToString().ToLower()}-{value.ToSlug()}";
 			Task<XboxLiveIdentity> task = null;
-			lock (inProgressLookups)
+			lock (_inProgressLookups)
 			{
-				inProgressLookups.TryGetValue(key, out task);
+				_inProgressLookups.TryGetValue(key, out task);
 
 				// There should never be a task in it's completed state in the dictionary,
 				// but if there is it won't be good - so we double check.
 				if (task == null || task.IsCompleted)
-					inProgressLookups.TryAdd(key, (task = getIdentity(type, value)));
+					_inProgressLookups.TryAdd(key, (task = getIdentity(type, value)));
 			}
 
 			return await task;
@@ -51,14 +51,14 @@ namespace Branch.Apps.ServiceIdentity.Services
 			XboxLiveIdentity identity = null;
 
 			if (type == XboxLiveIdentityType.Gamertag)
-				gamertagMap.TryGetValue(sanitizedInput, out identity);
+				_gamertagMap.TryGetValue(sanitizedInput, out identity);
 			else if (type == XboxLiveIdentityType.Xuid)
-				xuidMap.TryGetValue(long.Parse(value), out identity);
+				_xuidMap.TryGetValue(long.Parse(value), out identity);
 
 			if (identity != null && identity.ExpiresAt > now)
 				return identity;
 
-			var resp = await xblClient.GetProfileSettings(type, value, ProfileSetting.Gamertag);
+			var resp = await _xblClient.GetProfileSettings(type, value, ProfileSetting.Gamertag);
 			var user = resp.ProfileUsers[0];
 
 			identity = new XboxLiveIdentity
@@ -66,14 +66,14 @@ namespace Branch.Apps.ServiceIdentity.Services
 				XUID = user.ID,
 				Gamertag = user.Settings.First(s => s.ID == "Gamertag").Value,
 				CachedAt = now,
-				ExpiresAt = now.Add(cacheExpiry),
+				ExpiresAt = now.Add(_cacheExpiry),
 			};
 
-			gamertagMap[identity.Gamertag.ToSlug()] = identity;
-			xuidMap[identity.XUID] = identity;
+			_gamertagMap[identity.Gamertag.ToSlug()] = identity;
+			_xuidMap[identity.XUID] = identity;
 
 			// Remove from pending list
-			inProgressLookups.Remove(sanitizedInput);
+			_inProgressLookups.Remove(sanitizedInput);
 
 			return identity;
 		}

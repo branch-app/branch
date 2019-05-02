@@ -1,46 +1,57 @@
-﻿using Apollo;
-using Branch.Apps.ServiceIdentity.App;
-using Branch.Apps.ServiceIdentity.Models;
+﻿using Branch.Apps.ServiceIdentity.App;
 using Branch.Apps.ServiceIdentity.Server;
 using Branch.Apps.ServiceIdentity.Services;
+using Branch.Clients.Branch;
 using Branch.Clients.Token;
 using Branch.Packages.Contracts.ServiceIdentity;
-using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Models.Common.Config;
-using Microsoft.AspNetCore;
+using Branch.Packages.Crpc;
+using Branch.Packages.Crpc.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Branch.Apps.ServiceIdentity
 {
-	public class Startup : ApolloStartup<Config>
+	public class Startup
 	{
-		public Startup(IHostingEnvironment environment)
-			: base(environment, "service-identity")
+		public IConfiguration Configuration { get; }
+
+		public Startup(IConfiguration configuration)
 		{
-			var tokenConfig = Configuration.Services["Token"];
-			var tokenClient = new TokenClient(tokenConfig.Url, tokenConfig.Key);
-			var xblClient = new XboxLiveClient(tokenClient);
-			var identityMapper = new IdentityMapper(xblClient);
+			Configuration = configuration;
+		}
 
-			var app = new Application(tokenClient, identityMapper);
-			var rpc = new RPC(app);
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.Configure<BranchConfig>("Token", Configuration.GetSection("Services:Token"));
 
-			RpcRegistration<RPC>(rpc);
-			RegisterMethod<ReqGetXboxLiveIdentity, ResGetXboxLiveIdentity>("get_xboxlive_identity", "2018-08-19", rpc.GetXboxLiveIdentity, rpc.GetXboxLiveIdentitySchema);
+			services.AddSingleton<TokenClient>();
+			services.AddSingleton<XboxLiveClient>();
+			services.AddSingleton<IdentityMapper>();
+
+			services.AddSingleton<Application>();
+			services.AddSingleton<IService, RPC>();
+
+			services.AddCrpc(opts =>
+			{
+				opts.InternalKeys = Configuration.GetSection("InternalKeys").Get<string[]>();
+			});
+		}
+
+		public void Configure(IApplicationBuilder app)
+		{
+			app.UseCrpc("/1", opts => {
+				opts.Authentication = AuthenticationType.AllowInternalAuthentication;
+
+				opts.RegisterServer<RPC>();
+				opts.RegisterMethod("get_xboxlive_identity", "GetXboxLiveIdentity", "2018-08-19");
+			});
 		}
 
 		public static async Task Main(string[] args) =>
-			await new WebHostBuilder()
-				.UseKestrel()
-				.UseStartup<Startup>()
+			await CrpcHost.CreateCrpcHost<Startup>()
 				.Build()
 				.RunAsync();
 	}

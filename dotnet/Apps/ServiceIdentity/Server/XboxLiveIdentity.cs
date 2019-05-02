@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Ksuid;
 using Branch.Packages.Contracts.ServiceIdentity;
 
 namespace Branch.Apps.ServiceIdentity.Server
@@ -14,7 +12,7 @@ namespace Branch.Apps.ServiceIdentity.Server
 			return await app.GetXboxLiveIdentity(req.Type, req.Value);
 		}
 
-		public readonly string GetXboxLiveIdentitySchema = @"
+		public static readonly string GetXboxLiveIdentitySchema = @"
 			{
 				""type"": ""object"",
 				""additionalProperties"": false,

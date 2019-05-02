@@ -13,7 +13,7 @@ namespace Branch.Apps.ServiceIdentity.Models
 
 		public DateTime CachedAt { get; set; }
 
-		public DateTime ExpiresAt { get; set; }
+		public Nullable<DateTime> ExpiresAt { get; set; }
 
 		public bool IsFresh()
 		{
