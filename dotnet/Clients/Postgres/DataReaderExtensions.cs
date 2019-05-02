@@ -1,6 +1,7 @@
 using System;
 using System.Data.Common;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Npgsql;
 
 namespace Branch.Clients.Postgres
@@ -13,6 +14,17 @@ namespace Branch.Clients.Postgres
 				return null;
 
 			return reader.GetDateTime(ordinal);
+		}
+
+		public static T GetJsonOrNull<T>(this DbDataReader reader, int ordinal)
+			where T : class
+		{
+			var str = reader.GetString(ordinal);
+
+			if (str == null)
+				return null;
+
+			return JsonConvert.DeserializeObject<T>(str);
 		}
 	}
 }
