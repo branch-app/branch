@@ -61,7 +61,7 @@ namespace Branch.Packages.Bae
 
 		private BaeException parseError(BaeExceptionFormat err)
 		{
-			var reasons = err.Reasons.Select(r => parseError(r));
+			var reasons = err.Reasons?.Select(r => parseError(r)) ?? new BaeException[0];
 			var exception = new BaeException(err.Code, err.Meta, reasons);
 
 			return exception;
