@@ -7,8 +7,8 @@ CREATE TABLE service_records (
     gamertag text,
     cache_state cache_status NOT NULL,
     cache_failure jsonb,
-    created_at timestamp NOT NULL,
-    updated_at timestamp,
+    created_at timestamp without time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp without time zone,
     PRIMARY KEY (id),
-    UNIQUE (gamertag')
+    UNIQUE (gamertag)
 );

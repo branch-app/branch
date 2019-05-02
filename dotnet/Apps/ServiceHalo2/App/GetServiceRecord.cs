@@ -22,18 +22,31 @@ namespace Branch.Apps.ServiceHalo2.App
 			});
 
 			var srStatus = await _databaseClient.GetServiceRecord(identity.Gamertag);
-			// TODO(0xdeafcafe): If lookup is an XUID reject if there are no "verified"
-			// gamertags.
 
-			var payload = new QueueEvent
+			switch(srStatus?.CacheState)
 			{
-				Type = QueueEventTypes.CacheServiceRecord,
-				Payload = new ServiceRecordPayload{ Gamertag = identity.Gamertag },
-			};
+				case null:
+					await _databaseClient.SetServiceRecord(identity.Gamertag, "in_progress");
+					await _sqsClient.SendMessageAsync(new QueueEvent
+					{
+						Type = QueueEventTypes.CacheServiceRecord,
+						Payload = new ServiceRecordPayload{ Gamertag = identity.Gamertag },
+					});
 
-			await _sqsClient.SendMessageAsync(payload);
+					throw new BaeException("queued_for_caching");
 
-			throw new BaeException("queued_for_caching");
+				case "failed":
+					throw srStatus.CacheFailure;
+
+				case "in_progress":
+					throw new BaeException("currently_caching");
+
+				case "complete":
+					throw new NotImplementedException("Fetch this from S3!");
+
+				default:
+					throw new NotSupportedException("Yuuuge failure!");
+			}
 		}
 	}
 }
