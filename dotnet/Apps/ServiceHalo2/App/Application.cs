@@ -13,12 +13,14 @@ namespace Branch.Apps.ServiceHalo2.App
 		private readonly ILogger _logger;
 		private readonly IdentityClient _identityClient;
 		private readonly SqsClient _sqsClient;
+		private readonly DatabaseClient _databaseClient;
 
-		public Application(ILoggerFactory loggerFactory, IdentityClient identityClient, SqsClient sqsClient)
+		public Application(ILoggerFactory loggerFactory, IdentityClient identityClient, SqsClient sqsClient, DatabaseClient databaseClient)
 		{
 			_logger = loggerFactory.CreateLogger(nameof(Application));
 			_identityClient = identityClient;
 			_sqsClient = sqsClient;
+			_databaseClient = databaseClient;
 		}
 	}
 }

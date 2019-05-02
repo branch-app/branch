@@ -6,6 +6,7 @@ using Branch.Apps.ServiceHalo2.Server;
 using Branch.Apps.ServiceHalo2.Services;
 using Branch.Clients.Branch;
 using Branch.Clients.Identity;
+using Branch.Clients.Postgres;
 using Branch.Clients.S3;
 using Branch.Clients.Sqs;
 using Branch.Packages.Contracts.ServiceHalo2;
@@ -15,7 +16,6 @@ using Branch.Packages.Extensions;
 using Branch.Packages.Models.Common.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,13 +40,11 @@ namespace Branch.Apps.ServiceHalo2
 			services.Configure<BranchConfig>("Identity", Configuration.GetSection("Services:Identity"));
 			services.Configure<SqsConfig>(Configuration.GetSection("Sqs"));
 			services.Configure<S3Config>(Configuration.GetSection("S3"));
-
-			services.AddEntityFrameworkNpgsql()
-				.AddDbContext<DatabaseContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Postgres")))
-				.BuildServiceProvider();
+			services.Configure<PostgresConfig>(Configuration.GetSection("Postgres"));
 
 			services.AddSingleton<IdentityClient>();
 
+			services.AddSingleton<DatabaseClient>();
 			services.AddSingleton<SqsClient>();
 			services.AddSingleton<S3Client>();
 			services.AddSingleton<BnetClient>();

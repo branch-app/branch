@@ -22,10 +22,9 @@
 		<ProjectReference Include="..\..\Packages\Enums\Enums.csproj" />
 		<ProjectReference Include="..\..\Packages\Extensions\Extensions.csproj" />
 		<ProjectReference Include="..\..\Packages\Models\Models.csproj" />
+		<ProjectReference Include="..\..\Clients\Postgres\Postgres.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
-	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
 	  <PackageReference Include="PuppeteerSharp" Version="1.14.0" />
 	</ItemGroup>
 </Project>

@@ -21,6 +21,7 @@ namespace Branch.Apps.ServiceHalo2.App
 				Value = req.Identity.Value,
 			});
 
+			var srStatus = await _databaseClient.GetServiceRecord(identity.Gamertag);
 			// TODO(0xdeafcafe): If lookup is an XUID reject if there are no "verified"
 			// gamertags.
 
