@@ -26,36 +26,36 @@ using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using External = Branch.Apps.ServiceHalo4.Models.Waypoint;
+using Branch.Clients.S3;
 
 namespace Branch.Apps.ServiceHalo4.Services
 {
 	public partial class WaypointClient : CacheClient
 	{
-		private TokenClient tokenClient { get; }
-		private JsonClient presenceClient { get; }
-		private JsonClient statsClient { get; }
-		private JsonClient settingsClient { get; }
-		private JsonClient optionsClient { get; }
-		private Transpiler transpiler { get; }
-		private Enricher enricher { get; }
+		private readonly TokenClient _tokenClient;
+		private readonly JsonClient _presenceClient;
+		private readonly JsonClient _statsClient;
+		private readonly JsonClient _settingsClient;
+		private readonly JsonClient _optionsClient;
+		private readonly Transpiler _transpiler;
+		private readonly Enricher _enricher;
 
 		private const string presenceUrl = "https://presence.svc.halowaypoint.com/en-US/";
 		private const string statsUrl = "https://stats.svc.halowaypoint.com/en-US/";
 		private const string settingsUrl = "https://settings.svc.halowaypoint.com/";
 		private const string optionsUrl = "https://settings.svc.halowaypoint.com/RegisterClientService.svc/register/webapp/AE5D20DCFA0347B1BCE0A5253D116752";
 		private const string authHeader = "X-343-Authorization-Spartan";
-		private const string storageBucket = "branch-app-stats";
 
-		public WaypointClient(TokenClient tokenClient, IdentityClient identityClient, AmazonS3Client s3Client)
-			: base(storageBucket, s3Client)
+		public WaypointClient(TokenClient tokenClient, IdentityClient identityClient, S3Client s3Client)
+			: base(s3Client)
 		{
-			this.tokenClient = tokenClient;
-			this.transpiler = new Transpiler();
-			this.enricher = new Enricher(identityClient);
-			this.presenceClient = new JsonClient(presenceUrl);
-			this.statsClient = new JsonClient(statsUrl);
-			this.settingsClient = new JsonClient(settingsUrl);
-			this.optionsClient = new JsonClient(optionsUrl);
+			this._tokenClient = tokenClient;
+			this._transpiler = new Transpiler();
+			this._enricher = new Enricher(identityClient);
+			this._presenceClient = new JsonClient(presenceUrl);
+			this._statsClient = new JsonClient(statsUrl);
+			this._settingsClient = new JsonClient(settingsUrl);
+			this._optionsClient = new JsonClient(optionsUrl);
 		}
 
 		private async Task<T> requestWaypointData<T>(string path, Dictionary<string, string> query, string bucketKey)
@@ -65,7 +65,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			var opts = new Options(auth);
 
 			// TODO(0xdeafcafe): Handle waypoint errors
-			var response = await statsClient.Do<T, Exception>("GET", path, query, opts);
+			var response = await _statsClient.Do<T, Exception>("GET", path, query, opts);
 
 			switch (response.StatusCode)
 			{
@@ -91,7 +91,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 		private async Task<Dictionary<string, string>> getTokenHeaders()
 		{
-			var resp = await tokenClient.GetHalo4Token(new ReqGetHalo4Token());
+			var resp = await _tokenClient.GetHalo4Token(new ReqGetHalo4Token());
 
 			return new Dictionary<string, string> {{ "X-343-Tokenorization-Spartan", resp.SpartanToken }};
 		}
@@ -113,8 +113,8 @@ namespace Branch.Apps.ServiceHalo4.Services
 
 			// Transpile and enrich content
 			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);
-			var final = transpiler.ServiceRecord(response);
-			final = await enricher.ServiceRecord(final, response);
+			var final = _transpiler.ServiceRecord(response);
+			final = await _enricher.ServiceRecord(final, response);
 
 			TaskExt.FireAndForget(() => cacheContent(key, final, finalCacheInfo));
 
@@ -145,7 +145,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 				return (await fetchContent<RecentMatchesResponse>(key), cacheInfo);
 
 			// Transpile and enrich content
-			var final = transpiler.RecentMatches(response, newCount);
+			var final = _transpiler.RecentMatches(response, newCount);
 			// final = await enricher.RecentMatches(final, response); // Nothing to enrich here I think
 
 			var finalCacheInfo = new CacheInfo(DateTime.UtcNow, expire);

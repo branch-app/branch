@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Branch.Apps.ServiceHalo4.Services;
 using Branch.Clients.Token;
 using Branch.Clients.Identity;
@@ -8,17 +6,17 @@ namespace Branch.Apps.ServiceHalo4.App
 {
 	public partial class Application
 	{
-		private TokenClient tokenClient { get; }
+		public readonly TokenClient _tokenClient;
 
-		private IdentityClient identityClient { get; }
+		public readonly IdentityClient _identityClient;
 
-		public WaypointClient waypointClient { get; }
+		public readonly WaypointClient _waypointClient;
 
 		public Application(TokenClient tokenClient, IdentityClient identityClient, WaypointClient waypointClient)
 		{
-			this.tokenClient = tokenClient;
-			this.identityClient = identityClient;
-			this.waypointClient = waypointClient;
+			this._tokenClient = tokenClient;
+			this._identityClient = identityClient;
+			this._waypointClient = waypointClient;
 		}
 	}
 }

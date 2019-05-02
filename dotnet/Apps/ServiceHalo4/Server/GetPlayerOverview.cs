@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Ksuid;
 using Branch.Packages.Contracts.ServiceHalo4;
 
 namespace Branch.Apps.ServiceHalo4.Server
@@ -14,7 +10,7 @@ namespace Branch.Apps.ServiceHalo4.Server
 			return await app.GetPlayerOverview(req.Identity);
 		}
 
-		public readonly string GetPlayerOverviewSchema = @"
+		public static readonly string GetPlayerOverviewSchema = @"
 			{
 				""type"": ""object"",
 				""additionalProperties"": false,

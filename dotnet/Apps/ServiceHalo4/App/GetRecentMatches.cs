@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Branch.Packages.Contracts.ServiceHalo4;
 using Branch.Packages.Contracts.Common.Branch;
 using Branch.Packages.Contracts.ServiceIdentity;
 using AutoMapper;
-using Branch.Packages.Enums.ServiceIdentity;
-using System.Linq;
 using Branch.Packages.Enums.Halo4;
 
 namespace Branch.Apps.ServiceHalo4.App
@@ -16,13 +11,13 @@ namespace Branch.Apps.ServiceHalo4.App
 	{
 		public async Task<ResGetRecentMatches> GetRecentMatches(IdentityRequest identReq, GameMode gameMode, uint startAt, uint count)
 		{
-			var identity = await identityClient.GetXboxLiveIdentity(new ReqGetXboxLiveIdentity
+			var identity = await _identityClient.GetXboxLiveIdentity(new ReqGetXboxLiveIdentity
 			{
 				Type = identReq.Type,
 				Value = identReq.Value,
 			});
 
-			var response = await waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, count);
+			var response = await _waypointClient.GetRecentMatches(identity.ToIdentity(), gameMode, startAt, count);
 			var result = Mapper.Map<ResGetRecentMatches>(response.recentMatches);
 			result.CacheInfo = response.cacheInfo;
 
