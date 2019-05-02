@@ -17,30 +17,13 @@ namespace Branch.Apps.ServiceHalo2.Server
 				""additionalProperties"": false,
 
 				""required"": [
-					""identity""
+					""gamertag""
 				],
 
 				""properties"": {
-					""identity"": {
-						""type"": ""object"",
-						""additionalProperties"": false,
-
-						""required"": [
-							""type"",
-							""value""
-						],
-
-						""properties"": {
-							""type"": {
-								""type"": ""string"",
-								""enum"": [""xuid"", ""gamertag""]
-							},
-
-							""value"": {
-								""type"": ""string"",
-								""minLength"": 1
-							}
-						}
+					""gamertag"": {
+						""type"": ""string"",
+						""minLength"": 1
 					}
 				}
 			}

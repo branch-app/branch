@@ -57,6 +57,9 @@ namespace Branch.Apps.ServiceHalo2.Models
 
 		[JsonProperty("page")]
 		public int Page { get; set; }
+
+		[JsonProperty("last_page")]
+		public bool LastPage { get; set; }
 	}
 
 	public class MatchPayload : QueueEventPayload

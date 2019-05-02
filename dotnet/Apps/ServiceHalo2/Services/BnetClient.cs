@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amazon;
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Branch.Apps.ServiceHalo2.Database;
 using Branch.Apps.ServiceHalo2.Models;
 using Branch.Clients.S3;
 using Branch.Clients.Sqs;
@@ -26,15 +27,17 @@ namespace Branch.Apps.ServiceHalo2.Services
 		private readonly SqsClient _sqsClient;
 		private readonly ILogger _logger;
 		private readonly IHub _sentry;
+		private readonly DatabaseClient _dbClient;
 		private const string _serviceRecordUrl = "https://halo.bungie.net/Stats/PlayerStatsHalo2.aspx?player={0}";
 		private const string _serviceRecordHeaderRegex = @"Total Games: ([0-9]+)|Last Played: ([0-9\/ :]+(?:AM|PM))|Total Kills: ([0-9]+)|Total Deaths: ([0-9]+)|Total Assists: ([0-9]+)";
 
-		public BnetClient(S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry)
+		public BnetClient(S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry, DatabaseClient dbClient)
 		{
 			_s3Client = s3Client;
 			_sqsClient = sqsClient;
 			_logger = loggerFactory.CreateLogger(nameof(BnetClient));
 			_sentry = sentry;
+			_dbClient = dbClient;
 
 			this.Connect().Wait();
 		}
@@ -54,6 +57,13 @@ namespace Branch.Apps.ServiceHalo2.Services
 
 		public async Task<bool> CacheServiceRecord(string gamertag)
 		{
+			// Don't cache again
+			var escapedGt = gamertag.ToSlug();
+			var cacheMetaIdent = $"sr-{escapedGt}";
+			var srInfo = await _dbClient.GetCacheMeta(cacheMetaIdent);
+			if (srInfo?.CacheState != "in_progress")
+				return true;
+
 			using (_logger.BeginScope($"Caching Halo 2 Service Record for {gamertag}"))
 			using (var page = await _browser.NewPageAsync())
 			{
@@ -70,10 +80,10 @@ namespace Branch.Apps.ServiceHalo2.Services
 				{
 					// TODO(0xdeafcafe): Record player never played
 					_logger.LogInformation($"{gamertag} never played");
+					await _dbClient.SetCacheMeta(cacheMetaIdent, "failed", new BaeException("player_not_found"));
+
 					return true;
 				}
-
-				_logger.LogInformation($" if {gamertag} exists");
 
 				var pageInfo = await page.EvaluateFunctionAsync<Dictionary<string, string>>(@"
 					() => {
@@ -104,27 +114,29 @@ namespace Branch.Apps.ServiceHalo2.Services
 					return false;
 				}
 
-				_logger.LogInformation($"Fetching recent matches page count for {gamertag}");
 				var matchPageCount = await page.EvaluateFunctionAsync<int>(@"
 					() => window.document.querySelector('.rgArrPart2 > a:nth-child(2)').href.split('=').slice(-1).pop()
 				");
 				_logger.LogInformation($"Recent match page count for {gamertag} is {matchPageCount}");
 				await queueRecentMatchPages(gamertag, matchPageCount);
 
-				var serviceRecord = new BnetServiceRecord
+				var serviceRecord = new ServiceRecord
 				{
 					Gamertag = pageInfo["gamertag"],
 					EmblemUrl = pageInfo["emblemUrl"],
 					ClanName = pageInfo["clanInfo"],
-					TotalGames = uint.Parse(sr[0].Groups[1].Value),
+					TotalGames = int.Parse(sr[0].Groups[1].Value),
 					LastPlayed = DateTime.Parse(sr[1].Groups[2].Value),
-					TotalKills = uint.Parse(sr[2].Groups[3].Value),
-					TotalDeaths = uint.Parse(sr[3].Groups[4].Value),
-					TotalAssists = uint.Parse(sr[4].Groups[5].Value),
+					TotalKills = int.Parse(sr[2].Groups[3].Value),
+					TotalDeaths = int.Parse(sr[3].Groups[4].Value),
+					TotalAssists = int.Parse(sr[4].Groups[5].Value),
 				};
 
-				// TODO(0xdeafcafe): Remember that this is done
-				await _s3Client.CacheContent($"halo-2/service-record/{serviceRecord.Gamertag}.json", serviceRecord, new CacheInfo(DateTime.UtcNow));
+				await Task.WhenAll(new Task[]
+				{
+					_dbClient.SetCacheMeta(cacheMetaIdent, "complete"),
+					_dbClient.SetServiceRecord(serviceRecord),
+				});
 
 				return true;
 			}

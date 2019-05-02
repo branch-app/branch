@@ -1,4 +1,5 @@
 ﻿using Amazon.SQS;
+using AutoMapper;
 using Branch.Apps.ServiceHalo2.App;
 using Branch.Apps.ServiceHalo2.Database;
 using Branch.Apps.ServiceHalo2.Models;
@@ -14,6 +15,7 @@ using Branch.Packages.Crpc;
 using Branch.Packages.Crpc.Registration;
 using Branch.Packages.Extensions;
 using Branch.Packages.Models.Common.Config;
+using Branch.Packages.Models.Halo2;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,13 @@ namespace Branch.Apps.ServiceHalo2
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+
+			// Setup automapper yaboi
+			Mapper.Initialize(cfg =>
+			{
+				cfg.CreateMap<ServiceRecord, ServiceRecordResponse>();
+				cfg.CreateMap<ServiceRecordResponse, ResGetServiceRecord>();
+			});
 		}
 
 		public void ConfigureServices(IServiceCollection services)

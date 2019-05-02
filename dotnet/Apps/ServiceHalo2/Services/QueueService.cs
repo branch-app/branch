@@ -38,7 +38,6 @@ namespace Branch.Apps.ServiceHalo2.Services
 				var response = await _sqsClient.Client.ReceiveMessageAsync(request, cancellationToken);
 
 				await processQueue(response.Messages);
-				await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
 			}
 		}
 

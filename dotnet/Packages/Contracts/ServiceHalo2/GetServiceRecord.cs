@@ -6,8 +6,8 @@ namespace Branch.Packages.Contracts.ServiceHalo2
 {
 	public class ReqGetServiceRecord
 	{
-		[JsonProperty("identity")]
-		public IdentityRequest Identity { get; set; }
+		[JsonProperty("gamertag")]
+		public string Gamertag { get; set; }
 	}
 
 	public class ResGetServiceRecord : IBranchResponse

@@ -25,6 +25,7 @@
 		<ProjectReference Include="..\..\Clients\Postgres\Postgres.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="Automapper" Version="8.1.0" />
 	  <PackageReference Include="PuppeteerSharp" Version="1.14.0" />
 	</ItemGroup>
 </Project>
