@@ -3,6 +3,7 @@ using System.Data.Common;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Branch.Clients.Postgres
 {
@@ -23,6 +24,14 @@ namespace Branch.Clients.Postgres
 				Value = value,
 				DataTypeName = enumName,
 			});
+		}
+
+		public static void AddWithJsonOrNull<T>(this NpgsqlParameterCollection parameters, string name, T value)
+		{
+			if (value == null)
+				parameters.AddWithValue(name, DBNull.Value);
+			else
+				parameters.Add(new NpgsqlParameter(name, NpgsqlDbType.Jsonb) { Value = value });
 		}
 	}
 }

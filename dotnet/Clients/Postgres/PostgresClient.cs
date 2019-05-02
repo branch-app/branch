@@ -10,6 +10,9 @@ namespace Branch.Clients.Postgres
 
 		public PostgresClient(IOptions<PostgresConfig> options)
 		{
+			// Setup Plugins
+			NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
+
 			Connection = new NpgsqlConnection(options.Value.ConnectionString);
 			Connection.Open();
 		}
