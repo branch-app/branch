@@ -62,7 +62,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 				_logger.LogInformation($"Fetching  websocket url from {_jsonClient.Client.BaseUrl}");
 
 				var version = await _jsonClient.Do<Dictionary<string, string>>("GET", "/json/version");
-				var url = version["browserWSEndpoint"];
+				var url = version["webSocketDebuggerUrl"];
 
 				_logger.LogInformation($"Connecting to browser with websocker url {url}");
 
