@@ -90,14 +90,14 @@ namespace Branch.Apps.ServiceHalo2.Database
 			{
 				command.CommandText = @"
 					INSERT INTO service_records
-						(id, gamertag_ident, gamertag, emblem, clan_name, total_games, total_kills, total_deaths, total_assists, last_played)
+						(id, gamertag_ident, gamertag, emblem_url, clan_name, total_games, total_kills, total_deaths, total_assists, last_played)
 					VALUES
-						(@id, @gamertag_ident, @gamertag, @emblem, @clan_name, @total_games, @total_kills, @total_deaths, @total_assists, @last_played)
+						(@id, @gamertag_ident, @gamertag, @emblem_url, @clan_name, @total_games, @total_kills, @total_deaths, @total_assists, @last_played)
 					ON CONFLICT (gamertag)
 					DO UPDATE SET
 						gamertag_ident = @gamertag_ident,
 						gamertag = @gamertag,
-						emblem = @emblem,
+						emblem_url = @emblem_url,
 						clan_name = @clan_name,
 						total_games = @total_games,
 						total_kills = @total_kills,
@@ -110,7 +110,7 @@ namespace Branch.Apps.ServiceHalo2.Database
 				command.Parameters.AddWithValue("@id", Ksuid.Ksuid.Generate("h2svcrec").ToString());
 				command.Parameters.AddWithValue("@gamertag_ident", sr.GamertagIdent);
 				command.Parameters.AddWithValue("@gamertag", sr.Gamertag);
-				command.Parameters.AddWithValue("@emblem", sr.EmblemUrl);
+				command.Parameters.AddWithValue("@emblem_url", sr.EmblemUrl);
 				command.Parameters.AddWithValue("@clan_name", sr.ClanName);
 				command.Parameters.AddWithValue("@total_games", sr.TotalGames);
 				command.Parameters.AddWithValue("@total_kills", sr.TotalKills);

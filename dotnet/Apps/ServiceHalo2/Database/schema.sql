@@ -33,7 +33,7 @@ CREATE TABLE service_records (
 
     gamertag_ident text NOT NULL,
     gamertag text NOT NULL,
-    emblem text NOT NULL,
+    emblem_url text NOT NULL,
     clan_name text,
     total_games int NOT NULL,
     total_kills int NOT NULL,
