@@ -53,7 +53,7 @@ namespace Branch.Apps.ServiceHalo2
 
 			services.AddSingleton<IdentityClient>();
 
-			services.AddSingleton<DatabaseClient>();
+			services.AddTransient<DatabaseClient>();
 			services.AddSingleton<SqsClient>();
 			services.AddSingleton<S3Client>();
 			services.AddSingleton<BnetClient>();
