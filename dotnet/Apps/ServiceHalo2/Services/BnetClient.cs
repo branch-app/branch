@@ -47,7 +47,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 			{
 				// This is a workaround so chrome doesn't freak the fuck out??
 				var opts = new Branch.Clients.Http.Models.Options();
-				// opts.Headers.Add("Host", "0.0.0.0");
+				opts.Headers.Add("Host", "0.0.0.0");
 
 				_jsonClient = new JsonClient($"http://{remoteChrome}", opts);
 			}
