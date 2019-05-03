@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Branch.Apps.ServiceHalo2.Database;
 using Branch.Clients.Identity;
 using Branch.Clients.Sqs;
+using Branch.Packages.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Branch.Apps.ServiceHalo2.App
@@ -13,14 +12,19 @@ namespace Branch.Apps.ServiceHalo2.App
 		private readonly ILogger _logger;
 		private readonly IdentityClient _identityClient;
 		private readonly SqsClient _sqsClient;
-		private readonly DatabaseClient _databaseClient;
+		private readonly IServiceProvider _serviceProvider;
 
-		public Application(ILoggerFactory loggerFactory, IdentityClient identityClient, SqsClient sqsClient, DatabaseClient databaseClient)
+		public Application(ILoggerFactory loggerFactory, IdentityClient identityClient, SqsClient sqsClient, IServiceProvider serviceProvider)
 		{
 			_logger = loggerFactory.CreateLogger(nameof(Application));
 			_identityClient = identityClient;
 			_sqsClient = sqsClient;
-			_databaseClient = databaseClient;
+			_serviceProvider = serviceProvider;
+		}
+
+		private DatabaseClient _dbClient
+		{
+			get { return _serviceProvider.GetOrActivateService<DatabaseClient>(); }
 		}
 	}
 }

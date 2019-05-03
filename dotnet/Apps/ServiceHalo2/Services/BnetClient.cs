@@ -32,17 +32,17 @@ namespace Branch.Apps.ServiceHalo2.Services
 		private readonly string _puppeteerRemoteHost;
 		private readonly ILogger _logger;
 		private readonly IHub _sentry;
-		private readonly DatabaseClient _dbClient;
+		private readonly IServiceProvider _serviceProvider;
 		private const string _serviceRecordUrl = "https://halo.bungie.net/Stats/PlayerStatsHalo2.aspx?player={0}";
 		private const string _serviceRecordHeaderRegex = @"Total Games: ([0-9]+)|Last Played: ([0-9\/ :]+(?:AM|PM))|Total Kills: ([0-9]+)|Total Deaths: ([0-9]+)|Total Assists: ([0-9]+)";
 
-		public BnetClient(IOptions<Config> config, S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry, DatabaseClient dbClient)
+		public BnetClient(IOptions<Config> config, S3Client s3Client, SqsClient sqsClient, ILoggerFactory loggerFactory, IHub sentry, IServiceProvider serviceProvider)
 		{
 			_s3Client = s3Client;
 			_sqsClient = sqsClient;
 			_logger = loggerFactory.CreateLogger(nameof(BnetClient));
 			_sentry = sentry;
-			_dbClient = dbClient;
+			_serviceProvider = serviceProvider;
 			_puppeteerRemoteHost = config.Value.PuppeteerRemoteHost;
 
 			this.ConnectOrLaunch().Wait();
@@ -85,10 +85,12 @@ namespace Branch.Apps.ServiceHalo2.Services
 
 		public async Task<bool> CacheServiceRecord(string gamertag)
 		{
+			var dbClient = _serviceProvider.GetOrActivateService<DatabaseClient>();
+
 			// Don't cache again
 			var escapedGt = gamertag.ToSlug();
 			var cacheMetaIdent = $"sr-{escapedGt}";
-			var srInfo = await _dbClient.GetCacheMeta(cacheMetaIdent);
+			var srInfo = await dbClient.GetCacheMeta(cacheMetaIdent);
 			if (srInfo?.CacheState != "in_progress")
 				return true;
 
@@ -110,7 +112,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 					{
 						// TODO(0xdeafcafe): Record player never played
 						_logger.LogInformation($"{gamertag} never played");
-						await _dbClient.SetCacheMeta(cacheMetaIdent, "failed", new BaeException("player_not_found"));
+						await dbClient.SetCacheMeta(cacheMetaIdent, "failed", new BaeException("player_not_found"));
 
 						return true;
 					}
@@ -162,11 +164,8 @@ namespace Branch.Apps.ServiceHalo2.Services
 						TotalAssists = int.Parse(sr[4].Groups[5].Value),
 					};
 
-					await Task.WhenAll(new Task[]
-					{
-						_dbClient.SetCacheMeta(cacheMetaIdent, "complete"),
-						_dbClient.SetServiceRecord(serviceRecord),
-					});
+					await dbClient.SetCacheMeta(cacheMetaIdent, "complete");
+					await dbClient.SetServiceRecord(serviceRecord);
 
 					return true;
 				}

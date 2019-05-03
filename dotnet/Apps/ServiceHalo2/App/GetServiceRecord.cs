@@ -21,11 +21,11 @@ namespace Branch.Apps.ServiceHalo2.App
 		public async Task<ResGetServiceRecord> GetServiceRecord(ReqGetServiceRecord req)
 		{
 			var escapedGt = req.Gamertag.ToSlug();
-			var needsQueueing = await CacheMetaHelpers.NeedsQueueing(_databaseClient, $"sr-{escapedGt}");
+			var needsQueueing = await CacheMetaHelpers.NeedsQueueing(_dbClient, $"sr-{escapedGt}");
 
 			if (needsQueueing)
 			{
-				await _databaseClient.SetCacheMeta($"sr-{escapedGt}", "in_progress");
+				await _dbClient.SetCacheMeta($"sr-{escapedGt}", "in_progress");
 
 				TaskExt.FireAndForget(() => _sqsClient.SendMessageAsync(new QueueEvent
 				{
@@ -37,7 +37,7 @@ namespace Branch.Apps.ServiceHalo2.App
 			}
 
 			// TODO(0xdeafcafe): Clean this shit up 🤮
-			var sr = await _databaseClient.GetServiceRecord(escapedGt);
+			var sr = await _dbClient.GetServiceRecord(escapedGt);
 			var p1 = Mapper.Map<ServiceRecordResponse>(sr);
 			var p2 = Mapper.Map<ResGetServiceRecord>(p1);
 			p2.CacheInfo = new CacheInfo(sr.CreatedAt);
