@@ -5,22 +5,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Sentry;
 
 namespace Branch.Packages.Crpc.Middleware
 {
 	public sealed class ExceptionMiddleware : IMiddleware
 	{
 		private readonly ILogger _logger;
+		private readonly IHub _sentry;
 		private static JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
 		{
 			ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() },
 		};
 
-		public ExceptionMiddleware(ILoggerFactory loggerFactory)
+		public ExceptionMiddleware(ILoggerFactory loggerFactory, IHub sentry)
 		{
 			if (loggerFactory == null) throw new ArgumentNullException(nameof(loggerFactory));
 
 			_logger = loggerFactory.CreateLogger(nameof(ExceptionMiddleware));
+			_sentry = sentry;
 		}
 
 		public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -31,13 +34,13 @@ namespace Branch.Packages.Crpc.Middleware
 			}
 			catch (Exception ex)
 			{
-				var bae = ex as BaeException;
+				_logger.LogError(ex, ex.Message);
+				_sentry.CaptureException(ex);
 
-				// TODO(0xdeafcafe): How should this be done?
+				var bae = ex as BaeException;
 				if (!(ex is BaeException))
 				{
-					_logger.LogError(ex, ex.Message);
-
+					// TODO(0xdeafcafe): How should this be done?
 					bae = new BaeException(BaeCodes.Unknown);
 				}
 
