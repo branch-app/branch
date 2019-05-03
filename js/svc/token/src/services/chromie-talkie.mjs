@@ -25,15 +25,13 @@ export default class ChromieTalkie {
 		const meta = await this.chromeClient('get', '/json/version');
 		const url = this._generateUrl(meta.webSocketDebuggerUrl);
 
-		return await puppeteer.connect({
-			browserWSEndpoint: url,
-		});
+		return await puppeteer.connect({ browserWSEndpoint: url });
 	}
 
 	async typeAndSubmit(page, content) {
 		await page.keyboard.type(content);
 		await Promise.all([
-			delay(1000),
+			delay(1750),
 			page.click('input[type=submit]'),
 		]);
 	}
