@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +29,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 		private Browser _browser;
 		private readonly S3Client _s3Client;
 		private readonly SqsClient _sqsClient;
-		private readonly JsonClient _jsonClient;
+		private readonly string _puppeteerRemoteHost;
 		private readonly ILogger _logger;
 		private readonly IHub _sentry;
 		private readonly DatabaseClient _dbClient;
@@ -41,27 +43,24 @@ namespace Branch.Apps.ServiceHalo2.Services
 			_logger = loggerFactory.CreateLogger(nameof(BnetClient));
 			_sentry = sentry;
 			_dbClient = dbClient;
-
-			var remoteChrome = config.Value.PuppeteerRemoteHost;
-			if (remoteChrome != null)
-			{
-				// This is a workaround so chrome doesn't freak the fuck out??
-				var opts = new Branch.Clients.Http.Models.Options();
-				opts.Headers.Add("Host", "69.69.69.69");
-
-				_jsonClient = new JsonClient($"http://{remoteChrome}", opts);
-			}
+			_puppeteerRemoteHost = config.Value.PuppeteerRemoteHost;
 
 			this.ConnectOrLaunch().Wait();
 		}
 
 		public async Task ConnectOrLaunch()
 		{
-			if (_jsonClient != null)
+			if (_puppeteerRemoteHost != null)
 			{
-				_logger.LogInformation($"Fetching  websocket url from {_jsonClient.Client.BaseUrl}");
+				var parts = _puppeteerRemoteHost.Split(":");
+				var lookups = await Dns.GetHostAddressesAsync(parts[0]);
+				var ip = lookups.First().ToString();
+				var puppeteerUrl = $"{ip}:{parts[1]}";
+				var jsonClient = new JsonClient(puppeteerUrl);
 
-				var version = await _jsonClient.Do<Dictionary<string, string>>("GET", "/json/version");
+				_logger.LogInformation($"Fetching websocket url from {puppeteerUrl}");
+
+				var version = await jsonClient.Do<Dictionary<string, string>>("GET", "/json/version");
 				var url = version["webSocketDebuggerUrl"];
 
 				_logger.LogInformation($"Connecting to browser with websocker url {url}");
