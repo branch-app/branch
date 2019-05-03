@@ -24,7 +24,7 @@ using Sentry;
 
 namespace Branch.Apps.ServiceHalo2.Services
 {
-	public class BnetClient
+	public class BnetClient : IDisposable
 	{
 		private Browser _browser;
 		private readonly S3Client _s3Client;
@@ -72,7 +72,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 				return;
 			}
 
-			_logger.LogInformation("Downloading to browser");
+			_logger.LogInformation("Downloading browser");
 
 			await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
 
@@ -196,6 +196,11 @@ namespace Branch.Apps.ServiceHalo2.Services
 			_logger.LogInformation($"{gamertag} has {pages} pages of recent matches over {tasks.Count} tasks");
 
 			await Task.WhenAll(tasks.ToArray());
+		}
+
+		public void Dispose()
+		{
+			((IDisposable)_browser)?.Dispose();
 		}
 	}
 }
