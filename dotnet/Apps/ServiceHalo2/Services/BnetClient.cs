@@ -55,7 +55,7 @@ namespace Branch.Apps.ServiceHalo2.Services
 				var parts = _puppeteerRemoteHost.Split(":");
 				var lookups = await Dns.GetHostAddressesAsync(parts[0]);
 				var ip = lookups.First().ToString();
-				var puppeteerUrl = $"{ip}:{parts[1]}";
+				var puppeteerUrl = $"http://{ip}:{parts[1]}";
 				var jsonClient = new JsonClient(puppeteerUrl);
 
 				_logger.LogInformation($"Fetching websocket url from {puppeteerUrl}");
