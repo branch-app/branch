@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Branch.Clients.Http;
 using Branch.Clients.Http.Models;
 using Branch.Packages.Converters;
-using Branch.Packages.Bae;
+using Crpc.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -71,9 +71,9 @@ namespace Branch.Clients.Json
 			var hasContent = !String.IsNullOrWhiteSpace(str);
 
 			if (isJson && hasContent)
-				throwIfBaeException(str);
+				throwIfCrpcException(str);
 
-			throw new BaeException(RequestFailedCode, new Dictionary<string, object>
+			throw new CrpcException(RequestFailedCode, new Dictionary<string, object>
 			{
 				{ "Url", output.req.RequestUri.ToString() },
 				{ "Verb", verb },
@@ -93,11 +93,11 @@ namespace Branch.Clients.Json
 			return TimeSpan.FromSeconds(2);
 		}
 
-		private void throwIfBaeException(string str)
+		private void throwIfCrpcException(string str)
 		{
 			try
 			{
-				var err = JsonConvert.DeserializeObject<BaeException>(str);
+				var err = JsonConvert.DeserializeObject<CrpcException>(str);
 
 				if (err.Message != null)
 					throw err;

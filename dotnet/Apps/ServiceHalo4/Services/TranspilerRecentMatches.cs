@@ -6,7 +6,7 @@ using Branch.Clients.Identity;
 using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Bae;
+using Crpc.Exceptions;
 using Branch.Packages.Models.Halo4.RecentMatches;
 using Ext = Branch.Apps.ServiceHalo4.Models.Waypoint;
 using ExtRM = Branch.Apps.ServiceHalo4.Models.Waypoint.RecentMatches;
@@ -101,7 +101,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 						}
 
 					default:
-						throw new BaeException(
+						throw new CrpcException(
 							"unknown_game_mode_id",
 							new Dictionary<string, object>{ {"ModeId", match.ModeId} }
 						);

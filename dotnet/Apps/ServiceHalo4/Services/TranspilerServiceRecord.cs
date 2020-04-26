@@ -6,7 +6,7 @@ using Branch.Clients.Identity;
 using Branch.Packages.Contracts.ServiceIdentity;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Bae;
+using Crpc.Exceptions;
 using Ext = Branch.Apps.ServiceHalo4.Models.Waypoint;
 using ExtSR = Branch.Apps.ServiceHalo4.Models.Waypoint.ServiceRecord;
 using Int = Branch.Packages.Models.Halo4;
@@ -174,7 +174,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 							case 3: o.WarGames = final; break;
 							case 6: o.CustomGames = final; break;
 							default:
-								throw new BaeException(
+								throw new CrpcException(
 									"unknown_game_mode_id",
 									new Dictionary<string, object>{ {"Id", m.Id} }
 								);
@@ -182,7 +182,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 						break;
 
 					default:
-						throw new BaeException(
+						throw new CrpcException(
 							"unknown_game_mode",
 							new Dictionary<string, object>{ {"ModeType", mode.GetType()} }
 						);

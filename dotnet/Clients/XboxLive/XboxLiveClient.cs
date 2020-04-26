@@ -7,7 +7,7 @@ using Branch.Models.Common.XboxLive;
 using Branch.Packages.Contracts.ServiceToken;
 using Branch.Packages.Enums.External.XboxLive;
 using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Bae;
+using Crpc.Exceptions;
 using Branch.Packages.Models.Common.XboxLive;
 using Branch.Packages.Models.XboxLive;
 using Newtonsoft.Json;
@@ -82,10 +82,10 @@ namespace Branch.Clients.XboxLive
 			var isJson = output.resp.Content.Headers.ContentType.MediaType == "application/json";
 
 			if (output.resp.StatusCode == HttpStatusCode.Unauthorized)
-				throw new BaeException("xbl_auth_failure", createExceptionMeta(output));
+				throw new CrpcException("xbl_auth_failure", createExceptionMeta(output));
 
 			if (String.IsNullOrWhiteSpace(str) || !isJson)
-				throw new BaeException("request_failed", createExceptionMeta(output));
+				throw new CrpcException("request_failed", createExceptionMeta(output));
 
 			var error = JsonConvert.DeserializeObject<Error>(str);
 
@@ -93,14 +93,14 @@ namespace Branch.Clients.XboxLive
 			{
 				case ResponseCode.ProfileNotFound:
 				case ResponseCode.XUIDInvalid:
-					throw new BaeException("xbl_identity_not_found");
+					throw new CrpcException("xbl_identity_not_found");
 
 				default:
 					{
 						var meta = createExceptionMeta(output);
 						meta.Add("Response", error);
 
-						throw new BaeException("request_failed", meta);
+						throw new CrpcException("request_failed", meta);
 					}
 			}
 		}

@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Packages\Bae\Bae.csproj" />
     <ProjectReference Include="..\..\Packages\Converters\Converters.csproj" />
     <ProjectReference Include="..\Http\Http.csproj" />
   </ItemGroup>

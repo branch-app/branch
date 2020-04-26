@@ -1,7 +1,6 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": true,
@@ -11,19 +10,19 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "strictNullChecks": false,
+    "lib": [
+      "dom",
+      "es7",
+      "es2017"
+    ],
     "isolatedModules": true,
+    "strictNullChecks": false,
     "pretty": true,
     "noEmit": true,
     "jsx": "preserve",
     "typeRoots": [
       "node_modules/@types",
-      "src/lib/@types"
-    ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "src/@types"
     ]
   },
   "include": [

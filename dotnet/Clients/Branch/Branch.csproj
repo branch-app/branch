@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cache\Cache.csproj" />
     <ProjectReference Include="..\Json\Json.csproj" />
-    <ProjectReference Include="..\..\Packages\Bae\Bae.csproj" />
   </ItemGroup>
 
   <ItemGroup>

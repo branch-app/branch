@@ -18,7 +18,7 @@ using Branch.Packages.Contracts.ServiceToken;
 using Branch.Packages.Crypto;
 using Branch.Packages.Enums.Halo4;
 using Branch.Packages.Enums.ServiceIdentity;
-using Branch.Packages.Bae;
+using Crpc.Exceptions;
 using Branch.Packages.Extensions;
 using Branch.Packages.Models.Common.XboxLive;
 using Branch.Packages.Models.Halo4;
@@ -71,7 +71,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 			{
 				// Should never happen on player-related requests
 				case ResponseCode.NotFound:
-					throw new BaeException(
+					throw new CrpcException(
 						"content_not_found",
 						new Dictionary<string, object> {
 							{ "Path", path },
@@ -80,7 +80,7 @@ namespace Branch.Apps.ServiceHalo4.Services
 					);
 
 				case ResponseCode.PlayerHasNotPlayedHalo4:
-					throw new BaeException("player_never_played");
+					throw new CrpcException("player_never_played");
 
 				case ResponseCode.Okay:
 				case ResponseCode.Found:
