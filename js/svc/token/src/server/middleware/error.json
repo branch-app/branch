@@ -1,6 +1,0 @@
-{
-	"unauthorized": 401,
-	"access_denied": 403,
-	"not_found": 404,
-	"invalid_body": 422
-}

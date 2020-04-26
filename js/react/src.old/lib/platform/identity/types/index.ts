@@ -1,1 +1,0 @@
-export * from './xboxlive-identity';

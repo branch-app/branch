@@ -17,3 +17,7 @@ Build
 
 # IDE things
 .vscode
+
+# Shh
+/.old-js
+/.old-dotnet
