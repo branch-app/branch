@@ -34,4 +34,4 @@ jobs:
         access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         region: eu-west-2
-        image: ${{ steps.branch_name.outputs.branch }}
+        image: branch-dotnet-services:${{ steps.branch_name.outputs.branch }}
