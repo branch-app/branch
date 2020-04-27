@@ -27,15 +27,11 @@ jobs:
       run: dotnet restore ./dotnet
     - name: Build
       run: dotnet build ./dotnet --configuration Release --no-restore
-    # - name: Create docker iamge
-    #   run: docker build ./dotnet
-    - name: Push docker image
-      uses: kciter/aws-ecr-action@v1
-      with:
-        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-        repo: branch-dotnet-services
-        region: eu-west-2
-        tags: latest,${{ github.sha }},${{ steps.branch_name.outputs.branch }}
-        path: ./dotnet
+    - run: docker build --tag ${{ steps.branch_name.outputs.branch }} ./dotnet
+    - name: Push to ECR
+      uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-west-2
+          image: ${{ steps.branch_name.outputs.branch }}
