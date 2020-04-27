@@ -27,8 +27,8 @@ jobs:
       run: dotnet restore ./dotnet
     - name: Build
       run: dotnet build ./dotnet --configuration Release --no-restore
-    - name: Create docker iamge
-      run: docker build ./dotnet
+    # - name: Create docker iamge
+    #   run: docker build ./dotnet
     - name: Push docker image
       uses: kciter/aws-ecr-action@v1
       with:
@@ -38,4 +38,4 @@ jobs:
         repo: branch-dotnet-services
         region: eu-west-2
         tags: latest,${{ github.sha }},${{ steps.branch_name.outputs.branch }}
-        path: ./dotnet/Dockerfile
+        path: ./dotnet
