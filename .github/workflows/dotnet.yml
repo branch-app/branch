@@ -23,3 +23,14 @@ jobs:
       run: dotnet restore ./dotnet
     - name: Build
       run: dotnet build ./dotnet --configuration Release --no-restore
+    - name: Create docker iamge
+      run: docker build ./dotnet/Dockerfile
+    - name: Push docker image
+      uses: kciter/aws-ecr-action@v1
+      with:
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: dotnet-services
+        region: eu-west-2
+        tags: latest,${{ github.sha }},${GITHUB_REF##*/}
