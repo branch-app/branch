@@ -19,11 +19,6 @@ namespace Branch.Global.Libraries
 		public readonly string RequestFailedCode = "request_failed";
 
 		/// <summary>
-		/// Serializer used to handle JSON on the way out.
-		/// </summary>
-		private JsonSerializerSettings jss;
-
-		/// <summary>
 		/// Initializes a new JsonClient.
 		/// </summary>
 		/// <param name="baseUrl">The base url to be prefixed to every request.</param>
