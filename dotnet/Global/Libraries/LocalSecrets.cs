@@ -15,7 +15,7 @@ namespace Branch.Global.Libraries
 			_configRepo = Environment.GetEnvironmentVariable("BRANCH_CONFIG_REPO");
 			_infraRepo = Environment.GetEnvironmentVariable("BRANCH_INFRA_REPO");
 
-			if (!String.IsNullOrWhiteSpace(_configRepo) || !String.IsNullOrWhiteSpace(_configRepo))
+			if (String.IsNullOrWhiteSpace(_configRepo) || String.IsNullOrWhiteSpace(_configRepo))
 				_hasRepo = false;
 		}
 
