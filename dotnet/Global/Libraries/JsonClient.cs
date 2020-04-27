@@ -32,6 +32,12 @@ namespace Branch.Global.Libraries
 			Client = new HttpClient(baseUrl, options);
 		}
 
+		public async Task<TRes> Do<TRes>(string verb, string path, HttpClientOptions newOpts = null)
+			where TRes : class
+		{
+			return await Do<TRes>(verb, path, null, null, newOpts);
+		}
+
 		public async Task<TRes> Do<TRes>(string verb, string path, Dictionary<string, string> query = null, HttpClientOptions newOpts = null)
 			where TRes : class
 		{

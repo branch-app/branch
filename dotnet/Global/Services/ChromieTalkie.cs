@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Branch.Global.Libraries;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using PuppeteerSharp;
 
 namespace Branch.Global.Services
@@ -20,7 +24,7 @@ namespace Branch.Global.Services
 		public ChromieTalkie(ILoggerFactory loggerFactory, IOptionsMonitor<Config> options)
 		{
 			_logger = loggerFactory.CreateLogger(typeof(ChromieTalkie));
-			_config = options.Get("RemoteEndpoint");
+			_config = options.CurrentValue;
 
 			if (_config.RemoteEndpoint == null)
 			{
@@ -43,12 +47,25 @@ namespace Branch.Global.Services
 				return;
 			}
 
-			Browser = await Puppeteer.ConnectAsync(new ConnectOptions { BrowserWSEndpoint = _config.RemoteEndpoint });
+			var chromeClient = new JsonClient($"http://{_config.RemoteEndpoint}");
+			var options = new HttpClientOptions { Headers = new Dictionary<string, string> { { "Host", "" } } };
+			var meta = await chromeClient.Do<ChromeInstanceMeta>("GET", "/json/version", options);
+			var url = meta.WebSocketDebuggerUrl;
+			var id = url.Split("/").Last();
+			var finalRemoteUrl = $"ws://{_config.RemoteEndpoint}/devtools/browser/{id}";
+
+			Browser = await Puppeteer.ConnectAsync(new ConnectOptions { BrowserWSEndpoint = finalRemoteUrl });
 		}
 
 		public void Dispose()
 		{
 			Browser?.Dispose();
+		}
+
+		private class ChromeInstanceMeta
+		{
+			[JsonProperty("webSocketDebuggerUrl")]
+			public string WebSocketDebuggerUrl { get; set; }
 		}
 	}
 }

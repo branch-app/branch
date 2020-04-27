@@ -1,4 +1,5 @@
 using Branch.Global.Libraries;
+using Branch.Global.Services;
 
 namespace Branch.Services.Token.Models
 {
@@ -6,7 +7,7 @@ namespace Branch.Services.Token.Models
 	{
 		public string[] InternalKeys { get; set; }
 
-		public string RemotePuppeteerEndpoint { get; set; }
+		public ChromieTalkie.Config Puppeteer { get; set; }
 
 		public ConfigAuthProviders AuthProviders { get; set; }
 
@@ -17,7 +18,10 @@ namespace Branch.Services.Token.Models
 			return new Config
 			{
 				InternalKeys = new string[] {"test"},
-				RemotePuppeteerEndpoint = null,
+				Puppeteer = new ChromieTalkie.Config
+				{
+					RemoteEndpoint = "ws://rancher.forbes.red:6969",
+				},
 				RedisConnectionString = "redis://127.0.0.1:6379?db=0",
 				AuthProviders = new ConfigAuthProviders
 				{
