@@ -15,6 +15,10 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
     steps:
     - uses: actions/checkout@v2
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: branch_name
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -33,4 +37,4 @@ jobs:
         account_id: ${{ secrets.AWS_ACCOUNT_ID }}
         repo: branch-dotnet-services
         region: eu-west-2
-        tags: latest,${{ github.sha }},${GITHUB_REF##*/}
+        tags: latest,${{ github.sha }},${{ steps.branch_name.outputs.branch }}
