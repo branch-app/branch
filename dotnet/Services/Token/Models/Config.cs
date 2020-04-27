@@ -18,10 +18,7 @@ namespace Branch.Services.Token.Models
 			return new Config
 			{
 				InternalKeys = new string[] {"test"},
-				Puppeteer = new ChromieTalkie.Config
-				{
-					RemoteEndpoint = "ws://rancher.forbes.red:6969",
-				},
+				Puppeteer = null,
 				RedisConnectionString = "redis://127.0.0.1:6379?db=0",
 				AuthProviders = new ConfigAuthProviders
 				{
