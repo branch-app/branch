@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Branch.Services.Token
+namespace Branch.Services.Token.Server
 {
 	public partial class RpcServer : ITokenService
 	{
@@ -10,13 +10,9 @@ namespace Branch.Services.Token
 				""type"": ""object"",
 				""additionalProperties"": false,
 
-				""required"": [
-					""ignore_cache""
-				],
-
 				""properties"": {
 					""ignore_cache"": {
-						""type"": ""bool""
+						""type"": ""boolean""
 					}
 				}
 			}

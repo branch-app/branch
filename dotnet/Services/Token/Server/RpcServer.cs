@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using Branch.Services.Token.App;
-using Microsoft.AspNetCore.Http;
 
-namespace Branch.Services.Token
+namespace Branch.Services.Token.Server
 {
 	public partial class RpcServer : ITokenService
 	{

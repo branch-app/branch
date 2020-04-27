@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Branch.Global.Contracts;
 using Microsoft.AspNetCore.Http;
 
 namespace Branch.Services.Token
@@ -13,8 +14,10 @@ namespace Branch.Services.Token
 		public bool IgnoreCache { get; set; }
 	}
 
-	public class GetXblTokenResponse
+	public class GetXblTokenResponse : IBranchResponse
 	{
+		public CacheInfo CacheInfo { get; set; }
 
+		public string Token { get; set; }
 	}
 }
