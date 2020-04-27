@@ -8,16 +8,21 @@ namespace Branch.Global.Services
 {
 	public class ChromieTalkie : IDisposable
 	{
-		private ILogger _logger;
-		private string _puppeteerEndpoint;
-		private Browser _browser;
+		public class Config
+		{
+			public string RemoteEndpoint { get; set; }
+		}
 
-		public ChromieTalkie(ILoggerFactory loggerFactory, IOptionsMonitor<string> options)
+		private ILogger _logger;
+		private Config _config;
+		public Browser Browser { get; private set; }
+
+		public ChromieTalkie(ILoggerFactory loggerFactory, IOptionsMonitor<Config> options)
 		{
 			_logger = loggerFactory.CreateLogger(typeof(ChromieTalkie));
-			_puppeteerEndpoint = options.Get("RemotePuppeteerEndpoint");
+			_config = options.Get("RemoteEndpoint");
 
-			if (_puppeteerEndpoint == null)
+			if (_config.RemoteEndpoint == null)
 			{
 				_logger.LogInformation("No remote puppeteer browser specified, downloading browser");
 
@@ -25,23 +30,25 @@ namespace Branch.Global.Services
 
 				task.Wait();
 			}
+
+			EnsureBrowserReady().Wait();
 		}
 
 		private async Task EnsureBrowserReady()
 		{
-			if (_puppeteerEndpoint == null)
+			if (_config.RemoteEndpoint == null)
 			{
-				_browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+				Browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
 
 				return;
 			}
 
-			_browser = await Puppeteer.ConnectAsync(new ConnectOptions { BrowserWSEndpoint = _puppeteerEndpoint });
+			Browser = await Puppeteer.ConnectAsync(new ConnectOptions { BrowserWSEndpoint = _config.RemoteEndpoint });
 		}
 
 		public void Dispose()
 		{
-			_browser.Dispose();
+			Browser?.Dispose();
 		}
 	}
 }
