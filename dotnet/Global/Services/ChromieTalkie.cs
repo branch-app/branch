@@ -48,7 +48,7 @@ namespace Branch.Global.Services
 			}
 
 			var chromeClient = new JsonClient($"http://{_config.RemoteEndpoint}");
-			var options = new HttpClientOptions { Headers = new Dictionary<string, string> { { "Host", "" } } };
+			var options = new HttpClientOptions { Headers = new Dictionary<string, string> { { "Host", "0.0.0.0" } } };
 			var meta = await chromeClient.Do<ChromeInstanceMeta>("GET", "/json/version", options);
 			var url = meta.WebSocketDebuggerUrl;
 			var id = url.Split("/").Last();
