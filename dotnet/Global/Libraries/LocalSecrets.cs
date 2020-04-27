@@ -8,15 +8,22 @@ namespace Branch.Global.Libraries
 	{
 		private static string _configRepo { get; }
 		private static string _infraRepo { get; }
+		private static bool _hasRepo { get; } = true;
 
 		static LocalSecrets()
 		{
 			_configRepo = Environment.GetEnvironmentVariable("BRANCH_CONFIG_REPO");
 			_infraRepo = Environment.GetEnvironmentVariable("BRANCH_INFRA_REPO");
+
+			if (!String.IsNullOrWhiteSpace(_configRepo) || !String.IsNullOrWhiteSpace(_configRepo))
+				_hasRepo = false;
 		}
 
 		public static T GetConfigValue<T>(string environment, string service, string key)
 		{
+			if (!_hasRepo)
+				return default(T);
+
 			if (String.IsNullOrWhiteSpace(_configRepo))
 				throw new Exception("Branch config repo environment variable not setup");
 
