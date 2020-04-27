@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Crpc" Version="1.0.0" />
+    <PackageReference Include="Crpc" Version="1.1.3" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="5.8.0" />
   </ItemGroup>
 
 </Project>
