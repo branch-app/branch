@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crpc.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Branch.Global.Libraries
 {
@@ -18,6 +19,8 @@ namespace Branch.Global.Libraries
 		/// </summary>
 		public readonly string RequestFailedCode = "request_failed";
 
+		private JsonSerializerSettings _jss { get; }
+
 		/// <summary>
 		/// Initializes a new JsonClient.
 		/// </summary>
@@ -30,6 +33,14 @@ namespace Branch.Global.Libraries
 			options.Headers.Add("Accept", "application/json");
 
 			Client = new HttpClient(baseUrl, options);
+
+			_jss = new JsonSerializerSettings
+			{
+				ContractResolver = new DefaultContractResolver
+				{
+					NamingStrategy = new SnakeCaseNamingStrategy()
+				}
+			};
 		}
 
 		public async Task<TRes> Do<TRes>(string verb, string path, HttpClientOptions newOpts = null)
@@ -56,10 +67,12 @@ namespace Branch.Global.Libraries
 			HttpContent content = null;
 
 			if (body != null)
-				content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+				content = new StringContent(JsonConvert.SerializeObject(body, _jss), Encoding.UTF8, "application/json");
 
 			var response = await Client.Do(verb, path, query, content, newOpts);
 			var str = await response.Content.ReadAsStringAsync();
+
+			Console.WriteLine(str);
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -75,12 +88,10 @@ namespace Branch.Global.Libraries
 			if (isJson && hasContent)
 				throwIfCrpcException(str);
 
-			throw new CrpcException(RequestFailedCode, new Dictionary<string, object>
-			{
-				{ "url", response.RequestMessage.RequestUri.ToString() },
-				{ "verb", verb },
-				{ "status_code", response.StatusCode },
-			});
+			response.EnsureSuccessStatusCode();
+
+			// NOTE(afr): This shouldn't be possible to hit
+			throw new InvalidOperationException("Not poss");
 		}
 
 		private TimeSpan getTimeout(HttpClientOptions options, HttpClientOptions domOpts)
@@ -97,13 +108,10 @@ namespace Branch.Global.Libraries
 
 		private void throwIfCrpcException(string str)
 		{
-			try
-			{
-				var err = JsonConvert.DeserializeObject<CrpcException>(str);
+			var err = JsonConvert.DeserializeObject<CrpcException>(str);
 
-				if (err.Message != null)
-					throw err;
-			} catch { /* */ }
+			if (err.Message != null)
+				throw err;
 		}
 	}
 }

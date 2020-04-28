@@ -84,6 +84,20 @@ namespace Branch.Global.Libraries
 
 		[JsonProperty("Token")]
 		public string Token { get; set; }
+
+		[JsonProperty("DisplayClaims")]
+		public XboxLiveAuthDisplayClaims DisplayClaims { get; set; }
+	}
+
+	public class XboxLiveAuthDisplayClaims
+	{
+		[JsonProperty("xui")]
+		public XboxLiveAuthDisplayClaim[] Xui { get; set; }
+	}
+
+	public class XboxLiveAuthDisplayClaim
+	{
+		[JsonProperty("uhs")]
+		public string Uhs { get; set; }
 	}
 }
-
