@@ -4,7 +4,7 @@ BaseURL: https://service-token.branch.golf/1
 
 ## Versions
 
-- `2020-04-27`: Service created
+- `preview`: This service is still in preview.
 
 ## Api
 

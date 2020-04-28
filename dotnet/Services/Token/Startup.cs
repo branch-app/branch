@@ -46,7 +46,9 @@ namespace Branch.Services.Token
 			app.UseCrpc<RpcServer>("/1", (c, s) => {
 				c.Authentication = AuthenticationType.AllowInternalAuthentication;
 
-				c.Register<GetTokenRequest, GetXblTokenResponse>("get_xbl_token", "2020-04-27", s.GetXblToken, s.GetXblTokenSchema);
+				c.Register<GetTokenRequest, GetXblTokenResponse>(
+					"get_xbl_token", "preview", s.GetXblToken, s.GetXblTokenSchema
+				);
 			});
 		}
 

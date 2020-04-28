@@ -22,7 +22,7 @@ namespace Branch.Services.Token
 
 		public async Task<GetXblTokenResponse> GetXblToken(HttpContext ctx, GetTokenRequest req)
 		{
-			return await _client.Do<GetXblTokenResponse>("POST", "1/2020-04-27/get_xbl_token", req);
+			return await _client.Do<GetXblTokenResponse>("POST", "1/preview/get_xbl_token", req);
 		}
 	}
 }
