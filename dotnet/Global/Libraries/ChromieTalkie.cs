@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PuppeteerSharp;
 
-namespace Branch.Global.Services
+namespace Branch.Global.Libraries
 {
 	public class ChromieTalkie : IDisposable
 	{

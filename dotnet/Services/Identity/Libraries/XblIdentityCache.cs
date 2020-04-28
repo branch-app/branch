@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Branch.Global.Contracts;
 using Branch.Global.Extensions;
 using Branch.Global.Libraries;
+using Branch.Global.Models.Domain;
 using Branch.Global.Models.XboxLive;
 using Branch.Services.Token;
+using Crpc.Exceptions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ServiceStack.Redis;
@@ -85,12 +86,29 @@ namespace Branch.Services.Identity.Libraries
 			options.Headers.Add("X-XBL-Contract-Version", "2");
 			query.Add("settings", "gamertag");
 
-			var response = await _client.Do<ProfileSettings>("GET", path, query, options);
-			var user = response.ProfileUsers[0];
-			var xuid = user.ID.ToString();
-			var gamertag = user.Settings.First(s => s.ID == "Gamertag").Value;
+			try
+			{
+				var response = await _client.Do<ProfileSettings>("GET", path, query, options);
+				var user = response.ProfileUsers[0];
+				var xuid = user.ID.ToString();
+				var gamertag = user.Settings.First(s => s.ID == "Gamertag").Value;
 
-			return (gamertag, xuid);
+				return (gamertag, xuid);
+			}
+			catch (CrpcException ex)
+			{
+				switch(ex.Message)
+				{
+					case "2": // XUIDInvalid
+						throw new CrpcException("invalid_xuid");
+
+					case "8": // ProfileNotFound
+						throw new CrpcException("profile_not_found");
+
+					default:
+						throw new CrpcException("resolve_identity_failed", null, ex);
+				}
+			}
 		}
 		
 		private string GenerateRedisKey(LookupType type, string value)

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Branch.Global.Contracts;
+using Branch.Global.Models.Domain;
 using Branch.Global.Libraries;
 using Microsoft.AspNetCore.Http;
 

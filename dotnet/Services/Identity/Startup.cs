@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Branch.Global.Attributes;
-using Branch.Global.Contracts;
+using Branch.Global.Models.Domain;
 using Branch.Services.Identity.App;
 using Branch.Services.Identity.Libraries;
 using Branch.Services.Identity.Models;

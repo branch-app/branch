@@ -1,4 +1,4 @@
-namespace Branch.Global.Contracts
+namespace Branch.Global.Models.Domain
 {
 	public class ServiceConfig
 	{

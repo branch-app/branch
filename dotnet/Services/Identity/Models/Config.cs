@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Branch.Global.Contracts;
+using Branch.Global.Models.Domain;
 using Branch.Global.Libraries;
 
 namespace Branch.Services.Identity.Models

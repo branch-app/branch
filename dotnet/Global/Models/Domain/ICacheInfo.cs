@@ -1,6 +1,6 @@
 using System;
 
-namespace Branch.Global.Contracts
+namespace Branch.Global.Models.Domain
 {
 	public interface ICacheInfo
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Web;
-using Branch.Global.Contracts;
+using Branch.Global.Models.Domain;
 using Branch.Global.Extensions;
 using Branch.Global.Libraries;
 using Crpc.Exceptions;
