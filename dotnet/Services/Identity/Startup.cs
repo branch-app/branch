@@ -1,8 +1,11 @@
 using System.Threading.Tasks;
 using Branch.Global.Attributes;
+using Branch.Global.Contracts;
 using Branch.Services.Identity.App;
+using Branch.Services.Identity.Libraries;
 using Branch.Services.Identity.Models;
 using Branch.Services.Identity.Server;
+using Branch.Services.Token;
 using Crpc;
 using Crpc.Registration;
 using Microsoft.AspNetCore.Builder;
@@ -27,8 +30,11 @@ namespace Branch.Services.Identity
 			services.Configure<Config>(Configuration);
 
 			var redisConnectionString = Configuration.GetSection("RedisConnectionString").Get<string>();
+			var tokenCfg = Configuration.GetSection("TokenConfig").Get<ServiceConfig>();
 
 			services.AddSingleton<IRedisClientsManager>(new BasicRedisClientManager(redisConnectionString));
+			services.AddSingleton(new TokenClient(tokenCfg.Url, tokenCfg.Key));
+			services.AddSingleton<XblIdentityCache>();
 
 			services.AddCrpc<Application, RpcServer>(opts =>
 			{

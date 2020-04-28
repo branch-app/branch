@@ -9,15 +9,10 @@ namespace Branch.Services.Identity.App
 
 		public async Task<GetXblIdentityRes> GetXblIdentity(HttpContext ctx, GetXblIdentityReq req)
 		{
-			var useCache = !req.IgnoreCache;
+			if (req.Type == "gamertag")
+				return await _xblIdentityCache.GetByGamertag(req.Value, req.IgnoreCache);
 
-			using (var client = _redisClientsManager.GetClient())
-			{
-				return new GetXblIdentityRes
-				{
-					CacheInfo = null,
-				};
-			}
+			return await _xblIdentityCache.GetByGamertag(req.Value, req.IgnoreCache);
 		}
 	}
 }
