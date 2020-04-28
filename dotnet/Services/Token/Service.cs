@@ -19,5 +19,7 @@ namespace Branch.Services.Token
 		public CacheInfo CacheInfo { get; set; }
 
 		public string Token { get; set; }
+
+		public string Uhs { get; set; }
 	}
 }

@@ -73,6 +73,7 @@ namespace Branch.Services.Token.App
 					{
 						CacheInfo = new CacheInfo(token.IssueInstant, token.NotAfter),
 						Token = token.Token,
+						Uhs = token.DisplayClaims.Xui[0].Uhs,
 					};
 
 					client.Set(XblRedisKey, JsonConvert.SerializeObject(response), (DateTime) response.CacheInfo.ExpiresAt);
