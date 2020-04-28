@@ -21,8 +21,6 @@ namespace Branch.Services.Token.App
 			var useCache = !ignoreCache; // Easier to read non-negated conditions
 			var xblProvider = _config.AuthProviders.XboxLive;
 
-			Console.WriteLine(xblProvider.Password);
-
 			using (var client = _redisClientsManager.GetClient())
 			{
 				if (useCache)

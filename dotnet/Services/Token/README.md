@@ -4,7 +4,7 @@ BaseURL: https://service-token.branch.golf/1
 
 ## Versions
 
-- `preview`: This service is still in preview.
+- `2020-04-27`: Service created
 
 ## Api
 
@@ -14,7 +14,7 @@ BaseURL: https://service-token.branch.golf/1
 
 ### Methods
 
-#### `get_xboxlive_token`
+#### `get_xbl_token`
 
 ##### Request
 
@@ -30,9 +30,9 @@ BaseURL: https://service-token.branch.golf/1
 {
 	"cache_overview": {
 		"cached_at": "2020-04-26T23:00:02.168Z",
-		"cache_expiry": "2020-04-26T23:15:13.614Z"
+		"expires_at": "2020-04-26T23:15:13.614Z"
 	},
-	"token": ""
+	"token": "blah blah"
 }
 ```
 
