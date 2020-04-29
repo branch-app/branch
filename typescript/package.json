@@ -1,0 +1,51 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "debug": "parcel watch index.html",
+    "start": "parcel index.html"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "connected-react-router": "^6.8.0",
+    "crpc": "^0.2.2",
+    "history": "^4.10.1",
+    "jquery": "1.9.1 - 3",
+    "json-client": "^0.9.3",
+    "popper.js": "^1.16.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "5.1.2",
+    "reactstrap": "^8.4.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3",
+    "styled-components": "^5.1.0",
+    "typed.js": "^2.0.11",
+    "typesafe-actions": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/crpc": "^0.2.1",
+    "@types/history": "^4.7.5",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-helmet": "^5.0.15",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router": "^5.1.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/reactstrap": "^8.4.2",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "typescript": "^3.8.3"
+  }
+}

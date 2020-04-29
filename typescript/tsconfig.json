@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "allowJs": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "lib": [
+      "dom",
+      "es7",
+      "es2017"
+    ],
+    "isolatedModules": true,
+    "strictNullChecks": false,
+    "pretty": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}
