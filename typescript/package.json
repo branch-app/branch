@@ -23,6 +23,7 @@
     "react-helmet": "^6.0.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "5.1.2",
+    "react-use-scroll-position": "^2.0.0",
     "reactstrap": "^8.4.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
